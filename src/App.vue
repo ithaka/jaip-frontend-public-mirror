@@ -7,6 +7,8 @@ import { storeToRefs } from 'pinia'
 import { makeGrammaticalList } from '@/utils/helpers'
 import { watch, computed } from 'vue'
 import updateRoutes from './router/updateRoutes'
+import MainHeader from '@/components/headers/MainHeader.vue'
+import SmallHeader from '@/components/headers/SmallHeader.vue'
 import type { StringString } from '@/interfaces/BasicObjects'
 
 const coreStore = useCoreStore()
@@ -79,6 +81,31 @@ const showRequestWarning = computed(() => !features.value['submit_requests'] && 
     <pep-pharos-toaster :key="toastKey" ref="toaster" />
 
     <!-- Headers -->
+    <MainHeader
+      class="hidden-md"
+      :groups="makeGrammaticalList(groups.map((group) => group.name))"
+      :show-login="!isAuthenticatedAdmin && isAdminSubdomain"
+      :login-url="loginUrl"
+      :update-key="updateKey"
+      :is-unauthenticated="isUnauthenticated"
+      :is-authenticated-admin="isAuthenticatedAdmin"
+      :is-authenticated-student="isAuthenticatedStudent"
+      :show-request-warning="!!showRequestWarning"
+      :name="entityName"
+      @logout="logout"
+    />
+    <SmallHeader
+      class="hidden display-grid-md"
+      :show-login="!isAuthenticatedAdmin && isAdminSubdomain"
+      :login-url="loginUrl"
+      :update-key="updateKey"
+      :is-authenticated-admin="isAuthenticatedAdmin"
+      :is-authenticated-student="isAuthenticatedStudent"
+      :is-unauthenticated="isUnauthenticated"
+      :show-request-warning="!!showRequestWarning"
+      @logout="logout"
+    />
+
     <!-- Main Content -->
     <RouterView class="cols-12" />
 

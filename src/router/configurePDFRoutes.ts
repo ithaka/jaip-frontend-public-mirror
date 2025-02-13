@@ -8,7 +8,7 @@ const PDFRoute = {
     hidden: true,
     requiresAny: ['view_pdf']
   },
-  component: () => import('@/views/HomeView.vue')
+  component: () => import('@/views/PDFView.vue')
 }
 
 export const addPDFRoute = (config: RouterOptions) => {
