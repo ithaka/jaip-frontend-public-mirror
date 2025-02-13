@@ -28,6 +28,7 @@ build app image:
   stage: prepare
   extends: .build-image
   variables:
+    KUBERNETES_MEMORY_LIMIT: 8Gi
     CI_DEBUG_TRACE: true
   before_script:
     # Write necessary env vars to .env file for the build
