@@ -1,0 +1,91 @@
+# Typically, a Capstan pipeline would include a promote stage (see
+# https://wiki.ithaka.org/pages/viewpage.action?spaceKey=softdel&title=The+container+image+promotion+process).
+# However, since we are pulling an image from a remote repo, promotion:
+# * does not work (the image is not located where the promotion job would look)
+# * is not necessary (the deploy script will look at the remote repo before
+#   looking through our snapshot/rc/stable repos).
+
+include:
+  - ".gitlab/deploy/_setup.yml"
+
+stages:
+  - prepare
+  - check
+  - promote
+  - deploy
+  - post-deploy
+  - verify
+
+# See Dockerfile. Note that the contents of the repository are _ignored by
+# default_ and only built into the app when explicitly exempted in the
+# .dockerignore. This is because the top-level repo contains lots of apparatus
+# for test, CI, etc. that we don't actually need to deploy. In other words, if
+# you have reached this comment because you're confused that your app builds
+# fine locally with npm run build but isn't deploying properly, check the
+# .dockerignore and consider whether you have recently added files or
+# directories that you need to build.
+build app image:
+  stage: prepare
+  extends: .build-image
+  variables:
+    CI_DEBUG_TRACE: true
+  before_script:
+    # Write necessary env vars to .env file for the build
+    - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
+    - echo "API_URL=$API_URL" >> .env
+    # Copy the environment specific nginx config so it can be used in the build, then remove irrelevant config files
+    - mv nginx/$NGINX_CONFIG nginx/nginx.conf && rm -rf nginx/nginx.conf.*
+
+
+
+
+# Default chart, configured via any `EXTRA_HELM_TEMPLATE_OPTIONS` referenced
+# in `_setup.yml`. This chart deploys the app.
+render capstan chart:
+  stage: prepare
+  extends: .render-charts
+  needs: []
+
+scan vulnerabilities:
+  stage: check
+  dependencies:
+    - build app image
+  extends: .vulnerability-scanner
+  variables:
+    SEVERITY: critical high unknown
+    FAIL_ON_SEVERITY: critical high unknown
+  before_script:
+    # replace / with - in branch name to be friendly w/ job
+    - export CI_COMMIT_BRANCH="${CI_COMMIT_BRANCH//\//-}"
+
+# Run tsc type checker
+type check:
+  stage: check
+  extends:
+    - .test
+  script:
+    - yarn type-check
+
+# Run eslint
+lint:
+  stage: check
+  extends:
+    - .test
+  script:
+    - yarn lint
+
+# Run e2e tests
+e2e tests:
+  stage: check
+  extends:
+    - .test
+  script:
+    - yarn test:e2e
+    
+promote image:
+  stage: promote
+  extends: .promote-image
+
+wait for eureka:
+  extends: .check-healthy-deployment
+  stage: verify

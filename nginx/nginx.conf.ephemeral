@@ -1,0 +1,10 @@
+# NGINX configuration file for the Ephemeral environment
+include /etc/nginx/shared/setup.conf;
+http {
+  include /etc/nginx/shared/http-setup.conf;
+  server {
+    include /etc/nginx/shared/server-setup.conf;
+    include /etc/nginx/shared/spa-root.conf;
+    include /etc/nginx/shared/error-pages.conf;
+  }
+}

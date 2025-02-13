@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: jaip-frontend
+  description: The JAIP Online Application Frontend
+  tags:
+    - jaip
+    - online-pep
+    - vue
+    - javascript
+    - typescript
+    - frontend
+    - labs
+  annotations:
+    gitlab.com/project-id: '66912359'
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: website
+  owner: jaip
+  lifecycle: production
+  system: jaip
+  consumesApis:
+    - api:jaip-backend-api
+  dependsOn:
+    - component:jaip-backend

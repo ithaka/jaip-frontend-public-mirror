@@ -1,0 +1,91 @@
+# ---- RULES -------------------------------------------------------------------
+# Mixins which govern when jobs run.
+.test-rules:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: always
+
+.staging-rules:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main' && $PIPELINE == 'default'
+      when: always
+    - if: $PIPELINE == 'deploy-test'
+
+.prod-rules:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'main' && $PIPELINE == 'default'
+      when: manual
+    - if: $PIPELINE == 'deploy-prod'
+
+.cron:
+  # Run nightly.
+  # This is intended for nightly cron jobs.
+  rules:
+    - if: $PIPELINE == 'nightly_trivy'
+
+# ---- ENV ---------------------------------------------------------------------
+# Mixins which supply context-specific environment variables.
+.ephemeral-env:
+  variables:
+    API_TARGET: test
+    APP_NAME: jaip-backend-$CI_MERGE_REQUEST_IID
+    DEPLOY_JOB: ephemeral
+    ENVIRONMENT: test
+    NGINX_CONFIG: nginx.conf.ephemeral
+    PROMOTE_TO: release-candidate
+    TARGET_CLUSTER: ephemeral
+    # Ephemeral only
+    EKS_CLUSTER: ephemeral
+    K8S_ACTION: apply
+    BASE_URL: https://jaip-backend-$CI_MERGE_REQUEST_IID.apps.test.cirrostratus.org/jaip/api
+    DATABASE_SECRET_NAME: jaip-database-creds
+
+.test-env:
+  variables:
+    API_TARGET: test
+    APP_NAME: jaip-backend
+    ENVIRONMENT: test
+    NGINX_CONFIG: nginx.conf.persistent
+    PROMOTE_TO: release-candidate
+    TARGET_CLUSTER: integration
+    BASE_URL: https://jaip-backend.apps.test.cirrostratus.org/jaip/api
+    DATABASE_SECRET_NAME: jaip-database-creds
+
+.prod-env:
+  variables:
+    API_TARGET: prod
+    APP_NAME: jaip-backend
+    DEPLOY_JOB: persistent
+    ENVIRONMENT: prod
+    NGINX_CONFIG: nginx.conf.persistent
+    PROMOTE_TO: stable
+    TARGET_CLUSTER: production
+    BASE_URL: https://jaip-backend.apps.prod.cirrostratus.org/jaip/api
+    DATABASE_SECRET_NAME: jaip-database-creds
+
+
+# ---- PIPELINES ---------------------------------------------------------------
+# Mixins specifying which child pipeline to run.
+.deploy:
+  stage: deploy
+  trigger:
+    strategy: depend
+
+.undeploy:
+  stage: undeploy
+  trigger:
+    strategy: depend
+
+
+# ---- CHECKS ------------------------------------------------------------------
+# Must stay synced with Dockerfile
+
+.test:
+  extends:
+    - .test-rules
+    - .test-env
+  before_script:
+    - yarn install --immutable --immutable-cache
+  tags:
+    - test-runner
+
