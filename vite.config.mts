@@ -5,8 +5,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from "path";
 import Markdown from 'unplugin-vue-markdown/vite'
-
 import dynamicImport from "vite-plugin-dynamic-import";
+import pnpapi from 'pnpapi'
 
 export default defineConfig(({ mode }) => {
   const config = {
@@ -29,7 +29,6 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         external: [
           `/public/scripts/scoped-custom-element-registry.min.js`,
-          `/public/scripts/scoped-custom-element-registry.min.js.map`,
           `/public/scripts/pdf.worker.min.mjs`
         ],
         output: {
@@ -53,21 +52,17 @@ export default defineConfig(({ mode }) => {
       viteStaticCopy({
         targets: [
           {
-            src: './node_modules/@ithaka/pharos/lib/styles/icons/**/*',
+            src: path.join(pnpapi.resolveToUnqualified('@ithaka/pharos', './'), "lib", "styles", "icons", "**", "*"),
             dest: 'public/styles/icons/pharos',
           },
           // This is kind of an awkward workaround to avoid external script. Instead of importing this in the index,
           // we install it in node_modules and copy it to a static file where we can reach it from index.html
           {
-            src: './node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js',
+            src: path.join(pnpapi.resolveToUnqualified('@webcomponents/scoped-custom-element-registry', './'), "scoped-custom-element-registry.min.js"),
             dest: 'public/scripts/',
           },
           {
-            src: './node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js.map',
-            dest: 'public/scripts/',
-          },
-          {
-            src: './node_modules/pdfjs-dist/build/pdf.worker.min.mjs',
+            src: path.join(pnpapi.resolveToUnqualified('pdfjs-dist', './'), "build", "pdf.worker.min.mjs"),
             dest: 'public/scripts/',
           },
         ],

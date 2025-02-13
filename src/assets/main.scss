@@ -1,0 +1,689 @@
+@import '@ithaka/pharos/lib/styles/variables.css';
+@import '@ithaka/pharos/lib/styles/fonts.css';
+// @import '@ithaka/pharos/lib/styles/typography.css';
+@import './base.css';
+$pharos-breakpoint-max: 99rem; // 1584px
+$pharos-breakpoint-xlarge: 85rem; // 1360px
+$pharos-breakpoint-large: 66rem; // 1056px
+$pharos-breakpoint-medium: 48rem; // 768px
+$pharos-breakpoint-small: 22.5rem; // 360px
+
+body {
+  letter-spacing: calc(var(--pharos-font-size-base) * -0.02);
+  font-family: var(--pharos-font-family-sans-serif);
+  font-size: var(--pharos-font-size-base);
+  font-weight: var(--pharos-font-weight-regular);
+  line-height: var(--pharos-line-height-medium);
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.notice {
+  border: 1px solid var(--pharos-color-marble-gray-80);
+  padding: var(--pharos-spacing-1-x);
+}
+
+.hidden {
+  display: none;
+}
+.full-width {
+  width: 100%;
+}
+.header-logo {
+  height: 90px;
+}
+.footer-logo {
+  max-width: 300px;
+  max-height: 90px;
+  width: auto;
+  height: auto;
+}
+.hero {
+  overflow: hidden;
+  background-image: url('@/assets/images/PEP_hero.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  height: 450px;
+  width: 100%;
+}
+.alert {
+  ul {
+    list-style-type: disc;
+    margin-left: var(--pharos-spacing-1-x);
+  }
+}
+.svg-white {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(61deg) brightness(106%) contrast(102%);
+}
+
+.search-view {
+  display: grid;
+  // The 272px comes from jstor.org
+  grid-template-columns: 272px auto;
+}
+.inactive {
+  background-color: var(--pharos-color-marble-gray-97);
+  color: var(--pharos-color-marble-gray-20);
+}
+
+.search-filters-container {
+  max-height: 100vh;
+  overflow: hidden scroll;
+  padding-bottom: var(--pharos-spacing-5-x);
+  position: sticky;
+  top: 0;
+  background-color: var(--pharos-color-marble-gray-97);
+  color: var(--pharos-color-marble-gray-20);
+  padding-bottom: calc(2 * var(--pharos-spacing-10-x));
+}
+.error {
+  color: var(--pharos-color-living-coral-53);
+  margin-top: var(--pharos-spacing-one-half-x);
+}
+.search-results {
+  display: grid;
+  grid-template-columns: 5rem minmax(auto, 1200px) 2rem;
+  grid-template-rows: auto;
+  &.request-results {
+    .search-results-header {
+      grid-column: span 12;
+    }
+  }
+}
+.search-results-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.search-results-header-margins {
+  margin-left: var(--pharos-spacing-5-x);
+  margin-right: var(--pharos-spacing-2-x);
+}
+.results-list {
+  grid-column: 2;
+}
+.search-result {
+  display: grid;
+  grid-template-columns: auto 15rem;
+}
+.journal-filter {
+  padding-top: 0;
+  padding-bottom: var(--pharos-spacing-one-quarter-x);
+}
+.search-result-title {
+  grid-gap: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: 1fr;
+  justify-content: start;
+}
+.inline-button {
+  height: var(--pharos-spacing-1-x);
+}
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.button-row-buttons {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  // column-gap: var(--pharos-spacing-1-x);
+}
+.modal-search-results {
+  max-height: 300px;
+  overflow-y: scroll;
+  .search-result {
+    grid-template-columns: auto;
+  }
+  li {
+    border-bottom: 1px solid var(--pharos-color-marble-gray-80);
+    margin: 0;
+    padding-bottom: var(--pharos-spacing-2-x);
+    margin-top: var(--pharos-spacing-1-x);
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: var(--pharos-spacing-1-x);
+    }
+  }
+}
+
+.page {
+  margin-top: var(--pharos-spacing-2-x);
+  margin-bottom: var(--pharos-spacing-5-x);
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+}
+.markdown-body {
+  p {
+    margin-bottom: var(--pharos-spacing-1-x);
+  }
+  img {
+    max-width: 600px;
+  }
+}
+.groups-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+}
+.checkbox-group {
+  margin-left: -var(--pharos-spacing-one-eighth-x);
+}
+
+.local {
+  grid-template-columns:
+    minmax(auto, 5rem) minmax(auto, 8rem) minmax(auto, 5rem) minmax(auto, 10rem)
+    minmax(auto, 1fr);
+}
+.global {
+  grid-template-columns: minmax(auto, 5rem) minmax(auto, 5rem) minmax(auto, 10rem) minmax(auto, 1fr);
+}
+.entity-card {
+  margin-top: var(--pharos-spacing-2-x);
+  padding-bottom: var(--pharos-spacing-3-x);
+  border-bottom: 1px solid var(--pharos-color-marble-gray-80);
+}
+.entity-features {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  row-gap: var(--pharos-spacing-2-x);
+}
+.user-features {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  row-gap: var(--pharos-spacing-2-x);
+}
+.small-icon {
+  width: var(--pharos-line-height-xsmall);
+}
+
+.page-select {
+  max-width: 10rem;
+  min-width: 8rem;
+}
+$text-decoration-line-options: (none, underline, overline, line-through, blink);
+
+.tooltip__shortcut {
+  color: var(--pharos-color-marble-gray-80);
+  margin: 0 var(--pharos-spacing-one-quarter-x);
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.underline {
+  border-bottom: 1px solid var(--pharos-color-marble-gray-80);
+}
+.group-card {
+  .buttons {
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+@mixin text-decoration-lines {
+  @each $option in $text-decoration-line-options {
+    &-decoration-line-#{$option} {
+      text-decoration-line: $option;
+    }
+  }
+}
+
+$text-transform-options: (none, capitalize, uppercase, lowercase, full-width, full-size-kana);
+
+@mixin text-transforms {
+  @each $transform in $text-transform-options {
+    &-#{$transform} {
+      text-transform: $transform;
+    }
+  }
+}
+
+$flex-wrap-options: (nowrap, wrap, wrap-reverse);
+@mixin flex-wrap {
+  @each $alignment in $flex-wrap-options {
+    &-wrap-#{$alignment} {
+      flex-wrap: $alignment;
+    }
+  }
+}
+
+$text-align-options: (start end left right center justify justify-all match-parent);
+@mixin text-align {
+  @each $alignment in $text-align-options {
+    &-align-#{$alignment} {
+      text-align: $alignment;
+    }
+  }
+}
+$font-weight-options: (
+  regular: var(--pharos-font-weight-regular),
+  bold: var(--pharos-font-weight-bold)
+);
+@mixin font-weights {
+  @each $name, $weight in $font-weight-options {
+    &-weight-#{$name} {
+      font-weight: $weight;
+    }
+  }
+}
+
+$font-size-options: (
+  xl: var(--pharos-font-size-xlarge),
+  lg: var(--pharos-font-size-large),
+  md: var(--pharos-font-size-base),
+  sm: var(--pharos-font-size-small),
+  xs: var(--pharos-font-size-micro)
+);
+@mixin font-sizes {
+  @each $name, $size in $font-size-options {
+    &-size-#{$name} {
+      font-size: $size;
+    }
+  }
+}
+
+$color-options: (
+  overlay: var(--pharos-color-overlay),
+  green-base: var(--pharos-color-green-base),
+  green-93: var(--pharos-color-green-93),
+  yellow-base: var(--pharos-color-yellow-base),
+  yellow-97: var(--pharos-color-yellow-97),
+  white-base: var(--pharos-color-white),
+  black-base: var(--pharos-color-black),
+  gray-base: var(--pharos-color-marble-gray-base),
+  gray-97: var(--pharos-color-marble-gray-97),
+  gray-94: var(--pharos-color-marble-gray-94),
+  gray-80: var(--pharos-color-marble-gray-80),
+  gray-50: var(--pharos-color-marble-gray-50),
+  gray-40: var(--pharos-color-marble-gray-40),
+  gray-20: var(--pharos-color-marble-gray-20),
+  gray-10: var(--pharos-color-marble-gray-10),
+  coral-base: var(--pharos-color-living-coral-base),
+  coral-90: var(--pharos-color-living-coral-90),
+  coral-80: var(--pharos-color-living-coral-80),
+  coral-53: var(--pharos-color-living-coral-53),
+  coral-50: var(--pharos-color-living-coral-50),
+  glacier-base: var(--pharos-color-glacier-blue-base),
+  glacier-90: var(--pharos-color-glacier-blue-90),
+  glacier-80: var(--pharos-color-glacier-blue-80),
+  glacier-70: var(--pharos-color-glacier-blue-70),
+  glacier-40: var(--pharos-color-glacier-blue-40),
+  night-base: var(--pharos-color-night-blue-base),
+  night-60: var(--pharos-color-night-blue-60),
+  night-15: var(--pharos-color-night-blue-15),
+  jstor-red: var(--pharos-color-jstor-red)
+);
+
+@mixin colors {
+  @each $name, $color in $color-options {
+    &-color-#{$name} {
+      color: $color;
+    }
+  }
+}
+@mixin background-colors {
+  @each $name, $color in $color-options {
+    &-color-#{$name} {
+      background-color: $color !important;
+    }
+  }
+}
+$font-options: (
+  serif: var(--pharos-font-family-serif),
+  sans: var(--pharos-font-family-sans-serif)
+);
+
+@mixin fonts {
+  @each $name, $font in $font-options {
+    &-font-#{$name} {
+      font-family: $font;
+    }
+  }
+}
+
+// $line-height-options: (
+//   xl: var(--pharos-line-height-xlarge,
+//   lg: var(--pharos-line-height-large,
+//   md: var(--pharos-line-height-medium,
+//   sm: var(--pharos-line-height-small,
+//   xs: var(--pharos-line-height-xsmall,
+// );
+// @mixin line-heights {
+//   @each $name, $height in $line-height-options {
+//     &-line-height-#{$name} {
+//       line-height: $height;
+//     }
+//   }
+// }
+.text {
+  @include text-decoration-lines;
+  @include text-transforms;
+  @include font-weights;
+  @include font-sizes;
+  @include colors;
+  @include fonts;
+  @include text-align;
+  @include flex-wrap;
+  // @include line-heights;
+}
+.background {
+  @include background-colors;
+}
+@each $label, $color in $color-options {
+  .fill-#{$label} {
+    fill: #{$color};
+  }
+}
+
+$breakpoints: (
+  max: var(--pharos-breakpoint-max),
+  xl: var(--pharos-breakpoint-xlarge),
+  lg: var(--pharos-breakpoint-large),
+  md: var(--pharos-breakpoint-medium),
+  sm: var(--pharos-breakpoint-small)
+);
+
+// List of sizes to generate for each
+$spaces: (
+  0,
+  var(--pharos-spacing-one-eighth-x),
+  var(--pharos-spacing-one-quarter-x),
+  var(--pharos-spacing-one-half-x),
+  var(--pharos-spacing-three-quarters-x),
+  var(--pharos-spacing-1-x),
+  var(--pharos-spacing-one-and-a-half-x),
+  var(--pharos-spacing-2-x),
+  var(--pharos-spacing-3-x),
+  var(--pharos-spacing-three-and-a-half-x),
+  var(--pharos-spacing-5-x),
+  var(--pharos-spacing-7-x),
+  var(--pharos-spacing-10-x),
+  auto
+);
+$sides: (x, y, all, top, bottom, left, right);
+$types: (
+  p: padding,
+  m: margin
+);
+$i: 0;
+@each $space in $spaces {
+  .gap-#{$i} {
+    gap: #{$space} #{$space};
+  }
+  .row-gap-#{$i} {
+    row-gap: #{$space};
+  }
+  .column-gap-#{$i} {
+    column-gap: #{$space};
+  }
+  @each $side in $sides {
+    // Add negative margin options
+    @if $side == all {
+      .ma--#{$i} {
+        margin: -#{$space} -#{$space} !important;
+      }
+    } @else if $side == x {
+      .mx--#{$i} {
+        margin-left: -#{$space} !important;
+        margin-right: -#{$space} !important;
+      }
+    } @else if $side == y {
+      .my--#{$i} {
+        margin-top: -#{$space} !important;
+        margin-bottom: -#{$space} !important;
+      }
+    } @else {
+      .m#{str-slice($side, 0, 1)}--#{$i} {
+        margin-#{$side}: -#{$space} !important;
+      }
+    }
+    // Add positive margin and padding
+    @each $id, $type in $types {
+      @if $side == all {
+        .#{$id}a-#{$i} {
+          #{$type}: #{$space} #{$space} !important;
+        }
+      } @else if $side == x {
+        .#{$id}x-#{$i} {
+          #{$type}-left: #{$space} !important;
+          #{$type}-right: #{$space} !important;
+        }
+      } @else if $side == y {
+        .#{$id}y-#{$i} {
+          #{$type}-top: #{$space} !important;
+          #{$type}-bottom: #{$space} !important;
+        }
+      } @else {
+        .#{$id}#{str-slice($side, 0, 1)}-#{$i} {
+          #{$type}-#{$side}: #{$space} !important;
+        }
+      }
+    }
+  }
+  $i: $i + 1;
+}
+
+$i: 0;
+@each $space in $spaces {
+  @each $side in $sides {
+    @each $id, $type in $types {
+      @each $label, $bp in $breakpoints {
+        @media screen and (max-width: $bp) {
+          @if $side == all {
+            .#{$label}-#{$id}a-#{$i} {
+              #{$type}: #{$space} #{$space} !important;
+            }
+          } @else if $side == x {
+            .#{$label}-#{$id}x-#{$i} {
+              #{$type}-left: #{$space} !important;
+              #{$type}-right: #{$space} !important;
+            }
+          } @else if $side == y {
+            .#{$label}-#{$id}y-#{$i} {
+              #{$type}-top: #{$space} !important;
+              #{$type}-bottom: #{$space} !important;
+            }
+          } @else {
+            .#{$label}-#{$id}#{str-slice($side, 0, 1)}-#{$i} {
+              #{$type}-#{$side}: #{$space} !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  $i: $i + 1;
+}
+
+$alignment-options: (
+  normal,
+  stretch,
+  center,
+  start,
+  end,
+  flex-start,
+  flex-end,
+  space-between,
+  self-start,
+  self-end,
+  baseline,
+  first baseline,
+  last baseline,
+  safe center,
+  unsafe center
+);
+
+@each $alignment in $alignment-options {
+  .align-items-#{$alignment} {
+    align-items: $alignment;
+  }
+  .align-self-#{$alignment} {
+    align-self: $alignment;
+  }
+  .justify-content-#{$alignment} {
+    justify-content: $alignment;
+  }
+  .justify-self-#{$alignment} {
+    justify-self: $alignment;
+  }
+}
+@each $label, $bp in $breakpoints {
+  @each $alignment in $alignment-options {
+    @media screen and (max-width: $bp) {
+      .#{$label}-align-items-#{$alignment} {
+        align-items: $alignment;
+      }
+      .#{$label}-align-self-#{$alignment} {
+        align-self: $alignment;
+      }
+      .#{$label}-justify-content-#{$alignment} {
+        justify-content: $alignment;
+      }
+      .#{$label}-justify-self-#{$alignment} {
+        justify-self: $alignment;
+      }
+    }
+  }
+}
+$positions: (static, relative, fixed, absolute, sticky);
+@each $position in $positions {
+  .position-#{$position} {
+    position: $position;
+  }
+}
+
+@for $i from 1 through 12 {
+  .cols-#{$i} {
+    grid-column: span #{$i};
+  }
+}
+
+@for $i from 1 through 12 {
+  @each $label, $bp in $breakpoints {
+    @media screen and (max-width: $bp) {
+      .cols-#{$label}-#{$i} {
+        grid-column: span #{$i};
+      }
+    }
+  }
+}
+
+@media screen and (max-width: var(--pharos-breakpoint-medium)) {
+  @for $i from 9 through 12 {
+    .cols-#{$i} {
+      grid-column: span 8;
+    }
+  }
+}
+@media screen and (max-width: var(--pharos-breakpoint-small)) {
+  @for $i from 5 through 12 {
+    .cols-#{$i} {
+      grid-column: span 4;
+    }
+  }
+}
+
+$display-options: (
+  none,
+  block,
+  inline,
+  inline-block,
+  flex,
+  inline-flex,
+  grid,
+  inline-grid,
+  flow-root
+);
+@each $display in $display-options {
+  .display-#{$display} {
+    display: #{$display};
+  }
+}
+@each $label, $bp in $breakpoints {
+  @media screen and (max-width: $bp) {
+    .hidden-#{$label} {
+      display: none;
+    }
+    @each $display in $display-options {
+      .display-#{$display}-#{$label} {
+        display: #{$display};
+      }
+    }
+  }
+}
+
+$flex-direction-options: (row, row-reverse, column, column-reverse);
+
+@each $direction in $flex-direction-options {
+  .flex-direction-#{$direction} {
+    flex-direction: #{$direction};
+  }
+}
+@each $direction in $flex-direction-options {
+  @each $label, $bp in $breakpoints {
+    @media screen and (max-width: $bp) {
+      .#{$label}-flex-direction-#{$direction} {
+        flex-direction: #{$direction};
+      }
+    }
+  }
+}
+
+@media screen and (max-width: var(--pharos-breakpoint-small)) {
+  .search-results {
+    grid-template-columns: 1rem minmax(0, 1fr);
+  }
+  .search-results-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .button-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .button-row-buttons {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: var(--pharos-spacing-one-quarter-x);
+  }
+  .entity-features {
+    grid-template-columns: minmax(0, 1fr);
+    > li {
+      grid-column: span 4;
+    }
+  }
+}
+
+@media screen and (max-width: var(--pharos-breakpoint-medium)) {
+  .header-logo {
+    height: 62px;
+  }
+  .search-view {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .search-results-header-margins {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .search-results {
+    grid-template-columns: 2rem minmax(auto, 1200px) 2rem;
+  }
+  .search-filters-container {
+    max-height: none;
+    display: block;
+    position: relative;
+    padding-bottom: 0;
+  }
+  .journal-filter {
+    margin-bottom: calc(1.5 * var(--pharos-spacing-10-x));
+  }
+  .entity-features {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .group-card > div {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: var(--pharos-breakpoint-large)) {
+  .search-result {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

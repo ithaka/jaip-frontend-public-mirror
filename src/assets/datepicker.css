@@ -1,0 +1,88 @@
+@import '@ithaka/pharos/lib/styles/variables.css';
+
+:root {
+  /*General*/
+  --dp-font-family: var(--pharos-font-family-serif);
+  --dp-border-radius: var(--pharos-radius-base-standard); /*Configurable border-radius*/
+  --dp-cell-border-radius: var(
+    --pharos-radius-base-standard
+  ); /*Specific border radius for the calendar cell*/
+  --dp-common-transition: var(
+    --pharos-transition-base
+  ); /*Generic transition applied on buttons and calendar cells*/
+
+  /*Sizing*/
+  --dp-button-height: var(--pharos-spacing-2-x); /*Size for buttons in overlays*/
+  --dp-month-year-row-height: var(--pharos-spacing-2-x); /*Height of the month-year select row*/
+  --dp-month-year-row-button-size: var(
+    --pharos-spacing-2-x
+  ); /*Specific height for the next/previous buttons*/
+  --dp-button-icon-height: var(--pharos-spacing-1-x); /*Icon sizing in buttons*/
+  --dp-cell-size: var(--pharos-spacing-2-x); /*Width and height of calendar cell*/
+  --dp-cell-padding: var(--pharos-spacing-one-quarter-x); /*Padding in the cell*/
+  --dp-common-padding: var(--pharos-spacing-three-quarters-x); /*Common padding used*/
+  --dp-input-icon-padding: var(
+    --pharos-spacing-2-x
+  ); /*Padding on the left side of the input if icon is present*/
+  --dp-input-padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-2-x)
+    var(--pharos-spacing-one-half-x) var(--pharos-spacing-three-quarters-x); /*Padding in the input*/
+  --dp-menu-min-width: 260px; /*Adjust the min width of the menu*/
+  --dp-action-buttons-padding: var(--pharos-spacing-one-eighth-x)
+    var(--pharos-spacing-one-quarter-x); /*Adjust padding for the action buttons in action row*/
+  --dp-row-maring: var(--pharos-spacing-one-quarter-x) 0; /*Adjust the spacing between rows in the calendar*/
+  --dp-calendar-header-cell-padding: var(
+    --pharos-spacing-one-half-x
+  ); /*Adjust padding in calendar header cells*/
+  --dp-two-calendars-spacing: var(
+    --pharos-spacing-three-quarters-x
+  ); /*Space between multiple calendars*/
+  --dp-overlay-col-padding: var(--pharos-spacing-one-eighth-x); /*Padding in the overlay column*/
+  --dp-time-inc-dec-button-size: var(
+    -pharos-spacing-2-x
+  ); /*Sizing for arrow buttons in the time picker*/
+  --dp-menu-padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x); /*Menu padding*/
+
+  /*Font sizes*/
+  --dp-font-size: var(--pharos-type-scale-3); /*Default font-size*/
+  --dp-preview-font-size: var(
+    --pharos-type-scale-1
+  ); /*Font size of the date preview in the action row*/
+  --dp-time-font-size: var(--pharos-type-scale-1); /*Font size in the time picker*/
+
+  /*Transitions*/
+  --dp-animation-duration: var(--pharos-transition-duration-short); /*Transition duration*/
+  --dp-menu-appear-transition-timing: cubic-bezier(
+    0.17,
+    0.67,
+    0.83,
+    0.67
+  ); /*Timing on menu appear animation*/
+  --dp-transition-timing: ease-out; /*Timing on slide animations*/
+
+  /*Colors*/
+  --dp-primary-color: var(--pharos-color-primary); /*Primary color*/
+  --dp-secondary-color: var(--pharos-color-secondary); /*Secondary color*/
+  --dp-tertiary-color: var(--pharos-color-tertiary); /*Tertiary color*/
+}
+
+.dp__theme_light {
+  --dp-background-color: var(--pharos-modal-color-background-content);
+  --dp-text-color: var(--pharos-color-text-base);
+  --dp-hover-color: var(--pharos-color-ui-20);
+  --dp-hover-text-color: var(--pharos-color-text-base);
+  --dp-hover-icon-color: var(--pharos-color-interactive-primary);
+  --dp-primary-color: var(--pharos-color-interactive-primary);
+  --dp-primary-text-color: var(--pharos-color-text-white);
+  --dp-secondary-color: var(--pharos-color-ui-50);
+  --dp-border-color: var(--pharos-form-element-color-border-base);
+  --dp-menu-border-color: var(--pharos-form-element-color-border-base);
+  --dp-border-color-hover: var(--pharos-form-element-color-border-focus);
+  --dp-disabled-color: var(--pharos-color-disabled);
+  --dp-scroll-bar-background: var(--pharos-color-ui-30);
+  --dp-scroll-bar-color: var(--pharos-color-ui-50);
+  --dp-success-color: var(--pharos-alert-color-background-success);
+  --dp-success-color-disabled: var(--pharos-color-disabled);
+  --dp-icon-color: var(--pharos-color-ui-50);
+  --dp-danger-color: var(--pharos-color-feedback-error);
+  --dp-highlight-color: #990000a;
+}
