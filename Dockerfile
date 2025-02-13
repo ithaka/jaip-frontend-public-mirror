@@ -4,7 +4,7 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY .yarnrc.yml ./
 COPY .yarn ./.yarn
-RUN yarn install --immutable --immutable-cache
+RUN yarn install --immutable
 COPY ./ .
 RUN yarn build-only
 
