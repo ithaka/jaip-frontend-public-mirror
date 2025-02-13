@@ -1,0 +1,70 @@
+# Variables set in the pipeline are available here.
+commitHash: $CI_COMMIT_SHA
+eurekaServiceName: $EUREKA_SERVICE_NAME
+
+requiredTags:
+  owner: $ITHAKA_OWNER
+  app: $APP_NAME
+  environment: $ENVIRONMENT
+  businessUnit: $ITHAKA_BUSINESS_UNIT
+
+# This enables preStop hooks on the app and sidecar containers.
+# These will de-register the app from Eureka, then wait a minute for Eureka's cache to clear before shutting down.
+# 'sh' and the command 'sleep' are required to be available in your app container. Set this to false if not.
+gaplessDeployment:
+  enable: true
+  sleepLength: '60'
+
+# Disables application service discovery via the sidecar
+serviceLocatable: false
+
+autoscaling:
+  enabled: false
+
+# This is the port to the nginx reverse proxy, providing
+# routing to the static app deployed in s3.
+internalPort: 80
+
+# Never fall under 100% capacity when rolling updates are executed and ensure new replicas are
+# stood up before terminating old
+rollingUpdate:
+  maxSurge: 100%
+  maxUnavailable: 0
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 90Mi
+  limits:
+    cpu: 20m
+    memory: 128Mi
+
+healthcheckPath: /
+
+sirius:
+  enabled: true
+
+probes:
+  useDefault: false
+  customProbes:
+    startupProbe:
+      httpGet:
+        path: /
+        port: 80
+      failureThreshold: 30
+      periodSeconds: 10
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 120
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+        httpHeaders:
+          - name: X-Forwarded-Proto
+            value: https
+      failureThreshold: 30
+      periodSeconds: 10
+
