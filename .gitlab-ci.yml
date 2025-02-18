@@ -1,7 +1,7 @@
 # This file deploys an API container on artifactory with Capstan.
 #
 # Prerequisites:
-# A docker image on artifactory, named docker-virtual.artifactory.acorn.cirrostratus.org/capstan/platform-apps/labs/jaip-frontend:$TAG-{test,prod}
+# A docker image on artifactory, named docker-virtual.artifactory.acorn.cirrostratus.org/capstan/platform-apps/labs/jaip-backend:$TAG-{test,prod}
 # The _setup.yml file has been updated with the matching TAG
 #
 # Expected dev workflow:
@@ -37,7 +37,7 @@ trigger deploy merge request:
 
 # A persistent api that should deploy automatically to whenever main
 # updates. It runs in the integration cluster and is always named
-# jaip-frontend.apps.test.cirrostratus.org.
+# jaip-backend.apps.test.cirrostratus.org.
 # This gives us a staging deploy and also makes sure that we have the latest
 # docker image available in the release-candidate area, so the prod deploy can
 # find it when it promotes from release-candidate to stable.
@@ -52,7 +52,7 @@ trigger deploy test to staging:
 # A persistent api that must be spun up manually and torn down manually.
 # This is the production api.
 # It runs in the production cluster and is always named
-# jaip-frontend.apps.prod.cirrostratus.org.
+# jaip-backend.apps.prod.cirrostratus.org.
 trigger deploy prod:
   extends:
     - .prod-rules
