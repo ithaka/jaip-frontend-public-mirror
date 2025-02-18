@@ -63,7 +63,7 @@
     "vite-plugin-dynamic-import": "^1.6.0",
     "vite-plugin-static-copy": "^2.2.0",
     "vite-plugin-vue-devtools": "^7.7.2",
-    "vue-tsc": "^2.2.0"
+    "vue-tsc": "^2.2.2"
   },
   "packageManager": "yarn@4.6.0"
 }
