@@ -53,6 +53,9 @@ build app image success:
   variables:
     STATUS_NAME: "build app image"
     STATUS_STATE: "success"
+  before_script:
+    - echo "https://api.github.com/repos/ithaka/${GITHUB_PROJECT_NAME}/statuses/${CI_COMMIT_SHA}"
+    - echo "${CI_PIPELINE_URL}"
 
 build app image failure:
   extends: .notify-failure
