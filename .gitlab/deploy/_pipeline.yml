@@ -133,35 +133,35 @@ scan vulnerabilities failure:
     STATUS_STATE: "failure"
 
 # Run tsc type checker
-type check:
+type-check:
   stage: check
   extends:
     - .test
   script:
     - yarn type-check
 
-type check pending:
+type-check pending:
   extends: .notify-pending
   variables:
-    STATUS_NAME: "type check"
+    STATUS_NAME: "type-check"
     STATUS_STATE: "pending"
 
-type check success:
+type-check success:
   extends: .notify-success
   needs: 
-    - type check
-    - type check pending
+    - type-check
+    - type-check pending
   variables:
-    STATUS_NAME: "type check"
+    STATUS_NAME: "type-check"
     STATUS_STATE: "success"
 
-type check failure:
+type-check failure:
   extends: .notify-failure
   needs: 
-    - type check
-    - type check pending
+    - type-check
+    - type-check pending
   variables:
-    STATUS_NAME: "type check"
+    STATUS_NAME: "type-check"
     STATUS_STATE: "failure"
 
 
