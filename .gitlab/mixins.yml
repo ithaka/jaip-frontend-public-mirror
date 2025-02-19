@@ -85,6 +85,6 @@
   extends:
     - .test-env
   before_script:
-    - yarn install --immutable --immutable-cache
+    - yarn install --immutable
   tags:
     - test-runner
