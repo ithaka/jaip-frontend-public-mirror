@@ -16,7 +16,7 @@ stages:
   - deploy
   - post-deploy
   - verify
-  - status-notifications
+  - notifications
 
 # See Dockerfile. Note that the contents of the repository are _ignored by
 # default_ and only built into the app when explicitly exempted in the
