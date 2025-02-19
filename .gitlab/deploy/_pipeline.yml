@@ -15,6 +15,8 @@ stages:
   - deploy
   - post-deploy
   - verify
+  - status-notifications
+
 
 # See Dockerfile. Note that the contents of the repository are _ignored by
 # default_ and only built into the app when explicitly exempted in the
@@ -37,7 +39,29 @@ build app image:
     # Copy the environment specific nginx config so it can be used in the build, then remove irrelevant config files
     - mv nginx/$NGINX_CONFIG nginx/nginx.conf && rm -rf nginx/nginx.conf.*
 
+build app image pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "build app image"
+    STATUS_STATE: "pending"
 
+build app image success:
+  extends: .notify-success
+  needs: 
+    - build app image
+    - build app image pending
+  variables:
+    STATUS_NAME: "build app image"
+    STATUS_STATE: "success"
+
+build app image failure:
+  extends: .notify-failure
+  needs: 
+    - build app image
+    - build app image pending
+  variables:
+    STATUS_NAME: "build app image"
+    STATUS_STATE: "failure"
 
 
 # Default chart, configured via any `EXTRA_HELM_TEMPLATE_OPTIONS` referenced
@@ -46,6 +70,31 @@ render capstan chart:
   stage: prepare
   extends: .render-charts
   needs: []
+
+render capstan chart pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "render capstan chart"
+    STATUS_STATE: "pending"
+
+render capstan chart success:
+  extends: .notify-success
+  needs: 
+    - render capstan chart
+    - render capstan chart pending
+  variables:
+    STATUS_NAME: "render capstan chart"
+    STATUS_STATE: "success"
+
+render capstan chart failure:
+  extends: .notify-failure
+  needs: 
+    - render capstan chart
+    - render capstan chart pending
+  variables:
+    STATUS_NAME: "render capstan chart"
+    STATUS_STATE: "failure"
+
 
 scan vulnerabilities:
   stage: check
@@ -59,6 +108,30 @@ scan vulnerabilities:
     # replace / with - in branch name to be friendly w/ job
     - export CI_COMMIT_BRANCH="${CI_COMMIT_BRANCH//\//-}"
 
+scan vulnerabilities pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "scan vulnerabilities"
+    STATUS_STATE: "pending"
+
+scan vulnerabilities success:
+  extends: .notify-success
+  needs: 
+    - scan vulnerabilities
+    - scan vulnerabilities pending
+  variables:
+    STATUS_NAME: "scan vulnerabilities"
+    STATUS_STATE: "success"
+
+scan vulnerabilities failure:
+  extends: .notify-failure
+  needs: 
+    - scan vulnerabilities
+    - scan vulnerabilities pending
+  variables:
+    STATUS_NAME: "scan vulnerabilities"
+    STATUS_STATE: "failure"
+
 # Run tsc type checker
 type check:
   stage: check
@@ -66,6 +139,31 @@ type check:
     - .test
   script:
     - yarn type-check
+
+type check pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "type check"
+    STATUS_STATE: "pending"
+
+type check success:
+  extends: .notify-success
+  needs: 
+    - type check
+    - type check pending
+  variables:
+    STATUS_NAME: "type check"
+    STATUS_STATE: "success"
+
+type check failure:
+  extends: .notify-failure
+  needs: 
+    - type check
+    - type check pending
+  variables:
+    STATUS_NAME: "type check"
+    STATUS_STATE: "failure"
+
 
 # Run eslint
 lint:
@@ -75,6 +173,31 @@ lint:
   script:
     - yarn lint
 
+lint pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "lint"
+    STATUS_STATE: "pending"
+
+lint success:
+  extends: .notify-success
+  needs: 
+    - lint
+    - lint pending
+  variables:
+    STATUS_NAME: "lint"
+    STATUS_STATE: "success"
+
+lint failure:
+  extends: .notify-failure
+  needs: 
+    - lint
+    - lint pending
+  variables:
+    STATUS_NAME: "lint"
+    STATUS_STATE: "failure"
+
+
 # Run e2e tests
 e2e tests:
   stage: check
@@ -83,10 +206,82 @@ e2e tests:
   script:
     - yarn test:e2e
     
+e2e tests pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "e2e tests"
+    STATUS_STATE: "pending"
+
+e2e tests success:
+  extends: .notify-success
+  needs: 
+    - e2e tests
+    - e2e tests pending
+  variables:
+    STATUS_NAME: "e2e tests"
+    STATUS_STATE: "success"
+
+e2e tests failure:
+  extends: .notify-failure
+  needs: 
+    - e2e tests
+    - e2e tests pending
+  variables:
+    STATUS_NAME: "e2e tests"
+    STATUS_STATE: "failure"
+
 promote image:
   stage: promote
   extends: .promote-image
 
+promote image pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "promote image"
+    STATUS_STATE: "pending"
+
+promote image success:
+  extends: .notify-success
+  needs: 
+    - promote image
+    - promote image pending
+  variables:
+    STATUS_NAME: "promote image"
+    STATUS_STATE: "success"
+
+promote image failure:
+  extends: .notify-failure
+  needs: 
+    - promote image
+    - promote image pending
+  variables:
+    STATUS_NAME: "promote image"
+    STATUS_STATE: "failure"
+
 wait for eureka:
   extends: .check-healthy-deployment
   stage: verify
+
+wait for eureka pending:
+  extends: .notify-pending
+  variables:
+    STATUS_NAME: "wait for eureka"
+    STATUS_STATE: "pending"
+
+wait for eureka success:
+  extends: .notify-success
+  needs: 
+    - wait for eureka
+    - wait for eureka pending
+  variables:
+    STATUS_NAME: "wait for eureka"
+    STATUS_STATE: "success"
+
+wait for eureka failure:
+  extends: .notify-failure
+  needs: 
+    - wait for eureka
+    - wait for eureka pending
+  variables:
+    STATUS_NAME: "wait for eureka"
+    STATUS_STATE: "failure"

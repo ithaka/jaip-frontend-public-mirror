@@ -89,3 +89,27 @@
   tags:
     - test-runner
 
+# ---- NOTIFICATIONS ------------------------------------------------------------------
+# Mixins for sending notifications to GitHub
+include:
+  - project: capstan/pow/gitlab-templates
+    file: /send-github-status/template.yml
+    ref: send-github-status-v1
+
+.notify-pending:
+  stage: status-notifications # groups status notification jobs together to denoise other stages
+  needs: [] # Run on pipeline start, to show pending status right away
+  extends: .send-github-status
+  allow_failure: true # Status notifications are nice to have, but not critical
+
+.notify-success:
+  stage: status-notifications
+  when: on_success
+  extends: .send-github-status
+  allow_failure: true
+
+.notify-failure:
+  stage: status-notifications
+  when: on_failure
+  extends: .send-github-status
+  allow_failure: true
