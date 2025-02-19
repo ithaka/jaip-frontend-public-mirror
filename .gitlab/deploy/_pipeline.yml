@@ -64,6 +64,8 @@ scan vulnerabilities:
 # Run tsc type checker
 type-check:
   stage: check
+  dependencies:
+    - build app image
   extends:
     - .test
   script:
@@ -76,6 +78,8 @@ type-check:
 # Run eslint
 lint:
   stage: check
+  dependencies:
+    - build app image
   extends:
     - .test
   script:
@@ -85,16 +89,16 @@ lint:
 # Run e2e tests
 e2e tests:
   stage: check
+  dependencies:
+    - build app image
   extends:
     - .test
   script:
     - yarn test:e2e
-    
 
 promote image:
   stage: promote
   extends: .promote-image
-
 
 wait for eureka:
   extends: .check-healthy-deployment
