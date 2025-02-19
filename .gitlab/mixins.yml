@@ -82,7 +82,6 @@
 
 .test:
   extends:
-    - .test-rules
     - .test-env
   before_script:
     - yarn install --immutable --immutable-cache
