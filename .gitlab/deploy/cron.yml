@@ -34,8 +34,6 @@ build app image:
     IMAGE_TAG: $DOCKER_VIRTUAL/$CI_PROJECT_PATH:$CI_COMMIT_SHA-nightly-scan
     DOCKER_REPOSITORY: $CI_PROJECT_PATH
 
-
-
 scan vulnerabilities:
   stage: check
   extends: .vulnerability-scanner
