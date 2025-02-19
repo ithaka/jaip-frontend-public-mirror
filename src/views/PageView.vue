@@ -16,9 +16,11 @@ const doc = ref(null)
 const iid = (route.params || {}).iid as string
 const page_index = (route.params || {}).pid as string
 let initial_page_index = parseInt(page_index, 10)
+
 if (isNaN(initial_page_index) || initial_page_index < 0) {
   initial_page_index = 0
 }
+
 const gettingDocument = ref(false)
 const pdfData = ref('')
 const metadata = ref({ id: iid } as Cedar)
