@@ -56,9 +56,10 @@ build app image success:
 
 build app image failure:
   extends: .notify-failure
-  needs:optional: 
-    - build app image
-    - build app image pending
+  needs:
+    optional: 
+      - build app image
+      - build app image pending
   variables:
     STATUS_NAME: "build app image"
     STATUS_STATE: "failure"
@@ -79,18 +80,20 @@ render capstan chart pending:
 
 render capstan chart success:
   extends: .notify-success
-  needs:optional: 
-    - render capstan chart
-    - render capstan chart pending
+  needs:
+    optional: 
+      - render capstan chart
+      - render capstan chart pending
   variables:
     STATUS_NAME: "render capstan chart"
     STATUS_STATE: "success"
 
 render capstan chart failure:
   extends: .notify-failure
-  needs:optional: 
-    - render capstan chart
-    - render capstan chart pending
+  needs:
+    optional: 
+      - render capstan chart
+      - render capstan chart pending
   variables:
     STATUS_NAME: "render capstan chart"
     STATUS_STATE: "failure"
@@ -116,18 +119,20 @@ scan vulnerabilities pending:
 
 scan vulnerabilities success:
   extends: .notify-success
-  needs:optional: 
-    - scan vulnerabilities
-    - scan vulnerabilities pending
+  needs:
+    optional: 
+      - scan vulnerabilities
+      - scan vulnerabilities pending
   variables:
     STATUS_NAME: "scan vulnerabilities"
     STATUS_STATE: "success"
 
 scan vulnerabilities failure:
   extends: .notify-failure
-  needs:optional: 
-    - scan vulnerabilities
-    - scan vulnerabilities pending
+  needs:
+    optional: 
+      - scan vulnerabilities
+      - scan vulnerabilities pending
   variables:
     STATUS_NAME: "scan vulnerabilities"
     STATUS_STATE: "failure"
@@ -148,18 +153,20 @@ type-check pending:
 
 type-check success:
   extends: .notify-success
-  needs:optional: 
-    - type-check
-    - type-check pending
+  needs:
+    optional: 
+      - type-check
+      - type-check pending
   variables:
     STATUS_NAME: "type-check"
     STATUS_STATE: "success"
 
 type-check failure:
   extends: .notify-failure
-  needs:optional: 
-    - type-check
-    - type-check pending
+  needs:
+    optional: 
+      - type-check
+      - type-check pending
   variables:
     STATUS_NAME: "type-check"
     STATUS_STATE: "failure"
@@ -181,18 +188,20 @@ lint pending:
 
 lint success:
   extends: .notify-success
-  needs:optional: 
-    - lint
-    - lint pending
+  needs:
+    optional: 
+      - lint
+      - lint pending
   variables:
     STATUS_NAME: "lint"
     STATUS_STATE: "success"
 
 lint failure:
   extends: .notify-failure
-  needs:optional: 
-    - lint
-    - lint pending
+  needs:
+    optional: 
+      - lint
+      - lint pending
   variables:
     STATUS_NAME: "lint"
     STATUS_STATE: "failure"
@@ -214,18 +223,20 @@ e2e tests pending:
 
 e2e tests success:
   extends: .notify-success
-  needs:optional: 
-    - e2e tests
-    - e2e tests pending
+  needs:
+    optional: 
+      - e2e tests
+      - e2e tests pending
   variables:
     STATUS_NAME: "e2e tests"
     STATUS_STATE: "success"
 
 e2e tests failure:
   extends: .notify-failure
-  needs:optional: 
-    - e2e tests
-    - e2e tests pending
+  needs:
+    optional: 
+      - e2e tests
+      - e2e tests pending
   variables:
     STATUS_NAME: "e2e tests"
     STATUS_STATE: "failure"
@@ -242,18 +253,20 @@ promote image pending:
 
 promote image success:
   extends: .notify-success
-  needs:optional: 
-    - promote image
-    - promote image pending
+  needs:
+    optional: 
+      - promote image
+      - promote image pending
   variables:
     STATUS_NAME: "promote image"
     STATUS_STATE: "success"
 
 promote image failure:
   extends: .notify-failure
-  needs:optional: 
-    - promote image
-    - promote image pending
+  needs:
+    optional: 
+      - promote image
+      - promote image pending
   variables:
     STATUS_NAME: "promote image"
     STATUS_STATE: "failure"
@@ -270,18 +283,20 @@ wait for eureka pending:
 
 wait for eureka success:
   extends: .notify-success
-  needs:optional: 
-    - wait for eureka
-    - wait for eureka pending
+  needs:
+    optional: 
+      - wait for eureka
+      - wait for eureka pending
   variables:
     STATUS_NAME: "wait for eureka"
     STATUS_STATE: "success"
 
 wait for eureka failure:
   extends: .notify-failure
-  needs:optional: 
-    - wait for eureka
-    - wait for eureka pending
+  needs:
+    optional: 
+      - wait for eureka
+      - wait for eureka pending
   variables:
     STATUS_NAME: "wait for eureka"
     STATUS_STATE: "failure"
