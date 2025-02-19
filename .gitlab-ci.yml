@@ -46,7 +46,6 @@ trigger deploy test to staging:
     - .staging-rules
     - .deploy
     - .test-env
-    - .test
   trigger:
     include: .gitlab/deploy/persistent.yml
 
