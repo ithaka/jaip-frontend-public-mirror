@@ -18,7 +18,6 @@ stages:
   - verify
   - status-notifications
 
-
 # See Dockerfile. Note that the contents of the repository are _ignored by
 # default_ and only built into the app when explicitly exempted in the
 # .dockerignore. This is because the top-level repo contains lots of apparatus
@@ -48,7 +47,7 @@ build app image pending:
 
 build app image success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - build app image
     - build app image pending
   variables:
@@ -57,7 +56,7 @@ build app image success:
 
 build app image failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - build app image
     - build app image pending
   variables:
@@ -80,7 +79,7 @@ render capstan chart pending:
 
 render capstan chart success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - render capstan chart
     - render capstan chart pending
   variables:
@@ -89,7 +88,7 @@ render capstan chart success:
 
 render capstan chart failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - render capstan chart
     - render capstan chart pending
   variables:
@@ -117,7 +116,7 @@ scan vulnerabilities pending:
 
 scan vulnerabilities success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - scan vulnerabilities
     - scan vulnerabilities pending
   variables:
@@ -126,7 +125,7 @@ scan vulnerabilities success:
 
 scan vulnerabilities failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - scan vulnerabilities
     - scan vulnerabilities pending
   variables:
@@ -149,7 +148,7 @@ type-check pending:
 
 type-check success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - type-check
     - type-check pending
   variables:
@@ -158,7 +157,7 @@ type-check success:
 
 type-check failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - type-check
     - type-check pending
   variables:
@@ -182,7 +181,7 @@ lint pending:
 
 lint success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - lint
     - lint pending
   variables:
@@ -191,7 +190,7 @@ lint success:
 
 lint failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - lint
     - lint pending
   variables:
@@ -215,7 +214,7 @@ e2e tests pending:
 
 e2e tests success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - e2e tests
     - e2e tests pending
   variables:
@@ -224,7 +223,7 @@ e2e tests success:
 
 e2e tests failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - e2e tests
     - e2e tests pending
   variables:
@@ -243,7 +242,7 @@ promote image pending:
 
 promote image success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - promote image
     - promote image pending
   variables:
@@ -252,7 +251,7 @@ promote image success:
 
 promote image failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - promote image
     - promote image pending
   variables:
@@ -271,7 +270,7 @@ wait for eureka pending:
 
 wait for eureka success:
   extends: .notify-success
-  needs: 
+  needs:optional: 
     - wait for eureka
     - wait for eureka pending
   variables:
@@ -280,7 +279,7 @@ wait for eureka success:
 
 wait for eureka failure:
   extends: .notify-failure
-  needs: 
+  needs:optional: 
     - wait for eureka
     - wait for eureka pending
   variables:
