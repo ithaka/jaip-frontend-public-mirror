@@ -58,9 +58,6 @@ include:
     file: /ephemeral-deployer/template.yml
     ref: ephemeral-deployer-v3
   - project: capstan/pow/gitlab-templates
-    file: /run-argo-deployer/template.yml
-    ref: run-argo-deployer-v3
-  - project: capstan/pow/gitlab-templates
     file: /argocd-sync/template.yml
     ref: argocd-sync-v3
   - project: capstan/pow/gitlab-templates
