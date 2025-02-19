@@ -45,7 +45,7 @@ trigger deploy test to staging:
   extends:
     - .staging-rules
     - .deploy
-    - .test
+    - .test-env
   trigger:
     include: .gitlab/deploy/persistent.yml
 
@@ -75,7 +75,7 @@ trigger undeploy prod:
 trigger undeploy staging:
   extends:
     - .undeploy
-    - .test
+    - .test-env
   rules:
     - if: $PIPELINE == 'undeploy-test'
   trigger:
