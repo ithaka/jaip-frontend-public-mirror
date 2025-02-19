@@ -14,12 +14,12 @@ import type InputFileEvent from '@/interfaces/Events/InputEvent'
 const props = defineProps({
   entity: {
     type: Object as PropType<Entity>,
-    required: true
+    required: true,
   },
   entityType: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const userStore = useUserStore()
@@ -34,8 +34,8 @@ const groupObject = ref(
       obj[group.id] = group
       return obj
     },
-    {} as { [key: number]: Group }
-  )
+    {} as { [key: number]: Group },
+  ),
 )
 
 const initGroups = props.entity.groups || []
@@ -47,7 +47,7 @@ const selectedGroup = computed(() => {
 })
 
 const categorizedFeatures = computed(() =>
-  featuresStore.categorizedFeatures(selectedGroup.value, props.entity.type, false)
+  featuresStore.categorizedFeatures(selectedGroup.value, props.entity.type, false),
 )
 
 const hasEdit = computed(() => {

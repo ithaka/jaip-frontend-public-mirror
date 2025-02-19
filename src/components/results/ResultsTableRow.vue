@@ -7,15 +7,15 @@ const props = defineProps({
   isGlobal: Boolean,
   history: {
     type: Object as PropType<History>,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const scope = ref(props.isGlobal ? 'global' : 'local')
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   dateStyle: 'medium',
-  timeStyle: 'short'
+  timeStyle: 'short',
 }
 </script>
 <template>

@@ -12,29 +12,30 @@ const props = defineProps({
   sourceList: {
     // This is a little awkward in ts, but it's handy to be able to pass in any type and
     // use functions as props to get the correct values from the parent component.
-    type: Array as any,
-    default: () => []
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type: Array<any>,
+    default: () => [],
   },
   filterFunction: {
     type: Function,
-    default: () => {}
+    default: () => {},
   },
   getValue: {
     type: Function,
-    default: () => {}
+    default: () => {},
   },
   getLabel: {
     type: Function,
-    default: () => {}
+    default: () => {},
   },
   initialListLength: {
     type: Number,
-    default: 5
+    default: 5,
   },
   initialSelections: {
     type: Array<string>,
-    default: () => []
-  }
+    default: () => [],
+  },
 })
 
 const userStore = useUserStore()
@@ -71,7 +72,7 @@ const handleSelection = async (e: InputFileEvent) => {
   }
   emit('input', {
     checkboxes: checkboxes.value,
-    newValue
+    newValue,
   })
 }
 const iconKey = ref(displayList.value.map(() => 0))
@@ -120,7 +121,7 @@ const iconKey = ref(displayList.value.map(() => 0))
                 <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
                 <div slot="label" class="display-flex">
                   <BulkApprovalIcon
-                    v-if="getBulkApprovalStatus(item.bulk_approval, groupIDs)"
+                    v-if="item.bulk_approval && getBulkApprovalStatus(item.bulk_approval, groupIDs)"
                     :key="iconKey[i]"
                     :tooltip-id="`${getLabel(item).replace(/\s/g, '')}_approval`"
                     :text="`Articles in ${getLabel(item)} are generally approved automatically.`"

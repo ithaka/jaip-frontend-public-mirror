@@ -1,6 +1,17 @@
 import type { FeatureDetails } from '@/interfaces/Features'
-import type { History } from '@/interfaces/MediaRecord'
+import type { BulkHistory, History } from '@/interfaces/MediaRecord'
 import type { Router } from 'vue-router'
+
+export const ensureError = (value: unknown): Error => {
+  if (value instanceof Error) return value
+  let stringified = '[Unable to stringify the thrown value]'
+  try {
+    stringified = JSON.stringify(value)
+  } catch {}
+
+  const error = new Error(`This value was thrown as is, not through an Error: ${stringified}`)
+  return error
+}
 
 export const makeGrammaticalList = (original: Array<string>) => {
   const arr = [...original]
@@ -21,19 +32,19 @@ export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-
-export const hasStaticBlock = ():boolean => {
-    let hsb = true
-    try {
-    const sum = new Function("class ClassWithStaticInitializationBlock {static staticProperty1 = 'Property 1'; static staticProperty2; static { this.staticProperty2 = 'Property 2'; }}");
-    } catch {
+export const hasStaticBlock = (): boolean => {
+  let hsb = true
+  try {
+    new Function(
+      "class ClassWithStaticInitializationBlock {static staticProperty1 = 'Property 1'; static staticProperty2; static { this.staticProperty2 = 'Property 2'; }}",
+    )
+  } catch {
     hsb = false
-    }
-    return hsb
+  }
+  return hsb
 }
 
-
-export const getBulkApprovalStatus = (opts: History[], groups: number[]) => {
+export const getBulkApprovalStatus = (opts: History[] | BulkHistory[], groups: number[]) => {
   if (!opts) return false
   const numStatuses = Object.keys(opts).length
   if (!numStatuses) return false
@@ -56,12 +67,12 @@ export const getStatus = (opts: { [key: string]: History }, groups: number[]): s
 
 export const changeRoute = (
   router: Router,
-  emit: Function,
+  emit: (event: 'close', ...args: unknown[]) => void,
   path: string,
   term: string,
   page: number,
   groups: number[] | undefined,
-  statusQuery: string | undefined
+  statusQuery: string | undefined,
 ) => {
   if (router.currentRoute.value.path !== path) {
     page = 1
@@ -73,19 +84,21 @@ export const changeRoute = (
       term,
       page,
       groups: JSON.stringify(groups),
-      statusq: statusq
-    }
+      statusq: statusq,
+    },
   })
   emit('close')
 }
 
-export const combineArrays = (array1: any, array2: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const combineArrays = (array1: Array<any>, array2: Array<any>) => {
   return [...new Set([...array1, ...array2])]
 }
 
-export const arraysAreEqual = (array1: any, array2: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const arraysAreEqual = (array1: Array<any>, array2: Array<any>) => {
   if (array1.length === array2.length) {
-    return array1.every((element: any) => {
+    return array1.every((element: unknown) => {
       if (array2.includes(element)) {
         return true
       }
@@ -95,6 +108,8 @@ export const arraysAreEqual = (array1: any, array2: any) => {
 
   return false
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const uniqueArray = (arr: Array<any>) => {
   const a = arr.concat()
   for (let i = 0; i < a.length; ++i) {
@@ -107,7 +122,7 @@ export const uniqueArray = (arr: Array<any>) => {
 
 export const getGroupsWithStatus = (
   statuses: { [key: string]: History },
-  status: string
+  status: string,
 ): number[] => {
   return Object.values(statuses)
     .filter((history: History) => {
@@ -122,7 +137,7 @@ export const hideButton = (
   featureDetails: FeatureDetails,
   statuses: { [key: string]: History },
   status: string,
-  fname: string
+  fname: string,
 ): boolean => {
   const feature = featureDetails[fname]
   if (!feature.enabled) {

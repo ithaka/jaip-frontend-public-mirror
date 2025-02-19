@@ -29,7 +29,7 @@ const { searching } = storeToRefs(searchStore)
 
 const route = useRoute()
 const redirectToParams = () => {
-  let path = route.path
+  const path = route.path
   let newURL = new URL(window.location.href)
   if (path.toLowerCase() === '/about') {
     newURL = new URL(newURL.search, newURL.origin)
@@ -45,7 +45,7 @@ watch(entityName, () => {
   updateRoutes(isAuthenticatedStudent.value, isAuthenticatedAdmin.value, router)
   const availableRoutes = router.getRoutes()
   // TODO: Figure out a better way to match a path to a dynamic route.
-  let path = availableRoutes.some((route) => routePath.value.startsWith(route.path))
+  const path = availableRoutes.some((route) => routePath.value.startsWith(route.path))
     ? routePath.value
     : router.currentRoute.value.fullPath
   const params = new URLSearchParams(routeQuery.value || '?term=&page=1')
@@ -62,14 +62,17 @@ const logout = async () => {
     path: '/',
     query: {
       term: '',
-      page: 1
-    }
+      page: 1,
+    },
   })
   routePath.value = '/'
   routeQuery.value = '?term=&page=1'
   userStore.$reset()
 }
-const showRequestWarning = computed(() => !features.value['submit_requests'] && isAuthenticatedStudent.value && !isAdminSubdomain.value )
+const showRequestWarning = computed(
+  () =>
+    !features.value['submit_requests'] && isAuthenticatedStudent.value && !isAdminSubdomain.value,
+)
 </script>
 
 <template>
@@ -110,7 +113,7 @@ const showRequestWarning = computed(() => !features.value['submit_requests'] && 
     <RouterView class="cols-12" />
 
     <pep-pharos-footer id="footer">
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <div slot="links-group" class="display-flex flex-direction-column mb-6 cols-md-8">
         <span> Brought to you by: </span>
         <img
@@ -127,7 +130,6 @@ const showRequestWarning = computed(() => !features.value['submit_requests'] && 
           />
         </a>
       </div>
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <span slot="links-group" class="display-flex flex-direction-column mb-6 pr-6 cols-md-8">
         <span> Made possible with funding from: </span>
         <img
@@ -157,7 +159,6 @@ const showRequestWarning = computed(() => !features.value['submit_requests'] && 
           />
         </a>
       </span>
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <span slot="links-group" class="cols-3">
         <span class="mb-4">
           JSTOR is part of
@@ -170,13 +171,13 @@ const showRequestWarning = computed(() => !features.value['submit_requests'] && 
           use digital technologies to preserve the scholarly record and to advance research and
           teaching in sustainable ways.
         </span>
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
         <span class="display-block mt-4 copyright">
           ©2000-{{ new Date().getFullYear().toString() }} ITHAKA. All Rights Reserved. JSTOR®, the
           JSTOR logo, JPASS®, Artstor®, Reveal Digital™ and ITHAKA® are registered trademarks of
           ITHAKA.
         </span>
       </span>
+      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-footer>
   </div>
 </template>

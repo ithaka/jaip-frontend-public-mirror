@@ -7,12 +7,12 @@ import ResultsTableRow from '@/components/results/ResultsTableRow.vue'
 defineProps({
   history: {
     type: [] as PropType<History[]>,
-    required: true
+    required: true,
   },
   scope: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 </script>
 

@@ -67,9 +67,6 @@ export default defineConfig(({ mode }) => {
           },
         ],
       }),
-      // This is a callable function and it works, but it does currently pop a ts error in vscode,
-      // which does not appear in build or dev builds.
-      // @ts-ignore
       dynamicImport({
         filter(id: string) {
           // https://github.com/vite-plugin/vite-plugin-dynamic-import/blob/v1.3.0/src/index.ts#L133-L135

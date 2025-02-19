@@ -17,15 +17,15 @@ const entityOptions = ref([
     title: 'Users',
     titleSingular: 'User',
     type: 'users',
-    icon: 'profile'
+    icon: 'profile',
   },
   {
     feature: 'get_facilities',
     title: 'Facilities',
     titleSingular: 'Facility',
     type: 'facilities',
-    icon: 'workspace'
-  }
+    icon: 'workspace',
+  },
 ] as EntityOption[])
 const availableEntities = computed(() => {
   return entityOptions.value.filter((entity: EntityOption) => {
@@ -43,7 +43,7 @@ const entityObject = computed(() => {
 const visibleEntity = ref(
   featureDetails.value['get_users'].enabled
     ? ('users' as EntityTypes)
-    : ('facilities' as EntityTypes)
+    : ('facilities' as EntityTypes),
 )
 </script>
 

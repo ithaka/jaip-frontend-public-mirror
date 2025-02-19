@@ -15,10 +15,10 @@ import AccessButtons from '@/components/AccessButtons.vue'
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({})
+    default: () => ({}),
   },
   pdfView: Boolean,
-  includePdf: Boolean
+  includePdf: Boolean,
 })
 
 const searchStore = useSearchStore()
@@ -45,7 +45,7 @@ const isGlobal = ref((props.doc.history || []).length ? false : true)
 const readRoute = ref(
   featureDetails.value['view_document'].enabled
     ? `/page/${props.doc.iid}/0`
-    : `/pdf/${props.doc.iid}`
+    : `/pdf/${props.doc.iid}`,
 )
 </script>
 <template>

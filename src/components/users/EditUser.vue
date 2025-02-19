@@ -17,8 +17,8 @@ const props = defineProps({
   show: Boolean,
   user: {
     type: Object as PropType<Entity>,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const disenable = (ufd: UngroupedFeatureDetails) => {
@@ -43,7 +43,7 @@ if (
 }
 
 const newUserSortedUngroupedFeatures = computed(() =>
-  userStore.sortUngroupedFeatures(newUser.value.ungrouped_features!)
+  userStore.sortUngroupedFeatures(newUser.value.ungrouped_features!),
 )
 
 const hasAllFeatures = computed(() => {

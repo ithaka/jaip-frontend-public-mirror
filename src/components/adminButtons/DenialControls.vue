@@ -15,7 +15,7 @@ import {
   arraysAreEqual,
   combineArrays,
   hideButton,
-  getGroupsWithStatus
+  getGroupsWithStatus,
 } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group, GroupSelection } from '@/interfaces/Group'
@@ -29,8 +29,8 @@ const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(use
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
 const isSingleGroup = userStore.isSingleGroupFeature('deny_requests')
@@ -41,7 +41,7 @@ const denyModalKey = ref(0)
 const denyGroups = ref(
   isSingleGroup
     ? featureDetails.value['deny_requests'].groups
-    : getGroupsWithStatus(statuses.value, 'denied')
+    : getGroupsWithStatus(statuses.value, 'denied'),
 )
 const incompleteReason = 'Missing required information'
 const reasons = [
@@ -93,7 +93,7 @@ const selectorGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 
 const handleGroupChange = (event: GroupSelection) => {
@@ -127,7 +127,7 @@ const handleDenial = async () => {
     doi: props.doc.doi,
     groups: selectedGroups.value['deny_requests'],
     reason: selectedReason.value.trim(),
-    comments: comments.value.trim()
+    comments: comments.value.trim(),
   }
   try {
     if (selectedReason.value === incompleteReason) {
@@ -139,7 +139,7 @@ const handleDenial = async () => {
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
     emit('denialSubmitted')
-  } catch (err) {
+  } catch {
     const msg = 'There was an error and your denial was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
@@ -204,18 +204,18 @@ const emit = defineEmits(['denialSubmitted'])
           <span slot="label">
             <span class="display-flex align-items-center">
               {{ reason }}
-              <span v-if="reason===incompleteReason">
+              <span v-if="reason === incompleteReason">
                 <pep-pharos-icon
                   :data-tooltip-id="`incomplete_explanation`"
                   name="question-inverse"
                   class="mt-0 pl-2 fill-gray-40 small-icon"
                   :aria-describedby="`incomplete_explanation`"
                 />
-                <pep-pharos-tooltip
-                  :id="`incomplete_explanation`"
-                  placement="top"
-                >
-                  <span class="text-none">Selecting this option will list the item as Incomplete rather than Denied.</span>
+                <pep-pharos-tooltip :id="`incomplete_explanation`" placement="top">
+                  <span class="text-none"
+                    >Selecting this option will list the item as Incomplete rather than
+                    Denied.</span
+                  >
                 </pep-pharos-tooltip>
               </span>
             </span>
@@ -267,7 +267,7 @@ const emit = defineEmits(['denialSubmitted'])
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
+      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="
@@ -275,17 +275,18 @@ const emit = defineEmits(['denialSubmitted'])
           !selectedGroups['deny_requests'].length ||
           !denyGroups.length ||
           arraysAreEqual(
-            denyGroups.length,
+            denyGroups,
             combineArrays(
               getGroupsWithStatus(statuses, 'denied'),
-              getGroupsWithStatus(statuses, 'incomplete')
-            )
+              getGroupsWithStatus(statuses, 'incomplete'),
+            ),
           )
         "
         @click.prevent.stop="handleDenial"
       >
         Deny
       </pep-pharos-button>
+      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

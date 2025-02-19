@@ -12,17 +12,17 @@ export default (isStudent: boolean, isAdmin: boolean, currentRouter: Router) => 
   const userStore = useUserStore()
   const newRouter = createRouter(isStudent, isAdmin)
   const newRoutes = newRouter.getRoutes()
-  const hasAny = (reqs: string[], features: FeatureBoolean): Boolean => {
+  const hasAny = (reqs: string[], features: FeatureBoolean): boolean => {
     return reqs.some((feature) => features[feature])
   }
-  const hasAnyUngrouped = (reqs: string[], features: UngroupedFeatureDetails): Boolean => {
+  const hasAnyUngrouped = (reqs: string[], features: UngroupedFeatureDetails): boolean => {
     if (!features) return false
     return reqs.some((feature) => (features[feature] || {}).enabled)
   }
-  const hasAll = (reqs: string[], features: FeatureBoolean): Boolean => {
+  const hasAll = (reqs: string[], features: FeatureBoolean): boolean => {
     return reqs.every((feature) => features[feature])
   }
-  const hasAllUngrouped = (reqs: string[], features: UngroupedFeatureDetails): Boolean => {
+  const hasAllUngrouped = (reqs: string[], features: UngroupedFeatureDetails): boolean => {
     if (!features) return false
     return reqs.every((feature) => (features[feature] || {}).enabled)
   }

@@ -11,7 +11,7 @@ import ReactivateFeature from '@/components/features/ReactivateFeature.vue'
 import type { Feature } from '@/interfaces/Features'
 
 const props = defineProps({
-  ungrouped: Boolean
+  ungrouped: Boolean,
 })
 
 const coreStore = useCoreStore()
@@ -36,7 +36,7 @@ const getFeatures = async () => {
     name: query.value,
     page: page.value,
     limit: limit.value,
-    is_active: isActive.value
+    is_active: isActive.value,
   }
   const type = props.ungrouped ? 'ungrouped' : 'basic'
   const { data } = await coreStore.$api.auth.features[type].get(args)

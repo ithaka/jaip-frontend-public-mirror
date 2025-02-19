@@ -8,12 +8,12 @@ import type { PropType } from 'vue'
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    required: true
+    required: true,
   },
   scope: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const histories = computed(() => {

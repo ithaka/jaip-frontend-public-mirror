@@ -6,7 +6,7 @@ import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
-// @ts-ignore
+// @ts-expect-error The viewer utils are not typed
 import { hasBrowserPDFViewer } from '@/utils/viewers'
 import { hasStaticBlock } from '@/utils/helpers'
 
@@ -17,24 +17,24 @@ const coreStore = useCoreStore()
 const props = defineProps({
   iid: {
     type: String,
-    required: true
+    required: true,
   },
   variant: {
     type: String,
-    default: 'primary'
+    default: 'primary',
   },
   column: {
     type: Boolean,
-    default: false
+    default: false,
   },
   includePdf: {
     type: Boolean,
-    default: false
+    default: false,
   },
   pdfView: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const isDisabledPrint = ref(false)
@@ -74,7 +74,7 @@ const printPDF = () => {
     onError: () => {
       isDisabledPrint.value = false
       coreStore.toast('Error printing document', 'error')
-    }
+    },
   })
 }
 
@@ -96,7 +96,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
       'lg-mr-3':
         (featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()) ||
         (featureDetails['view_pdf'].enabled && includePdf) ||
-        (featureDetails['view_document'].enabled && isPDFPage)
+        (featureDetails['view_document'].enabled && isPDFPage),
     }"
     @click="downloadPDF"
   >
@@ -110,7 +110,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     :class="{
       'lg-mr-3':
         (featureDetails['view_pdf'].enabled && includePdf) ||
-        (featureDetails['view_document'].enabled && isPDFPage)
+        (featureDetails['view_document'].enabled && isPDFPage),
     }"
     :variant="variant"
     full-width
@@ -121,7 +121,9 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     Print
   </pep-pharos-button>
   <pep-pharos-button
-    v-if="hasStaticBlock() && featureDetails['view_pdf'].enabled && includePdf && hasStructuredClone"
+    v-if="
+      hasStaticBlock() && featureDetails['view_pdf'].enabled && includePdf && hasStructuredClone
+    "
     icon-left="filetype-pdf"
     class="mb-2"
     full-width

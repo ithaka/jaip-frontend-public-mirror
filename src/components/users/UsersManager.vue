@@ -32,7 +32,7 @@ const getUsers = async () => {
     query: query.value,
     page: page.value,
     limit: limit.value,
-    include_ungrouped: true
+    include_ungrouped: true,
   }
   const { data } = await coreStore.$api.auth.entities.get(args, 'users')
   currentUsers.value = data.entities
@@ -80,7 +80,7 @@ const handleAddAdmin = async (i: number) => {
         :show="showEditUserModal[0]"
         :user="{
           type: 'users',
-          ungrouped_features: {}
+          ungrouped_features: {},
         }"
         @submit="handleEditUser(0)"
         @close="showEditUserModal[0] = false"
@@ -153,7 +153,7 @@ const handleAddAdmin = async (i: number) => {
             <div class="entity-features">
               <div
                 v-for="(category, label, index) in userStore.sortUngroupedFeatures(
-                  userStore.getEnabledFeatures(user.ungrouped_features)
+                  userStore.getEnabledFeatures(user.ungrouped_features),
                 )"
                 :key="`feature-category-${index}`"
                 :data-panel-id="`feature-category-${index}`"

@@ -8,8 +8,8 @@ import type { RoutesObject } from '@/interfaces/Routes'
 const props = defineProps({
   sidenav: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const searchStore = useSearchStore()
@@ -37,8 +37,8 @@ const routesObject = (): RoutesObject => {
     },
     {
       grouped: {},
-      ungrouped: []
-    } as RoutesObject
+      ungrouped: [],
+    } as RoutesObject,
   )
 }
 const r = routesObject()

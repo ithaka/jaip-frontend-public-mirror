@@ -8,12 +8,12 @@ const props = defineProps({
   show: Boolean,
   name: {
     type: String,
-    required: true
+    required: true,
   },
   groupId: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {

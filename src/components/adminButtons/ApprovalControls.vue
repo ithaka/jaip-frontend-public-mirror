@@ -13,7 +13,7 @@ import {
   makeGrammaticalList,
   arraysAreEqual,
   hideButton,
-  getGroupsWithStatus
+  getGroupsWithStatus,
 } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
@@ -27,8 +27,8 @@ const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(use
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
 const statuses = ref(props.doc.mediaReviewStatuses)
@@ -36,10 +36,10 @@ const showApprove = !hideButton(
   featureDetails.value,
   statuses.value,
   'approved',
-  'approve_requests'
+  'approve_requests',
 )
 const useApproveModal = ref(
-  showApprove && featureDetails.value['approve_requests'].groups.length > 1
+  showApprove && featureDetails.value['approve_requests'].groups.length > 1,
 )
 const showApproveModal = ref(false)
 const approveModalKey = ref(0)
@@ -67,7 +67,7 @@ const handleApproval = async () => {
   }
   const args = {
     doi: props.doc.doi,
-    groups: selectedGroups.value['approve_requests']
+    groups: selectedGroups.value['approve_requests'],
   }
   if (!args.groups.length || args.doi === '') {
     return
@@ -78,7 +78,7 @@ const handleApproval = async () => {
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
     emit('approvalSubmitted')
-  } catch (err) {
+  } catch {
     const msg = 'There was an error and your approval was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
@@ -97,7 +97,7 @@ const selectorGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 
 const emit = defineEmits(['approvalSubmitted'])
@@ -131,7 +131,7 @@ const emit = defineEmits(['approvalSubmitted'])
           >&nbsp;for use in
           {{
             makeGrammaticalList(
-              approveGroups.map((group) => (groupMap.get(group) || {}).name || '')
+              approveGroups.map((group) => (groupMap.get(group) || {}).name || ''),
             )
           }}</span
         >
@@ -154,7 +154,7 @@ const emit = defineEmits(['approvalSubmitted'])
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
+      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="
@@ -165,6 +165,7 @@ const emit = defineEmits(['approvalSubmitted'])
       >
         Approve
       </pep-pharos-button>
+      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

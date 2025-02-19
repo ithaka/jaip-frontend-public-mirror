@@ -8,5 +8,5 @@ import '@/assets/datepicker.css'
 export default {
   install: (app: App) => {
     app.component('VueDatePicker', VueDatePicker)
-  }
+  },
 }

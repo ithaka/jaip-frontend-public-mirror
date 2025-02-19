@@ -19,8 +19,8 @@ import type { Group, GroupSelection } from '@/interfaces/Group'
 const props = defineProps({
   requestsPage: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const userStore = useUserStore()
@@ -50,7 +50,7 @@ const {
   lastSearchTerms,
   reviewStatus,
   selectedContentTypes,
-  pseudoDisciplines
+  pseudoDisciplines,
 } = storeToRefs(searchStore)
 
 const coreStore = useCoreStore()
@@ -77,17 +77,17 @@ const sortOptions = computed(() => {
   const options = [
     {
       label: 'Newest',
-      value: 'new'
+      value: 'new',
     },
     {
       label: 'Oldest',
-      value: 'old'
-    }
+      value: 'old',
+    },
   ]
   if (!props.requestsPage && searchTerms.value) {
     options.unshift({
       label: 'Relevance',
-      value: 'rel'
+      value: 'rel',
     })
   }
   return options
@@ -107,7 +107,7 @@ const submitRequests = async () => {
   }
   const args = {
     comments: studentNotes.value,
-    dois: reqs.value.map((req: string) => JSON.parse(req)['_id']) as MediaRecord[]
+    dois: reqs.value.map((req: string) => JSON.parse(req)['_id']),
   }
 
   try {
@@ -137,7 +137,7 @@ const changePage = (page: number) => {
     searchTerms.value,
     page,
     props.requestsPage ? selectedGroups.value['status_search'] : undefined,
-    statusQuery.value
+    statusQuery.value,
   )
   if (resultsArea.value) {
     resultsArea!.value?.scrollIntoView({ behavior: 'smooth' })
@@ -165,7 +165,7 @@ const selectorApproveGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 const selectorApproveGroupOptionIDs = computed(() => {
   return selectorApproveGroupOptions.value.map((group: Group) => group.id)
@@ -178,7 +178,7 @@ const selectorBulkApproveGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 const selectorBulkApproveGroupOptionIDs = computed(() => {
   return selectorBulkApproveGroupOptions.value.map((group: Group) => group.id)
@@ -231,7 +231,7 @@ const handleRequestApprovalReversals = (e: InputFileEvent) => {
     requestApprovalReversals.value.push(e.target.value)
   } else {
     requestApprovalReversals.value = requestApprovalReversals.value.filter(
-      (id) => id !== e.target.value
+      (id) => id !== e.target.value,
     )
   }
 }
@@ -251,13 +251,14 @@ const submitApproveRequests = async () => {
     groups: selectedGroups.value['approve_requests'],
     journals: [],
     disciplines: [],
-    documents: docs
+    documents: docs,
   }
   try {
     await coreStore.$api.approvals.bulk(args)
     const msg = 'Your approval has been submitted.'
     coreStore.toast(msg, 'success')
-  } catch (err) {
+  } catch (err: unknown) {
+    console.error(err)
     const msg = 'There was an error and your denial was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
@@ -269,7 +270,7 @@ const submitApproveRequests = async () => {
 const emit = defineEmits(['close'])
 const resultsArea = ref<HTMLInputElement | null>(null)
 const hasOriginalDates = ref(
-  pubYearStart.value === 1665 && pubYearEnd.value === new Date().getFullYear()
+  pubYearStart.value === 1665 && pubYearEnd.value === new Date().getFullYear(),
 )
 const showApproveAllButton = computed(() => {
   return (
@@ -312,13 +313,14 @@ const submitApproveAll = async () => {
     groups: selectedGroups.value['bulk_approve'],
     journals: selectedJournalIDs.value,
     disciplines: disciplines,
-    documents: bulkApproveReversals.value
+    documents: bulkApproveReversals.value,
   }
   try {
     await coreStore.$api.approvals.bulk(args)
     const msg = 'Your approval has been submitted.'
     coreStore.toast(msg, 'success')
-  } catch (err) {
+  } catch (err: unknown) {
+    console.error(err)
     const msg = 'There was an error and your denial was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
@@ -355,7 +357,7 @@ const disciplineFilterDescription = computed(() => {
     return 'all subjects'
   const discLabel = selectedDisciplines.value.map(
     (disc: string) =>
-      (disciplineList.value.find((d: Discipline) => d.code === disc) || {}).label || ''
+      (disciplineList.value.find((d: Discipline) => d.code === disc) || {}).label || '',
   )
   return makeGrammaticalList(discLabel)
 })
@@ -454,7 +456,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
                   >This will approve all pending requests for
                   {{
                     makeGrammaticalList(
-                      selectorApproveGroupOptions.map((group: Group) => group.name)
+                      selectorApproveGroupOptions.map((group: Group) => group.name),
                     )
                   }}.</span
                 >
@@ -510,7 +512,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
                 </pep-pharos-checkbox-group>
               </div>
 
-              <!-- eslint-disable-next-line -->
+              <!-- eslint-disable vue/no-deprecated-slot-attribute -->
               <pep-pharos-button
                 slot="footer"
                 variant="secondary"
@@ -518,7 +520,6 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
               >
                 Cancel
               </pep-pharos-button>
-              <!-- eslint-disable-next-line -->
               <pep-pharos-button
                 slot="footer"
                 :disabled="!selectedGroups['approve_requests'].length"
@@ -526,6 +527,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
               >
                 Submit
               </pep-pharos-button>
+              <!-- eslint-enable vue/no-deprecated-slot-attribute -->
             </pep-pharos-modal>
           </Teleport>
         </div>
@@ -611,7 +613,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
               </div>
             </div>
 
-            <!-- eslint-disable-next-line -->
+            <!-- eslint-disable vue/no-deprecated-slot-attribute -->
             <pep-pharos-button
               slot="footer"
               variant="secondary"
@@ -619,7 +621,6 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
             >
               Cancel
             </pep-pharos-button>
-            <!-- eslint-disable-next-line -->
             <pep-pharos-button
               slot="footer"
               :disabled="secondarySearching || !selectedGroups['bulk_approve'].length"
@@ -627,6 +628,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
             >
               Submit
             </pep-pharos-button>
+            <!-- eslint-enable vue/no-deprecated-slot-attribute -->
           </pep-pharos-modal>
         </div>
       </div>

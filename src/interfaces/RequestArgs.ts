@@ -1,5 +1,5 @@
-export default interface ApprovalArgs {
-  name: string
+export default interface RequestArgs {
+  name?: string
   comments: string
   dois: string
 }

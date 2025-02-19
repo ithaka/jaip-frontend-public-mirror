@@ -64,7 +64,7 @@ export function hasBrowserPDFViewer() {
     if (hasPluginEnabled) {
       hasPDFViewer = true
     }
-  } catch (e) {
+  } catch {
     hasPDFViewer = false
   }
 

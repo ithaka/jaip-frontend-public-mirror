@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useCoreStore } from '@/stores/core'
-import { useUserStore } from '@/stores/user'
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import type { Cedar } from '@/interfaces/Metadata'
 import PageViewer from '@/components/pages/PageViewer.vue'
-// @ts-ignore
+// @ts-expect-error The viewer utils are not typed
 import { requestFullscreen, exitFullscreen } from '@/utils/viewers'
+import type { MediaRecord } from '@/interfaces/MediaRecord'
 
 const route = useRoute()
 const coreStore = useCoreStore()
-const doc = ref(null)
+const doc = ref({} as MediaRecord)
 const iid = (route.params || {}).iid as string
 const page_index = (route.params || {}).pid as string
 let initial_page_index = parseInt(page_index, 10)
@@ -27,9 +26,8 @@ const metadata = ref({ id: iid } as Cedar)
 const error = ref({
   message: '',
   status: false,
-  code: 0
+  code: 0,
 })
-const userStore = useUserStore()
 
 const updateKey = ref(0)
 const getDocument = async () => {
@@ -45,11 +43,11 @@ const getDocument = async () => {
         'contentType',
         'pageCount',
         'semanticTerms',
-        'ocr'
+        'ocr',
       ],
       facets: ['contentType', 'disciplines'],
       filters: [],
-      query: `id:${iid}`
+      query: `id:${iid}`,
     }
     gettingDocument.value = true
 
@@ -68,7 +66,7 @@ const getDocument = async () => {
     if (page_index) {
       metadata.value = {
         ...metadata.value,
-        ...results[1].data
+        ...results[1].data,
       }
       if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
         initial_page_index = metadata.value.pageCount - 1
@@ -79,11 +77,12 @@ const getDocument = async () => {
         error.value.code = 403
       }
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorResponse = err as { response: { status: number } }
     error.value.status = true
-    metadata.value.status = err.response.status || 500
+    metadata.value.status = errorResponse.response.status || 500
     error.value.message = 'Server Error'
-    error.value.code = err.response.status || 500
+    error.value.code = errorResponse.response.status || 500
   } finally {
     updateKey.value++
     gettingDocument.value = false
@@ -104,8 +103,6 @@ const handleFullscreenToggle = () => {
     })
   }
 }
-
-const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 </script>
 
 <template>
@@ -153,5 +150,3 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 </template>
 
 <style lang="scss"></style>
-
-@/utils/viewers

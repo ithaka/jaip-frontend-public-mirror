@@ -29,7 +29,7 @@ const getGroups = async () => {
     name: query.value,
     page: page.value,
     limit: limit.value,
-    is_active: isActive.value
+    is_active: isActive.value,
   })
   currentGroups.value = data.groups || []
   total.value = data.total

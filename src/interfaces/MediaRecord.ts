@@ -55,7 +55,7 @@ export enum Status {
   ApprovedByDiscipline = 'Approved by Discipline',
   ApprovedByJournal = 'Approved by Journal',
   Denied = 'Denied',
-  Pending = 'Pending'
+  Pending = 'Pending',
 }
 
 export interface StatusDetails {

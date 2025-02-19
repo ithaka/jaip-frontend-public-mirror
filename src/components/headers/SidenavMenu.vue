@@ -7,16 +7,16 @@ import type { RoutesObject } from '@/interfaces/Routes'
 defineProps({
   loginUrl: {
     type: String,
-    default: ''
+    default: '',
   },
   showLogin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   sidenav: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const searchStore = useSearchStore()
@@ -41,8 +41,8 @@ const getRoutesObject = (): RoutesObject => {
     },
     {
       grouped: {},
-      ungrouped: []
-    } as RoutesObject
+      ungrouped: [],
+    } as RoutesObject,
   )
 }
 const r = getRoutesObject()

@@ -12,25 +12,31 @@ const router = useRouter()
 <template>
   <pep-pharos-alert status="warning" class="alert">
     <div>
-      <span class="mb-2">Requests are temporarily disabled at this site. To browse pre-approved material, try:</span>
+      <span class="mb-2"
+        >Requests are temporarily disabled at this site. To browse pre-approved material, try:</span
+      >
       <ul>
-          <li>
-          Filtering for Subjects or Journals in your 
+        <li>
+          Filtering for Subjects or Journals in your
           <pep-pharos-link
-              @click.prevent.stop="changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined)"
-          >search results</pep-pharos-link>
-          </li>
-          <li>
-          Browsing approved 
-          <pep-pharos-link
-              @click.prevent.stop="changeRoute(router, emit, '/requests', searchTerms, pageNo, undefined, undefined)"
+            @click.prevent.stop="
+              changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined)
+            "
+            >search results</pep-pharos-link
           >
-              requests
-          </pep-pharos-link> 
+        </li>
+        <li>
+          Browsing approved
+          <pep-pharos-link
+            @click.prevent.stop="
+              changeRoute(router, emit, '/requests', searchTerms, pageNo, undefined, undefined)
+            "
+          >
+            requests
+          </pep-pharos-link>
           by changing the Status field to "Approved"
-          </li>
+        </li>
       </ul>
-
     </div>
   </pep-pharos-alert>
 </template>

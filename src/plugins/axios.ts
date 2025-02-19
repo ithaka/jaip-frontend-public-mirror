@@ -12,8 +12,8 @@ export default {
     // This creates the axios instance that the app will use.
     app.config.globalProperties.$axios = axios.create({
       headers: {
-        Accept: 'text/plain, application/json'
-      }
+        Accept: 'text/plain, application/json',
+      },
     })
     const coreStore = useCoreStore()
 
@@ -22,5 +22,5 @@ export default {
 
     const { $api } = storeToRefs(coreStore)
     $api.value = app.config.globalProperties.$api
-  }
+  },
 }

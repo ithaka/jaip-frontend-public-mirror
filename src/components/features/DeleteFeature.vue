@@ -10,9 +10,9 @@ const props = defineProps({
   show: Boolean,
   feature: {
     type: Object as PropType<Feature>,
-    required: true
+    required: true,
   },
-  ungrouped: Boolean
+  ungrouped: Boolean,
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {

@@ -17,17 +17,17 @@ import { useSubdomainStore } from '@/stores/subdomains'
 const props = defineProps({
   entity: {
     type: Object as PropType<Entity>,
-    required: true
+    required: true,
   },
   entityType: {
     type: String,
-    required: true
+    required: true,
   },
   action: {
     type: String as PropType<EntityActions>,
-    required: true
+    required: true,
   },
-  showModal: Boolean
+  showModal: Boolean,
 })
 
 const coreStore = useCoreStore()
@@ -69,13 +69,13 @@ const selectorGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 
 if (props.action === 'edit') {
   if (props.entity.type === 'users') {
     selectedGroups.value[featureName.value] = selectorGroupOptions.value.map(
-      (group: Group) => group.id
+      (group: Group) => group.id,
     )
   } else if (props.entity.type === 'facilities') {
     selectedGroups.value[featureName.value] = [selectorGroupOptions.value[0].id]
@@ -159,7 +159,7 @@ const handleSubmit = async () => {
       return {
         id: g!.id,
         name: g!.name,
-        features: selectedFeatures.value[group]
+        features: selectedFeatures.value[group],
       }
     })
     .filter((group) => {
@@ -169,7 +169,7 @@ const handleSubmit = async () => {
     await coreStore.$api.auth.entities[props.action](newEntity.value, props.entity.type)
     const msg = `${newEntity.value.name} successfully ${props.action === 'add' ? 'added' : 'edited'}.`
     coreStore.toast(msg, 'success')
-  } catch (err) {
+  } catch {
     const msg = `Oops! There was an error and ${newEntity.value.name} could not be ${props.action === 'add' ? 'added' : 'edited'}.`
     coreStore.toast(msg, 'error')
   }
@@ -180,7 +180,11 @@ const handleSubmit = async () => {
 
 const newEntity = ref({ ...props.entity })
 const categorizedFeatures = computed(() =>
-  featuresStore.categorizedFeatures(groupMap.value.get(focusedGroup.value), props.entity.type, true)
+  featuresStore.categorizedFeatures(
+    groupMap.value.get(focusedGroup.value),
+    props.entity.type,
+    true,
+  ),
 )
 const selectedFeatures = ref({} as { [group: number]: { [feature: string]: boolean } })
 selectorGroupOptions.value.forEach((group) => {
@@ -205,7 +209,7 @@ const selectAllFeatures = (emptying: boolean) => {
         obj[feature.name] = true
         return obj
       },
-      {} as { [feature: string]: boolean }
+      {} as { [feature: string]: boolean },
     )
   }
 }
@@ -245,21 +249,21 @@ const noPrimarySitecode = computed(() => !primarySitecode.value.trim())
 const primarySitecodeTouched = ref(false)
 const hasInvalidPrimarySiteCode = computed(() => includeSubdomain.value && noPrimarySitecode.value)
 const showInvalidPrimarySitecode = computed(
-  () => includeSubdomain.value && primarySitecodeTouched.value && noPrimarySitecode.value
+  () => includeSubdomain.value && primarySitecodeTouched.value && noPrimarySitecode.value,
 )
 const sitecodeMessage = computed(() =>
   primarySitecodeTouched.value && noPrimarySitecode.value
     ? 'A primary sitecode is required if you wish to use a subdomain.'
-    : ''
+    : '',
 )
 const subdomain = ref(newEntity.value.subdomain || '')
 const hasInvalidSubdomain = computed(() => includeSubdomain.value && !subdomain.value)
 const showInvalidSubdomain = computed(
-  () => includeSubdomain.value && subdomainTouched.value && !subdomain.value
+  () => includeSubdomain.value && subdomainTouched.value && !subdomain.value,
 )
 const subdomainTouched = ref(false)
 const subdomainMessage = computed(() =>
-  showInvalidSubdomain.value ? 'A subdomain is required if you wish to use a subdomain.' : ''
+  showInvalidSubdomain.value ? 'A subdomain is required if you wish to use a subdomain.' : '',
 )
 
 const handlePrimarySitecode = (e: InputFileEvent) => {
@@ -274,7 +278,7 @@ const handleSubdomain = (e: InputFileEvent) => {
 const getSubdomains = async () => {
   gettingSubdomains.value = true
   const args = {
-    is_active: true
+    is_active: true,
   }
   const { data } = await coreStore.$api.auth.subdomains.get(args)
   subdomains.value = data.subdomains
@@ -404,7 +408,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               </div>
               <option
                 v-for="group in selectorGroupOptions.filter((group: Group) =>
-                  selectedGroups[featureName].includes(group.id)
+                  selectedGroups[featureName].includes(group.id),
                 )"
                 :key="`${entity.id}_group_${group}`"
                 :value="group.id"
@@ -429,7 +433,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             <pep-pharos-dropdown-menu :id="`group_selector_manager_${entity.id}`" full-width>
               <pep-pharos-dropdown-menu-item
                 v-for="group in selectorGroupOptions.filter((group: Group) =>
-                  selectedGroups[featureName].includes(group.id)
+                  selectedGroups[featureName].includes(group.id),
                 )"
                 :key="`${entity.id}_group_${group}`"
                 @click="focusedGroup = group.id"
@@ -477,7 +481,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             @input="
               selectAllFeatures(
                 Object.values(selectedFeatures[focusedGroup]).filter((val: boolean) => val)
-                  .length === features.length
+                  .length === features.length,
               )
             "
           >
@@ -492,15 +496,15 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                 <pep-pharos-checkbox
                   :checked="
                     category.every(
-                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name]
+                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
                     )
                   "
                   :indeterminate="
                     category.some(
-                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name]
+                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
                     ) &&
                     !category.every(
-                      (feature: Feature) => selectedFeatures[focusedGroup][feature.name]
+                      (feature: Feature) => selectedFeatures[focusedGroup][feature.name],
                     )
                   "
                   class="mb-2"

@@ -1,19 +1,7 @@
 import type { AxiosInstance } from 'axios'
-import type SearchArgs from '@/interfaces/SearchArgs'
-import type BulkApprovalArgs from '@/interfaces/BulkApprovalArgs'
-import type BulkApprovalUndoArgs from '@/interfaces/BulkApprovalUndoArgs'
-import type DenialArgs from '@/interfaces/DenialArgs'
-import type ApprovalArgs from '@/interfaces/ApprovalArgs'
-import type RequestArgs from '@/interfaces/RequestArgs'
-import type { EntitiesArgs } from '@/interfaces/AccountManagement'
-import type { User } from '@/interfaces/Entities'
-import type StatusSearchArgs from '@/interfaces/StatusSearchArgs'
-import type { EditingGroup } from '@/interfaces/Group'
-import type { Subdomain } from '@/interfaces/Subdomains'
-import type { PaginatedQuery } from '@/interfaces/Queries'
-import type { Feature } from '@/interfaces/Features'
+import type ApiObject from '@/interfaces/ApiObject'
 
-export default ($axios: AxiosInstance) => ({
+export default ($axios: AxiosInstance): ApiObject => ({
   auth: {
     session: () =>
       $axios
@@ -25,68 +13,65 @@ export default ($axios: AxiosInstance) => ({
         }),
     features: {
       basic: {
-        get: (data: PaginatedQuery) => $axios.post('/api/auth/features/basic/get', data),
-        add: (data: Feature) => $axios.post(`/api/auth/features/basic`, data),
-        remove: (data: Feature) => $axios.delete(`/api/auth/features/basic`, { data }),
-        edit: (data: Feature) => $axios.patch(`/api/auth/features/basic`, data),
-        reactivate: (data: Subdomain) => $axios.post(`/api/auth/features/basic/reactivate`, data)
+        get: (data) => $axios.post('/api/auth/features/basic/get', data),
+        add: (data) => $axios.post(`/api/auth/features/basic`, data),
+        remove: (data) => $axios.delete(`/api/auth/features/basic`, { data }),
+        edit: (data) => $axios.patch(`/api/auth/features/basic`, data),
+        reactivate: (data) => $axios.post(`/api/auth/features/basic/reactivate`, data),
       },
       ungrouped: {
-        get: (data: PaginatedQuery) => $axios.post('/api/auth/features/ungrouped/get', data),
-        add: (data: Feature) => $axios.post(`/api/auth/features/ungrouped`, data),
-        remove: (data: Feature) => $axios.delete(`/api/auth/features/ungrouped`, { data }),
-        edit: (data: Feature) => $axios.patch(`/api/auth/features/ungrouped`, data),
-        reactivate: (data: Subdomain) =>
-          $axios.post(`/api/auth/features/ungrouped/reactivate`, data)
-      }
+        get: (data) => $axios.post('/api/auth/features/ungrouped/get', data),
+        add: (data) => $axios.post(`/api/auth/features/ungrouped`, data),
+        remove: (data) => $axios.delete(`/api/auth/features/ungrouped`, { data }),
+        edit: (data) => $axios.patch(`/api/auth/features/ungrouped`, data),
+        reactivate: (data) => $axios.post(`/api/auth/features/ungrouped/reactivate`, data),
+      },
     },
     alerts: () => $axios.get('/api/auth/alerts'),
     validateSubdomains: (entity: string) => $axios.get(`/api/auth/subdomains/${entity}`),
     subdomains: {
-      get: (data: PaginatedQuery) => $axios.post(`/api/auth/getSubdomains`, data),
-      add: (data: Subdomain) => $axios.post(`/api/auth/subdomains`, data),
-      remove: (data: Subdomain) => $axios.delete(`/api/auth/subdomains`, { data }),
-      edit: (data: Subdomain) => $axios.patch(`/api/auth/subdomains`, data),
-      reactivate: (data: Subdomain) => $axios.post(`/api/auth/reactivateSubdomains`, data)
+      get: (data) => $axios.post(`/api/auth/getSubdomains`, data),
+      add: (data) => $axios.post(`/api/auth/subdomains`, data),
+      remove: (data) => $axios.delete(`/api/auth/subdomains`, { data }),
+      edit: (data) => $axios.patch(`/api/auth/subdomains`, data),
+      reactivate: (data) => $axios.post(`/api/auth/reactivateSubdomains`, data),
     },
     entities: {
-      get: (data: EntitiesArgs, entity: string) =>
-        $axios.post(`/api/auth/getEntities/${entity}`, data),
-      remove: (data: User, entity: string) =>
-        $axios.delete(`/api/auth/entities/${entity}`, { data }),
-      add: (data: User, entity: string) => $axios.post(`/api/auth/entities/${entity}`, data),
-      edit: (data: User, entity: string) => $axios.patch(`/api/auth/entities/${entity}`, data)
+      get: (data, entity) => $axios.post(`/api/auth/getEntities/${entity}`, data),
+      remove: (data, entity) => $axios.delete(`/api/auth/entities/${entity}`, { data }),
+      add: (data, entity) => $axios.post(`/api/auth/entities/${entity}`, data),
+      edit: (data, entity) => $axios.patch(`/api/auth/entities/${entity}`, data),
     },
     groups: {
-      get: (data: PaginatedQuery) => $axios.post(`/api/auth/getGroups`, data),
-      remove: (data: EditingGroup) => $axios.delete('/api/auth/groups', { data }),
-      add: (data: EditingGroup) => $axios.post('/api/auth/groups', data),
-      edit: (data: EditingGroup) => $axios.patch('/api/auth/groups', data),
-      reactivate: (data: EditingGroup) => $axios.patch('/api/auth/reactivateGroups', data),
-      clearHistory: (data: EditingGroup) => $axios.delete('/api/auth/clearHistory', { data }),
-      addAdministrator: (data: User) => $axios.post(`/api/auth/createGroupAdmin`, data)
-    }
+      get: (data) => $axios.post(`/api/auth/getGroups`, data),
+      remove: (data) => $axios.delete('/api/auth/groups', { data }),
+      add: (data) => $axios.post('/api/auth/groups', data),
+      edit: (data) => $axios.patch('/api/auth/groups', data),
+      reactivate: (data) => $axios.patch('/api/auth/reactivateGroups', data),
+      clearHistory: (data) => $axios.delete('/api/auth/clearHistory', { data }),
+      addAdministrator: (data) => $axios.post(`/api/auth/createGroupAdmin`, data),
+    },
   },
   disciplines: () => $axios.get('/api/disciplines'),
   journals: (code: string) => $axios(`/api/disciplines/${code}`),
   search: {
-    basic: (data: SearchArgs) => $axios.post(`/api/search`, data),
-    status: (data: StatusSearchArgs, status: string) => $axios.post(`/api/search/${status}`, data)
+    basic: (data) => $axios.post(`/api/search`, data),
+    status: (data, status) => $axios.post(`/api/search/${status}`, data),
   },
   approvals: {
-    bulk: (data: BulkApprovalArgs) => $axios.post(`/api/approvals/bulk`, data),
-    bulkUndo: (data: BulkApprovalUndoArgs) => $axios.post(`/api/approvals/bulkUndo`, data),
-    deny: (data: DenialArgs) => $axios.post(`/api/approvals/deny`, data),
-    incomplete: (data: DenialArgs) => $axios.post(`/api/approvals/incomplete`, data),
-    approve: (data: ApprovalArgs) => $axios.post(`/api/approvals/approve`, data),
-    request: (data: RequestArgs) => $axios.post(`/api/approvals/request`, data)
+    bulk: (data) => $axios.post(`/api/approvals/bulk`, data),
+    bulkUndo: (data) => $axios.post(`/api/approvals/bulkUndo`, data),
+    deny: (data) => $axios.post(`/api/approvals/deny`, data),
+    incomplete: (data) => $axios.post(`/api/approvals/incomplete`, data),
+    approve: (data) => $axios.post(`/api/approvals/approve`, data),
+    request: (data) => $axios.post(`/api/approvals/request`, data),
   },
   documents: {
     pdfs: (iid: string) => {
       const config = {
         headers: {
-          Accept: 'application/pdf'
-        }
+          Accept: 'application/pdf',
+        },
       }
       return $axios.get(`/api/pages/pdf/${iid}`, config)
     },
@@ -97,8 +82,8 @@ export default ($axios: AxiosInstance) => ({
       return $axios({
         url: `/api/pages/${iid}/${pid}`,
         method: 'GET',
-        responseType: 'blob'
+        responseType: 'blob',
       })
-    }
-  }
+    },
+  },
 })

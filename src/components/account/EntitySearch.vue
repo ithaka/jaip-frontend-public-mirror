@@ -14,8 +14,8 @@ import type { Group } from '@/interfaces/Group'
 const props = defineProps({
   entity: {
     type: Object as PropType<EntityOption>,
-    required: true
-  }
+    required: true,
+  },
 })
 const coreStore = useCoreStore()
 const userStore = useUserStore()
@@ -39,7 +39,7 @@ const selectorGroupOptions = ref(
       arr.push(group)
     }
     return arr
-  }, [] as Group[])
+  }, [] as Group[]),
 )
 
 const doSearch = async () => {
@@ -48,7 +48,7 @@ const doSearch = async () => {
     groups: selectedGroups.value[`get_${props.entity.type}`],
     query: query.value,
     limit: secondaryLimit.value,
-    page: page.value
+    page: page.value,
   }
   const { data } = await coreStore.$api.auth.entities.get(args, props.entity.type)
   entities.value = data.entities
@@ -103,7 +103,7 @@ const addEntityModal = () => {
     </pep-pharos-heading>
     <EntityManager
       :entity="{
-        type: entity.type
+        type: entity.type,
       }"
       :entity-type="entity.title"
       :show-modal="showAddEntityModal"

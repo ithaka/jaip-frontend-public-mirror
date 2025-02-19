@@ -6,13 +6,12 @@ import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
+import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { Cedar } from '@/interfaces/Metadata'
-// @ts-ignore
-import { requestFullscreen, exitFullscreen } from '@/utils/viewers'
 
 const route = useRoute()
 const coreStore = useCoreStore()
-const doc = ref(null)
+const doc = ref({} as MediaRecord)
 const iid = (route.params || {}).iid as string
 const page_index = (route.params || {}).pid as string
 let initial_page_index = parseInt(page_index, 10)
@@ -25,7 +24,7 @@ const metadata = ref({ id: iid } as Cedar)
 const error = ref({
   message: '',
   status: false,
-  code: 0
+  code: 0,
 })
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
@@ -44,11 +43,11 @@ const getDocument = async () => {
         'contentType',
         'pageCount',
         'semanticTerms',
-        'ocr'
+        'ocr',
       ],
       facets: ['contentType', 'disciplines'],
       filters: [],
-      query: `id:${iid}`
+      query: `id:${iid}`,
     }
     gettingDocument.value = true
 
@@ -67,7 +66,7 @@ const getDocument = async () => {
     if (page_index) {
       metadata.value = {
         ...metadata.value,
-        ...results[1].data
+        ...results[1].data,
       }
       if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
         initial_page_index = metadata.value.pageCount - 1
@@ -78,11 +77,12 @@ const getDocument = async () => {
         error.value.code = 403
       }
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const errorResponse = err as { response: { status: number } }
     error.value.status = true
-    metadata.value.status = err.response.status || 500
+    metadata.value.status = errorResponse.response.status || 500
     error.value.message = 'Server Error'
-    error.value.code = err.response.status || 500
+    error.value.code = errorResponse.response.status || 500
   } finally {
     updateKey.value++
     gettingDocument.value = false

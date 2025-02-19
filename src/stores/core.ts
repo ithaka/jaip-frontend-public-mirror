@@ -19,7 +19,7 @@ export const useCoreStore = defineStore('core', {
       routeQuery: '',
       toastKey: 0,
       $api: {} as ApiObject,
-      alert: {} as Alert
+      alert: {} as Alert,
     }
   },
   getters: {
@@ -34,7 +34,7 @@ export const useCoreStore = defineStore('core', {
     },
     isAdminSubdomain(): boolean {
       return this.subdomain === this.adminSubdomain
-    }
+    },
   },
   actions: {
     saveReqs(reqs: MediaRecord[]) {
@@ -58,8 +58,8 @@ export const useCoreStore = defineStore('core', {
       const open = new CustomEvent('pharos-toast-open', {
         detail: {
           content: msg,
-          status
-        }
+          status,
+        },
       })
       document.dispatchEvent(open)
       // This is a bit ugly, but the pharos component seems to have an uncaught typeerror that prevents
@@ -67,6 +67,6 @@ export const useCoreStore = defineStore('core', {
       setTimeout(() => {
         this.toastKey++
       }, 5000)
-    }
-  }
+    },
+  },
 })

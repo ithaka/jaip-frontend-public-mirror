@@ -25,7 +25,7 @@
   </pep-pharos-tooltip>
 </template>
 
-<script>
+<script lang="ts">
 import { v4 as uuidv4 } from 'uuid'
 
 export default {
@@ -34,22 +34,22 @@ export default {
     iconName: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     text: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     tooltipText: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     tooltipPosition: {
       type: String,
       default: 'bottom',
-      validator: function (value) {
+      validator: function (value: string) {
         // The value must match one of these strings
         return (
           [
@@ -67,44 +67,46 @@ export default {
             'right-end',
             'auto',
             'auto-start',
-            'auto-end'
+            'auto-end',
           ].indexOf(value) !== -1
         )
-      }
+      },
     },
     keyboardShortcut: {
       type: String,
-      default: null
+      default: null,
     },
     analyticsTag: {
       type: String,
       required: false,
-      default: null
+      default: null,
     },
     buttonPadding: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     hideShortcutText: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   emits: ['clicked'],
   data() {
     return {
-      tooltipId: uuidv4()
+      tooltipId: uuidv4(),
     }
   },
   methods: {
     buttonClick() {
-      this.$emit('clicked')
-      // this is to close tool tips on click
-      document.activeElement.blur()
-    }
-  }
+      // @ts-expect-error This emit value does not have a type
+      this.$emit('clicked')(
+        // this is to close tool tips on click
+        document.activeElement as HTMLElement,
+      )?.blur()
+    },
+  },
 }
 </script>
 

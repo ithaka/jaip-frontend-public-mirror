@@ -10,27 +10,27 @@ import { arraysAreEqual } from '@/utils/helpers'
 const props = defineProps({
   groups: {
     type: Array as PropType<Group[]>,
-    required: true
+    required: true,
   },
   featureName: {
     type: String,
-    required: true
+    required: true,
   },
   startFull: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
   multiple: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
   isStatusSearch: {
     type: Boolean,
     required: false,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const userStore = useUserStore()
@@ -43,7 +43,7 @@ const possibleGroups = computed(() => {
     return g.filter((groupId: number) => sortedGroups.some((group: Group) => group.id === groupId))
   }
   return g.filter((groupId: number) =>
-    (featureDetails.value[props.featureName] || {}).groups.includes(groupId)
+    (featureDetails.value[props.featureName] || {}).groups.includes(groupId),
   )
 })
 const emit = defineEmits(['change'])
@@ -74,7 +74,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
     selectedGroups.value[props.featureName] = []
   } else if (selectedGroups.value[props.featureName].includes(val)) {
     selectedGroups.value[props.featureName] = selectedGroups.value[props.featureName].filter(
-      (group: number) => group !== val
+      (group: number) => group !== val,
     )
   } else {
     if (props.multiple) {

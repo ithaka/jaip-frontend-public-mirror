@@ -6,20 +6,20 @@ import { storeToRefs } from 'pinia'
 defineProps({
   id: {
     type: String,
-    default: 'search'
+    default: 'search',
   },
   variant: {
     type: String,
-    default: 'primary'
+    default: 'primary',
   },
   placeholder: {
     type: String,
-    default: 'Search journals, books, and research reports'
+    default: 'Search journals, books, and research reports',
   },
   label: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 const searchStore = useSearchStore()
@@ -31,8 +31,8 @@ const handleSubmit = () => {
     path: '/search',
     query: {
       term: searchTerms.value,
-      page: 1
-    }
+      page: 1,
+    },
   })
 }
 </script>

@@ -16,7 +16,7 @@ const hasAdminFeatures = (group: Group) => {
   return false
 }
 const sortUngroupedFeatures = (
-  ungroupedFeatures: UngroupedFeatureDetails
+  ungroupedFeatures: UngroupedFeatureDetails,
 ): { [key: string]: UngroupedFeatureDetails } => {
   const sorted = {} as { [key: string]: UngroupedFeatureDetails }
   for (const key in ungroupedFeatures) {
@@ -56,7 +56,7 @@ export const useUserStore = defineStore('user', {
 
       // In some cases, a user may have a valid JSTOR account, but not have admin access to the site. If they attempt to log in, we'll
       // indicate which email they used and that they don't have access to the site.
-      invalidUserEmail: ''
+      invalidUserEmail: '',
     }
   },
   actions: {
@@ -113,7 +113,7 @@ export const useUserStore = defineStore('user', {
     },
     getEnabledFeatures(features: UngroupedFeatureDetails): UngroupedFeatureDetails {
       return getEnabledFeatures(features)
-    }
+    },
   },
   getters: {
     groupMap(): Map<number, Group> {
@@ -170,7 +170,7 @@ export const useUserStore = defineStore('user', {
             features[key] = {
               enabled: false,
               groups: [],
-              disabled_groups: []
+              disabled_groups: [],
             }
           }
           if (group.features[key]) {
@@ -191,6 +191,6 @@ export const useUserStore = defineStore('user', {
     },
     sortedEnabledUngroupedFeatures(): { [key: string]: UngroupedFeatureDetails } {
       return sortUngroupedFeatures(this.enabledUngroupedFeatures)
-    }
-  }
+    },
+  },
 })

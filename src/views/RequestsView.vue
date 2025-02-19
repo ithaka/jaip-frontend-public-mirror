@@ -19,20 +19,20 @@ const presetRanges = ref([
   { label: 'Today', value: [new Date(), new Date()] },
   {
     label: 'Last 30 Days',
-    value: [new Date().setDate(new Date().getDate() - 30), new Date()]
+    value: [new Date().setDate(new Date().getDate() - 30), new Date()],
   },
   {
     label: 'Last 60 Days',
-    value: [new Date().setDate(new Date().getDate() - 60), new Date()]
+    value: [new Date().setDate(new Date().getDate() - 60), new Date()],
   },
   {
     label: 'Last 90 Days',
-    value: [new Date().setDate(new Date().getDate() - 90), new Date()]
+    value: [new Date().setDate(new Date().getDate() - 90), new Date()],
   },
   {
     label: 'All',
-    value: [Date.parse('01 Jan 2022 00:00:00 GMT'), new Date()]
-  }
+    value: [Date.parse('01 Jan 2022 00:00:00 GMT'), new Date()],
+  },
 ])
 
 const statusGroups = ref(groupIDs.value)
@@ -60,7 +60,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-  timeZone: 'UTC'
+  timeZone: 'UTC',
 }
 const handleDateSelection = (dates: Array<Date>) => {
   statusStartDate.value = new Date(dates[0].setHours(0, 0, 0, 0))
@@ -73,7 +73,7 @@ const dates = computed(() => {
 const displayDates = computed(() => {
   const displayDates = [
     statusStartDate.value.toLocaleString('en', dateOptions),
-    statusEndDate.value.toLocaleString('en', dateOptions)
+    statusEndDate.value.toLocaleString('en', dateOptions),
   ]
   if (displayDates[0] === displayDates[1]) {
     return String(displayDates[0])
@@ -104,7 +104,7 @@ const newSearch = () => {
     '',
     1,
     selectedGroups.value['status_search'],
-    statusQuery.value
+    statusQuery.value,
   )
   searchStore.doSearch(reviewStatus.value, false)
 }

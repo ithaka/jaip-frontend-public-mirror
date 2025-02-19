@@ -6,7 +6,7 @@ const coreStore = useCoreStore()
 
 const props = defineProps({
   show: Boolean,
-  ungrouped: Boolean
+  ungrouped: Boolean,
 })
 const emit = defineEmits(['close', 'submit'])
 const emptyFeature = {
@@ -14,7 +14,7 @@ const emptyFeature = {
   display_name: '',
   category: '',
   description: '',
-  is_active: true
+  is_active: true,
 } as Feature
 const resetTouched = (val: boolean) => {
   touchedName.value = val
@@ -77,7 +77,7 @@ const displayNameErrorMessage = computed(() => {
 
 const touchedCategory = ref(false)
 const noCategory = computed(
-  () => !newFeature.value.category || newFeature.value.category?.trim() === ''
+  () => !newFeature.value.category || newFeature.value.category?.trim() === '',
 )
 const invalidCategory = computed(() => {
   return touchedCategory.value && noCategory.value

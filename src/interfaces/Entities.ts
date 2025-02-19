@@ -1,7 +1,7 @@
 import type { Group } from './Group'
 import type { UngroupedFeatureDetails } from './Features'
 export interface User {
-  id: number
+  id?: number
   name: string
   type: string
   ungrouped_features: UngroupedFeatureDetails

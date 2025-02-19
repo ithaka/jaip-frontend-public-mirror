@@ -258,7 +258,7 @@ $text-align-options: (start end left right center justify justify-all match-pare
 }
 $font-weight-options: (
   regular: var(--pharos-font-weight-regular),
-  bold: var(--pharos-font-weight-bold)
+  bold: var(--pharos-font-weight-bold),
 );
 @mixin font-weights {
   @each $name, $weight in $font-weight-options {
@@ -273,7 +273,7 @@ $font-size-options: (
   lg: var(--pharos-font-size-large),
   md: var(--pharos-font-size-base),
   sm: var(--pharos-font-size-small),
-  xs: var(--pharos-font-size-micro)
+  xs: var(--pharos-font-size-micro),
 );
 @mixin font-sizes {
   @each $name, $size in $font-size-options {
@@ -312,7 +312,7 @@ $color-options: (
   night-base: var(--pharos-color-night-blue-base),
   night-60: var(--pharos-color-night-blue-60),
   night-15: var(--pharos-color-night-blue-15),
-  jstor-red: var(--pharos-color-jstor-red)
+  jstor-red: var(--pharos-color-jstor-red),
 );
 
 @mixin colors {
@@ -331,7 +331,7 @@ $color-options: (
 }
 $font-options: (
   serif: var(--pharos-font-family-serif),
-  sans: var(--pharos-font-family-sans-serif)
+  sans: var(--pharos-font-family-sans-serif),
 );
 
 @mixin fonts {
@@ -381,7 +381,7 @@ $breakpoints: (
   xl: var(--pharos-breakpoint-xlarge),
   lg: var(--pharos-breakpoint-large),
   md: var(--pharos-breakpoint-medium),
-  sm: var(--pharos-breakpoint-small)
+  sm: var(--pharos-breakpoint-small),
 );
 
 // List of sizes to generate for each
@@ -404,7 +404,7 @@ $spaces: (
 $sides: (x, y, all, top, bottom, left, right);
 $types: (
   p: padding,
-  m: margin
+  m: margin,
 );
 $i: 0;
 @each $space in $spaces {

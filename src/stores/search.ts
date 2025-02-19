@@ -32,16 +32,16 @@ export const useSearchStore = defineStore('search', {
       contentTypes: [
         {
           value: 'journal',
-          label: 'Journals'
+          label: 'Journals',
         },
         {
           value: 'chapter',
-          label: 'Book Chapters'
+          label: 'Book Chapters',
         },
         {
           value: 'research_report',
-          label: 'Research Reports'
-        }
+          label: 'Research Reports',
+        },
       ],
       selectedContentTypes: [] as string[],
       contentTypeList: [] as ContentType[],
@@ -74,7 +74,7 @@ export const useSearchStore = defineStore('search', {
       searching: false,
       secondarySearching: false,
 
-      searchResultsKey: 0
+      searchResultsKey: 0,
     }
   },
   actions: {
@@ -104,10 +104,10 @@ export const useSearchStore = defineStore('search', {
           'contentType',
           'pageCount',
           'semanticTerms',
-          'ocr'
+          'ocr',
         ],
         facets: ['contentType', 'disciplines'],
-        filters: []
+        filters: [],
       }
 
       if (secondary) {
@@ -150,7 +150,7 @@ export const useSearchStore = defineStore('search', {
       }
       this.searching = false
       this.secondarySearching = false
-    }
+    },
   },
   getters: {
     disciplineObject(): DisciplineObject {
@@ -215,6 +215,6 @@ export const useSearchStore = defineStore('search', {
     },
     secondarySearchTotal(): number {
       return this.secondarySearchResp.total || 0
-    }
-  }
+    },
+  },
 })

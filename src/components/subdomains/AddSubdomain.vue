@@ -5,7 +5,7 @@ import { useCoreStore } from '@/stores/core'
 const coreStore = useCoreStore()
 
 const props = defineProps({
-  show: Boolean
+  show: Boolean,
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {

@@ -12,8 +12,8 @@ const props = defineProps({
   show: Boolean,
   user: {
     type: Object as PropType<Entity>,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const coreStore = useCoreStore()

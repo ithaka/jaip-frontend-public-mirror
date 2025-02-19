@@ -37,7 +37,7 @@ import {
   PharosToaster,
   PharosToggleButton,
   PharosToggleButtonGroup,
-  PharosTooltip
+  PharosTooltip,
 } from '@ithaka/pharos'
 
 import registerComponents from '@ithaka/pharos/lib/utils/registerComponents'
@@ -80,7 +80,7 @@ export default {
       PharosToaster,
       PharosToggleButton,
       PharosToggleButtonGroup,
-      PharosTooltip
+      PharosTooltip,
     ])
-  }
+  },
 }

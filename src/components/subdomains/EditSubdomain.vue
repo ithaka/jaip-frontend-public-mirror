@@ -10,8 +10,8 @@ const props = defineProps({
   show: Boolean,
   subdomain: {
     type: Object as PropType<Subdomain>,
-    required: true
-  }
+    required: true,
+  },
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {
@@ -20,7 +20,7 @@ const submitForm = async () => {
   if (noName.value || duplicateName.value) return
   const { data } = await coreStore.$api.auth.subdomains.edit({
     name: newName.value,
-    id: props.subdomain.id
+    id: props.subdomain.id,
   })
   if (data.duplicate) {
     duplicateName.value = true

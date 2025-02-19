@@ -5,11 +5,11 @@ import type { Group } from '@/interfaces/Group'
 export const useFeaturesStore = defineStore('features', {
   state: () => {
     return {
-      features: [] as Feature[]
+      features: [] as Feature[],
     }
   },
   actions: {
-    categorizedFeatures(group: Group | undefined, entity: String, includeAll: boolean) {
+    categorizedFeatures(group: Group | undefined, entity: string, includeAll: boolean) {
       if (!group) {
         return {}
       }
@@ -32,7 +32,7 @@ export const useFeaturesStore = defineStore('features', {
           }
         })
       return categories
-    }
+    },
   },
   getters: {
     featuresObject() {
@@ -43,10 +43,10 @@ export const useFeaturesStore = defineStore('features', {
           name: feature.name,
           category: feature.category,
           description: feature.description,
-          is_admin_only: feature.is_admin_only
+          is_admin_only: feature.is_admin_only,
         }
       })
       return features
-    }
-  }
+    },
+  },
 })

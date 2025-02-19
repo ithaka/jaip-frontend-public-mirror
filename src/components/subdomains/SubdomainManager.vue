@@ -28,7 +28,7 @@ const getSubdomains = async () => {
     name: query.value,
     page: page.value,
     limit: limit.value,
-    is_active: isActive.value
+    is_active: isActive.value,
   }
   const { data } = await coreStore.$api.auth.subdomains.get(args)
   currentSubdomains.value = data.subdomains
@@ -37,7 +37,7 @@ const getSubdomains = async () => {
   showEditSubdomainModal.value = Array(Object.keys(currentSubdomains.value).length).fill(false)
   showDeleteSubdomainModal.value = Array(Object.keys(currentSubdomains.value).length).fill(false)
   showReactivateSubdomainModal.value = Array(Object.keys(currentSubdomains.value).length).fill(
-    false
+    false,
   )
 }
 
@@ -98,7 +98,7 @@ const handleEditSubdomain = async (i: number) => {
         :show="showAddSubdomainModal"
         :user="{
           type: 'users',
-          ungrouped_features: {}
+          ungrouped_features: {},
         }"
         @submit="handleAddSubdomain"
         @close="showAddSubdomainModal = false"

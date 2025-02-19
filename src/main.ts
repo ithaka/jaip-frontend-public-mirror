@@ -45,7 +45,7 @@ const {
   routeQuery,
   alert,
   customSubdomains,
-  hasValidSubdomain
+  hasValidSubdomain,
 } = storeToRefs(coreStore)
 const { features } = storeToRefs(featuresStore)
 const {
@@ -60,7 +60,7 @@ const {
   gettingUser,
   groupIDs,
   ungroupedFeatures,
-  id
+  id,
 } = storeToRefs(userStore)
 const { pageNo, reviewStatus, statusQuery } = storeToRefs(searchStore)
 
@@ -74,7 +74,7 @@ routeQuery.value = location.search
 // Get current subdomain and check existing authentication
 // Because Cypress has issues with subdomains, we use a stub value here to replace the location
 // during e2e tests.
-// @ts-ignore
+// @ts-expect-error Cypress stubs window location
 const host = window.__location ? window.__location.host() : location.host
 subdomain.value = host.split('.')[0]
 let duplicateRoute = false
@@ -135,8 +135,8 @@ const logout = () => {
     path: '/',
     query: {
       term: '',
-      page: 1
-    }
+      page: 1,
+    },
   })
 }
 
@@ -152,7 +152,10 @@ const auth = async (app: App) => {
     const subdomains = await api.auth.validateSubdomains(subdomain.value)
     if (subdomains.data) {
       customSubdomains.value = subdomains.data
-        .map((s: any) => s.subdomain || '')
+        .map((s: unknown) => {
+          const resp = s as { subdomain: string }
+          return resp.subdomain || ''
+        })
         .filter((s: string) => !!s)
     }
   }
@@ -170,7 +173,6 @@ const auth = async (app: App) => {
     if (router) {
       router.replace({ path: app.config.globalProperties.$route.path })
     }
-
   }
 
   // If we don't have auth data, get it and put it in the store

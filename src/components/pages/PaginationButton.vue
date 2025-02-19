@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { v4 as uuidv4 } from 'uuid'
 
 export default {
@@ -7,23 +7,23 @@ export default {
     direction: {
       type: String,
       required: true,
-      validator: function (value) {
+      validator: function (value: string) {
         // The value must match one of these strings
         return ['left', 'right'].indexOf(value) !== -1
-      }
+      },
     },
     isRtl: {
       type: Boolean,
-      required: false
+      required: false,
     },
     tooltipText: {
       type: String,
-      default: null
+      default: null,
     },
     tooltipPosition: {
       type: String,
       default: 'top',
-      validator: function (value) {
+      validator: function (value: string) {
         // The value must match one of these strings
         return (
           [
@@ -41,20 +41,20 @@ export default {
             'right-end',
             'auto',
             'auto-start',
-            'auto-end'
+            'auto-end',
           ].indexOf(value) !== -1
         )
-      }
+      },
     },
     keyboardShortcut: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   emits: ['page'],
   data() {
     return {
-      tooltipId: uuidv4()
+      tooltipId: uuidv4(),
     }
   },
   computed: {
@@ -64,13 +64,13 @@ export default {
       } else {
         return this.direction === 'right' ? 'Next page' : 'Previous page'
       }
-    }
+    },
   },
   methods: {
     applyFocus() {
-      this.$refs.paginationButton.focus()
-    }
-  }
+      ;(this.$refs.paginationButton as HTMLElement)?.focus()
+    },
+  },
 }
 </script>
 

@@ -26,7 +26,7 @@ const {
   selectedJournals,
   contentTypes,
   selectedContentTypes,
-  pseudoDisciplines
+  pseudoDisciplines,
 } = storeToRefs(searchStore)
 
 // Get Disciplines
@@ -45,14 +45,14 @@ const handleAdditionalTerms = () => {
   if (searchTerms.value) {
     // This regex will detect strings that include substrings wrapped in parentheses joined by the word "AND"
     // so if they're present, we can simply add another
-    let regex = /\([^()]+\)(?:\s+AND\s+\([^()]+\))*/
+    const regex = /\([^()]+\)(?:\s+AND\s+\([^()]+\))*/
     const hasTerms = regex.test(searchTerms.value)
     if (!hasTerms) {
       searchStore.setSearchTerms(`(${searchTerms.value})`, router.currentRoute.value.path)
     }
     searchStore.setSearchTerms(
       `${searchTerms.value} AND (${additionalTerms.value})`,
-      router.currentRoute.value.path
+      router.currentRoute.value.path,
     )
   } else {
     searchStore.setSearchTerms(additionalTerms.value, router.currentRoute.value.path)
@@ -61,8 +61,8 @@ const handleAdditionalTerms = () => {
     path: '/search',
     query: {
       term: searchTerms.value,
-      page: 1
-    }
+      page: 1,
+    },
   })
   additionalTerms.value = ''
 }
@@ -139,7 +139,7 @@ const handleDisciplineSelection = (e: CheckboxEvent) => {
     }
   } else {
     const selectedPseudoDisciplines = e.checkboxes.filter((disc) =>
-      pseudoDisciplines.value.includes(disc)
+      pseudoDisciplines.value.includes(disc),
     )
 
     pseudoDisciplines.value.forEach((pseudoDiscipline: string) => {
@@ -148,7 +148,7 @@ const handleDisciplineSelection = (e: CheckboxEvent) => {
         !selectedPseudoDisciplines.includes(pseudoDiscipline)
       ) {
         selectedContentTypes.value = selectedContentTypes.value.filter(
-          (disc) => disc !== pseudoDiscipline
+          (disc) => disc !== pseudoDiscipline,
         )
       }
     })
@@ -171,7 +171,7 @@ const selectedJournalDisciplines: string[] = selectedJournals.value.reduce(
     }
     return arr
   },
-  [] as string[]
+  [] as string[],
 )
 const visibleJournalDisciplines = ref(selectedJournalDisciplines)
 const combobox = ref(null)
@@ -182,7 +182,7 @@ const handleJournalDisciplineSelection = async (e: InputFileEvent) => {
     // This is an awkward solution, but the combobox doesn't appear to allow programmatic value
     // changes, and the input event doesn't fire, so this reaches into the component and clears the
     // value manually.
-    // @ts-ignore
+    // @ts-expect-error This is using a private method from the component
     ;(combobox.value || {})._handleInputClear()
   }
 }
@@ -200,11 +200,11 @@ const handleJournalSelection = (e: CheckboxEvent, disc: string) => {
   if (e.newValue) {
     selectedJournals.value.push({
       ...allJournals.value[disc][e.newValue],
-      discipline: disc
+      discipline: disc,
     })
   } else {
     selectedJournals.value = selectedJournals.value.filter((journal) =>
-      e.checkboxes.includes(journal.headid)
+      e.checkboxes.includes(journal.headid),
     )
   }
   searchStore.doSearch('', false)
@@ -218,11 +218,11 @@ const showSearchFilters = ref(false)
 const handleContentTypeSelection = (e: InputFileEvent) => {
   if (selectedContentTypes.value.includes(e.target.value)) {
     selectedContentTypes.value = selectedContentTypes.value.filter(
-      (type) => type !== e.target.value
+      (type) => type !== e.target.value,
     )
     if (pseudoDisciplines.value.includes(e.target.value)) {
       selectedDisciplines.value = selectedDisciplines.value.filter(
-        (disc) => disc !== e.target.value
+        (disc) => disc !== e.target.value,
       )
     }
   } else {
@@ -487,7 +487,7 @@ const handleContentTypeSelection = (e: InputFileEvent) => {
                           :initial-selections="[
                             ...selectedJournals
                               .filter((j: Journal) => j.discipline === discipline)
-                              .map((j) => j.headid)
+                              .map((j) => j.headid),
                           ]"
                           :filter-function="
                             (j: Journal, term: string) =>

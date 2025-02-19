@@ -9,43 +9,43 @@ import { useSearchStore } from '@/stores/search'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 
-const props = defineProps({
+defineProps({
   loginUrl: {
     type: String,
-    default: ''
+    default: '',
   },
   showLogin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   groups: {
     type: String,
-    default: ''
+    default: '',
   },
   updateKey: {
     type: Number,
-    default: 0
+    default: 0,
   },
   isAuthenticatedAdmin: {
     type: Boolean,
-    required: true
+    required: true,
   },
   isAuthenticatedStudent: {
     type: Boolean,
-    required: true
+    required: true,
   },
   isUnauthenticated: {
     type: Boolean,
-    required: true
+    required: true,
   },
   showRequestWarning: {
     type: Boolean,
-    default: false
+    default: false,
   },
   name: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 const searchStore = useSearchStore()

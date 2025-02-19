@@ -7,9 +7,9 @@ import { ref } from 'vue'
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({})
+    default: () => ({}),
   },
-  small: Boolean
+  small: Boolean,
 })
 
 // Page Extraction

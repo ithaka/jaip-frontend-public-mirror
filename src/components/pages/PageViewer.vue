@@ -161,6 +161,7 @@
   </div>
 </template>
 
+<!-- @ts-expect-error This is borrowing from the platform code, and isn't typed -->
 <script lang="js">
 import ControlBar from '@/components/pages/ControlBar.vue'
 import PaginationButton from '@/components/pages/PaginationButton.vue'
@@ -175,7 +176,7 @@ import {
   PAN_KEYS,
   HOME_KEYS,
   CHANGE_PAGE_KEYS,
-  LEFT_BRACKET_KEY
+  LEFT_BRACKET_KEY,
 } from '@/consts/PageViewerConsts.ts'
 
 import { v4 as uuidv4 } from 'uuid'
@@ -188,54 +189,54 @@ export default {
   components: {
     ControlBar,
     PaginationButton,
-    ViewerControlButton
+    ViewerControlButton,
   },
   inject: ['contextData'],
   props: {
     metadata: {
       type: Object,
-      required: true
+      required: true,
     },
     initialPageIndex: {
       type: Number,
-      default: 0
+      default: 0,
     },
     showFullscreenToggle: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showNavigatorInFullscreen: {
       type: Boolean,
-      required: true
+      required: true,
     },
     isPrimary: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isInFullscreen: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hasMultipleViewers: {
       type: Boolean,
-      default: false
+      default: false,
     },
     presentationSession: {
       type: String,
-      default: null
+      default: null,
     },
     viewerClosedCallback: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     fullscreenToggledCallback: {
       type: Function,
-      default: undefined
+      default: undefined,
     },
     primaryPageChangedCallback: {
       type: Function,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
   data() {
     return {
@@ -246,7 +247,7 @@ export default {
       currentPageIndex: this.initialPageIndex,
       pageNumberUpdateCallback: undefined,
       isFirstLoad: true,
-      enableSavedZoomImage: false
+      enableSavedZoomImage: false,
     }
   },
   computed: {
@@ -317,7 +318,7 @@ export default {
       if (this.metadata) {
         return [...Array(this.metadata.pageCount).keys()].map((value) => ({
           type: 'image',
-          url: `/api/pages/${this.metadata.id}/${value}`
+          url: `/api/pages/${this.metadata.id}/${value}`,
         }))
       } else {
         return []
@@ -342,10 +343,10 @@ export default {
           top: VIEWPORT_MARGIN,
           right: VIEWPORT_MARGIN,
           bottom: VIEWPORT_MARGIN,
-          left: VIEWPORT_MARGIN
+          left: VIEWPORT_MARGIN,
         },
         visibilityRatio: 1,
-        zoomPerClick: ZOOM_PER_CLICK
+        zoomPerClick: ZOOM_PER_CLICK,
       }
 
       return openSeadragonOptions
@@ -361,7 +362,7 @@ export default {
         this.viewer.viewport.getBounds().height.toFixed(5) ===
         this.viewer.world.getItemAt(0).getBounds().height.toFixed(5)
       )
-    }
+    },
   },
   watch: {
     async metadata() {
@@ -375,7 +376,7 @@ export default {
     },
     isInFullscreen() {
       this.updateDisplayNavigator()
-    }
+    },
   },
   created() {
     this.viewerId = uuidv4()
@@ -447,8 +448,8 @@ export default {
       }
     },
     setImageZoomDetails() {
-      let bounds = this.viewer.viewport.viewportToImageRectangle(
-        this.viewer.viewport.getBounds(true)
+      const bounds = this.viewer.viewport.viewportToImageRectangle(
+        this.viewer.viewport.getBounds(true),
       )
       // Make sure the bounds are adjusted for the negative x and y values
       bounds['width'] = bounds['x'] < 0 ? bounds['width'] + bounds['x'] : bounds['width']
@@ -520,13 +521,15 @@ export default {
 
         setTimeout(
           () =>
-            this.isPageRightDisabled && !this.isPageLeftDisabled && this.$refs.pageLeft.applyFocus()
+            this.isPageRightDisabled &&
+            !this.isPageLeftDisabled &&
+            this.$refs.pageLeft.applyFocus(),
         )
         setTimeout(
           () =>
             this.isPageLeftDisabled &&
             !this.isPageRightDisabled &&
-            this.$refs.pageRight.applyFocus()
+            this.$refs.pageRight.applyFocus(),
         )
       })
 
@@ -584,188 +587,188 @@ export default {
         const zoomParamY = parseInt(params.get('y'))
         const width = parseInt(params.get('w'))
         const height = parseInt(params.get('h'))
-        let bounds = this.viewer.viewport.imageToViewportRectangle(
+        const bounds = this.viewer.viewport.imageToViewportRectangle(
           zoomParamX,
           zoomParamY,
           width,
-          height
+          height,
         )
         await this.viewer.viewport.fitBounds(bounds, true)
         this.zoomIn()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-// @import '@ithaka/pharos/lib/utils/scss/mixins';
+@import '@ithaka/pharos/lib/utils/scss/mixins';
 
-// $image-details-height: var(--pharos-spacing-5-x);
-// $image-control-tray-no-detail-height: 72px;
-// $image-control-tray-with-detail-height: 120px;
-// $image-control-tray-with-detail-height-mobile: 132px;
-// $button-offset: var(--pharos-spacing-one-and-a-half-x);
+$image-details-height: var(--pharos-spacing-5-x);
+$image-control-tray-no-detail-height: 72px;
+$image-control-tray-with-detail-height: 120px;
+$image-control-tray-with-detail-height-mobile: 132px;
+$button-offset: var(--pharos-spacing-one-and-a-half-x);
 
-// .page-viewer-container {
-//   height: 100vh;
-//   min-height: 500px;
-//   width: 100%;
-//   margin-bottom: 100px;
-//   &.full-screen {
-//     height: 100%;
-//     min-height: 100%;
-//     min-width: 100vw;
-//     width: 100vw;
-//   }
-// }
+.page-viewer-container {
+  height: 100vh;
+  min-height: 500px;
+  width: 100%;
+  margin-bottom: 100px;
+  &.full-screen {
+    height: 100%;
+    min-height: 100%;
+    min-width: 100vw;
+    width: 100vw;
+  }
+}
 
-// .viewer-details-container {
-//   height: 100%;
-//   background: var(--pharos-color-black);
-//   position: relative;
-//   display: flex;
-//   overflow: hidden;
-// }
+.viewer-details-container {
+  height: 100%;
+  background: var(--pharos-color-black);
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
 
-// .viewer-wrapper {
-//   display: flex;
-//   position: relative;
-//   background: var(--pharos-color-black);
-//   transition: all 0.3s ease;
-//   width: 100%;
-//   height: 100%;
-// }
+.viewer-wrapper {
+  display: flex;
+  position: relative;
+  background: var(--pharos-color-black);
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+}
 
-// .image-details {
-//   height: $image-details-height;
-// }
+.image-details {
+  height: $image-details-height;
+}
 
-// .image-viewport {
-//   position: relative;
-//   width: 100%;
-// }
+.image-viewport {
+  position: relative;
+  width: 100%;
+}
 
-// .iiif-viewer {
-//   height: 100%;
+.iiif-viewer {
+  height: 100%;
 
-//   &.full-screen {
-//     height: 100%;
-//   }
+  &.full-screen {
+    height: 100%;
+  }
 
-//   &.show-image-details {
-//     height: calc(100% - $image-details-height);
-//   }
+  &.show-image-details {
+    height: calc(100% - $image-details-height);
+  }
 
-//   @include until(medium) {
-//     &.show-image-details {
-//       height: calc(100% - $image-control-tray-with-detail-height-mobile);
-//     }
-//   }
-// }
+  @include until(medium) {
+    &.show-image-details {
+      height: calc(100% - $image-control-tray-with-detail-height-mobile);
+    }
+  }
+}
 
-// .viewer-error {
-//   position: absolute;
-//   display: flex;
-//   top: 45%;
-//   height: 100%;
-//   width: 100%;
-//   flex-direction: column;
-//   gap: var(--pharos-spacing-1-x);
-//   text-align: center;
-//   color: var(--pharos-color-white);
-// }
+.viewer-error {
+  position: absolute;
+  display: flex;
+  top: 45%;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--pharos-spacing-1-x);
+  text-align: center;
+  color: var(--pharos-color-white);
+}
 
-// .controls {
-//   z-index: 100;
-//   position: absolute !important;
-//   pointer-events: none;
-//   height: 100%;
-//   width: 100%;
+.controls {
+  z-index: 100;
+  position: absolute !important;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
 
-//   button {
-//     pointer-events: all;
-//   }
+  button {
+    pointer-events: all;
+  }
 
-//   .viewer-controls--left {
-//     position: absolute !important;
-//     left: $button-offset;
-//     top: $button-offset;
-//   }
+  .viewer-controls--left {
+    position: absolute !important;
+    left: $button-offset;
+    top: $button-offset;
+  }
 
-//   .viewer-controls--right {
-//     display: flex;
-//     position: absolute !important;
-//     right: $button-offset;
-//     top: $button-offset;
+  .viewer-controls--right {
+    display: flex;
+    position: absolute !important;
+    right: $button-offset;
+    top: $button-offset;
 
-//     .viewer-control-button {
-//       margin-left: var(--pharos-spacing-one-half-x);
-//     }
-//   }
-// }
+    .viewer-control-button {
+      margin-left: var(--pharos-spacing-one-half-x);
+    }
+  }
+}
 
-// @mixin pagination-button {
-//   position: absolute !important;
-//   top: 50%;
-//   pointer-events: all;
-//   cursor: pointer;
+@mixin pagination-button {
+  position: absolute !important;
+  top: 50%;
+  pointer-events: all;
+  cursor: pointer;
 
-//   &:disabled {
-//     cursor: unset;
-//     opacity: 0.2;
-//   }
-// }
+  &:disabled {
+    cursor: unset;
+    opacity: 0.2;
+  }
+}
 
-// .page-left {
-//   @include pagination-button;
-//   left: $button-offset;
-// }
+.page-left {
+  @include pagination-button;
+  left: $button-offset;
+}
 
-// .page-right {
-//   @include pagination-button;
-//   right: $button-offset;
-// }
+.page-right {
+  @include pagination-button;
+  right: $button-offset;
+}
 
-// .viewer-show-for-medium-down {
-//   @include at-least(medium) {
-//     display: none !important;
-//   }
+.viewer-show-for-medium-down {
+  @include at-least(medium) {
+    display: none !important;
+  }
 
-//   display: inline-block !important;
-// }
+  display: inline-block !important;
+}
 
-// .viewer-show-for-medium-up {
-//   @include at-least(medium) {
-//     display: inline-block !important;
-//   }
+.viewer-show-for-medium-up {
+  @include at-least(medium) {
+    display: inline-block !important;
+  }
 
-//   display: none !important;
-// }
+  display: none !important;
+}
 
-// .viewer-show-for-large-down {
-//   @include between(medium, large) {
-//     display: flex !important;
-//   }
+.viewer-show-for-large-down {
+  @include between(medium, large) {
+    display: flex !important;
+  }
 
-//   display: none !important;
-// }
+  display: none !important;
+}
 
-// .viewer-show-for-large-up {
-//   @include at-least(large) {
-//     display: flex !important;
-//   }
+.viewer-show-for-large-up {
+  @include at-least(large) {
+    display: flex !important;
+  }
 
-//   display: none !important;
-// }
+  display: none !important;
+}
 
-// .viewer-controls-thumbnail {
-//   position: absolute !important;
-//   left: $button-offset;
-//   top: $button-offset;
+.viewer-controls-thumbnail {
+  position: absolute !important;
+  left: $button-offset;
+  top: $button-offset;
 
-//   @include between(small, large) {
-//     display: none;
-//   }
-// }
+  @include between(small, large) {
+    display: none;
+  }
+}
 </style>

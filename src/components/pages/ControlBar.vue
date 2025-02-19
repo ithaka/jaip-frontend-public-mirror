@@ -4,19 +4,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'ControlBar',
   props: {
     buttonDirection: {
       type: String,
       default: 'horizontal',
-      validator: function (value) {
+      validator: function (value: string) {
         // The value must match one of these strings
         return ['horizontal', 'vertical'].indexOf(value) !== -1
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

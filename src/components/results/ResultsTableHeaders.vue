@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps({
-  isGlobal: Boolean
+  isGlobal: Boolean,
 })
 </script>
 <template>

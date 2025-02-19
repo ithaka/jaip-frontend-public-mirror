@@ -12,13 +12,13 @@ import type { Group } from '@/interfaces/Group'
 const props = defineProps({
   entity: {
     type: Object as PropType<Entity>,
-    required: true
+    required: true,
   },
   entityType: {
     type: String,
-    required: true
+    required: true,
   },
-  showModal: Boolean
+  showModal: Boolean,
 })
 
 const userStore = useUserStore()
@@ -38,15 +38,15 @@ const removeEntity = async () => {
   const args = {
     ...props.entity,
     groups: (props.entity.groups || []).filter((group: Group) =>
-      selectedGroups.value[featureName.value].includes(group.id)
-    )
+      selectedGroups.value[featureName.value].includes(group.id),
+    ),
   }
 
   try {
     await coreStore.$api.auth.entities.remove(args, props.entity.type)
     const msg = `${props.entity.name} successfully removed.`
     coreStore.toast(msg, 'success')
-  } catch (err) {
+  } catch {
     const msg = `Oops! There was an error and ${props.entity.name} was not removed removed.`
     coreStore.toast(msg, 'error')
   }
@@ -72,8 +72,8 @@ const removeEntity = async () => {
           {{
             makeGrammaticalList(
               selectedGroups[featureName].map(
-                (group: number) => (groupMap.get(group) || {}).name || ''
-              )
+                (group: number) => (groupMap.get(group) || {}).name || '',
+              ),
             )
           }}. Are you sure you wish to proceed?
         </span>
@@ -92,7 +92,7 @@ const removeEntity = async () => {
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
+      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="!(selectedGroups[featureName] || []).length"
@@ -100,6 +100,7 @@ const removeEntity = async () => {
       >
         Remove
       </pep-pharos-button>
+      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

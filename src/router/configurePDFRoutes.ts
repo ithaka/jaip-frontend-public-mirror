@@ -6,17 +6,17 @@ const PDFRoute = {
   name: 'PDF Viewer',
   meta: {
     hidden: true,
-    requiresAny: ['view_pdf']
+    requiresAny: ['view_pdf'],
   },
-  component: () => import('@/views/PDFView.vue')
+  component: () => import('@/views/PDFView.vue'),
 }
 
 export const addPDFRoute = (config: RouterOptions) => {
-    if (hasStaticBlock()) {
-        return {
-            ...config,
-            routes: [...config.routes, PDFRoute]
-        }
+  if (hasStaticBlock()) {
+    return {
+      ...config,
+      routes: [...config.routes, PDFRoute],
     }
-    return config
+  }
+  return config
 }

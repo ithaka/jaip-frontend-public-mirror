@@ -8,18 +8,18 @@ import type { Log } from '@/interfaces/Log'
 const props = defineProps({
   iid: {
     type: String,
-    required: true
+    required: true,
   },
   enableViewer: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const logEvent: Log = {
   eventtype: 'pep_pdf_viewer_access_attempt',
   event_description: 'A user attempted to access the PDF viewer, but an error occurred.',
-  itemid: props.iid
+  itemid: props.iid,
 }
 
 const CMAP_URL = 'pdfjs-dist/cmaps/'
@@ -40,7 +40,7 @@ const createLoadingTask = (src: string) => {
       url: src,
       cMapUrl: CMAP_URL,
       cMapPacked: CMAP_PACKED,
-      enableXfa: ENABLE_XFA
+      enableXfa: ENABLE_XFA,
     }).promise
     return loadingTask
   } catch (err) {
@@ -56,7 +56,7 @@ const createViewer = () => {
 
     const pdfViewer = new viewer.PDFViewer({
       container,
-      eventBus
+      eventBus,
     })
 
     eventBus.on('pagesinit', function () {

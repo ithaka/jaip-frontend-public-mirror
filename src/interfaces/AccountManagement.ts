@@ -1,6 +1,6 @@
 export interface EntitiesArgs {
   groups: Array<number>
-  query: String
+  query: string
   limit: number
   page: number
 }
@@ -20,10 +20,10 @@ export interface EntityObject {
 
 export enum EntityTypes {
   Users = 'users',
-  Facilities = 'facilities'
+  Facilities = 'facilities',
 }
 
 export enum EntityActions {
   Add = 'add',
-  Edit = 'edit'
+  Edit = 'edit',
 }

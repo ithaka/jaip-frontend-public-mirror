@@ -10,9 +10,9 @@ const props = defineProps({
   show: Boolean,
   feature: {
     type: Object as PropType<Feature>,
-    required: true
+    required: true,
   },
-  ungrouped: Boolean
+  ungrouped: Boolean,
 })
 const emit = defineEmits(['close', 'submit'])
 
@@ -76,7 +76,7 @@ const displayNameErrorMessage = computed(() => {
 
 const touchedCategory = ref(false)
 const noCategory = computed(
-  () => !newFeature.value.category || newFeature.value.category?.trim() === ''
+  () => !newFeature.value.category || newFeature.value.category?.trim() === '',
 )
 const invalidCategory = computed(() => {
   return touchedCategory.value && noCategory.value

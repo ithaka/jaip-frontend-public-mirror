@@ -5,17 +5,17 @@ import { ref } from 'vue'
 const props = defineProps({
   text: {
     type: String,
-    default: ''
+    default: '',
   },
   startOpen: {
     type: Boolean,
-    default: false
+    default: false,
   },
   limit: {
     type: Number,
-    default: 220
+    default: 220,
   },
-  small: Boolean
+  small: Boolean,
 })
 const expand = ref(props.startOpen)
 const component = ref(props.small ? 'small' : 'span')

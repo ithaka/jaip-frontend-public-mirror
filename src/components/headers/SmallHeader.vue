@@ -14,36 +14,36 @@ import { storeToRefs } from 'pinia'
 defineProps({
   loginUrl: {
     type: String,
-    default: ''
+    default: '',
   },
   showLogin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   updateKey: {
     type: Number,
-    default: 0
+    default: 0,
   },
   isAuthenticatedAdmin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isAuthenticatedStudent: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isUnauthenticated: {
     type: Boolean,
-    default: false
+    default: false,
   },
   showRequestWarning: {
     type: Boolean,
-    default: false
+    default: false,
   },
   name: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
@@ -54,7 +54,7 @@ const { alert } = storeToRefs(coreStore)
 const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 
-let showSidenav = ref(false)
+const showSidenav = ref(false)
 
 const logout = () => {
   emit('logout')

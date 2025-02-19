@@ -9,8 +9,8 @@ const props = defineProps({
   show: Boolean,
   subdomain: {
     type: Object as PropType<Subdomain>,
-    required: true
-  }
+    required: true,
+  },
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {

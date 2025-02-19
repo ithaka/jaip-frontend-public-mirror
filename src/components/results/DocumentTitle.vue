@@ -5,13 +5,13 @@ import { ref } from 'vue'
 const props = defineProps({
   title: {
     type: String,
-    default: '[Untitled]'
+    default: '[Untitled]',
   },
   subtitle: {
     type: [Array<string>, String] as PropType<string[] | string>,
-    default: ''
+    default: '',
   },
-  small: Boolean
+  small: Boolean,
 })
 // Subtitle Handling
 const separateSubtitle = (title: string, subtitle: string) => {
