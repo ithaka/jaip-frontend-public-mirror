@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios'
 import type { PaginatedQuery } from '@/interfaces/Queries'
 import type { Feature, FeatureRequest, FeatureResponse } from '@/interfaces/Features'
-import type { Subdomain, SubdomainRequest } from '@/interfaces/Subdomains'
+import type { SubdomainRequest } from '@/interfaces/Subdomains'
 import type { EntitiesArgs } from '@/interfaces/AccountManagement'
 import type { Entity, EntityResponse, User } from '@/interfaces/Entities'
 import type { EditingGroup, GroupResponse } from '@/interfaces/Group'
@@ -14,7 +14,6 @@ import type ApprovalArgs from '@/interfaces/ApprovalArgs'
 import type RequestArgs from '@/interfaces/RequestArgs'
 import type { Journal } from './Journal'
 import type { SubdomainsResponse } from './Subdomains'
-import type { SimpleReadable } from 'vue/server-renderer'
 import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
 interface Documents {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown, unknown>>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Entity, EntityResponse } from '@/interfaces/Entities'
+import type { Entity } from '@/interfaces/Entities'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
