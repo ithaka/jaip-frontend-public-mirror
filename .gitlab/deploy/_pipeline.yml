@@ -82,7 +82,7 @@ lint:
 
 # Run e2e tests
 e2e tests:
-  image: $DOCKER_VIRTUAL/node:20
+  image: $DOCKER_VIRTUAL/cypress/browsers:22.12.0
   stage: check
   dependencies:
     - build app image
