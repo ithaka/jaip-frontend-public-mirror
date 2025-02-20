@@ -60,6 +60,7 @@ scan vulnerabilities:
 
 # Run tsc type checker
 type-check:
+  image: $DOCKER_VIRTUAL/node:20
   stage: check
   dependencies:
     - build app image
@@ -68,9 +69,9 @@ type-check:
   script:
     - yarn type-check
 
-
 # Run eslint
 lint:
+  image: $DOCKER_VIRTUAL/node:20
   stage: check
   dependencies:
     - build app image
@@ -79,9 +80,9 @@ lint:
   script:
     - yarn lint
 
-
 # Run e2e tests
 e2e tests:
+  image: $DOCKER_VIRTUAL/node:20
   stage: check
   dependencies:
     - build app image

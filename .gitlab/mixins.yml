@@ -81,7 +81,6 @@
 # Must stay synced with Dockerfile
 
 .test:
-  image: $DOCKER_VIRTUAL/node:20
   extends:
     - .test-env
   before_script:
