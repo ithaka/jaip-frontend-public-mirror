@@ -90,6 +90,7 @@ e2e tests:
     - .test
   before_script:
     - yarn install --immutable
+    - yarn build
   script:
     - yarn test:e2e
 
