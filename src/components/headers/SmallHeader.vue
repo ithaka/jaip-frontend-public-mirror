@@ -87,6 +87,7 @@ const logout = () => {
         />
       </pep-pharos-link>
       <div>
+        <!-- TODO: This needs to be put back in, though maybe not as a pharos component? Maybe just a pharos icon button? -->
         <!-- <pep-pharos-sidenav-button @click.prevent.stop="showSidenav = true" /> -->
       </div>
       <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
