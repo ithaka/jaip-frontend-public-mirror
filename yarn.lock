@@ -893,12 +893,12 @@ __metadata:
   linkType: hard
 
 "@lit-labs/scoped-registry-mixin@npm:^1.0.0":
-  version: 1.0.3
-  resolution: "@lit-labs/scoped-registry-mixin@npm:1.0.3"
+  version: 1.0.4
+  resolution: "@lit-labs/scoped-registry-mixin@npm:1.0.4"
   dependencies:
     "@lit/reactive-element": "npm:^1.0.0 || ^2.0.0"
     lit: "npm:^2.0.0 || ^3.0.0"
-  checksum: 10c0/eb03fd10ba400eb80ef7acac84a128a10f595dc38ad8e9d559d5fd141e36b51441a79c262852e91560ea60437815e65e216098537a5baf2f1fe2cb5404377620
+  checksum: 10c0/dec32a9dc097ab9cf924c4635160110a07dd36b67cf7be88482c301f1011e553501e51f3737fe70270364940fb9d9cf97fd8c2b11c8d936591b07465f6a6ab62
   languageName: node
   linkType: hard
 

@@ -602,173 +602,173 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@ithaka/pharos/lib/utils/scss/mixins';
+// @import '@ithaka/pharos/lib/utils/scss/_mixins.scss';
 
-$image-details-height: var(--pharos-spacing-5-x);
-$image-control-tray-no-detail-height: 72px;
-$image-control-tray-with-detail-height: 120px;
-$image-control-tray-with-detail-height-mobile: 132px;
-$button-offset: var(--pharos-spacing-one-and-a-half-x);
+// $image-details-height: var(--pharos-spacing-5-x);
+// $image-control-tray-no-detail-height: 72px;
+// $image-control-tray-with-detail-height: 120px;
+// $image-control-tray-with-detail-height-mobile: 132px;
+// $button-offset: var(--pharos-spacing-one-and-a-half-x);
 
-.page-viewer-container {
-  height: 100vh;
-  min-height: 500px;
-  width: 100%;
-  margin-bottom: 100px;
-  &.full-screen {
-    height: 100%;
-    min-height: 100%;
-    min-width: 100vw;
-    width: 100vw;
-  }
-}
+// .page-viewer-container {
+//   height: 100vh;
+//   min-height: 500px;
+//   width: 100%;
+//   margin-bottom: 100px;
+//   &.full-screen {
+//     height: 100%;
+//     min-height: 100%;
+//     min-width: 100vw;
+//     width: 100vw;
+//   }
+// }
 
-.viewer-details-container {
-  height: 100%;
-  background: var(--pharos-color-black);
-  position: relative;
-  display: flex;
-  overflow: hidden;
-}
+// .viewer-details-container {
+//   height: 100%;
+//   background: var(--pharos-color-black);
+//   position: relative;
+//   display: flex;
+//   overflow: hidden;
+// }
 
-.viewer-wrapper {
-  display: flex;
-  position: relative;
-  background: var(--pharos-color-black);
-  transition: all 0.3s ease;
-  width: 100%;
-  height: 100%;
-}
+// .viewer-wrapper {
+//   display: flex;
+//   position: relative;
+//   background: var(--pharos-color-black);
+//   transition: all 0.3s ease;
+//   width: 100%;
+//   height: 100%;
+// }
 
-.image-details {
-  height: $image-details-height;
-}
+// .image-details {
+//   height: $image-details-height;
+// }
 
-.image-viewport {
-  position: relative;
-  width: 100%;
-}
+// .image-viewport {
+//   position: relative;
+//   width: 100%;
+// }
 
-.iiif-viewer {
-  height: 100%;
+// .iiif-viewer {
+//   height: 100%;
 
-  &.full-screen {
-    height: 100%;
-  }
+//   &.full-screen {
+//     height: 100%;
+//   }
 
-  &.show-image-details {
-    height: calc(100% - $image-details-height);
-  }
+//   &.show-image-details {
+//     height: calc(100% - $image-details-height);
+//   }
 
-  @include until(medium) {
-    &.show-image-details {
-      height: calc(100% - $image-control-tray-with-detail-height-mobile);
-    }
-  }
-}
+//   @include until(medium) {
+//     &.show-image-details {
+//       height: calc(100% - $image-control-tray-with-detail-height-mobile);
+//     }
+//   }
+// }
 
-.viewer-error {
-  position: absolute;
-  display: flex;
-  top: 45%;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  gap: var(--pharos-spacing-1-x);
-  text-align: center;
-  color: var(--pharos-color-white);
-}
+// .viewer-error {
+//   position: absolute;
+//   display: flex;
+//   top: 45%;
+//   height: 100%;
+//   width: 100%;
+//   flex-direction: column;
+//   gap: var(--pharos-spacing-1-x);
+//   text-align: center;
+//   color: var(--pharos-color-white);
+// }
 
-.controls {
-  z-index: 100;
-  position: absolute !important;
-  pointer-events: none;
-  height: 100%;
-  width: 100%;
+// .controls {
+//   z-index: 100;
+//   position: absolute !important;
+//   pointer-events: none;
+//   height: 100%;
+//   width: 100%;
 
-  button {
-    pointer-events: all;
-  }
+//   button {
+//     pointer-events: all;
+//   }
 
-  .viewer-controls--left {
-    position: absolute !important;
-    left: $button-offset;
-    top: $button-offset;
-  }
+//   .viewer-controls--left {
+//     position: absolute !important;
+//     left: $button-offset;
+//     top: $button-offset;
+//   }
 
-  .viewer-controls--right {
-    display: flex;
-    position: absolute !important;
-    right: $button-offset;
-    top: $button-offset;
+//   .viewer-controls--right {
+//     display: flex;
+//     position: absolute !important;
+//     right: $button-offset;
+//     top: $button-offset;
 
-    .viewer-control-button {
-      margin-left: var(--pharos-spacing-one-half-x);
-    }
-  }
-}
+//     .viewer-control-button {
+//       margin-left: var(--pharos-spacing-one-half-x);
+//     }
+//   }
+// }
 
-@mixin pagination-button {
-  position: absolute !important;
-  top: 50%;
-  pointer-events: all;
-  cursor: pointer;
+// @mixin pagination-button {
+//   position: absolute !important;
+//   top: 50%;
+//   pointer-events: all;
+//   cursor: pointer;
 
-  &:disabled {
-    cursor: unset;
-    opacity: 0.2;
-  }
-}
+//   &:disabled {
+//     cursor: unset;
+//     opacity: 0.2;
+//   }
+// }
 
-.page-left {
-  @include pagination-button;
-  left: $button-offset;
-}
+// .page-left {
+//   @include pagination-button;
+//   left: $button-offset;
+// }
 
-.page-right {
-  @include pagination-button;
-  right: $button-offset;
-}
+// .page-right {
+//   @include pagination-button;
+//   right: $button-offset;
+// }
 
-.viewer-show-for-medium-down {
-  @include at-least(medium) {
-    display: none !important;
-  }
+// .viewer-show-for-medium-down {
+//   @include at-least(medium) {
+//     display: none !important;
+//   }
 
-  display: inline-block !important;
-}
+//   display: inline-block !important;
+// }
 
-.viewer-show-for-medium-up {
-  @include at-least(medium) {
-    display: inline-block !important;
-  }
+// .viewer-show-for-medium-up {
+//   @include at-least(medium) {
+//     display: inline-block !important;
+//   }
 
-  display: none !important;
-}
+//   display: none !important;
+// }
 
-.viewer-show-for-large-down {
-  @include between(medium, large) {
-    display: flex !important;
-  }
+// .viewer-show-for-large-down {
+//   @include between(medium, large) {
+//     display: flex !important;
+//   }
 
-  display: none !important;
-}
+//   display: none !important;
+// }
 
-.viewer-show-for-large-up {
-  @include at-least(large) {
-    display: flex !important;
-  }
+// .viewer-show-for-large-up {
+//   @include at-least(large) {
+//     display: flex !important;
+//   }
 
-  display: none !important;
-}
+//   display: none !important;
+// }
 
-.viewer-controls-thumbnail {
-  position: absolute !important;
-  left: $button-offset;
-  top: $button-offset;
+// .viewer-controls-thumbnail {
+//   position: absolute !important;
+//   left: $button-offset;
+//   top: $button-offset;
 
-  @include between(small, large) {
-    display: none;
-  }
-}
+//   @include between(small, large) {
+//     display: none;
+//   }
+// }
 </style>
