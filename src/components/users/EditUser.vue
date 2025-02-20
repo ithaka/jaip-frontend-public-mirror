@@ -29,7 +29,7 @@ const disenable = (ufd: UngroupedFeatureDetails) => {
   }, {} as UngroupedFeatureDetails)
 }
 
-const newUser = ref({ ...props.user })
+const newUser = ref({ ...props.user, type: props.user.type || '' } as Entity)
 if (!newUser.value.name) newUser.value.name = ''
 if (!newUser.value.contact) newUser.value.contact = ''
 if (!newUser.value.groups) newUser.value.groups = []

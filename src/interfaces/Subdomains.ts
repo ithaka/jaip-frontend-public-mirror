@@ -3,3 +3,14 @@ export interface Subdomain {
   subdomain: string
   is_active: boolean
 }
+
+export interface SubdomainRequest {
+  name?: string
+  page?: number
+  limit?: number
+  is_active: boolean
+}
+export interface SubdomainsResponse {
+  total: number
+  subdomains: Subdomain[]
+}

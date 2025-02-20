@@ -22,3 +22,8 @@ export interface Entity {
   subdomain?: string
   primary_sitecode?: string
 }
+
+export interface EntityResponse {
+  total: number
+  entities: { [key: string]: Entity }
+}

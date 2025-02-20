@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Entity } from '@/interfaces/Entities'
+import type { Entity, EntityResponse } from '@/interfaces/Entities'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
@@ -19,7 +19,7 @@ watch(gettingUser, async (newValue, oldValue) => {
 })
 
 const gettingUsers = ref(false)
-const currentUsers = ref([] as Entity[])
+const currentUsers = ref({} as { [key: string]: Entity })
 const query = ref('')
 const total = ref(0)
 const limit = ref(10)

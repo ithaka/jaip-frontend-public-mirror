@@ -50,7 +50,7 @@ const groupNamesWithAllFeatures = computed(() => {
   return groups
 })
 const submitForm = async () => {
-  if (noEmpty.value) return (touchedInstruction.value = true)
+  if (noEmpty.value || !props.user.id) return (touchedInstruction.value = true)
   await coreStore.$api.auth.groups.addAdministrator({ id: props.user.id })
   emit('submit')
 }

@@ -1,6 +1,7 @@
 export interface PaginatedQuery {
-  query: string
+  query?: string
+  name?: string
   page: number
   limit: number
-  is_active?: string
+  is_active?: boolean
 }

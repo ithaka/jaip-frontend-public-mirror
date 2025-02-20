@@ -16,3 +16,8 @@ export interface GroupSelection {
   groups: number[]
   target: number
 }
+
+export interface GroupResponse {
+  total: number
+  groups: Group[]
+}

@@ -37,3 +37,14 @@ export interface UngroupedFeature {
 export interface UngroupedFeatureDetails {
   [key: string]: UngroupedFeature
 }
+
+export interface FeatureRequest {
+  name?: string
+  page?: number
+  limit?: number
+  is_active: boolean
+}
+export interface FeatureResponse {
+  total: number
+  features: Feature[]
+}

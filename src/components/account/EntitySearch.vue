@@ -10,7 +10,9 @@ import EntityCard from '@/components/account/EntityCard.vue'
 import EntityManager from '@/components/account/EntityManager.vue'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
+import type { Entity
 
+ } from '@/interfaces/Entities'
 const props = defineProps({
   entity: {
     type: Object as PropType<EntityOption>,
@@ -28,7 +30,7 @@ const { secondaryLimit } = storeToRefs(searchStore)
 const query = ref('')
 const page = ref(1)
 const searching = ref(false)
-const entities = ref([])
+const entities = ref({} as { [key: string]: Entity })
 const entityCount = ref(0)
 const entityGroups = ref(featureDetails.value[`get_${props.entity.type}`].groups)
 selectedGroups.value[`get_${props.entity.type}`] = entityGroups.value
