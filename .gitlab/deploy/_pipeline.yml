@@ -87,6 +87,8 @@ e2e tests:
     - build app image
   extends:
     - .test
+  before_script:
+    - yarn install --immutable
   script:
     - yarn test:e2e
 

@@ -81,7 +81,6 @@
 # Must stay synced with Dockerfile
 
 .test:
-  image: $IMAGE_TAG
   extends:
     - .test-env
   before_script:
