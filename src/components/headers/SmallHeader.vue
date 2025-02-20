@@ -87,7 +87,7 @@ const logout = () => {
         />
       </pep-pharos-link>
       <div>
-        <pep-pharos-sidenav-button @click.prevent.stop="showSidenav = true" />
+        <!-- <pep-pharos-sidenav-button @click.prevent.stop="showSidenav = true" /> -->
       </div>
       <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
         Log in
