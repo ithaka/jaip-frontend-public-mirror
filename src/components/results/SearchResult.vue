@@ -236,37 +236,5 @@ const readRoute = ref(
         </span>
       </div>
     </div>
-    <Teleport to="div#app">
-      <pep-pharos-modal
-        v-if="showExcessiveRequestsWarningModal"
-        :id="`excessive-requests-warning-modal`"
-        :key="`excessive-requests-warning-modal`"
-        :header="`Too Many Requests`"
-        size="large"
-        :open="showExcessiveRequestsWarningModal"
-        @pharos-modal-closed="showExcessiveRequestsWarningModal = false"
-      >
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-        <div slot="description">
-          <p class="mb-4">
-            Your cart is full. Please remove an item or submit your current requests before adding
-            more.
-          </p>
-          <p>
-            Media review can be time consuming. Reviewers may deny requests or limit access at times
-            when they are dealing with requests they deem excessive.
-          </p>
-        </div>
-        <!-- eslint-disable-next-line -->
-        <template v-slot:footer>
-          <pep-pharos-button
-            variant="primary"
-            @click.prevent.stop="showExcessiveRequestsWarningModal = false"
-          >
-            Cancel
-          </pep-pharos-button>
-        </template>
-      </pep-pharos-modal>
-    </Teleport>
   </div>
 </template>

@@ -10,9 +10,7 @@ import EntityCard from '@/components/account/EntityCard.vue'
 import EntityManager from '@/components/account/EntityManager.vue'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
-import type { Entity
-
- } from '@/interfaces/Entities'
+import type { Entity } from '@/interfaces/Entities'
 const props = defineProps({
   entity: {
     type: Object as PropType<EntityOption>,

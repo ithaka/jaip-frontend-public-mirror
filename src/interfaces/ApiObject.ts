@@ -59,7 +59,7 @@ export default interface ApiObject {
       add: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse, unknown>>
       remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
       edit: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse, unknown>>
-      reactivate: (arg:  SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
+      reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
     }
     entities: {
       get: (arg1: EntitiesArgs, arg2: string) => Promise<AxiosResponse<EntityResponse, unknown>>
