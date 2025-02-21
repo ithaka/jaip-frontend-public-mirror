@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
+    "postinstall": "husky",
+    "pre-commit": "lint-staged",
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
@@ -49,8 +51,10 @@
     "eslint": "^9.20.1",
     "eslint-plugin-cypress": "^4.1.0",
     "eslint-plugin-vue": "^9.32.0",
+    "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",
+    "lint-staged": "^15.4.3",
     "npm-run-all": "^4.1.5",
     "npm-run-all2": "^7.0.2",
     "path": "^0.12.7",
@@ -64,6 +68,16 @@
     "vite-plugin-static-copy": "^2.2.0",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vue-tsc": "^2.2.2"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint ./src --fix",
+      "prettier --write src/"
+    ],
+    "src/**/*.vue": [
+      "eslint ./src --fix",
+      "prettier --write src/"
+    ]
   },
   "packageManager": "yarn@4.6.0"
 }
