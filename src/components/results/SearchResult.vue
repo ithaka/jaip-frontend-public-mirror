@@ -18,7 +18,7 @@ import { ref, computed } from 'vue'
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({})
+    default: () => ({}),
   },
   hideDetails: Boolean,
   hideAbstract: Boolean,
@@ -32,9 +32,9 @@ const props = defineProps({
   small: Boolean,
   buttonName: {
     type: String,
-    default: 'Cancel'
+    default: 'Cancel',
   },
-  pdfView: Boolean
+  pdfView: Boolean,
 })
 
 const coreStore = useCoreStore()
@@ -53,8 +53,8 @@ const searchFor = (term: string) => {
     path: '/search',
     query: {
       term: term,
-      page: 1
-    }
+      page: 1,
+    },
   })
 }
 
@@ -75,7 +75,7 @@ const canRequest = computed(() => {
     !reqs.value.includes(JSON.stringify(props.doc)) &&
     status.value !== 'approved' &&
     status.value !== 'pending' &&
-    userStore.features['submit_requests'] && 
+    userStore.features['submit_requests'] &&
     !props.hideRequests
   )
 })
@@ -83,7 +83,7 @@ const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
     ? `/page/${props.doc.iid}/0`
-    : `/pdf/${props.doc.iid}`
+    : `/pdf/${props.doc.iid}`,
 )
 </script>
 <template>
@@ -213,8 +213,19 @@ const readRoute = ref(
                 new Date(statusData.createdAt).toLocaleDateString()
               }}</span>
               <span v-if="statusData.statusDetails?.reason || statusData.statusDetails?.comments">
-                <span v-if="statusData.status.toLowerCase() === 'denied' || statusData.status.toLowerCase() === 'incomplete' || isAuthenticatedAdmin">
-                  <span v-if="statusData.statusDetails!.reason || statusData.status.toLowerCase() !== 'incomplete' ">
+                <span
+                  v-if="
+                    statusData.status.toLowerCase() === 'denied' ||
+                    statusData.status.toLowerCase() === 'incomplete' ||
+                    isAuthenticatedAdmin
+                  "
+                >
+                  <span
+                    v-if="
+                      statusData.statusDetails!.reason ||
+                      statusData.status.toLowerCase() !== 'incomplete'
+                    "
+                  >
                     {{ statusData.statusDetails!.reason }} -&nbsp;
                   </span>
                   <span>{{ statusData.statusDetails!.comments }}</span>
