@@ -1,0 +1,9 @@
+{
+  "name": "t",
+  "display_name": "t",
+  "category": "t",
+  "description": "t",
+  "is_active": true,
+  "is_protected": true,
+  "is_admin_only": true
+}

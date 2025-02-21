@@ -1,0 +1,19 @@
+{
+    "groups": [
+      {
+        "id": 2,
+        "name": "Ilium",
+        "is_active": false,
+        "created_at": "0001-01-01T00:00:00Z",
+        "updated_at": "0001-01-01T00:00:00Z"
+      },
+      {
+        "id": 1,
+        "name": "Ithaka",
+        "is_active": false,
+        "created_at": "0001-01-01T00:00:00Z",
+        "updated_at": "0001-01-01T00:00:00Z"
+      }
+    ],
+    "total": 5
+  }

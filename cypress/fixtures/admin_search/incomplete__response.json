@@ -1,0 +1,702 @@
+{
+  "total": 7,
+  "qtime": 591,
+  "docs": [
+    {
+      "_id": "10.1163/j.ctvjhzq0f.31",
+      "_score": 67.431335,
+      "abstract": "",
+      "authors": [
+        "DAVID CLINE"
+      ],
+      "book_description": "",
+      "book_publisher": "",
+      "citation_line": "<cite>National Civic Review</cite>, Vol. 111, No. 4 (Winter 2023), pp. 42-49",
+      "contentType": "Journal Article",
+      "cty": "journal",
+      "cty_str": "journal",
+      "doi": "10.1163/j.ctvjhzq0f.31",
+      "fpage": "42",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-02T19:28:33.831696Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:34:35.832528Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:12.032443Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-02T19:28:57.100134Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "contains a map of the area on page 45",
+            "reason": "Detrimental to the good order of the facility or rehabilitation"
+          }
+        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:35:33.689328Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:38.020906Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Sexually explicit/pornographic"
+          }
+        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:35:38.408092Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Sexually explicit/pornographic"
+          }
+        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:40.591448Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:40:48.483792Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:46.701282Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Sexually explicit/pornographic"
+          }
+        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:32:06.326366Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        },
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:09.53457Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Sexually explicit/pornographic"
+          }
+        },
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:52.435136Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "b7ba064b-2ba6-3f3a-ad45-907b21a510ac",
+      "lpage": "49",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:52.435136Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-10T03:41:52.435136Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.1163/j.ctvjhzq0f.31",
+          "text": "gave me. I came up with three main ideas: <span class=\"highlight\">1</span> . Don’t lecture, don’t judge – no one likes a know it all, we all are learning. 2. Bring yourself and your own stories to the table – this was a group of friends who cared about each other and wanted"
+        }
+      ],
+      "subtitle": "",
+      "tb": "",
+      "title": "Starting a Conversation on Racism, one Book Club at a Time",
+      "year": 2023
+    },
+    {
+      "_id": "10.1163/j.ctvjhzq0f.31",
+      "_score": 63.96902,
+      "abstract": "<p>At least 115 million animals are thought to be used for scientific purposes every year, worldwide (Taylor et al., 2008). Animals are typically used to test whether an intervention will cause harm to humans or other animals of the same or different species, i. e. safety testing; or whether it will work, i.e. efficacy testing. Interventions can include testing substances (such as cosmetic products, industrial chemicals, drugs, pesticides, food additives, and biocides); medical devices; surgical techniques; environmental changes; or other ways of altering the physiology and/or behavior of a live animal. Safety testing is highly regulated and is often done</p>",
+      "authors": [
+        "Katy Taylor"
+      ],
+      "book_description": "<p>Animal experimentation has been one of the most controversial areas of animal use, mainly due to the intentional harms inflicted upon animals for the sake of hoped-for benefits in humans. Despite this rationale for continued animal experimentation, shortcomings of this practice have become increasingly more apparent and well-documented. However, these limitations are not yet widely known or appreciated, and there is a danger that they may simply be ignored. The 51 experts who have contributed to Animal Experimentation: Working Towards a Paradigm Change critically review current animal use in science, present new and innovative non-animal approaches to address urgent scientific questions, and offer a roadmap towards an animal-free world of science.</p>",
+      "book_publisher": "[{\"publisher\":\"Brill\",\"code\":\"bap\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Brill\",\"code\":\"bap\",\"role\":\"LICENSOR\"}]",
+      "citation_line": "2019",
+      "contentType": "Book Chapter",
+      "cty": "chapter",
+      "cty_str": "chapter",
+      "doi": "10.1163/j.ctvjhzq0f.31",
+      "fpage": "585",
+      "history": [
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-29T18:06:37.034222Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "test",
+            "reason": "Instructive for explosives, weapons, or escapes"
+          }
+        },
+        {
+          "status": "Pending",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T00:03:40.626954Z",
+          "entityName": "ITHAKA Facility",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {}
+        }
+      ],
+      "iid": "d2359c79-4901-3812-a215-03d7b0ec908e",
+      "lpage": "609",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-29T18:06:37.034222Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "test",
+            "reason": "Instructive for explosives, weapons, or escapes"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Denied",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-29T18:06:37.034222Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "test",
+            "reason": "Instructive for explosives, weapons, or escapes"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.1163/j.ctvjhzq0f.31",
+          "text": "Affairs, Cruelty Free International (formerly buav) and the European Coalition to End Animal Experiments, London, United Kingdom <span class=\"highlight\">1</span> Introduction to Alternative Methods At least 115 million animals are thought to be used for scientific purposes every year, worldwide (Taylor et al., 2008). Animals are typically used to test whether an intervention"
+        }
+      ],
+      "subtitle": "",
+      "tb": "Animal Experimentation",
+      "title": "Recent Developments in Alternatives to Animal Testing",
+      "year": 2019
+    },
+    {
+      "_id": "10.2307/45178180",
+      "_score": 81.683754,
+      "abstract": "",
+      "authors": [
+        "Aaron W. Hughey"
+      ],
+      "book_description": "",
+      "book_publisher": "",
+      "citation_line": "<cite>Counterpoints</cite>, Vol. 517, Colleges at the Crossroads: Taking Sides on Contested Issues (2018), pp. 329-342",
+      "contentType": "Journal Article",
+      "cty": "journal",
+      "cty_str": "journal",
+      "doi": "10.2307/45178180",
+      "fpage": "329",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:01.782022Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "788f3231-135e-3ab8-9811-f705ac0f08e0",
+      "lpage": "342",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:01.782022Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:01.782022Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.2307/45178180",
+          "text": "of words. It is argued that students who had taken Latin in school had a unique advantage for this section because of their knowledge of root words, (para. <span class=\"highlight\">1</span> ) Before proceeding with a more definitive critique outlining why stan- dardized testing is inappropriate for making decisions about who should be"
+        }
+      ],
+      "subtitle": "",
+      "tb": "",
+      "title": "Why Standardized Testing Is Not Essential in College Admissions",
+      "year": 2018
+    },
+    {
+      "_id": "10.2307/90002164",
+      "_score": 62.785503,
+      "abstract": "ABSTRACT Test anxiety was a commonly known or assumed factor that could greatly influence performance of test takers. With the employment of designed questionnaires and computer-based spoken English test, this paper explored test anxiety manifestation of Chinese college students from both macro and micro aspects, and found out that the major anxiety in computer-based spoken English test was spoken English test anxiety, which consisted of test anxiety and communication apprehension. Regard to proximal test anxiety, the causes listed in proper order as low spoken English abilities, lack of speaking techniques, anxiety from the evaluative process and inadaptability with computer-based spoken English test format. As to distal anxiety causes, attitude toward learning spoken English and self-evaluation of speaking abilities were significantly negatively correlated with test anxiety. Besides, as test anxiety significantly associated often with test performance, a look at pedagogical implications has been discussed in this paper.",
+      "authors": [
+        "Yang Yanxia"
+      ],
+      "book_description": "",
+      "book_publisher": "",
+      "citation_line": "<cite>Journal of Educational Technology & Society</cite>, Vol. 20, No. 2 (April 2017), pp. 63-73",
+      "contentType": "Journal Article",
+      "cty": "journal",
+      "cty_str": "journal",
+      "doi": "10.2307/90002164",
+      "fpage": "63",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:03.773373Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "9cd47406-7638-32d6-87e6-5aee32be56ff",
+      "lpage": "73",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:03.773373Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:03.773373Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.2307/90002164",
+          "text": "Test Anxiety (TA) and the score of each item ranged from <span class=\"highlight\">1</span> to 5 points, thus, the potential score of each student’s anxiety should range from 17 to 85 points. The 17 items were composed of three aspects: fear of negative evaluation (item 5 and 17), which was defined as the"
+        }
+      ],
+      "subtitle": "",
+      "tb": "",
+      "title": "Test Anxiety Analysis of Chinese College Students in Computer-based Spoken English Test",
+      "year": 2017
+    },
+    {
+      "_id": "10.2307/26554209",
+      "_score": 60.657146,
+      "abstract": "Few studies have examined the relationship between adolescents’ perceptions of parental and teacher pressure and habits conducive or aversive to improved academic performance, such as test anxiety. In the present investigation, 568 racially and socioeconomically diverse students in grades 9-12 preparing to take statewide examinations completed measures of test perception, test anxiety, test attitudes, and study skills. Results associate higher levels of test anxiety with greater pressure from parents and teachers, poor time management, decreased ability to maintain attention, mind-blanking on tests, and lower test confidence. However, greater perceived pressure from parents and teachers is positively related to good study habits, and parental pressure is predictive of material knowledge.",
+      "authors": [
+        "Tiarney D. Ritchwood",
+        "Dana Carthron",
+        "Jamie Decoster"
+      ],
+      "book_description": "",
+      "book_publisher": "",
+      "citation_line": "<cite>Journal of Best Practices in Health Professions Diversity</cite>, Vol. 8, No. 1 (Spring 2015), pp. 1006-1019",
+      "contentType": "Journal Article",
+      "cty": "journal",
+      "cty_str": "journal",
+      "doi": "10.2307/26554209",
+      "fpage": "1006",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:23.709162Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "78563b84-d926-3a98-aeca-03b3e41db1ad",
+      "lpage": "1019",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:23.709162Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:10:23.709162Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.2307/26554209",
+          "text": "While we are aware that many students experience some form of test anxiety on occasion, we are most concerned about those for whom it is JBPHPD: Res, Educ, and Policy. (Spring, 2015); 8( <span class=\"highlight\">1</span> ): 1006-1019. ISBN 987- <span class=\"highlight\">0</span> -9794409- <span class=\"highlight\">0</span> -8 / ISBN <span class=\"highlight\">0</span> -9794409- <span class=\"highlight\">0</span> -4 © 2007-2015 Winston-Salem"
+        }
+      ],
+      "subtitle": "",
+      "tb": "",
+      "title": "The Impact of Perceived Teacher and Parental Pressure on Adolescents’ Study Skills and Reports of Test Anxiety",
+      "year": 2015
+    },
+    {
+      "_id": "10.2307/43268053",
+      "_score": 60.68354,
+      "abstract": "This study examined test-takers' motivation, test anxiety, and test performance across a range of social and educational contexts in three high-stakes language tests: the Canadian Academic English Language (CAEL) Assessment in Canada, the College English Test (CET) in the People's Republic of China, and the General English Proficiency Test (GEPT) in Taiwan. The researchers issued a questionnaire exploring motivation, test anxiety, and perceptions of test importance and purpose to test-takers in each of the three contexts. A total of 1,281 valid questionnaire responses were obtained: 255 from CAEL, 493 from CET, and 533 from GEPT. Questionnaire responses were linked to each test-taker's respective test performance. The results illustrate complex interrelationships of test-takers' motivation and test anxiety in their test performance. Differences in motivation and test anxiety emerged with regard to social variables (i.e., test importance to stakeholders and test purposes). Further, motivation and test anxiety, along with personal variables (i.e., gender and age), were associated with test performance. Given that motivation and test anxiety have typically been examined separately and in relation to a single testing context, this study addresses an important research gap.",
+      "authors": [
+        "LIYING CHENG",
+        "DON KLINGER",
+        "JANNA FOX",
+        "CHRISTINE DOE",
+        "YAN JIN",
+        "JESSICA WU"
+      ],
+      "book_description": "",
+      "book_publisher": "",
+      "citation_line": "<cite>TESOL Quarterly</cite>, Vol. 48, No. 2 (JUNE 2014), pp. 300-330",
+      "contentType": "Journal Article",
+      "cty": "journal",
+      "cty_str": "journal",
+      "doi": "10.2307/43268053",
+      "fpage": "300",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:12:06.438298Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "a69e4a85-862a-38b6-a139-62cab99e233d",
+      "lpage": "330",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:12:06.438298Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-08T21:12:06.438298Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.2307/43268053",
+          "text": "wish to study in Canadian universities. Once again, Chi- nese students constitute the largest cohort of this population. Successfully evaluating these learners' English language abilities through various language tests has therefore had a direct impact on people who come to Canada to study and settle. <span class=\"highlight\">1</span> This impact has sig- nificant"
+        }
+      ],
+      "subtitle": "",
+      "tb": "",
+      "title": "Motivation and Test Anxiety in Test Performance Across Three Testing Contexts: The CAEL, CET, and GEPT",
+      "year": 2014
+    },
+    {
+      "_id": "10.2307/j.ctt1ckpccf.11",
+      "_score": 56.773136,
+      "abstract": "<p>Three decades ago, L2 assessment validation research was focused for the most part on the outcomes of testing—namely, on how tests fared in terms of item performance (item difficulty and item discrimination), test reliability, the intercorrelation of subtests and the relationship between the test and other tests or criterion variables (e.g., GPA), and the effects of different test methods. What was missing was the aspect of test validation that related to respondents' behaviours in taking the tests: little was known about what they were actually doing to produce answers to questions and how it corresponded to the abilities one</p>",
+      "authors": [
+        "Andrew D. Cohen"
+      ],
+      "book_description": "<p><em>Language Testing Reconsidered</em>provides a critical update on major issues that have engaged the field of language testing since its inception. Anyone who is working in, studying or teaching language testing should have a copy of this book. The information, discussions, and reflections offered within the volume address major developments within the field over the past decades, enlivened by current \"takes\" on these issues. The real value of this collection, however, lies in its consideration of the past as a means of defining the future agenda of language testing.</p>",
+      "book_publisher": "[{\"publisher\":\"University of Ottawa Press\",\"code\":\"uottawapress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Ottawa Press\",\"code\":\"uottawapress\",\"role\":\"LICENSOR\"}]",
+      "citation_line": "2007",
+      "contentType": "Book Chapter",
+      "cty": "chapter",
+      "cty_str": "chapter",
+      "doi": "10.2307/j.ctt1ckpccf.11",
+      "fpage": "89",
+      "history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:06.954045Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "iid": "e9af1b63-0864-3d1b-b46b-65323a18295d",
+      "lpage": "112",
+      "mediaReviewStatuses": {
+        "1": {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:06.954045Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      },
+      "national_history": [
+        {
+          "status": "Incomplete",
+          "statusLabel": "",
+          "statusCreatedAt": "2023-06-09T13:59:06.954045Z",
+          "entityName": "Inspector Javert",
+          "groupName": "Ithaka",
+          "groupID": 1,
+          "statusDetails": {
+            "comments": "Test",
+            "reason": "Missing Required Information"
+          }
+        }
+      ],
+      "snippets": [
+        {
+          "id": "10.2307/j.ctt1ckpccf.11",
+          "text": "of test validity required attention as to how the respondents arrived at their answers. As formulated in early studies (see Co- hen, 2000, for details), this meant paying attention to the kinds of strategies that respondents were drawing upon as they completed language tests — that is <span class=\"highlight\">1</span> , the consciously"
+        }
+      ],
+      "subtitle": "",
+      "tb": "Language Testing Reconsidered",
+      "title": "The Coming of Age for Research on Test-Taking Strategies",
+      "year": 2007
+    }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+    "disciplines": [
+      {
+        "value": "education-discipline",
+        "count": 4
+      },
+      {
+        "value": "socialsciences-discipline",
+        "count": 4
+      },
+      {
+        "value": "health-discipline",
+        "count": 1
+      },
+      {
+        "value": "literature-discipline",
+        "count": 1
+      },
+      {
+        "value": "medicinealliedhealth-discipline",
+        "count": 1
+      },
+      {
+        "value": "philosophy-discipline",
+        "count": 1
+      },
+      {
+        "value": "politicalscience-discipline",
+        "count": 1
+      },
+      {
+        "value": "publicpolicy-discipline",
+        "count": 1
+      }
+    ],
+    "contentType": [
+      {
+        "value": "journal",
+        "count": 5
+      },
+      {
+        "value": "chapter",
+        "count": 2
+      }
+    ]
+  }
+}

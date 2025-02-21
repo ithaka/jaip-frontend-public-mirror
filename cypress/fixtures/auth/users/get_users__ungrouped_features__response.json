@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "3": {
+      "name": "Test User",
+      "contact": "user.name@ithaka.org",
+      "id": 3,
+      "type": "users",
+      "groups": [
+        {
+          "id": 1,
+          "name": "Ithaka",
+          "role": "admin",
+          "features": {
+            "": true,
+            "add_or_edit_users": true,
+            "approve_requests": true,
+            "bulk_approve": true,
+            "deny_requests": true,
+            "download_pdf": true,
+            "edit_facilities": false,
+            "get_facilities": true,
+            "get_users": true,
+            "is_hidden_user": true,
+            "manage_facilities": true,
+            "print_pdf": true,
+            "remove_users": true,
+            "undo_bulk_approve": true,
+            "use_protected_features": true,
+            "view_abstract": true,
+            "view_book_description": true,
+            "view_hidden_users": true,
+            "view_snippet": true
+          }
+        }
+      ]
+    },
+    "5": {
+      "name": "Another Test User",
+      "contact": "user.name.2@ithaka.org",
+      "id": 5,
+      "type": "users",
+      "ungrouped_features": {
+        "add_group": {
+          "display_name": "Add Group",
+          "category": "Groups",
+          "description": "Allows user to add a group to the system.",
+          "enabled": true
+        },
+        "manage_superusers": {
+          "display_name": "Manage Superusers",
+          "category": "Users",
+          "description": "Allows user to manage superusers.",
+          "enabled": true
+        }
+      },
+      "groups": [
+        {
+          "id": 2,
+          "name": "Ilium",
+          "role": "admin",
+          "features": {
+            "": true,
+            "add_or_edit_users": true,
+            "approve_requests": true,
+            "bulk_approve": true,
+            "deny_requests": true,
+            "download_pdf": true,
+            "edit_facilities": false,
+            "get_facilities": true,
+            "get_users": true,
+            "is_hidden_user": true,
+            "manage_facilities": true,
+            "print_pdf": true,
+            "remove_users": true,
+            "undo_bulk_approve": true,
+            "use_protected_features": true,
+            "view_abstract": true,
+            "view_book_description": true,
+            "view_hidden_users": true,
+            "view_snippet": true
+          }
+        }
+      ]
+    }
+  },
+  "total": 1
+}

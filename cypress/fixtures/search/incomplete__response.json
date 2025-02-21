@@ -1,0 +1,70 @@
+{
+  "total": 1,
+  "qtime": 94,
+  "docs": [
+      {
+          "_id": "10.2307/90017199",
+          "_score": 63.27929,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Books Ireland</cite>, No. 376 (November/December 2017), pp. 20-23",
+          "contentType": "Journal Article",
+          "doi": "10.2307/90017199",
+          "fpage": "20",
+          "history": null,
+          "iid": "b947214f-a68f-3f4d-be5b-6dae56fc9ea4",
+          "lpage": "23",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Incomplete",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-07-05T19:48:07.305107Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/90017199",
+                  "text": "BI-November/December 2017.qxp_Layout 1 19/ <span class=\"highlight\">10</span> /2017 08:42 Page 20 199pp; €7.50 pb. The poet of the title, Cathal Ó hUrdaill, is a bright young schoolteacher, popular with his students, who gets on the wrong side of his second- ary school principal. Cré na Cille. Mairtín Ó Cadhain. Cló Iar"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Christmas Books",
+          "year": 2017
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "areastudies-discipline",
+              "count": 1
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 1
+          },
+          {
+              "value": "irishstudies-discipline",
+              "count": 1
+          },
+          {
+              "value": "literature-discipline",
+              "count": 1
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 1
+          }
+      ]
+  }
+}

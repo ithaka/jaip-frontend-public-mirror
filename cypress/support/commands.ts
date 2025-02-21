@@ -35,5 +35,15 @@
 //     }
 //   }
 // }
+const resizeObserverNotificationErrRe = /^[^(ResizeObserver loop completed with undelivered notifications.)]/
+Cypress.on('uncaught:exception', (err) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  if (resizeObserverNotificationErrRe.test(err.message)) {
+    console.log('Cypress detected uncaught exception: ', err.message);
+    return false
+  }
+  return true;
+});
 
 export {}

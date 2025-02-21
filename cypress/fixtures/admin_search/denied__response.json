@@ -1,0 +1,945 @@
+{
+  "total": 23,
+  "qtime": 454,
+  "docs": [
+      {
+          "_id": "10.2307/48646133",
+          "_score": 67.7582,
+          "abstract": "",
+          "authors": [
+              "Teressa E. Ravenell",
+              "Riley H. Ross <suffix>III</suffix>"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 1-35",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646133",
+          "fpage": "1",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-22T04:27:28.476787Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "This is a note for a pending request.",
+                      "name": "Ryan"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-11T15:18:22.681898Z",
+                  "entityName": "Stacy Burnett",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "inflammatory toward law enforcement",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:29:12.72053Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "iid": "0e1832fb-7aca-3002-b51f-ec6abba4f273",
+          "lpage": "35",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/48646133",
+                  "text": "works at: https://scholarlycommons.law.northwestern.edu/jclc Part of the Criminal Law Commons Recommended Citation Teressa E. Ravenell & Riley H. Ross III, Qualified Immunity and Unqualified Assumptions, 112 <span class=\"highlight\">J</span> . CRIM. L. & CRIMINOLOGY 1 (2022). This Article is brought to you for free and open access by Northwestern Pritzker School of Law Scholarly"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Qualified Immunity and Unqualified Assumptions",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/resrep40488.5",
+          "_score": 52.7582,
+          "abstract": "",
+          "authors": [
+              "Alexandra Readhead",
+              "Jaqueline Taquiri"
+          ],
+          "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+          "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "Nov. 1, 2022",
+          "contentType": "Research Report",
+          "doi": "10.2307/resrep40488.5",
+          "fpage": "14",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-19T18:08:54.284456Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "234242343"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.789832Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.808664Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "iid": "41f7ed4f-7860-3ddc-acd9-d69f0f0d4dbb",
+          "lpage": "23",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.789832Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.808664Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.789832Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:40:09.808664Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/resrep40488.5",
+                  "text": ""
+              }
+          ],
+          "subtitle": "",
+          "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+          "title": "LES AVANTAGES ET LES COÛTS DES CONVENTIONS FISCALES DANS LE DOMAINE MINIER",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/resrep40488.3",
+          "_score": 52.7582,
+          "abstract": "",
+          "authors": [
+              "Alexandra Readhead",
+              "Jaqueline Taquiri"
+          ],
+          "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+          "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "Nov. 1, 2022",
+          "contentType": "Research Report",
+          "doi": "10.2307/resrep40488.3",
+          "fpage": "1",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-19T18:08:54.255436Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "234242343"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.089221Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.111322Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              }
+          ],
+          "iid": "9ee4ad84-7c14-3bb8-a699-ebb678210834",
+          "lpage": "5",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.089221Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.111322Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.089221Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:36.111322Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/resrep40488.3",
+                  "text": ""
+              }
+          ],
+          "subtitle": "",
+          "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+          "title": "INTRODUCTION",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/resrep40643.2",
+          "_score": 52.7582,
+          "abstract": "",
+          "authors": [
+              "John R. Deni",
+              "Chris Alden",
+              "Erik Brattberg",
+              "Roger Cliff",
+              "Mark Duckenfield",
+              "R. Evan Ellis",
+              "Nicholas Nelson",
+              "Lauren Speranza"
+          ],
+          "book_description": "\n<p>To the relief of many residents in the United States, China’s investment activities in Europe have been attracting increased scrutiny. Europeans seem keen to avoid making the mistakes of a decade ago, when China took advantage of Europe’s economic weakness in the wake of the eurozone sovereign debt crisis and the Great Recession. Through state-owned enterprises, state-affiliated entities, and nominally private investors and companies, China provided the funds necessary for capital-hungry European firms and governments to last through the worst of the dual-economic crises of the late 2000s and early 2010s.</p>\n<p>Given the unfolding recession induced by the coronavirus disease</p>\n",
+          "book_publisher": "[{\"publisher\":\"Strategic Studies Institute, US Army War College\",\"code\":\"ssiusarmywarc\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "May. 4, 2022",
+          "contentType": "Research Report",
+          "doi": "10.2307/resrep40643.2",
+          "fpage": "v",
+          "history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.565344Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.593539Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "iid": "a52270d8-8bc6-370d-820a-1c173dadac5e",
+          "lpage": "xii",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.565344Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.593539Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.565344Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:41:50.593539Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/resrep40643.2",
+                  "text": "<span class=\"highlight\">2</span> . Economic Impact of COVID-19 in Europe ............... <span class=\"highlight\">9</span> Impact of the Pandemic: Reduced Economic Activity and Shutdowns ......................................... <span class=\"highlight\">11</span> Government Responses ..........................................15 Emerging Economic Challenges ............................20 Receding Threats or Rise of the Zombies? ...........22"
+              }
+          ],
+          "subtitle": "",
+          "tb": "China, Europe, and the Pandemic Recession:",
+          "title": "Table of Contents",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/resrep40643.11",
+          "_score": 67.7582,
+          "abstract": "",
+          "authors": [
+              "Nicholas Nelson",
+              "Lauren Speranza"
+          ],
+          "book_description": "\n<p>To the relief of many residents in the United States, China’s investment activities in Europe have been attracting increased scrutiny. Europeans seem keen to avoid making the mistakes of a decade ago, when China took advantage of Europe’s economic weakness in the wake of the eurozone sovereign debt crisis and the Great Recession. Through state-owned enterprises, state-affiliated entities, and nominally private investors and companies, China provided the funds necessary for capital-hungry European firms and governments to last through the worst of the dual-economic crises of the late 2000s and early 2010s.</p>\n<p>Given the unfolding recession induced by the coronavirus disease</p>\n",
+          "book_publisher": "[{\"publisher\":\"Strategic Studies Institute, US Army War College\",\"code\":\"ssiusarmywarc\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "May. 4, 2022",
+          "contentType": "Research Report",
+          "doi": "10.2307/resrep40643.11",
+          "fpage": "151",
+          "history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:44.827188Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "iid": "b94ea50c-d788-3cbd-a71c-2ed8afbaaf99",
+          "lpage": "198",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:44.827188Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:44.827188Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/resrep40643.11",
+                  "text": "pursuing such strategic opportunities as part of its climb to great-power status. Emerging and disruptive technologies such as Internet of Things (IoT) components, and space -enabled capabilities have been the targets of many Chinese state-backed investors in Europe seeking to sharpen China’s competitive edge with foreign technology and know-how. <span class=\"highlight\">2</span>"
+              }
+          ],
+          "subtitle": [
+              "DUAL-USE TECHNOLOGY IN EUROPE"
+          ],
+          "tb": "China, Europe, and the Pandemic Recession:",
+          "title": "SECURITY RISKS:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv26dhjc9.13",
+          "_score": 68.84717,
+          "abstract": "<p>In 1963, Colin Rowe and Robert Slutzky published their classic article “Transparency: Literal and Phenomenal” in Pers<em>pecta</em>,¹ arguing for a dichotomy in the approximation of transparency in architecture. On the one hand, they invoke the ‘literal’ or ‘actual’ transparency of “overlapping planes” that “are able to interpenetrate without an optical destruction of each other”, purely because of their “material qualities”, and on the other hand, they invoke a ‘phenomenal’ or ‘illusionistic’ transparency that is more difficult to define and that has to do with “a simultaneous perception of different spatial locations”. The authors specifically consider the oeuvre of Le Corbusier</p>",
+          "authors": [
+              "Christophe Van Gerrewey"
+          ],
+          "book_description": "<p>\n<p><strong>The paradoxical logic of transparency and\nmediation</strong></p>\n\n<p>Transparency is the metaphor of our time. Whether in government\nor corporate governance, finance, technology, health or the media -\nit is ubiquitous today, and there is hardly a current debate that\ndoes not call for more transparency. But what does this word\nactually stand for and what are the consequences for the life of\nindividuals? Can knowledge from the arts, and its play of\nvisibility and invisibility, tell us something about the\nparadoxical logics of transparency and mediation? <em>This Obscure\nThing Called Transparency</em> gathers contributions by\ninternational experts who critically assess the promises and perils\nof transparency today.</p>\n\n<p>Contributors: Emmanuel Alloa (University of Fribourg), Loup\nCellard (Melbourne Law School), Riccardo Donati (Università di\nSalerno), Mark Fenster (University of Florida), Sara Guindani\n(Université Paris 7), David Heald (University of Glasgow), Vlad\nIonescu (UHasselt/PXL MAD), Dorota Mokrosinska (Leiden University),\nHerman Parret (KU Leuven), John Pitseys (UCLouvain), Natacha\nPfeiffer (Université Saint-Louis), Philippe Van Parijs (UCLouvain),\nBart Verschaffel (Ghent University), Patrick Vandermeersch (KU\nLeuven), Christophe Van Gerrewey (EPFL).</p>\n\n<p>This publication is GPRC-labeled (Guaranteed Peer-Reviewed\nContent).</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"Leuven University Press\",\"code\":\"lvup\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Leuven University Press\",\"code\":\"lvup\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv26dhjc9.13",
+          "fpage": "227",
+          "history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.183063Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.20374Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "iid": "3de9e7bf-7389-3bc3-99b1-006051d2b35d",
+          "lpage": "252",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.183063Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.20374Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.183063Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:44:07.20374Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv26dhjc9.13",
+                  "text": "<span class=\"highlight\">11</span> . TRANSPARENCY AND OBSTACLE IN ARCHITECTURE 227 <span class=\"highlight\">11</span> . TRANSPARENCY AND OBSTACLE IN ARCHITECTURE From Le Corbusier to Rem Koolhaas Christophe Van Gerrewey Literal, Phenomenal, and Conceptual In 1963, Colin Rowe and Robert Slutzky published their classic article “Transparency: Literal and Phenomenal” in Perspecta,1 arguing for a dichotomy in the"
+              }
+          ],
+          "subtitle": [
+              "From Le Corbusier to Rem Koolhaas"
+          ],
+          "tb": "This Obscure Thing Called Transparency",
+          "title": "TRANSPARENCY AND OBSTACLE IN ARCHITECTURE",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48646207",
+          "_score": 66.738785,
+          "abstract": "The walkability of a neighborhood is closely related to residents’ travel behavior and daily life and, ultimately, their health and wellbeing. Although existing studies in this area have reached some enlightening conclusions, few of them have considered residents’ travel attitudes and preferences, or the mediating role of commute mode. Do travel attitudes and preferences matter in the relationship between neighborhood walkability and residents being obese? How does commute mode work as a mediator? To answer these questions, based on the 2019 travel survey data in Guangzhou, this paper uses the Multilevel Linear Model (MLM) to examine the association between neighborhood walkability and residents’ body mass index (BMI). Furthermore, the Mediation Model is used to identify the mediating role of commute mode in the relationship between walkability and BMI. The results show that (1) travel attitudes and preferences do affect the individual’s BMI through the mediator of commute mode. (2) After controlling the individual socio-demographics and travel attitudes and preferences, neighborhood walkability has a significant negative effect on BMI. Meanwhile, walkability has a significant positive effect on the use of non-private motorized commute modes. Non-private motorized commute modes have a significant negative effect on BMI. (3) The mediating effect of commute mode in the relationship of neighborhood walkability with the individual’s BMI is significant. The proportion of mediation is 32.90%. Insights into the relationship between neighborhood walkability, commute mode, and individual BMI highlight the importance of walkable neighborhoods that encourage people to use healthy commute modes.",
+          "authors": [
+              "Wenyue Yang",
+              "Suhong Zhou",
+              "Xinyu Zhen"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Journal of Transport and Land Use</cite>, Vol. 14, No. 1 (2021), pp. 737-759",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646207",
+          "fpage": "737",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:39:47.532274Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-17T18:41:25.476237Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Instructions for escape.",
+                      "reason": "Instructive for explosives, weapons, or escapes"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:40.667041Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "iid": "9a5e809c-69ff-37b1-95de-41ec5abb90ad",
+          "lpage": "759",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:40.667041Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-17T18:41:25.476237Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Instructions for escape.",
+                      "reason": "Instructive for explosives, weapons, or escapes"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-17T18:41:25.476237Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Instructions for escape.",
+                      "reason": "Instructive for explosives, weapons, or escapes"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:40.667041Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/48646207",
+                  "text": "T <span class=\"highlight\">J</span>   T  L U http://jtlu.org V. 14 N. 1 [2021] pp. 737–759 How does neighborhood walkability affect obesity? The mediating role of commute mode Wenyue Yang Xinyu Zhen South China Agricultural University South China Agricultural University yangwenyue900780@163"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "How does neighborhood walkability affect obesity? The mediating role of commute mode",
+          "year": 2021
+      },
+      {
+          "_id": "10.2307/26409385",
+          "_score": 60.98401,
+          "abstract": "For each nonzero cardinal number 𝜅, there is a field extension 𝐐 ⊆ L and a maximal chain ℋ𝜅 of intermediate fields going from 𝐐 to 𝐿 such that the cardinal number of ℋ𝜅 is 𝜅. If 𝜅 is infinite, then for all infinite cardinals 𝝊 < 𝜅, it can be arranged that ℋ𝝊 ⊂ ℋ𝜅. However, there exists an infinite cardinal for which there does not exist a field extension 𝐿/𝐾 such that 𝜅 is the supremum of the cardinalities of chains of intermediate fields going from 𝐾 to 𝐿. For a field extension 𝐿/𝐾, this supremum of cardinalities has been denoted λ(𝐿/𝐾). If 𝐿/𝐾 is infinitely generated, we reduce its calculation to set theory, as follows. Let א𝛼 be the infimum of the cardinalities of generating sets of 𝐿/𝐾. Let Ω(א𝛼) be the supremum of the cardinalities of chains of subsets of a set of cardinality א𝛼 . (Ω(א𝛼) is equal to what has been called ded (א𝛼) in the literature.) Then א𝛼 < Ω(א𝛼) ≤ 2א𝛼 ; and if 𝛼 > 0 (but not necessarily if 𝛼 = 0), then λ(𝐿/𝐾) = Ω(א𝛼).",
+          "authors": [
+              "DAVID E. DOBBS",
+              "RAYMOND C. HEITMANN"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Rocky Mountain Journal of Mathematics</cite>, Vol. 44, No. 5 (2014), pp. 1471-1503",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26409385",
+          "fpage": "1471",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T16:06:06.640218Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.452468Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.470585Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "iid": "2014157c-f251-33d2-a4b7-a3c842349791",
+          "lpage": "1503",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.452468Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.470585Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.452468Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:39:45.470585Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Building up some denials for testing.",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "snippets": [
+              {
+                  "id": "10.2307/26409385",
+                  "text": "of the cardinalities of chains of subsets of a set of cardinality @ . ( (@ ) is equal to what has been called ded (@ ) in the literature.) Then @ &lt; (@ @ ) <span class=\"highlight\">2 ; and if &gt; 0 (but not necessarily if = 0), then (L=K) = (@ ). 1. Introduction. In [5</span> ], Mullins and the rst author introduced an invariant (L=K) that gives an intuitive"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "REALIZING INFINITE CARDINAL NUMBERS VIA MAXIMAL CHAINS OF INTERMEDIATE FIELDS",
+          "year": 2014
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "criminologycriminaljustice-discipline",
+              "count": 1
+          },
+          {
+              "value": "generallaw-discipline",
+              "count": 1
+          },
+          {
+              "value": "law-discipline",
+              "count": 1
+          },
+          {
+              "value": "mathematics-discipline",
+              "count": 1
+          },
+          {
+              "value": "philosophy-discipline",
+              "count": 1
+          },
+          {
+              "value": "sciencemathematics-discipline",
+              "count": 1
+          },
+          {
+              "value": "socialsciences-discipline",
+              "count": 1
+          },
+          {
+              "value": "transportationstudies-discipline",
+              "count": 1
+          }
+      ],
+      "contentType": [
+          {
+              "value": "research_report",
+              "count": 4
+          },
+          {
+              "value": "journal",
+              "count": 3
+          },
+          {
+              "value": "chapter",
+              "count": 1
+          }
+      ]
+  }
+}

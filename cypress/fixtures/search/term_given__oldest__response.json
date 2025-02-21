@@ -1,0 +1,718 @@
+{
+    "total": 2415,
+    "qtime": 699,
+    "docs": [
+        {
+            "_id": "10.2307/1798726",
+            "_score": 23.314466,
+            "abstract": "",
+            "authors": [
+                "Clements R. Markham"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of the Royal Geographical Society of London</cite>, Vol. 50 (1880), pp. 1-255",
+            "contentType": "Journal Article",
+            "doi": "10.2307/1798726",
+            "fpage": "1",
+            "history": null,
+            "iid": "38714250-5756-3d90-b85a-d3ac3a321811",
+            "lpage": "255",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/1798726",
+                    "text": "the gorgeous pululic entry of Philip and <span class=\"highlight\">Mary</span> . He describes himself as nearly lifted out of self- command by the excitement of the scene. He beheld the union of the Sovereign of the Indies with his own Queen, and he resolved, on the spot, to set about some work which"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "The Fifty Years' Work of the Royal Geographical Society",
+            "year": 1880
+        },
+        {
+            "_id": "10.2307/25079613",
+            "_score": 24.359629,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Proceedings of the Massachusetts Historical Society</cite>, Vol. 20, Index to the First Twenty Volumes of the Proceedings of the Massachusetts Historical Society, 1791-1883 (1883), pp. i-v, 1-521",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25079613",
+            "fpage": "i",
+            "history": null,
+            "iid": "d9458298-527b-335f-a1bf-5223a46942bb",
+            "lpage": "521",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25079613",
+                    "text": "surgeon's mate, 15. 76 n. Adams, Joseph E , donation, 5. 441; 6.17. Adams, Joseph T., 19 226, 227. Adams, Hon. Josiah, donations from, 2. 31, 266, 435. Letter from, in relation to the papers of the late Rev. Dr. He men way, 2. 306. Adams, <span class=\"highlight\">Mary</span> , 3. 10. Adams,"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Index to the First Twenty Volumes of the Proceedings of the Massachusetts Historical Society, 1791-1883",
+            "year": 1883
+        },
+        {
+            "_id": "10.2307/3402398",
+            "_score": 27.70778,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The American Journal of Nursing</cite>, Vol. 2, No. 10 (Jul., 1902), pp. 743-898",
+            "contentType": "Journal Article",
+            "doi": "10.2307/3402398",
+            "fpage": "743",
+            "history": null,
+            "iid": "178616c6-ff06-3336-8a2b-a1b821190bf9",
+            "lpage": "898",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/3402398",
+                    "text": "O. President. MISS <span class=\"highlight\">MARY</span> M. RIDDLE, 745 Massachusetts Avenue, Boston, Mass. First Vice-President. BIISS HARRIRr FULMER, Unity Building, 79 Dearborn Street, Chicago, Ill. Second Vice-President. MISS SARA RUDDEN, 312 North Nineteenth Street, Philadelphia, Pa. Treasurer. MISS TAMAR E. HEALY, 160 Joralemon Street, Brooklyn, N. Y. Secretary. MISS <span class=\"highlight\">MARY</span> E."
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Fifth Annual Convention of the Nurses' Associated Alumnæ of the United States: Minutes of the Proceedings",
+            "year": 1902
+        },
+        {
+            "_id": "10.2307/1631952",
+            "_score": 28.18124,
+            "abstract": "",
+            "authors": [
+                "H. M. Ami"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Science</cite>, New Series, Vol. 23, No. 600 (Jun. 29, 1906), pp. 967-975",
+            "contentType": "Journal Article",
+            "doi": "10.2307/1631952",
+            "fpage": "967",
+            "history": null,
+            "iid": "b0d63cdd-2753-350e-9d0e-6548f7f6b971",
+            "lpage": "975",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/1631952",
+                    "text": ". Monsieur Errol Bouchette discusses the relation between social progress and pri- <span class=\"highlight\">mary</span> education. Dr. N. E. Dionne gives a chronological list of the volumes, pamphlets, newspapers and reviews published in the English tongue in the Province of Quebec from the first introduction"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "The Royal Society of Canada",
+            "year": 1906
+        },
+        {
+            "_id": "10.2307/25079933",
+            "_score": 26.517807,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Proceedings of the Massachusetts Historical Society</cite>, Second Series, Vol. 20, Index to the Second Series of the Proceedings of the Massachusetts Historical Society, 1884-1907 (1907), pp. i-v, vii-xi, xiii-xv, xvii, 1, 3-490",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25079933",
+            "fpage": "i",
+            "history": null,
+            "iid": "daa4be6b-dd78-3520-8cca-2721ba740422",
+            "lpage": "490",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25079933",
+                    "text": "is reversed. Women appear under both the maiden and married names when both are known, and under each form the other name is also given : e. g. Babson, <span class=\"highlight\">Mary</span> C. (Rogers) ; Rogers, <span class=\"highlight\">Mary</span> C. [Mrs. Babson]. In the case of a married woman who has"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Index to the Second Series of the Proceedings of the Massachusetts Historical Society, 1884-1907",
+            "year": 1907
+        },
+        {
+            "_id": "10.2307/40066969",
+            "_score": 25.853333,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Records of the Columbia Historical Society, Washington, D.C.</cite>, Vol. 10, Analytical Index to the Records of the Columbia Historical Society. Volumes 1-10 (1897-1907) (1907), pp. 1-130",
+            "contentType": "Journal Article",
+            "doi": "10.2307/40066969",
+            "fpage": "1",
+            "history": null,
+            "iid": "b59d7f20-1600-3029-bc2e-89e4fc2ed435",
+            "lpage": "130",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/40066969",
+                    "text": "of Lf Enfant, 1824, (2) ,135 Judith, mother of William Newport, (10) ,5 Matthew, friend of Ann Royall, (10), 11, 12 <span class=\"highlight\">Mary</span> , mentioned by Dolly Madison, 1834, (3), 45 Ralph, mentioned by Dolly Madison, 1834, (3) ,46 A Street N.E. : Old- Capitol, later a prison, on First Street, (2)"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "General Index",
+            "year": 1907
+        },
+        {
+            "_id": "10.2307/42889991",
+            "_score": 26.823568,
+            "abstract": "",
+            "authors": [
+                "Frederick B. Richards"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Proceedings of the New York State Historical Association</cite>, Vol. 10 (1911), pp. 367-464",
+            "contentType": "Journal Article",
+            "doi": "10.2307/42889991",
+            "fpage": "367",
+            "history": null,
+            "iid": "4db8db71-d95c-3303-ac47-3f3b0c957421",
+            "lpage": "464",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "THE BLACK WATCH AT TICONDEROGA",
+            "year": 1911
+        },
+        {
+            "_id": "10.2307/25076901",
+            "_score": 24.96816,
+            "abstract": "",
+            "authors": [
+                "Henry J. Franklin"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the American Entomological Society (1890-)</cite>, Vol. 38, No. 3/4 (1912), pp. 177-486",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25076901",
+            "fpage": "177",
+            "history": null,
+            "iid": "9125507d-ba20-3411-9ac5-9b4fe125cba1",
+            "lpage": "486",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "The Bombidæ of the New World",
+            "year": 1912
+        },
+        {
+            "_id": "10.2307/1012642",
+            "_score": 28.33612,
+            "abstract": "",
+            "authors": [
+                "J. Castell Hopkins"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Annals of the American Academy of Political and Social Science</cite>, Vol. 45, Canadian National Problems (Jan., 1913), pp. 189-215",
+            "contentType": "Journal Article",
+            "doi": "10.2307/1012642",
+            "fpage": "189",
+            "history": null,
+            "iid": "81f24a58-b971-34f7-91d1-76da3dcc83df",
+            "lpage": "215",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/1012642",
+                    "text": "Munro's volume on the resources, etc., of the Dominion, published in 1879; the Rev. Dr. A. Sutherland's A Summer in Prairie Land (1881); and Miss <span class=\"highlight\">Mary</span> Fitzgibbon's Trip to Manitoba. Turning to later volumes upon special periods or events in Canadian history, reference must be made to Lady Edgar's Ten Years"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Canadian Literature",
+            "year": 1913
+        },
+        {
+            "_id": "10.2307/2713784",
+            "_score": 29.649538,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 4, No. 3 (Jul., 1919), pp. 345-346",
+            "contentType": "Journal Article",
+            "doi": "10.2307/2713784",
+            "fpage": "345",
+            "history": null,
+            "iid": "6b98d135-35bb-3946-87ca-8bfa07da0bde",
+            "lpage": "346",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/2713784",
+                    "text": "known to be useful in the uplift of the Negro race. Instead of this, however, there is the disappointment in the restriction of these sketches to Harriet Tubman, Nora Gordon, Meta Warrick Fuller, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune, and Mary</span> Church Terrell. No one will question the claims of some of these women to honorable"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "",
+            "year": 1919
+        },
+        {
+            "_id": "10.2307/2713442",
+            "_score": 36.146828,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 9, No. 1 (Jan., 1924), pp. 101-106",
+            "contentType": "Journal Article",
+            "doi": "10.2307/2713442",
+            "fpage": "101",
+            "history": null,
+            "iid": "aab8bd53-d6a8-3d9b-893a-2d87809b9c8e",
+            "lpage": "106",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/2713442",
+                    "text": "then, all that is worth while in our sys- tem of education must be secured to the Negro that he may have the best development possible. Mrs. <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> then addressed the As- sociation using for a subject \" A Better Understanding Essential to Genuine Co-operation.\" In a concise and"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Proceedings of the Eighth Annual Meeting of the Association for the Study of Negro Life and History, Held in Atlanta, Georgia, October 24, 25, and 26, 1923",
+            "year": 1924
+        },
+        {
+            "_id": "10.2307/25686623",
+            "_score": 29.428009,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Bulletin of the American Library Association</cite>, Vol. 20, No. 11, HANDBOOK (November, 1926), pp. 690-880",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25686623",
+            "fpage": "690",
+            "history": null,
+            "iid": "fe78716f-c7d5-3999-a6f2-5752e0feb678",
+            "lpage": "880",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25686623",
+                    "text": "15631. Abrahams, Vida, asst. catlgr. County F. L., Los Angeles, Calif. 15166. Abrams, Dorothy A., In. State Normal Sch. L., Paterson, N. J. 7760. Academy of the New Church L., Bryn Athyn, Pa. (Reginald W. Brown, In.) 11284. Achilles, Lillian A., In. Swan L., Albion, N. Y. 15167. Ackerly, <span class=\"highlight\">Mary</span>"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "MEMBERS",
+            "year": 1926
+        },
+        {
+            "_id": "10.2307/2714104",
+            "_score": 41.764397,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 12, No. 3 (Jul., 1927), pp. 359-364",
+            "contentType": "Journal Article",
+            "doi": "10.2307/2714104",
+            "fpage": "359",
+            "history": null,
+            "iid": "1414dd1d-f7be-3e11-a43e-361ce2f55914",
+            "lpage": "364",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/2714104",
+                    "text": ". Delegates were then registered, and visitors from various insti- tutions and agencies were introduced to say a word. Among those thus called upon were Mrs. <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune, of the Bethune</span> - Cookman College, and Dr. George E. Haynes, of the Federal Coun- cil"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Proceedings of the Spring Conference of the Association for the Study of Negro Life and History, Held in Jacksonville, Florida, March 29, 30, and 31, 1927",
+            "year": 1927
+        },
+        {
+            "_id": "10.2307/25686776",
+            "_score": 29.474407,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Bulletin of the American Library Association</cite>, Vol. 21, No. 11, HANDBOOK (November, 1927), pp. 535-746",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25686776",
+            "fpage": "535",
+            "history": null,
+            "iid": "ae848d7c-3ba4-39a7-8222-16d9a66f1cad",
+            "lpage": "746",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25686776",
+                    "text": "Trinity County F. L., Weaverville, Calif. 13640. Adams, <span class=\"highlight\">Mary</span> H., In. Benjamin Franklin Jr. High Sch. L., Uniontown, Pa. 17256. Adams, Maude B., In. Sheepshead Bay Br. P. L., Brooklyn, N. Y. 10788. Adamson, Catherine E., sr. asst. Sheridan Br. P. L., Chicago, 111. 16587. Adamson, Lucia A., jr. asst. Rogers"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "MEMBERS",
+            "year": 1927
+        },
+        {
+            "_id": "10.2307/2713967",
+            "_score": 33.556297,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 13, No. 2 (Apr., 1928), pp. 213-223",
+            "contentType": "Journal Article",
+            "doi": "10.2307/2713967",
+            "fpage": "213",
+            "history": null,
+            "iid": "f66325ad-15e6-3fe0-8d5d-18324a50e621",
+            "lpage": "223",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/2713967",
+                    "text": ", of Dr. J. H. Thompson, of West Palm Beach, and of Mrs. <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , of Daytona, contributed also to the success of this tour."
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Notes",
+            "year": 1928
+        },
+        {
+            "_id": "10.2307/25686938",
+            "_score": 29.118593,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Bulletin of the American Library Association</cite>, Vol. 22, No. 11, HANDBOOK (November, 1928), pp. 569-796",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25686938",
+            "fpage": "569",
+            "history": null,
+            "iid": "4dcec20e-27b1-3049-8532-a852e67ffd67",
+            "lpage": "796",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25686938",
+                    "text": "L., 6421 S. Broadway, Los Angeles, Calif. 12847. ADAMS, LETA E., ord. In. P. L., Cleve land, Ohio. 4352. Life Member. Adams, Mrs. Lila G., In. Trinity County F. L., Weaverville, Calif. 13640. Adams, <span class=\"highlight\">Mary</span> H., In. Southwestern State Normal Sch. L., California, Pa. 17256. Adams, Maude B., In. Sheepshead Bay"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "MEMBERS",
+            "year": 1928
+        },
+        {
+            "_id": "10.2307/25080207",
+            "_score": 27.625029,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Proceedings of the Massachusetts Historical Society</cite>, Third Series, Vol. 60, Index to the Third Series of the Proceedings of the Massachusetts Historical Society, Volumes 41-60, 1907-1928 (1928), pp. iii-v, vii-xi, xiii-xxv, 1, 3-454",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25080207",
+            "fpage": "iii",
+            "history": null,
+            "iid": "fff7afa9-df46-34d2-8a4b-b7cc4ab52dfb",
+            "lpage": "454",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25080207",
+                    "text": "R. Morse, by deposit, the journal of Mrs. <span class=\"highlight\">Mary</span> Turner (Sargent), wife of Samuel Torrey, containing records"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Index to the Third Series of the Proceedings of the Massachusetts Historical Society, Volumes 41-60, 1907-1928",
+            "year": 1928
+        },
+        {
+            "_id": "10.2307/25525906",
+            "_score": 27.542595,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Scottish Historical Review</cite>, Vol. 25, Index to Volumes Thirteen to Twenty-Five [1916-1928] (1928), pp. ii-v, vii-xix, 1-149",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25525906",
+            "fpage": "ii",
+            "history": null,
+            "iid": "59cbae53-21c5-3ca7-8959-7be90c19d2a4",
+            "lpage": "149",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25525906",
+                    "text": "Ld., London. A, R. Anderson, Glasgow. James Andrew, LL.D., Glasgow. Miss <span class=\"highlight\">Mary</span> Angus, Dundee. William Angus, Edinburgh. J. Craig Annan, Glasgow. C. T. Atkinson, Oxford. R. L. Atkinson, M.C., London. Allan F. Baird, LL.D., Redhill, Surrey. A. Millar Bannatyne, LL.D., Glasgow. Evan M. Barron, Inverness. C. E. A. Bedwell, London. Sir"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Index to Volumes Thirteen to Twenty-Five [1916-1928]",
+            "year": 1928
+        },
+        {
+            "_id": "10.2307/30009389",
+            "_score": 26.48737,
+            "abstract": "",
+            "authors": [
+                "Mary White Ovington"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Social Service Review</cite>, Vol. 3, No. 3 (Sep., 1929), pp. 509-511",
+            "contentType": "Journal Article",
+            "doi": "10.2307/30009389",
+            "fpage": "509",
+            "history": null,
+            "iid": "c970ab4a-83b9-3cca-b674-e164656c8bbd",
+            "lpage": "511",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/30009389",
+                    "text": "an educator, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , of Florida, stands as high as any Negro in the country, and to some of us the most interest- ing social service work among colored today is Janie Porter Barrett's state farm for girls in Virginia. This unconscious sex discrimination gives one an insight into"
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "",
+            "year": 1929
+        },
+        {
+            "_id": "10.2307/25137299",
+            "_score": 28.620277,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Bulletin of the Cleveland Museum of Art</cite>, Vol. 17, No. 4, Part II. Fourteenth Annual Report of the Cleveland Museum of Art 1929 (Apr., 1930), pp. 1, 4-5, 7-15, 17-29, 31-61, 63-65, 67, 69-75, 77-83, 85-95, 97-135",
+            "contentType": "Journal Article",
+            "doi": "10.2307/25137299",
+            "fpage": "1",
+            "history": null,
+            "iid": "66010824-38c0-37a5-bd19-4420ce46bd36",
+            "lpage": "135",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/25137299",
+                    "text": "E. A. RUGGLES DEPARTMENT OF BUILDINGS AND GROUNDS Superintendent ........ JOHN W. MCCABE STAFF ASSISTANTS BELKNAP, MARTHA *BOLLES, MARTHA *BONNETTE, ANNE BURCHFIELD, LOUISE BURROUS, EDITH *CHURCH, FANNIE DIDERO, E. G. FARAGHER,CATHERINE *FISCHER, IRMA FLOOD, MAYME FORBES, <span class=\"highlight\">MARY</span> L. FRYWORTH, TERESSA *GARRETT, THERESE L. *GILMAN, ELLA GROFF, <span class=\"highlight\">MARY</span> A."
+                }
+            ],
+            "subtitle": "",
+            "tb": "",
+            "title": "Part II. Fourteenth Annual Report of the Cleveland Museum of Art 1929",
+            "year": 1930
+        }
+    ],
+    "stats": null,
+    "page": 0,
+    "facets": {
+        "disciplines": [
+            {
+                "value": "history-discipline",
+                "count": 1313
+            },
+            {
+                "value": "areastudies-discipline",
+                "count": 792
+            },
+            {
+                "value": "generalhistory-discipline",
+                "count": 709
+            },
+            {
+                "value": "americanstudies-discipline",
+                "count": 682
+            },
+            {
+                "value": "africanamericanstudies-discipline",
+                "count": 571
+            },
+            {
+                "value": "sociology-discipline",
+                "count": 546
+            },
+            {
+                "value": "socialsciences-discipline",
+                "count": 510
+            },
+            {
+                "value": "education-discipline",
+                "count": 335
+            },
+            {
+                "value": "humanities-discipline",
+                "count": 325
+            },
+            {
+                "value": "literature-discipline",
+                "count": 309
+            },
+            {
+                "value": "politicalscience-discipline",
+                "count": 257
+            },
+            {
+                "value": "womensstudies-discipline",
+                "count": 163
+            },
+            {
+                "value": "religion-discipline",
+                "count": 76
+            },
+            {
+                "value": "sciencemathematics-discipline",
+                "count": 40
+            },
+            {
+                "value": "arts-discipline",
+                "count": 38
+            }
+        ],
+        "contentType": [
+            {
+                "value": "journal",
+                "count": 1484
+            },
+            {
+                "value": "chapter",
+                "count": 930
+            },
+            {
+                "value": "research_report",
+                "count": 1
+            }
+        ]
+    }
+}

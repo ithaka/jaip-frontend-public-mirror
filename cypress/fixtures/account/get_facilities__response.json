@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "4": {
+      "name": "ITHAKA Facility",
+      "contact": "jstor.org",
+      "id": 4,
+      "type": "facilities",
+      "groups": [
+        {
+          "id": 1,
+          "name": "Ithaka",
+          "role": "user",
+          "features": {
+            "add_or_edit_users": false,
+            "approve_requests": false,
+            "bulk_approve": false,
+            "deny_requests": false,
+            "download_pdf": true,
+            "edit_facilities": false,
+            "get_facilities": false,
+            "get_users": false,
+            "is_hidden_user": false,
+            "manage_facilities": false,
+            "print_pdf": true,
+            "remove_users": false,
+            "undo_bulk_approve": false,
+            "use_protected_features": false,
+            "view_abstract": true,
+            "view_book_description": true,
+            "view_hidden_users": false,
+            "view_snippet": true
+          }
+        }
+      ]
+    }
+  },
+  "total": 1
+}

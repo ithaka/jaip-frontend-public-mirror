@@ -1,0 +1,14 @@
+{
+    "type": "users",
+    "ungrouped_features": {
+      "manage_superusers": {
+        "display_name": "Manage Users",
+        "category": "Users",
+        "description": "Allows user to manage administrative users.",
+        "enabled": true
+      }
+    },
+    "name": "t",
+    "contact": "t",
+    "groups": []
+}

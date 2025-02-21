@@ -1,0 +1,155 @@
+{
+    "features": [
+        {
+            "id": 1,
+            "name": "view_snippet",
+            "display_name": "View Snippet",
+            "category": "Search Results",
+            "description": "Allows the user to see snippets of the text that include the search term",
+            "is_protected": false,
+            "is_admin_only": false,
+            "is_active": true
+        },
+        {
+            "id": 2,
+            "name": "remove_users",
+            "display_name": "Remove Users",
+            "category": "User Management",
+            "description": "Allows the user to remove other users",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 3,
+            "name": "add_or_edit_users",
+            "display_name": "Add or Edit Users",
+            "category": "User Management",
+            "description": "Allows the user to add or edit other users",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 4,
+            "name": "get_users",
+            "display_name": "Get Users",
+            "category": "User Management",
+            "description": "Allows the user to view a list of users in the group, including name, email, and privileges",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 5,
+            "name": "view_abstract",
+            "display_name": "View Abstract",
+            "category": "Search Results",
+            "description": "Allows the user to see an abstract if one is provided",
+            "is_protected": false,
+            "is_admin_only": false,
+            "is_active": true
+        },
+        {
+            "id": 6,
+            "name": "view_book_description",
+            "display_name": "View Book Description",
+            "category": "Search Results",
+            "description": "Allows the user to see a description of the book the chapter comes from if one is provided",
+            "is_protected": false,
+            "is_admin_only": false,
+            "is_active": true
+        },
+        {
+            "id": 7,
+            "name": "print_pdf",
+            "display_name": "Print PDFs",
+            "category": "Search Results",
+            "description": "Allows the user to print a copy of the PDF",
+            "is_protected": false,
+            "is_admin_only": false,
+            "is_active": true
+        },
+        {
+            "id": 8,
+            "name": "download_pdf",
+            "display_name": "Download PDFs",
+            "category": "Search Results",
+            "description": "Allows the user to download a copy of the PDF",
+            "is_protected": false,
+            "is_admin_only": false,
+            "is_active": true
+        },
+        {
+            "id": 9,
+            "name": "approve_requests",
+            "display_name": "Approve Requests",
+            "category": "Media Review",
+            "description": "Allows the user to approve requests for media access",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 10,
+            "name": "deny_requests",
+            "display_name": "Deny Requests",
+            "category": "Media Review",
+            "description": "Allows the user to deny requests for media access",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 11,
+            "name": "bulk_approve",
+            "display_name": "Bulk Approve",
+            "category": "Media Review",
+            "description": "Allows the user to approve entire disciplines or journals",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 12,
+            "name": "undo_bulk_approve",
+            "display_name": "Undo Bulk Approve",
+            "category": "Media Review",
+            "description": "Allows the user to undo an existing bulk approval",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 13,
+            "name": "get_facilities",
+            "display_name": "Get Facilities",
+            "category": "Facilities Management",
+            "description": "Allows the user to view a list of facilities where students can access JSTOR",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 14,
+            "name": "edit_facilities",
+            "display_name": "Edit Facilities",
+            "category": "Facilities Management",
+            "description": "Allows the user to edit the features that are enabled at facilities",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": true
+        },
+        {
+            "id": 15,
+            "name": "test_feature",
+            "display_name": "Test Feature",
+            "category": "Testing",
+            "description": "This is a test feature with no other functions",
+            "is_protected": false,
+            "is_admin_only": true,
+            "is_active": false
+        }
+    ],
+    "total": 14
+}

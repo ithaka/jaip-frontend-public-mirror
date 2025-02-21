@@ -1,0 +1,769 @@
+{
+    "total": 5020136,
+    "qtime": 561,
+    "docs": [
+        {
+            "_id": "10.2307/48646134",
+            "_score": 51,
+            "abstract": "This Article explores the intersection of Fourth Amendment standards of proof and the “clearly established” prong of qualified immunity. It illustrates how the juxtaposition of the Court’s insistence on a low level of specificity for the development of suspicion and a high degree of specificity for the imposition of liability makes it exceedingly difficult to hold officers accountable for violating constitutional rights. And it offers both a path for future research into the development of suspicion and suggestions for methods that police agencies can use to improve the development and articulation of suspicion. Ultimately, it contends that policing in the 21st century must take seriously the idea that the Constitution is a floor, not a ceiling, and it calls for the development of more rigorous standards for police actions.",
+            "authors": [
+                "Seth W. Stoughton",
+                "Kyle McLean",
+                "Justin Nix",
+                "Geoffrey Alpert"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 36-78",
+            "contentType": "Journal Article",
+            "doi": "10.2307/48646134",
+            "fpage": "36",
+            "history": null,
+            "iid": "feb143d0-2683-3747-bcbf-8ba4e676d64d",
+            "lpage": "78",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-04-20T15:23:35.236357Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": [
+                "Qualified Immunity and \"Clearly Established\" Standards of Proof"
+            ],
+            "tb": "",
+            "title": "Policing Suspicion",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/48646135",
+            "_score": 51,
+            "abstract": "The defense of qualified immunity for claims seeking monetary damages for constitutionally inadequate medical care for people who are incarcerated is misguided. According to the U.S. Department of Justice, medical illness is the leading cause of death of people incarcerated in prisons and jails across the United States. Qualified immunity in these cases limits accountability for carceral actors, thereby limiting incentives for improvements in the delivery of constitutionally adequate medical care. The qualified immunity defense also compounds other existing barriers, such as higher subjective intent standards and the Prison Litigation Reform Act, to asserting legal accountability of prison and jail administrators. In addition, the defense is not appropriate because medical care decisions by carceral actors are fundamentally different than traditional qualified immunity cases. Traditional qualified immunity cases usually involve discretionary decisions that are one-off, emergency, binary choices made by a single actor or unit of actors. In contrast, medical decisions in carceral settings are often serial, ongoing, and usually involve multiple decision makers, sometimes acting beyond their area of expertise. These significant differences between medical decisions in carceral settings and traditional qualified immunity decisions illustrate the practical difficulties for incarcerated plaintiffs and their families in holding prisons accountable for violating the U.S. Constitution. Recent developments refining the doctrine may lessen the negative impact of the defense on these civil rights claims, but they also do not address the core disconnect between the rationales justifying qualified immunity and its application in cases of severe injury or death from inadequate carceral healthcare.",
+            "authors": [
+                "ANDREA CRAIG ARMSTRONG"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 79-104",
+            "contentType": "Journal Article",
+            "doi": "10.2307/48646135",
+            "fpage": "79",
+            "history": null,
+            "iid": "01db63f3-eb34-3b47-a4b2-8969b12f2935",
+            "lpage": "104",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-06T03:39:37.144689Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PRISON MEDICAL DEATHS AND QUALIFIED IMMUNITY",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/48646136",
+            "_score": 51,
+            "abstract": "In December 2020, the United States Supreme Court issued its most important decision on qualified immunity since Harlow v. Fitzgerald, and the issue in the case did not even involve the doctrine. In the Court’s unanimous opinion in Tanzin v. Tanvir, which dealt with the interpretation of the Religious Freedom Restoration Act, Justice Thomas explicitly distanced the Court from the very type of policy reasoning used to create qualified immunity. He also embraced the availability of damages claims against government officials as historically justified and often necessary to vindicate individual rights and to check the government’s power. The Court’s decision in Tanvir—alongside those in Taylor v. Riojas and McCoy v. Alamu—offers the strongest signal in decades that the Court is ready to recalibrate its qualified immunity jurisprudence. While it is not time to celebrate the demise of qualified immunity just yet, this Article will discuss how the Court’s disposition of those cases reveals the Court is reconsidering both the foundations and applications of qualified immunity.",
+            "authors": [
+                "PATRICK JAICOMO",
+                "ANYA BIDWELL"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 105-144",
+            "contentType": "Journal Article",
+            "doi": "10.2307/48646136",
+            "fpage": "105",
+            "history": null,
+            "iid": "75ef1fd1-6261-3ff6-bfd8-77efcba01b05",
+            "lpage": "144",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-16T18:29:48.4117Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": [
+                "HOW <em>TANZIN V. TANVIR, TAYLOR V. RIOJAS</em>, AND <em>MCCOY V. ALAMU</em> SIGNAL THE SUPREME COURT’S DISCOMFORT WITH THE DOCTRINE OF QUALIFIED IMMUNITY"
+            ],
+            "tb": "",
+            "title": "RECALIBRATING QUALIFIED IMMUNITY",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/48646137",
+            "_score": 51,
+            "abstract": "Now that Justice Amy Coney Barrett has joined the United States Supreme Court, most observers predict the law will shift on many issues. This common view presumably contains at least some truth. The conventional wisdom, however, overlooks something important: the Supreme Court’s ability to shift the law is constrained by the cases presented to it and how they are presented. Lower courts are thus an important part of the equation. Elsewhere, the authors have offered a model of certiorari to demonstrate how lower courts in theory can design their decisions to evade Supreme Court review; they also explain why such “cert-proofing” tools are problematic. In this Article, they apply that model to civil rights litigation involving qualified immunity, with particular focus on Justice Barrett’s confirmation. On the assumption that Barrett’s views will be more like those of the late Justice Antonin Scalia (for whom she clerked) than those of the late Justice Ruth Bader Ginsburg (whom she replaced), the model predicts lower court judges who do not share Barrett’s views will be tempted, at the margins, to try to evade Supreme Court review. This temptation may be particularly strong for cases that involve qualified immunity, which present unique cert-proofing opportunities. At the same time, the model predicts judges who do share Barrett’s views will be less inclined to use such tools. Thus, although there likely will be no meaningful change in how most cases are decided, the upshot of the model is that in marginal cases it is possible that lower courts will change how they address civil rights litigation.",
+            "authors": [
+                "Aaron L. Nielson",
+                "Paul Stancil"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 145-170",
+            "contentType": "Journal Article",
+            "doi": "10.2307/48646137",
+            "fpage": "145",
+            "history": null,
+            "iid": "86e7236d-3b4a-3423-a866-849fe569d48f",
+            "lpage": "170",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": [
+                "The Justice Barrett Edition"
+            ],
+            "tb": "",
+            "title": "Civil Rights Litigation in the Lower Courts",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/48646133",
+            "_score": 51,
+            "abstract": "",
+            "authors": [
+                "Teressa E. Ravenell",
+                "Riley H. Ross <suffix>III</suffix>"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 1-35",
+            "contentType": "Journal Article",
+            "doi": "10.2307/48646133",
+            "fpage": "1",
+            "history": null,
+            "iid": "0e1832fb-7aca-3002-b51f-ec6abba4f273",
+            "lpage": "35",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Denied",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {
+                        "comments": "test",
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Qualified Immunity and Unqualified Assumptions",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.7",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.7",
+            "fpage": "64",
+            "history": null,
+            "iid": "0a5889d7-60af-3fbc-8206-fd685625a172",
+            "lpage": "68",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-16T17:45:51.582997Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.7",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "CONCLUSION ET RECOMMANDATIONS",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.6",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.6",
+            "fpage": "24",
+            "history": null,
+            "iid": "369261f0-fde7-324c-882f-812289580825",
+            "lpage": "63",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-16T17:45:51.582997Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {}
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.6",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "DES CONVENTIONS FISCALES NÉGOCIÉES POUR PROTÉGER LE DROIT D’IMPOSER LES REVENUS MINIERS",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.2",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.2",
+            "fpage": "v",
+            "history": null,
+            "iid": "9bfd06d5-876f-3ac1-8e8b-fe13b6dffc2d",
+            "lpage": "viii",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.2",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "Table of Contents",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.5",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.5",
+            "fpage": "14",
+            "history": null,
+            "iid": "41f7ed4f-7860-3ddc-acd9-d69f0f0d4dbb",
+            "lpage": "23",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Denied",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-20T15:40:09.789832Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {
+                        "comments": "Building up some denials for testing.",
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.5",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "LES AVANTAGES ET LES COÛTS DES CONVENTIONS FISCALES DANS LE DOMAINE MINIER",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.3",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.3",
+            "fpage": "1",
+            "history": null,
+            "iid": "9ee4ad84-7c14-3bb8-a699-ebb678210834",
+            "lpage": "5",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Denied",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-20T15:39:36.089221Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {
+                        "comments": "Building up some denials for testing.",
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.3",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "INTRODUCTION",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.8",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.8",
+            "fpage": "69",
+            "history": null,
+            "iid": "32c33ee0-e084-393c-8008-597d0dacf2e4",
+            "lpage": "72",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.8",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "RÉFÉRENCES",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.10",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.10",
+            "fpage": "75",
+            "history": null,
+            "iid": "9b308e4a-cc18-368c-bb2a-5ab1bd62e270",
+            "lpage": "75",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.10",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "LISTE DES CAS CITÉS",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.4",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.4",
+            "fpage": "6",
+            "history": null,
+            "iid": "8048ad4f-9200-390c-a28d-dc13929f8368",
+            "lpage": "13",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Denied",
+                    "statusLabel": "",
+                    "statusCreatedAt": "2022-05-20T16:41:35.07135Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": {
+                        "comments": "test",
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                }
+            },
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.4",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "LES CONVENTIONS FISCALES SONT DES ACCORDS ENTRE ÉTATS QUI DÉFINISSENT DES DROITS EN MATIÈRE D’IMPOSITION",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.9",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.9",
+            "fpage": "73",
+            "history": null,
+            "iid": "0d44a899-07c5-350c-9da6-30afe04248bc",
+            "lpage": "74",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.9",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "LISTE DES CONVENTIONS FISCALES ÉCHANTILLONNÉES",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep40488.11",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "Alexandra Readhead",
+                "Jaqueline Taquiri"
+            ],
+            "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Nov. 1, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep40488.11",
+            "fpage": "76",
+            "history": null,
+            "iid": "31e3f07d-a625-3558-b274-564eb2201623",
+            "lpage": "76",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep40488.11",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+            "title": "ANNEXE",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep42126",
+            "_score": 51,
+            "abstract": "",
+            "authors": [
+                "Anthony H. Cordesman",
+                "Grace Hwang"
+            ],
+            "book_description": "\n<p>NATO countries have already provided massive amounts of military aid to Ukraine, deployed additional forces to support the NATO countries that share a border with Russia, improved the Alliance’s ability to rapidly deploy forces forward in a crisis, and worked with key powers like Poland to strengthen its capabilities. NATO has accepted Finland and Sweden as future members of the Alliance, and it has made numerous other short-term adjustments to its force posture that enhance its deterrence and defense capabilities.</p>\n<p>NATO faces a future, however, where it cannot predict how much territory Ukraine will lose and where it must now</p>\n",
+            "book_publisher": "[{\"publisher\":\"Center for Strategic and International Studies (CSIS)\",\"code\":\"centstratintlstud\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Jul. 14, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep42126",
+            "fpage": "",
+            "history": null,
+            "iid": "9ea4fb93-66b6-32da-b696-55b65bb8379f",
+            "lpage": "",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep42126",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "The Need for a New NATO Force Planning Exercise",
+            "title": "The Need for a New NATO Force Planning Exercise",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep42013",
+            "_score": 51,
+            "abstract": "",
+            "authors": [
+                "Jang Ji-Hyang",
+                "Yoo Ah Rum"
+            ],
+            "book_description": "\n<p>When Russia invaded Ukraine on February 24, many countries condemned it and joined the US-led sanctions against Russia, but the reaction of Middle Eastern countries was rather lukewarm. The United Arab Emirates (UAE), the only non-permanent member of the UN Security Council in the Middle East, abstained from a vote on the 25th UN Security Council resolution condemning Russia. In a statement on February 28, the Arab League called for dialogue to overcome the crisis without even mentioning Russia. Subsequently, Saudi Arabia and the UAE rejected participating in US-led sanctions against Russia and demands to increase their oil production.</p>\n<p>Israel</p>\n",
+            "book_publisher": "[{\"publisher\":\"Asan Institute for Policy Studies\",\"code\":\"asaninstitute\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Jul. 14, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep42013",
+            "fpage": "",
+            "history": null,
+            "iid": "2635cb97-d1d1-3b19-8784-5b22bd50523d",
+            "lpage": "",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep42013",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "The Ukrainian War and the Calculations of the Middle East",
+            "title": "The Ukrainian War and the Calculations of the Middle East",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep41959.4",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "International Crisis Group"
+            ],
+            "book_description": "\n<p>The Western Balkans are not where their inhabitants or outside peacemakers hoped they would be twenty-plus years after the guns there went largely quiet. Two of the states that emerged from the former Yugoslavia’s ashes have joined the European Union: Slovenia in 2004 and Croatia in 2013. Since then, the remaining five — Serbia, Bosnia and Herzegovina, Kosovo, Montenegro and North Macedonia, plus Albania (which is in the Western Balkans but was not part of Yugoslavia) — have been stuck in an enlargement process that seems on life support, if not already dead. EU and U.S. influence in the region</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Crisis Group\",\"code\":\"icg\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Jul. 7, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep41959.4",
+            "fpage": "Page 1",
+            "history": null,
+            "iid": "e159573d-a5da-3492-8c52-5d2b10188505",
+            "lpage": "Page 2",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep41959.4",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "Managing the Risks of Instability in the Western Balkans",
+            "title": "Introduction",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep41959.6",
+            "_score": 51,
+            "abstract": "",
+            "authors": [
+                "International Crisis Group"
+            ],
+            "book_description": "\n<p>The Western Balkans are not where their inhabitants or outside peacemakers hoped they would be twenty-plus years after the guns there went largely quiet. Two of the states that emerged from the former Yugoslavia’s ashes have joined the European Union: Slovenia in 2004 and Croatia in 2013. Since then, the remaining five — Serbia, Bosnia and Herzegovina, Kosovo, Montenegro and North Macedonia, plus Albania (which is in the Western Balkans but was not part of Yugoslavia) — have been stuck in an enlargement process that seems on life support, if not already dead. EU and U.S. influence in the region</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Crisis Group\",\"code\":\"icg\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Jul. 7, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep41959.6",
+            "fpage": "Page 12",
+            "history": null,
+            "iid": "25e675cf-4e3c-35dc-bc58-fc6a5a47684b",
+            "lpage": "Page 14",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep41959.6",
+                    "text": ""
+                }
+            ],
+            "subtitle": "",
+            "tb": "Managing the Risks of Instability in the Western Balkans",
+            "title": "Great-Power Competition",
+            "year": 2022
+        },
+        {
+            "_id": "10.2307/resrep41959.12",
+            "_score": 36,
+            "abstract": "",
+            "authors": [
+                "International Crisis Group"
+            ],
+            "book_description": "\n<p>The Western Balkans are not where their inhabitants or outside peacemakers hoped they would be twenty-plus years after the guns there went largely quiet. Two of the states that emerged from the former Yugoslavia’s ashes have joined the European Union: Slovenia in 2004 and Croatia in 2013. Since then, the remaining five — Serbia, Bosnia and Herzegovina, Kosovo, Montenegro and North Macedonia, plus Albania (which is in the Western Balkans but was not part of Yugoslavia) — have been stuck in an enlargement process that seems on life support, if not already dead. EU and U.S. influence in the region</p>\n",
+            "book_publisher": "[{\"publisher\":\"International Crisis Group\",\"code\":\"icg\",\"role\":\"LICENSOR\"}]",
+            "citation_line": "Jul. 7, 2022",
+            "contentType": "Research Report",
+            "doi": "10.2307/resrep41959.12",
+            "fpage": "Page 37",
+            "history": null,
+            "iid": "9a0d75e2-7fd5-3b73-8588-196c5dc39e66",
+            "lpage": "Page 38",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [
+                {
+                    "id": "10.2307/resrep41959.12",
+                    "text": ""
+                }
+            ],
+            "subtitle": [
+                "International Crisis Group Board of Trustees"
+            ],
+            "tb": "Managing the Risks of Instability in the Western Balkans",
+            "title": "Appendix C:",
+            "year": 2022
+        }
+    ],
+    "stats": null,
+    "page": 0,
+    "facets": {
+        "disciplines": [
+            {
+                "value": "socialsciences-discipline",
+                "count": 1077603
+            },
+            {
+                "value": "history-discipline",
+                "count": 861661
+            },
+            {
+                "value": "sciencemathematics-discipline",
+                "count": 838960
+            },
+            {
+                "value": "humanities-discipline",
+                "count": 819246
+            },
+            {
+                "value": "literature-discipline",
+                "count": 739788
+            },
+            {
+                "value": "areastudies-discipline",
+                "count": 513342
+            },
+            {
+                "value": "politicalscience-discipline",
+                "count": 510666
+            },
+            {
+                "value": "generalhistory-discipline",
+                "count": 499306
+            },
+            {
+                "value": "biologicalsciences-discipline",
+                "count": 457773
+            },
+            {
+                "value": "sociology-discipline",
+                "count": 362237
+            },
+            {
+                "value": "medicinealliedhealth-discipline",
+                "count": 321825
+            },
+            {
+                "value": "businesseconomics-discipline",
+                "count": 289367
+            },
+            {
+                "value": "healthsciences-discipline",
+                "count": 273887
+            },
+            {
+                "value": "religion-discipline",
+                "count": 252000
+            },
+            {
+                "value": "education-discipline",
+                "count": 238169
+            }
+        ],
+        "contentType": [
+            {
+                "value": "journal",
+                "count": 3556504
+            },
+            {
+                "value": "chapter",
+                "count": 1288504
+            },
+            {
+                "value": "research_report",
+                "count": 175128
+            }
+        ]
+    }
+}

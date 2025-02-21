@@ -1,0 +1,42 @@
+{
+    "name": "Test User",
+    "contact": "user.name@ithaka.org",
+    "id": 3,
+    "type": "users",
+    "groups": [
+      {
+        "id": 1,
+        "name": "Ithaka",
+        "role": "admin",
+        "features": {
+          "": true,
+          "add_or_edit_users": true,
+          "approve_requests": true,
+          "bulk_approve": true,
+          "deny_requests": true,
+          "download_pdf": true,
+          "edit_facilities": false,
+          "get_facilities": true,
+          "get_users": true,
+          "is_hidden_user": true,
+          "manage_facilities": true,
+          "print_pdf": true,
+          "remove_users": true,
+          "undo_bulk_approve": true,
+          "use_protected_features": true,
+          "view_abstract": true,
+          "view_book_description": true,
+          "view_hidden_users": true,
+          "view_snippet": true
+        }
+      }
+    ],
+    "ungrouped_features": {
+      "manage_superusers": {
+        "display_name": "Manage Users",
+        "category": "Users",
+        "description": "Allows user to manage administrative users.",
+        "enabled": true
+      }
+    }
+  }

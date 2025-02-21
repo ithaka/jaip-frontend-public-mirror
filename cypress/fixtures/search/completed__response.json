@@ -1,0 +1,201 @@
+{
+  "total": 4,
+  "qtime": 75,
+  "docs": [
+      {
+          "_id": "10.2307/resrep40488.4",
+          "_score": 52.770927,
+          "abstract": "",
+          "authors": [
+              "Alexandra Readhead",
+              "Jaqueline Taquiri"
+          ],
+          "book_description": "\n<p>Dans les pays en développement, l’exploitation minière à grande échelle est souvent le fait d’investisseurs, de titulaires de permis, de prestataires de services et de fournisseurs qui n’y résident pas. Une telle situation est en fait le reflet de l’importance des investissements directs étrangers (IDE) qui sont requis afin de mener à bien un projet minier. Toutefois, ce contexte donne également lieu à toute une série d'opérations transfrontalières entre la compagnie, implantée dans le pays où se trouve le site minier, et des sociétés étrangères établies dans d’autres pays. Ces transactions peuvent inclure, sans s’y limiter, la vente indirecte à</p>\n",
+          "book_publisher": "[{\"publisher\":\"International Institute for Sustainable Development (IISD)\",\"code\":\"iisd\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "Nov. 1, 2022",
+          "contentType": "Research Report",
+          "doi": "10.2307/resrep40488.4",
+          "fpage": "6",
+          "history": null,
+          "iid": "8048ad4f-9200-390c-a28d-dc13929f8368",
+          "lpage": "13",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-08-24T15:05:55.458669Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/resrep40488.4",
+                  "text": ""
+              }
+          ],
+          "subtitle": "",
+          "tb": "PROTÉGER LES DROITS D'IMPOSITION DES REVENUS MINIERS :",
+          "title": "LES CONVENTIONS FISCALES SONT DES ACCORDS ENTRE ÉTATS QUI DÉFINISSENT DES DROITS EN MATIÈRE D’IMPOSITION",
+          "year": 2022
+      },
+      {
+          "_id": "10.1163/j.ctvjhzq0f.31",
+          "_score": 39.24332,
+          "abstract": "",
+          "authors": [
+              "Mary McLeod Bethune"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Blacks in Higher Education</cite>, No. 32 (Summer, 2001), p. 35",
+          "contentType": "Journal Article",
+          "doi": "10.1163/j.ctvjhzq0f.31",
+          "fpage": "35",
+          "history": null,
+          "iid": "a9715135-bbe8-3a4e-984c-2fa6aea71d23",
+          "lpage": "35",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-08-26T17:58:14.013297Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "The Sacrifices and Achievements of African-American Women",
+          "year": 2001
+      },
+      {
+          "_id": "10.2307/4316309",
+          "_score": 51.792664,
+          "abstract": "",
+          "authors": [
+              "Audrey Thomas McCluskey"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>NWSA Journal</cite>, Vol. 6, No. 1 (Spring, 1994), pp. 69-81",
+          "contentType": "Journal Article",
+          "doi": "10.2307/4316309",
+          "fpage": "69",
+          "history": null,
+          "iid": "d436255b-16e1-345b-af9d-f94b1fcaac35",
+          "lpage": "81",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-08-09T15:31:41.588081Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/4316309",
+                  "text": "in 1886 as well as Georgia's first kindergarten, invited Bethune to become her assistant in 1897. Bethune always acknowledged Laney's great influence on her, especially in shaping her budding womanist consciousness.3 Laney believed that educating black women was the key to racial progress. <span class=\"highlight\">4</span> During her year with Laney, Bethune"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Multiple Consciousness in the Leadership of Mary McLeod Bethune",
+          "year": 1994
+      },
+      {
+          "_id": "10.2307/26432710",
+          "_score": 48.89996,
+          "abstract": "",
+          "authors": [
+              "Eloise McKinney Johnson"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Langston Hughes Review</cite>, Vol. 2, No. 1 (SPRING, 1983), pp. 1-12",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26432710",
+          "fpage": "1",
+          "history": null,
+          "iid": "d90bf224-d454-3026-8613-b450a1a9083d",
+          "lpage": "12",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-08-09T15:27:11.024327Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/26432710",
+                  "text": "Bethune, a college founder and a college president, was married to teacher and businessman, Albertus Bethune, and mother of their son, Albert McLeod Bethune. In addition, she was a political activist. Her letters indicate that her governmental involvement grew with her recogni tion of what political power can accomplish. <span class=\"highlight\">4</span>"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "LANGSTON HUGHES AND MARY McLEOD BETHUNE",
+          "year": 1983
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "socialsciences-discipline",
+              "count": 2
+          },
+          {
+              "value": "africanamericanstudies-discipline",
+              "count": 1
+          },
+          {
+              "value": "areastudies-discipline",
+              "count": 1
+          },
+          {
+              "value": "education-discipline",
+              "count": 1
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 1
+          },
+          {
+              "value": "literature-discipline",
+              "count": 1
+          },
+          {
+              "value": "womensstudies-discipline",
+              "count": 1
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 3
+          },
+          {
+              "value": "research_report",
+              "count": 1
+          }
+      ]
+  }
+}

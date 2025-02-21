@@ -1,0 +1,93 @@
+{
+    "features": [
+      {
+        "id": 1,
+        "name": "add_feature",
+        "display_name": "Add Feature",
+        "category": "Features",
+        "description": "Allows user to add a feature.",
+        "is_active": true
+      },
+      {
+        "id": 2,
+        "name": "add_group",
+        "display_name": "Add Group",
+        "category": "Groups",
+        "description": "Allows user to add a group to the system.",
+        "is_active": true
+      },
+      {
+        "id": 36,
+        "name": "add_subdomain",
+        "display_name": "Add Subdomain",
+        "category": "Subdomains",
+        "description": "Allows user to add a subdomain to the system.",
+        "is_active": true
+      },
+      {
+        "id": 67,
+        "name": "add_ungrouped_feature",
+        "display_name": "Add Ungrouped Feature",
+        "category": "Ungrouped Features",
+        "description": "Allows user to add a superuser-level feature.",
+        "is_active": true
+      },
+      {
+        "id": 4,
+        "name": "clear_history",
+        "display_name": "Clear Media Review History",
+        "category": "Groups",
+        "description": "Allows a user to completely clear the entire media review history for a group.",
+        "is_active": true
+      },
+      {
+        "id": 35,
+        "name": "create_group_admins",
+        "display_name": "Create Group Admins",
+        "category": "Users",
+        "description": "Allows a user make any user an administrator for all existing groups.",
+        "is_active": true
+      },
+      {
+        "id": 72,
+        "name": "delete_feature",
+        "display_name": "Delete Feature",
+        "category": "Features",
+        "description": "Allows user to delete a superuser-level feature.",
+        "is_active": true
+      },
+      {
+        "id": 3,
+        "name": "delete_group",
+        "display_name": "Delete Group",
+        "category": "Groups",
+        "description": "Allows user to delete a group from the system.",
+        "is_active": true
+      },
+      {
+        "id": 38,
+        "name": "delete_subdomain",
+        "display_name": "Delete Subdomain",
+        "category": "Subdomains",
+        "description": "Allows user to delete a subdomain from the system.",
+        "is_active": true
+      },
+      {
+        "id": 69,
+        "name": "delete_ungrouped_feature",
+        "display_name": "Delete Ungrouped Feature",
+        "category": "Ungrouped Features",
+        "description": "Allows user to delete a superuser-level feature.",
+        "is_active": true
+      },
+      {
+        "id": 15,
+        "name": "test_feature",
+        "display_name": "Test Feature",
+        "category": "Testing",
+        "description": "This feature exists for testing purposes.",
+        "is_active": false
+      }
+    ],
+    "total": 11
+  }

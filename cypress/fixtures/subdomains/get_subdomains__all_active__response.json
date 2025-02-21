@@ -1,0 +1,26 @@
+{
+    "subdomains": [
+        {
+            "id": 1,
+            "subdomain": "test1",
+            "is_active": true,
+            "createdAt": "0001-01-01T00:00:00Z",
+            "updatedAt": "0001-01-01T00:00:00Z"
+        },
+        {
+            "id": 2,
+            "subdomain": "test2",
+            "is_active": true,
+            "createdAt": "0001-01-01T00:00:00Z",
+            "updatedAt": "0001-01-01T00:00:00Z"
+        },
+        {
+            "id": 3,
+            "subdomain": "test3",
+            "is_active": true,
+            "createdAt": "0001-01-01T00:00:00Z",
+            "updatedAt": "0001-01-01T00:00:00Z"
+        }
+    ],
+    "total": 3
+}

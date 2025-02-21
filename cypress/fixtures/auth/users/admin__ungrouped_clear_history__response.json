@@ -1,0 +1,42 @@
+{
+  "name": "Test Admin",
+  "id": 4,
+  "type": "users",
+  "ungrouped_features": {
+    "clear_history": {
+      "display_name": "Clear History",
+      "category": "Groups",
+      "description": "Allows user to remove the media review history from a group.",
+      "enabled": true
+    }
+  },
+  "groups": [
+    {
+      "id": 1,
+      "name": "Ithaka",
+      "role": "admin",
+      "features": {
+        "add_or_edit_users": true,
+        "approve_requests": false,
+        "bulk_approve": false,
+        "deny_requests": false,
+        "download_pdf": false,
+        "edit_facilities": false,
+        "get_facilities": false,
+        "get_users": true,
+        "is_hidden_user": false,
+        "manage_facilities": false,
+        "print_pdf": false,
+        "remove_users": false,
+        "undo_bulk_approve": false,
+        "use_protected_features": false,
+        "view_abstract": false,
+        "view_book_description": false,
+        "view_hidden_users": false,
+        "view_snippet": false,
+        "view_document": false,
+        "view_pdf": false
+      }
+    }
+  ]
+}

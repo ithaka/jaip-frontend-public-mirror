@@ -1,0 +1,30 @@
+{
+    "type": "facilities",
+    "name": "t",
+    "contact": "t",
+    "primary_sitecode": "t",
+    "subdomain": "test1",
+    "groups": [
+        {
+            "id": 1,
+            "name": "Ithaka",
+            "features": {
+                "view_snippet": true,
+                "remove_users": true,
+                "add_or_edit_users": true,
+                "get_users": true,
+                "view_abstract": true,
+                "view_book_description": true,
+                "print_pdf": true,
+                "download_pdf": true,
+                "approve_requests": true,
+                "deny_requests": true,
+                "bulk_approve": true,
+                "undo_bulk_approve": true,
+                "get_facilities": true,
+                "edit_facilities": true,
+                "test_feature": true
+            }
+        }
+    ]
+}

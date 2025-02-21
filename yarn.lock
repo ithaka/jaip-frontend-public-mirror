@@ -4915,7 +4915,7 @@ __metadata:
     print-js: "npm:^1.6.0"
     sass: "npm:^1.85.0"
     start-server-and-test: "npm:^2.0.10"
-    typescript: "npm:~5.7.3"
+    typescript: "npm:^5.3.4"
     typescript-cookie: "npm:^1.0.6"
     unplugin-vue-markdown: "npm:^28.3.0"
     uuid: "npm:^11.0.5"
@@ -7469,7 +7469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.7.3":
+"typescript@npm:^5.3.4":
   version: 5.7.3
   resolution: "typescript@npm:5.7.3"
   bin:
@@ -7479,7 +7479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A~5.7.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.3.4#optional!builtin<compat/typescript>":
   version: 5.7.3
   resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
   bin:

@@ -1,0 +1,669 @@
+{
+  "total": 3981,
+  "qtime": 179,
+  "docs": [
+      {
+          "_id": "10.2307/26817767",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Simon Abramowitsch"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 305-327",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817767",
+          "fpage": "305",
+          "history": null,
+          "iid": "63a53737-d623-3678-a822-b01ef2171bee",
+          "lpage": "327",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "The Black Communications Movement",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817768",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "K. Eltinaé"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), p. 329",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817768",
+          "fpage": "329",
+          "history": null,
+          "iid": "e78465f8-5d1f-32f6-8735-e4e3df6be56a",
+          "lpage": "329",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "kohl",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817769",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "K. Eltinaé"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), p. 329",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817769",
+          "fpage": "329",
+          "history": null,
+          "iid": "41f1206e-0fb6-39a4-b205-5e606713549d",
+          "lpage": "329",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "pride",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817766",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Samantha Pergadia"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 289-304",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817766",
+          "fpage": "289",
+          "history": null,
+          "iid": "9d86523a-0132-3eb9-a670-120dcc64754e",
+          "lpage": "304",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "Genres of the Nonhuman in the Neo-Slave Novel"
+          ],
+          "tb": "",
+          "title": "Like an Animal",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817771",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "Natasha Andreil"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 332-333",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817771",
+          "fpage": "332",
+          "history": null,
+          "iid": "6da311bc-5eeb-35a9-8436-34a479ed60f6",
+          "lpage": "333",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mirror",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817776",
+          "_score": 23.625,
+          "abstract": "",
+          "authors": [
+              "Bryan Crable"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 339-341",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817776",
+          "fpage": "339",
+          "history": null,
+          "iid": "5f564217-40aa-373d-ae31-76e4b2d24930",
+          "lpage": "341",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817762",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Koritha Mitchell"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 253-262",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817762",
+          "fpage": "253",
+          "history": null,
+          "iid": "4fd63daa-888a-3ba7-9a12-3f0f496d502c",
+          "lpage": "262",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "A Form of Self-Care"
+          ],
+          "tb": "",
+          "title": "Identifying White Mediocrity and Know-Your-Place Aggression",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817764",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Dana A. Williams"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 273-278",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817764",
+          "fpage": "273",
+          "history": null,
+          "iid": "596def2c-ff47-37f9-9461-f67567dae647",
+          "lpage": "278",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "\"The Next Time You Got Questions Like That, Ask Yourself\"",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817765",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Eurie Dahn"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 279-287",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817765",
+          "fpage": "279",
+          "history": null,
+          "iid": "41de0d5b-6ae4-3610-b4be-9fd39886a890",
+          "lpage": "287",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "\"Lex Talionis: A Story,\" by Robert W. Bagnall"
+          ],
+          "tb": "",
+          "title": "Forgotten Manuscripts",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817775",
+          "_score": 23.625,
+          "abstract": "",
+          "authors": [
+              "J. D. Porter"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 337-339",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817775",
+          "fpage": "337",
+          "history": null,
+          "iid": "ff4494e9-edbf-3821-9256-7b0c533f1525",
+          "lpage": "339",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817774",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "Calvin Walds"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), p. 335",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817774",
+          "fpage": "335",
+          "history": null,
+          "iid": "dd918b49-2316-3f97-ac69-b207be101b18",
+          "lpage": "335",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "A History of Sound (Part 56)",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817777",
+          "_score": 23.625,
+          "abstract": "",
+          "authors": [
+              "Joel Dinerstein"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 342-344",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817777",
+          "fpage": "342",
+          "history": null,
+          "iid": "45b28a8c-71c7-3744-851e-7b423fcaea0a",
+          "lpage": "344",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817772",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "Calvin Walds"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), p. 334",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817772",
+          "fpage": "334",
+          "history": null,
+          "iid": "3b75b2e9-f7cb-3ee9-bc73-b25c08a57c42",
+          "lpage": "334",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Be a Problem",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817780",
+          "_score": 32.25,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 349-350",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817780",
+          "fpage": "349",
+          "history": null,
+          "iid": "7b23b118-c95e-3195-836e-dd48d8bac189",
+          "lpage": "350",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Contributors",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817770",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "DaMaris B. Hill"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 330-331",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817770",
+          "fpage": "330",
+          "history": null,
+          "iid": "0eda5a6a-8dc8-36db-8054-1609ffdef17e",
+          "lpage": "331",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Revolution",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817763",
+          "_score": 47.25,
+          "abstract": "",
+          "authors": [
+              "Derik Smith"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 263-271",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817763",
+          "fpage": "263",
+          "history": null,
+          "iid": "9d627ff8-26a1-30c4-ae8d-f122a785842f",
+          "lpage": "271",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Beneath and Beyond the Forty-Fifth American Presidency",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817779",
+          "_score": 23.625,
+          "abstract": "",
+          "authors": [
+              "Colleen G. Eils"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), pp. 346-348",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817779",
+          "fpage": "346",
+          "history": null,
+          "iid": "a0bb2a5e-c332-3b34-b2f4-5cc0758fea30",
+          "lpage": "348",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26817773",
+          "_score": 32.25,
+          "abstract": "",
+          "authors": [
+              "Calvin Walds"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 4 (Winter 2018), p. 335",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26817773",
+          "fpage": "335",
+          "history": null,
+          "iid": "f3222113-eb3a-3737-b106-f078d9f2b259",
+          "lpage": "335",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "To capture the landscape (for Somaliland)",
+          "year": 2018
+      },
+      {
+          "_id": "10.2307/26795156",
+          "_score": 22.036438,
+          "abstract": "",
+          "authors": [
+              "Granville Ganter"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>African American Review</cite>, Vol. 51, No. 3 (Fall 2018), pp. 239-240",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26795156",
+          "fpage": "239",
+          "history": null,
+          "iid": "5b2f5c04-e99b-3e48-86e5-199ce5a10dee",
+          "lpage": "240",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Journal",
+                  "statusCreatedAt": "2022-05-04T18:51:22.18699Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2018
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "africanamericanstudies-discipline",
+              "count": 3981
+          },
+          {
+              "value": "americanstudies-discipline",
+              "count": 3981
+          },
+          {
+              "value": "areastudies-discipline",
+              "count": 3981
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 3981
+          },
+          {
+              "value": "literature-discipline",
+              "count": 3981
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 3981
+          }
+      ]
+  }
+}

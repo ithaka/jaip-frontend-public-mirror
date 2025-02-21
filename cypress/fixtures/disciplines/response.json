@@ -1,0 +1,1131 @@
+[
+  {
+      "code": "africanamericanstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 25,
+          "pamphlets": 0
+      },
+      "label": "African American Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 25,
+      "titles": "/disciplines/africanamericanstudies-discipline",
+      "bulk_approval": true
+  },
+  {
+      "code": "africanstudies-discipline",
+      "counts": {
+          "books": 3,
+          "journals": 75,
+          "pamphlets": 0
+      },
+      "label": "African Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 78,
+      "titles": "/disciplines/africanstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "americanindianstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 10,
+          "pamphlets": 0
+      },
+      "label": "American Indian Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 10,
+      "titles": "/disciplines/americanindianstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "americanstudies-discipline",
+      "counts": {
+          "books": 46,
+          "journals": 140,
+          "pamphlets": 0
+      },
+      "label": "American Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 186,
+      "titles": "/disciplines/americanstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "anthropology-discipline",
+      "counts": {
+          "books": 2500,
+          "journals": 136,
+          "pamphlets": 0
+      },
+      "label": "Anthropology",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 2636,
+      "titles": "/disciplines/anthropology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "aquaticsciences-discipline",
+      "counts": {
+          "books": 52,
+          "journals": 19,
+          "pamphlets": 0
+      },
+      "label": "Aquatic Sciences",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 71,
+      "titles": "/disciplines/aquaticsciences-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "archeology-discipline",
+      "counts": {
+          "books": 592,
+          "journals": 156,
+          "pamphlets": 0
+      },
+      "label": "Archaeology",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 748,
+      "titles": "/disciplines/archeology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "architecture-discipline",
+      "counts": {
+          "books": 405,
+          "journals": 51,
+          "pamphlets": 0
+      },
+      "label": "Architecture & Architectural History",
+      "parent": false,
+      "parent_code": "arts-discipline",
+      "parent_label": "Arts",
+      "title_count": 456,
+      "titles": "/disciplines/architecture-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "arthistory-discipline",
+      "counts": {
+          "books": 987,
+          "journals": 262,
+          "pamphlets": 0
+      },
+      "label": "Art & Art History",
+      "parent": false,
+      "parent_code": "arts-discipline",
+      "parent_label": "Arts",
+      "title_count": 1249,
+      "titles": "/disciplines/arthistory-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "asianstudies-discipline",
+      "counts": {
+          "books": 6,
+          "journals": 172,
+          "pamphlets": 0
+      },
+      "label": "Asian Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 178,
+      "titles": "/disciplines/asianstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "astronomy-discipline",
+      "counts": {
+          "books": 52,
+          "journals": 1,
+          "pamphlets": 0
+      },
+      "label": "Astronomy",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 53,
+      "titles": "/disciplines/astronomy-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "bibliog-discipline",
+      "counts": {
+          "books": 23,
+          "journals": 31,
+          "pamphlets": 0
+      },
+      "label": "Bibliography",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 54,
+      "titles": "/disciplines/bibliog-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "biologicalsciences-discipline",
+      "counts": {
+          "books": 593,
+          "journals": 270,
+          "pamphlets": 0
+      },
+      "label": "Biological Sciences",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 863,
+      "titles": "/disciplines/biologicalsciences-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "botany-discipline",
+      "counts": {
+          "books": 162,
+          "journals": 151,
+          "pamphlets": 0
+      },
+      "label": "Botany & Plant Sciences",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 313,
+      "titles": "/disciplines/botany-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "britstud-discipline",
+      "counts": {
+          "books": 4,
+          "journals": 12,
+          "pamphlets": 9
+      },
+      "label": "British Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 25,
+      "titles": "/disciplines/britstud-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "business-discipline",
+      "counts": {
+          "books": 1698,
+          "journals": 302,
+          "pamphlets": 0
+      },
+      "label": "Business",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 2000,
+      "titles": "/disciplines/business-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "chemistry-discipline",
+      "counts": {
+          "books": 24,
+          "journals": 0,
+          "pamphlets": 0
+      },
+      "label": "Chemistry",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 24,
+      "titles": "/disciplines/chemistry-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "classicalstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 84,
+          "pamphlets": 0
+      },
+      "label": "Classical Studies",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 84,
+      "titles": "/disciplines/classicalstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "communicationstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 10,
+          "pamphlets": 0
+      },
+      "label": "Communication Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 10,
+      "titles": "/disciplines/communicationstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "criminologycriminaljustice-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 19,
+          "pamphlets": 0
+      },
+      "label": "Criminology & Criminal Justice",
+      "parent": false,
+      "parent_code": "generallaw-discipline",
+      "parent_label": "Law",
+      "title_count": 19,
+      "titles": "/disciplines/criminologycriminaljustice-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "developmentstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 26,
+          "pamphlets": 0
+      },
+      "label": "Development Studies",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 26,
+      "titles": "/disciplines/developmentstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "developmentalcellbiology-discipline",
+      "counts": {
+          "books": 20,
+          "journals": 12,
+          "pamphlets": 0
+      },
+      "label": "Developmental & Cell Biology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 32,
+      "titles": "/disciplines/developmentalcellbiology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "ecology-discipline",
+      "counts": {
+          "books": 545,
+          "journals": 101,
+          "pamphlets": 0
+      },
+      "label": "Ecology & Evolutionary Biology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 646,
+      "titles": "/disciplines/ecology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "economics-discipline",
+      "counts": {
+          "books": 1112,
+          "journals": 244,
+          "pamphlets": 0
+      },
+      "label": "Economics",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 1356,
+      "titles": "/disciplines/economics-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "education-discipline",
+      "counts": {
+          "books": 1241,
+          "journals": 252,
+          "pamphlets": 0
+      },
+      "label": "Education",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 1493,
+      "titles": "/disciplines/education-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "engineering-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 8,
+          "pamphlets": 0
+      },
+      "label": "Engineering",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 8,
+      "titles": "/disciplines/engineering-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "environmentalscience-discipline",
+      "counts": {
+          "books": 707,
+          "journals": 13,
+          "pamphlets": 0
+      },
+      "label": "Environmental Science",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 720,
+      "titles": "/disciplines/environmentalscience-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "womensstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 43,
+          "pamphlets": 0
+      },
+      "label": "Feminist & Women's Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 43,
+      "titles": "/disciplines/womensstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "film-discipline",
+      "counts": {
+          "books": 1203,
+          "journals": 26,
+          "pamphlets": 0
+      },
+      "label": "Film Studies",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 1229,
+      "titles": "/disciplines/film-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "finance-discipline",
+      "counts": {
+          "books": 259,
+          "journals": 54,
+          "pamphlets": 0
+      },
+      "label": "Finance",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 313,
+      "titles": "/disciplines/finance-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "folklore-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 29,
+          "pamphlets": 0
+      },
+      "label": "Folklore",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 29,
+      "titles": "/disciplines/folklore-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "generalscience-discipline",
+      "counts": {
+          "books": 553,
+          "journals": 55,
+          "pamphlets": 0
+      },
+      "label": "General Science",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 608,
+      "titles": "/disciplines/generalscience-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "geography-discipline",
+      "counts": {
+          "books": 77,
+          "journals": 45,
+          "pamphlets": 0
+      },
+      "label": "Geography",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 122,
+      "titles": "/disciplines/geography-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "geology-discipline",
+      "counts": {
+          "books": 56,
+          "journals": 3,
+          "pamphlets": 0
+      },
+      "label": "Geology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 59,
+      "titles": "/disciplines/geology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "health-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 24,
+          "pamphlets": 0
+      },
+      "label": "Health Policy",
+      "parent": false,
+      "parent_code": "medicinealliedhealth-discipline",
+      "parent_label": "Medicine & Allied Health",
+      "title_count": 24,
+      "titles": "/disciplines/health-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "healthsciences-discipline",
+      "counts": {
+          "books": 1259,
+          "journals": 49,
+          "pamphlets": 0
+      },
+      "label": "Health Sciences",
+      "parent": false,
+      "parent_code": "medicinealliedhealth-discipline",
+      "parent_label": "Medicine & Allied Health",
+      "title_count": 1308,
+      "titles": "/disciplines/healthsciences-discipline",
+      "bulk_approval": [
+        {
+            "id": 0,
+            "entityName": "",
+            "entityID": 0,
+            "status": "Approved",
+            "groupName": "",
+            "groupID": 1,
+            "createdAt": "2022-05-20T15:32:46.379794Z"
+        },
+        {
+            "id": 0,
+            "entityName": "",
+            "entityID": 0,
+            "status": "Approved",
+            "groupName": "",
+            "groupID": 2,
+            "createdAt": "2022-05-20T15:32:46.379794Z"
+        }
+    ]
+  },
+  {
+      "code": "history-discipline",
+      "counts": {
+          "books": 16357,
+          "journals": 500,
+          "pamphlets": 9
+      },
+      "label": "History",
+      "parent": false,
+      "parent_code": "generalhistory-discipline",
+      "parent_label": "History",
+      "title_count": 16866,
+      "titles": "/disciplines/history-discipline",
+      "bulk_approval": [
+          {
+              "id": 0,
+              "entityName": "",
+              "entityID": 0,
+              "status": "Approved",
+              "groupName": "",
+              "groupID": 1,
+              "createdAt": "2022-05-20T15:32:46.379794Z"
+          },
+          {
+              "id": 0,
+              "entityName": "",
+              "entityID": 0,
+              "status": "Approved",
+              "groupName": "",
+              "groupID": 2,
+              "createdAt": "2022-05-20T15:32:46.379794Z"
+          }
+      ]
+  },
+  {
+      "code": "historyofscience-discipline",
+      "counts": {
+          "books": 261,
+          "journals": 51,
+          "pamphlets": 0
+      },
+      "label": "History of Science & Technology",
+      "parent": false,
+      "parent_code": "generalhistory-discipline",
+      "parent_label": "History",
+      "title_count": 312,
+      "titles": "/disciplines/historyofscience-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "horticulture-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 2,
+          "pamphlets": 0
+      },
+      "label": "Horticulture",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 2,
+      "titles": "/disciplines/horticulture-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "interrela-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 75,
+          "pamphlets": 0
+      },
+      "label": "International Relations",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 75,
+      "titles": "/disciplines/interrela-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "irishstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 63,
+          "pamphlets": 0
+      },
+      "label": "Irish Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 63,
+      "titles": "/disciplines/irishstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "jewishstudies-discipline",
+      "counts": {
+          "books": 3,
+          "journals": 76,
+          "pamphlets": 0
+      },
+      "label": "Jewish Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 79,
+      "titles": "/disciplines/jewishstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "laboremploymentrelations-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 34,
+          "pamphlets": 0
+      },
+      "label": "Labor & Employment Relations",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 34,
+      "titles": "/disciplines/laboremploymentrelations-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "literature-discipline",
+      "counts": {
+          "books": 8659,
+          "journals": 454,
+          "pamphlets": 0
+      },
+      "label": "Language & Literature",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 9113,
+      "titles": "/disciplines/literature-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "latinamericanstudies-discipline",
+      "counts": {
+          "books": 3,
+          "journals": 78,
+          "pamphlets": 0
+      },
+      "label": "Latin American Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 81,
+      "titles": "/disciplines/latinamericanstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "law-discipline",
+      "counts": {
+          "books": 1676,
+          "journals": 182,
+          "pamphlets": 0
+      },
+      "label": "Law",
+      "parent": false,
+      "parent_code": "generallaw-discipline",
+      "parent_label": "Law",
+      "title_count": 1858,
+      "titles": "/disciplines/law-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "libraryscience-discipline",
+      "counts": {
+          "books": 44,
+          "journals": 23,
+          "pamphlets": 0
+      },
+      "label": "Library Science",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 67,
+      "titles": "/disciplines/libraryscience-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "linguistics-discipline",
+      "counts": {
+          "books": 254,
+          "journals": 67,
+          "pamphlets": 0
+      },
+      "label": "Linguistics",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 321,
+      "titles": "/disciplines/linguistics-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "manorgbeha-discipline",
+      "counts": {
+          "books": 337,
+          "journals": 49,
+          "pamphlets": 0
+      },
+      "label": "Management & Organizational Behavior",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 386,
+      "titles": "/disciplines/manorgbeha-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "markadvert-discipline",
+      "counts": {
+          "books": 44,
+          "journals": 16,
+          "pamphlets": 0
+      },
+      "label": "Marketing & Advertising",
+      "parent": false,
+      "parent_code": "businesseconomics-discipline",
+      "parent_label": "Business & Economics",
+      "title_count": 60,
+      "titles": "/disciplines/markadvert-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "mathematics-discipline",
+      "counts": {
+          "books": 672,
+          "journals": 106,
+          "pamphlets": 0
+      },
+      "label": "Mathematics",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 778,
+      "titles": "/disciplines/mathematics-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "middleeaststudies-discipline",
+      "counts": {
+          "books": 15,
+          "journals": 88,
+          "pamphlets": 0
+      },
+      "label": "Middle East Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 103,
+      "titles": "/disciplines/middleeaststudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "music-discipline",
+      "counts": {
+          "books": 1001,
+          "journals": 110,
+          "pamphlets": 0
+      },
+      "label": "Music",
+      "parent": false,
+      "parent_code": "arts-discipline",
+      "parent_label": "Arts",
+      "title_count": 1111,
+      "titles": "/disciplines/music-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "paleontology-discipline",
+      "counts": {
+          "books": 69,
+          "journals": 14,
+          "pamphlets": 0
+      },
+      "label": "Paleontology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 83,
+      "titles": "/disciplines/paleontology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "peaceconflictstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 16,
+          "pamphlets": 0
+      },
+      "label": "Peace & Conflict Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 16,
+      "titles": "/disciplines/peaceconflictstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "performingarts-discipline",
+      "counts": {
+          "books": 586,
+          "journals": 32,
+          "pamphlets": 0
+      },
+      "label": "Performing Arts",
+      "parent": false,
+      "parent_code": "arts-discipline",
+      "parent_label": "Arts",
+      "title_count": 618,
+      "titles": "/disciplines/performingarts-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "philosophy-discipline",
+      "counts": {
+          "books": 2764,
+          "journals": 151,
+          "pamphlets": 0
+      },
+      "label": "Philosophy",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 2915,
+      "titles": "/disciplines/philosophy-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "physics-discipline",
+      "counts": {
+          "books": 278,
+          "journals": 0,
+          "pamphlets": 0
+      },
+      "label": "Physics",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 278,
+      "titles": "/disciplines/physics-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "politicalscience-discipline",
+      "counts": {
+          "books": 8554,
+          "journals": 255,
+          "pamphlets": 9
+      },
+      "label": "Political Science",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 8818,
+      "titles": "/disciplines/politicalscience-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "populationstudies-discipline",
+      "counts": {
+          "books": 272,
+          "journals": 36,
+          "pamphlets": 0
+      },
+      "label": "Population Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 308,
+      "titles": "/disciplines/populationstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "psychology-discipline",
+      "counts": {
+          "books": 810,
+          "journals": 42,
+          "pamphlets": 0
+      },
+      "label": "Psychology",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 852,
+      "titles": "/disciplines/psychology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "publichealth-discipline",
+      "counts": {
+          "books": 128,
+          "journals": 16,
+          "pamphlets": 0
+      },
+      "label": "Public Health",
+      "parent": false,
+      "parent_code": "medicinealliedhealth-discipline",
+      "parent_label": "Medicine & Allied Health",
+      "title_count": 144,
+      "titles": "/disciplines/publichealth-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "publicpolicy-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 49,
+          "pamphlets": 0
+      },
+      "label": "Public Policy & Administration",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 49,
+      "titles": "/disciplines/publicpolicy-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "religion-discipline",
+      "counts": {
+          "books": 3872,
+          "journals": 165,
+          "pamphlets": 0
+      },
+      "label": "Religion",
+      "parent": false,
+      "parent_code": "humanities-discipline",
+      "parent_label": "Humanities",
+      "title_count": 4037,
+      "titles": "/disciplines/religion-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "research_report",
+      "counts": {
+          "books": 0,
+          "journals": 0,
+          "pamphlets": 0
+      },
+      "label": "Research Reports",
+      "parent": false,
+      "bulk_approval": null
+  },
+  {
+      "code": "slavicstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 28,
+          "pamphlets": 0
+      },
+      "label": "Slavic Studies",
+      "parent": false,
+      "parent_code": "areastudies-discipline",
+      "parent_label": "Area Studies",
+      "title_count": 28,
+      "titles": "/disciplines/slavicstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "socialwork-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 29,
+          "pamphlets": 0
+      },
+      "label": "Social Work",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 29,
+      "titles": "/disciplines/socialwork-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "sociology-discipline",
+      "counts": {
+          "books": 10088,
+          "journals": 206,
+          "pamphlets": 0
+      },
+      "label": "Sociology",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 10294,
+      "titles": "/disciplines/sociology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "statistics-discipline",
+      "counts": {
+          "books": 56,
+          "journals": 54,
+          "pamphlets": 0
+      },
+      "label": "Statistics",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 110,
+      "titles": "/disciplines/statistics-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "technology-discipline",
+      "counts": {
+          "books": 1084,
+          "journals": 9,
+          "pamphlets": 0
+      },
+      "label": "Technology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 1093,
+      "titles": "/disciplines/technology-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "transportationstudies-discipline",
+      "counts": {
+          "books": 150,
+          "journals": 7,
+          "pamphlets": 0
+      },
+      "label": "Transportation Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 157,
+      "titles": "/disciplines/transportationstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "urbanstudies-discipline",
+      "counts": {
+          "books": 0,
+          "journals": 13,
+          "pamphlets": 0
+      },
+      "label": "Urban Studies",
+      "parent": false,
+      "parent_code": "socialsciences-discipline",
+      "parent_label": "Social Sciences",
+      "title_count": 13,
+      "titles": "/disciplines/urbanstudies-discipline",
+      "bulk_approval": null
+  },
+  {
+      "code": "zoology-discipline",
+      "counts": {
+          "books": 327,
+          "journals": 78,
+          "pamphlets": 0
+      },
+      "label": "Zoology",
+      "parent": false,
+      "parent_code": "sciencemathematics-discipline",
+      "parent_label": "Science & Mathematics",
+      "title_count": 405,
+      "titles": "/disciplines/zoology-discipline",
+      "bulk_approval": null
+  }
+]

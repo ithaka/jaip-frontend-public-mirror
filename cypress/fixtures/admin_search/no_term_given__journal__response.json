@@ -1,0 +1,1164 @@
+{
+  "total": 12493455,
+  "qtime": 1082,
+  "docs": [
+      {
+          "_id": "10.2307/48646137",
+          "_score": 51,
+          "abstract": "Now that Justice Amy Coney Barrett has joined the United States Supreme Court, most observers predict the law will shift on many issues. This common view presumably contains at least some truth. The conventional wisdom, however, overlooks something important: the Supreme Court’s ability to shift the law is constrained by the cases presented to it and how they are presented. Lower courts are thus an important part of the equation. Elsewhere, the authors have offered a model of certiorari to demonstrate how lower courts in theory can design their decisions to evade Supreme Court review; they also explain why such “cert-proofing” tools are problematic. In this Article, they apply that model to civil rights litigation involving qualified immunity, with particular focus on Justice Barrett’s confirmation. On the assumption that Barrett’s views will be more like those of the late Justice Antonin Scalia (for whom she clerked) than those of the late Justice Ruth Bader Ginsburg (whom she replaced), the model predicts lower court judges who do not share Barrett’s views will be tempted, at the margins, to try to evade Supreme Court review. This temptation may be particularly strong for cases that involve qualified immunity, which present unique cert-proofing opportunities. At the same time, the model predicts judges who do share Barrett’s views will be less inclined to use such tools. Thus, although there likely will be no meaningful change in how most cases are decided, the upshot of the model is that in marginal cases it is possible that lower courts will change how they address civil rights litigation.",
+          "authors": [
+              "Aaron L. Nielson",
+              "Paul Stancil"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 145-170",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646137",
+          "fpage": "145",
+          "history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:39.495296Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:39.508084Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T16:29:51.423472Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Testing queries.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T16:29:51.453715Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Testing queries.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T19:26:58.791205Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-22T04:27:28.460809Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "This is a note for a pending request.",
+                      "name": "Ryan"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-27T16:45:54.63388Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "There's an inappropriate picture.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-04T18:51:49.709266Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "Contains maps of the area.",
+                      "reason": "Instructive for explosives, weapons, or escapes"
+                  }
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-11T15:21:01.414466Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "name": "stacy"
+                  }
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "iid": "86e7236d-3b4a-3423-a866-849fe569d48f",
+          "lpage": "170",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T17:45:40.411628Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "snippets": [],
+          "subtitle": [
+              "The Justice Barrett Edition"
+          ],
+          "tb": "",
+          "title": "Civil Rights Litigation in the Lower Courts",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48646136",
+          "_score": 51,
+          "abstract": "In December 2020, the United States Supreme Court issued its most important decision on qualified immunity since Harlow v. Fitzgerald, and the issue in the case did not even involve the doctrine. In the Court’s unanimous opinion in Tanzin v. Tanvir, which dealt with the interpretation of the Religious Freedom Restoration Act, Justice Thomas explicitly distanced the Court from the very type of policy reasoning used to create qualified immunity. He also embraced the availability of damages claims against government officials as historically justified and often necessary to vindicate individual rights and to check the government’s power. The Court’s decision in Tanvir—alongside those in Taylor v. Riojas and McCoy v. Alamu—offers the strongest signal in decades that the Court is ready to recalibrate its qualified immunity jurisprudence. While it is not time to celebrate the demise of qualified immunity just yet, this Article will discuss how the Court’s disposition of those cases reveals the Court is reconsidering both the foundations and applications of qualified immunity.",
+          "authors": [
+              "PATRICK JAICOMO",
+              "ANYA BIDWELL"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 105-144",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646136",
+          "fpage": "105",
+          "history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T01:55:33.366187Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "I don't like this article.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T01:55:33.385376Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "I don't like this article.",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T19:28:11.478553Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-22T04:27:28.439943Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "This is a note for a pending request.",
+                      "name": "Ryan"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-27T17:09:39.106658Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "There's an inappropriate picture.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-27T17:09:39.128447Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "There's an inappropriate picture.",
+                      "reason": "Sexually explicit/pornographic"
+                  }
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T16:06:06.608998Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.4117Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.420978Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "iid": "75ef1fd1-6261-3ff6-bfd8-77efcba01b05",
+          "lpage": "144",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.4117Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.420978Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.4117Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-16T18:29:48.420978Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "snippets": [],
+          "subtitle": [
+              "HOW <em>TANZIN V. TANVIR, TAYLOR V. RIOJAS</em>, AND <em>MCCOY V. ALAMU</em> SIGNAL THE SUPREME COURT’S DISCOMFORT WITH THE DOCTRINE OF QUALIFIED IMMUNITY"
+          ],
+          "tb": "",
+          "title": "RECALIBRATING QUALIFIED IMMUNITY",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48646134",
+          "_score": 51,
+          "abstract": "This Article explores the intersection of Fourth Amendment standards of proof and the “clearly established” prong of qualified immunity. It illustrates how the juxtaposition of the Court’s insistence on a low level of specificity for the development of suspicion and a high degree of specificity for the imposition of liability makes it exceedingly difficult to hold officers accountable for violating constitutional rights. And it offers both a path for future research into the development of suspicion and suggestions for methods that police agencies can use to improve the development and articulation of suspicion. Ultimately, it contends that policing in the 21st century must take seriously the idea that the Constitution is a floor, not a ceiling, and it calls for the development of more rigorous standards for police actions.",
+          "authors": [
+              "Seth W. Stoughton",
+              "Kyle McLean",
+              "Justin Nix",
+              "Geoffrey Alpert"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 36-78",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646134",
+          "fpage": "36",
+          "history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.236357Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.248052Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "iid": "feb143d0-2683-3747-bcbf-8ba4e676d64d",
+          "lpage": "78",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.236357Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.248052Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.236357Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-20T15:23:35.248052Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {}
+              }
+          ],
+          "snippets": [],
+          "subtitle": [
+              "Qualified Immunity and \"Clearly Established\" Standards of Proof"
+          ],
+          "tb": "",
+          "title": "Policing Suspicion",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48646135",
+          "_score": 51,
+          "abstract": "The defense of qualified immunity for claims seeking monetary damages for constitutionally inadequate medical care for people who are incarcerated is misguided. According to the U.S. Department of Justice, medical illness is the leading cause of death of people incarcerated in prisons and jails across the United States. Qualified immunity in these cases limits accountability for carceral actors, thereby limiting incentives for improvements in the delivery of constitutionally adequate medical care. The qualified immunity defense also compounds other existing barriers, such as higher subjective intent standards and the Prison Litigation Reform Act, to asserting legal accountability of prison and jail administrators. In addition, the defense is not appropriate because medical care decisions by carceral actors are fundamentally different than traditional qualified immunity cases. Traditional qualified immunity cases usually involve discretionary decisions that are one-off, emergency, binary choices made by a single actor or unit of actors. In contrast, medical decisions in carceral settings are often serial, ongoing, and usually involve multiple decision makers, sometimes acting beyond their area of expertise. These significant differences between medical decisions in carceral settings and traditional qualified immunity decisions illustrate the practical difficulties for incarcerated plaintiffs and their families in holding prisons accountable for violating the U.S. Constitution. Recent developments refining the doctrine may lessen the negative impact of the defense on these civil rights claims, but they also do not address the core disconnect between the rationales justifying qualified immunity and its application in cases of severe injury or death from inadequate carceral healthcare.",
+          "authors": [
+              "ANDREA CRAIG ARMSTRONG"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 79-104",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646135",
+          "fpage": "79",
+          "history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-06T03:39:37.144689Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          ],
+          "iid": "01db63f3-eb34-3b47-a4b2-8969b12f2935",
+          "lpage": "104",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-06T03:39:37.144689Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Approved",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-06T03:39:37.144689Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              }
+          ],
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "PRISON MEDICAL DEATHS AND QUALIFIED IMMUNITY",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48646133",
+          "_score": 51,
+          "abstract": "",
+          "authors": [
+              "Teressa E. Ravenell",
+              "Riley H. Ross <suffix>III</suffix>"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Criminal Law and Criminology (1973-)</cite>, Vol. 112, No. 1 (Winter 2022), pp. 1-35",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48646133",
+          "fpage": "1",
+          "history": [
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-04-22T04:27:28.476787Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comment": "This is a note for a pending request.",
+                      "name": "Ryan"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-11T15:18:22.681898Z",
+                  "entityName": "Stacy Burnett",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "inflammatory toward law enforcement",
+                      "reason": "Detrimental to the good order of the facility or rehabilitation"
+                  }
+              },
+              {
+                  "status": "Pending",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T15:29:12.72053Z",
+                  "entityName": "ITHAKA Facility",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {}
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "iid": "0e1832fb-7aca-3002-b51f-ec6abba4f273",
+          "lpage": "35",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              "2": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          },
+          "national_history": [
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.107528Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              },
+              {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-05-20T16:43:56.128177Z",
+                  "entityName": "Inspector Javert",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": {
+                      "comments": "test",
+                      "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                  }
+              }
+          ],
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Qualified Immunity and Unqualified Assumptions",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27135676",
+          "_score": 25.5,
+          "abstract": "",
+          "authors": [
+              "David Carbajal López"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Historia Mexicana</cite>, Vol. 72, No. 1 (285) (JULIO-SEPTIEMBRE 2022), pp. 375-379",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27135676",
+          "fpage": "375",
+          "history": null,
+          "iid": "96f3eed8-aabe-39ce-8ad0-e906f16d3cca",
+          "lpage": "379",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48675904",
+          "_score": 51,
+          "abstract": "Both the UK and Cuba face an ageing population, which presents major challenges for their health and social care sectors. Although the UK is considerably more developed than Cuba, its disorganised and inadequate community services for older people, combined with a less preventative approach to the health of its older population have increased pressure on care homes and hospitals alike. In contrast, Cuba’s cheaper, preventative and holistic elderly care programme integrates health and social care to sufficiently serve its older population. This article demonstrates the flaws in the UK elderly care system and highlights the successes of the Cuban system, before formulating three suggested areas of research for potential implementation in the UK based on Cuban principles. These are: 1) associating care homes with medical professionals, 2) overhauling the NHS health check system and 3) providing each local authority with a wider variety of facilities for the older person. Modelling Cuba’s elderly care system with these suggestions may improve the management of an ageing population in the UK by increasing disease prevention and care planning. This should improve the overall health of the UK’s older population whilst saving the health service both money and time.",
+          "authors": [
+              "Caroline Helen Jarman"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>International Journal of Cuban Studies</cite>, Vol. 14, No. 1 (Summer 2022), pp. 154-176",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48675904",
+          "fpage": "154",
+          "history": null,
+          "iid": "db6daf99-7644-33fc-a258-b1c2d8d7f656",
+          "lpage": "176",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "LESSONS THE UK COULD LEARN FROM CUBA"
+          ],
+          "tb": "",
+          "title": "MANAGING AN AGEING POPULATION",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140432",
+          "_score": 36,
+          "abstract": "",
+          "authors": [
+              "David Saranchak"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Phalanx</cite>, Vol. 55, No. 2 (Summer 2022), pp. 2-3",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140432",
+          "fpage": "2",
+          "history": null,
+          "iid": "55aabcad-b33d-3dbb-b926-675a67fd7199",
+          "lpage": "3",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "Step Up and Discover Your MORStory"
+          ],
+          "tb": "",
+          "title": "MORS PRESIDENT",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140444",
+          "_score": 36,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Phalanx</cite>, Vol. 55, No. 2 (Summer 2022), pp. 46-47",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140444",
+          "fpage": "46",
+          "history": null,
+          "iid": "cf7303ac-1f40-3381-9ecc-843c1c25670f",
+          "lpage": "47",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Ethics Koffee Klatch",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140437",
+          "_score": 51,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Phalanx</cite>, Vol. 55, No. 2 (Summer 2022), pp. 18-23",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140437",
+          "fpage": "18",
+          "history": null,
+          "iid": "ca934f37-e433-3297-aeda-760c6902e224",
+          "lpage": "23",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Highlighting Women in OR and Their Achievements",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27141364",
+          "_score": 51,
+          "abstract": "",
+          "authors": [
+              "David B. Holcomb"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Military Images</cite>, Vol. 40, No. 3 (221) (SUMMER 2022), pp. 59-68",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27141364",
+          "fpage": "59",
+          "history": null,
+          "iid": "db1f2b17-e413-314b-a502-72937c8aa921",
+          "lpage": "68",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "SCOUNDREL Lafayette Curry Baker"
+          ],
+          "tb": "",
+          "title": "The rise and fall of Union spy chief",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140329",
+          "_score": 51,
+          "abstract": "",
+          "authors": [
+              "RICHARD DENNISS"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>AQ: Australian Quarterly</cite>, Vol. 93, No. 3, 2022 Special Edition: Reform and Renewal (JUL–SEP 2022), pp. 24-31",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140329",
+          "fpage": "24",
+          "history": null,
+          "iid": "de7cd685-049c-3b1f-abb3-66542f5cc70e",
+          "lpage": "31",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "Tackling The Tax Taboo"
+          ],
+          "tb": "",
+          "title": "You Get What You Pay For",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140327",
+          "_score": 51,
+          "abstract": "",
+          "authors": [
+              "HANNAH E POWER",
+              "MICHAEL A KINSELA",
+              "THOMAS P MURRAY",
+              "ANDREW W M POMEROY"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>AQ: Australian Quarterly</cite>, Vol. 93, No. 3, 2022 Special Edition: Reform and Renewal (JUL–SEP 2022), pp. 12-20",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140327",
+          "fpage": "12",
+          "history": null,
+          "iid": "308cfc54-60a3-30b2-8296-80b79a5fc729",
+          "lpage": "20",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "Adapting Coastal Management in a Changing Climate"
+          ],
+          "tb": "",
+          "title": "Life on the Edge",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27135685",
+          "_score": 25.5,
+          "abstract": "",
+          "authors": [
+              "Miguel Ángel Puig-Samper"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Historia Mexicana</cite>, Vol. 72, No. 1 (285) (JULIO-SEPTIEMBRE 2022), pp. 422-427",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27135685",
+          "fpage": "422",
+          "history": null,
+          "iid": "84e8c1fe-5c02-33c2-94be-c615d7984ddf",
+          "lpage": "427",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48668557",
+          "_score": 51,
+          "abstract": "Most cyberattacks are not attempts to coerce or deterrence failures, but they are attempts to alter the balance of power. Extant IR theory accepts that states balance internally and externally by increasing domestic capacity and by partnering with other states, respectively. While balancing affects the balance of power by increasing power, states can also affect the balance of power by decreasing their competitors’ power, or “handicapping.” States wanting to handicap competitors can use certain kinds of information to decrease a competitor’s capacity—information is important enough to economic and political processes but sufficiently removed from battlefield defeat to be less likely to provoke escalation. The internet’s decreased costs and global scope have moved handicapping from the periphery of statecraft to a central position in international relations.",
+          "authors": [
+              "David Benson"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Æther: A Journal of Strategic Airpower & Spacepower</cite>, Vol. 1, No. 2 (Summer 2022), pp. 81-96",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48668557",
+          "fpage": "81",
+          "history": null,
+          "iid": "518a934a-0135-3042-9d27-747106ea3ad6",
+          "lpage": "96",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "NOT CYBERWAR, BUT CYBERBALANCE",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27141367",
+          "_score": 36,
+          "abstract": "",
+          "authors": [
+              "Adam Ochs Fleischer"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Military Images</cite>, Vol. 40, No. 3 (221) (SUMMER 2022), pp. 74-75",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27141367",
+          "fpage": "74",
+          "history": null,
+          "iid": "ac972c41-582d-324d-b2cf-c8645dbe881d",
+          "lpage": "75",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": [
+              "House Near the Susquehanna"
+          ],
+          "tb": "",
+          "title": "Origins, artistry and photographers",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27140325",
+          "_score": 36,
+          "abstract": "",
+          "authors": [
+              "Grant Mills"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>AQ: Australian Quarterly</cite>, Vol. 93, No. 3, 2022 Special Edition: Reform and Renewal (JUL–SEP 2022), p. 2",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27140325",
+          "fpage": "2",
+          "history": null,
+          "iid": "b48bdc6b-19b1-3227-a076-c81f8938aa60",
+          "lpage": "2",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "A WORD",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/48673832",
+          "_score": 36,
+          "abstract": "",
+          "authors": [
+              "Naima Iram",
+              "Maria F. Adame"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Bulletin of the Ecological Society of America</cite>, Vol. 103, No. 3 (JULY 2022), pp. 1-6",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48673832",
+          "fpage": "1",
+          "history": null,
+          "iid": "857a8716-77fa-3ff2-8c6e-e81a5ad5cf30",
+          "lpage": "6",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "UNPRODUCTIVE SUGARCANE LAND RESTORED INTO WETLANDS AFTER TIDAL RE-CONNECTION",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27143736",
+          "_score": 25.5,
+          "abstract": "",
+          "authors": [
+              "Hui Yew-Foong",
+              "Huang Jianli",
+              "Wang Gungwu"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Sojourn: Journal of Social Issues in Southeast Asia</cite>, Vol. 37, No. 2 (July 2022), pp. 352-368",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27143736",
+          "fpage": "352",
+          "history": null,
+          "iid": "4bb9bb5d-bc86-31e6-b9d2-cfd43a08b8a8",
+          "lpage": "368",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "Home is Where We Are by Wang Gungwu with Margaret Wang. NUS Press, 2021",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/27135681",
+          "_score": 25.5,
+          "abstract": "",
+          "authors": [
+              "Carlos de Jesús Becerril Hernández"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Historia Mexicana</cite>, Vol. 72, No. 1 (285) (JULIO-SEPTIEMBRE 2022), pp. 399-407",
+          "contentType": "Journal Article",
+          "doi": "10.2307/27135681",
+          "fpage": "399",
+          "history": null,
+          "iid": "be4840c1-785a-3aa7-ba2b-7a5b41915e37",
+          "lpage": "407",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              },
+              "2": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "entityName": "",
+                  "groupName": "Ilium",
+                  "groupID": 2,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [],
+          "subtitle": "",
+          "tb": "",
+          "title": "",
+          "year": 2022
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "socialsciences-discipline",
+              "count": 3555856
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 2912532
+          },
+          {
+              "value": "sciencemathematics-discipline",
+              "count": 2797604
+          },
+          {
+              "value": "areastudies-discipline",
+              "count": 1697978
+          },
+          {
+              "value": "generalhistory-discipline",
+              "count": 1696907
+          },
+          {
+              "value": "literature-discipline",
+              "count": 1599395
+          },
+          {
+              "value": "history-discipline",
+              "count": 1544869
+          },
+          {
+              "value": "biologicalsciences-discipline",
+              "count": 1290400
+          },
+          {
+              "value": "medicinealliedhealth-discipline",
+              "count": 1154671
+          },
+          {
+              "value": "businesseconomics-discipline",
+              "count": 1042039
+          },
+          {
+              "value": "politicalscience-discipline",
+              "count": 953496
+          },
+          {
+              "value": "healthsciences-discipline",
+              "count": 931977
+          },
+          {
+              "value": "generalscience-discipline",
+              "count": 899680
+          },
+          {
+              "value": "education-discipline",
+              "count": 832442
+          },
+          {
+              "value": "arts-discipline",
+              "count": 728274
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 12493455
+          }
+      ]
+  }
+}

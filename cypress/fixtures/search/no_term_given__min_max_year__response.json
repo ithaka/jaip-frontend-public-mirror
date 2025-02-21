@@ -1,0 +1,648 @@
+{
+    "total": 5973,
+    "qtime": 61,
+    "docs": [
+        {
+            "_id": "10.2307/106791",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "John Jerome Schroeter"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 309-361",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106791",
+            "fpage": "309",
+            "history": null,
+            "iid": "6ba28067-6149-301c-978a-b64924548e8f",
+            "lpage": "361",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Observations on the Atmospheres of Venus and the Moon, Their Respective Densities, Perpendicular Heights, and the Twi-Light Occasioned by Them. By John Jerome Schroeter, Esq. of Lilienthal, in the Dutchy of Bremen. Translated from the German",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106774",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "William Herschel"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 23-27",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106774",
+            "fpage": "23",
+            "history": null,
+            "iid": "4d9d290f-d30f-3aa0-9834-733682654e02",
+            "lpage": "27",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Miscellaneous Observations. By William Herschel, LL.D. F. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106796",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "John Andrew de Luc"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 400-424",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106796",
+            "fpage": "400",
+            "history": null,
+            "iid": "43938596-d67a-339a-9a0f-57246991fc0b",
+            "lpage": "424",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "On Evaporation. By John Andrew de Luc, Esq. F. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106779",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Joh. Godfr. Schmeisser",
+                "Joseph Banks"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 115-127",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106779",
+            "fpage": "115",
+            "history": null,
+            "iid": "fbfa0ee9-3cca-30ba-b11c-4baef680ec4d",
+            "lpage": "127",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Description of Kilburn Wells, and Analysis of Their Water. By Mr. Joh. Godfr. Schmeisser. Communicated by Sir Joseph Banks, Bart. P. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106785",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "James Currie",
+                "Thomas Percival"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 199-224",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106785",
+            "fpage": "199",
+            "history": null,
+            "iid": "d7e3607f-eba2-3a0d-bf0c-1b9cafed8c79",
+            "lpage": "224",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "An Account of the Remarkable Effects of a Shipwreck on the Mariners; With Experiments and Observations on the Influence of Immersion in Fresh and Salt Water, Hot and Cold, on the Powers of the Living Body. By James Currie, of Liverpool, M. D. Fellow of the Royal College of Physicians at Edinburgh. Communicated by Thomas Percival, M. D. F. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106782",
+            "_score": 20.43038,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 1-26",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106782",
+            "fpage": "1",
+            "history": null,
+            "iid": "225f09a9-4012-3625-9236-38a17b5f2a4c",
+            "lpage": "26",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Meteorological Journal, Kept at the Apartments of the Royal Society, By Order of the President and Council",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322140",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Samuel More"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 283, 285-390",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322140",
+            "fpage": "283",
+            "history": null,
+            "iid": "a62839e6-4316-359d-8cee-53400425ad67",
+            "lpage": "390",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PREMIUMS OFFERED BY THE SOCIETY FOR THE ENCOURAGEMENT OF ARTS, MANUFACTURES, AND COMMERCE, IN THE YEAR M. DCCXCII",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322138",
+            "_score": 5.43038,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 271-276",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322138",
+            "fpage": "271",
+            "history": null,
+            "iid": "19d50e12-6447-37f3-ac79-36784b4b086c",
+            "lpage": "276",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PRESENTS RECEIVED BY THE SOCIETY. SINCE THE PUBLICATION OF THE NINTH VOLUME OF THESE TRANSACTIONS. WITH THE NAMES OF THE DONORS",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106773",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "William Herschel"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 1-22",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106773",
+            "fpage": "1",
+            "history": null,
+            "iid": "4adc1af4-d9e4-3a78-ba8a-49227854ea66",
+            "lpage": "22",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "On the Ring of Saturn, and the Rotation of the Fifth Satellite upon Its Axis. By William Herschel, LL. D. F. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322131",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Lewis Majendie",
+                "James Montgomerie",
+                "George Caswell",
+                "Barker Myall",
+                "John Holliday",
+                "John Woolfe",
+                "James Dunn",
+                "B. Woolfe",
+                "J. Woolfe",
+                "Thomas Steel",
+                "Nathaniel Kent",
+                "William Pattenson",
+                "John Mather",
+                "Thomas Kirkbank",
+                "R. Pullen",
+                "Samuel Dunn",
+                "Thomas Rogerson",
+                "Peter Smith",
+                "William Dann",
+                "John Ambrose",
+                "Charles Hayward",
+                "John Baker",
+                "John Poulton",
+                "William Hayles",
+                "John Christmass",
+                "Houst. Radcliffe",
+                "John Carman",
+                "B. Douglass",
+                "John Hunter",
+                "W. Fordyce",
+                "J. Shepherd",
+                "Walter Scott",
+                "G. Poynter",
+                "Herbert Randolph",
+                "Robert Tabrum",
+                "John Keysal",
+                "John Wedge",
+                "John Jaques",
+                "John Jones",
+                "John Keysall"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 1, 3-150",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322131",
+            "fpage": "1",
+            "history": null,
+            "iid": "0d381c8e-5365-3592-9e08-2fb148afbbad",
+            "lpage": "150",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PAPERS IN AGRICULTURE",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106797",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Charles Blagden",
+                "George Gilpin"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 425-455",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106797",
+            "fpage": "425",
+            "history": null,
+            "iid": "d3bf4256-adb8-3fda-aec3-b2aba3272539",
+            "lpage": "455",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Supplementary Report on the Best Method of Proportioning the Excise upon Spirituous Liquors. By Charles Blagden, M. D. S. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322129",
+            "_score": 5.43038,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792)",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322129",
+            "fpage": "",
+            "history": null,
+            "iid": "d8d2d8fe-ed1d-3a1b-823f-081cb07ade03",
+            "lpage": "",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "[Illustration]",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322135",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "John Bell",
+                "Edward Pakenham",
+                "William Howells",
+                "Abraham Andrews",
+                "William Hill",
+                "M. Ware",
+                "J. Dann",
+                "John Frankland",
+                "James Hayward",
+                "Thomas Jones",
+                "James White",
+                "John Wheatley",
+                "John Metcalf",
+                "William Stavers",
+                "George Watson"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 201, 203-245",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322135",
+            "fpage": "201",
+            "history": null,
+            "iid": "71657b7f-d6ef-31e2-b2c7-acfd3f4a4498",
+            "lpage": "245",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PAPERS IN MECHANICKS",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322130",
+            "_score": 20.43038,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. iii-xviii",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322130",
+            "fpage": "iii",
+            "history": null,
+            "iid": "929b832e-ac97-3475-b77c-aaf7cacbaab8",
+            "lpage": "xviii",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PREFACE",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106775",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Thomas Wedgwood",
+                "Joseph Banks"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 28-47",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106775",
+            "fpage": "28",
+            "history": null,
+            "iid": "553d57ec-0ea2-3468-8fd9-89ee51ddefef",
+            "lpage": "47",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Experiments and Observations on the Production of Light from Different Bodies, by Heat and by Attrition. By Mr. Thomas Wedgwood; Communicated by Sir Joseph Banks, Bart. P. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106794",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "George Fordyce"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 374-382",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106794",
+            "fpage": "374",
+            "history": null,
+            "iid": "d41d2d34-c5e1-316b-b636-deb661327b91",
+            "lpage": "382",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "On the Cause of the Additional Weight Which Metals Acquire by Being Calcined. In a Letter from George Fordyce, M. D. F. R. S. to Sir Joseph Banks, Bart. P. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106788",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Thomas Wedgwood",
+                "Joseph Banks"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 270-282",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106788",
+            "fpage": "270",
+            "history": null,
+            "iid": "5fa40192-7af6-30c1-bc0e-5c63f27db2aa",
+            "lpage": "282",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Continuation of a Paper on the Production of Light and Heat from Different Bodies. By Mr. Thomas Wedgwood; Communicated by Sir Joseph Banks, Bart. P. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/106793",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "Cooper Abbs"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Philosophical Transactions of the Royal Society of London</cite>, Vol. 82 (1792), pp. 367-373",
+            "contentType": "Journal Article",
+            "doi": "10.2307/106793",
+            "fpage": "367",
+            "history": null,
+            "iid": "61c63f02-b807-34e4-bc35-3142144b0cb1",
+            "lpage": "373",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "Observations on the Remarkable Failure of Haddocks, on the Coasts of Northumberland, Durham, and Yorkshire. In Two Letters from the Rev. Cooper Abbs, to Dr. Blagden, Sec. R. S.",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322136",
+            "_score": 20.43038,
+            "abstract": "",
+            "authors": [
+                "George Unwin",
+                "G. Dominicus",
+                "Thomas Dancer"
+            ],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 247, 249-260",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322136",
+            "fpage": "247",
+            "history": null,
+            "iid": "8db25be3-b01a-3725-be66-acc8318d64fc",
+            "lpage": "260",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Approved",
+                    "statusLabel": "Approved by Discipline",
+                    "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                    "groupName": "Ithaka",
+                    "groupID": 1,
+                    "statusDetails": null
+                }
+            },
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "PAPERS IN COLONIES AND TRADE",
+            "year": 1792
+        },
+        {
+            "_id": "10.2307/41322139",
+            "_score": 5.43038,
+            "abstract": "",
+            "author": [],
+            "book_description": "",
+            "book_publisher": "",
+            "citation_line": "<cite>Transactions of the Society, Instituted at London, for the Encouragement of Arts, Manufactures, and Commerce</cite>, Vol. 10 (1792), pp. 277-278",
+            "contentType": "Journal Article",
+            "doi": "10.2307/41322139",
+            "fpage": "277",
+            "history": null,
+            "iid": "53f81e26-d64b-382e-af03-3f109fc32563",
+            "lpage": "278",
+            "mediaReviewStatuses": {},
+            "national_history": null,
+            "snippets": [],
+            "subtitle": "",
+            "tb": "",
+            "title": "A CATALOGUE OF THE MODELS AND MACHINES, RECEIVED SINCE THE PUBLICATION OF THE NINTH VOLUME OF THE SOCIETY'S TRANSACTIONS",
+            "year": 1792
+        }
+    ],
+    "stats": null,
+    "page": 0,
+    "facets": {
+        "disciplines": [
+            {
+                "value": "biologicalsciences-discipline",
+                "count": 5562
+            },
+            {
+                "value": "generalscience-discipline",
+                "count": 5562
+            },
+            {
+                "value": "mathematics-discipline",
+                "count": 5562
+            },
+            {
+                "value": "sciencemathematics-discipline",
+                "count": 5562
+            },
+            {
+                "value": "generalhistory-discipline",
+                "count": 409
+            },
+            {
+                "value": "history-discipline",
+                "count": 364
+            },
+            {
+                "value": "areastudies-discipline",
+                "count": 141
+            },
+            {
+                "value": "arthistory-discipline",
+                "count": 105
+            },
+            {
+                "value": "arts-discipline",
+                "count": 105
+            },
+            {
+                "value": "business-discipline",
+                "count": 105
+            },
+            {
+                "value": "businesseconomics-discipline",
+                "count": 105
+            },
+            {
+                "value": "education-discipline",
+                "count": 105
+            },
+            {
+                "value": "historyofscience-discipline",
+                "count": 105
+            },
+            {
+                "value": "socialsciences-discipline",
+                "count": 105
+            },
+            {
+                "value": "irishstudies-discipline",
+                "count": 92
+            }
+        ],
+        "contentType": [
+            {
+                "value": "journal",
+                "count": 5971
+            },
+            {
+                "value": "chapter",
+                "count": 2
+            }
+        ]
+    }
+}

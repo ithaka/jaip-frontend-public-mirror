@@ -1,0 +1,828 @@
+{
+  "total": 2415,
+  "qtime": 90,
+  "docs": [
+      {
+          "_id": "10.2307/48662452",
+          "_score": 58.635193,
+          "abstract": "",
+          "authors": [
+              "SUSAN P. MCNEILL"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Washington History</cite>, Vol. 34, No. 1 (SPRING 2022), pp. 6-26",
+          "contentType": "Journal Article",
+          "doi": "10.2307/48662452",
+          "fpage": "6",
+          "history": null,
+          "iid": "e6f5f2eb-0a51-3fbc-a202-2f3bc97508d2",
+          "lpage": "26",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/48662452",
+                  "text": "son of Depression era-defining photograph, “Migrant <span class=\"highlight\">Mary</span> Alice Wheeler McNeill, who taught German Mother,” hung two of my father’s vintage prints. in the DC Public Schools and served on its Board of They came from his 1938 series, “The Negro in Vir- Education (representing the segregated, “colored” ginia,” and were displayed"
+              }
+          ],
+          "subtitle": [
+              "Depression-Era Photo Documentarian Robert H. McNeill"
+          ],
+          "tb": "",
+          "title": "Rooted in DC",
+          "year": 2022
+      },
+      {
+          "_id": "10.5406/j.ctv2d6jrj1.8",
+          "_score": 56.70642,
+          "abstract": "<p>Among the many people in attendance at Johnson Publishing’s open house events in 1949 was <em>Chicago Defender</em> publisher John Sengstacke. A nephew and protégé of Robert Abbott, Sengstacke had been groomed to succeed the newspaper’s founder from a young age. Abbott helped to finance Sengstacke’s education at the Hampton Institute—his own alma mater—and arranged valuable work experience at the <em>Defender</em> during Sengstacke’s summer vacations.¹ In 1934 Sengstacke moved into Abbott’s palatial South Parkway home and began a role in the <em>Defender</em>’s bookkeeping department. Six years later he assumed full control of the newspaper’s operations following Abbott’s death in</p>",
+          "authors": [
+              "E. JAMES WEST"
+          ],
+          "book_description": "<p>\nBuildings once symbolized Chicago's place as the business capital\nof Black America and a thriving hub for Black media. In this\ngroundbreaking work, E. James West examines the city's Black press\nthrough its relationship with the built environment. As a house for\nthe struggle, the buildings of publications like <em>Ebony</em> and\nthe <em>Chicago Defender</em> embodied narratives of racial uplift\nand community resistance. As political hubs, gallery spaces, and\npublic squares, they served as key sites in the ongoing Black quest\nfor self-respect, independence, and civic identity. At the same\ntime, factors ranging from discriminatory business practices to\neditorial and corporate ideology prescribed their location, use,\nand appearance, positioning Black press buildings as sites of both\nBlack possibility and racial constraint. \n\n<p>Engaging and innovative, <em>A House for the Struggle</em>\nreconsiders the Black press's place at the crossroads where\naspiration collided with life in one of America's most segregated\ncities.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Illinois Press\",\"code\":\"illinois\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Illinois Press\",\"code\":\"illinois\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.5406/j.ctv2d6jrj1.8",
+          "fpage": "115",
+          "history": null,
+          "iid": "3ee4b93c-c35e-393b-848d-d41ce7d3abc6",
+          "lpage": "146",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.5406/j.ctv2d6jrj1.8",
+                  "text": "finances. By the early 1950s, he had gone even further, adding “a chain of newspapers . . . that stretch[ed] from Memphis to New York City.”2 For Black leaders such as educator <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , Sengstacke was a worthy heir to Abbott’s empire, “carrying high the torch passed on to"
+              }
+          ],
+          "subtitle": "",
+          "tb": "A House for the Struggle",
+          "title": "A Meeting Place for All the People",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.cdbmfhq4z.9",
+          "_score": 255.4748,
+          "abstract": "<p>“My dear Mr. President,” wrote Mary McLeod Bethune, president of the National Council of Negro Women (NCNW), to Franklin Roosevelt in June 1940, “at a time like this, when the basic principles of democracy are being challenged at home and abroad, when racial and religious hatreds are being engendered, it is vitally important that the Negro … express anew his faith in your leadership and his unswerving adherence to a program of national defense adequate to insure the perpetuation of the principles of democracy.” To Roosevelt’s program of national defense, Bethune pledged the support of herself and her organization, and</p>",
+          "authors": [
+              "Megan Threlkeld"
+          ],
+          "book_description": "<p>\n<p>Between 1900 and 1950, many internationalist U.S. women referred\nto themselves as \"citizens of the world.\" This book argues that the\nphrase was not simply a rhetorical flourish; it represented a\ndemand to participate in shaping the global polity and an\nexpression of women's obligation to work for peace and equality.\nThe nine women profiled here invoked world citizenship as they\npromoted world government-a permanent machinery to end war, whether\nin the form of the League of Nations, the United Nations, or a\nfull-fledged world federation. These women agreed neither on the\nbest form for such a government nor on the best means to achieve\nit, and they had different definitions of peace and different\nlevels of commitment to genuine equality. But they all saw\nthemselves as part of a global effort to end war that required\ntheir participation in the international body politic. Excluded\nfrom full national citizenship, they saw in the world polity\nopportunities for engagement and equality as well as for peace.\nClaiming world citizenship empowered them on the world stage. It\ngave them a language with which to advocate for international\ncooperation. <em>Citizens of the World</em> not only provides a\nmore complete understanding of the kind of world these women\nenvisioned and the ways in which they claimed membership in the\nglobal community. It also draws attention to the ways in which they\nwere excluded from international institution-building and to the\ncritiques many of them leveled at those institutions. Women's\narguments for world government and their practices of world\ncitizenship represented an alternative reaction to the crises of\nthe first half of the twentieth century, one predicated on\ncooperation and equality rather than competition and force.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.cdbmfhq4z.9",
+          "fpage": "124",
+          "history": null,
+          "iid": "51127af5-f43d-3830-86c8-52875c2bf62d",
+          "lpage": "144",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.cdbmfhq4z.9",
+                  "text": "6 <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Bethune’s Plans for a Just Postwar Peace “My dear Mr. President,” wrote <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , president of the National Council of Negro Women (NCNW), to Franklin Roosevelt in June 1940, “at a time like this, when the basic principles of democracy are being challenged at home and"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Citizens of the World",
+          "title": "Mary McLeod Bethune’s Plans for a Just Postwar Peace",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.cdbmfhq4z.10",
+          "_score": 59.7005,
+          "abstract": "<p>In June 1949, Dorothy Kenyon, the United States’ representative on the United Nations Commission on the Status of Women, gave the keynote address at the annual convention of the American Association of University Women. U.S. women had important responsibilities in the post–World War II era, she told her audience, and they could not allow geography to limit their vision. “Our frontier is now the world,” Kenyon told the AAUW. “Not Latin-America, in respect to which we are becoming an increasingly good neighbor, nor Canada; not Europe of the Atlantic Pact; not even the sharp line of demarcation laid down</p>",
+          "authors": [
+              "Megan Threlkeld"
+          ],
+          "book_description": "<p>\n<p>Between 1900 and 1950, many internationalist U.S. women referred\nto themselves as \"citizens of the world.\" This book argues that the\nphrase was not simply a rhetorical flourish; it represented a\ndemand to participate in shaping the global polity and an\nexpression of women's obligation to work for peace and equality.\nThe nine women profiled here invoked world citizenship as they\npromoted world government-a permanent machinery to end war, whether\nin the form of the League of Nations, the United Nations, or a\nfull-fledged world federation. These women agreed neither on the\nbest form for such a government nor on the best means to achieve\nit, and they had different definitions of peace and different\nlevels of commitment to genuine equality. But they all saw\nthemselves as part of a global effort to end war that required\ntheir participation in the international body politic. Excluded\nfrom full national citizenship, they saw in the world polity\nopportunities for engagement and equality as well as for peace.\nClaiming world citizenship empowered them on the world stage. It\ngave them a language with which to advocate for international\ncooperation. <em>Citizens of the World</em> not only provides a\nmore complete understanding of the kind of world these women\nenvisioned and the ways in which they claimed membership in the\nglobal community. It also draws attention to the ways in which they\nwere excluded from international institution-building and to the\ncritiques many of them leveled at those institutions. Women's\narguments for world government and their practices of world\ncitizenship represented an alternative reaction to the crises of\nthe first half of the twentieth century, one predicated on\ncooperation and equality rather than competition and force.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.cdbmfhq4z.10",
+          "fpage": "145",
+          "history": null,
+          "iid": "4199392f-6bfb-3127-a8e1-f8464f5eef7b",
+          "lpage": "164",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.cdbmfhq4z.10",
+                  "text": "a Conference on the United Nations and the Special Interests of Women. More than fifty prominent women attended the day- long session, including Esther Brunauer, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , and Kenyon. The meeting had both an explicit and an implicit agenda. The explicit agenda, which is the focus here, was a"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Citizens of the World",
+          "title": "Dorothy Kenyon and World Citizenship Through the United Nations",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2f9xrtq.6",
+          "_score": 55.933994,
+          "abstract": "<p>As Reverend Ambrose Hubbs approached the pulpit in Galveston’s First Missionary Baptist Church, with the November breeze in the coastal city cool and a bit damp from the rains, Robert Henson Hilliard’s death weighed heavily on his mind.¹ Hilliard had been chained to a pole and set ablaze in Tyler, Texas, just a few weeks before the pastor’s address to those who filled the sanctuary. Every seat was occupied that Friday evening by some curious or troubled local resident, forcing many in attendance to stand to receive the words delivered by invited speakers. African Americans in the area gathered</p>",
+          "authors": [
+              "TERRY ANNE SCOTT"
+          ],
+          "book_description": "<p>\nIn <em>Lynching and Leisure</em>, Terry Anne Scott examines how\nwhite Texans transformed lynching from a largely clandestine\nstrategy of extralegal punishment into a form of racialized\nrecreation in which crowd involvement was integral to the mode and\nmethods of the violence. Scott powerfully documents how lynchings\ncame to function not only as tools for debasing the status of Black\npeople but also as highly anticipated occasions for entertainment,\nmaking memories with friends and neighbors, and reifying whiteness.\nIn focusing on the sense of pleasure and normality that prevailed\namong the white spectatorship, this comprehensive study of Texas\nlynchings sheds new light on the practice understood as one of the\nchief strategies of racial domination in the nineteenth- and\ntwentieth-century South.\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Arkansas Press\",\"code\":\"uarp\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Arkansas Press\",\"code\":\"uarp\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2f9xrtq.6",
+          "fpage": "65",
+          "history": null,
+          "iid": "840fb0ca-c64f-3682-b4e6-9b26155de395",
+          "lpage": "112",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2f9xrtq.6",
+                  "text": "many had succumbed: at least two Black women— <span class=\"highlight\">Mary</span> Phillips and an unnamed woman—were lynched in Texas that year. Hannah Phillips was also lynched. She was only twelve years old.7 Hubbs and the other orators who addressed the assemblage of troubled citizens that evening sought “to resort to proper methods to"
+              }
+          ],
+          "subtitle": [
+              "Race, Gender, and the Uninterrupted Staging of Death by Burning"
+          ],
+          "tb": "Lynching and Leisure",
+          "title": "“Black Brutes . . . Will Be Burned”:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2kjcx1g.12",
+          "_score": 56.25872,
+          "abstract": "",
+          "author": [],
+          "book_description": "<p>\n<p><strong>The rich friendship of two remarkable women talking to\neach other in letters</strong></p>\n\n<p>Exploring the rich, enduring companionship shared by Marjorie\nKinnan Rawlings and Julia Scribner Bigham through\nnever-before-published letters, <em>Marge and Julia</em> provides a\nrevelatory depiction of these two literary women's experiences in\nmid-twentieth-century America.</p>\n\n<p>Pulitzer Prize-winning author Rawlings was first introduced to\nJulia Scribner (later Bigham), daughter of publishing magnate\nCharles Scribner III, shortly after the legendary Scribner House\npublished <em>The Yearling</em> to runaway success. Though Julia's\nNew York City life was far removed from the rural world of Cross\nCreek, the two women remained close until Rawlings's death in 1953,\nafter which Scribner Bigham served as Rawlings's literary executor.\nIn this documentary edition of 211 of their letters, Rawlings's and\nBigham's perspectives on the world are woven through over a decade\nof intimate discussion and advice about relationships, motherhood,\nmental health, politics, art, and literature.</p>\n\nSupplementing the letters with an introduction, explanatory\nfootnotes, and a reminiscence by Scribner Bigham's eldest daughter,\nHildreth Julia Bigham McCarthy, MD , this edition provides\nhistorical context and prompts readers to inspect the facets of\nboth women's complex relationship with issues such as racial\ndiscrimination, class, and gender inequality. These letters offer\nan unprecedented performance of two women's intimate friendship,\none that transcended the limitations of patriarchy as they wrote\ntheir lives in letters.\n</p>",
+          "book_publisher": "[{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2kjcx1g.12",
+          "fpage": "318",
+          "history": null,
+          "iid": "5c3e2af6-6ea2-330b-9ebb-5b1fd304e02f",
+          "lpage": "403",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2kjcx1g.12",
+                  "text": "we saw a good deal of him and his attractive wife at parties before and after. We liked them very much. Then a few days ago I went alone to Tallahassee, to speak at the colored State college, Florida A.&M.,4 where <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> was being honored.5 It was most interesting"
+              }
+          ],
+          "subtitle": [
+              "1945–1947"
+          ],
+          "tb": "Marge and Julia",
+          "title": "The Height of Friendship:",
+          "year": 2022
+      },
+      {
+          "_id": "10.5749/j.ctv2h6vkf7.6",
+          "_score": 57.23483,
+          "abstract": "<p>I was enjoying a meal with Elijah Lovejoy and Jim Davis, owner of the new Rosa Mae’s restaurant in Thomasville, ten miles from High Point. Davis had closed his original restaurant in downtown High Point after concluding that the location was no longer tenable. Lovejoy was asking him what might replace the lost downtown.</p><p>“Essentially, it looks like the Palladium area,” Davis said. He was referring to the new retail center in North High Point near the Greensboro border. This former greenfield area north of downtown was slowly incorporated into the city limits but was developed into a suburban landscape.</p>",
+          "authors": [
+              "JOHN JOE SCHLICHTMAN"
+          ],
+          "book_description": "<p>\n<p><strong>A unique and engaging account of local urban\ndecision-making within the globalizing world</strong> High Point,\nNorth Carolina, is known as the \"Furniture Capital of the World.\"\nOnce a manufacturing stronghold, most of its furniture factories\nhave closed over the past forty years, with production shipped off\nto low-wage countries. Yet as manufacturing left, the city\ntightened its hold on a biannual global exposition that serves as\nthe world's furniture fashion runway. At the High Point Market,\nvisitors from more than one hundred nations traverse twelve million\nsquare feet of meticulous design. Downtown buildings-once\ncourthouses, movie theaters, post offices, and gas stations-are now\nchic showroom spaces, even as many sit empty between each\nexposition.</p>\n\n<p>In <em>Showroom City</em>, John Joe Schlichtman applies an\nethnographic lens to the global exposition's relationship with High\nPoint after it defeated rival Chicago in the 1960s and established\nitself as the world's dominant furniture center. In recent decades,\nfollowing trends in global finance, private equity firms were\nincreasingly behind downtown High Point's real estate transactions,\ncoordinated by buyers far removed from the region. Then, in one\nmassive transaction in 2011, a firm funded by Bain Capital\npurchased every major showroom building, and the majority of\ndowntown real estate was under one owner.</p>\n\n<p><em>Showroom City</em> is a story of exclusionary growth and\nunchecked development, of a city flailing to fill the void left by\nits dwindling factories. But beyond that Schlichtman engages the\ngeneral lessons behind both High Point's deindustrialization and\nits stunning reinvention as a furniture fashion, merchandising, and\ndesign node. With great nuance, he delves deeply to reveal how\npower operates locally and how citizens may affirm, exploit,\ninfluence, and resist the takeover of their community.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Minnesota Press\",\"code\":\"umnpress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Minnesota Press\",\"code\":\"umnpress\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.5749/j.ctv2h6vkf7.6",
+          "fpage": "43",
+          "history": null,
+          "iid": "d84d3113-a000-34cf-8649-d5641e5f9182",
+          "lpage": "70",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.5749/j.ctv2h6vkf7.6",
+                  "text": ", and cultivate anchor institutions for Black thought in every arena of life.12 Chavis proudly cited the prominent figures—Booker T. Washington, James Weldon Johnson, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , Walter White, <span class=\"highlight\">Mary</span> White Ovington, Langston Hughes—who came to Washington Street to speak, perform, or just visit kin"
+              }
+          ],
+          "subtitle": [
+              "The “All-American” Downtown Goes Temp"
+          ],
+          "tb": "Showroom City",
+          "title": "Hollowing Out",
+          "year": 2022
+      },
+      {
+          "_id": "10.5149/9781469668499_sharpless.11",
+          "_score": 60.546455,
+          "abstract": "<p>When blues idol Bessie Smith sang in 1927, “I need a little sugar in my bowl, I need a little jelly in my roll,” she invoked the tradition of comparing food with sex, given fresh attention through modern media. In the blues, angel food cake, cookies, and shortening bread all stood in for another kind of desire, but the jelly roll, a plain cake with sweet filling, was the favorite metaphor.¹ Music—whether live, on the radio, or recorded—and baked goods all told the same story. Desire and baking were central to understanding the modernizing South.</p><p>As the South</p>",
+          "authors": [
+              "REBECCA SHARPLESS"
+          ],
+          "book_description": "<p>While a luscious layer cake may exemplify the towering glory of southern baking, like everything about the American South, baking is far more complicated than it seems. Rebecca Sharpless here weaves a brilliant chronicle, vast in perspective and entertaining in detail, revealing how three global food traditions-Indigenous American, European, and African-collided with and merged in the economies, cultures, and foodways of the South to create what we know as the southern baking tradition. Recognizing that sentiments around southern baking run deep, Sharpless takes delight in deflating stereotypes as she delves into the surprising realities underlying the creation and consumption of baked goods. People who controlled the food supply in the South used baking to reinforce their power and make social distinctions. Who used white cornmeal and who used yellow, who put sugar in their cornbread and who did not had traditional meanings for southerners, as did the proportions of flour, fat, and liquid in biscuits. By the twentieth century, however, the popularity of convenience foods and mixes exploded in the region, as it did nationwide. Still, while some regional distinctions have waned, baking in the South continues to be a remarkable, and remarkably tasty, source of identity and entrepreneurship.</p>",
+          "book_publisher": "[{\"publisher\":\"University of North Carolina Press\",\"code\":\"uncpress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of North Carolina Press\",\"code\":\"uncpress\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.5149/9781469668499_sharpless.11",
+          "fpage": "147",
+          "history": null,
+          "iid": "cc8a8109-e3e7-3680-b51c-651521170cda",
+          "lpage": "175",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.5149/9781469668499_sharpless.11",
+                  "text": "the transition to stoves fired with wood.5 Families saved their pennies to buy them, and the used stove market thrived. When East Texan <span class=\"highlight\">Mary</span> Cimarolli’s family moved to a dilapidated house with only a fireplace in 1937, her father quickly paid four dollars for a used stove.6 Mildred Council, the esteemed"
+              }
+          ],
+          "subtitle": [
+              "The Modernizing South"
+          ],
+          "tb": "Grain and Fire",
+          "title": "JELLY ROLL:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2bfhhfs.9",
+          "_score": 57.04809,
+          "abstract": "<p>Catharine Beecher, who founded one of the first institutions of advanced education for females, was very clear about what was appropriate to woman: “delicacy of appearance and manners, … a shrinking from notoriety and public gaze, a love of dependence and protection.” She was equally clear about what was inappropriate, and Frances Wright, a women’s rights pioneer and one of the first women in the United States to speak to mixed audiences of men and women, was the epitome of inappropriate. Wright advocated ideas that were shockingly radical: free love, birth control, and the liberalization of divorce laws. “There she</p>",
+          "authors": [
+              "LILLIAN FADERMAN"
+          ],
+          "book_description": "<p>\n<strong>A comprehensive history of the struggle to define womanhood\nin America, from the seventeenth to the twenty-first\ncentury</strong> <strong>\"An intelligently provocative, vital\nreading experience. . . . This highly readable, inclusive, and\ndeeply researched book will appeal to scholars of women and gender\nstudies as well as anyone seeking to understand the historical\npatterns that misogyny has etched across every era of American\nculture.\"-<em>Kirkus Reviews</em></strong> <strong>\"A comprehensive\nand lucid overview of the ongoing campaign to free women from 'the\ntyranny of old notions.'\"-<em>Publishers Weekly</em></strong> What\ndoes it mean to be a \"woman\" in America? Award-winning gender and\nsexuality scholar Lillian Faderman traces the evolution of the\nmeaning from Puritan ideas of God's plan for women to the sexual\nrevolution of the 1960s and its reversals to the impact of such\nrecent events as #metoo, the appointment of Amy Coney Barrett to\nthe Supreme Court, the election of Kamala Harris as vice president,\nand the transgender movement. This wide-ranging 400-year history\nchronicles conflicts, retreats, defeats, and hard-won victories in\nboth the private and the public sectors and shines a light on the\noften-overlooked battles of enslaved women and women leaders in\ntribal nations. Noting that every attempt to cement a particular\ndefinition of \"woman\" has been met with resistance, Faderman also\nshows that successful challenges to the status quo are often\nshort-lived. As she underlines, the idea of womanhood in America\ncontinues to be contested.\n</p>",
+          "book_publisher": "[{\"publisher\":\"Yale University Press\",\"code\":\"yale\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Yale University Press\",\"code\":\"yale\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2bfhhfs.9",
+          "fpage": "142",
+          "history": null,
+          "iid": "289d7ef0-b529-33fc-b9bf-d25e2a9bf444",
+          "lpage": "167",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2bfhhfs.9",
+                  "text": "L L E G E “ Under such influences the female character is fast becoming masculine.” — e. a . andrews, commentary on <span class=\"highlight\">Mary</span> Lyon’s proposal for Mount Holyoke Female Seminary, 18372 Like her con temporary Sarah Josepha Hale, Catharine Beecher was a study in contradictions. Both w omen spent their"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Woman",
+          "title": "Woman Goes to College and Enters the Professions",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2m2fvf6.8",
+          "_score": 58.145596,
+          "abstract": "<p>When Bertha Maxwell-Roddey talked to students in her African American Studies class at the University of South Carolina at Lancaster or at public events, she often asked how many of them once lived with their grandparents or in a single-parent home and later shared that she grew up the same way. The Frank Porter Graham Distinguished Professor Emeritus and former director of the University of North Carolina at Charlotte’s now Africana Studies Department never hesitated to share that she grew up, “P.O. poor.” She assured them that she received a wealth of love and support despite lacking material things as</p>",
+          "authors": [
+              "Sonya Y. Ramsey"
+          ],
+          "book_description": "<p>\n<p><strong>The life and accomplishments of an influential leader in\nthe desegregated South</strong></p>\n\n<p>This biography of educational activist and Black studies\nforerunner Bertha Maxwell-Roddey examines a life of remarkable\nachievements and leadership in the desegregated South. Sonya Ramsey\nmodernizes the nineteenth-century term \"race woman\" to describe how\nMaxwell-Roddey and her peers turned hard-won civil rights and\nfeminist milestones into tangible accomplishments in North Carolina\nand nationwide from the late 1960s to the 1990s.</p>\n\n<p>﻿</p>\n\n<p>Born in 1930, Maxwell-Roddey became one of Charlotte's first\nBlack women principals of a white elementary school; she was the\nfounding director of the University of North Carolina at\nCharlotte's Africana Studies Department; and she cofounded the\nAfro-American Cultural and Service Center, now the Harvey B. Gantt\nCenter for African-American Art + Culture. Maxwell-Roddey founded\nthe National Council for Black Studies, helping institutionalize\nthe field with what is still its premier professional organization,\nand served as the 20th National President of Delta Sigma Theta\nSorority, Inc., one of the most influential Black women's\norganizations in the United States.</p>\n\n<p>﻿</p>\n\n<p>Using oral histories and primary sources that include private\nrecords from numerous Black women's home archives, Ramsey\nilluminates the intersectional leadership strategies used by\nMaxwell-Roddey and other modern race women to dismantle\ndiscriminatory barriers in the classroom and the boardroom. Bertha\nMaxwell-Roddey offers new insights into desegregation, urban\nrenewal, and the rise of the Black middle class through the lens of\na powerful leader's life story.</p>\n\n<p><strong>Publication of this work made possible by a Sustaining\nthe Humanities through the American Rescue Plan grant from the\nNational Endowment for the Humanities.</strong></p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2m2fvf6.8",
+          "fpage": "15",
+          "history": null,
+          "iid": "8ac74efd-ba83-3e60-8cb9-c8ed17a91632",
+          "lpage": "33",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2m2fvf6.8",
+                  "text": "because the Lyons’s house had a bathroom. Bertha remembered that at the age of eight, she helped her grandmother prepare their home for the upcoming visit of <span class=\"highlight\">Mary</span> Church Terrell. The civil rights activist and former president of the then National Association of Colored Women came"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Bertha Maxwell-Roddey",
+          "title": "A “Big Mind,” Childhood, and Early Beginnings",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2bfhhfs.14",
+          "_score": 62.2727,
+          "abstract": "<p>It was an emotional reaction born of the desire to counter the social destabilization: to return to a time when life was more predictable, when woman honored her domestic sphere. The journalist Norman Cousins—who would become editor in chief of the <em>Saturday Review</em>, a magazine with almost 700,000 readers—proposed a sweeping plan that would at once end the Depression and restore woman to the place where God had set her, erasing generations’ worth of unwise permutations. “There are approximately ten million people out of work in the United States today,” Cousins wrote. “There are also ten million or</p>",
+          "authors": [
+              "LILLIAN FADERMAN"
+          ],
+          "book_description": "<p>\n<strong>A comprehensive history of the struggle to define womanhood\nin America, from the seventeenth to the twenty-first\ncentury</strong> <strong>\"An intelligently provocative, vital\nreading experience. . . . This highly readable, inclusive, and\ndeeply researched book will appeal to scholars of women and gender\nstudies as well as anyone seeking to understand the historical\npatterns that misogyny has etched across every era of American\nculture.\"-<em>Kirkus Reviews</em></strong> <strong>\"A comprehensive\nand lucid overview of the ongoing campaign to free women from 'the\ntyranny of old notions.'\"-<em>Publishers Weekly</em></strong> What\ndoes it mean to be a \"woman\" in America? Award-winning gender and\nsexuality scholar Lillian Faderman traces the evolution of the\nmeaning from Puritan ideas of God's plan for women to the sexual\nrevolution of the 1960s and its reversals to the impact of such\nrecent events as #metoo, the appointment of Amy Coney Barrett to\nthe Supreme Court, the election of Kamala Harris as vice president,\nand the transgender movement. This wide-ranging 400-year history\nchronicles conflicts, retreats, defeats, and hard-won victories in\nboth the private and the public sectors and shines a light on the\noften-overlooked battles of enslaved women and women leaders in\ntribal nations. Noting that every attempt to cement a particular\ndefinition of \"woman\" has been met with resistance, Faderman also\nshows that successful challenges to the status quo are often\nshort-lived. As she underlines, the idea of womanhood in America\ncontinues to be contested.\n</p>",
+          "book_publisher": "[{\"publisher\":\"Yale University Press\",\"code\":\"yale\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Yale University Press\",\"code\":\"yale\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2bfhhfs.14",
+          "fpage": "249",
+          "history": null,
+          "iid": "b269a064-b239-343c-9e6e-90d1378b8027",
+          "lpage": "275",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2bfhhfs.14",
+                  "text": "the course of her thirty-s ix years at the college, <span class=\"highlight\">Mary</span> Woolley had transformed an indiffer- ent l ittle women’s college into one of the best schools for w omen in the country. Thirty- eight years old when she became president, Woolley an- nounced her intentions in her inaugural speech. A"
+              }
+          ],
+          "subtitle": [
+              "THE DEPRESSION AND WORLD WAR II"
+          ],
+          "tb": "Woman",
+          "title": "Woman on a Seesaw:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2fwfzxx.11",
+          "_score": 56.450687,
+          "abstract": "<p>There is a growing body of scholarship and literature that explores the impact of the revolutionary events across the African diaspora and the subsequent critical intellectual influence of Marxism and Bolshevism on the stream of revolutionary ‘black internationalism’ in its aftermath, in particular the pre-eminent work of Cedric J. Robinson, <em>Black Marxism: The Making of the Black Radical Tradition</em> (1983).¹ In his work, Robinson identifies three intellectuals as illustrative of the black radical intellectual tradition – W.E.B. Du Bois, C.L.R. James, and Richard Wright.² In this framing, one does not get a sense that black women were activists and theoreticians</p>",
+          "authors": [
+              "Lydia Lindsey"
+          ],
+          "book_description": "<p>\n<p><em>Revolutionary lives of the Red and Black Atlantic</em>\nbrings to light the life histories of a wide range of radical\nfigures whose political activity in relation to the black\nliberation struggle was profoundly shaped by the global impact and\nlegacy of the Russian Revolution of October 1917. The volume\nintroduces new perspectives on the intellectual trajectories of\nwell-known figures and critical activists including C. L. R. James,\nPaul Robeson, Walter Rodney and Grace P. Campbell. This\nbiographical approach brings a vivid and distinctive lens to bear\non how racialised social and political worlds were negotiated and\nexperienced by these revolutionary figures, and on historic black\nradical engagements with left political movements, in the wake of\nthe Russian Revolution.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"Manchester University Press\",\"code\":\"manchesterup\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Manchester University Press\",\"code\":\"manchesterup\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2fwfzxx.11",
+          "fpage": "94",
+          "history": null,
+          "iid": "fdccf1e8-0fd2-3ebb-afa0-43081de94b59",
+          "lpage": "142",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2fwfzxx.11",
+                  "text": "marriage, six children were born. One son, Henry (1880), was born before the couple left for Texas, and <span class=\"highlight\">Mary</span> V. Campbell (1891) and Ralph E. Campbell (1888) were born in Galveston. So far, only three of the couple’s living children have been identified.18 Grace Campbell had a relationship with <span class=\"highlight\">Mary</span>"
+              }
+          ],
+          "subtitle": [
+              "Grace P. Campbell’s role in the formation of a radical feminist tradition in African-American intellectual culture"
+          ],
+          "tb": "Revolutionary lives of the Red and Black Atlantic since 1917",
+          "title": "Gendering the black radical tradition:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2cmrbv5.23",
+          "_score": 62.929634,
+          "abstract": "<p>Black Omaha’s battle for civil rights began early and still continues. Long before there was a civil rights movement, African American women and girls began agitating for change in the schools and in the workplace. <em>Omaha Star</em> publisher Mildred Brown started fighting job discrimination during World War II and never stopped. She was one of the founders of the local civil rights movement that paralleled the national movement. African American women and girls marched, protested, litigated, and organized, usually with little acclaim. They were plaintiffs in the lawsuit that desegregated the Omaha Public Schools and scored victories like the recognition</p>",
+          "authors": [
+              "EILEEN WIRTH"
+          ],
+          "book_description": "<p>\nDuring the 1930s the Federal Writers' Project described Omaha as a\n\"man's town,\" and histories of the city have all but ignored women.\nHowever, women have played major roles in education, health,\nculture, social services, and other fields since the city's\nfounding in 1854. In <em>The Women Who Built Omaha</em> Eileen\nWirth tells the stories of groundbreaking women who built Omaha,\nincluding Susette \"Bright Eyes\" LaFlesche, who translated at the\ntrial of Chief Standing Bear; Mildred Brown, an African American\nnewspaper publisher; Sarah Joslyn, who personally paid for Joslyn\nArt Museum; Mrs. B of Nebraska Furniture Mart; and the Sisters of\nMercy, who started Omaha's Catholic schools. Omaha women have been\nchampion athletes and suffragists as well as madams and\nbootleggers. They transformed the city's parks, co-founded\nCreighton University, helped run Boys Town, and so much more, in\nways that continue today.\n</p>",
+          "book_publisher": "[{\"publisher\":\"Bison Books\",\"code\":\"bisonbooks\",\"role\":\"IMPRINT\"},{\"publisher\":\"University of Nebraska Press\",\"code\":\"unp\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Nebraska Press\",\"code\":\"unp\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2cmrbv5.23",
+          "fpage": "155",
+          "history": null,
+          "iid": "c8d0fea0-167c-3077-9ba6-1d08c48d1886",
+          "lpage": "164",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2cmrbv5.23",
+                  "text": "of Colored Women’s Clubs in 1905 and was active for fifty years. She also helped organize the Eureka Art Club, South Side Civic Club, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Club, and Civic Matrons Club and was active in the Zion Baptist Church.4 In segregated Omaha, African Americans formed their own community within the"
+              }
+          ],
+          "subtitle": "",
+          "tb": "The Women Who Built Omaha",
+          "title": "Civil Rights",
+          "year": 2022
+      },
+      {
+          "_id": "10.7591/j.ctv1k139wk.7",
+          "_score": 56.70642,
+          "abstract": "<p>When Rosetta Crutchfield and her two young children arrived in Rochester from Sanford, Florida, in 1948, the city and its Black community had not yet undergone their great transition. Jobs were still available, and she found one immediately as a nurse’s aide. The housing market in the Third Ward, though strongly discriminatory, was not as predatory as it soon would become. The nearby School 3, where her children enrolled, was not yet marked by strict segregation. “We were active; I was happy,” her second daughter, Nellie King, said. “If anyone had a problem it was not mine. A lot of</p>",
+          "authors": [
+              "Justin Murphy"
+          ],
+          "book_description": "<p>\n<p><strong>In</strong> <strong><em>Your Children Are Very Greatly\nin Danger</em></strong> <strong>, the veteran journalist Justin\nMurphy makes the compelling argument that the educational\ndisparities in Rochester, New York, are the result of historical\nand present-day racial segregation.</strong> Education reform alone\nwill never be the full solution; to resolve racial inequity, cities\nsuch as Rochester must first dismantle segregation. Drawing on\nnever-before-seen archival documents as well as scores of new\ninterviews, Murphy shows how discriminatory public policy and\npersonal prejudice combined to create the racially segregated\neducation system that exists in the Rochester area today. Alongside\nthis dismal history, Murphy recounts the courageous fight for\nintegration and equality, from the advocacy of Frederick Douglass\nin the 1850s to a countywide student coalition inspired by the\nBlack Lives Matter movement in the 2010s. This grinding antagonism,\nfeaturing numerous failed efforts to uphold the promise of Brown v.\nBoard of Education, underlines that desegregation and integration\noffer the greatest opportunity to improve educational and economic\noutcomes for children of color in the United States. To date, that\nopportunity has been lost in Rochester, and persistent poor\nacademic outcomes have been one terrible result. <em>Your Children\nAre Very Greatly in Danger</em> is a history of Rochester with\nclear relevance for today. The struggle for equity in Rochester,\nlike in many northern cities, shows how the burden of history lies\non the present. A better future for these cities requires grappling\nwith their troubled pasts. Murphy's account is a necessary\ncontribution to twenty-first-century Rochester.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"Cornell University Press\",\"code\":\"cornellpress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Cornell University Press\",\"code\":\"cornellpress\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.7591/j.ctv1k139wk.7",
+          "fpage": "72",
+          "history": null,
+          "iid": "30f39d46-2a94-3ea0-a024-30f2f299cc58",
+          "lpage": "98",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.7591/j.ctv1k139wk.7",
+                  "text": "educator <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> compared a riot in Harlem to the Boston Tea Party and connected Black Americans’ grievances with those of the oppressed in China and Russia: “Along with other good Americans the Negro has been . . . fight­ ing now on land and sea and in the air"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Your Children Are Very Greatly in Danger",
+          "title": "Willing Combatants",
+          "year": 2022
+      },
+      {
+          "_id": "10.5325/j.ctv2f4v62n.10",
+          "_score": 70.07959,
+          "abstract": "<p>This chapter explores the contributions of several black women leaders whose social witness influenced the emergence of two successive religious movements in the United States: the Radical Holiness Movement in the nineteenth century and Pentecostalism in the twentieth century. The women chosen for this study represent several denominational traditions. Evangelist Amanda Berry Smith was a member of the African Methodist Episcopal Church. The women who ministered alongside William J. Seymour during the Azusa Street Revival were from the Holiness or “sanctified” tradition. Lizzie Robinson and Lillian Brooks Coffey were two pioneering church mothers of the Church of God in Christ.</p>",
+          "authors": [
+              "Cheryl J. Sanders"
+          ],
+          "book_description": "<p>\n<p>Since the 1830s, Holiness and Pentecostal movements have had a\nsignificant influence on many Christian churches, and they have\nbeen a central force in producing what is known today as World\nChristianity. This book demonstrates the advantages of analyzing\nthem in relation to one another.</p>\n\n<p>The Salvation Army, the Church of the Nazarene, the Wesleyan\nChurch, and the Free Methodist Church identify strongly with the\nHoliness Movement. The Assemblies of God and the Pentecostal\nAssemblies of the World identify just as strongly with the\nPentecostal Movement. Complicating matters, denominations such as\nthe Church of God (Cleveland), the International Holiness\nPentecostal Church, and the Church of God in Christ have harmonized\nHoliness and Pentecostalism. This book, the first in the new series\nStudies in the Holiness and Pentecostal Movements, examines these\ncomplex relationships in a multidisciplinary fashion. Building on\nprevious scholarship, the contributors provide new ways of\nunderstanding the relationships, influences, and circulation of\nideas among these movements in the United States, the United\nKingdom, India, and Southeast and East Asia.</p>\n\n<p>In addition to the editors, the contributors are Kimberly Ervin\nAlexander, Insik Choi, Robert A. Danielson, Chris E. W. Green,\nHenry H. Knight III, Frank D. Macchia, Luther Oconer, Cheryl J.\nSanders, and Daniel Woods.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"Penn State University Press\",\"code\":\"psup\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Penn State University Press\",\"code\":\"psup\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.5325/j.ctv2f4v62n.10",
+          "fpage": "138",
+          "history": null,
+          "iid": "264a9120-98f7-3f32-941c-46c9c503e8bd",
+          "lpage": "158",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.5325/j.ctv2f4v62n.10",
+                  "text": ": the cosmopolitan evangelism of Amanda Berry Smith, the egalitarian revivalism of the Azusa Street washwomen, and the sanctified civic engagement of the COGIC church mothers, Lizzie Robinson and Lillian Brooks Coffey. Amanda Berry Smith (1837–1915) was born to enslaved parents in <span class=\"highlight\">Mary</span> - land"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Holiness and Pentecostal Movements",
+          "title": "Black Radical Holy Women at the Intersection of Christian Unity and Social Justice",
+          "year": 2022
+      },
+      {
+          "_id": "10.7591/j.ctv1mcpmnf.10",
+          "_score": 56.184288,
+          "abstract": "<p>In March 1960, Eileen D. Peck of Watertown, New York, wrote a letter to Governor Nelson Rockefeller. Peck and her husband had been following Rockefeller’s campaign for fallout shelters closely but had developed several questions. “If the fallout is so heavy that we must have such shelters,” Peck wondered, “won’t the earth be contaminated—and all the foods grown in the soil? Also won’t the animals be poisoned so as to be unfit for consumption?” By the early 1960s, civil defense and concerns about fallout had become thoroughly aligned, thanks in large part to official civil defense campaigns to promote</p>",
+          "authors": [
+              "Sarah E. Robey"
+          ],
+          "book_description": "<p>\n<p>At the dawn of the Atomic Age, Americans encountered troubling\nnew questions brought about by the nuclear revolution: In a\nrepresentative democracy, who is responsible for national public\nsafety? How do citizens imagine themselves as members of the\nnational collective when faced with the priority of individual\nsurvival? What do nuclear weapons mean for transparency and\naccountability in government? What role should scientific experts\noccupy within a democratic government? Nuclear weapons created a\nnew arena for debating individual and collective rights. In turn,\nthey threatened to destabilize the very basis of American\ncitizenship.</p>\n\n<p>As Sarah E. Robey shows in <em>Atomic Americans</em>, people\nnegotiated the contours of nuclear citizenship through overlapping\npublic discussions about survival. Policymakers and citizens\ndisagreed about the scale of civil defense programs and other\npublic safety measures. As the public learned more about the\ndangers of nuclear fallout, critics articulated concerns about\nwhether the federal government was operating in its citizens' best\ninterests. By the early 1960s, a significant antinuclear movement\nhad emerged, which ultimately contributed to the 1963 nuclear\ntesting ban. <em>Atomic Americans</em> tells the story of a\nthoughtful body politic engaged in rewriting the rubric of rights\nand responsibilities that made up American citizenship in the\nAtomic Age.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"Cornell University Press\",\"code\":\"cornellpress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Cornell University Press\",\"code\":\"cornellpress\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.7591/j.ctv1mcpmnf.10",
+          "fpage": "135",
+          "history": null,
+          "iid": "f48c3acf-ebb6-3d1c-9fb3-60aac3be624b",
+          "lpage": "170",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.7591/j.ctv1mcpmnf.10",
+                  "text": "Black communities, especially those in American cities, skepticism about nuclear survival had a long pre ce dent.60 Despite the appointment of civil rights activist <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> to the FCDA’s advisory council in the early 1950s, the FCDA’s reco rd on racial equality was tarnished from the start by the segregationist"
+              }
+          ],
+          "subtitle": [
+              "The Expert Public and Nuclear Dissent"
+          ],
+          "tb": "Atomic Americans",
+          "title": "Atomic America:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2jhjv93.5",
+          "_score": 57.802162,
+          "abstract": "<p>White southern enthusiasm for much of the New Deal was partly predicated on the assumption that Roosevelt’s administration would, in practice, do little to upset traditional patterns of race relations in the South. But African Americans saw the possibilities in the 1930s, especially after the start of World War II, of a new racial order. Conservative whites, always sensitive to real or imagined threats to white supremacy, could see the warning signs from the late 1930s onward.</p><p>It has become customary to talk of a long civil rights movement. But economically and politically powerless African Americans had few levers to</p>",
+          "authors": [
+              "Anthony J. Badger"
+          ],
+          "book_description": "<p>\n<strong>It's not the economy, stupid: How liberal politicians'\nfaith in the healing powers of economic growth-and refusal to\naddress racial divisions-fueled reactionary politics across the\nSouth.</strong> From FDR to Clinton, charismatic Democratic leaders\nhave promised a New South-a model of social equality and economic\nopportunity that is always just around the corner. So how did the\nregion become the stronghold of conservative Republicans in thrall\nto Donald Trump? After a lifetime studying Southern politics,\nAnthony Badger has come to a provocative conclusion: white liberals\nfailed because they put their faith in policy solutions as an\nengine for social change and were reluctant to confront directly\nthe explosive racial politics dividing their constituents. After\nWorld War II, many Americans believed that if the edifice of racial\nsegregation, white supremacy, and voter disfranchisement could be\ndismantled across the South, the forces of liberalism would\nprevail. Hopeful that economic modernization and education would\nbring about gradual racial change, Southern moderates were rattled\nwhen civil rights protest and federal intervention forced their\nhand. Most were fatalistic in the face of massive resistance. When\nthe end of segregation became inevitable, it was largely driven by\nactivists and mediated by Republican businessmen. Badger follows\nthe senators who refused to sign the Southern Manifesto and\nrejected Nixon's Southern Strategy. He considers the dilemmas\nliberals faced across the South, arguing that their failure cannot\nbe blamed simply on entrenched racism. Conservative triumph was not\ninevitable, he argues, before pointing to specific false steps and\nmissed opportunities. Could the biracial coalition of low-income\nvoters that liberal politicians keep counting on finally\nmaterialize? Badger sees hope but urges Democrats not to be too\ncomplacent.\n</p>",
+          "book_publisher": "[{\"publisher\":\"Harvard University Press\",\"code\":\"hup\",\"role\":\"PUBLISHER\"},{\"publisher\":\"Harvard University Press\",\"code\":\"hup\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2jhjv93.5",
+          "fpage": "48",
+          "history": null,
+          "iid": "421a6a84-0fa4-3a87-b1b1-6c2f09626deb",
+          "lpage": "72",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2jhjv93.5",
+                  "text": "of resources to defeat Hitler. But they were shocked to discover that “what the Negro wants,” as educators <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> and Gordon Blaine Hancock made clear in an explosive book of that title, was the end of segregation. William Terry Couch, the publisher of the University of North Carolina Press"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Why White Liberals Fail",
+          "title": "Liberal Hopes and Conservative Fears",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv1sjwpfz.6",
+          "_score": 59.7005,
+          "abstract": "<p>Seated at the head of the table in his home in Pétion-Ville, an affluent suburb on the outskirts of Port-au-Prince, Giles Hubert was in his element. Hubert, an African American economist who worked as an agricultural attaché at the American embassy between 1948 and 1951, had often used his residence to play host to visiting black intellectuals from the United States, including the novelist Richard Wright and the sociologist E. Franklin Frazier, both of whom had enjoyed long evenings of conversation on the house’s veranda overlooking Port-au-Prince Bay.¹ But on this occasion, Hubert’s guests represented the past and future of</p>",
+          "authors": [
+              "Alec Fazackerley Hickmott"
+          ],
+          "book_description": "<p>\n<p>At the same time as modern capitalism became an engine of\nprogress and a source of inequality, the United States rose to\nglobal power. Hence diplomacy and the forces of capitalism have\ncontinually evolved together and shaped each other at different\nlevels of international, national, and local transformations.\n<em>Diplomacy and Capitalism</em> focuses on the crucial questions\nof wealth and power in the United States and the world in the\ntwentieth century. Through a series of wide-ranging case studies on\nthe history of international political economy and its array of\nstate and non-state actors, the volume's authors analyze how\nmaterial interests and foreign relations shaped each other. How did\nthe rising and then disproportionate power of the United States and\nthe actions of corporations, creditors, diplomats, and soldiers\nshape the twentieth-century world? How did officials in the United\nStates and other nations understand the relationship between\nforeign investment and the state? How did people outside of the\nUnited States respond to and shape American diplomacy and\npolitical-economic policy? In detailed discussions of the exchanges\nand entanglements of capitalism and diplomacy, the authors answer\nthese crucial questions. In doing so, they excavate how different\ncombinations of material interest, geopolitical rivalry, and\nideology helped create the world we live in today. The book thus\nanalyzes competing and shared visions of international capitalism\nand U.S. diplomatic influence in chapters that bring the book's\nreaders from the dawn of the twentieth century to its end, from\nTheodore Roosevelt to Ronald Reagan. Contributors: Abou Bamba,\nGiulia Crisanti, Christopher R. W. Dietrich, Max Paul Friedman,\nJoseph Fronczak, Alec Hickmott, Jennifer M. Miller, Alanna\nO'Malley, Nicole Sackley, Jayita Sarkar, Erum Sattar, Jason Scott\nSmith.</p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of Pennsylvania Press\",\"code\":\"upenn\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv1sjwpfz.6",
+          "fpage": "50",
+          "history": null,
+          "iid": "626b4eff-8b89-397a-9f94-215ae5873a40",
+          "lpage": "70",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv1sjwpfz.6",
+                  "text": "influence on the part of <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , whose work as head of the National Youth Administration’s Division of Negro Affairs during the New Deal had accorded her sizeable clout in Washington, D.C. Indeed, Hubert had first contacted <span class=\"highlight\">Bethune</span> in 1946 in an effort to protect African American officials in"
+              }
+          ],
+          "subtitle": [
+              "Giles A. Hubert and the Agrarian New Deal in Postoccupation Haiti"
+          ],
+          "tb": "Diplomacy and Capitalism",
+          "title": "From Nashville to Port-au-Prince:",
+          "year": 2022
+      },
+      {
+          "_id": "10.5149/9781469668222_moak.8",
+          "_score": 56.561462,
+          "abstract": "<p>Throughout the 1940s and 1950s individuals and groups on the economic left were ruthlessly cut out of the political mainstream. Although scholars have tended to describe the years between the end of World War II and the 1960s as an “Age of Consensus,” historian Thomas Sugrue has argued that it is best understood as “an era of brutality, of attempts to silence dissent.”¹ Government loyalty investigations and a resurgent form of business-friendly liberalism curtailed challenges from the left, destroying coalitions and individuals on the way. Simultaneously, the changing international and domestic political context of this era greatly weakened the ability</p>",
+          "authors": [
+              "DANIEL S. MOAK"
+          ],
+          "book_description": "<p>In an era defined by political polarization, both major U.S. parties have come to share a remarkably similar understanding of the education system as well as a set of punitive strategies for fixing it. Combining an intellectual history of social policy with a sweeping history of the educational system, Daniel S. Moak looks beyond the rise of neoliberalism to find the origin of today's education woes in Great Society reforms. In the wake of World War II, a coalition of thinkers gained dominance in U.S. policymaking. They identified educational opportunity as the ideal means of addressing racial and economic inequality by incorporating individuals into a free market economy. The passage of the Elementary and Secondary Education Act (ESEA) in 1965 secured an expansive federal commitment to this goal. However, when social problems failed to improve, the underlying logic led policymakers to hold schools responsible. Moak documents how a vision of education as a panacea for society's flaws led us to turn away from redistributive economic policies and down the path to market-based reforms, No Child Left Behind, mass school closures, teacher layoffs, and other policies that plague the public education system to this day.</p>",
+          "book_publisher": "[{\"publisher\":\"University of North Carolina Press\",\"code\":\"uncpress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University of North Carolina Press\",\"code\":\"uncpress\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.5149/9781469668222_moak.8",
+          "fpage": "90",
+          "history": null,
+          "iid": "8295159e-f858-3d08-90f0-6e0bdaf50a6d",
+          "lpage": "132",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.5149/9781469668222_moak.8",
+                  "text": "whose relationship with the CPUSA had already soured due to the purges, joined an anti-c ommunist faction of the AFT. With the support of Dewey, Counts was elected president of the AFT in 1939 and steadily limited the in- fluence of communists within the union, including Doxey Wilkerson and <span class=\"highlight\">Mary</span> Grossman"
+              }
+          ],
+          "subtitle": [
+              "The Rise of the Liberal Incorporationist Coalition"
+          ],
+          "tb": "From the New Deal to the War on Schools",
+          "title": "Courts, Communism, and Commercialism:",
+          "year": 2022
+      },
+      {
+          "_id": "10.2307/j.ctv2m2fvf6.14",
+          "_score": 123.42817,
+          "abstract": "<p>As a small eight-year-old child, Bertha had the extraordinary opportunity to pin a flower corsage on the lapel of Mary McLeod Bethune when she visited St. James Methodist Church in Seneca, South Carolina. A larger-than-life figure, Bethune was a prominent member of the Roosevelt administration and president of the National Council of Negro Women (NCNW). Bethune also belonged to another major African American women’s national organization, Delta Sigma Theta Sorority, Inc.</p><p>Delta and the other African American sororities, Alpha Kappa Alpha, Inc., Sigma Gamma Rho, Inc., and Zeta Phi Beta, Inc. are nonprofit public service organizations. Members support their communities</p>",
+          "authors": [
+              "Sonya Y. Ramsey"
+          ],
+          "book_description": "<p>\n<p><strong>The life and accomplishments of an influential leader in\nthe desegregated South</strong></p>\n\n<p>This biography of educational activist and Black studies\nforerunner Bertha Maxwell-Roddey examines a life of remarkable\nachievements and leadership in the desegregated South. Sonya Ramsey\nmodernizes the nineteenth-century term \"race woman\" to describe how\nMaxwell-Roddey and her peers turned hard-won civil rights and\nfeminist milestones into tangible accomplishments in North Carolina\nand nationwide from the late 1960s to the 1990s.</p>\n\n<p>﻿</p>\n\n<p>Born in 1930, Maxwell-Roddey became one of Charlotte's first\nBlack women principals of a white elementary school; she was the\nfounding director of the University of North Carolina at\nCharlotte's Africana Studies Department; and she cofounded the\nAfro-American Cultural and Service Center, now the Harvey B. Gantt\nCenter for African-American Art + Culture. Maxwell-Roddey founded\nthe National Council for Black Studies, helping institutionalize\nthe field with what is still its premier professional organization,\nand served as the 20th National President of Delta Sigma Theta\nSorority, Inc., one of the most influential Black women's\norganizations in the United States.</p>\n\n<p>﻿</p>\n\n<p>Using oral histories and primary sources that include private\nrecords from numerous Black women's home archives, Ramsey\nilluminates the intersectional leadership strategies used by\nMaxwell-Roddey and other modern race women to dismantle\ndiscriminatory barriers in the classroom and the boardroom. Bertha\nMaxwell-Roddey offers new insights into desegregation, urban\nrenewal, and the rise of the Black middle class through the lens of\na powerful leader's life story.</p>\n\n<p><strong>Publication of this work made possible by a Sustaining\nthe Humanities through the American Rescue Plan grant from the\nNational Endowment for the Humanities.</strong></p>\n</p>",
+          "book_publisher": "[{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"PUBLISHER\"},{\"publisher\":\"University Press of Florida\",\"code\":\"upf\",\"role\":\"LICENSOR\"}]",
+          "citation_line": "2022",
+          "contentType": "Book Chapter",
+          "doi": "10.2307/j.ctv2m2fvf6.14",
+          "fpage": "195",
+          "history": null,
+          "iid": "7e02354b-3e4b-38dc-bfca-f0682fc70917",
+          "lpage": "232",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/j.ctv2m2fvf6.14",
+                  "text": "flower corsage on the lapel of <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> when she visited St. James Methodist Church in Seneca, South Carolina. A larger-than-life fig- ure, <span class=\"highlight\">Bethune</span> was a prominent member of the Roosevelt administration and president of the National Council of Negro Women (NCNW). <span class=\"highlight\">Bethune</span> also belonged to another major African American"
+              }
+          ],
+          "subtitle": "",
+          "tb": "Bertha Maxwell-Roddey",
+          "title": "What Does It Mean to Be a Delta?",
+          "year": 2022
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "history-discipline",
+              "count": 1313
+          },
+          {
+              "value": "areastudies-discipline",
+              "count": 792
+          },
+          {
+              "value": "generalhistory-discipline",
+              "count": 709
+          },
+          {
+              "value": "americanstudies-discipline",
+              "count": 682
+          },
+          {
+              "value": "africanamericanstudies-discipline",
+              "count": 571
+          },
+          {
+              "value": "sociology-discipline",
+              "count": 546
+          },
+          {
+              "value": "socialsciences-discipline",
+              "count": 510
+          },
+          {
+              "value": "education-discipline",
+              "count": 335
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 325
+          },
+          {
+              "value": "literature-discipline",
+              "count": 309
+          },
+          {
+              "value": "politicalscience-discipline",
+              "count": 257
+          },
+          {
+              "value": "womensstudies-discipline",
+              "count": 163
+          },
+          {
+              "value": "religion-discipline",
+              "count": 76
+          },
+          {
+              "value": "sciencemathematics-discipline",
+              "count": 40
+          },
+          {
+              "value": "arts-discipline",
+              "count": 38
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 1484
+          },
+          {
+              "value": "chapter",
+              "count": 930
+          },
+          {
+              "value": "research_report",
+              "count": 1
+          }
+      ]
+  }
+}

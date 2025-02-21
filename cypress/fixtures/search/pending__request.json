@@ -1,0 +1,26 @@
+{
+  "pageNo": 1,
+  "limit": 8,
+  "sort": "old",
+  "fields": [
+      "title",
+      "authors",
+      "citation_line",
+      "contentType",
+      "pageCount",
+      "semanticTerms",
+      "ocr"
+  ],
+  "facets": [
+      "contentType",
+      "disciplines"
+  ],
+  "filters": [
+      "year:[1665 TO 2022]"
+  ],
+  "statusStartDate": "2022-07-30T17:11:56.914Z",
+  "statusEndDate": "2022-08-29T17:11:56.914Z",
+  "groups": [
+      1
+  ]
+}

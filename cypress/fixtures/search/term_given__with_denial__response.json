@@ -1,0 +1,762 @@
+{
+  "total": 2417,
+  "qtime": 64,
+  "docs": [
+      {
+          "_id": "10.2307/44212916",
+          "_score": 979.1901,
+          "abstract": "",
+          "authors": [
+              "William M. Brewer"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Negro History Bulletin</cite>, Vol. 19, No. 2 (November, 1955), p. 48, 36",
+          "contentType": "Journal Article",
+          "doi": "10.2307/44212916",
+          "fpage": "48",
+          "history": null,
+          "iid": "9e230b20-27ff-320e-a400-1d43f3f7b1e5",
+          "lpage": "36",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/44212916",
+                  "text": "that great teacher. Later she went to Florida where, perhaps, her great- est work was accomplished. There she founded <span class=\"highlight\">Bethune</span> -Cookman College, Daytona, Fla. start- ing with resources of $1.50, faith in God, and, of course belief in <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> . Although she never had the advantage of col- lege"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "MARY McLEOD BETHUNE",
+          "year": 1955
+      },
+      {
+          "_id": "10.2307/2715669",
+          "_score": 1273.2816,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 40, No. 4 (Oct., 1955), pp. 393-395",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2715669",
+          "fpage": "393",
+          "history": null,
+          "iid": "eb878bdd-2a16-340d-9390-c9f9b8c62a80",
+          "lpage": "395",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2715669",
+                  "text": "PERSONAL <span class=\"highlight\">MARY</span> <span class=\"highlight\">McLEOD</span> <span class=\"highlight\">BETHUNE The death of Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> May 18, 1955 as she ap- proached her 80th birthday removed a courtly, capable, and color- ful figure in Negro life and history. She was born July 10, 1875 near Mayesville, S. C. and her parents were Samuel and Patsy <span class=\"highlight\">McLeod</span> , ex-slaves that purchased"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune",
+          "year": 1955
+      },
+      {
+          "_id": "10.2307/2714492",
+          "_score": 1183.9904,
+          "abstract": "",
+          "authors": [
+              "Mary McLeod Bethune"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 24, No. 1 (Jan., 1939), pp. 9-13",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2714492",
+          "fpage": "9",
+          "history": null,
+          "iid": "b017221f-620d-3ca2-b668-0ce4894bba6c",
+          "lpage": "13",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2714492",
+                  "text": "and all other available means get the story and tell the story again and again so that Negro youth who come along this way may rejoice in that story to make a new history by accomplishments founded on the work of the pioneers and trail blazers in History. <span class=\"highlight\">MARY</span> <span class=\"highlight\">McLEOD</span> <span class=\"highlight\">BETHUNE</span>"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "The Adaptation of the History of the Negro to the Capacity of the Child",
+          "year": 1939
+      },
+      {
+          "_id": "10.2307/2714703",
+          "_score": 1153.7698,
+          "abstract": "",
+          "authors": [
+              "Mary McLeod Bethune"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 23, No. 1 (Jan., 1938), pp. 10-15",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2714703",
+          "fpage": "10",
+          "history": null,
+          "iid": "4ff38aad-a114-35ca-bd0a-bb6bf3e6320b",
+          "lpage": "15",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2714703",
+                  "text": "Christophe: \"While I live I shall try to build that pride we need, and build in terms white men as well as black can understand! I am thinking of the future, not of now. I will teach pride if my teaching breaks every back in my Kingdom.\" <span class=\"highlight\">MARY</span> <span class=\"highlight\">McLEOD</span> <span class=\"highlight\">BETHUNE</span> Daytona"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Clarifying Our Vision with the Facts",
+          "year": 1938
+      },
+      {
+          "_id": "10.1163/j.ctvjhzq0f.31",
+          "_score": 864.76434,
+          "abstract": "",
+          "authors": [
+              "Mary McLeod Bethune"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Blacks in Higher Education</cite>, No. 32 (Summer, 2001), p. 35",
+          "contentType": "Journal Article",
+          "doi": "10.1163/j.ctvjhzq0f.31",
+          "fpage": "35",
+          "history": null,
+          "iid": "a9715135-bbe8-3a4e-984c-2fa6aea71d23",
+          "lpage": "35",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Denied",
+                  "statusLabel": "",
+                  "statusCreatedAt": "2022-08-09T14:11:00.762396Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": {
+                      "comments": "Need to generate a denial for testing purposes. Feel guilty about denying this, though.",
+                      "reason": "t"
+                  }
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.1163/j.ctvjhzq0f.31",
+                  "text": "of African-American Women by <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> (1875 -1955) Editor's Note: <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , the fifteenth of 17 children of former slaves, was educated at the Moody Bible Institute in Chicago. In 1904 she made a down payment on land that had served as the city dump for Daytona Beach,"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "The Sacrifices and Achievements of African-American Women",
+          "year": 2001
+      },
+      {
+          "_id": "10.2307/26432710",
+          "_score": 867.2091,
+          "abstract": "",
+          "authors": [
+              "Eloise McKinney Johnson"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Langston Hughes Review</cite>, Vol. 2, No. 1 (SPRING, 1983), pp. 1-12",
+          "contentType": "Journal Article",
+          "doi": "10.2307/26432710",
+          "fpage": "1",
+          "history": null,
+          "iid": "d90bf224-d454-3026-8613-b450a1a9083d",
+          "lpage": "12",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/26432710",
+                  "text": "THE LANGSTON HUGHES REVIEW Official Publication of The Langston Hughes Society Volume II Spring, 1983 Number 1 LANGSTON HUGHES AND <span class=\"highlight\">MARY</span> <span class=\"highlight\">McLEOD</span> <span class=\"highlight\">BETHUNE</span> By Eloise McKinney Johnson Längstem Hughes (1902-1967) and his earliest professional mentor, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> (1875-1955), gleam steadily"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "LANGSTON HUGHES AND MARY McLEOD BETHUNE",
+          "year": 1983
+      },
+      {
+          "_id": "10.2307/4316309",
+          "_score": 2074.8416,
+          "abstract": "",
+          "authors": [
+              "Audrey Thomas McCluskey"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>NWSA Journal</cite>, Vol. 6, No. 1 (Spring, 1994), pp. 69-81",
+          "contentType": "Journal Article",
+          "doi": "10.2307/4316309",
+          "fpage": "69",
+          "history": null,
+          "iid": "d436255b-16e1-345b-af9d-f94b1fcaac35",
+          "lpage": "81",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/4316309",
+                  "text": "in the Leadership of <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Audrey Thomas McCluskey Indiana University \"I am interested in women, and I believe in their possibilities. \" - <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , Speech to the NACW The layers of <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Bethune's identity emerge from her racial and gendered experience and are key to"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Multiple Consciousness in the Leadership of Mary McLeod Bethune",
+          "year": 1994
+      },
+      {
+          "_id": "10.2307/30148760",
+          "_score": 1039.7484,
+          "abstract": "",
+          "authors": [
+              "Audrey Thomas McCluskey"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Florida Historical Quarterly</cite>, Vol. 73, No. 2 (Oct., 1994), pp. 200-217",
+          "contentType": "Journal Article",
+          "doi": "10.2307/30148760",
+          "fpage": "200",
+          "history": null,
+          "iid": "028d6600-999b-3639-b063-2896cbe2362a",
+          "lpage": "217",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/30148760",
+                  "text": "RINGING UP A SCHOOL: <span class=\"highlight\">MARY</span> <span class=\"highlight\">MCLEOD</span> BETHUNE'S IMPACT ON DAYTONA by AUDREY THOMAS MCCLUSKEY he limited scholarly attention given to <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> T has focused either on her pioneering efforts to integrate the federal bureaucracy during the presidency of Franklin Delano Roosevelt"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Ringing up a School: Mary Mcleod Bethune's Impact on Daytona",
+          "year": 1994
+      },
+      {
+          "_id": "10.2307/2678864",
+          "_score": 822.233,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Blacks in Higher Education</cite>, No. 29 (Autumn, 2000), p. 125",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2678864",
+          "fpage": "125",
+          "history": null,
+          "iid": "4e7071e1-1b99-318f-9c96-11ba3d9658c2",
+          "lpage": "125",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2678864",
+                  "text": "<span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> \"The chickens sensed that she was coming.\" <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune at the age of 28 shortly before the founding of Bethune</span> -Cookman College <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> was born July 10, 1875, the fifteenth child of Sam and Patsy <span class=\"highlight\">McLeod</span> . The birth of this fabulous woman occurred at the <span class=\"highlight\">McLeod</span> home on Raccoon Road near Mayesville, South"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune",
+          "year": 2000
+      },
+      {
+          "_id": "10.2307/2966912",
+          "_score": 1338.8291,
+          "abstract": "",
+          "authors": [
+              "Dolores C. Leffall",
+              "Janet L. Sims"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro Education</cite>, Vol. 45, No. 3 (Summer, 1976), pp. 342-359",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2966912",
+          "fpage": "342",
+          "history": null,
+          "iid": "aaadabbd-bca3-32bb-8bfd-14e44356bded",
+          "lpage": "359",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2966912",
+                  "text": "<span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> The Educator; Also Including a Selected Annotated Bib liography Dolores C. Leffall and Janet L. Sims** July 10, 1975, was the looth anniversary of the birth of one of the greatest American educators who left an impact upon the American educational system. <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , after many"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune-The Educator; Also Including a Selected Annotated Bibliography",
+          "year": 1976
+      },
+      {
+          "_id": "10.2307/40034578",
+          "_score": 890.7036,
+          "abstract": "\"This article examines the education of African American girls and women. It begins with a look at scholarship on African American girls and women published in\" The Journal of Negro Education \"from its inception in 1932 to the present. Subsequently, a historical overview of the long, hardfought struggles of educating this population for empowerment and uplift of the race is provided, including a discussion of late 19th and early 20th century schools for African American girls and women and prominent African American women educators of this period. This is followed by an examination of contemporary successes and challenges including a look at the educational outcomes and experiences of African American girls and women in elementary, secondary, and postsecondary institutions. Finally, the article concludes with recommendations for better understanding and enhancing the education of African American girls and women.\"",
+          "authors": [
+              "Veronica G. Thomas",
+              "Janine A. Jackson"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro Education</cite>, Vol. 76, No. 3, Celebrating the Legacy of “The Journal”: 75 Years of Facilitating Excellence in Black Education (Summer, 2007), pp. 357-372",
+          "contentType": "Journal Article",
+          "doi": "10.2307/40034578",
+          "fpage": "357",
+          "history": null,
+          "iid": "c48215e3-3076-38a3-9538-90185967ea0f",
+          "lpage": "372",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/40034578",
+                  "text": "devoted the 1982 Summer Yearbook issue to \"The Impact of Black Women in Education.\" Bettye Collier-Thomas (1982), then director of the National Archives for Black Women's History and the <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Memorial Museum (both institutions of the National Council of Negro Women), served as guest editor for this seminal volume."
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "The Education of African American Girls and Women: Past to Present",
+          "year": 2007
+      },
+      {
+          "_id": "10.2307/2717611",
+          "_score": 1371.9294,
+          "abstract": "",
+          "authors": [
+              "Elaine M. Smith"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 81, No. 1/4, Vindicating the Race: Contributions to African-American Intellectual History (Winter - Autumn, 1996), pp. 105-122",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2717611",
+          "fpage": "105",
+          "history": null,
+          "iid": "1aae01cd-aca0-3350-a26d-ab7a9252b66c",
+          "lpage": "122",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2717611",
+                  "text": "educated blacks throughout the country. It sprang from white America cursing people of African descent with assumed inferiority and using its crushing power to enforce economic, political, social, and educational discrimination and segregation. Long before affiliating with the NACW, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span>"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune's \"Last Will and Testament\": A Legacy for Race Vindication",
+          "year": 1996
+      },
+      {
+          "_id": "10.2307/2967314",
+          "_score": 1203.5251,
+          "abstract": "This article examines the history, philosophy, curriculum, methodology, and operations of the Mary McLeod Bethune Institute (MMBI), an Afrocentric supplementary school located in Los Angeles, California. Qualitative data focusing on MMBI students, parents, and staff, and on the school's relationship with its students' public schools and communities are presented. Based on these data, the author posits that Afrocentric supplementary schools play a critical role in the process of developing socially active, conscious, and capable African American youth. Further, these institutions are shown to be essential for the cultural development and academic support of public- and private-school African American students.",
+          "authors": [
+              "Subira Kifano"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro Education</cite>, Vol. 65, No. 2 (Spring, 1996), pp. 209-218",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2967314",
+          "fpage": "209",
+          "history": null,
+          "iid": "56c408bd-b661-3b3c-9aef-037188fc4641",
+          "lpage": "218",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2967314",
+                  "text": "Paradigm and Practice at the <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Institute Subira Kifano, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Institute and The Claremont Graduate School This article examines the history, philosophy, curriculum, methodology, and operations of the <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Institute (MMBI, an Afrocentric supplementary school located in Los Angeles, California."
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Afrocentric Education in Supplementary Schools: Paradigm and Practice at the Mary McLeod Bethune Institute",
+          "year": 1996
+      },
+      {
+          "_id": "10.2307/2294696",
+          "_score": 1009.5409,
+          "abstract": "",
+          "authors": [
+              "Mary Frances Berry"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro Education</cite>, Vol. 51, No. 3, The Impact of Black Women in Education: An Historical Overview (Summer, 1982), pp. 288-300",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2294696",
+          "fpage": "288",
+          "history": null,
+          "iid": "e90540c9-9d2f-36c4-b7a2-afc794e3223d",
+          "lpage": "300",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2294696",
+                  "text": "the last fifty years is <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , who is in a class by herself. In the last twenty years, Constance Baker Motley, Willa Beatrice Player, Mar- ian Wright Edelman, and Barbara Sizemore have made their own 'Marianna W. Davis, Contributions of Black Women to America, forthcoming from Kenday Press,"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Twentieth-Century Black Women in Education",
+          "year": 1982
+      },
+      {
+          "_id": "10.2307/30148938",
+          "_score": 1562.9977,
+          "abstract": "",
+          "authors": [
+              "Christopher E. Linsin"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Florida Historical Quarterly</cite>, Vol. 76, No. 1 (Summer, 1997), pp. 20-41",
+          "contentType": "Journal Article",
+          "doi": "10.2307/30148938",
+          "fpage": "20",
+          "history": null,
+          "iid": "8ee83436-f6df-3256-86d9-3e52562da625",
+          "lpage": "41",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/30148938",
+                  "text": "Creed: <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Bethune's Aim of Integrated Autonomy As Director of Negro Affairs by CHRISTOPHER E. LINSIN HARD HARD work and divine inspiration remained central aspects of <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Bethune's character throughout her life. A strong and consistent advocate of racial uplift through industrial education and hard work, <span class=\"highlight\">Bethune</span> embraced Booker"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Something More than a Creed: Mary McLeod Bethune's Aim of Integrated Autonomy as Director of Negro Affairs",
+          "year": 1997
+      },
+      {
+          "_id": "10.2307/2716791",
+          "_score": 1381.8359,
+          "abstract": "",
+          "authors": [
+              "B. Joyce Ross"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Negro History</cite>, Vol. 60, No. 1 (Jan., 1975), pp. 1-28",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2716791",
+          "fpage": "1",
+          "history": null,
+          "iid": "7317c30d-948a-3e69-a376-51f9d16cb259",
+          "lpage": "28",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2716791",
+                  "text": "VOLUME LX. NO. 1 JANUARY, 1975 <span class=\"highlight\">MARY</span> <span class=\"highlight\">McLEOD</span> <span class=\"highlight\">BETHUNE</span> AND THE NATIONAL YOUTH ADMINISTRATION: A CASE STUDY OF POWER RELATIONSHIPS IN THE BLACK CABINET OF FRANKLIN D. ROOSEVELT B. JOYCE ROSS In terms of black people's history, the New Deal primarily is impor- tant because it marked for the first time"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune and the National Youth Administration: A Case Study of Power Relationships in the Black Cabinet of Franklin D. Roosevelt",
+          "year": 1975
+      },
+      {
+          "_id": "10.2307/3175282",
+          "_score": 903.9119,
+          "abstract": "",
+          "authors": [
+              "Audrey Thomas McCluskey"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Signs</cite>, Vol. 22, No. 2 (Winter, 1997), pp. 403-426",
+          "contentType": "Journal Article",
+          "doi": "10.2307/3175282",
+          "fpage": "403",
+          "history": null,
+          "iid": "a7c74b70-2a35-3414-8507-743b1582ff7f",
+          "lpage": "426",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/3175282",
+                  "text": "Mission Audrey Thomas McCluskey Introduction and background S_ CHOOL FOUNDERS Lucy Craft Laney (1854-1933), <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> (1875-1955), Nannie Helen Burroughs (1883- 1961), and Charlotte Hawkins Brown (1883-1961) lived and worked within a shared historical framework and sense of mission to their race and sex. With the exception of former slave"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "\"We Specialize in the Wholly Impossible\": Black Women School Founders and Their Mission",
+          "year": 1997
+      },
+      {
+          "_id": "10.2307/44176945",
+          "_score": 796.15784,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>Negro History Bulletin</cite>, Vol. 47, No. 4 (October, November, December 1984), p. 17",
+          "contentType": "Journal Article",
+          "doi": "10.2307/44176945",
+          "fpage": "17",
+          "history": null,
+          "iid": "233ed63b-1bf6-34ea-96f4-f2c393f33032",
+          "lpage": "17",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/44176945",
+                  "text": "Remembering <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> In Hoover ipation November, of sought Mrs. 1930 and <span class=\"highlight\">Bethune</span> received and 1931 in two the President impor- partic- Hoover sought and received the partic- ipation of Mrs. <span class=\"highlight\">Bethune</span> in two impor- tant conferences: the White House Con- ference on Child Health"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Remembering Mary McLeod Bethune",
+          "year": 1984
+      },
+      {
+          "_id": "10.2307/30150829",
+          "_score": 840.4799,
+          "abstract": "",
+          "authors": [
+              "Maxine D. Jones"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Florida Historical Quarterly</cite>, Vol. 77, No. 4, Women's Activism in Twentieth-Century Florida (Spring, 1999), pp. 475-502",
+          "contentType": "Journal Article",
+          "doi": "10.2307/30150829",
+          "fpage": "475",
+          "history": null,
+          "iid": "bf24f400-e1e2-3354-82d8-eb588753e286",
+          "lpage": "502",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-05-20T15:32:46.379794Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/30150829",
+                  "text": "their respective communities, women such as <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Be- thune, Eartha White, Blanche Armwood, Alice Mickens, Viola Hill, Maxine D. Jones is professor of history at Florida State University 1. <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> , \"Viewing the Facts Objectively,\" <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> Papers: The <span class=\"highlight\">Bethune</span> Foundation Collection, Part I, Reel 2, Frame"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "\"Without Compromise or Fear\": Florida's African American Female Activists",
+          "year": 1999
+      },
+      {
+          "_id": "10.2307/2962618",
+          "_score": 833.88617,
+          "abstract": "",
+          "author": [],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Journal of Blacks in Higher Education</cite>, No. 9 (Autumn, 1995), p. 27",
+          "contentType": "Journal Article",
+          "doi": "10.2307/2962618",
+          "fpage": "27",
+          "history": null,
+          "iid": "089bbc41-fecd-3abb-afe5-86c0c73770cb",
+          "lpage": "27",
+          "mediaReviewStatuses": {},
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/2962618",
+                  "text": "<span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> <span class=\"highlight\">Bethune</span> : \"She Is a Nigger, Ain't She?\" \"In the early 1940s, according to an apocryphal story often told by my older relatives, <span class=\"highlight\">Mary</span> <span class=\"highlight\">McLeod</span> Be- thune, a well-known educator and of- ficial in the Roosevelt administra- tion, was traveling one day by train through the segregated South"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Mary McLeod Bethune: \"She Is a Nigger, Ain't She?\"",
+          "year": 1995
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "history-discipline",
+              "count": 1313
+          },
+          {
+              "value": "areastudies-discipline",
+              "count": 792
+          },
+          {
+              "value": "generalhistory-discipline",
+              "count": 709
+          },
+          {
+              "value": "americanstudies-discipline",
+              "count": 682
+          },
+          {
+              "value": "africanamericanstudies-discipline",
+              "count": 571
+          },
+          {
+              "value": "sociology-discipline",
+              "count": 546
+          },
+          {
+              "value": "socialsciences-discipline",
+              "count": 510
+          },
+          {
+              "value": "education-discipline",
+              "count": 335
+          },
+          {
+              "value": "humanities-discipline",
+              "count": 325
+          },
+          {
+              "value": "literature-discipline",
+              "count": 309
+          },
+          {
+              "value": "politicalscience-discipline",
+              "count": 257
+          },
+          {
+              "value": "womensstudies-discipline",
+              "count": 163
+          },
+          {
+              "value": "religion-discipline",
+              "count": 76
+          },
+          {
+              "value": "sciencemathematics-discipline",
+              "count": 40
+          },
+          {
+              "value": "arts-discipline",
+              "count": 38
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 1484
+          },
+          {
+              "value": "chapter",
+              "count": 930
+          },
+          {
+              "value": "research_report",
+              "count": 3
+          }
+      ]
+  }
+}

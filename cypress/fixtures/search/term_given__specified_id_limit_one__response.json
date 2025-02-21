@@ -1,0 +1,66 @@
+{
+  "total": 1,
+  "qtime": 627,
+  "docs": [
+      {
+          "_id": "10.2307/48694885",
+          "_score": -1.2640983,
+          "abstract": "",
+          "authors": [
+              "Susan Gubernat"
+          ],
+          "book_description": "",
+          "book_publisher": "",
+          "citation_line": "<cite>The Radical Teacher</cite>, No. 120, Teaching Migration/Immigration (Summer 2021), pp. 94-95",
+          "contentType": "Journal Article",
+          "cty": "journal",
+          "cty_str": "journal",
+          "doi": "10.2307/48694885",
+          "fpage": "94",
+          "history": null,
+          "iid": "43e7b8c1-a49c-37c3-ad42-6016af1d0eb8",
+          "lpage": "95",
+          "mediaReviewStatuses": {
+              "1": {
+                  "status": "Approved",
+                  "statusLabel": "Approved by Discipline",
+                  "statusCreatedAt": "2022-11-18T16:34:37.802396Z",
+                  "groupName": "Ithaka",
+                  "groupID": 1,
+                  "statusDetails": null
+              }
+          },
+          "national_history": null,
+          "snippets": [
+              {
+                  "id": "10.2307/48694885",
+                  "text": "ISSN: 1941-0832 Poetry “Emma Goldman’s Ice Cream Parlor” and “To Be <span class=\"highlight\">a</span> Jew, Anywhere” by Susan Gubernat FENCE BY SHAUN SLIFER (2018) VIA JUST SEEDS RADICAL TEACHER 94 http://radicalteacher.library.pitt.edu No. 120 (Summer 2021) DOI 10.5195/rt.2021.833"
+              }
+          ],
+          "subtitle": "",
+          "tb": "",
+          "title": "Emma Goldman’s Ice Cream Parlor",
+          "year": 2021
+      }
+  ],
+  "stats": null,
+  "page": 0,
+  "facets": {
+      "disciplines": [
+          {
+              "value": "education-discipline",
+              "count": 1
+          },
+          {
+              "value": "socialsciences-discipline",
+              "count": 1
+          }
+      ],
+      "contentType": [
+          {
+              "value": "journal",
+              "count": 1
+          }
+      ]
+  }
+}
