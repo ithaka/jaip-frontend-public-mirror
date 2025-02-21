@@ -18,7 +18,7 @@ import { ref, computed } from 'vue'
 const props = defineProps({
   doc: {
     type: Object as PropType<MediaRecord>,
-    default: () => ({}),
+    default: () => ({})
   },
   hideDetails: Boolean,
   hideAbstract: Boolean,
@@ -32,9 +32,9 @@ const props = defineProps({
   small: Boolean,
   buttonName: {
     type: String,
-    default: 'Cancel',
+    default: 'Cancel'
   },
-  pdfView: Boolean,
+  pdfView: Boolean
 })
 
 const coreStore = useCoreStore()
@@ -53,8 +53,8 @@ const searchFor = (term: string) => {
     path: '/search',
     query: {
       term: term,
-      page: 1,
-    },
+      page: 1
+    }
   })
 }
 
@@ -75,7 +75,7 @@ const canRequest = computed(() => {
     !reqs.value.includes(JSON.stringify(props.doc)) &&
     status.value !== 'approved' &&
     status.value !== 'pending' &&
-    userStore.features['submit_requests'] &&
+    userStore.features['submit_requests'] && 
     !props.hideRequests
   )
 })
@@ -83,7 +83,7 @@ const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
     ? `/page/${props.doc.iid}/0`
-    : `/pdf/${props.doc.iid}`,
+    : `/pdf/${props.doc.iid}`
 )
 </script>
 <template>
@@ -213,19 +213,8 @@ const readRoute = ref(
                 new Date(statusData.createdAt).toLocaleDateString()
               }}</span>
               <span v-if="statusData.statusDetails?.reason || statusData.statusDetails?.comments">
-                <span
-                  v-if="
-                    statusData.status.toLowerCase() === 'denied' ||
-                    statusData.status.toLowerCase() === 'incomplete' ||
-                    isAuthenticatedAdmin
-                  "
-                >
-                  <span
-                    v-if="
-                      statusData.statusDetails!.reason ||
-                      statusData.status.toLowerCase() !== 'incomplete'
-                    "
-                  >
+                <span v-if="statusData.status.toLowerCase() === 'denied' || statusData.status.toLowerCase() === 'incomplete' || isAuthenticatedAdmin">
+                  <span v-if="statusData.statusDetails!.reason || statusData.status.toLowerCase() !== 'incomplete' ">
                     {{ statusData.statusDetails!.reason }} -&nbsp;
                   </span>
                   <span>{{ statusData.statusDetails!.comments }}</span>
@@ -236,5 +225,37 @@ const readRoute = ref(
         </span>
       </div>
     </div>
+    <Teleport to="div#app">
+      <pep-pharos-modal
+        v-if="showExcessiveRequestsWarningModal"
+        :id="`excessive-requests-warning-modal`"
+        :key="`excessive-requests-warning-modal`"
+        :header="`Too Many Requests`"
+        size="large"
+        :open="showExcessiveRequestsWarningModal"
+        @pharos-modal-closed="showExcessiveRequestsWarningModal = false"
+      >
+        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+        <div slot="description">
+          <p class="mb-4">
+            Your cart is full. Please remove an item or submit your current requests before adding
+            more.
+          </p>
+          <p>
+            Media review can be time consuming. Reviewers may deny requests or limit access at times
+            when they are dealing with requests they deem excessive.
+          </p>
+        </div>
+        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+        <template slot="footer">
+          <pep-pharos-button
+            variant="primary"
+            @click.prevent.stop="showExcessiveRequestsWarningModal = false"
+          >
+            Cancel
+          </pep-pharos-button>
+        </template>
+      </pep-pharos-modal>
+    </Teleport>
   </div>
 </template>

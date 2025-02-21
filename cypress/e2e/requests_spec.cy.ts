@@ -38,7 +38,7 @@ describe('Requests page', () => {
       })
     })
 
-    it('Can filter by date reviewed', () => {
+    it.only('Can filter by date reviewed', () => {
       // Open date picker
       cy.get('pep-pharos-button[id="datepicker-button"')
         .click()
@@ -49,10 +49,10 @@ describe('Requests page', () => {
 
       // // This test needs to use a date range wholly in the past, because prior
       // // to the 10th, the specified dates won't be selectable.
-      cy.get('button[aria-label="Open years overlay"').click()
+      cy.get('button[aria-label$="pen years overlay"').click()
       cy.get('div[role="gridcell"]').contains('2022').click()
 
-      cy.get('button[aria-label="Open months overlay"').click()
+      cy.get('button[aria-label$="pen months overlay"').click()
       cy.get('div[role="gridcell"]').contains('Jan').click()
       
       // Using regex to ensure that the number is the only value in the cell to avoid

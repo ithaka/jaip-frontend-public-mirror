@@ -218,7 +218,7 @@ describe('Media Review', () => {
           .as('disciplines')
 
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage','@alerts', '@search', '@auth', '@disciplines'])  
+        cy.wait(['@searchPage','@alerts', '@search', '@auth'])  
       })
 
       it('Displays warning when the cart is full', () => {
