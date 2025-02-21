@@ -1,6 +1,6 @@
 export const replaceHost = (cy: Cypress.cy & CyEventEmitter, subdomain: string) => {
   cy.on('window:before:load', (win) => {
-    // @ts-ignore
+    // @ts-expect-error We need to set the location property here to use the subdomain system
     win.__location = {
       host: cy.stub().as('host').returns(`${subdomain}.${win.location.host}`)
     }
