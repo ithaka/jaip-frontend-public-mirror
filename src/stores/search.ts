@@ -97,15 +97,6 @@ export const useSearchStore = defineStore('search', {
         pageNo: this.pageNo,
         limit: status ? this.secondaryLimit : this.limit,
         sort: this.sort,
-        fields: [
-          'title',
-          'authors',
-          'citation_line',
-          'contentType',
-          'pageCount',
-          'semanticTerms',
-          'ocr',
-        ],
         facets: ['contentType', 'disciplines'],
         filters: [],
       }

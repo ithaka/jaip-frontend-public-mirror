@@ -1,6 +1,5 @@
 export default interface SearchArgs {
   facets: Array<string>
-  fields: Array<string>
   filters: Array<string>
   limit: number
   pageNo: number
