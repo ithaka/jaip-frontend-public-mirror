@@ -2,15 +2,6 @@
     "pageNo": 1,
     "limit": 25,
     "sort": "rel",
-    "fields": [
-        "title",
-        "authors",
-        "citation_line",
-        "contentType",
-        "pageCount",
-        "semanticTerms",
-        "ocr"
-    ],
     "facets": [
         "contentType",
         "disciplines"

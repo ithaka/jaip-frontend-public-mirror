@@ -1,26 +1,17 @@
 {
-    "pageNo": 1,
-    "limit": 25,
-    "sort": "new",
-    "fields": [
-      "title",
-      "authors",
-      "citation_line",
-      "contentType",
-      "pageCount",
-      "semanticTerms",
-      "ocr"
-    ],
-    "facets": [
-      "contentType",
-      "disciplines"
-    ],
-    "filters": [
-      "year: [1665 TO 2022]",
-      "contentType: journal"
-    ],
-    "query": "",
-    "groups": [
-      1
-    ]
-  }
+  "pageNo": 1,
+  "limit": 25,
+  "sort": "new",
+  "facets": [
+    "contentType",
+    "disciplines"
+  ],
+  "filters": [
+    "year: [1665 TO 2022]",
+    "contentType: journal"
+  ],
+  "query": "",
+  "groups": [
+    1
+  ]
+}
