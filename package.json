@@ -22,8 +22,8 @@
   "dependencies": {
     "@ithaka/pharos": "^13.4.0",
     "@vuepic/vue-datepicker": "^11.0.1",
-    "@webcomponents/scoped-custom-element-registry": "^0.0.9",
-    "axios": "^1.7.9",
+    "@webcomponents/scoped-custom-element-registry": "^0.0.10",
+    "axios": "^1.8.3",
     "html-truncate": "^1.2.2",
     "openseadragon": "^5.0.1",
     "pdfjs-dist": "^4.10.38",
@@ -35,39 +35,39 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@babel/types": "^7.26.9",
+    "@babel/types": "^7.26.10",
     "@tsconfig/node22": "^22.0.0",
     "@types/html-truncate": "^1.2.4",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.10",
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.4.0",
+    "@vue/eslint-config-typescript": "^14.5.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "cypress": "^13.17.0",
-    "eslint": "^9.21.0",
-    "eslint-plugin-cypress": "^4.1.0",
-    "eslint-plugin-vue": "^9.32.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-cypress": "^4.2.0",
+    "eslint-plugin-vue": "^9.33.0",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.0.0",
-    "lint-staged": "^15.4.3",
+    "lint-staged": "^15.5.0",
     "npm-run-all": "^4.1.5",
     "npm-run-all2": "^7.0.2",
     "path": "^0.12.7",
-    "prettier": "^3.5.2",
-    "sass": "^1.85.0",
-    "start-server-and-test": "^2.0.10",
-    "typescript": "~5.7.3",
+    "prettier": "^3.5.3",
+    "sass": "^1.85.1",
+    "start-server-and-test": "^2.0.11",
+    "typescript": "~5.8.2",
     "unplugin-vue-markdown": "^28.3.1",
-    "vite": "^6.1.1",
+    "vite": "^6.2.1",
     "vite-plugin-dynamic-import": "^1.6.0",
-    "vite-plugin-static-copy": "^2.2.0",
+    "vite-plugin-static-copy": "^2.3.0",
     "vite-plugin-vue-devtools": "^7.7.2",
-    "vue-tsc": "^2.2.4"
+    "vue-tsc": "^2.2.8"
   },
   "lint-staged": {
     "src/**/*.ts": [
@@ -79,5 +79,5 @@
       "prettier --write src/"
     ]
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.7.0"
 }
