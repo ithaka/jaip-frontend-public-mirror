@@ -1,0 +1,19 @@
+kind: RouteTable
+apiVersion: gateway.solo.io/v1
+metadata:
+  labels:
+    apiGroup: pep.jstor.org
+  name: jaip-frontend-route
+  namespace: sequoia
+spec:
+  routes:
+    - matchers:
+        - prefix: /
+      routeAction:
+        single:
+          upstream:
+            name: jaip-frontend
+            namespace: sequoia
+      options:
+        timeout: "30s"
+  weight: 0
