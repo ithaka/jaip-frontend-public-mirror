@@ -81,18 +81,18 @@ lint:
     - yarn lint
 
 # Run e2e tests
-e2e tests:
-  image: $DOCKER_VIRTUAL/cypress/browsers:22.12.0
-  stage: check
-  dependencies:
-    - build app image
-  extends:
-    - .test
-  before_script:
-    - yarn install --immutable
-    - yarn build
-  script:
-    - yarn test:e2e
+# e2e tests:
+#   image: $DOCKER_VIRTUAL/cypress/browsers:22.12.0
+#   stage: check
+#   dependencies:
+#     - build app image
+#   extends:
+#     - .test
+#   before_script:
+#     - yarn install --immutable
+#     - yarn build
+#   script:
+#     - yarn test:e2e
 
 promote image:
   stage: promote

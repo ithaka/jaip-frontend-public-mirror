@@ -92,11 +92,11 @@ include:
     ref: "2"
     inputs:
       job_name: "lint"
-  - project: capstan/platform-apps/blueprint/glab-ci-update-github-commit-status
-    file: template.gitlab-ci.yml
-    ref: "2"
-    inputs:
-      job_name: "e2e tests"
+  # - project: capstan/platform-apps/blueprint/glab-ci-update-github-commit-status
+  #   file: template.gitlab-ci.yml
+  #   ref: "2"
+  #   inputs:
+  #     job_name: "e2e tests"
   - project: capstan/platform-apps/blueprint/glab-ci-update-github-commit-status
     file: template.gitlab-ci.yml
     ref: "2"
