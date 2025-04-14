@@ -150,13 +150,8 @@ const auth = async (app: App) => {
   }
   if (!!subdomain.value && !hasValidSubdomain.value) {
     const subdomains = await api.auth.validateSubdomains()
-    if (subdomains.data) {
-      customSubdomains.value = subdomains.data
-        .map((s: unknown) => {
-          const resp = s as { subdomain: string }
-          return resp.subdomain || ''
-        })
-        .filter((s: string) => !!s)
+    if (subdomains.data && subdomains.data.subdomain) {
+      customSubdomains.value.push(subdomains.data.subdomain)
     }
   }
 
