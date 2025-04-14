@@ -140,7 +140,7 @@ const logout = () => {
   })
 }
 
-// Handle auth and the intial fetching of features
+// Handle auth and the initial fetching of features
 const auth = async (app: App) => {
   // Prepare Stores
   const api = app.config.globalProperties.$api
@@ -149,7 +149,7 @@ const auth = async (app: App) => {
     alert.value = alerts.data
   }
   if (!!subdomain.value && !hasValidSubdomain.value) {
-    const subdomains = await api.auth.validateSubdomains(subdomain.value)
+    const subdomains = await api.auth.validateSubdomains()
     if (subdomains.data) {
       customSubdomains.value = subdomains.data
         .map((s: unknown) => {

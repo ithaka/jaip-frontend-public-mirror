@@ -52,7 +52,7 @@ export default interface ApiObject {
       }
     }
     alerts: () => Promise<AxiosResponse<unknown, unknown>>
-    validateSubdomains: (arg: string) => Promise<AxiosResponse<unknown, unknown>>
+    validateSubdomains: () => Promise<AxiosResponse<unknown, unknown>>
     subdomains: {
       get: (arg: SubdomainRequest) => Promise<AxiosResponse<SubdomainsResponse, unknown>>
       add: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse, unknown>>

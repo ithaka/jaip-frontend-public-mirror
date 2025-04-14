@@ -27,8 +27,8 @@ export default ($axios: AxiosInstance): ApiObject => ({
         reactivate: (data) => $axios.post(`/api/auth/features/ungrouped/reactivate`, data),
       },
     },
-    alerts: () => $axios.get('/api/auth/alerts'),
-    validateSubdomains: (entity: string) => $axios.get(`/api/auth/subdomains/${entity}`),
+    alerts: () => $axios.get('/api/v2/alerts'),
+    validateSubdomains: () => $axios.get(`/api/v2/subdomains/validate`),
     subdomains: {
       get: (data) => $axios.post(`/api/auth/getSubdomains`, data),
       add: (data) => $axios.post(`/api/auth/subdomains`, data),
