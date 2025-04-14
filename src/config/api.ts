@@ -5,7 +5,7 @@ export default ($axios: AxiosInstance): ApiObject => ({
   auth: {
     session: () =>
       $axios
-        .get('/api/auth/session')
+        .get('/api/v2/auth')
         // We need to catch and return the error here because we may need it to display a
         // message to an unauthorized user.
         .catch((error) => {
