@@ -103,7 +103,7 @@ export default defineConfig(({ mode }) => {
   // when ENVIRONMENT is set to "local". This allows us to use the prod or staging
   // clusters during frontend development.
   process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
-  if (process.env.ENVIRONMENT==="local") {
+  if (process.env.ENVIRONMENT==="development") {
     config.server = {
       proxy: {
         '/api': {
