@@ -107,7 +107,7 @@ export const useSearchStore = defineStore('search', {
       if (status) {
         args.statusStartDate = this.statusStartDate
         args.statusEndDate = this.statusEndDate
-        args.statusQuery = this.statusQuery
+        args.statusQuery = this.statusQuery || ''
       } else {
         args.query = this.searchTerms
         args.filters = this.searchFilters
