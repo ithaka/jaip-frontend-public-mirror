@@ -43,7 +43,7 @@ const component = ref(props.small ? 'small' : 'span')
         />
         <!-- eslint-enable vue/no-v-html  -->
       </component>
-      <component :is="component" v-else-if="subtitle">
+      <component :is="component" v-else-if="subtitle && !Array.isArray(subtitle)">
         <!-- eslint-disable vue/no-v-html -->
         <span v-html="separateSubtitle(title, subtitle as string)" />
         <!-- eslint-enable vue/no-v-html  -->
