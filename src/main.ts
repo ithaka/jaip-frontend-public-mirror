@@ -3,7 +3,7 @@ import '@/assets/main.scss'
 import { createApp } from 'vue'
 import type { App } from 'vue'
 import { createPinia, storeToRefs } from 'pinia'
-import { setCookie, getCookie } from 'typescript-cookie'
+import { setCookie } from 'typescript-cookie'
 
 import VueApp from '@/App.vue'
 import pharos from '@/plugins/pharos'
@@ -174,9 +174,7 @@ const auth = async (app: App) => {
   if (isUnauthenticated.value) {
     gettingUser.value = true
     try {
-      console.log(getCookie('uuid'))
       const resp = await api.auth.session()
-      console.log(resp)
       // If we have an invalid email, we need to show the user a message. We can extract the email
       // from the 401 response.
       if (resp.name === 'AxiosError' && resp.response.data && resp.response.data.invalid_email) {
