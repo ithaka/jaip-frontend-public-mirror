@@ -23,6 +23,12 @@ function checkIfValidUUID(str: string) {
   return regexExp.test(str)
 }
 
+function get_subdomain(host: string): string {
+  const split_host = host.split('.')
+  const ending = split_host[split_host.length - 1].startsWith('localhost:') ? -1 : -2
+  return split_host.slice(0, ending).join('.')
+}
+
 // Start setting up app
 const app = createApp(VueApp)
 const pinia = createPinia()
@@ -40,12 +46,12 @@ const searchStore = useSearchStore()
 // Make store values reactive
 const {
   subdomain,
-  adminSubdomain,
   routePath,
   routeQuery,
   alert,
   customSubdomains,
   hasValidSubdomain,
+  isAdminSubdomain,
 } = storeToRefs(coreStore)
 const { features } = storeToRefs(featuresStore)
 const {
@@ -76,7 +82,7 @@ routeQuery.value = location.search
 // during e2e tests.
 // @ts-expect-error Cypress stubs window location
 const host = window.__location ? window.__location.host() : location.host
-subdomain.value = host.split('.')[0]
+subdomain.value = get_subdomain(host)
 let duplicateRoute = false
 
 // We don't need to refetch auth data with every route change.
@@ -162,7 +168,7 @@ const auth = async (app: App) => {
   const valid = checkIfValidUUID(uuid)
 
   // Set UUID Cookie and remove hash
-  if (valid && subdomain.value === adminSubdomain.value && (location || {}).hash) {
+  if (valid && isAdminSubdomain.value && (location || {}).hash) {
     setCookie('uuid', uuid)
     duplicateRoute = true
     if (router) {

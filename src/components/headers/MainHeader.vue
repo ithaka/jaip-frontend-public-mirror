@@ -47,7 +47,6 @@ defineProps({
     default: '',
   },
 })
-
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
 

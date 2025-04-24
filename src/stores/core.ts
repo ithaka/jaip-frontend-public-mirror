@@ -14,6 +14,7 @@ export const useCoreStore = defineStore('core', {
       subdomain: '',
       customSubdomains: [] as string[],
       adminSubdomain: 'pep-admin',
+      adminSubdomains: ['pep-admin', 'admin.pep'],
       studentSubdomain: 'pep',
       routePath: '/',
       routeQuery: '',
@@ -24,16 +25,19 @@ export const useCoreStore = defineStore('core', {
   },
   getters: {
     validSubdomains(): string[] {
-      return [...this.customSubdomains, this.adminSubdomain, this.studentSubdomain]
+      return [...this.customSubdomains, ...this.adminSubdomains, this.studentSubdomain]
     },
     hasValidSubdomain(): boolean {
       return this.validSubdomains.includes(this.subdomain)
     },
     hasValidStudentSubdomain(): boolean {
-      return this.validSubdomains.includes(this.subdomain) && this.subdomain != this.adminSubdomain
+      return (
+        this.validSubdomains.includes(this.subdomain) &&
+        !this.adminSubdomains.includes(this.subdomain)
+      )
     },
     isAdminSubdomain(): boolean {
-      return this.subdomain === this.adminSubdomain
+      return this.adminSubdomains.includes(this.subdomain)
     },
   },
   actions: {

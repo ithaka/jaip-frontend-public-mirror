@@ -145,8 +145,7 @@ export const useUserStore = defineStore('user', {
     },
     isAuthenticatedAdmin(): boolean {
       const core = useCoreStore()
-      const correctSubdomain = core.adminSubdomain === core.subdomain
-      return correctSubdomain && this.isAdmin
+      return core.isAdminSubdomain && this.isAdmin
     },
     isUnauthenticated(): boolean {
       return !this.gettingUser && !this.isAuthenticatedStudent && !this.isAuthenticatedAdmin

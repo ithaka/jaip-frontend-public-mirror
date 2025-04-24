@@ -37,7 +37,11 @@ const redirectToParams = () => {
   return encodeURIComponent('?to=' + newURL)
 }
 const loginUrl =
-  'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' + redirectToParams()
+  import.meta.env.ENVIRONMENT === 'production'
+    ? 'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
+      redirectToParams()
+    : 'https://firefly.jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
+      redirectToParams()
 
 const router = useRouter()
 let updateKey = 0
