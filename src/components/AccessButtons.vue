@@ -46,7 +46,7 @@ const downloadPDF = () => {
     const a = document.createElement('a')
     a.style.display = 'none'
     document.body.appendChild(a)
-    a.href = `/api/pages/pdf/${props.iid}`
+    a.href = `/api/v2/page/${props.iid}`
     // Use download attribute to set set desired file name
     a.setAttribute('download', (props.iid || 'document') + '.pdf')
     // Trigger the download by simulating click
@@ -66,7 +66,7 @@ const downloadPDF = () => {
 const printPDF = () => {
   isDisabledPrint.value = true
   printJS({
-    printable: `api/pages/pdf/${props.iid}`,
+    printable: `api/v2/page/${props.iid}`,
     type: 'pdf',
     onPrintDialogClose: () => {
       isDisabledPrint.value = false
@@ -128,7 +128,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     class="mb-2"
     full-width
     :variant="variant"
-    :href="hasBrowserPDFViewer() ? `/api/pages/pdf/${iid}` : `/pdf/${iid}`"
+    :href="hasBrowserPDFViewer() ? `/api/v2/page/${iid}` : `/pdf/${iid}`"
   >
     View PDF
   </pep-pharos-button>

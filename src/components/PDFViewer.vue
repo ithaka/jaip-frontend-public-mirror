@@ -78,7 +78,7 @@ const preparePage = async () => {
   try {
     const workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString()
     pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc
-    const url = `/api/pages/pdf/${props.iid}`
+    const url = `/api/v2/page/${props.iid}`
     if (props.enableViewer) {
       const document = await createLoadingTask(url)
       const pdfViewer = createViewer()

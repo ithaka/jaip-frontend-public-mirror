@@ -124,6 +124,7 @@ export const getGroupsWithStatus = (
   statuses: { [key: string]: History },
   status: string,
 ): number[] => {
+  if (!statuses) return []
   return Object.values(statuses)
     .filter((history: History) => {
       return history.status.toLowerCase() === status.toLowerCase()
