@@ -5225,7 +5225,7 @@ __metadata:
     typescript-cookie: "npm:^1.0.6"
     unplugin-vue-markdown: "npm:^28.3.1"
     uuid: "npm:^11.1.0"
-    vite: "npm:^6.2.1"
+    vite: "npm:^6.3.3"
     vite-plugin-dynamic-import: "npm:^1.6.0"
     vite-plugin-static-copy: "npm:^2.3.1"
     vite-plugin-vue-devtools: "npm:^7.7.6"
@@ -8297,7 +8297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.2.1":
+"vite@npm:^6.3.3":
   version: 6.3.3
   resolution: "vite@npm:6.3.3"
   dependencies:
