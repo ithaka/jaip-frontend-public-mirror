@@ -703,7 +703,7 @@ describe('Requests page', () => {
     })
 
 
-    it('Requires group selection', () => {
+    it.only('Requires group selection', () => {
       cy.get('.search-result')
         .first()
         .find('pep-pharos-button')
@@ -726,11 +726,8 @@ describe('Requests page', () => {
         .first()
         .find('pep-pharos-button')
         .contains('Deny')
-        // Cypress can't recognize this Pharos button as disabled, so this
-        // directly checks the element for the attribute. 
-        .then($el => {
-          expect($el[0].getAttribute('disabled')).to.exist;
-        })
+        .invoke('attr', 'disabled')
+        .should('exist')
     })
 
     it('Can deny for two groups', () => {
