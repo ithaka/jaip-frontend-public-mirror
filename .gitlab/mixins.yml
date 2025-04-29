@@ -28,7 +28,7 @@
 .ephemeral-env:
   variables:
     API_TARGET: test
-    APP_NAME: jaip-frontend-$CI_MERGE_REQUEST_IID
+    APP_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA
     DEPLOY_JOB: ephemeral
     ENVIRONMENT: test
     NGINX_CONFIG: nginx.conf.ephemeral
@@ -37,7 +37,7 @@
     # Ephemeral only
     EKS_CLUSTER: ephemeral
     K8S_ACTION: apply
-    BASE_URL: https://jaip-frontend-$CI_MERGE_REQUEST_IID.apps.test.cirrostratus.org/jaip/api
+    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA.apps.test.cirrostratus.org/jaip/api
     DATABASE_SECRET_NAME: jaip-database-creds
 
 .test-env:
