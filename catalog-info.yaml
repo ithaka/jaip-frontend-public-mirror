@@ -18,7 +18,7 @@ metadata:
 spec:
   type: website
   owner: jaip
-  lifecycle: production
+  lifecycle: beta
   system: jaip
   consumesApis:
     - api:jaip-backend-api
