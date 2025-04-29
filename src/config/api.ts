@@ -5,11 +5,83 @@ const global_version = 'v2'
 const global_route_prefix = `/${global_path}`
 const global_route_prefix_versioned = `${global_route_prefix}/${global_version}`
 
+export const routes = {
+  auth: {
+    get: `${global_route_prefix_versioned}/auth`,
+  },
+  features: {
+    grouped: {
+      get: `${global_route_prefix_versioned}/site-administration/features/grouped/get`,
+      add: `${global_route_prefix_versioned}/site-administration/features/grouped`,
+      remove: `${global_route_prefix_versioned}/site-administration/features/grouped`,
+      edit: `${global_route_prefix_versioned}/site-administration/features/grouped`,
+      reactivate: `${global_route_prefix_versioned}/site-administration/features/grouped/reactivate`,
+    },
+    ungrouped: {
+      get: `${global_route_prefix_versioned}/site-administration/features/ungrouped/get`,
+      add: `${global_route_prefix_versioned}/site-administration/features/ungrouped`,
+      remove: `${global_route_prefix_versioned}/site-administration/features/ungrouped`,
+      edit: `${global_route_prefix_versioned}/site-administration/features/ungrouped`,
+      reactivate: `${global_route_prefix_versioned}/site-administration/features/ungrouped/reactivate`,
+    },
+  },
+  alerts: {
+    get: `${global_route_prefix_versioned}/alerts`,
+  },
+  validateSubdomains: {
+    get: `${global_route_prefix_versioned}/subdomains/validate`,
+  },
+  subdomains: {
+    get: `${global_route_prefix_versioned}/site-administration/subdomains/get`,
+    add: `${global_route_prefix_versioned}/site-administration/subdomains`,
+    remove: `${global_route_prefix_versioned}/site-administration/subdomains`,
+    edit: `${global_route_prefix_versioned}/site-administration/subdomains`,
+    reactivate: `${global_route_prefix_versioned}/site-administration/subdomains/reactivate`,
+  },
+  entities: {
+    get: (entity: string) => `${global_route_prefix_versioned}/entities/${entity}/get`,
+    remove: (entity: string) => `${global_route_prefix_versioned}/entities/${entity}`,
+    add: (entity: string) => `${global_route_prefix_versioned}/entities/${entity}`,
+    edit: (entity: string) => `${global_route_prefix_versioned}/entities/${entity}`,
+  },
+  groups: {
+    get: `${global_route_prefix_versioned}/site-administration/groups/get`,
+    remove: `${global_route_prefix_versioned}/site-administration/groups`,
+    add: `${global_route_prefix_versioned}/site-administration/groups`,
+    edit: `${global_route_prefix_versioned}/site-administration/groups`,
+    reactivate: `${global_route_prefix_versioned}/site-administration/groups/reactivate`,
+    clearHistory: `${global_route_prefix_versioned}/site-administration/groups/clear-history`,
+    addAdministrator: `${global_route_prefix_versioned}/site-administration/groups/create-group-admin`,
+  },
+  disciplines: {
+    get: `${global_route_prefix_versioned}/disciplines`,
+  },
+  journals: {
+    get: (code: string) => `${global_route_prefix_versioned}/disciplines/${code}`,
+  },
+  search: {
+    basic: `${global_route_prefix_versioned}/search`,
+    status: (status: string) => `${global_route_prefix_versioned}/search/${status}`,
+  },
+  approvals: {
+    bulk: `${global_route_prefix_versioned}/media-review/bulk`,
+    bulkUndo: `${global_route_prefix_versioned}/media-review/bulk-undo`,
+    deny: `${global_route_prefix_versioned}/media-review/deny`,
+    incomplete: `${global_route_prefix_versioned}/media-review/incomplete`,
+    approve: `${global_route_prefix_versioned}/media-review/approve`,
+    request: `${global_route_prefix_versioned}/media-review/request`,
+  },
+  documents: {
+    pdfs: (iid: string) => `${global_route_prefix_versioned}/page/${iid}`,
+    metadata: (iid: string) => `${global_route_prefix_versioned}/metadata/${iid}`,
+    pages: (iid: string, pid: string) => `${global_route_prefix_versioned}/page/${iid}/${pid}`,
+  },
+}
 export default ($axios: AxiosInstance): ApiObject => ({
   auth: {
     session: () =>
       $axios
-        .get(`${global_route_prefix_versioned}/auth`)
+        .get(routes.auth.get)
         // We need to catch and return the error here because we may need it to display a
         // message to an unauthorized user.
         .catch((error) => {
@@ -69,74 +141,47 @@ export default ($axios: AxiosInstance): ApiObject => ({
           ),
       },
     },
-    alerts: () => $axios.get(`${global_route_prefix_versioned}/alerts`),
-    validateSubdomains: () => $axios.get(`${global_route_prefix_versioned}/subdomains/validate`),
+    alerts: () => $axios.get(routes.alerts.get),
+    validateSubdomains: () => $axios.get(routes.validateSubdomains.get),
     subdomains: {
-      get: (data) =>
-        $axios.post(`${global_route_prefix_versioned}/site-administration/subdomains/get`, data),
-      add: (data) =>
-        $axios.post(`${global_route_prefix_versioned}/site-administration/subdomains`, data),
-      remove: (data) =>
-        $axios.delete(`${global_route_prefix_versioned}/site-administration/subdomains`, { data }),
-      edit: (data) =>
-        $axios.patch(`${global_route_prefix_versioned}/site-administration/subdomains`, data),
-      reactivate: (data) =>
-        $axios.post(
-          `${global_route_prefix_versioned}/site-administration/subdomains/reactivate`,
-          data,
-        ),
+      get: (data) => $axios.post(routes.subdomains.get, data),
+      add: (data) => $axios.post(routes.subdomains.add, data),
+      remove: (data) => $axios.delete(routes.subdomains.remove, { data }),
+      edit: (data) => $axios.patch(routes.subdomains.edit, data),
+      reactivate: (data) => $axios.post(routes.subdomains.reactivate, data),
     },
     entities: {
-      get: (data, entity) =>
-        $axios.post(`${global_route_prefix_versioned}/entities/${entity}/get`, data),
-      remove: (data, entity) =>
-        $axios.delete(`${global_route_prefix_versioned}/entities/${entity}`, { data }),
-      add: (data, entity) =>
-        $axios.post(`${global_route_prefix_versioned}/entities/${entity}`, data),
-      edit: (data, entity) =>
-        $axios.patch(`${global_route_prefix_versioned}/entities/${entity}`, data),
+      get: (data, entity) => $axios.post(routes.entities.get(entity), data),
+      remove: (data, entity) => $axios.delete(routes.entities.remove(entity), { data }),
+      add: (data, entity) => $axios.post(routes.entities.add(entity), data),
+      edit: (data, entity) => $axios.patch(routes.entities.edit(entity), data),
     },
     groups: {
-      get: (data) =>
-        $axios.post(`${global_route_prefix_versioned}/site-administration/groups/get`, data),
-      remove: (data) =>
-        $axios.delete(`${global_route_prefix_versioned}/site-administration/groups`, { data }),
-      add: (data) =>
-        $axios.post(`${global_route_prefix_versioned}/site-administration/groups`, data),
-      edit: (data) =>
-        $axios.patch(`${global_route_prefix_versioned}/site-administration/groups`, data),
-      reactivate: (data) =>
-        $axios.patch(
-          `${global_route_prefix_versioned}/site-administration/groups/reactivate`,
-          data,
-        ),
+      get: (data) => $axios.post(routes.groups.get, data),
+      remove: (data) => $axios.delete(routes.groups.remove, { data }),
+      add: (data) => $axios.post(routes.groups.add, data),
+      edit: (data) => $axios.patch(routes.groups.edit, data),
+      reactivate: (data) => $axios.patch(routes.groups.reactivate, data),
       clearHistory: (data) =>
-        $axios.delete(`${global_route_prefix_versioned}/site-administration/groups/clear-history`, {
+        $axios.delete(routes.groups.clearHistory, {
           data,
         }),
-      addAdministrator: (data) =>
-        $axios.post(
-          `${global_route_prefix_versioned}/site-administration/groups/create-group-admin`,
-          data,
-        ),
+      addAdministrator: (data) => $axios.post(routes.groups.addAdministrator, data),
     },
   },
-  disciplines: () => $axios.get(`${global_route_prefix_versioned}/disciplines`),
-  journals: (code: string) => $axios(`${global_route_prefix_versioned}/disciplines/${code}`),
+  disciplines: () => $axios.get(routes.disciplines.get),
+  journals: (code: string) => $axios(routes.journals.get(code)),
   search: {
-    basic: (data) => $axios.post(`${global_route_prefix_versioned}/search`, data),
-    status: (data, status) =>
-      $axios.post(`${global_route_prefix_versioned}/search/${status}`, data),
+    basic: (data) => $axios.post(routes.search.basic, data),
+    status: (data, status) => $axios.post(routes.search.status(status), data),
   },
   approvals: {
-    bulk: (data) => $axios.post(`${global_route_prefix_versioned}/media-review/bulk`, data),
-    bulkUndo: (data) =>
-      $axios.post(`${global_route_prefix_versioned}/media-review/bulk-undo`, data),
-    deny: (data) => $axios.post(`${global_route_prefix_versioned}/media-review/deny`, data),
-    incomplete: (data) =>
-      $axios.post(`${global_route_prefix_versioned}/media-review/incomplete`, data),
-    approve: (data) => $axios.post(`${global_route_prefix_versioned}/media-review/approve`, data),
-    request: (data) => $axios.post(`${global_route_prefix_versioned}/media-review/request`, data),
+    bulk: (data) => $axios.post(routes.approvals.bulk, data),
+    bulkUndo: (data) => $axios.post(routes.approvals.bulkUndo, data),
+    deny: (data) => $axios.post(routes.approvals.deny, data),
+    incomplete: (data) => $axios.post(routes.approvals.incomplete, data),
+    approve: (data) => $axios.post(routes.approvals.approve, data),
+    request: (data) => $axios.post(routes.approvals.request, data),
   },
   documents: {
     pdfs: (iid: string) => {
@@ -145,14 +190,14 @@ export default ($axios: AxiosInstance): ApiObject => ({
           Accept: `application/pdf`,
         },
       }
-      return $axios.get(`${global_route_prefix_versioned}/page/${iid}`, config)
+      return $axios.get(routes.documents.pdfs(iid), config)
     },
     // NOTE: Logs from this route are used in counter reporting. If any changes are made here,
     // be sure to make adjustments to avoid interfering or check with the data team.
-    metadata: (iid: string) => $axios.get(`${global_route_prefix_versioned}/metadata/${iid}`),
+    metadata: (iid: string) => $axios.get(routes.documents.metadata(iid)),
     pages: (iid: string, pid: string) => {
       return $axios({
-        url: `${global_route_prefix_versioned}/page/${iid}/${pid}`,
+        url: routes.documents.pages(iid, pid),
         method: 'GET',
         responseType: 'blob',
       })

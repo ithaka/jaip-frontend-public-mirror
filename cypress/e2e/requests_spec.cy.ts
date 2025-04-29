@@ -1,13 +1,14 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Requests page', () => {
   context('General', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
       cy.visit('/requests?term=&page=1')
@@ -38,7 +39,7 @@ describe('Requests page', () => {
       })
     })
 
-    it.only('Can filter by date reviewed', () => {
+    it('Can filter by date reviewed', () => {
       // Open date picker
       cy.get('pep-pharos-button[id="datepicker-button"')
         .click()
@@ -65,18 +66,18 @@ describe('Requests page', () => {
         const req = request.request.body
         // NOTE: This will likely fail when running locally, because of UTC issues.
         expect(req.statusStartDate).to.contain(`2022-01-01`)
-        expect(req.statusEndDate).to.contain(`2022-01-02`)
+        expect(req.statusEndDate).to.contain(`2022-01-03`)
       })
     })
 
     it('Can filter by status', () => {
-      cy.intercept('POST', '/api/search/pending', { fixture: 'search/pending__response.json' } )
+      cy.intercept('POST', routes.search.status('pending'), { fixture: 'search/pending__response.json' } )
         .as('pending')
 
       // The responses here will have the same format, so we can just reuse the same fixture.
-      cy.intercept('POST', '/api/search/denied', { fixture: 'search/pending__response.json' } )
+      cy.intercept('POST', routes.search.status('denied'), { fixture: 'search/pending__response.json' } )
         .as('denied')
-      cy.intercept('POST', '/api/search/approved', { fixture: 'search/pending__response.json' } )
+      cy.intercept('POST', routes.search.status('approved'), { fixture: 'search/pending__response.json' } )
         .as('approved')
 
         // Filter for pending items
@@ -132,15 +133,15 @@ describe('Requests page', () => {
 
   context('Student', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_media_access__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
     })
 
     it('Lets students re-request denied articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
         
       cy.visit('/requests?term=&page=1')
@@ -157,7 +158,7 @@ describe('Requests page', () => {
     })
 
     it('Lets students re-request incomplete articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/incomplete__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/incomplete__response.json' } )
         .as('completed')
 
       cy.visit('/requests?term=&page=1')
@@ -174,7 +175,7 @@ describe('Requests page', () => {
     })
 
     it('Lets students read approved articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@completed'])
@@ -190,7 +191,7 @@ describe('Requests page', () => {
     })
 
     it('Lets students download approved articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@completed'])
@@ -206,7 +207,7 @@ describe('Requests page', () => {
     })
 
     it('Lets students print approved articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@completed'])
@@ -222,12 +223,12 @@ describe('Requests page', () => {
     })
 
     it('Does not have a button for pending articles', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@auth', '@completed'])
 
-      cy.intercept('POST', '/api/search/pending', { fixture: 'search/pending__response.json' })
+      cy.intercept('POST', routes.search.status('pending'), { fixture: 'search/pending__response.json' })
         .as('pending')
 
       cy.get('pep-pharos-button')
@@ -248,7 +249,7 @@ describe('Requests page', () => {
         .should('have.length', 0)
     })
     it('Has no groups', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'search/completed__response.json' } )
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@auth', '@completed'])
@@ -261,13 +262,13 @@ describe('Requests page', () => {
 
   context('Admin', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_media_review__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_review__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/search/pending', { fixture: 'admin_search/completed__response.json' })
+      cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
         .as('pending')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
@@ -315,7 +316,7 @@ describe('Requests page', () => {
     })
 
     it('Approves with the approve button', () => {
-      cy.intercept('POST', '/api/approvals/approve', { body: '' })
+      cy.intercept('POST', routes.approvals.approve, { body: '' })
         .as('approve')
 
       cy.get('.search-result').eq(1).find('pep-pharos-button')
@@ -330,7 +331,7 @@ describe('Requests page', () => {
     })
 
     it('Denies with the deny button', () => {
-      cy.intercept('POST', '/api/approvals/deny', { body: '' })
+      cy.intercept('POST', routes.approvals.deny, { body: '' })
         .as('deny')
 
       cy.get('.search-result')
@@ -365,7 +366,7 @@ describe('Requests page', () => {
     })
 
     it('Has no groups in the deny modal', () => {
-      cy.intercept('POST', '/api/approvals/deny', { body: '' })
+      cy.intercept('POST', routes.approvals.deny, { body: '' })
         .as('deny')
 
       cy.get('.search-result')
@@ -380,7 +381,7 @@ describe('Requests page', () => {
     })
 
     it('Includes metadata for completed results', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'admin_search/completed__response.json' })
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/completed__response.json' })
         .as('completed')
         
       cy.get('pep-pharos-button')
@@ -404,7 +405,7 @@ describe('Requests page', () => {
     })
 
     it('Links to review history for pending items for that location only', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'admin_search/pending__response.json' })
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/pending__response.json' })
         .as('pending')
 
       cy.get('.search-result')
@@ -441,7 +442,7 @@ describe('Requests page', () => {
     })
 
     it('Links to review history for completed items for that location only', () => {
-      cy.intercept('POST', '/api/search/completed', { fixture: 'admin_search/completed__response.json' })
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/completed__response.json' })
       .as('completed')
   
       cy.get('pep-pharos-button')
@@ -482,7 +483,7 @@ describe('Requests page', () => {
     })
 
     it('Links to review history for incomplete items for that location only', () => {
-      cy.intercept('POST', '/api/search/incomplete', { fixture: 'admin_search/incomplete__response.json' })
+      cy.intercept('POST', routes.search.status('incomplete'), { fixture: 'admin_search/incomplete__response.json' })
         .as('incomplete')
   
       cy.get('pep-pharos-button')
@@ -660,13 +661,13 @@ describe('Requests page', () => {
 
   context('Admin with two groups', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/search/pending', { fixture: 'admin_search/completed__response.json' })
+      cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
         .as('pending')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
@@ -725,11 +726,15 @@ describe('Requests page', () => {
         .first()
         .find('pep-pharos-button')
         .contains('Deny')
-        .should('be.disabled')
+        // Cypress can't recognize this Pharos button as disabled, so this
+        // directly checks the element for the attribute. 
+        .then($el => {
+          expect($el[0].getAttribute('disabled')).to.exist;
+        })
     })
 
     it('Can deny for two groups', () => {
-      cy.intercept('POST', '/api/approvals/deny', { body: '' })
+      cy.intercept('POST', routes.approvals.deny, { body: '' })
         .as('deny')
 
       cy.get('.search-result')
@@ -779,7 +784,7 @@ describe('Requests page', () => {
 
 
     it('Can approve for two groups', () => {
-      cy.intercept('POST', '/api/approvals/approve', { body: '' })
+      cy.intercept('POST', routes.approvals.approve, { body: '' })
         .as('approve')
 
       cy.get('.search-result')

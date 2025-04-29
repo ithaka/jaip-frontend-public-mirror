@@ -1,15 +1,16 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Bulk approval', () => {
   context('As a student', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_view_document__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
       cy.visit('/search?term=mary+mcleod+bethune')
@@ -24,7 +25,7 @@ describe('Bulk approval', () => {
     })
 
     it('Shows a status indicator for articles from bulk approved journals', () => {
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__journal_approved__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__journal_approved__response.json' })
         .as('search')
       cy.visit('/search?term=mary+mcleod+bethune')
       cy.wait(['@searchPage', '@alerts', '@auth', '@disciplines', '@search'])
@@ -58,19 +59,19 @@ describe('Bulk approval', () => {
 
   context('As an admin', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'admin_search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
         .as('search')
-      cy.intercept('POST', '/api/search/denied', { fixture: 'admin_search/denied__response.json' })
+      cy.intercept('POST', routes.search.status('denied'), { fixture: 'admin_search/denied__response.json' })
         .as('denied')
-      cy.intercept('POST', '/api/approvals/bulk', { body: '' })
+      cy.intercept('POST', routes.approvals.bulk, { body: '' })
         .as('bulk')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
@@ -84,7 +85,7 @@ describe('Bulk approval', () => {
       })
 
       it('Displays when no search term or filter are set except a discipline', () => {
-        cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: 'disciplines/afam__response.json' })
+        cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
           .as('afam')
 
         cy.get('pep-pharos-checkbox')
@@ -115,9 +116,9 @@ describe('Bulk approval', () => {
       })
 
       it('Displays when no search term or filter are set except a journal', () => {
-        cy.intercept('POST', '/api/search', { fixture: `admin_search/no_term_given__journal__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `admin_search/no_term_given__journal__response.json` })
           .as('search-termless')
-        cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: `disciplines/journals__response.json` })
+        cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: `disciplines/journals__response.json` })
           .as('afam')
 
 
@@ -218,11 +219,11 @@ describe('Bulk approval', () => {
     })
 
     it('Lets you add disciplines to the bulk approval list', () => {
-      cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { body: '' })
         .as('afam')
-      cy.intercept('GET', '/api/disciplines/law-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('law-discipline'), { body: '' })
         .as('law')
-      cy.intercept('GET', '/api/disciplines/criminologycriminaljustice-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('criminologycriminaljustice-discipline'), { body: '' })
         .as('crim')
 
       cy.get('.search-filters pep-pharos-button')
@@ -270,7 +271,7 @@ describe('Bulk approval', () => {
     })
 
     it('Lets you add journals to the bulk approval list', () => {
-      cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: 'disciplines/afam__response.json' })
+      cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
         .as('afam')
 
       // Select a discipline from the dropdown to access a journal list
@@ -318,7 +319,7 @@ describe('Bulk approval', () => {
     })
 
     it('Displays an indicator for bulk approved disciplines', () => {
-      cy.intercept('POST', '/api/disciplines', { fixture: 'disciplines/with_bulk_approval__response.json' })
+      cy.intercept('POST', routes.disciplines.get, { fixture: 'disciplines/with_bulk_approval__response.json' })
 
       cy.get('.search-filters pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
@@ -333,7 +334,7 @@ describe('Bulk approval', () => {
     })
 
     it('Displays an indicator for bulk approved journals', () => {
-      cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: 'disciplines/afam__response.json' })
+      cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
         .as('afam')
 
       cy.get('pep-pharos-combobox[placeholder="Select a subject"]')
@@ -364,7 +365,7 @@ describe('Bulk approval', () => {
     })
 
     it('Has a bulk undo feature', () => {
-      cy.intercept('POST', '/api/approvals/bulkUndo', { body: '' })
+      cy.intercept('POST', routes.approvals.bulkUndo, { body: '' })
         .as('bulkUndo')
       cy.get('.search-filters pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
@@ -397,19 +398,19 @@ describe('Bulk approval', () => {
   })
   context('As an admin with multiple groups', ()=>{
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'admin_search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
         .as('search')
-      cy.intercept('POST', '/api/search/denied', { fixture: 'admin_search/denied__response.json' })
+      cy.intercept('POST', routes.search.status('denied'), { fixture: 'admin_search/denied__response.json' })
         .as('denied')
-      cy.intercept('POST', '/api/approvals/bulk', { body: '' })
+      cy.intercept('POST', routes.approvals.bulk, { body: '' })
         .as('bulk')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
@@ -451,11 +452,11 @@ describe('Bulk approval', () => {
 
 
     it('Lets you add disciplines to the bulk approval list', () => {
-      cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { body: '' })
         .as('afam')
-      cy.intercept('GET', '/api/disciplines/law-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('law-discipline'), { body: '' })
         .as('law')
-      cy.intercept('GET', '/api/disciplines/criminologycriminaljustice-discipline', { body: '' })
+      cy.intercept('GET', routes.journals.get('criminologycriminaljustice-discipline'), { body: '' })
         .as('crim')
 
       cy.get('.search-filters pep-pharos-button')
@@ -517,7 +518,7 @@ describe('Bulk approval', () => {
     })
 
     it('Lets you add journals to the bulk approval list', () => {
-      cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: 'disciplines/afam__response.json' })
+      cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
         .as('afam')
 
       // Select a discipline from the dropdown to access a journal list
@@ -583,19 +584,19 @@ describe('Bulk approval', () => {
   })
   context('As an admin without access', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_get_users__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/with_bulk_approval__response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/with_bulk_approval__response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'admin_search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
         .as('search')
-      cy.intercept('POST', '/api/search/denied', { fixture: 'admin_search/denied__response.json' })
+      cy.intercept('POST', routes.search.status('denied'), { fixture: 'admin_search/denied__response.json' })
         .as('denied')
-      cy.intercept('POST', '/api/approvals/bulk', { body: '' })
+      cy.intercept('POST', routes.approvals.bulk, { body: '' })
         .as('bulk')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')

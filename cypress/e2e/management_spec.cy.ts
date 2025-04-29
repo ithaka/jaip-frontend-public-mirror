@@ -1,73 +1,74 @@
 
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Management', () => {
   context('For admins', () => {
     beforeEach(() => {
       handleLocation('/management?term=&page=1', cy, 'managementPage', 'pep-admin')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
-      cy.intercept('POST', '/api/auth/getGroups', { fixture: 'auth/groups/get_groups__response.json' })
+      cy.intercept('POST', routes.groups.get, { fixture: 'auth/groups/get_groups__response.json' })
         .as('getGroups')
-      cy.intercept('POST', '/api/auth/groups', { fixture: 'auth/groups/add_group__request.json' })
+      cy.intercept('POST', routes.groups.add, { fixture: 'auth/groups/add_group__request.json' })
         .as('addGroup')
-      cy.intercept('PATCH', '/api/auth/groups', { fixture: 'auth/groups/edit_group__request.json' })
+      cy.intercept('PATCH', routes.groups.edit, { fixture: 'auth/groups/edit_group__request.json' })
         .as('editGroup')
-      cy.intercept('DELETE', '/api/auth/groups', { fixture: 'auth/groups/delete_group__request.json' })
+      cy.intercept('DELETE', routes.groups.remove, { fixture: 'auth/groups/delete_group__request.json' })
         .as('deleteGroup')
-      cy.intercept('PATCH', '/api/auth/reactivateGroups', { fixture: 'auth/groups/reactivate_group__request.json' })
+      cy.intercept('PATCH', routes.groups.reactivate, { fixture: 'auth/groups/reactivate_group__request.json' })
         .as('reactivateGroup')
-      cy.intercept('DELETE', '/api/auth/clearHistory', { fixture: 'auth/groups/clear_history__request.json' })
+      cy.intercept('DELETE', routes.groups.clearHistory, { fixture: 'auth/groups/clear_history__request.json' })
         .as('clearHistory')
-      cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'auth/users/get_users__ungrouped_features__response.json' })
+      cy.intercept('POST', routes.entities.get('users'), { fixture: 'auth/users/get_users__ungrouped_features__response.json' })
         .as('getUsers')
-      cy.intercept('POST', '/api/auth/entities/users', { fixture: 'auth/users/add_user__request.json' })
+      cy.intercept('POST', routes.entities.add('users'), { fixture: 'auth/users/add_user__request.json' })
         .as('addUser')
-      cy.intercept('PATCH', '/api/auth/entities/users', { fixture: 'auth/users/edit_user__ungrouped_features__request.json' })
+      cy.intercept('PATCH', routes.entities.edit('users'), { fixture: 'auth/users/edit_user__ungrouped_features__request.json' })
         .as('editUser')
-      cy.intercept('POST', '/api/auth/createGroupAdmin', { fixture: 'auth/users/create_group_admin__request.json' })
+      cy.intercept('POST', routes.groups.addAdministrator, { fixture: 'auth/users/create_group_admin__request.json' })
         .as('createGroupAdmin')
 
 
-      cy.intercept('POST', '/api/auth/getSubdomains', { fixture: 'auth/subdomains/get_subdomains__response.json' })
+      cy.intercept('POST', routes.subdomains.get, { fixture: 'auth/subdomains/get_subdomains__response.json' })
         .as('getSubdomains')
-      cy.intercept('POST', '/api/auth/subdomains', { fixture: 'auth/subdomains/add_subdomain__request.json' })
+      cy.intercept('POST', routes.subdomains.add, { fixture: 'auth/subdomains/add_subdomain__request.json' })
         .as('addSubdomain')
-      cy.intercept('PATCH', '/api/auth/subdomains', { fixture: 'auth/subdomains/edit_subdomain__request.json' })
+      cy.intercept('PATCH', routes.subdomains.edit, { fixture: 'auth/subdomains/edit_subdomain__request.json' })
         .as('editSubdomain')
-      cy.intercept('DELETE', '/api/auth/subdomains', { fixture: 'auth/subdomains/delete_subdomain__request.json' })
+      cy.intercept('DELETE', routes.subdomains.remove, { fixture: 'auth/subdomains/delete_subdomain__request.json' })
         .as('deleteSubdomain')
-      cy.intercept('POST', '/api/auth/reactivateSubdomains', { fixture: 'auth/subdomains/reactivate_subdomain__request.json' })
+      cy.intercept('POST', routes.subdomains.reactivate, { fixture: 'auth/subdomains/reactivate_subdomain__request.json' })
         .as('reactivateSubdomain')
 
 
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('getFeatures')
-      cy.intercept('POST', '/api/auth/features/basic', { fixture: 'auth/features/add_feature__request.json' })
+      cy.intercept('POST', routes.features.grouped.add, { fixture: 'auth/features/add_feature__request.json' })
         .as('addFeature')
-      cy.intercept('PATCH', '/api/auth/features/basic', { fixture: 'auth/features/edit_feature__request.json' })
+      cy.intercept('PATCH', routes.features.grouped.edit, { fixture: 'auth/features/edit_feature__request.json' })
         .as('editFeature')
-      cy.intercept('DELETE', '/api/auth/features/basic', { fixture: 'auth/features/delete_feature__request' })
+      cy.intercept('DELETE', routes.features.grouped.remove, { fixture: 'auth/features/delete_feature__request' })
         .as('deleteFeature')
-      cy.intercept('POST', '/api/auth/features/basic/reactivate', { fixture: 'auth/features/reactivate_feature__request.json' })
+      cy.intercept('POST', routes.features.grouped.reactivate, { fixture: 'auth/features/reactivate_feature__request.json' })
         .as('reactivateFeature')
 
 
-      cy.intercept('POST', '/api/auth/features/ungrouped/get', { fixture: 'auth/features/ungrouped_features__response.json' })
+      cy.intercept('POST', routes.features.ungrouped.get, { fixture: 'auth/features/ungrouped_features__response.json' })
         .as('getUngroupedFeatures')
-      cy.intercept('POST', '/api/auth/features/ungrouped', { fixture: 'auth/features/add_ungrouped_feature__request.json' })
+      cy.intercept('POST', routes.features.ungrouped.add, { fixture: 'auth/features/add_ungrouped_feature__request.json' })
         .as('addUngroupedFeature')
-      cy.intercept('PATCH', '/api/auth/features/ungrouped', { fixture: 'auth/features/edit_ungrouped_feature__request.json' })
+      cy.intercept('PATCH', routes.features.ungrouped.edit, { fixture: 'auth/features/edit_ungrouped_feature__request.json' })
         .as('editUngroupedFeature')
-      cy.intercept('DELETE', '/api/auth/features/ungrouped', { fixture: 'auth/features/delete_feature__request' })
+      cy.intercept('DELETE', routes.features.ungrouped.remove, { fixture: 'auth/features/delete_feature__request' })
         .as('deleteUngroupedFeature')
-      cy.intercept('POST', '/api/auth/features/ungrouped/reactivate', { fixture: 'auth/features/reactivate_feature__request.json' })
+      cy.intercept('POST', routes.features.ungrouped.reactivate, { fixture: 'auth/features/reactivate_feature__request.json' })
         .as('reactivateUngroupedFeature')
     })
 
     context('When logged in', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
         cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures'])
@@ -81,7 +82,7 @@ describe('Management', () => {
 
     context('When logged in with add_group', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -133,7 +134,7 @@ describe('Management', () => {
 
     context('When logged in with edit_group', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_edit_group__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_group__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -198,7 +199,7 @@ describe('Management', () => {
 
     context('When logged in with delete_group', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_delete_group__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_group__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -263,10 +264,10 @@ describe('Management', () => {
 
     context('When logged in with reactivate_group', () => {
       beforeEach(() => {
-        cy.intercept('POST', '/api/auth/getGroups', { fixture: 'auth/groups/get_groups__inactive__response.json' })
+        cy.intercept('POST', routes.groups.get, { fixture: 'auth/groups/get_groups__inactive__response.json' })
         .as('getGroupsInactive')
 
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -314,7 +315,7 @@ describe('Management', () => {
 
     context('When logged in with clear_history', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_clear_history__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_clear_history__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -379,7 +380,7 @@ describe('Management', () => {
 
     context('When logged in with manage_superusers', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_manage_superusers__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_manage_superusers__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -472,7 +473,7 @@ describe('Management', () => {
 
     context('When logged in with create_group_admins', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_create_group_admins__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_create_group_admins__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -553,7 +554,7 @@ describe('Management', () => {
 
     context('When logged in with add_subdomain', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -604,7 +605,7 @@ describe('Management', () => {
 
     context('When logged in with edit_subdomain', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_edit_subdomain__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_subdomain__response.json' })
           .as('auth')
         
           cy.visit('/management?term=&page=1')
@@ -668,7 +669,7 @@ describe('Management', () => {
 
     context('When logged in with delete_subdomain', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_delete_subdomain__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_subdomain__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
         cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomains'])
@@ -730,10 +731,10 @@ describe('Management', () => {
 
     context('When logged in with add_subdomain and inactive subdomains', () => {
       beforeEach(() => {
-        cy.intercept('POST', '/api/auth/getSubdomains', { fixture: 'auth/subdomains/get_subdomains__inactive__response.json' })
+        cy.intercept('POST', routes.subdomains.get, { fixture: 'auth/subdomains/get_subdomains__inactive__response.json' })
         .as('getSubdomainsInactive')
 
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
         cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomainsInactive'])
@@ -779,7 +780,7 @@ describe('Management', () => {
 
     context('When logged in with add_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
@@ -856,7 +857,7 @@ describe('Management', () => {
 
     context('When logged in with edit_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_edit_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_feature__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
         cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
@@ -975,7 +976,7 @@ describe('Management', () => {
 
     context('When logged in with delete_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_delete_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
@@ -1041,7 +1042,7 @@ describe('Management', () => {
 
     context('When logged in with add_feature and inactive features', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
@@ -1090,7 +1091,7 @@ describe('Management', () => {
 
     context('When logged in with add_ungrouped_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
@@ -1168,7 +1169,7 @@ describe('Management', () => {
 
     context('When logged in with edit_ungrouped_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_edit_ungrouped_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_ungrouped_feature__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
         cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
@@ -1289,7 +1290,7 @@ describe('Management', () => {
 
     context('When logged in with delete_ungrouped_feature', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_delete_ungrouped_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
@@ -1357,7 +1358,7 @@ describe('Management', () => {
 
     context('When logged in with add_ungrouped_feature and inactive features', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])

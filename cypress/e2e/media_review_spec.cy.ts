@@ -1,15 +1,16 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Media Review', () => {
   context('As a student', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_view_document_submit_requests__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document_submit_requests__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
     })
 
@@ -131,9 +132,9 @@ describe('Media Review', () => {
     })
     context('With alternate search response', () => {
       beforeEach(() => {
-        cy.intercept('POST', '/api/search', { fixture: 'search/term_given__with_denial__response.json' })
+        cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__with_denial__response.json' })
           .as('search')
-        cy.intercept('POST', '/api/approvals/request', { body: '' }).as('request')
+        cy.intercept('POST', routes.approvals.request, { body: '' }).as('request')
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
         cy.visit('/search?term=mary+mcleod+bethune')
         cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@disciplines'])  
@@ -187,7 +188,7 @@ describe('Media Review', () => {
       })
   
       it('Does not let students re-request pending articles', () => {
-        cy.intercept('POST', '/api/search', { fixture: 'search/term_given__pending__response.json' })
+        cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__pending__response.json' })
           .as('search')
   
         cy.visit('/search?term=mary+mcleod+bethune')
@@ -212,9 +213,9 @@ describe('Media Review', () => {
     context('With full cart', () => {
       beforeEach(() => {
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
-        cy.intercept('POST', '/api/search', { fixture: '/search/no_term_given__no_statuses__response.json' })
+        cy.intercept('POST', routes.search.basic, { fixture: '/search/no_term_given__no_statuses__response.json' })
           .as('search')
-        cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/with_no_bulk_approval__response.json' })
+        cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/with_no_bulk_approval__response.json' })
           .as('disciplines')
 
         cy.visit('/search?term=mary+mcleod+bethune')
@@ -241,13 +242,13 @@ describe('Media Review', () => {
 
   context('As a student who cannot submit requests', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_view_document__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
     })
 
@@ -271,26 +272,26 @@ describe('Media Review', () => {
   })
   context('As an admin', () => {
     beforeEach(() => {
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
     })
 
     context('In multiple groups', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
           .as('auth')
       })
 
       context('From the search page', () => {
         beforeEach(() => {
-          cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+          cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
             .as('disciplines')
-          cy.intercept('POST', '/api/search', { fixture: 'admin_search/term_given__pending__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__pending__response.json' })
             .as('search')
-          cy.intercept('POST', '/api/approvals/deny', { body: '' })
+          cy.intercept('POST', routes.approvals.deny, { body: '' })
             .as('deny')
             
           cy.visit('/search?term=mary+mcleod+bethune')
@@ -298,7 +299,7 @@ describe('Media Review', () => {
         })
 
         it('Lets admins approve an article', () => {
-          cy.intercept('POST', '/api/approvals/approve', { body: '' }).as('approve')
+          cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
 
           // The pending article has an approve button
           cy.get('.search-result')
@@ -334,7 +335,7 @@ describe('Media Review', () => {
         })
     
         it('Lets admins deny an article', () => {
-          cy.intercept('POST', '/api/approvals/deny', { body: '' })
+          cy.intercept('POST', routes.approvals.deny, { body: '' })
             .as('deny')
   
           cy.get('.search-result')
@@ -483,14 +484,14 @@ describe('Media Review', () => {
 
     context('In one group', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_media_review__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_review__response.json' })
           .as('auth')
-        cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+        cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
           .as('disciplines')
-        cy.intercept('POST', '/api/search', { fixture: 'admin_search/term_given__pending__response.json' })
+        cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__pending__response.json' })
           .as('search')
 
-        cy.intercept('POST', '/api/approvals/approve', { body: '' }).as('approve')
+        cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
         cy.visit('/search?term=mary+mcleod+bethune')
         cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@features', '@disciplines'])  

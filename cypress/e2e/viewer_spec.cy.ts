@@ -1,4 +1,5 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 // These tests seem to be taking an unusually long time, so we're increasing the timeout. That's resulting in
 // consistent test passing.
@@ -8,15 +9,15 @@ describe('Page Viewer', () => {
   context('As student', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_view_document__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__specified_id_limit_one__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
-      cy.intercept('GET', `/api/pages/metadata/${iid}`, { statusCode: 200, body: '' })
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
       handleLocation(route, cy, 'viewer', 'pep')
 
@@ -40,15 +41,15 @@ describe('Page Viewer', () => {
   context('As admin', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__specified_id_limit_one__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
-      cy.intercept('GET', `/api/pages/metadata/${iid}`, { statusCode: 200, body: '' })
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
@@ -70,15 +71,15 @@ describe('Page Viewer', () => {
   context('As student with media access', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_media_access__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__specified_id_limit_one__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
-      cy.intercept('GET', `/api/pages/metadata/${iid}`, { statusCode: 200, body: '' })
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep')
 
@@ -100,15 +101,15 @@ describe('Page Viewer', () => {
   context('As admin with media access', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_media_access__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_access__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('POST', '/api/search', { fixture: 'search/term_given__specified_id_limit_one__response.json' })
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
-      cy.intercept('GET', `/api/pages/metadata/${iid}`, { statusCode: 200, body: '' })
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 

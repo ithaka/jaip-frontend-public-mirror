@@ -1,15 +1,16 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Main site content', () => {
   
   context('Unauthenticated', () => {
     context('General', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
-        cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+        cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
           .as('alerts')
-        cy.intercept('GET', '/api/auth/subdomains/**', { fixture: 'auth/subdomains/facilities.json' }) // no alerts
+        cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
           .as('subdomains') 
         cy.visit('/')
       })
@@ -41,16 +42,16 @@ describe('Main site content', () => {
     })
     context('General with Alert', () =>{
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
-        cy.intercept('GET', '/api/auth/alerts', { fixture: 'auth/alerts/response.json' })
+        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
           .as('alerts')
-        cy.intercept('GET', '/api/auth/subdomains/**', { fixture: 'auth/subdomains/facilities.json' }) // no alerts
+        cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
           .as('subdomains') 
       })
       it('includes alert', () => {
         cy.visit('/')
-        cy.wait(['@alerts', '@subdomains', '@auth'])
+        cy.wait(['@alerts', '@auth'])
         cy.get('pep-pharos-alert')
           .contains('Oh, no!')
           .should('be.visible')
@@ -58,9 +59,9 @@ describe('Main site content', () => {
     })
     context('Admin', ()=>{
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
-        cy.intercept('GET', '/api/auth/alerts', { fixture: 'auth/alerts/response.json' })
+        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
           .as('alerts')
         handleLocation('/', cy, 'index', 'pep-admin')
       })
@@ -77,9 +78,9 @@ describe('Main site content', () => {
 
   context('AuthenticatedStudent', () => {
     beforeEach(() => {
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
         .as('auth')
-      cy.intercept('GET', '/api/auth/alerts', { fixture: 'auth/alerts/response.json' })
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
         .as('alerts')
       handleLocation('/', cy, 'index', 'pep')
     })
@@ -179,11 +180,11 @@ describe('Main site content', () => {
   context('AuthenticatedAdmin', () => {
     beforeEach(() => {
       // An admin needs at least one admin feature.
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { fixture: 'auth/alerts/response.json' })
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
         .as('alerts')
       handleLocation('/', cy, 'index', 'pep-admin')
     })
@@ -277,11 +278,11 @@ describe('Main site content', () => {
   context('AuthenticatedAdminWithAccountManagement', () => {
     beforeEach(() => {
       // An admin needs at least one admin feature.
-      cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_get_users__response.json' })
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
         .as('auth')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
-      cy.intercept('GET', '/api/auth/alerts', { fixture: 'auth/alerts/response.json' })
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
         .as('alerts')
       handleLocation('/', cy, 'index', 'pep-admin')
     })

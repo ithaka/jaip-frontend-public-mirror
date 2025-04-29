@@ -1,18 +1,19 @@
 
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 describe('Account Management', () => {
   context('For admins', () => {
     beforeEach(() => {
       handleLocation('/account?term=&page=1', cy, 'accountPage', 'pep-admin')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
     })
     context('When logged in', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features'])
@@ -26,11 +27,11 @@ describe('Account Management', () => {
 
     context('When logged in with get_users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_get_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -51,11 +52,11 @@ describe('Account Management', () => {
 
     context('When logged in with get_facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_get_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
           cy.visit('/account?term=&page=1')
           cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
@@ -73,13 +74,13 @@ describe('Account Management', () => {
 
     context('When logged in with get_facilities and get_users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_get_facilities_and_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_facilities_and_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -102,15 +103,15 @@ describe('Account Management', () => {
 
     context('When user can add or edit users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_add_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_add_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
-        cy.intercept('PATCH', '/api/auth/entities/users', { fixture: 'account/edit_user__one_group__request.json' })
+        cy.intercept('PATCH', routes.entities.edit('users'), { fixture: 'account/edit_user__one_group__request.json' })
           .as('editUser')
-        cy.intercept('POST', '/api/auth/entities/users', { fixture: 'account/add_user__one_group__request.json' })
+        cy.intercept('POST', routes.entities.add('users'), { fixture: 'account/add_user__one_group__request.json' })
           .as('addUser')
   
         cy.visit('/account?term=&page=1')
@@ -180,13 +181,13 @@ describe('Account Management', () => {
   
     context('When user can remove users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_remove_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_remove_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
-        cy.intercept('DELETE', '/api/auth/entities/users', { fixture: 'account/remove_user__one_group__request.json' })
+        cy.intercept('DELETE', routes.entities.remove('users'), { fixture: 'account/remove_user__one_group__request.json' })
           .as('removeUser')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -219,13 +220,13 @@ describe('Account Management', () => {
 
     context('When user can edit facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_edit_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_edit_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('users')
-        cy.intercept('PATCH', '/api/auth/entities/facilities', { fixture: 'account/edit_facility__one_group__request.json' })
+        cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/edit_facility__one_group__request.json' })
           .as('editFacility')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -268,19 +269,19 @@ describe('Account Management', () => {
  
     context('When user can manage facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__one_group_manage_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_manage_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
-        cy.intercept('PATCH', '/api/auth/entities/facilities', { fixture: 'account/manage_facility__one_group__request.json' })
+        cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/manage_facility__one_group__request.json' })
           .as('manageFacility')
-        cy.intercept('DELETE', '/api/auth/entities/facilities', { fixture: 'account/remove_facility__one_group__request.json' })
+        cy.intercept('DELETE', routes.entities.remove('facilities'), { fixture: 'account/remove_facility__one_group__request.json' })
           .as('removeFacility')
-        cy.intercept('POST', '/api/auth/entities/facilities', { fixture: 'account/add_facility__one_group__request.json' })
+        cy.intercept('POST', routes.entities.add('facilities'), { fixture: 'account/add_facility__one_group__request.json' })
           .as('addFacility')
-        cy.intercept('POST', '/api/auth/getSubdomains', { fixture: 'subdomains/get_subdomains__all_active__response.json' })
+        cy.intercept('POST', routes.subdomains.get, { fixture: 'subdomains/get_subdomains__all_active__response.json' })
           .as('getSubdomains')
 
         cy.visit('/account?term=&page=1')
@@ -543,14 +544,14 @@ describe('Account Management', () => {
   context('For admins in multiple groups', () => {
     beforeEach(() => {
       handleLocation('/account?term=&page=1', cy, 'accountPage', 'pep-admin')
-      cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
-      cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
     })
     context('When logged in', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features'])
@@ -564,11 +565,11 @@ describe('Account Management', () => {
 
     context('When logged in with get_users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_get_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_get_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -595,11 +596,11 @@ describe('Account Management', () => {
 
     context('When logged in with get_facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_get_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_get_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
           cy.visit('/account?term=&page=1')
           cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
@@ -626,13 +627,13 @@ describe('Account Management', () => {
 
     context('When logged in with get_facilities and get_users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_get_facilities_and_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_get_facilities_and_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -692,11 +693,11 @@ describe('Account Management', () => {
 
     context('When user can add or edit users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_add_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_add_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
 
         cy.visit('/account?term=&page=1')
@@ -705,7 +706,7 @@ describe('Account Management', () => {
 
       context('When editing users', () => {
         beforeEach(() => {
-          cy.intercept('PATCH', '/api/auth/entities/users', { fixture: 'account/edit_user__two_groups__request.json' })
+          cy.intercept('PATCH', routes.entities.edit('users'), { fixture: 'account/edit_user__two_groups__request.json' })
           .as('editUser')
 
           cy.get('pep-pharos-button')
@@ -746,7 +747,7 @@ describe('Account Management', () => {
 
       context('When adding users', () => {
         beforeEach(() => {
-          cy.intercept('POST', '/api/auth/entities/users', { fixture: 'account/add_user__two_groups__request.json' })
+          cy.intercept('POST', routes.entities.add('users'), { fixture: 'account/add_user__two_groups__request.json' })
           .as('addUser')
 
           cy.get('pep-pharos-button')
@@ -832,13 +833,13 @@ describe('Account Management', () => {
   
     context('When user can remove users', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_remove_users__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_remove_users__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/users', { fixture: 'account/get_users__two_groups__response.json' })
+        cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__two_groups__response.json' })
           .as('users')
-        cy.intercept('DELETE', '/api/auth/entities/users', { fixture: 'account/remove_user__two_groups__request.json' })
+        cy.intercept('DELETE', routes.entities.remove('users'), { fixture: 'account/remove_user__two_groups__request.json' })
           .as('removeUser')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
@@ -882,13 +883,13 @@ describe('Account Management', () => {
 
     context('When user can edit facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_edit_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_edit_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
-        cy.intercept('PATCH', '/api/auth/entities/facilities', { fixture: 'account/edit_facility__one_group__request.json' })
+        cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/edit_facility__one_group__request.json' })
           .as('editFacility')
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
@@ -928,19 +929,19 @@ describe('Account Management', () => {
 
     context('When user can manage facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/admin__two_groups_manage_facilities__response.json' })
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_manage_facilities__response.json' })
           .as('auth')
-        cy.intercept('POST', '/api/auth/features/basic/get', { fixture: 'auth/features/basic_features.json' })
+        cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-        cy.intercept('POST', '/api/auth/getEntities/facilities', { fixture: 'account/get_facilities__response.json' })
+        cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
-          cy.intercept('PATCH', '/api/auth/entities/facilities', { fixture: 'account/manage_facility__one_group__request.json' })
+          cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/manage_facility__one_group__request.json' })
           .as('manageFacility')
-        cy.intercept('DELETE', '/api/auth/entities/facilities', { fixture: 'account/remove_facility__one_group__request.json' })
+        cy.intercept('DELETE', routes.entities.remove('facilities'), { fixture: 'account/remove_facility__one_group__request.json' })
           .as('removeFacility')
-        cy.intercept('POST', '/api/auth/entities/facilities', { fixture: 'account/add_facility__one_group__request.json' })
+        cy.intercept('POST', routes.entities.add('facilities'), { fixture: 'account/add_facility__one_group__request.json' })
           .as('addFacility')
-        cy.intercept('POST', '/api/auth/getSubdomains', { fixture: 'subdomains/get_subdomains__all_active__response.json' })
+        cy.intercept('POST', routes.subdomains.get, { fixture: 'subdomains/get_subdomains__all_active__response.json' })
           .as('getSubdomains')
 
         cy.visit('/account?term=&page=1')

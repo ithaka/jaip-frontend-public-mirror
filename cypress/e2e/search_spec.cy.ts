@@ -1,4 +1,5 @@
 import { handleLocation } from './helpers'
+import { routes } from '../../src/config/api'
 
 const resizeObserverNotificationErrRe = /^[^(ResizeObserver loop completed with undelivered notifications.)]/
 Cypress.on('uncaught:exception', (err) => {
@@ -31,11 +32,11 @@ describe('Search', () => {
     // 3 - to perform the search
     // 1 and 2 can be the same for each test. 3 needs to be set in the test
     // with the appropriate fixture(s).
-    cy.intercept('GET', '/api/disciplines', { fixture: 'disciplines/response.json' })
+    cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
       .as('disciplines')
-    cy.intercept('GET', '/api/auth/session', { fixture: 'auth/users/student__one_group_no_features__response.json' })
+    cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
       .as('auth')
-    cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+    cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
       .as('alerts')
     handleLocation("/search?term=&page=1", cy, 'searchPage', 'pep')
   })
@@ -44,7 +45,7 @@ describe('Search', () => {
     context('Sorting', () => {
       context('When no search term is given', () => {
         beforeEach(() => {
-          cy.intercept('POST', '/api/search', { fixture: 'search/no_term_given__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/no_term_given__response.json' })
             .as('search')
           cy.visit('/search?term=&page=1')
           // Not also waiting on @search here, even though it's fired by the
@@ -77,7 +78,7 @@ describe('Search', () => {
         })
 
         it('Switches to relevance sort when switching from no term to a term', () => {
-          cy.intercept('POST', '/api/search', { fixture: 'search/term_given__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
             .as('search')
           cy.visit('/search?term=&page=1')
           cy.wait(['@searchPage', '@auth', '@alerts', '@search', '@disciplines'])
@@ -90,9 +91,9 @@ describe('Search', () => {
 
       context('When there is a search term', () => {
         beforeEach(() => {
-          cy.intercept('POST', '/api/search', { fixture: 'search/term_given__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
             .as('search')
-          cy.intercept('GET', '/api/auth/alerts', { statusCode: 204, body: '' }) // no alerts
+          cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
             .as('alerts')
           handleLocation("/search?term=mary+mcleod+bethune", cy, 'searchPageWithQuery', 'pep')
         })
@@ -112,7 +113,7 @@ describe('Search', () => {
           // Initial page visit.
           cy.visit('/search?term=mary+mcleod+bethune')
           // Interact with page to trigger new sort.
-          cy.intercept('POST', '/api/search', { fixture: 'search/term_given__newest__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__newest__response.json' })
             .as('search')
           cy.wait('@search')
           cy.get('pep-pharos-button')
@@ -141,7 +142,7 @@ describe('Search', () => {
           // Initial page visit.
           cy.visit('/search?term=mary+mcleod+bethune')
           // Interact with page to trigger new sort.
-          cy.intercept('POST', '/api/search', { fixture: 'search/term_given__oldest__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__oldest__response.json' })
             .as('search')
           cy.wait('@search')
           cy.get('pep-pharos-button').contains('Sort By:', { matchCase: false }).click()
@@ -159,7 +160,7 @@ describe('Search', () => {
 
         it('Lets users choose relevance sort', () => {
           cy.visit('/search?term=mary+mcleod+bethune')
-          cy.intercept('POST', '/api/search', { fixture: 'search/term_given__relevance__response.json' })
+          cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__relevance__response.json' })
             .as('search')
           // The default request with a term given is relevance sort.
           cy.fixture('search/term_given__request.json').then((request) => {
@@ -183,7 +184,7 @@ describe('Search', () => {
       //     'research_report': ' Research Report '
       //   }
       //   Object.entries(contentTypes).forEach( ([key, value] ) => {
-      //     cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__${key}__response.json` })
+      //     cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__${key}__response.json` })
       //       .as('search')
       //     cy.visit('/search')
       //     cy.get(`#filters-col input[value="${key}"]`)
@@ -204,7 +205,7 @@ describe('Search', () => {
       // })
 
       it('Lets users filter by publication year (max only)', () => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__max_year__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__max_year__response.json` })
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait(['@searchPage', '@search'])
@@ -230,7 +231,7 @@ describe('Search', () => {
       })    
 
       it('Lets users filter by publication year (min only)', () => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__min_year__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__min_year__response.json` })
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait(['@searchPage', '@search'])
@@ -257,7 +258,7 @@ describe('Search', () => {
       })    
 
       it('Lets users filter by publication year (max and min)', () => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__min_max_year__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__min_max_year__response.json` })
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait(['@searchPage', '@search'])
@@ -295,11 +296,11 @@ describe('Search', () => {
       })    
 
       it('Lets users filter by discipline', () => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__discipline__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__discipline__response.json` })
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait(['@searchPage', '@search'])
-        cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: 'disciplines/afam__response.json' })
+        cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
           .as('afam')
         cy.get('pep-pharos-checkbox[value="africanamericanstudies-discipline"]').first().click()
 
@@ -313,9 +314,9 @@ describe('Search', () => {
       })
 
       it('Lets users filter by journal', () => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__journal__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__journal__response.json` })
           .as('search')
-        cy.intercept('GET', '/api/disciplines/africanamericanstudies-discipline', { fixture: `disciplines/journals__response.json` })
+        cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: `disciplines/journals__response.json` })
           .as('afam')
         cy.visit('/search?term=&page=1')
         cy.wait(['@searchPage', '@search', '@auth', '@disciplines', '@alerts'])
@@ -352,7 +353,7 @@ describe('Search', () => {
 
     context('Validation', () => {
       beforeEach(() => {
-        cy.intercept('POST', '/api/search', { fixture: `search/no_term_given__response.json` })
+        cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__response.json` })
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait('@searchPage')
