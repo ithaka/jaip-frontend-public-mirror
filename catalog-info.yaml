@@ -12,9 +12,6 @@ metadata:
     - typescript
     - frontend
     - labs
-  annotations:
-    gitlab.com/project-id: '67104316'
-    backstage.io/techdocs-ref: dir:.
 spec:
   type: website
   owner: jaip
