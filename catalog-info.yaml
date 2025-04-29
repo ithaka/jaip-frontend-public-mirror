@@ -2,6 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: jaip-frontend
+  title: JAIP Frontend
   description: The JAIP Online Application Frontend
   tags:
     - jaip
