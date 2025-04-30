@@ -1,3 +1,5 @@
+@use "sass:string";
+
 @import '@ithaka/pharos/lib/styles/variables.css';
 @import '@ithaka/pharos/lib/styles/fonts.css';
 // @import '@ithaka/pharos/lib/styles/typography.scss';
@@ -152,6 +154,15 @@ body {
   max-width: 70rem;
   display: flex;
   flex-direction: column;
+  &.about, &.help {
+    @media screen and (max-width: $pharos-breakpoint-medium) {
+      margin-bottom: var(--pharos-spacing-5-x);
+    }
+    @media screen and (max-width: $pharos-breakpoint-xlarge) {
+      margin-bottom: calc(var(--pharos-spacing-5-x) * 3);
+    }
+    margin-bottom: calc(var(--pharos-spacing-5-x) * 2);
+  }
 }
 .markdown-body {
   p {
@@ -434,7 +445,7 @@ $i: 0;
         margin-bottom: calc(#{$space} * -1) !important;
       }
     } @else {
-      .m#{str-slice($side, 0, 1)}--#{$i} {
+      .m#{string.slice($side, 0, 1)}--#{$i} {
         margin-#{$side}: calc(#{$space} * -1) !important;
       }
     }
@@ -455,7 +466,7 @@ $i: 0;
           #{$type}-bottom: #{$space} !important;
         }
       } @else {
-        .#{$id}#{str-slice($side, 0, 1)}-#{$i} {
+        .#{$id}#{string.slice($side, 0, 1)}-#{$i} {
           #{$type}-#{$side}: #{$space} !important;
         }
       }
@@ -485,7 +496,7 @@ $i: 0;
               #{$type}-bottom: #{$space} !important;
             }
           } @else {
-            .#{$label}-#{$id}#{str-slice($side, 0, 1)}-#{$i} {
+            .#{$label}-#{$id}#{string.slice($side, 0, 1)}-#{$i} {
               #{$type}-#{$side}: #{$space} !important;
             }
           }
