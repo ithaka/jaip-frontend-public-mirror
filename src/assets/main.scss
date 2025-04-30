@@ -160,9 +160,9 @@ body {
       margin-bottom: var(--pharos-spacing-5-x);
     }
     @media screen and (max-width: $pharos-breakpoint-xlarge) {
-      margin-bottom: calc(var(--pharos-spacing-5-x) * 3);
+      margin-bottom: calc(var(--pharos-spacing-5-x) * 2);
     }
-    margin-bottom: calc(var(--pharos-spacing-5-x) * 2);
+    margin-bottom: calc(var(--pharos-spacing-5-x) * 3);
   }
 }
 .markdown-body {
