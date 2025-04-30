@@ -74,7 +74,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
     selectedGroups.value[props.featureName] = []
   } else if (selectedGroups.value[props.featureName].includes(val)) {
     selectedGroups.value[props.featureName] = selectedGroups.value[props.featureName].filter(
-      (group: number) => group !== val,
+      (group: number) => group === val,
     )
   } else {
     if (props.multiple) {

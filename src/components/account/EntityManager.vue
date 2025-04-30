@@ -279,6 +279,7 @@ const getSubdomains = async () => {
   gettingSubdomains.value = true
   const args = {
     is_active: true,
+    name: '',
   }
   const { data } = await coreStore.$api.auth.subdomains.get(args)
   subdomains.value = data.subdomains
