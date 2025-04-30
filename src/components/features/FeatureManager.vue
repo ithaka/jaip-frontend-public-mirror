@@ -129,7 +129,9 @@ const handleEditFeature = async (i: number) => {
           @input="query = $event.target.value"
         >
           <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-          <span slot="label">Ungrouped Feature Search</span>
+          <span slot="label">{{
+            props.ungrouped ? 'Ungrouped Feature Search' : 'Feature Search'
+          }}</span>
           <pep-pharos-button
             name="search-button"
             icon="search"
