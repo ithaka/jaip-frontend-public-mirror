@@ -1,6 +1,6 @@
 @import '@ithaka/pharos/lib/styles/variables.css';
 @import '@ithaka/pharos/lib/styles/fonts.css';
-// @import '@ithaka/pharos/lib/styles/typography.css';
+// @import '@ithaka/pharos/lib/styles/typography.scss';
 @import './base.css';
 $pharos-breakpoint-max: 99rem; // 1584px
 $pharos-breakpoint-xlarge: 85rem; // 1360px
@@ -377,11 +377,11 @@ $font-options: (
 }
 
 $breakpoints: (
-  max: var(--pharos-breakpoint-max),
-  xl: var(--pharos-breakpoint-xlarge),
-  lg: var(--pharos-breakpoint-large),
-  md: var(--pharos-breakpoint-medium),
-  sm: var(--pharos-breakpoint-small),
+  mx: $pharos-breakpoint-max,
+  xl: $pharos-breakpoint-xlarge,
+  lg: $pharos-breakpoint-large,
+  md: $pharos-breakpoint-medium,
+  sm: $pharos-breakpoint-small,
 );
 
 // List of sizes to generate for each
@@ -421,21 +421,21 @@ $i: 0;
     // Add negative margin options
     @if $side == all {
       .ma--#{$i} {
-        margin: -#{$space} -#{$space} !important;
+        margin: calc(#{$space} * -1) calc(#{$space} * -1) !important;
       }
     } @else if $side == x {
       .mx--#{$i} {
-        margin-left: -#{$space} !important;
-        margin-right: -#{$space} !important;
+        margin-left: calc(#{$space} * -1) !important;
+        margin-right: calc(#{$space} * -1) !important;
       }
     } @else if $side == y {
       .my--#{$i} {
-        margin-top: -#{$space} !important;
-        margin-bottom: -#{$space} !important;
+        margin-top: calc(#{$space} * -1) !important;
+        margin-bottom: calc(#{$space} * -1) !important;
       }
     } @else {
       .m#{str-slice($side, 0, 1)}--#{$i} {
-        margin-#{$side}: -#{$space} !important;
+        margin-#{$side}: calc(#{$space} * -1) !important;
       }
     }
     // Add positive margin and padding
@@ -560,23 +560,46 @@ $positions: (static, relative, fixed, absolute, sticky);
 }
 
 @for $i from 1 through 12 {
-  @each $label, $bp in $breakpoints {
-    @media screen and (max-width: $bp) {
-      .cols-#{$label}-#{$i} {
-        grid-column: span #{$i};
-      }
+  @media screen and (max-width: $pharos-breakpoint-max) {
+    .cols-mx-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  @media screen and (max-width: $pharos-breakpoint-xlarge) {
+    .cols-xl-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  @media screen and (max-width: $pharos-breakpoint-large) {
+    .cols-lg-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  @media screen and (max-width: $pharos-breakpoint-medium) {
+    .cols-md-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  @media screen and (max-width: $pharos-breakpoint-small) {
+    .cols-sm-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  @media screen and (max-width: $pharos-breakpoint-small) {
+    .cols-#{$i} {
+      grid-column: span #{$i};
     }
   }
 }
 
-@media screen and (max-width: var(--pharos-breakpoint-medium)) {
+@media screen and (max-width: $pharos-breakpoint-medium) {
   @for $i from 9 through 12 {
     .cols-#{$i} {
       grid-column: span 8;
     }
   }
 }
-@media screen and (max-width: var(--pharos-breakpoint-small)) {
+@media screen and (max-width: $pharos-breakpoint-small) {
   @for $i from 5 through 12 {
     .cols-#{$i} {
       grid-column: span 4;
@@ -630,7 +653,7 @@ $flex-direction-options: (row, row-reverse, column, column-reverse);
   }
 }
 
-@media screen and (max-width: var(--pharos-breakpoint-small)) {
+@media screen and (max-width: $pharos-breakpoint-small) {
   .search-results {
     grid-template-columns: 1rem minmax(0, 1fr);
   }
@@ -652,7 +675,7 @@ $flex-direction-options: (row, row-reverse, column, column-reverse);
   }
 }
 
-@media screen and (max-width: var(--pharos-breakpoint-medium)) {
+@media screen and (max-width: $pharos-breakpoint-medium) {
   .header-logo {
     height: 62px;
   }
@@ -682,7 +705,7 @@ $flex-direction-options: (row, row-reverse, column, column-reverse);
     flex-direction: column;
   }
 }
-@media screen and (max-width: var(--pharos-breakpoint-large)) {
+@media screen and (max-width: $pharos-breakpoint-large) {
   .search-result {
     grid-template-columns: minmax(0, 1fr);
   }
