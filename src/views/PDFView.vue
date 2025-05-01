@@ -70,10 +70,21 @@ const getDocument = async () => {
     }
   } catch (err: unknown) {
     const errorResponse = err as { response: { status: number } }
-    error.value.status = true
-    metadata.value.status = errorResponse.response.status || 500
-    error.value.message = 'Server Error'
-    error.value.code = errorResponse.response.status || 500
+    console.log('XXXXXXXXXXXXXX', errorResponse.response.status)
+    if (errorResponse.response.status === 403) {
+      error.value.status = true
+      error.value.message = 'Unauthorized'
+      error.value.code = 403
+    } else if (errorResponse.response.status === 404) {
+      error.value.status = true
+      error.value.message = 'Not Found'
+      error.value.code = 404
+    } else {
+      error.value.status = true
+      metadata.value.status = errorResponse.response.status || 500
+      error.value.message = 'Server Error'
+      error.value.code = errorResponse.response.status || 500
+    }
   } finally {
     updateKey.value++
     gettingDocument.value = false

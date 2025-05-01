@@ -46,34 +46,44 @@ const getDocument = async () => {
     if (page_index) {
       apiCalls.push(coreStore.$api.documents.metadata(iid))
     }
-
-    const results = await Promise.all(apiCalls)
-    const search = results[0]
-
-    if (((search.data || {}).docs || []).length) {
-      doc.value = search.data.docs[0]
+    const results = await Promise.allSettled(apiCalls)
+    if (results[0].status === 'rejected') {
+      throw results[0].reason
+    } else {
+      const search = results[0].value
+      if (((search.data || {}).docs || []).length) {
+        doc.value = search.data.docs[0]
+      }
     }
-
-    if (page_index) {
-      metadata.value = {
-        ...metadata.value,
-        ...results[1].data,
-      }
-      if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
-        initial_page_index = metadata.value.pageCount - 1
-      }
-      if (metadata.value.status === 403) {
-        error.value.status = true
-        error.value.message = 'Unauthorized'
-        error.value.code = 403
+    if (results[1]?.status === 'rejected') {
+      throw results[1].reason
+    } else {
+      if (page_index) {
+        metadata.value = {
+          ...metadata.value,
+          ...results[1].value.data,
+        }
+        if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
+          initial_page_index = metadata.value.pageCount - 1
+        }
       }
     }
   } catch (err: unknown) {
     const errorResponse = err as { response: { status: number } }
-    error.value.status = true
-    metadata.value.status = errorResponse.response.status || 500
-    error.value.message = 'Server Error'
-    error.value.code = errorResponse.response.status || 500
+    if (errorResponse.response.status === 403) {
+      error.value.status = true
+      error.value.message = 'Unauthorized'
+      error.value.code = 403
+    } else if (errorResponse.response.status === 404) {
+      error.value.status = true
+      error.value.message = 'Not Found'
+      error.value.code = 404
+    } else {
+      error.value.status = true
+      metadata.value.status = errorResponse.response.status || 500
+      error.value.message = 'Server Error'
+      error.value.code = errorResponse.response.status || 500
+    }
   } finally {
     updateKey.value++
     gettingDocument.value = false
