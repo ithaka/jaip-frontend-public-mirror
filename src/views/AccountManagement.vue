@@ -20,6 +20,9 @@ for (const key in sortedUngroupedFeatures.value) {
     filteredCategories.value[key] = sortedUngroupedFeatures.value[key]
   }
 }
+const filteredOrderedCategories = categories.filter((value) =>
+  Object.keys(filteredCategories.value).includes(value),
+)
 </script>
 
 <template>
@@ -27,26 +30,26 @@ for (const key in sortedUngroupedFeatures.value) {
     <pep-pharos-layout row-gap="0">
       <pep-pharos-tabs class="cols-12">
         <pep-pharos-tab
-          v-for="(group, label, index) in filteredCategories"
+          v-for="(key, index) in filteredOrderedCategories"
           :key="`group-${index}`"
           :data-panel-id="`group-${index}`"
         >
           <pep-pharos-heading :level="1" preset="1--bold">
-            {{ label }}
+            {{ key }}
           </pep-pharos-heading>
         </pep-pharos-tab>
         <!-- eslint-disable vue/no-deprecated-slot-attribute -->
         <pep-pharos-tab-panel
-          v-for="(features, label, index) in filteredCategories"
+          v-for="(key, index) in filteredOrderedCategories"
           :id="`group-${index}`"
           :key="`group-panel-${index}`"
           slot="panel"
         >
-          <GroupsManager v-if="label === 'Groups'" />
-          <UsersManager v-else-if="label === 'Users'" />
-          <SubdomainManager v-else-if="label === 'Subdomains'" />
-          <FeatureManager v-else-if="label === 'Ungrouped Features'" ungrouped />
-          <FeatureManager v-else-if="label === 'Features'" />
+          <GroupsManager v-if="key === 'Groups'" />
+          <UsersManager v-else-if="key === 'Users'" />
+          <SubdomainManager v-else-if="key === 'Subdomains'" />
+          <FeatureManager v-else-if="key === 'Ungrouped Features'" ungrouped />
+          <FeatureManager v-else-if="key === 'Features'" />
         </pep-pharos-tab-panel>
         <!-- eslint-enable vue/no-deprecated-slot-attribute -->
       </pep-pharos-tabs>
