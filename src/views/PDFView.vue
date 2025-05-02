@@ -70,7 +70,6 @@ const getDocument = async () => {
     }
   } catch (err: unknown) {
     const errorResponse = err as { response: { status: number } }
-    console.log('XXXXXXXXXXXXXX', errorResponse.response.status)
     if (errorResponse.response.status === 403) {
       error.value.status = true
       error.value.message = 'Unauthorized'
