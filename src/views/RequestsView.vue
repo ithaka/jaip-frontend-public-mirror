@@ -200,7 +200,7 @@ const newSearch = () => {
           <pep-pharos-input-group
             v-if="isAuthenticatedAdmin"
             id="request_query"
-            placeholder="Greendale"
+            placeholder="Enter a term to search statuses and user comments"
             name="request_query"
             class="mt-4"
             :value="statusQuery"
