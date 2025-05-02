@@ -124,7 +124,7 @@ const newSearch = () => {
         <GroupSelector
           :groups="sortedFullGroups"
           :feature-name="`status_search`"
-          :start-full="true"
+          :start-full="sortedFullGroups.length < 4"
           multiple
           is-status-search
           @change="newSearch"
