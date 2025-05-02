@@ -657,6 +657,11 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
   &.show-image-details {
     height: calc(100% - $image-details-height);
   }
+  @media screen and (max-width: 48rem) {
+    &.show-image-details {
+      height: calc(100% - $image-control-tray-with-detail-height-mobile);
+    }
+  }
 }
 
 .viewer-error {
@@ -697,6 +702,69 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
     .viewer-control-button {
       margin-left: var(--pharos-spacing-one-half-x);
     }
+  }
+}
+
+@mixin pagination-button {
+  position: absolute !important;
+  top: 50%;
+  pointer-events: all;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: unset;
+    opacity: 0.2;
+  }
+}
+
+.page-left {
+  @include pagination-button;
+  left: $button-offset;
+}
+
+.page-right {
+  @include pagination-button;
+  right: $button-offset;
+}
+
+.viewer-show-for-medium-down {
+  @media screen and (min-width: 48rem) {
+    display: none !important;
+  }
+
+  display: inline-block !important;
+}
+
+.viewer-show-for-medium-up {
+  @media screen and (min-width: 48rem) {
+    display: inline-block !important;
+  }
+
+  display: none !important;
+}
+
+.viewer-show-for-large-down {
+  @media screen and (min-width: 48rem) and (max-width: calc(1056 - 1)px) {
+    display: flex !important;
+  }
+
+  display: none !important;
+}
+
+.viewer-show-for-large-up {
+  @media screen and (min-width: 66rem) {
+    display: flex !important;
+  }
+
+  display: none !important;
+}
+
+.viewer-controls-thumbnail {
+  position: absolute !important;
+  left: $button-offset;
+  top: $button-offset;
+  @media screen and (min-width: 22.5rem) and (max-width: calc(1056 - 1)px) {
+    display: none;
   }
 }
 </style>
