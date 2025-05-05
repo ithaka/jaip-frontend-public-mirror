@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import type { App } from 'vue'
 import { createPinia, storeToRefs } from 'pinia'
 import { setCookie } from 'typescript-cookie'
-
 import VueApp from '@/App.vue'
 import pharos from '@/plugins/pharos'
 import axios from '@/plugins/axios'
