@@ -36,6 +36,8 @@ const redirectToParams = () => {
   }
   return encodeURIComponent('?to=' + newURL)
 }
+console.log('ENVIRONMENT', import.meta.env.ENVIRONMENT)
+console.log('ENV', import.meta.env)
 const loginUrl =
   import.meta.env.ENVIRONMENT === 'prod'
     ? 'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
