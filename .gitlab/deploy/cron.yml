@@ -45,6 +45,7 @@ scan vulnerabilities:
     DOCKER_REPOSITORY: $CI_PROJECT_PATH
     IMAGE_TAG: $DOCKER_VIRTUAL/$CI_PROJECT_PATH:$CI_COMMIT_SHA-nightly-scan
   before_script:
+    - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
     # replace / with - in branch name to be friendly w/ job
     - export CI_COMMIT_BRANCH="${CI_COMMIT_BRANCH//\//-}"
 
