@@ -33,6 +33,8 @@ build app image:
     # We namespace the nightly scan image tag so that nightly rebuilds aren't overwriting the actual canonical tag that we use for deployment.
     IMAGE_TAG: $DOCKER_VIRTUAL/$CI_PROJECT_PATH:$CI_COMMIT_SHA-nightly-scan
     DOCKER_REPOSITORY: $CI_PROJECT_PATH
+  before_script:
+    - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
 
 scan vulnerabilities:
   stage: check
@@ -45,7 +47,6 @@ scan vulnerabilities:
     DOCKER_REPOSITORY: $CI_PROJECT_PATH
     IMAGE_TAG: $DOCKER_VIRTUAL/$CI_PROJECT_PATH:$CI_COMMIT_SHA-nightly-scan
   before_script:
-    - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
     # replace / with - in branch name to be friendly w/ job
     - export CI_COMMIT_BRANCH="${CI_COMMIT_BRANCH//\//-}"
 
