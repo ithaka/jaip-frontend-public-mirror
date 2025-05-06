@@ -346,7 +346,7 @@ const journalFilterDescription = computed(() => {
   } else if (selectedJournals.value.length === 0) {
     return 'all journals'
   } else {
-    return makeGrammaticalList(selectedJournals.value.map((j: Journal) => j.head_title.title))
+    return makeGrammaticalList(selectedJournals.value.map((j: Journal) => j.headTitle.title))
   }
 })
 const disciplineFilterDescription = computed(() => {

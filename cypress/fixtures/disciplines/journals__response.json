@@ -1,1554 +1,1554 @@
 [
-  {
-      "headid": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
-      "bulk_approval": [
-          {
-              "id": 0,
-              "entityName": "",
-              "entityID": 0,
-              "status": "Approved",
-              "groupName": "",
-              "groupID": 1,
-              "createdAt": "2022-05-04T18:51:22.18699Z"
-          },
-          {
-              "id": 0,
-              "entityName": "",
-              "entityID": 0,
-              "status": "Approved",
-              "groupName": "",
-              "groupID": 2,
-              "createdAt": "2022-05-04T18:51:22.18699Z"
-          }
-      ],
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100881",
-          "end_year": "2012",
-          "id": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
-          "jcode": [
-              "afriamerrevi"
-          ],
-          "jid": [
-              "10.2307/j100881",
-              "j100881"
-          ],
-          "other_ids": [
-              "10.2307/j100881",
-              "j100881",
-              "afriamerrevi",
-              "10624783",
-              "sn99-23369",
-              "40892739"
-          ],
-          "pub_code": "slu",
-          "publisher": "African American Review (St. Louis University)",
-          "publishers": {},
-          "sort_title": "African American Review",
-          "start_year": "1992",
-          "sub_title": "",
-          "title": "African American Review",
-          "type": "journal",
-          "years": "1992 - 2012"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100881",
-              "end_year": "2012",
-              "id": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
-              "jcode": [
-                  "afriamerrevi"
-              ],
-              "jid": [
-                  "10.2307/j100881",
-                  "j100881"
-              ],
-              "other_ids": [
-                  "10.2307/j100881",
-                  "j100881",
-                  "afriamerrevi",
-                  "10624783",
-                  "sn99-23369",
-                  "40892739"
-              ],
-              "pub_code": "slu",
-              "publisher": "African American Review (St. Louis University)",
-              "publishers": {},
-              "sort_title": "African American Review",
-              "start_year": "1992",
-              "sub_title": "",
-              "title": "African American Review",
-              "type": "journal",
-              "years": "1992 - 2012"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100531",
-              "end_year": "1991",
-              "id": "4d8ddee4-3e1d-3e9e-88ba-49f2e5b5a914",
-              "jcode": [
-                  "blacamerliteforu"
-              ],
-              "jid": [
-                  "10.2307/j100531",
-                  "j100531"
-              ],
-              "other_ids": [
-                  "10.2307/j100531",
-                  "j100531",
-                  "blacamerliteforu",
-                  "01486179",
-                  "sn99-23368",
-                  "40892653"
-              ],
-              "pub_code": "slu",
-              "publisher": "African American Review (St. Louis University)",
-              "publishers": {},
-              "sort_title": "Black American Literature Forum",
-              "start_year": "1976",
-              "sub_title": "",
-              "title": "Black American Literature Forum",
-              "type": "journal",
-              "years": "1976 - 1991"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100298",
-              "end_year": "1976",
-              "id": "23ccbf03-82cb-3595-8b70-a5765d6e141e",
-              "jcode": [
-                  "negramerliteforu"
-              ],
-              "jid": [
-                  "10.2307/j100298",
-                  "j100298"
-              ],
-              "other_ids": [
-                  "10.2307/j100298",
-                  "j100298",
-                  "negramerliteforu",
-                  "00282480",
-                  "sn99-23367",
-                  "40892614"
-              ],
-              "pub_code": "slu",
-              "publisher": "African American Review (St. Louis University)",
-              "publishers": {},
-              "sort_title": "Negro American Literature Forum",
-              "start_year": "1967",
-              "sub_title": "",
-              "title": "Negro American Literature Forum",
-              "type": "journal",
-              "years": "1967 - 1976"
-          }
-      ],
-      "all_ids": [
-          "abb70559-9665-3b42-aa8a-42535bf6f3c0",
-          "4d8ddee4-3e1d-3e9e-88ba-49f2e5b5a914",
-          "23ccbf03-82cb-3595-8b70-a5765d6e141e"
-      ]
-  },
-  {
-      "headid": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100479",
-          "end_year": "1990",
-          "id": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
-          "jcode": [
-              "blacpersmusi"
-          ],
-          "jid": [
-              "10.2307/j100479",
-              "j100479"
-          ],
-          "other_ids": [
-              "10.2307/j100479",
-              "j100479",
-              "blacpersmusi",
-              "00907790",
-              "2004-236894",
-              "56138066"
-          ],
-          "pub_code": "prjso",
-          "publisher": "Professor J. Southern (Managing Editor-Publisher)",
-          "publishers": {},
-          "sort_title": "Black Perspective in Music",
-          "start_year": "1973",
-          "sub_title": "",
-          "title": "The Black Perspective in Music",
-          "type": "journal",
-          "years": "1973 - 1990"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100479",
-              "end_year": "1990",
-              "id": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
-              "jcode": [
-                  "blacpersmusi"
-              ],
-              "jid": [
-                  "10.2307/j100479",
-                  "j100479"
-              ],
-              "other_ids": [
-                  "10.2307/j100479",
-                  "j100479",
-                  "blacpersmusi",
-                  "00907790",
-                  "2004-236894",
-                  "56138066"
-              ],
-              "pub_code": "prjso",
-              "publisher": "Professor J. Southern (Managing Editor-Publisher)",
-              "publishers": {},
-              "sort_title": "Black Perspective in Music",
-              "start_year": "1973",
-              "sub_title": "",
-              "title": "The Black Perspective in Music",
-              "type": "journal",
-              "years": "1973 - 1990"
-          }
-      ],
-      "all_ids": [
-          "cf11ff7a-9b26-31bf-85c0-b82d9781b435"
-      ]
-  },
-  {
-      "headid": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50001074",
-          "end_year": "2014",
-          "id": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
-          "jcode": [
-              "blackscholar"
-          ],
-          "jid": [
-              "10.2307/j50001074",
-              "j50001074"
-          ],
-          "other_ids": [
-              "10.2307/j50001074",
-              "j50001074",
-              "blackscholar",
-              "00064246",
-              "2011-201717",
-              "38540633"
-          ],
-          "pub_code": "taylorfrancis",
-          "publisher": "Taylor & Francis, Ltd.",
-          "publishers": {},
-          "sort_title": "Black Scholar",
-          "start_year": "1969",
-          "sub_title": "",
-          "title": "The Black Scholar",
-          "type": "journal",
-          "years": "1969 - 2014"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50001074",
-              "end_year": "2014",
-              "id": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
-              "jcode": [
-                  "blackscholar"
-              ],
-              "jid": [
-                  "10.2307/j50001074",
-                  "j50001074"
-              ],
-              "other_ids": [
-                  "10.2307/j50001074",
-                  "j50001074",
-                  "blackscholar",
-                  "00064246",
-                  "2011-201717",
-                  "38540633"
-              ],
-              "pub_code": "taylorfrancis",
-              "publisher": "Taylor & Francis, Ltd.",
-              "publishers": {},
-              "sort_title": "Black Scholar",
-              "start_year": "1969",
-              "sub_title": "",
-              "title": "The Black Scholar",
-              "type": "journal",
-              "years": "1969 - 2014"
-          }
-      ],
-      "all_ids": [
-          "8a9303e1-dd7a-364f-ac03-d7002ca752a4"
-      ]
-  },
-  {
-      "headid": "927a31eb-7d46-3a32-8434-43498faee215",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50000755",
-          "end_year": "2012",
-          "id": "927a31eb-7d46-3a32-8434-43498faee215",
-          "jcode": [
-              "blacwomegendfami"
-          ],
-          "jid": [
-              "10.2307/j50000755",
-              "j50000755"
-          ],
-          "other_ids": [
-              "10.2307/j50000755",
-              "j50000755",
-              "blacwomegendfami",
-              "19352743",
-              "19446462",
-              "2008216364",
-              "277050143"
-          ],
-          "pub_code": "illinois",
-          "publisher": "University of Illinois Press",
-          "publishers": {
-              "illinois": "University of Illinois Press"
-          },
-          "sort_title": "Black Women, Gender + Families",
-          "start_year": "2007",
-          "sub_title": "",
-          "title": "Black Women, Gender + Families",
-          "type": "journal",
-          "years": "2007 - 2012"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50000755",
-              "end_year": "2012",
-              "id": "927a31eb-7d46-3a32-8434-43498faee215",
-              "jcode": [
-                  "blacwomegendfami"
-              ],
-              "jid": [
-                  "10.2307/j50000755",
-                  "j50000755"
-              ],
-              "other_ids": [
-                  "10.2307/j50000755",
-                  "j50000755",
-                  "blacwomegendfami",
-                  "19352743",
-                  "19446462",
-                  "2008216364",
-                  "277050143"
-              ],
-              "pub_code": "illinois",
-              "publisher": "University of Illinois Press",
-              "publishers": {
-                  "illinois": "University of Illinois Press"
-              },
-              "sort_title": "Black Women, Gender + Families",
-              "start_year": "2007",
-              "sub_title": "",
-              "title": "Black Women, Gender + Families",
-              "type": "journal",
-              "years": "2007 - 2012"
-          }
-      ],
-      "all_ids": [
-          "927a31eb-7d46-3a32-8434-43498faee215"
-      ]
-  },
-  {
-      "headid": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100016",
-          "end_year": "2010",
-          "id": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
-          "jcode": [
-              "callaloo"
-          ],
-          "jid": [
-              "10.2307/j100016",
-              "j100016"
-          ],
-          "other_ids": [
-              "10.2307/j100016",
-              "j100016",
-              "callaloo",
-              "01612492",
-              "10806512",
-              "sn99-23407",
-              "41669989"
-          ],
-          "pub_code": "jhup",
-          "publisher": "The Johns Hopkins University Press",
-          "publishers": {},
-          "sort_title": "Callaloo",
-          "start_year": "1976",
-          "sub_title": "",
-          "title": "Callaloo",
-          "type": "journal",
-          "years": "1976 - 2010"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100016",
-              "end_year": "2010",
-              "id": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
-              "jcode": [
-                  "callaloo"
-              ],
-              "jid": [
-                  "10.2307/j100016",
-                  "j100016"
-              ],
-              "other_ids": [
-                  "10.2307/j100016",
-                  "j100016",
-                  "callaloo",
-                  "01612492",
-                  "10806512",
-                  "sn99-23407",
-                  "41669989"
-              ],
-              "pub_code": "jhup",
-              "publisher": "The Johns Hopkins University Press",
-              "publishers": {},
-              "sort_title": "Callaloo",
-              "start_year": "1976",
-              "sub_title": "",
-              "title": "Callaloo",
-              "type": "journal",
-              "years": "1976 - 2010"
-          }
-      ],
-      "all_ids": [
-          "6a5b4b02-9d09-311a-aad4-7b40c54b08f1"
-      ]
-  },
-  {
-      "headid": "9895c661-a4dc-3595-bd2d-df66896c5f37",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50000758",
-          "end_year": "2013",
-          "id": "9895c661-a4dc-3595-bd2d-df66896c5f37",
-          "jcode": [
-              "fire"
-          ],
-          "jid": [
-              "10.2307/j50000758",
-              "j50000758"
-          ],
-          "other_ids": [
-              "10.2307/j50000758",
-              "j50000758",
-              "fire",
-              "21564078",
-              "2010202011",
-              "648149886"
-          ],
-          "pub_code": "asalh",
-          "publisher": "Association for the Study of African American Life and History",
-          "publishers": {},
-          "sort_title": "Fire!!!",
-          "start_year": "2012",
-          "sub_title": "",
-          "title": "Fire!!!",
-          "type": "journal",
-          "years": "2012 - 2013"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50000758",
-              "end_year": "2013",
-              "id": "9895c661-a4dc-3595-bd2d-df66896c5f37",
-              "jcode": [
-                  "fire"
-              ],
-              "jid": [
-                  "10.2307/j50000758",
-                  "j50000758"
-              ],
-              "other_ids": [
-                  "10.2307/j50000758",
-                  "j50000758",
-                  "fire",
-                  "21564078",
-                  "2010202011",
-                  "648149886"
-              ],
-              "pub_code": "asalh",
-              "publisher": "Association for the Study of African American Life and History",
-              "publishers": {},
-              "sort_title": "Fire!!!",
-              "start_year": "2012",
-              "sub_title": "",
-              "title": "Fire!!!",
-              "type": "journal",
-              "years": "2012 - 2013"
-          }
-      ],
-      "all_ids": [
-          "9895c661-a4dc-3595-bd2d-df66896c5f37"
-      ]
-  },
-  {
-      "headid": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j101012",
-          "end_year": "2015",
-          "id": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
-          "jcode": [
-              "jafriamerhist"
-          ],
-          "jid": [
-              "10.2307/j101012",
-              "j101012"
-          ],
-          "other_ids": [
-              "10.2307/j101012",
-              "j101012",
-              "jafriamerhist",
-              "15481867",
-              "21535086",
-              "2006-236700",
-              "60628423"
-          ],
-          "pub_code": "asalh",
-          "publisher": "Association for the Study of African American Life and History",
-          "publishers": {},
-          "sort_title": "Journal of African American History",
-          "start_year": "2002",
-          "sub_title": "",
-          "title": "The Journal of African American History",
-          "type": "journal",
-          "years": "2002 - 2015"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j101012",
-              "end_year": "2015",
-              "id": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
-              "jcode": [
-                  "jafriamerhist"
-              ],
-              "jid": [
-                  "10.2307/j101012",
-                  "j101012"
-              ],
-              "other_ids": [
-                  "10.2307/j101012",
-                  "j101012",
-                  "jafriamerhist",
-                  "15481867",
-                  "21535086",
-                  "2006-236700",
-                  "60628423"
-              ],
-              "pub_code": "asalh",
-              "publisher": "Association for the Study of African American Life and History",
-              "publishers": {},
-              "sort_title": "Journal of African American History",
-              "start_year": "2002",
-              "sub_title": "",
-              "title": "The Journal of African American History",
-              "type": "journal",
-              "years": "2002 - 2015"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100242",
-              "end_year": "2001",
-              "id": "ae709ed3-28c5-3abf-9c5f-3e3fff008f0d",
-              "jcode": [
-                  "jnegrohistory"
-              ],
-              "jid": [
-                  "10.2307/j100242",
-                  "j100242"
-              ],
-              "other_ids": [
-                  "10.2307/j100242",
-                  "j100242",
-                  "jnegrohistory",
-                  "00222992",
-                  "sn99-23392",
-                  "41302474"
-              ],
-              "pub_code": "asalh",
-              "publisher": "Association for the Study of African American Life and History",
-              "publishers": {},
-              "sort_title": "Journal of Negro History",
-              "start_year": "1916",
-              "sub_title": "",
-              "title": "The Journal of Negro History",
-              "type": "journal",
-              "years": "1916 - 2001"
-          }
-      ],
-      "all_ids": [
-          "ae709ed3-28c5-3abf-9c5f-3e3fff008f0d",
-          "5d15811f-fbfe-3cf7-bde6-722c0cbc1931"
-      ]
-  },
-  {
-      "headid": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50006171",
-          "end_year": "2012",
-          "id": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
-          "jcode": [
-              "jafriamerstud"
-          ],
-          "jid": [
-              "10.2307/j50006171",
-              "j50006171"
-          ],
-          "other_ids": [
-              "10.2307/j50006171",
-              "j50006171",
-              "jafriamerstud",
-              "15591646",
-              "19364741",
-              "2007215116",
-              "56210516"
-          ],
-          "pub_code": "springer",
-          "publisher": "Springer",
-          "publishers": {},
-          "sort_title": "Journal of African American Studies",
-          "start_year": "2003",
-          "sub_title": "",
-          "title": "Journal of African American Studies",
-          "type": "journal",
-          "years": "2003 - 2012"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50006171",
-              "end_year": "2012",
-              "id": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
-              "jcode": [
-                  "jafriamerstud"
-              ],
-              "jid": [
-                  "10.2307/j50006171",
-                  "j50006171"
-              ],
-              "other_ids": [
-                  "10.2307/j50006171",
-                  "j50006171",
-                  "jafriamerstud",
-                  "15591646",
-                  "19364741",
-                  "2007215116",
-                  "56210516"
-              ],
-              "pub_code": "springer",
-              "publisher": "Springer",
-              "publishers": {},
-              "sort_title": "Journal of African American Studies",
-              "start_year": "2003",
-              "sub_title": "",
-              "title": "Journal of African American Studies",
-              "type": "journal",
-              "years": "2003 - 2012"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50006170",
-              "end_year": "2002",
-              "id": "d009ca5e-d570-334e-8068-f5d8e98c04e4",
-              "jcode": [
-                  "jafricanamermen"
-              ],
-              "jid": [
-                  "10.2307/j50006170",
-                  "j50006170"
-              ],
-              "other_ids": [
-                  "10.2307/j50006170",
-                  "j50006170",
-                  "jafricanamermen",
-                  "10811753",
-                  "21687870",
-                  "2012201533",
-                  "60637540"
-              ],
-              "pub_code": "springer",
-              "publisher": "Springer",
-              "publishers": {},
-              "sort_title": "Journal of African American Men",
-              "start_year": "1995",
-              "sub_title": "",
-              "title": "Journal of African American Men",
-              "type": "journal",
-              "years": "1995 - 2002"
-          }
-      ],
-      "all_ids": [
-          "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
-          "d009ca5e-d570-334e-8068-f5d8e98c04e4"
-      ]
-  },
-  {
-      "headid": "b94c7968-209d-320f-b181-033735426747",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50003645",
-          "end_year": "2016",
-          "id": "b94c7968-209d-320f-b181-033735426747",
-          "jcode": [
-              "jafrireli"
-          ],
-          "jid": [
-              "10.2307/j50003645",
-              "j50003645"
-          ],
-          "other_ids": [
-              "10.2307/j50003645",
-              "j50003645",
-              "jafrireli",
-              "21655405",
-              "21655413",
-              "2012200072",
-              "773296540"
-          ],
-          "pub_code": "psup",
-          "publisher": "Penn State University Press",
-          "publishers": {},
-          "sort_title": "Journal of Africana Religions",
-          "start_year": "2013",
-          "sub_title": "",
-          "title": "Journal of Africana Religions",
-          "type": "journal",
-          "years": "2013 - 2016"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50003645",
-              "end_year": "2016",
-              "id": "b94c7968-209d-320f-b181-033735426747",
-              "jcode": [
-                  "jafrireli"
-              ],
-              "jid": [
-                  "10.2307/j50003645",
-                  "j50003645"
-              ],
-              "other_ids": [
-                  "10.2307/j50003645",
-                  "j50003645",
-                  "jafrireli",
-                  "21655405",
-                  "21655413",
-                  "2012200072",
-                  "773296540"
-              ],
-              "pub_code": "psup",
-              "publisher": "Penn State University Press",
-              "publishers": {},
-              "sort_title": "Journal of Africana Religions",
-              "start_year": "2013",
-              "sub_title": "",
-              "title": "Journal of Africana Religions",
-              "type": "journal",
-              "years": "2013 - 2016"
-          }
-      ],
-      "all_ids": [
-          "b94c7968-209d-320f-b181-033735426747"
-      ]
-  },
-  {
-      "headid": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100209",
-          "end_year": "2012",
-          "id": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
-          "jcode": [
-              "jblackstudies"
-          ],
-          "jid": [
-              "10.2307/j100209",
-              "j100209"
-          ],
-          "other_ids": [
-              "10.2307/j100209",
-              "j100209",
-              "jblackstudies",
-              "00219347",
-              "sn99-23423",
-              "42275858"
-          ],
-          "pub_code": "sage",
-          "publisher": "Sage Publications, Inc.",
-          "publishers": {},
-          "sort_title": "Journal of Black Studies",
-          "start_year": "1970",
-          "sub_title": "",
-          "title": "Journal of Black Studies",
-          "type": "journal",
-          "years": "1970 - 2012"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100209",
-              "end_year": "2012",
-              "id": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
-              "jcode": [
-                  "jblackstudies"
-              ],
-              "jid": [
-                  "10.2307/j100209",
-                  "j100209"
-              ],
-              "other_ids": [
-                  "10.2307/j100209",
-                  "j100209",
-                  "jblackstudies",
-                  "00219347",
-                  "sn99-23423",
-                  "42275858"
-              ],
-              "pub_code": "sage",
-              "publisher": "Sage Publications, Inc.",
-              "publishers": {},
-              "sort_title": "Journal of Black Studies",
-              "start_year": "1970",
-              "sub_title": "",
-              "title": "Journal of Black Studies",
-              "type": "journal",
-              "years": "1970 - 2012"
-          }
-      ],
-      "all_ids": [
-          "8f6c581f-9288-34d6-9b60-915cb362c9e5"
-      ]
-  },
-  {
-      "headid": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100893",
-          "end_year": "2010",
-          "id": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
-          "jcode": [
-              "jblachigheduc"
-          ],
-          "jid": [
-              "10.2307/j100893",
-              "j100893"
-          ],
-          "other_ids": [
-              "10.2307/j100893",
-              "j100893",
-              "jblachigheduc",
-              "10773711",
-              "23266023",
-              "sn99-23372",
-              "40892795"
-          ],
-          "pub_code": "chii",
-          "publisher": "The JBHE Foundation, Inc",
-          "publishers": {},
-          "sort_title": "Journal of Blacks in Higher Education",
-          "start_year": "1993",
-          "sub_title": "",
-          "title": "The Journal of Blacks in Higher Education",
-          "type": "journal",
-          "years": "1993 - 2010"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100893",
-              "end_year": "2010",
-              "id": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
-              "jcode": [
-                  "jblachigheduc"
-              ],
-              "jid": [
-                  "10.2307/j100893",
-                  "j100893"
-              ],
-              "other_ids": [
-                  "10.2307/j100893",
-                  "j100893",
-                  "jblachigheduc",
-                  "10773711",
-                  "23266023",
-                  "sn99-23372",
-                  "40892795"
-              ],
-              "pub_code": "chii",
-              "publisher": "The JBHE Foundation, Inc",
-              "publishers": {},
-              "sort_title": "Journal of Blacks in Higher Education",
-              "start_year": "1993",
-              "sub_title": "",
-              "title": "The Journal of Blacks in Higher Education",
-              "type": "journal",
-              "years": "1993 - 2010"
-          }
-      ],
-      "all_ids": [
-          "5d8b5be5-506e-3d61-8107-fafd5faf04ca"
-      ]
-  },
-  {
-      "headid": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100241",
-          "end_year": "2015",
-          "id": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
-          "jcode": [
-              "jnegroeducation"
-          ],
-          "jid": [
-              "10.2307/j100241",
-              "j100241"
-          ],
-          "other_ids": [
-              "10.2307/j100241",
-              "j100241",
-              "jnegroeducation",
-              "00222984",
-              "21676437",
-              "sn99-23391",
-              "41302468"
-          ],
-          "pub_code": "jne",
-          "publisher": "Journal of Negro Education",
-          "publishers": {},
-          "sort_title": "Journal of Negro Education",
-          "start_year": "1932",
-          "sub_title": "",
-          "title": "The Journal of Negro Education",
-          "type": "journal",
-          "years": "1932 - 2015"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100241",
-              "end_year": "2015",
-              "id": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
-              "jcode": [
-                  "jnegroeducation"
-              ],
-              "jid": [
-                  "10.2307/j100241",
-                  "j100241"
-              ],
-              "other_ids": [
-                  "10.2307/j100241",
-                  "j100241",
-                  "jnegroeducation",
-                  "00222984",
-                  "21676437",
-                  "sn99-23391",
-                  "41302468"
-              ],
-              "pub_code": "jne",
-              "publisher": "Journal of Negro Education",
-              "publishers": {},
-              "sort_title": "Journal of Negro Education",
-              "start_year": "1932",
-              "sub_title": "",
-              "title": "The Journal of Negro Education",
-              "type": "journal",
-              "years": "1932 - 2015"
-          }
-      ],
-      "all_ids": [
-          "1fd40181-98d7-3df5-bb3c-d328c1210b87"
-      ]
-  },
-  {
-      "headid": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j101409",
-          "end_year": "1999",
-          "id": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
-          "jcode": [
-              "lenavenjinte"
-          ],
-          "jid": [
-              "10.2307/j101409",
-              "j101409"
-          ],
-          "other_ids": [
-              "10.2307/j101409",
-              "j101409",
-              "lenavenjinte",
-              "10800646",
-              "2008-234576",
-              "263448414"
-          ],
-          "pub_code": "cbmr",
-          "publisher": "Center for Black Music Research - Columbia College Chicago",
-          "publishers": {},
-          "sort_title": "Lenox Avenue: A Journal of Interarts Inquiry",
-          "start_year": "1995",
-          "sub_title": "",
-          "title": "Lenox Avenue: A Journal of Interarts Inquiry",
-          "type": "journal",
-          "years": "1995 - 1999"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j101409",
-              "end_year": "1999",
-              "id": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
-              "jcode": [
-                  "lenavenjinte"
-              ],
-              "jid": [
-                  "10.2307/j101409",
-                  "j101409"
-              ],
-              "other_ids": [
-                  "10.2307/j101409",
-                  "j101409",
-                  "lenavenjinte",
-                  "10800646",
-                  "2008-234576",
-                  "263448414"
-              ],
-              "pub_code": "cbmr",
-              "publisher": "Center for Black Music Research - Columbia College Chicago",
-              "publishers": {},
-              "sort_title": "Lenox Avenue: A Journal of Interarts Inquiry",
-              "start_year": "1995",
-              "sub_title": "",
-              "title": "Lenox Avenue: A Journal of Interarts Inquiry",
-              "type": "journal",
-              "years": "1995 - 1999"
-          }
-      ],
-      "all_ids": [
-          "119dc3df-3bf4-37e4-bc6e-3193a5363576"
-      ]
-  },
-  {
-      "headid": "be25999b-46b7-3ad2-b282-497ae2293316",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50006411",
-          "end_year": "2016",
-          "id": "be25999b-46b7-3ad2-b282-497ae2293316",
-          "jcode": [
-              "nortafristud"
-          ],
-          "jid": [
-              "10.2307/j50006411",
-              "j50006411"
-          ],
-          "other_ids": [
-              "10.2307/j50006411",
-              "j50006411",
-              "nortafristud",
-              "07409133",
-              "15356574"
-          ],
-          "pub_code": "msupress",
-          "publisher": "Michigan State University Press",
-          "publishers": {},
-          "sort_title": "Northeast African Studies",
-          "start_year": "1979",
-          "sub_title": "",
-          "title": "Northeast African Studies",
-          "type": "journal",
-          "years": "1979 - 2016"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50006411",
-              "end_year": "2016",
-              "id": "be25999b-46b7-3ad2-b282-497ae2293316",
-              "jcode": [
-                  "nortafristud"
-              ],
-              "jid": [
-                  "10.2307/j50006411",
-                  "j50006411"
-              ],
-              "other_ids": [
-                  "10.2307/j50006411",
-                  "j50006411",
-                  "nortafristud",
-                  "07409133",
-                  "15356574"
-              ],
-              "pub_code": "msupress",
-              "publisher": "Michigan State University Press",
-              "publishers": {},
-              "sort_title": "Northeast African Studies",
-              "start_year": "1979",
-              "sub_title": "",
-              "title": "Northeast African Studies",
-              "type": "journal",
-              "years": "1979 - 2016"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50009550",
-              "end_year": "1978",
-              "id": "a08574cc-a641-3190-8018-e7eea35c3284",
-              "jcode": [
-                  "ethinote"
-              ],
-              "jid": [
-                  "10.2307/j50009550",
-                  "j50009550"
-              ],
-              "other_ids": [
-                  "10.2307/j50009550",
-                  "j50009550",
-                  "ethinote",
-                  "10632751",
-                  "2374295X",
-                  "564687083"
-              ],
-              "pub_code": "msupress",
-              "publisher": "Michigan State University Press",
-              "publishers": {},
-              "sort_title": "Ethiopianist Notes",
-              "start_year": "1977",
-              "sub_title": "",
-              "title": "Ethiopianist Notes",
-              "type": "journal",
-              "years": "1977 - 1978"
-          }
-      ],
-      "all_ids": [
-          "be25999b-46b7-3ad2-b282-497ae2293316",
-          "a08574cc-a641-3190-8018-e7eea35c3284"
-      ]
-  },
-  {
-      "headid": "399e7cf2-ea56-3728-99c5-808b10c18e82",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100326",
-          "end_year": "2015",
-          "id": "399e7cf2-ea56-3728-99c5-808b10c18e82",
-          "jcode": [
-              "phylon1960"
-          ],
-          "jid": [
-              "10.2307/j100326",
-              "j100326"
-          ],
-          "other_ids": [
-              "10.2307/j100326",
-              "j100326",
-              "phylon1960",
-              "00318906",
-              "2002-227024",
-              "49976270"
-          ],
-          "pub_code": "cau",
-          "publisher": "Clark Atlanta University",
-          "publishers": {},
-          "sort_title": "Phylon (1960-)",
-          "start_year": "1960",
-          "sub_title": "",
-          "title": "Phylon (1960-)",
-          "type": "journal",
-          "years": "1960 - 2015"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100326",
-              "end_year": "2015",
-              "id": "399e7cf2-ea56-3728-99c5-808b10c18e82",
-              "jcode": [
-                  "phylon1960"
-              ],
-              "jid": [
-                  "10.2307/j100326",
-                  "j100326"
-              ],
-              "other_ids": [
-                  "10.2307/j100326",
-                  "j100326",
-                  "phylon1960",
-                  "00318906",
-                  "2002-227024",
-                  "49976270"
-              ],
-              "pub_code": "cau",
-              "publisher": "Clark Atlanta University",
-              "publishers": {},
-              "sort_title": "Phylon (1960-)",
-              "start_year": "1960",
-              "sub_title": "",
-              "title": "Phylon (1960-)",
-              "type": "journal",
-              "years": "1960 - 2015"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100775",
-              "end_year": "1959",
-              "id": "d21bbf76-dd15-391b-bea2-47b9e967ddd6",
-              "jcode": [
-                  "phylonquarterly"
-              ],
-              "jid": [
-                  "10.2307/j100775",
-                  "j100775"
-              ],
-              "other_ids": [
-                  "10.2307/j100775",
-                  "j100775",
-                  "phylonquarterly",
-                  "08856826",
-                  "2002-227023",
-                  "49976268"
-              ],
-              "pub_code": "cau",
-              "publisher": "Clark Atlanta University",
-              "publishers": {},
-              "sort_title": "Phylon Quarterly",
-              "start_year": "1957",
-              "sub_title": "",
-              "title": "The Phylon Quarterly",
-              "type": "journal",
-              "years": "1957 - 1959"
-          },
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100774",
-              "end_year": "1956",
-              "id": "d87bb4de-5678-3c36-8715-2dacd0a0ba5e",
-              "jcode": [
-                  "phylon19401956"
-              ],
-              "jid": [
-                  "10.2307/j100774",
-                  "j100774"
-              ],
-              "other_ids": [
-                  "10.2307/j100774",
-                  "j100774",
-                  "phylon19401956",
-                  "08856818",
-                  "2002-227022",
-                  "49976267"
-              ],
-              "pub_code": "cau",
-              "publisher": "Clark Atlanta University",
-              "publishers": {},
-              "sort_title": "Phylon (1940-1956)",
-              "start_year": "1940",
-              "sub_title": "",
-              "title": "Phylon (1940-1956)",
-              "type": "journal",
-              "years": "1940 - 1956"
-          }
-      ],
-      "all_ids": [
-          "399e7cf2-ea56-3728-99c5-808b10c18e82",
-          "d87bb4de-5678-3c36-8715-2dacd0a0ba5e",
-          "d21bbf76-dd15-391b-bea2-47b9e967ddd6"
-      ]
-  },
-  {
-      "headid": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50002324",
-          "end_year": "2016",
-          "id": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
-          "jcode": [
-              "spectrum"
-          ],
-          "jid": [
-              "10.2307/j50002324",
-              "j50002324"
-          ],
-          "other_ids": [
-              "10.2307/j50002324",
-              "j50002324",
-              "spectrum",
-              "21623244",
-              "21623252",
-              "2011200250",
-              "740919793"
-          ],
-          "pub_code": "iupress",
-          "publisher": "Indiana University Press",
-          "publishers": {
-              "iupress": "Indiana University Press"
-          },
-          "sort_title": "Spectrum: A Journal on Black Men",
-          "start_year": "2012",
-          "sub_title": "",
-          "title": "Spectrum: A Journal on Black Men",
-          "type": "journal",
-          "years": "2012 - 2016"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50002324",
-              "end_year": "2016",
-              "id": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
-              "jcode": [
-                  "spectrum"
-              ],
-              "jid": [
-                  "10.2307/j50002324",
-                  "j50002324"
-              ],
-              "other_ids": [
-                  "10.2307/j50002324",
-                  "j50002324",
-                  "spectrum",
-                  "21623244",
-                  "21623252",
-                  "2011200250",
-                  "740919793"
-              ],
-              "pub_code": "iupress",
-              "publisher": "Indiana University Press",
-              "publishers": {
-                  "iupress": "Indiana University Press"
-              },
-              "sort_title": "Spectrum: A Journal on Black Men",
-              "start_year": "2012",
-              "sub_title": "",
-              "title": "Spectrum: A Journal on Black Men",
-              "type": "journal",
-              "years": "2012 - 2016"
-          }
-      ],
-      "all_ids": [
-          "caae0636-fc8c-39ca-9722-7c23877b2b4d"
-      ]
-  },
-  {
-      "headid": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j100392",
-          "end_year": "2016",
-          "id": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
-          "jcode": [
-              "transition"
-          ],
-          "jid": [
-              "10.2307/j100392",
-              "j100392"
-          ],
-          "other_ids": [
-              "10.2307/j100392",
-              "j100392",
-              "transition",
-              "00411191",
-              "15278042",
-              "sn99-23435",
-              "42646438"
-          ],
-          "pub_code": "iupress",
-          "publisher": "Indiana University Press",
-          "publishers": {
-              "iupress": "Indiana University Press"
-          },
-          "sort_title": "Transition",
-          "start_year": "1961",
-          "sub_title": "",
-          "title": "Transition",
-          "type": "journal",
-          "years": "1961 - 2016"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j100392",
-              "end_year": "2016",
-              "id": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
-              "jcode": [
-                  "transition"
-              ],
-              "jid": [
-                  "10.2307/j100392",
-                  "j100392"
-              ],
-              "other_ids": [
-                  "10.2307/j100392",
-                  "j100392",
-                  "transition",
-                  "00411191",
-                  "15278042",
-                  "sn99-23435",
-                  "42646438"
-              ],
-              "pub_code": "iupress",
-              "publisher": "Indiana University Press",
-              "publishers": {
-                  "iupress": "Indiana University Press"
-              },
-              "sort_title": "Transition",
-              "start_year": "1961",
-              "sub_title": "",
-              "title": "Transition",
-              "type": "journal",
-              "years": "1961 - 2016"
-          }
-      ],
-      "all_ids": [
-          "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db"
-      ]
-  },
-  {
-      "headid": "8f730e4c-4f71-360a-91b6-6111791a9575",
-      "bulk_approval": null,
-      "head_title": {
-          "bidirectional_category": "left_to_right",
-          "cil": false,
-          "doi": "10.2307/j50003690",
-          "end_year": "2016",
-          "id": "8f730e4c-4f71-360a-91b6-6111791a9575",
-          "jcode": [
-              "womgenfamcol"
-          ],
-          "jid": [
-              "10.2307/j50003690",
-              "j50003690"
-          ],
-          "other_ids": [
-              "10.2307/j50003690",
-              "j50003690",
-              "womgenfamcol",
-              "23260939",
-              "23260947"
-          ],
-          "pub_code": "illinois",
-          "publisher": "University of Illinois Press",
-          "publishers": {
-              "illinois": "University of Illinois Press"
-          },
-          "sort_title": "Women, Gender, and Families of Color",
-          "start_year": "2013",
-          "sub_title": "",
-          "title": "Women, Gender, and Families of Color",
-          "type": "journal",
-          "years": "2013 - 2016"
-      },
-      "all_titles": [
-          {
-              "bidirectional_category": "left_to_right",
-              "cil": false,
-              "doi": "10.2307/j50003690",
-              "end_year": "2016",
-              "id": "8f730e4c-4f71-360a-91b6-6111791a9575",
-              "jcode": [
-                  "womgenfamcol"
-              ],
-              "jid": [
-                  "10.2307/j50003690",
-                  "j50003690"
-              ],
-              "other_ids": [
-                  "10.2307/j50003690",
-                  "j50003690",
-                  "womgenfamcol",
-                  "23260939",
-                  "23260947"
-              ],
-              "pub_code": "illinois",
-              "publisher": "University of Illinois Press",
-              "publishers": {
-                  "illinois": "University of Illinois Press"
-              },
-              "sort_title": "Women, Gender, and Families of Color",
-              "start_year": "2013",
-              "sub_title": "",
-              "title": "Women, Gender, and Families of Color",
-              "type": "journal",
-              "years": "2013 - 2016"
-          }
-      ],
-      "all_ids": [
-          "8f730e4c-4f71-360a-91b6-6111791a9575"
-      ]
-  }
+    {
+        "headid": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
+        "bulk_approval": [
+            {
+                "id": 0,
+                "entityName": "",
+                "entityID": 0,
+                "status": "Approved",
+                "groupName": "",
+                "groupID": 1,
+                "createdAt": "2022-05-04T18:51:22.18699Z"
+            },
+            {
+                "id": 0,
+                "entityName": "",
+                "entityID": 0,
+                "status": "Approved",
+                "groupName": "",
+                "groupID": 2,
+                "createdAt": "2022-05-04T18:51:22.18699Z"
+            }
+        ],
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100881",
+            "end_year": "2012",
+            "id": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
+            "jcode": [
+                "afriamerrevi"
+            ],
+            "jid": [
+                "10.2307/j100881",
+                "j100881"
+            ],
+            "other_ids": [
+                "10.2307/j100881",
+                "j100881",
+                "afriamerrevi",
+                "10624783",
+                "sn99-23369",
+                "40892739"
+            ],
+            "pub_code": "slu",
+            "publisher": "African American Review (St. Louis University)",
+            "publishers": {},
+            "sort_title": "African American Review",
+            "start_year": "1992",
+            "sub_title": "",
+            "title": "African American Review",
+            "type": "journal",
+            "years": "1992 - 2012"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100881",
+                "end_year": "2012",
+                "id": "abb70559-9665-3b42-aa8a-42535bf6f3c0",
+                "jcode": [
+                    "afriamerrevi"
+                ],
+                "jid": [
+                    "10.2307/j100881",
+                    "j100881"
+                ],
+                "other_ids": [
+                    "10.2307/j100881",
+                    "j100881",
+                    "afriamerrevi",
+                    "10624783",
+                    "sn99-23369",
+                    "40892739"
+                ],
+                "pub_code": "slu",
+                "publisher": "African American Review (St. Louis University)",
+                "publishers": {},
+                "sort_title": "African American Review",
+                "start_year": "1992",
+                "sub_title": "",
+                "title": "African American Review",
+                "type": "journal",
+                "years": "1992 - 2012"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100531",
+                "end_year": "1991",
+                "id": "4d8ddee4-3e1d-3e9e-88ba-49f2e5b5a914",
+                "jcode": [
+                    "blacamerliteforu"
+                ],
+                "jid": [
+                    "10.2307/j100531",
+                    "j100531"
+                ],
+                "other_ids": [
+                    "10.2307/j100531",
+                    "j100531",
+                    "blacamerliteforu",
+                    "01486179",
+                    "sn99-23368",
+                    "40892653"
+                ],
+                "pub_code": "slu",
+                "publisher": "African American Review (St. Louis University)",
+                "publishers": {},
+                "sort_title": "Black American Literature Forum",
+                "start_year": "1976",
+                "sub_title": "",
+                "title": "Black American Literature Forum",
+                "type": "journal",
+                "years": "1976 - 1991"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100298",
+                "end_year": "1976",
+                "id": "23ccbf03-82cb-3595-8b70-a5765d6e141e",
+                "jcode": [
+                    "negramerliteforu"
+                ],
+                "jid": [
+                    "10.2307/j100298",
+                    "j100298"
+                ],
+                "other_ids": [
+                    "10.2307/j100298",
+                    "j100298",
+                    "negramerliteforu",
+                    "00282480",
+                    "sn99-23367",
+                    "40892614"
+                ],
+                "pub_code": "slu",
+                "publisher": "African American Review (St. Louis University)",
+                "publishers": {},
+                "sort_title": "Negro American Literature Forum",
+                "start_year": "1967",
+                "sub_title": "",
+                "title": "Negro American Literature Forum",
+                "type": "journal",
+                "years": "1967 - 1976"
+            }
+        ],
+        "allids": [
+            "abb70559-9665-3b42-aa8a-42535bf6f3c0",
+            "4d8ddee4-3e1d-3e9e-88ba-49f2e5b5a914",
+            "23ccbf03-82cb-3595-8b70-a5765d6e141e"
+        ]
+    },
+    {
+        "headid": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100479",
+            "end_year": "1990",
+            "id": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
+            "jcode": [
+                "blacpersmusi"
+            ],
+            "jid": [
+                "10.2307/j100479",
+                "j100479"
+            ],
+            "other_ids": [
+                "10.2307/j100479",
+                "j100479",
+                "blacpersmusi",
+                "00907790",
+                "2004-236894",
+                "56138066"
+            ],
+            "pub_code": "prjso",
+            "publisher": "Professor J. Southern (Managing Editor-Publisher)",
+            "publishers": {},
+            "sort_title": "Black Perspective in Music",
+            "start_year": "1973",
+            "sub_title": "",
+            "title": "The Black Perspective in Music",
+            "type": "journal",
+            "years": "1973 - 1990"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100479",
+                "end_year": "1990",
+                "id": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
+                "jcode": [
+                    "blacpersmusi"
+                ],
+                "jid": [
+                    "10.2307/j100479",
+                    "j100479"
+                ],
+                "other_ids": [
+                    "10.2307/j100479",
+                    "j100479",
+                    "blacpersmusi",
+                    "00907790",
+                    "2004-236894",
+                    "56138066"
+                ],
+                "pub_code": "prjso",
+                "publisher": "Professor J. Southern (Managing Editor-Publisher)",
+                "publishers": {},
+                "sort_title": "Black Perspective in Music",
+                "start_year": "1973",
+                "sub_title": "",
+                "title": "The Black Perspective in Music",
+                "type": "journal",
+                "years": "1973 - 1990"
+            }
+        ],
+        "allids": [
+            "cf11ff7a-9b26-31bf-85c0-b82d9781b435"
+        ]
+    },
+    {
+        "headid": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50001074",
+            "end_year": "2014",
+            "id": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
+            "jcode": [
+                "blackscholar"
+            ],
+            "jid": [
+                "10.2307/j50001074",
+                "j50001074"
+            ],
+            "other_ids": [
+                "10.2307/j50001074",
+                "j50001074",
+                "blackscholar",
+                "00064246",
+                "2011-201717",
+                "38540633"
+            ],
+            "pub_code": "taylorfrancis",
+            "publisher": "Taylor & Francis, Ltd.",
+            "publishers": {},
+            "sort_title": "Black Scholar",
+            "start_year": "1969",
+            "sub_title": "",
+            "title": "The Black Scholar",
+            "type": "journal",
+            "years": "1969 - 2014"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50001074",
+                "end_year": "2014",
+                "id": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
+                "jcode": [
+                    "blackscholar"
+                ],
+                "jid": [
+                    "10.2307/j50001074",
+                    "j50001074"
+                ],
+                "other_ids": [
+                    "10.2307/j50001074",
+                    "j50001074",
+                    "blackscholar",
+                    "00064246",
+                    "2011-201717",
+                    "38540633"
+                ],
+                "pub_code": "taylorfrancis",
+                "publisher": "Taylor & Francis, Ltd.",
+                "publishers": {},
+                "sort_title": "Black Scholar",
+                "start_year": "1969",
+                "sub_title": "",
+                "title": "The Black Scholar",
+                "type": "journal",
+                "years": "1969 - 2014"
+            }
+        ],
+        "allids": [
+            "8a9303e1-dd7a-364f-ac03-d7002ca752a4"
+        ]
+    },
+    {
+        "headid": "927a31eb-7d46-3a32-8434-43498faee215",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50000755",
+            "end_year": "2012",
+            "id": "927a31eb-7d46-3a32-8434-43498faee215",
+            "jcode": [
+                "blacwomegendfami"
+            ],
+            "jid": [
+                "10.2307/j50000755",
+                "j50000755"
+            ],
+            "other_ids": [
+                "10.2307/j50000755",
+                "j50000755",
+                "blacwomegendfami",
+                "19352743",
+                "19446462",
+                "2008216364",
+                "277050143"
+            ],
+            "pub_code": "illinois",
+            "publisher": "University of Illinois Press",
+            "publishers": {
+                "illinois": "University of Illinois Press"
+            },
+            "sort_title": "Black Women, Gender + Families",
+            "start_year": "2007",
+            "sub_title": "",
+            "title": "Black Women, Gender + Families",
+            "type": "journal",
+            "years": "2007 - 2012"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50000755",
+                "end_year": "2012",
+                "id": "927a31eb-7d46-3a32-8434-43498faee215",
+                "jcode": [
+                    "blacwomegendfami"
+                ],
+                "jid": [
+                    "10.2307/j50000755",
+                    "j50000755"
+                ],
+                "other_ids": [
+                    "10.2307/j50000755",
+                    "j50000755",
+                    "blacwomegendfami",
+                    "19352743",
+                    "19446462",
+                    "2008216364",
+                    "277050143"
+                ],
+                "pub_code": "illinois",
+                "publisher": "University of Illinois Press",
+                "publishers": {
+                    "illinois": "University of Illinois Press"
+                },
+                "sort_title": "Black Women, Gender + Families",
+                "start_year": "2007",
+                "sub_title": "",
+                "title": "Black Women, Gender + Families",
+                "type": "journal",
+                "years": "2007 - 2012"
+            }
+        ],
+        "allids": [
+            "927a31eb-7d46-3a32-8434-43498faee215"
+        ]
+    },
+    {
+        "headid": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100016",
+            "end_year": "2010",
+            "id": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
+            "jcode": [
+                "callaloo"
+            ],
+            "jid": [
+                "10.2307/j100016",
+                "j100016"
+            ],
+            "other_ids": [
+                "10.2307/j100016",
+                "j100016",
+                "callaloo",
+                "01612492",
+                "10806512",
+                "sn99-23407",
+                "41669989"
+            ],
+            "pub_code": "jhup",
+            "publisher": "The Johns Hopkins University Press",
+            "publishers": {},
+            "sort_title": "Callaloo",
+            "start_year": "1976",
+            "sub_title": "",
+            "title": "Callaloo",
+            "type": "journal",
+            "years": "1976 - 2010"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100016",
+                "end_year": "2010",
+                "id": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
+                "jcode": [
+                    "callaloo"
+                ],
+                "jid": [
+                    "10.2307/j100016",
+                    "j100016"
+                ],
+                "other_ids": [
+                    "10.2307/j100016",
+                    "j100016",
+                    "callaloo",
+                    "01612492",
+                    "10806512",
+                    "sn99-23407",
+                    "41669989"
+                ],
+                "pub_code": "jhup",
+                "publisher": "The Johns Hopkins University Press",
+                "publishers": {},
+                "sort_title": "Callaloo",
+                "start_year": "1976",
+                "sub_title": "",
+                "title": "Callaloo",
+                "type": "journal",
+                "years": "1976 - 2010"
+            }
+        ],
+        "allids": [
+            "6a5b4b02-9d09-311a-aad4-7b40c54b08f1"
+        ]
+    },
+    {
+        "headid": "9895c661-a4dc-3595-bd2d-df66896c5f37",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50000758",
+            "end_year": "2013",
+            "id": "9895c661-a4dc-3595-bd2d-df66896c5f37",
+            "jcode": [
+                "fire"
+            ],
+            "jid": [
+                "10.2307/j50000758",
+                "j50000758"
+            ],
+            "other_ids": [
+                "10.2307/j50000758",
+                "j50000758",
+                "fire",
+                "21564078",
+                "2010202011",
+                "648149886"
+            ],
+            "pub_code": "asalh",
+            "publisher": "Association for the Study of African American Life and History",
+            "publishers": {},
+            "sort_title": "Fire!!!",
+            "start_year": "2012",
+            "sub_title": "",
+            "title": "Fire!!!",
+            "type": "journal",
+            "years": "2012 - 2013"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50000758",
+                "end_year": "2013",
+                "id": "9895c661-a4dc-3595-bd2d-df66896c5f37",
+                "jcode": [
+                    "fire"
+                ],
+                "jid": [
+                    "10.2307/j50000758",
+                    "j50000758"
+                ],
+                "other_ids": [
+                    "10.2307/j50000758",
+                    "j50000758",
+                    "fire",
+                    "21564078",
+                    "2010202011",
+                    "648149886"
+                ],
+                "pub_code": "asalh",
+                "publisher": "Association for the Study of African American Life and History",
+                "publishers": {},
+                "sort_title": "Fire!!!",
+                "start_year": "2012",
+                "sub_title": "",
+                "title": "Fire!!!",
+                "type": "journal",
+                "years": "2012 - 2013"
+            }
+        ],
+        "allids": [
+            "9895c661-a4dc-3595-bd2d-df66896c5f37"
+        ]
+    },
+    {
+        "headid": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j101012",
+            "end_year": "2015",
+            "id": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
+            "jcode": [
+                "jafriamerhist"
+            ],
+            "jid": [
+                "10.2307/j101012",
+                "j101012"
+            ],
+            "other_ids": [
+                "10.2307/j101012",
+                "j101012",
+                "jafriamerhist",
+                "15481867",
+                "21535086",
+                "2006-236700",
+                "60628423"
+            ],
+            "pub_code": "asalh",
+            "publisher": "Association for the Study of African American Life and History",
+            "publishers": {},
+            "sort_title": "Journal of African American History",
+            "start_year": "2002",
+            "sub_title": "",
+            "title": "The Journal of African American History",
+            "type": "journal",
+            "years": "2002 - 2015"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j101012",
+                "end_year": "2015",
+                "id": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
+                "jcode": [
+                    "jafriamerhist"
+                ],
+                "jid": [
+                    "10.2307/j101012",
+                    "j101012"
+                ],
+                "other_ids": [
+                    "10.2307/j101012",
+                    "j101012",
+                    "jafriamerhist",
+                    "15481867",
+                    "21535086",
+                    "2006-236700",
+                    "60628423"
+                ],
+                "pub_code": "asalh",
+                "publisher": "Association for the Study of African American Life and History",
+                "publishers": {},
+                "sort_title": "Journal of African American History",
+                "start_year": "2002",
+                "sub_title": "",
+                "title": "The Journal of African American History",
+                "type": "journal",
+                "years": "2002 - 2015"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100242",
+                "end_year": "2001",
+                "id": "ae709ed3-28c5-3abf-9c5f-3e3fff008f0d",
+                "jcode": [
+                    "jnegrohistory"
+                ],
+                "jid": [
+                    "10.2307/j100242",
+                    "j100242"
+                ],
+                "other_ids": [
+                    "10.2307/j100242",
+                    "j100242",
+                    "jnegrohistory",
+                    "00222992",
+                    "sn99-23392",
+                    "41302474"
+                ],
+                "pub_code": "asalh",
+                "publisher": "Association for the Study of African American Life and History",
+                "publishers": {},
+                "sort_title": "Journal of Negro History",
+                "start_year": "1916",
+                "sub_title": "",
+                "title": "The Journal of Negro History",
+                "type": "journal",
+                "years": "1916 - 2001"
+            }
+        ],
+        "allids": [
+            "ae709ed3-28c5-3abf-9c5f-3e3fff008f0d",
+            "5d15811f-fbfe-3cf7-bde6-722c0cbc1931"
+        ]
+    },
+    {
+        "headid": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50006171",
+            "end_year": "2012",
+            "id": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
+            "jcode": [
+                "jafriamerstud"
+            ],
+            "jid": [
+                "10.2307/j50006171",
+                "j50006171"
+            ],
+            "other_ids": [
+                "10.2307/j50006171",
+                "j50006171",
+                "jafriamerstud",
+                "15591646",
+                "19364741",
+                "2007215116",
+                "56210516"
+            ],
+            "pub_code": "springer",
+            "publisher": "Springer",
+            "publishers": {},
+            "sort_title": "Journal of African American Studies",
+            "start_year": "2003",
+            "sub_title": "",
+            "title": "Journal of African American Studies",
+            "type": "journal",
+            "years": "2003 - 2012"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50006171",
+                "end_year": "2012",
+                "id": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
+                "jcode": [
+                    "jafriamerstud"
+                ],
+                "jid": [
+                    "10.2307/j50006171",
+                    "j50006171"
+                ],
+                "other_ids": [
+                    "10.2307/j50006171",
+                    "j50006171",
+                    "jafriamerstud",
+                    "15591646",
+                    "19364741",
+                    "2007215116",
+                    "56210516"
+                ],
+                "pub_code": "springer",
+                "publisher": "Springer",
+                "publishers": {},
+                "sort_title": "Journal of African American Studies",
+                "start_year": "2003",
+                "sub_title": "",
+                "title": "Journal of African American Studies",
+                "type": "journal",
+                "years": "2003 - 2012"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50006170",
+                "end_year": "2002",
+                "id": "d009ca5e-d570-334e-8068-f5d8e98c04e4",
+                "jcode": [
+                    "jafricanamermen"
+                ],
+                "jid": [
+                    "10.2307/j50006170",
+                    "j50006170"
+                ],
+                "other_ids": [
+                    "10.2307/j50006170",
+                    "j50006170",
+                    "jafricanamermen",
+                    "10811753",
+                    "21687870",
+                    "2012201533",
+                    "60637540"
+                ],
+                "pub_code": "springer",
+                "publisher": "Springer",
+                "publishers": {},
+                "sort_title": "Journal of African American Men",
+                "start_year": "1995",
+                "sub_title": "",
+                "title": "Journal of African American Men",
+                "type": "journal",
+                "years": "1995 - 2002"
+            }
+        ],
+        "allids": [
+            "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
+            "d009ca5e-d570-334e-8068-f5d8e98c04e4"
+        ]
+    },
+    {
+        "headid": "b94c7968-209d-320f-b181-033735426747",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50003645",
+            "end_year": "2016",
+            "id": "b94c7968-209d-320f-b181-033735426747",
+            "jcode": [
+                "jafrireli"
+            ],
+            "jid": [
+                "10.2307/j50003645",
+                "j50003645"
+            ],
+            "other_ids": [
+                "10.2307/j50003645",
+                "j50003645",
+                "jafrireli",
+                "21655405",
+                "21655413",
+                "2012200072",
+                "773296540"
+            ],
+            "pub_code": "psup",
+            "publisher": "Penn State University Press",
+            "publishers": {},
+            "sort_title": "Journal of Africana Religions",
+            "start_year": "2013",
+            "sub_title": "",
+            "title": "Journal of Africana Religions",
+            "type": "journal",
+            "years": "2013 - 2016"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50003645",
+                "end_year": "2016",
+                "id": "b94c7968-209d-320f-b181-033735426747",
+                "jcode": [
+                    "jafrireli"
+                ],
+                "jid": [
+                    "10.2307/j50003645",
+                    "j50003645"
+                ],
+                "other_ids": [
+                    "10.2307/j50003645",
+                    "j50003645",
+                    "jafrireli",
+                    "21655405",
+                    "21655413",
+                    "2012200072",
+                    "773296540"
+                ],
+                "pub_code": "psup",
+                "publisher": "Penn State University Press",
+                "publishers": {},
+                "sort_title": "Journal of Africana Religions",
+                "start_year": "2013",
+                "sub_title": "",
+                "title": "Journal of Africana Religions",
+                "type": "journal",
+                "years": "2013 - 2016"
+            }
+        ],
+        "allids": [
+            "b94c7968-209d-320f-b181-033735426747"
+        ]
+    },
+    {
+        "headid": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100209",
+            "end_year": "2012",
+            "id": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
+            "jcode": [
+                "jblackstudies"
+            ],
+            "jid": [
+                "10.2307/j100209",
+                "j100209"
+            ],
+            "other_ids": [
+                "10.2307/j100209",
+                "j100209",
+                "jblackstudies",
+                "00219347",
+                "sn99-23423",
+                "42275858"
+            ],
+            "pub_code": "sage",
+            "publisher": "Sage Publications, Inc.",
+            "publishers": {},
+            "sort_title": "Journal of Black Studies",
+            "start_year": "1970",
+            "sub_title": "",
+            "title": "Journal of Black Studies",
+            "type": "journal",
+            "years": "1970 - 2012"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100209",
+                "end_year": "2012",
+                "id": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
+                "jcode": [
+                    "jblackstudies"
+                ],
+                "jid": [
+                    "10.2307/j100209",
+                    "j100209"
+                ],
+                "other_ids": [
+                    "10.2307/j100209",
+                    "j100209",
+                    "jblackstudies",
+                    "00219347",
+                    "sn99-23423",
+                    "42275858"
+                ],
+                "pub_code": "sage",
+                "publisher": "Sage Publications, Inc.",
+                "publishers": {},
+                "sort_title": "Journal of Black Studies",
+                "start_year": "1970",
+                "sub_title": "",
+                "title": "Journal of Black Studies",
+                "type": "journal",
+                "years": "1970 - 2012"
+            }
+        ],
+        "allids": [
+            "8f6c581f-9288-34d6-9b60-915cb362c9e5"
+        ]
+    },
+    {
+        "headid": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100893",
+            "end_year": "2010",
+            "id": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
+            "jcode": [
+                "jblachigheduc"
+            ],
+            "jid": [
+                "10.2307/j100893",
+                "j100893"
+            ],
+            "other_ids": [
+                "10.2307/j100893",
+                "j100893",
+                "jblachigheduc",
+                "10773711",
+                "23266023",
+                "sn99-23372",
+                "40892795"
+            ],
+            "pub_code": "chii",
+            "publisher": "The JBHE Foundation, Inc",
+            "publishers": {},
+            "sort_title": "Journal of Blacks in Higher Education",
+            "start_year": "1993",
+            "sub_title": "",
+            "title": "The Journal of Blacks in Higher Education",
+            "type": "journal",
+            "years": "1993 - 2010"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100893",
+                "end_year": "2010",
+                "id": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
+                "jcode": [
+                    "jblachigheduc"
+                ],
+                "jid": [
+                    "10.2307/j100893",
+                    "j100893"
+                ],
+                "other_ids": [
+                    "10.2307/j100893",
+                    "j100893",
+                    "jblachigheduc",
+                    "10773711",
+                    "23266023",
+                    "sn99-23372",
+                    "40892795"
+                ],
+                "pub_code": "chii",
+                "publisher": "The JBHE Foundation, Inc",
+                "publishers": {},
+                "sort_title": "Journal of Blacks in Higher Education",
+                "start_year": "1993",
+                "sub_title": "",
+                "title": "The Journal of Blacks in Higher Education",
+                "type": "journal",
+                "years": "1993 - 2010"
+            }
+        ],
+        "allids": [
+            "5d8b5be5-506e-3d61-8107-fafd5faf04ca"
+        ]
+    },
+    {
+        "headid": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100241",
+            "end_year": "2015",
+            "id": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
+            "jcode": [
+                "jnegroeducation"
+            ],
+            "jid": [
+                "10.2307/j100241",
+                "j100241"
+            ],
+            "other_ids": [
+                "10.2307/j100241",
+                "j100241",
+                "jnegroeducation",
+                "00222984",
+                "21676437",
+                "sn99-23391",
+                "41302468"
+            ],
+            "pub_code": "jne",
+            "publisher": "Journal of Negro Education",
+            "publishers": {},
+            "sort_title": "Journal of Negro Education",
+            "start_year": "1932",
+            "sub_title": "",
+            "title": "The Journal of Negro Education",
+            "type": "journal",
+            "years": "1932 - 2015"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100241",
+                "end_year": "2015",
+                "id": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
+                "jcode": [
+                    "jnegroeducation"
+                ],
+                "jid": [
+                    "10.2307/j100241",
+                    "j100241"
+                ],
+                "other_ids": [
+                    "10.2307/j100241",
+                    "j100241",
+                    "jnegroeducation",
+                    "00222984",
+                    "21676437",
+                    "sn99-23391",
+                    "41302468"
+                ],
+                "pub_code": "jne",
+                "publisher": "Journal of Negro Education",
+                "publishers": {},
+                "sort_title": "Journal of Negro Education",
+                "start_year": "1932",
+                "sub_title": "",
+                "title": "The Journal of Negro Education",
+                "type": "journal",
+                "years": "1932 - 2015"
+            }
+        ],
+        "allids": [
+            "1fd40181-98d7-3df5-bb3c-d328c1210b87"
+        ]
+    },
+    {
+        "headid": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j101409",
+            "end_year": "1999",
+            "id": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
+            "jcode": [
+                "lenavenjinte"
+            ],
+            "jid": [
+                "10.2307/j101409",
+                "j101409"
+            ],
+            "other_ids": [
+                "10.2307/j101409",
+                "j101409",
+                "lenavenjinte",
+                "10800646",
+                "2008-234576",
+                "263448414"
+            ],
+            "pub_code": "cbmr",
+            "publisher": "Center for Black Music Research - Columbia College Chicago",
+            "publishers": {},
+            "sort_title": "Lenox Avenue: A Journal of Interarts Inquiry",
+            "start_year": "1995",
+            "sub_title": "",
+            "title": "Lenox Avenue: A Journal of Interarts Inquiry",
+            "type": "journal",
+            "years": "1995 - 1999"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j101409",
+                "end_year": "1999",
+                "id": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
+                "jcode": [
+                    "lenavenjinte"
+                ],
+                "jid": [
+                    "10.2307/j101409",
+                    "j101409"
+                ],
+                "other_ids": [
+                    "10.2307/j101409",
+                    "j101409",
+                    "lenavenjinte",
+                    "10800646",
+                    "2008-234576",
+                    "263448414"
+                ],
+                "pub_code": "cbmr",
+                "publisher": "Center for Black Music Research - Columbia College Chicago",
+                "publishers": {},
+                "sort_title": "Lenox Avenue: A Journal of Interarts Inquiry",
+                "start_year": "1995",
+                "sub_title": "",
+                "title": "Lenox Avenue: A Journal of Interarts Inquiry",
+                "type": "journal",
+                "years": "1995 - 1999"
+            }
+        ],
+        "allids": [
+            "119dc3df-3bf4-37e4-bc6e-3193a5363576"
+        ]
+    },
+    {
+        "headid": "be25999b-46b7-3ad2-b282-497ae2293316",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50006411",
+            "end_year": "2016",
+            "id": "be25999b-46b7-3ad2-b282-497ae2293316",
+            "jcode": [
+                "nortafristud"
+            ],
+            "jid": [
+                "10.2307/j50006411",
+                "j50006411"
+            ],
+            "other_ids": [
+                "10.2307/j50006411",
+                "j50006411",
+                "nortafristud",
+                "07409133",
+                "15356574"
+            ],
+            "pub_code": "msupress",
+            "publisher": "Michigan State University Press",
+            "publishers": {},
+            "sort_title": "Northeast African Studies",
+            "start_year": "1979",
+            "sub_title": "",
+            "title": "Northeast African Studies",
+            "type": "journal",
+            "years": "1979 - 2016"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50006411",
+                "end_year": "2016",
+                "id": "be25999b-46b7-3ad2-b282-497ae2293316",
+                "jcode": [
+                    "nortafristud"
+                ],
+                "jid": [
+                    "10.2307/j50006411",
+                    "j50006411"
+                ],
+                "other_ids": [
+                    "10.2307/j50006411",
+                    "j50006411",
+                    "nortafristud",
+                    "07409133",
+                    "15356574"
+                ],
+                "pub_code": "msupress",
+                "publisher": "Michigan State University Press",
+                "publishers": {},
+                "sort_title": "Northeast African Studies",
+                "start_year": "1979",
+                "sub_title": "",
+                "title": "Northeast African Studies",
+                "type": "journal",
+                "years": "1979 - 2016"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50009550",
+                "end_year": "1978",
+                "id": "a08574cc-a641-3190-8018-e7eea35c3284",
+                "jcode": [
+                    "ethinote"
+                ],
+                "jid": [
+                    "10.2307/j50009550",
+                    "j50009550"
+                ],
+                "other_ids": [
+                    "10.2307/j50009550",
+                    "j50009550",
+                    "ethinote",
+                    "10632751",
+                    "2374295X",
+                    "564687083"
+                ],
+                "pub_code": "msupress",
+                "publisher": "Michigan State University Press",
+                "publishers": {},
+                "sort_title": "Ethiopianist Notes",
+                "start_year": "1977",
+                "sub_title": "",
+                "title": "Ethiopianist Notes",
+                "type": "journal",
+                "years": "1977 - 1978"
+            }
+        ],
+        "allids": [
+            "be25999b-46b7-3ad2-b282-497ae2293316",
+            "a08574cc-a641-3190-8018-e7eea35c3284"
+        ]
+    },
+    {
+        "headid": "399e7cf2-ea56-3728-99c5-808b10c18e82",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100326",
+            "end_year": "2015",
+            "id": "399e7cf2-ea56-3728-99c5-808b10c18e82",
+            "jcode": [
+                "phylon1960"
+            ],
+            "jid": [
+                "10.2307/j100326",
+                "j100326"
+            ],
+            "other_ids": [
+                "10.2307/j100326",
+                "j100326",
+                "phylon1960",
+                "00318906",
+                "2002-227024",
+                "49976270"
+            ],
+            "pub_code": "cau",
+            "publisher": "Clark Atlanta University",
+            "publishers": {},
+            "sort_title": "Phylon (1960-)",
+            "start_year": "1960",
+            "sub_title": "",
+            "title": "Phylon (1960-)",
+            "type": "journal",
+            "years": "1960 - 2015"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100326",
+                "end_year": "2015",
+                "id": "399e7cf2-ea56-3728-99c5-808b10c18e82",
+                "jcode": [
+                    "phylon1960"
+                ],
+                "jid": [
+                    "10.2307/j100326",
+                    "j100326"
+                ],
+                "other_ids": [
+                    "10.2307/j100326",
+                    "j100326",
+                    "phylon1960",
+                    "00318906",
+                    "2002-227024",
+                    "49976270"
+                ],
+                "pub_code": "cau",
+                "publisher": "Clark Atlanta University",
+                "publishers": {},
+                "sort_title": "Phylon (1960-)",
+                "start_year": "1960",
+                "sub_title": "",
+                "title": "Phylon (1960-)",
+                "type": "journal",
+                "years": "1960 - 2015"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100775",
+                "end_year": "1959",
+                "id": "d21bbf76-dd15-391b-bea2-47b9e967ddd6",
+                "jcode": [
+                    "phylonquarterly"
+                ],
+                "jid": [
+                    "10.2307/j100775",
+                    "j100775"
+                ],
+                "other_ids": [
+                    "10.2307/j100775",
+                    "j100775",
+                    "phylonquarterly",
+                    "08856826",
+                    "2002-227023",
+                    "49976268"
+                ],
+                "pub_code": "cau",
+                "publisher": "Clark Atlanta University",
+                "publishers": {},
+                "sort_title": "Phylon Quarterly",
+                "start_year": "1957",
+                "sub_title": "",
+                "title": "The Phylon Quarterly",
+                "type": "journal",
+                "years": "1957 - 1959"
+            },
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100774",
+                "end_year": "1956",
+                "id": "d87bb4de-5678-3c36-8715-2dacd0a0ba5e",
+                "jcode": [
+                    "phylon19401956"
+                ],
+                "jid": [
+                    "10.2307/j100774",
+                    "j100774"
+                ],
+                "other_ids": [
+                    "10.2307/j100774",
+                    "j100774",
+                    "phylon19401956",
+                    "08856818",
+                    "2002-227022",
+                    "49976267"
+                ],
+                "pub_code": "cau",
+                "publisher": "Clark Atlanta University",
+                "publishers": {},
+                "sort_title": "Phylon (1940-1956)",
+                "start_year": "1940",
+                "sub_title": "",
+                "title": "Phylon (1940-1956)",
+                "type": "journal",
+                "years": "1940 - 1956"
+            }
+        ],
+        "allids": [
+            "399e7cf2-ea56-3728-99c5-808b10c18e82",
+            "d87bb4de-5678-3c36-8715-2dacd0a0ba5e",
+            "d21bbf76-dd15-391b-bea2-47b9e967ddd6"
+        ]
+    },
+    {
+        "headid": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50002324",
+            "end_year": "2016",
+            "id": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
+            "jcode": [
+                "spectrum"
+            ],
+            "jid": [
+                "10.2307/j50002324",
+                "j50002324"
+            ],
+            "other_ids": [
+                "10.2307/j50002324",
+                "j50002324",
+                "spectrum",
+                "21623244",
+                "21623252",
+                "2011200250",
+                "740919793"
+            ],
+            "pub_code": "iupress",
+            "publisher": "Indiana University Press",
+            "publishers": {
+                "iupress": "Indiana University Press"
+            },
+            "sort_title": "Spectrum: A Journal on Black Men",
+            "start_year": "2012",
+            "sub_title": "",
+            "title": "Spectrum: A Journal on Black Men",
+            "type": "journal",
+            "years": "2012 - 2016"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50002324",
+                "end_year": "2016",
+                "id": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
+                "jcode": [
+                    "spectrum"
+                ],
+                "jid": [
+                    "10.2307/j50002324",
+                    "j50002324"
+                ],
+                "other_ids": [
+                    "10.2307/j50002324",
+                    "j50002324",
+                    "spectrum",
+                    "21623244",
+                    "21623252",
+                    "2011200250",
+                    "740919793"
+                ],
+                "pub_code": "iupress",
+                "publisher": "Indiana University Press",
+                "publishers": {
+                    "iupress": "Indiana University Press"
+                },
+                "sort_title": "Spectrum: A Journal on Black Men",
+                "start_year": "2012",
+                "sub_title": "",
+                "title": "Spectrum: A Journal on Black Men",
+                "type": "journal",
+                "years": "2012 - 2016"
+            }
+        ],
+        "allids": [
+            "caae0636-fc8c-39ca-9722-7c23877b2b4d"
+        ]
+    },
+    {
+        "headid": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j100392",
+            "end_year": "2016",
+            "id": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
+            "jcode": [
+                "transition"
+            ],
+            "jid": [
+                "10.2307/j100392",
+                "j100392"
+            ],
+            "other_ids": [
+                "10.2307/j100392",
+                "j100392",
+                "transition",
+                "00411191",
+                "15278042",
+                "sn99-23435",
+                "42646438"
+            ],
+            "pub_code": "iupress",
+            "publisher": "Indiana University Press",
+            "publishers": {
+                "iupress": "Indiana University Press"
+            },
+            "sort_title": "Transition",
+            "start_year": "1961",
+            "sub_title": "",
+            "title": "Transition",
+            "type": "journal",
+            "years": "1961 - 2016"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j100392",
+                "end_year": "2016",
+                "id": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
+                "jcode": [
+                    "transition"
+                ],
+                "jid": [
+                    "10.2307/j100392",
+                    "j100392"
+                ],
+                "other_ids": [
+                    "10.2307/j100392",
+                    "j100392",
+                    "transition",
+                    "00411191",
+                    "15278042",
+                    "sn99-23435",
+                    "42646438"
+                ],
+                "pub_code": "iupress",
+                "publisher": "Indiana University Press",
+                "publishers": {
+                    "iupress": "Indiana University Press"
+                },
+                "sort_title": "Transition",
+                "start_year": "1961",
+                "sub_title": "",
+                "title": "Transition",
+                "type": "journal",
+                "years": "1961 - 2016"
+            }
+        ],
+        "allids": [
+            "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db"
+        ]
+    },
+    {
+        "headid": "8f730e4c-4f71-360a-91b6-6111791a9575",
+        "bulk_approval": null,
+        "headTitle": {
+            "bidirectional_category": "left_to_right",
+            "cil": false,
+            "doi": "10.2307/j50003690",
+            "end_year": "2016",
+            "id": "8f730e4c-4f71-360a-91b6-6111791a9575",
+            "jcode": [
+                "womgenfamcol"
+            ],
+            "jid": [
+                "10.2307/j50003690",
+                "j50003690"
+            ],
+            "other_ids": [
+                "10.2307/j50003690",
+                "j50003690",
+                "womgenfamcol",
+                "23260939",
+                "23260947"
+            ],
+            "pub_code": "illinois",
+            "publisher": "University of Illinois Press",
+            "publishers": {
+                "illinois": "University of Illinois Press"
+            },
+            "sort_title": "Women, Gender, and Families of Color",
+            "start_year": "2013",
+            "sub_title": "",
+            "title": "Women, Gender, and Families of Color",
+            "type": "journal",
+            "years": "2013 - 2016"
+        },
+        "allTitles": [
+            {
+                "bidirectional_category": "left_to_right",
+                "cil": false,
+                "doi": "10.2307/j50003690",
+                "end_year": "2016",
+                "id": "8f730e4c-4f71-360a-91b6-6111791a9575",
+                "jcode": [
+                    "womgenfamcol"
+                ],
+                "jid": [
+                    "10.2307/j50003690",
+                    "j50003690"
+                ],
+                "other_ids": [
+                    "10.2307/j50003690",
+                    "j50003690",
+                    "womgenfamcol",
+                    "23260939",
+                    "23260947"
+                ],
+                "pub_code": "illinois",
+                "publisher": "University of Illinois Press",
+                "publishers": {
+                    "illinois": "University of Illinois Press"
+                },
+                "sort_title": "Women, Gender, and Families of Color",
+                "start_year": "2013",
+                "sub_title": "",
+                "title": "Women, Gender, and Families of Color",
+                "type": "journal",
+                "years": "2013 - 2016"
+            }
+        ],
+        "allids": [
+            "8f730e4c-4f71-360a-91b6-6111791a9575"
+        ]
+    }
 ]

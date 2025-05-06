@@ -3,9 +3,9 @@ import type { BulkHistory } from './MediaRecord'
 export interface Journal {
   bulk_approval?: BulkHistory[]
   headid: string
-  head_title: Title
-  all_titles: Title[]
-  all_ids: string[]
+  headTitle: Title
+  allTitles: Title[]
+  allids: string[]
   discipline?: string
 }
 

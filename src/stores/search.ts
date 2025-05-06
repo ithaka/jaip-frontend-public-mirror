@@ -153,7 +153,7 @@ export const useSearchStore = defineStore('search', {
     selectedJCodes(): string[] {
       const jcodes: string[] = []
       this.selectedJournals.forEach((journal) => {
-        journal.all_titles.forEach((title) => {
+        journal.allTitles.forEach((title) => {
           title.jcode.forEach((jc) => {
             if (!jcodes.includes(jc)) {
               jcodes.push(jc)

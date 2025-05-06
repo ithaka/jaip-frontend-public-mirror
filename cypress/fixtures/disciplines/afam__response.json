@@ -12,7 +12,7 @@
         "createdAt": "2023-05-24T14:54:38.548149Z"
       }
     ],
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100881",
@@ -43,7 +43,7 @@
       "type": "journal",
       "years": "1992 - 2012"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -138,7 +138,7 @@
         "years": "1967 - 1976"
       }
     ],
-    "all_ids": [
+    "allids": [
       "abb70559-9665-3b42-aa8a-42535bf6f3c0",
       "4d8ddee4-3e1d-3e9e-88ba-49f2e5b5a914",
       "23ccbf03-82cb-3595-8b70-a5765d6e141e"
@@ -147,7 +147,7 @@
   {
     "headid": "cf11ff7a-9b26-31bf-85c0-b82d9781b435",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100479",
@@ -178,7 +178,7 @@
       "type": "journal",
       "years": "1973 - 1990"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -211,14 +211,14 @@
         "years": "1973 - 1990"
       }
     ],
-    "all_ids": [
+    "allids": [
       "cf11ff7a-9b26-31bf-85c0-b82d9781b435"
     ]
   },
   {
     "headid": "8a9303e1-dd7a-364f-ac03-d7002ca752a4",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50001074",
@@ -249,7 +249,7 @@
       "type": "journal",
       "years": "1969 - 2014"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -282,14 +282,14 @@
         "years": "1969 - 2014"
       }
     ],
-    "all_ids": [
+    "allids": [
       "8a9303e1-dd7a-364f-ac03-d7002ca752a4"
     ]
   },
   {
     "headid": "927a31eb-7d46-3a32-8434-43498faee215",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50000755",
@@ -323,7 +323,7 @@
       "type": "journal",
       "years": "2007 - 2012"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -359,14 +359,14 @@
         "years": "2007 - 2012"
       }
     ],
-    "all_ids": [
+    "allids": [
       "927a31eb-7d46-3a32-8434-43498faee215"
     ]
   },
   {
     "headid": "6a5b4b02-9d09-311a-aad4-7b40c54b08f1",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100016",
@@ -398,7 +398,7 @@
       "type": "journal",
       "years": "1976 - 2010"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -432,14 +432,14 @@
         "years": "1976 - 2010"
       }
     ],
-    "all_ids": [
+    "allids": [
       "6a5b4b02-9d09-311a-aad4-7b40c54b08f1"
     ]
   },
   {
     "headid": "9895c661-a4dc-3595-bd2d-df66896c5f37",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50000758",
@@ -470,7 +470,7 @@
       "type": "journal",
       "years": "2012 - 2013"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -503,14 +503,14 @@
         "years": "2012 - 2013"
       }
     ],
-    "all_ids": [
+    "allids": [
       "9895c661-a4dc-3595-bd2d-df66896c5f37"
     ]
   },
   {
     "headid": "5d15811f-fbfe-3cf7-bde6-722c0cbc1931",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j101012",
@@ -542,7 +542,7 @@
       "type": "journal",
       "years": "2002 - 2015"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -607,7 +607,7 @@
         "years": "1916 - 2001"
       }
     ],
-    "all_ids": [
+    "allids": [
       "ae709ed3-28c5-3abf-9c5f-3e3fff008f0d",
       "5d15811f-fbfe-3cf7-bde6-722c0cbc1931"
     ]
@@ -615,7 +615,7 @@
   {
     "headid": "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50006171",
@@ -647,7 +647,7 @@
       "type": "journal",
       "years": "2003 - 2012"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -713,7 +713,7 @@
         "years": "1995 - 2002"
       }
     ],
-    "all_ids": [
+    "allids": [
       "d0435fcc-aa91-39af-9ea6-c9490db3b05b",
       "d009ca5e-d570-334e-8068-f5d8e98c04e4"
     ]
@@ -721,7 +721,7 @@
   {
     "headid": "b94c7968-209d-320f-b181-033735426747",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50003645",
@@ -753,7 +753,7 @@
       "type": "journal",
       "years": "2013 - 2016"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -787,14 +787,14 @@
         "years": "2013 - 2016"
       }
     ],
-    "all_ids": [
+    "allids": [
       "b94c7968-209d-320f-b181-033735426747"
     ]
   },
   {
     "headid": "8f6c581f-9288-34d6-9b60-915cb362c9e5",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100209",
@@ -825,7 +825,7 @@
       "type": "journal",
       "years": "1970 - 2012"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -858,14 +858,14 @@
         "years": "1970 - 2012"
       }
     ],
-    "all_ids": [
+    "allids": [
       "8f6c581f-9288-34d6-9b60-915cb362c9e5"
     ]
   },
   {
     "headid": "5d8b5be5-506e-3d61-8107-fafd5faf04ca",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100893",
@@ -897,7 +897,7 @@
       "type": "journal",
       "years": "1993 - 2010"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -931,14 +931,14 @@
         "years": "1993 - 2010"
       }
     ],
-    "all_ids": [
+    "allids": [
       "5d8b5be5-506e-3d61-8107-fafd5faf04ca"
     ]
   },
   {
     "headid": "1fd40181-98d7-3df5-bb3c-d328c1210b87",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100241",
@@ -970,7 +970,7 @@
       "type": "journal",
       "years": "1932 - 2015"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1004,14 +1004,14 @@
         "years": "1932 - 2015"
       }
     ],
-    "all_ids": [
+    "allids": [
       "1fd40181-98d7-3df5-bb3c-d328c1210b87"
     ]
   },
   {
     "headid": "119dc3df-3bf4-37e4-bc6e-3193a5363576",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j101409",
@@ -1042,7 +1042,7 @@
       "type": "journal",
       "years": "1995 - 1999"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1075,14 +1075,14 @@
         "years": "1995 - 1999"
       }
     ],
-    "all_ids": [
+    "allids": [
       "119dc3df-3bf4-37e4-bc6e-3193a5363576"
     ]
   },
   {
     "headid": "be25999b-46b7-3ad2-b282-497ae2293316",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50006411",
@@ -1112,7 +1112,7 @@
       "type": "journal",
       "years": "1979 - 2016"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1175,7 +1175,7 @@
         "years": "1977 - 1978"
       }
     ],
-    "all_ids": [
+    "allids": [
       "be25999b-46b7-3ad2-b282-497ae2293316",
       "a08574cc-a641-3190-8018-e7eea35c3284"
     ]
@@ -1183,7 +1183,7 @@
   {
     "headid": "399e7cf2-ea56-3728-99c5-808b10c18e82",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100326",
@@ -1214,7 +1214,7 @@
       "type": "journal",
       "years": "1960 - 2015"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1309,7 +1309,7 @@
         "years": "1940 - 1956"
       }
     ],
-    "all_ids": [
+    "allids": [
       "399e7cf2-ea56-3728-99c5-808b10c18e82",
       "d87bb4de-5678-3c36-8715-2dacd0a0ba5e",
       "d21bbf76-dd15-391b-bea2-47b9e967ddd6"
@@ -1318,7 +1318,7 @@
   {
     "headid": "caae0636-fc8c-39ca-9722-7c23877b2b4d",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50002324",
@@ -1352,7 +1352,7 @@
       "type": "journal",
       "years": "2012 - 2016"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1388,14 +1388,14 @@
         "years": "2012 - 2016"
       }
     ],
-    "all_ids": [
+    "allids": [
       "caae0636-fc8c-39ca-9722-7c23877b2b4d"
     ]
   },
   {
     "headid": "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j100392",
@@ -1429,7 +1429,7 @@
       "type": "journal",
       "years": "1961 - 2016"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1465,14 +1465,14 @@
         "years": "1961 - 2016"
       }
     ],
-    "all_ids": [
+    "allids": [
       "1e4f9ce2-5be3-3a8d-bc3b-f48e857a44db"
     ]
   },
   {
     "headid": "8f730e4c-4f71-360a-91b6-6111791a9575",
     "bulk_approval": null,
-    "head_title": {
+    "headTitle": {
       "bidirectional_category": "left_to_right",
       "cil": false,
       "doi": "10.2307/j50003690",
@@ -1504,7 +1504,7 @@
       "type": "journal",
       "years": "2013 - 2016"
     },
-    "all_titles": [
+    "allTitles": [
       {
         "bidirectional_category": "left_to_right",
         "cil": false,
@@ -1538,7 +1538,7 @@
         "years": "2013 - 2016"
       }
     ],
-    "all_ids": [
+    "allids": [
       "8f730e4c-4f71-360a-91b6-6111791a9575"
     ]
   }

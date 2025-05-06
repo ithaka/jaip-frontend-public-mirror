@@ -491,10 +491,10 @@ const handleContentTypeSelection = (e: InputFileEvent) => {
                           ]"
                           :filter-function="
                             (j: Journal, term: string) =>
-                              j.head_title.title.toLowerCase().includes(term)
+                              j.headTitle.title.toLowerCase().includes(term)
                           "
                           :get-value="(j: Journal) => j.headid"
-                          :get-label="(j: Journal) => j.head_title.title"
+                          :get-label="(j: Journal) => j.headTitle.title"
                           @input="handleJournalSelection($event, discipline)"
                         />
                       </div>
