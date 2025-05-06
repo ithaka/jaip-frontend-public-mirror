@@ -35,7 +35,6 @@ build app image:
   before_script:
     # Write necessary env vars to .env file for the build
     - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
-    - echo "API_URL=$API_URL" >> .env
     # Copy the environment specific nginx config so it can be used in the build, then remove irrelevant config files
     - mv nginx/$NGINX_CONFIG nginx/nginx.conf && rm -rf nginx/nginx.conf.*
 
