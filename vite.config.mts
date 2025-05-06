@@ -100,7 +100,7 @@ export default defineConfig(({ mode }) => {
   }
 
   // This handles rerouting to a server specified by API_URL in a .env file
-  // when ENVIRONMENT is set to "local". This allows us to use the prod or staging
+  // when ENVIRONMENT is set to "development". This allows us to use the prod or staging
   // clusters during frontend development.
   process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ''));
   if (process.env.ENVIRONMENT==="development") {
