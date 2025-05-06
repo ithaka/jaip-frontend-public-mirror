@@ -11,6 +11,8 @@ import EntityManager from '@/components/account/EntityManager.vue'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import type { Entity } from '@/interfaces/Entities'
+import { setCookie } from 'typescript-cookie'
+
 const props = defineProps({
   entity: {
     type: Object as PropType<EntityOption>,
@@ -59,7 +61,9 @@ const handleUpdate = async () => {
   doSearch()
   gettingUser.value = true
   const { data } = await coreStore.$api.auth.session()
-
+  if (data?.uuid) {
+    setCookie('uuid', data.uuid)
+  }
   groups.value = data.groups
   type.value = data.type
   entityName.value = data.name

@@ -5,6 +5,7 @@ import { removeCookie } from 'typescript-cookie'
 import { useFeaturesStore } from './features'
 import type { UngroupedFeatureDetails, FeatureBoolean, FeatureDetails } from '@/interfaces/Features'
 import type { Subdomain } from '@/interfaces/Subdomains'
+import { setCookie } from 'typescript-cookie'
 
 const hasAdminFeatures = (group: Group) => {
   const features = useFeaturesStore()
@@ -70,6 +71,11 @@ export const useUserStore = defineStore('user', {
       this.gettingUser = true
       const core = useCoreStore()
       const { data } = await core.$api.auth.session()
+
+      if (data?.uuid) {
+        setCookie('uuid', data.uuid)
+      }
+
       this.groups = data.groups
       this.type = data.type
       this.entityName = data.name

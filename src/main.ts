@@ -196,6 +196,9 @@ const auth = async (app: App) => {
             features.value = resp.data.features
           }
         }
+        if (data?.uuid) {
+          setCookie('uuid', data.uuid)
+        }
         if (data.invalid_email) {
           invalidUserEmail.value = data.invalid_email
         } else {

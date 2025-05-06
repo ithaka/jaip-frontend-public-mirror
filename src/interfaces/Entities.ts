@@ -8,6 +8,7 @@ export interface User {
   // This value is only used when adding or editing users
   email?: string
   groups: Array<Group>
+  uuid: string
 }
 
 export interface Entity {
