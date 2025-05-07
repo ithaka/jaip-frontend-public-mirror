@@ -113,7 +113,11 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
       }
       if (to.path === '/requests') {
         const groups = (to.query.groups || '').toString()
-        selectedGroups.value['status_search'] = groups ? JSON.parse(groups) : groupIDs.value
+        selectedGroups.value['status_search'] = groups
+          ? JSON.parse(groups)
+          : groupIDs.value.length > 4
+            ? []
+            : groupIDs.value
         if (!reviewStatus.value) {
           reviewStatus.value = isAuthenticatedAdmin.value ? 'pending' : 'completed'
         }
