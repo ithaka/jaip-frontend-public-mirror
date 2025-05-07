@@ -45,7 +45,7 @@ sirius:
   enabled: true
 
 envVars:
-  ITHAKA_ENVIRONMENT: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.ITHAKA_ENVIRONMENT
+  VITE_ENVIRONMENT: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.VITE_ENVIRONMENT
 
 
 probes:
