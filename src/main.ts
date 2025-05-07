@@ -201,7 +201,8 @@ const auth = async (app: App) => {
           }
         }
         if (data?.uuid) {
-          setCookie('uuid', data.uuid)
+          const inThirtyMinutes = new Date(new Date().getTime() + 30 * 60 * 1000)
+          setCookie('uuid', data.uuid, { expires: inThirtyMinutes })
         }
         if (data.invalid_email) {
           invalidUserEmail.value = data.invalid_email

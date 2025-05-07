@@ -73,7 +73,8 @@ export const useUserStore = defineStore('user', {
       const { data } = await core.$api.auth.session()
 
       if (data?.uuid) {
-        setCookie('uuid', data.uuid)
+        const inThirtyMinutes = new Date(new Date().getTime() + 30 * 60 * 1000)
+        setCookie('uuid', data.uuid, { expires: inThirtyMinutes })
       }
 
       this.groups = data.groups
