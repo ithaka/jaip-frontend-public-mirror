@@ -44,6 +44,10 @@ healthcheckPath: /
 sirius:
   enabled: true
 
+envVars:
+  ENVIRONMENT: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.ENVIRONMENT
+
+
 probes:
   useDefault: false
   customProbes:
