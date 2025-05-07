@@ -74,7 +74,13 @@ const handleGroupSelection = (e: InputFileEvent) => {
     selectedGroups.value[props.featureName] = []
   } else if (selectedGroups.value[props.featureName].includes(val)) {
     selectedGroups.value[props.featureName] = selectedGroups.value[props.featureName].filter(
-      (group: number) => group === val,
+      (group: number) => {
+        if (e.target.getAttribute('data-pharos-component') === 'PharosButton') {
+          return group !== val
+        } else {
+          return group === val
+        }
+      },
     )
   } else {
     if (props.multiple) {
