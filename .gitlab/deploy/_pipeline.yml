@@ -42,8 +42,6 @@ render capstan chart:
   stage: prepare
   extends: .render-charts
   needs: []
-  before_script:
-    - helm repo update
 
 scan vulnerabilities:
   stage: check
