@@ -37,6 +37,7 @@ const redirectToParams = () => {
   return encodeURIComponent('?to=' + newURL)
 }
 
+console.log(import.meta.env)
 const loginUrl = import.meta.env.PROD
   ? 'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' + redirectToParams()
   : 'https://firefly.jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
