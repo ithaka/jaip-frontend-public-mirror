@@ -10,9 +10,9 @@ requiredTags:
 
 env:
   - name: VITE_ENVIRONMENT
-    value: $ENVIRONMENT
+    value: test
   - name: NODE_ENV
-    value: $ENVIRONMENT
+    value: test
 
 # This enables preStop hooks on the app and sidecar containers.
 # These will de-register the app from Eureka, then wait a minute for Eureka's cache to clear before shutting down.
