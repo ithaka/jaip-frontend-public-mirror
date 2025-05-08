@@ -8,12 +8,6 @@ requiredTags:
   environment: $ENVIRONMENT
   businessUnit: $ITHAKA_BUSINESS_UNIT
 
-env:
-  - name: VITE_ENVIRONMENT
-    value: test
-  - name: NODE_ENV
-    value: test
-
 # This enables preStop hooks on the app and sidecar containers.
 # These will de-register the app from Eureka, then wait a minute for Eureka's cache to clear before shutting down.
 # 'sh' and the command 'sleep' are required to be available in your app container. Set this to false if not.
@@ -49,6 +43,11 @@ healthcheckPath: /
 
 sirius:
   enabled: true
+
+envVars:
+  VITE_ENVIRONMENT: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.VITE_ENVIRONMENT
+  NODE_ENV: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.NODE_ENV
+
 probes:
   useDefault: false
   customProbes:
