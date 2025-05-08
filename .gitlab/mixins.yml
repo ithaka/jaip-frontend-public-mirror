@@ -2,7 +2,7 @@
 # Mixins which govern when jobs run.
 .test-rules:
   rules:
-    - if: $CI_COMMIT_BRANCH != 'main'
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
       when: always
 
 .staging-rules:
@@ -38,7 +38,6 @@
     EKS_CLUSTER: ephemeral
     K8S_ACTION: apply
     BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA.apps.test.cirrostratus.org/jaip/api
-    DATABASE_SECRET_NAME: jaip-database-creds
 
 .test-env:
   variables:
@@ -49,7 +48,6 @@
     PROMOTE_TO: release-candidate
     TARGET_CLUSTER: integration
     BASE_URL: https://jaip-frontend.apps.test.cirrostratus.org/jaip/api
-    DATABASE_SECRET_NAME: jaip-database-creds
 
 .prod-env:
   variables:
@@ -61,7 +59,6 @@
     PROMOTE_TO: stable
     TARGET_CLUSTER: production
     BASE_URL: https://jaip-frontend.apps.prod.cirrostratus.org/jaip/api
-    DATABASE_SECRET_NAME: jaip-database-creds
 
 
 # ---- PIPELINES ---------------------------------------------------------------
