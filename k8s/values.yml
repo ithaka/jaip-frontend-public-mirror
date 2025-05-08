@@ -45,8 +45,10 @@ sirius:
   enabled: true
 
 extraEnv:
-  VITE_ENVIRONMENT: $ENVIRONMENT # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.VITE_ENVIRONMENT
-  NODE_ENV: $ENVIRONMENT # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.NODE_ENV
+  - name: VITE_ENVIRONMENT
+    value: $ENVIRONMENT
+  - name: NODE_ENV
+    value: $ENVIRONMENT
 
 probes:
   useDefault: false
