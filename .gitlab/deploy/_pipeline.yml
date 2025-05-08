@@ -93,8 +93,6 @@ e2e tests:
 
 promote image:
   stage: promote
-  variables:
-    ENVIRONMENT: $ENVIRONMENT
   extends: .promote-image
 
 # There shouldn't be a need for this to be in a separate stage, but it consistently failed
