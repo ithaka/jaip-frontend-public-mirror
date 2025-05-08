@@ -23,9 +23,6 @@ deploy:
   extends: .run-argo-deployer
   variables:
     ACTION: deploy
-    ENVIRONMENT: $ENVIRONMENT
-  before_script:
-    echo $ENVIRONMENT
   environment:
     name: $TARGET_CLUSTER
     url: https://$EUREKA_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org
