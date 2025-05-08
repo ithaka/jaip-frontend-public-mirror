@@ -33,6 +33,7 @@ build app image:
     KUBERNETES_MEMORY_LIMIT: 8Gi
     CI_DEBUG_TRACE: true
   before_script:
+    - echo "NODE_ENV: $ENVIRONMENT" > .env
     # Copy the environment specific nginx config so it can be used in the build, then remove irrelevant config files
     - mv nginx/$NGINX_CONFIG nginx/nginx.conf && rm -rf nginx/nginx.conf.*
 
