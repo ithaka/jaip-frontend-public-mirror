@@ -13,6 +13,7 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY --from=build-stage /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build-stage /app/nginx/shared/ /etc/nginx/shared
 RUN cat /etc/nginx/nginx.conf
+RUN echo $ENVIRONMENT
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
