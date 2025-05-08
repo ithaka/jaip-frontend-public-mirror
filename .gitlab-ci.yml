@@ -60,6 +60,9 @@ trigger deploy prod:
     - .prod-env
   trigger:
     include: .gitlab/deploy/persistent.yml
+  before_script:
+    - echo $ENVIRONMENT
+    
 
 # We don't need to undeploy apps in merge requests. Since they deploy to ephemeral,
 # they clean up automatically.
