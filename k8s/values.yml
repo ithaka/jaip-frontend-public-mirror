@@ -8,11 +8,11 @@ requiredTags:
   environment: $ENVIRONMENT
   businessUnit: $ITHAKA_BUSINESS_UNIT
 
-extraEnv:
+env:
   - name: VITE_ENVIRONMENT
-    value: "$ENVIRONMENT"
+    value: $ENVIRONMENT
   - name: NODE_ENV
-    value: "$ENVIRONMENT"
+    value: $ENVIRONMENT
 
 # This enables preStop hooks on the app and sidecar containers.
 # These will de-register the app from Eureka, then wait a minute for Eureka's cache to clear before shutting down.
