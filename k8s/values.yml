@@ -44,9 +44,9 @@ healthcheckPath: /
 sirius:
   enabled: true
 
-envVars:
-  VITE_ENVIRONMENT: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.VITE_ENVIRONMENT
-  NODE_ENV: override_in_setup_yml # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.NODE_ENV
+extraEnv:
+  VITE_ENVIRONMENT: $ENVIRONMENT # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.VITE_ENVIRONMENT
+  NODE_ENV: $ENVIRONMENT # required - overwritten in EXTRA_HELM_TEMPLATE_OPTIONS --set envVars.NODE_ENV
 
 probes:
   useDefault: false
