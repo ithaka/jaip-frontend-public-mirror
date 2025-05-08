@@ -9,6 +9,9 @@ export const routes = {
   auth: {
     get: `${global_route_prefix_versioned}/auth`,
   },
+  environment: {
+    get: `${global_route_prefix_versioned}/environment`,
+  },
   features: {
     grouped: {
       get: `${global_route_prefix_versioned}/site-administration/features/grouped/get`,
@@ -168,6 +171,9 @@ export default ($axios: AxiosInstance): ApiObject => ({
         }),
       addAdministrator: (data) => $axios.post(routes.groups.addAdministrator, data),
     },
+  },
+  environment: {
+    get: () => $axios.get(routes.environment.get),
   },
   disciplines: () => $axios.get(routes.disciplines.get),
   journals: (code: string) => $axios(routes.journals.get(code)),

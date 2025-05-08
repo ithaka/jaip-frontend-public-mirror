@@ -18,6 +18,7 @@ export const useCoreStore = defineStore('core', {
       routePath: '/',
       routeQuery: '',
       toastKey: 0,
+      environment: '',
       $api: {} as ApiObject,
       alert: {} as Alert,
     }

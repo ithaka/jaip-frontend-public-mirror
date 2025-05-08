@@ -12,7 +12,7 @@ import SmallHeader from '@/components/headers/SmallHeader.vue'
 import type { StringString } from '@/interfaces/BasicObjects'
 
 const coreStore = useCoreStore()
-const { isAdminSubdomain, routePath, routeQuery, toastKey } = storeToRefs(coreStore)
+const { isAdminSubdomain, routePath, routeQuery, toastKey, environment } = storeToRefs(coreStore)
 
 const userStore = useUserStore()
 const {
@@ -37,11 +37,13 @@ const redirectToParams = () => {
   return encodeURIComponent('?to=' + newURL)
 }
 
-console.log(import.meta.env)
-const loginUrl = import.meta.env.PROD
-  ? 'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' + redirectToParams()
-  : 'https://firefly.jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
-    redirectToParams()
+const loginUrl = computed(() => {
+  return environment.value === 'prod'
+    ? 'https://jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
+        redirectToParams()
+    : 'https://firefly.jstor.org/action/showLogin?redirectUri=/api/labs-pep-auth-service' +
+        redirectToParams()
+})
 
 const router = useRouter()
 let updateKey = 0

@@ -76,6 +76,9 @@ export default interface ApiObject {
       addAdministrator: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
     }
   }
+  environment: {
+    get: () => Promise<AxiosResponse<{ environment: string }, unknown>>
+  }
   disciplines: () => Promise<AxiosResponse<unknown, unknown>>
   journals: (arg: string) => Promise<AxiosResponse<Journal[], unknown>>
   search: Search

@@ -51,6 +51,7 @@ const {
   customSubdomains,
   hasValidSubdomain,
   isAdminSubdomain,
+  environment,
 } = storeToRefs(coreStore)
 const { features } = storeToRefs(featuresStore)
 const {
@@ -162,6 +163,11 @@ const auth = async (app: App) => {
     if (subdomains.data && subdomains.data.subdomain) {
       customSubdomains.value.push(subdomains.data.subdomain)
     }
+  }
+
+  const env_response = await api.environment.get()
+  if (env_response.data && env_response.data.environment) {
+    environment.value = env_response.data.environment
   }
 
   const router = app.config.globalProperties.$router
