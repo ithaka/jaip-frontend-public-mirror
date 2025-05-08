@@ -12,10 +12,13 @@ describe('Bulk approval', () => {
         .as('search')
       cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
+
       handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
       cy.visit('/search?term=mary+mcleod+bethune')
 
-      cy.wait(['@searchPage', '@alerts', '@auth', '@disciplines', '@search'])
+      cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@disciplines', '@search'])
     })
 
     it('Shows a status indicator for articles from bulk approved disciplines', () => {
@@ -28,7 +31,7 @@ describe('Bulk approval', () => {
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__journal_approved__response.json' })
         .as('search')
       cy.visit('/search?term=mary+mcleod+bethune')
-      cy.wait(['@searchPage', '@alerts', '@auth', '@disciplines', '@search'])
+      cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@disciplines', '@search'])
       cy.get('.search-result')
         .first()
         .contains('Status: Approved by Journal')
@@ -61,6 +64,8 @@ describe('Bulk approval', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
@@ -75,7 +80,7 @@ describe('Bulk approval', () => {
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
-      cy.wait(['@searchPage', '@alerts', '@auth', '@features', '@disciplines', '@search'])
+      cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@features', '@disciplines', '@search'])
     })
 
     context('The approve all button', () => {
@@ -149,7 +154,7 @@ describe('Bulk approval', () => {
       it('Does not display when there is a search term', () => {
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage', '@alerts', '@auth', '@disciplines', '@search'])
+        cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@disciplines', '@search'])
         cy.get('pep-pharos-button')
           .contains('Approve All', { matchCase: false })
           .should('not.exist')
@@ -400,6 +405,8 @@ describe('Bulk approval', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
@@ -414,7 +421,7 @@ describe('Bulk approval', () => {
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
-      cy.wait(['@searchPage', '@alerts', '@auth', '@features', '@disciplines', '@search'])
+      cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@features', '@disciplines', '@search'])
     })
   
     it('Approves all disciplines in both groups when no journals or disciplines are selected', () => {      
@@ -586,6 +593,8 @@ describe('Bulk approval', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/with_bulk_approval__response.json' })
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
@@ -600,7 +609,7 @@ describe('Bulk approval', () => {
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
-      cy.wait(['@searchPage', '@alerts', '@auth', '@features', '@disciplines', '@search'])
+      cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@features', '@disciplines', '@search'])
     })
 
     context('The approve all button', () => {

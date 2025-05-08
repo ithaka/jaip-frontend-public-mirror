@@ -38,6 +38,8 @@ describe('Search', () => {
       .as('auth')
     cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
       .as('alerts')
+    cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+      .as('env')
     handleLocation("/search?term=&page=1", cy, 'searchPage', 'pep')
   })
   context('General', () => {
@@ -51,7 +53,7 @@ describe('Search', () => {
           // Not also waiting on @search here, even though it's fired by the
           // cy.visit(), because we wait for it in some of the tests to check
           // the requests.
-          cy.wait(['@searchPage', '@auth', '@alerts', '@disciplines'])
+          cy.wait(['@searchPage', '@auth', '@alerts', '@env', '@disciplines'])
         })
 
         it('Sorts by date (newest first)', () => {  
@@ -81,7 +83,7 @@ describe('Search', () => {
           cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
             .as('search')
           cy.visit('/search?term=&page=1')
-          cy.wait(['@searchPage', '@auth', '@alerts', '@search', '@disciplines'])
+          cy.wait(['@searchPage', '@auth', '@alerts', '@env', '@search', '@disciplines'])
           cy.get('#main_search').shadow().find('input').type('mary mcleod bethune{enter}')
   
           cy.contains('Sort by: Relevance', { matchCase: false }).should('be.visible')
@@ -106,7 +108,7 @@ describe('Search', () => {
           })
           cy.contains('Sort by: Relevance', { matchCase: false }).should('be.visible')
 
-          cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@disciplines'])
+          cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
         })
 
         it('Lets users choose newest-first sort', () => {
@@ -135,7 +137,7 @@ describe('Search', () => {
           cy.get('.document-title').first()
             .should('contain.text', 'Rooted in DC')
 
-            cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@disciplines'])
+            cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
           })  
 
         it('Lets users choose oldest-first sort', () => {
@@ -155,7 +157,7 @@ describe('Search', () => {
           cy.get('.document-title').first()
             .should('contain.text', "The Fifty Years' Work of the Royal Geographical Society")
 
-          cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@disciplines'])
+          cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
         })
 
         it('Lets users choose relevance sort', () => {
@@ -170,7 +172,7 @@ describe('Search', () => {
           cy.get('.document-title').first()
             .should('contain.text', 'MARY McLEOD BETHUNE')
 
-            cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@disciplines'])
+            cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
           })  
       })
     })
@@ -223,7 +225,7 @@ describe('Search', () => {
           .type('1999{enter}')
 
         cy.fixture('search/no_term_given__max_year__request.json').then((request) => {
-          cy.wait(['@alerts', '@auth', '@disciplines'])
+          cy.wait(['@alerts', '@env', '@auth', '@disciplines'])
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
         cy.get('.document-title').first()
@@ -249,7 +251,7 @@ describe('Search', () => {
           .type('1999{enter}')
 
         cy.fixture('search/no_term_given__min_year__request.json').then((request) => {
-          cy.wait(['@alerts', '@auth', '@disciplines'])
+          cy.wait(['@alerts', '@env', '@auth', '@disciplines'])
           request.filters = updateYear(request.filters)
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
@@ -288,7 +290,7 @@ describe('Search', () => {
           .type('1792{enter}')
     
         cy.fixture('search/no_term_given__min_max_year__request.json').then((request) => {
-          cy.wait(['@alerts', '@auth', '@disciplines'])
+          cy.wait(['@alerts', '@env', '@auth', '@disciplines'])
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
         cy.get('.document-title').first()
@@ -305,7 +307,7 @@ describe('Search', () => {
         cy.get('pep-pharos-checkbox[value="africanamericanstudies-discipline"]').first().click()
 
         cy.fixture('search/no_term_given__discipline__request.json').then((request) => {
-          cy.wait(['@alerts', '@auth', '@disciplines', '@afam'])
+          cy.wait(['@alerts', '@env', '@auth', '@disciplines', '@afam'])
           request.filters = updateYear(request.filters)
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
@@ -357,7 +359,7 @@ describe('Search', () => {
           .as('search')
         cy.visit('/search?term=&page=1')
         cy.wait('@searchPage')
-        cy.wait(['@search', '@alerts', '@auth', '@disciplines'])
+        cy.wait(['@search', '@alerts', '@env', '@auth', '@disciplines'])
       })
 
       it('Requires start year to be an integer', () => {

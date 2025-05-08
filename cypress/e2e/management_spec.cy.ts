@@ -8,6 +8,8 @@ describe('Management', () => {
       handleLocation('/management?term=&page=1', cy, 'managementPage', 'pep-admin')
       cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.groups.get, { fixture: 'auth/groups/get_groups__response.json' })
         .as('getGroups')
       cy.intercept('POST', routes.groups.add, { fixture: 'auth/groups/add_group__request.json' })
@@ -71,7 +73,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
-        cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures'])
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures'])
 
       })
 
@@ -86,7 +88,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getGroups'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -138,7 +140,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getGroups'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -203,7 +205,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getGroups'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -271,7 +273,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getGroupsInactive'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroupsInactive'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -319,7 +321,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getGroups'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -384,7 +386,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUsers'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUsers'])
       })
       it('Has user management panel', () => {
         cy.get('pep-pharos-tab')
@@ -477,7 +479,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUsers'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUsers'])
       })
       it('Has user management panel', () => {
         cy.get('pep-pharos-tab')
@@ -558,7 +560,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomains'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomains'])
       })
       it('Has subdomain management panel', () => {
         cy.get('pep-pharos-tab')
@@ -609,7 +611,7 @@ describe('Management', () => {
           .as('auth')
         
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomains'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomains'])
       })
       it('Has subdomain management panel', () => {
         cy.get('pep-pharos-tab')
@@ -672,7 +674,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_subdomain__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
-        cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomains'])
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomains'])
       })
       it('Has subdomain management panel', () => {
         cy.get('pep-pharos-tab')
@@ -737,7 +739,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
-        cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getSubdomainsInactive'])
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomainsInactive'])
       })
       it('Has subdomain management panel', () => {
         cy.get('pep-pharos-tab')
@@ -783,7 +785,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getFeatures'])
       })
       it('Has features management panel', () => {
         cy.get('pep-pharos-tab')
@@ -860,7 +862,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_feature__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
-        cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getFeatures'])
       })
       it('Has feature management panel', () => {
         cy.get('pep-pharos-tab')
@@ -979,7 +981,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getFeatures'])
       })
       it('Has feature management panel', () => {
         cy.get('pep-pharos-tab')
@@ -1045,7 +1047,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getFeatures'])
       })
       it('Has features management panel', () => {
         cy.get('pep-pharos-tab')
@@ -1094,7 +1096,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUngroupedFeatures'])
       })
       it('Has features management panel', () => {
         cy.get('pep-pharos-tab')
@@ -1172,7 +1174,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_ungrouped_feature__response.json' })
           .as('auth')
         cy.visit('/management?term=&page=1')
-        cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUngroupedFeatures'])
       })
       it('Has feature management panel', () => {
         cy.get('pep-pharos-tab')
@@ -1293,7 +1295,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUngroupedFeatures'])
       })
       it('Has feature management panel', () => {
         cy.get('pep-pharos-tab')
@@ -1361,7 +1363,7 @@ describe('Management', () => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_ungrouped_feature__response.json' })
           .as('auth')
           cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@auth', '@getFeatures', '@getUngroupedFeatures'])
+          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUngroupedFeatures'])
       })
       it('Has features management panel', () => {
         cy.get('pep-pharos-tab')

@@ -11,6 +11,8 @@ describe('Page Viewer', () => {
       const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
@@ -23,7 +25,7 @@ describe('Page Viewer', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
     })
 
     // NOTE: There are no pep-pharos-buttons on the student PDF viewer. This means we can't
@@ -43,8 +45,10 @@ describe('Page Viewer', () => {
       const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+        .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
@@ -55,7 +59,7 @@ describe('Page Viewer', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
     })
 
     it('does not show download button', () => {
@@ -73,8 +77,10 @@ describe('Page Viewer', () => {
       const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+        .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
@@ -85,7 +91,7 @@ describe('Page Viewer', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
     })
     it('shows pdf button', () => {
       cy.get('pep-pharos-button').contains("View PDF", { matchCase: false }).should('be.visible')
@@ -103,8 +109,10 @@ describe('Page Viewer', () => {
       const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_access__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+        .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
@@ -115,7 +123,7 @@ describe('Page Viewer', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
     })
 
     it('shows pdf button', () => {

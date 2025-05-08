@@ -8,6 +8,8 @@ describe('Main site content', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
+        cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+          .as('env')
         cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
@@ -44,6 +46,8 @@ describe('Main site content', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
+        cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+          .as('env')
         cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
@@ -51,7 +55,7 @@ describe('Main site content', () => {
       })
       it('includes alert', () => {
         cy.visit('/')
-        cy.wait(['@alerts', '@auth'])
+        cy.wait(['@alerts', '@env', '@auth'])
         cy.get('pep-pharos-alert')
           .contains('Oh, no!')
           .should('be.visible')
@@ -61,6 +65,8 @@ describe('Main site content', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
           .as('auth')
+        cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+          .as('env')
         cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
           .as('alerts')
         handleLocation('/', cy, 'index', 'pep-admin')
@@ -68,7 +74,7 @@ describe('Main site content', () => {
   
       it('includes log in button', () => {
         cy.visit('/')
-        cy.wait(['@index', '@alerts', '@auth'])
+        cy.wait(['@index', '@alerts', '@env', '@auth'])
         cy.get('pep-pharos-button').contains('Log in')
       })
     })
@@ -82,18 +88,20 @@ describe('Main site content', () => {
         .as('auth')
       cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
         .as('alerts')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       handleLocation('/', cy, 'index', 'pep')
     })
 
     it('includes landing page text', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('main').contains('Explore the world’s knowledge')
     })
 
     it('shows authenticated users an error page on invalid paths', () =>{
       cy.visit('/not-a-page')
-      cy.wait(['@alerts', '@auth'])
+      cy.wait(['@alerts', '@env', '@auth'])
       cy.contains('Page Not Found')
       // We should test that it returns 404, but it doesn't -- it returns 200!
     })
@@ -101,59 +109,59 @@ describe('Main site content', () => {
 
     it('links to home', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('home').should('be.visible')
     })
 
     it('links to support', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').should('be.visible')
     })
 
     it('links to research', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').should('be.visible')
     })
 
     it('links to search', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('search').should('be.visible')
     })
 
     it('links to requests', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
     })
   
     it('links to about', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('about').should('be.visible')
     })
 
     it('links to help', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('help').should('be.visible')
     })
 
     it('has exactly seven links', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 7).should('be.visible')
     })
 
     it('does not link to Mellon', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
 
       cy.get('#footer [alt="Mellon Foundation Logo"]').should('be.visible')
       cy.get('a[href="https://www.mellon.org"]').should('not.exist')
@@ -161,7 +169,7 @@ describe('Main site content', () => {
 
     it('does not link to Ascendium', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
 
       cy.get('#footer [alt="Ascendium Foundation Logo"]').should('be.visible')
       cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('not.exist')
@@ -169,7 +177,7 @@ describe('Main site content', () => {
 
     it('does not link to Labs', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth'])
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
 
       cy.get('#footer [alt="JSTOR Labs Logo"]').should('be.visible')
       cy.get('a[href="https://labs.jstor.org"]').should('not.exist')
@@ -182,70 +190,72 @@ describe('Main site content', () => {
       // An admin needs at least one admin feature.
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+        .as('features')
       cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
         .as('alerts')
       handleLocation('/', cy, 'index', 'pep-admin')
     })
     it('includes landing page text', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('main').contains('Explore the world’s knowledge')
     })
 
     it('links to Mellon', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('#footer [alt="Mellon Foundation Logo"]').should('be.visible')
       cy.get('a[href="https://www.mellon.org"]').should('have.length', 1)
     })
 
     it('links to Ascendium', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('#footer [alt="Ascendium Foundation Logo"]').should('be.visible')
       cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('have.length', 1)
     })
 
     it('links to Labs', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('#footer [alt="JSTOR Labs Logo"]').should('be.visible')
       cy.get('a[href="https://labs.jstor.org"]').should('have.length', 1)
     })
 
     it('links to home', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('home').should('be.visible')
     })
 
     it('links to support', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').should('be.visible')
     })
 
     it('links to research', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').should('be.visible')
     })
     
     it('links to search', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('search').should('be.visible')
     })
 
     it('links to requests', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
@@ -254,7 +264,7 @@ describe('Main site content', () => {
     it('links to about', () => {
       cy.visit('/')
       
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('about').should('be.visible')
@@ -262,7 +272,7 @@ describe('Main site content', () => {
 
     it('links to help', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('help').should('be.visible')
@@ -270,7 +280,7 @@ describe('Main site content', () => {
 
     it('has exactly seven links', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 7).should('be.visible')
     })
   })
@@ -280,6 +290,8 @@ describe('Main site content', () => {
       // An admin needs at least one admin feature.
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
       cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
@@ -289,7 +301,7 @@ describe('Main site content', () => {
 
     it('links to account', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('account').should('be.visible')
@@ -297,7 +309,7 @@ describe('Main site content', () => {
 
     it('has exactly eight links', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@auth', '@features'])
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 8).should('be.visible')
     })

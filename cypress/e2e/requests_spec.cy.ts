@@ -6,13 +6,15 @@ describe('Requests page', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@completed'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
     })
 
     it('Can sort by date', () => {
@@ -135,6 +137,8 @@ describe('Requests page', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
@@ -145,7 +149,7 @@ describe('Requests page', () => {
         .as('completed')
         
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@completed'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
       cy.get('.search-result')
         .first()
@@ -162,7 +166,7 @@ describe('Requests page', () => {
         .as('completed')
 
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@completed'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
       cy.get('.search-result')
         .first()
@@ -178,7 +182,7 @@ describe('Requests page', () => {
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@auth', '@alerts', '@completed'])
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
       cy.get('.search-result')
         .eq(1)
@@ -194,7 +198,7 @@ describe('Requests page', () => {
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@auth', '@alerts', '@completed'])
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
       cy.get('.search-result')
         .eq(1)
@@ -210,7 +214,7 @@ describe('Requests page', () => {
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@auth', '@alerts', '@completed'])
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
       cy.get('.search-result')
         .eq(1)
@@ -226,7 +230,7 @@ describe('Requests page', () => {
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@completed'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
       cy.intercept('POST', routes.search.status('pending'), { fixture: 'search/pending__response.json' })
         .as('pending')
@@ -264,6 +268,8 @@ describe('Requests page', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_review__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
         .as('pending')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
@@ -272,7 +278,7 @@ describe('Requests page', () => {
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@features', '@pending'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@features', '@pending'])
     })
 
     it('Includes metadata for pending results', () => {
@@ -663,6 +669,8 @@ describe('Requests page', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
         .as('pending')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
@@ -671,7 +679,7 @@ describe('Requests page', () => {
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
-      cy.wait(['@requestsPage', '@alerts', '@auth', '@features', '@pending'])
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@features', '@pending'])
     })
   
     it('Has two groups', () => {

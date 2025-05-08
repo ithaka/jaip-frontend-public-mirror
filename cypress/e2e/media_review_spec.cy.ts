@@ -6,6 +6,8 @@ describe('Media Review', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document_submit_requests__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
@@ -18,7 +20,7 @@ describe('Media Review', () => {
       beforeEach(() => {
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage','@alerts', '@search', '@auth', '@disciplines'])  
+        cy.wait(['@searchPage','@alerts', '@env', '@search', '@auth', '@disciplines'])  
       })
       
       it('Lacks a warning alert', () => {
@@ -137,7 +139,7 @@ describe('Media Review', () => {
         cy.intercept('POST', routes.approvals.request, { body: '' }).as('request')
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@disciplines'])  
+        cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@disciplines'])  
       })
 
       it('Lets students re-request denied articles', () => {
@@ -192,7 +194,7 @@ describe('Media Review', () => {
           .as('search')
   
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@disciplines'])  
+        cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@disciplines'])  
   
         // There exists a pending item
         cy.get('.search-result')
@@ -219,7 +221,7 @@ describe('Media Review', () => {
           .as('disciplines')
 
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage','@alerts', '@search', '@auth'])  
+        cy.wait(['@searchPage','@alerts', '@env', '@search', '@auth'])  
       })
 
       it('Displays warning when the cart is full', () => {
@@ -244,6 +246,8 @@ describe('Media Review', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
         .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
@@ -256,7 +260,7 @@ describe('Media Review', () => {
       beforeEach(() => {
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage','@alerts', '@search', '@auth', '@disciplines'])  
+        cy.wait(['@searchPage','@alerts', '@env', '@search', '@auth', '@disciplines'])  
       })
       it('Shows a warning alert', () => {
         cy.get('.alert')
@@ -276,6 +280,8 @@ describe('Media Review', () => {
           .as('features')
       cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
         .as('alerts')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
       handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
     })
 
@@ -295,7 +301,7 @@ describe('Media Review', () => {
             .as('deny')
             
           cy.visit('/search?term=mary+mcleod+bethune')
-          cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@features', '@disciplines'])
+          cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@features', '@disciplines'])
         })
 
         it('Lets admins approve an article', () => {
@@ -494,7 +500,7 @@ describe('Media Review', () => {
         cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
         handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
         cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage', '@alerts', '@search', '@auth', '@features', '@disciplines'])  
+        cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@features', '@disciplines'])  
 
       })
 

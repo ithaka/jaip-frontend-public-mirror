@@ -10,13 +10,16 @@ describe('Account Management', () => {
         .as('alerts')
         cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
+        cy.intercept('GET', routes.environment.get, { environment: 'test' })
+          .as('env')
+
     })
     context('When logged in', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features'])
       })
 
       it('Shows no access to account management', () => {
@@ -34,7 +37,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
       it('Does not show group selection', () => {
         cy.get('.group-selector-combobox')
@@ -59,7 +62,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
           cy.visit('/account?term=&page=1')
-          cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
+          cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@facilities'])
       })
 
       it('Shows access to facilities only', () => {
@@ -83,7 +86,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows access to users and facilities', () => {
@@ -115,7 +118,7 @@ describe('Account Management', () => {
           .as('addUser')
   
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows add user button', () => {
@@ -190,7 +193,7 @@ describe('Account Management', () => {
         cy.intercept('DELETE', routes.entities.remove('users'), { fixture: 'account/remove_user__one_group__request.json' })
           .as('removeUser')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows remove user button', () => {
@@ -229,7 +232,7 @@ describe('Account Management', () => {
         cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/edit_facility__one_group__request.json' })
           .as('editFacility')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows edit facility button', () => {
@@ -285,7 +288,7 @@ describe('Account Management', () => {
           .as('getSubdomains')
 
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@facilities'])
       })
 
       it('Shows edit facility button', () => {
@@ -537,10 +540,6 @@ describe('Account Management', () => {
     })
   })
 
-
-
-
-
   context('For admins in multiple groups', () => {
     beforeEach(() => {
       handleLocation('/account?term=&page=1', cy, 'accountPage', 'pep-admin')
@@ -548,13 +547,15 @@ describe('Account Management', () => {
         .as('alerts')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
     })
     context('When logged in', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_bulk_approve__response.json' })
           .as('auth')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features'])
       })
 
       it('Shows no access to account management', () => {
@@ -572,7 +573,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('users'), { fixture: 'account/get_users__response.json' })
           .as('users')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows group selection', () => {
@@ -603,7 +604,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
           cy.visit('/account?term=&page=1')
-          cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
+          cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@facilities'])
       })
 
       it('Shows group selection', () => {
@@ -636,7 +637,7 @@ describe('Account Management', () => {
         cy.intercept('POST', routes.entities.get('facilities'), { fixture: 'account/get_facilities__response.json' })
           .as('facilities')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows access to group selection for users and facilities', () => {
@@ -701,7 +702,7 @@ describe('Account Management', () => {
           .as('users')
 
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       context('When editing users', () => {
@@ -842,7 +843,7 @@ describe('Account Management', () => {
         cy.intercept('DELETE', routes.entities.remove('users'), { fixture: 'account/remove_user__two_groups__request.json' })
           .as('removeUser')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@users'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@users'])
       })
 
       it('Shows group selection for remove users', () => {
@@ -892,7 +893,7 @@ describe('Account Management', () => {
         cy.intercept('PATCH', routes.entities.edit('facilities'), { fixture: 'account/edit_facility__one_group__request.json' })
           .as('editFacility')
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@facilities'])
       })
 
       // Facilities can only be in one group, so there should be no group selection
@@ -945,7 +946,7 @@ describe('Account Management', () => {
           .as('getSubdomains')
 
         cy.visit('/account?term=&page=1')
-        cy.wait(['@accountPage', '@alerts', '@auth', '@features', '@facilities'])
+        cy.wait(['@accountPage', '@alerts', '@env',  '@auth', '@features', '@facilities'])
       })
 
       // Facilities can only be in one group, so there should be no group selection for anything
