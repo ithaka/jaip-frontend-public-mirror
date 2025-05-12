@@ -33,7 +33,7 @@ rollingUpdate:
 
 resources:
   requests:
-    cpu: 10m
+    cpu: 5m
     memory: 90Mi
   limits:
     cpu: 20m
