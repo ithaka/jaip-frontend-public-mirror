@@ -36,8 +36,8 @@ resources:
     cpu: 5m
     memory: 90Mi
   limits:
-    cpu: 20m
-    memory: 128Mi
+    cpu: 50m
+    memory: 500Mi
 
 healthcheckPath: /
 
