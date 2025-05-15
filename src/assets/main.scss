@@ -147,6 +147,10 @@ body {
     }
   }
 }
+.sidenav-bottom {
+  position: absolute;
+  bottom: var(--pharos-spacing-2-x);
+}
 
 .page {
   margin-top: var(--pharos-spacing-2-x);

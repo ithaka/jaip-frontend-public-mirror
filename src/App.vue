@@ -112,6 +112,8 @@ const showRequestWarning = computed(
       :is-authenticated-student="isAuthenticatedStudent"
       :is-unauthenticated="isUnauthenticated"
       :show-request-warning="!!showRequestWarning"
+      :name="entityName"
+      :groups="makeGrammaticalList(groups.map((group) => group.name))"
       @logout="logout"
     />
 

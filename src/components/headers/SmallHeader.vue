@@ -44,6 +44,10 @@ defineProps({
     type: String,
     default: '',
   },
+  groups: {
+    type: String,
+    default: '',
+  },
 })
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
@@ -99,15 +103,17 @@ const logout = () => {
     <pep-pharos-sidenav :slide="showSidenav">
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <div slot="top" class="display-flex flex-direction-column gap-4">
-        <div
-          @click.stop="changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)"
-        >
-          <img
-            src="@/assets/images/JSTOR_Logo.svg"
-            class="header-logo svg-white"
-            alt="JSTOR Logo"
-            data-cy="home"
-          />
+        <div>
+          <div
+            @click.stop="changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)"
+          >
+            <img
+              src="@/assets/images/JSTOR_Logo.svg"
+              class="header-logo svg-white"
+              alt="JSTOR Logo"
+              data-cy="home"
+            />
+          </div>
         </div>
         <pep-pharos-button
           v-if="isAuthenticatedAdmin"
@@ -129,6 +135,11 @@ const logout = () => {
           @close="showSidenav = false"
         />
       </pep-pharos-sidenav-section>
+      <div class="sidenav-bottom">
+        <p class="pl-7 text-color-white-base">
+          <span>{{ name }}</span>
+        </p>
+      </div>
     </pep-pharos-sidenav>
     <div v-if="showSidenav" class="sidenav-container" @click.prevent.stop="showSidenav = false" />
     <SearchInput v-if="$route.meta.showSearch && !isUnauthenticated" id="small" class="mx-6 mb-2" />
@@ -142,6 +153,7 @@ const logout = () => {
 }
 .header__content {
   border-top: 1px solid var(--pharos-color-ui-40);
+  border-bottom: 1px solid var(--pharos-color-ui-40);
   padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x) 0;
   display: flex;
   flex-direction: row;
@@ -149,13 +161,14 @@ const logout = () => {
 }
 
 .sidenav-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 99;
+  overflow: hidden;
 }
 .fade-in {
   transition:
