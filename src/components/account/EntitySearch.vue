@@ -62,8 +62,8 @@ const handleUpdate = async () => {
   gettingUser.value = true
   const { data } = await coreStore.$api.auth.session()
   if (data?.uuid) {
-    const inThirtyMinutes = new Date(new Date().getTime() + 30 * 60 * 1000)
-    setCookie('uuid', data.uuid, { expires: inThirtyMinutes })
+    const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
+    setCookie('uuid', data.uuid, { expires: inOneDay })
   }
   groups.value = data.groups
   type.value = data.type
