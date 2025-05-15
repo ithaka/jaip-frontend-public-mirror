@@ -136,9 +136,18 @@ const logout = () => {
         />
       </pep-pharos-sidenav-section>
       <div class="sidenav-bottom">
-        <p class="pl-7 text-color-white-base">
-          <span>{{ name }}</span>
-        </p>
+        <component
+          :is="isAuthenticatedStudent ? 'pep-pharos-sidenav-menu' : 'div'"
+          :label="name"
+          :a11y-label="name"
+        >
+          <span v-if="isAuthenticatedAdmin" class="ml-7">
+            <strong>{{ name }}</strong>
+          </span>
+          <span v-else-if="isAuthenticatedStudent" class="ml-8"
+            >Participating through {{ groups }}</span
+          >
+        </component>
       </div>
     </pep-pharos-sidenav>
     <div v-if="showSidenav" class="sidenav-container" @click.prevent.stop="showSidenav = false" />
