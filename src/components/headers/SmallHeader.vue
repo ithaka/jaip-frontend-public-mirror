@@ -72,7 +72,7 @@ const logout = () => {
       <ProviderBar />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
-    <div class="header__content pa-5">
+    <div class="header__content pa-5 justify-content-space-between">
       <pep-pharos-link
         class="mr-4"
         @click.prevent.stop="
@@ -87,8 +87,10 @@ const logout = () => {
         />
       </pep-pharos-link>
       <div>
-        <!-- TODO: This needs to be put back in, though maybe not as a pharos component? Maybe just a pharos icon button? -->
-        <!-- <pep-pharos-sidenav-button @click.prevent.stop="showSidenav = true" /> -->
+        <pep-pharos-sidenav-button
+          class="display-float-right"
+          @click.prevent.stop="showSidenav = true"
+        />
       </div>
       <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
         Log in
