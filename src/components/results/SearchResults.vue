@@ -10,7 +10,6 @@ import { makeGrammaticalList, changeRoute } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
-import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { Discipline } from '@/interfaces/Discipline'
 import type { Journal } from '@/interfaces/Journal'
 import type { AxiosResponse } from 'axios'
@@ -148,16 +147,6 @@ const changeSecondaryPage = (page: number) => {
   searchStore.doSearch('denied', true)
 }
 
-// Request approval
-const currentUnapprovedRequests = computed(() => {
-  const searchStatus = 'approved'
-  return searchResults.value.filter((result: MediaRecord) => {
-    return featureDetails.value['approve_requests'].groups.some((group: number) => {
-      return ((result.mediaReviewStatuses[group] || {}).status || '').toLowerCase() !== searchStatus
-    })
-  })
-})
-
 const selectorApproveGroupOptions = ref(
   (featureDetails.value['approve_requests'] || {}).groups.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
@@ -184,87 +173,12 @@ const selectorBulkApproveGroupOptionIDs = computed(() => {
   return selectorBulkApproveGroupOptions.value.map((group: Group) => group.id)
 })
 selectedGroups.value['bulk_approve'] = selectorBulkApproveGroupOptionIDs.value
-
-const showApproveRequestsButton = computed(() => {
-  return (
-    props.requestsPage &&
-    !!searchTotal.value &&
-    !!selectorApproveGroupOptions.value.length &&
-    !!currentUnapprovedRequests.value.length
-  )
-})
-
-const approveRequestsUpdateKey = ref(0)
-const showApproveRequestsModal = ref(false)
-const openApproveRequestsModal = () => {
-  approveRequestsUpdateKey.value++
-  statusStartDate.value = new Date('2022-01-01')
-  statusEndDate.value = new Date(new Date().setUTCHours(23, 59, 59, 999))
-  searchStore.doSearch('denied', true)
-  showApproveRequestsModal.value = true
-}
-const closeApproveRequestsModal = () => {
-  showApproveRequestsModal.value = false
-  approveRequestsUpdateKey.value++
-}
-
 selectedGroups.value['approve_requests'] = selectorApproveGroupOptionIDs.value
 
 const handleGroupSelection = (event: GroupSelection, action: string) => {
   // const hasGroup = selectedGroups.value['approve_requests'].includes(event.target)
   // const hasAny = event.groups.length
   selectedGroups.value[action] = event.groups
-}
-
-const currentDeniedRequests = computed(() => {
-  const searchStatus = 'denied'
-  return searchResults.value.filter((result: MediaRecord) => {
-    return selectorApproveGroupOptionIDs.value.some((group: number) => {
-      return ((result.mediaReviewStatuses[group] || {}).status || '').toLowerCase() === searchStatus
-    })
-  })
-})
-
-const requestApprovalReversals = ref([] as string[])
-const handleRequestApprovalReversals = (e: InputFileEvent) => {
-  if (!e.target.checked) {
-    requestApprovalReversals.value.push(e.target.value)
-  } else {
-    requestApprovalReversals.value = requestApprovalReversals.value.filter(
-      (id) => id !== e.target.value,
-    )
-  }
-}
-
-const submitApproveRequests = async () => {
-  const deniedRequests = currentDeniedRequests.value
-    .map((denied: MediaRecord) => denied._id)
-    .filter((denied: string) => !requestApprovalReversals.value.includes(denied))
-
-  const docs = searchResults.value
-    .filter((doc: MediaRecord) => {
-      return !deniedRequests.includes(doc._id)
-    })
-    .map((doc: MediaRecord) => doc._id)
-
-  const args = {
-    groups: selectedGroups.value['approve_requests'],
-    journals: [],
-    disciplines: [],
-    documents: docs,
-  }
-  try {
-    await coreStore.$api.approvals.bulk(args)
-    const msg = 'Your approval has been submitted.'
-    coreStore.toast(msg, 'success')
-  } catch (err: unknown) {
-    console.error(err)
-    const msg = 'There was an error and your denial was not submitted.'
-    coreStore.toast(`Oops! ${msg}`, 'error')
-  } finally {
-    closeApproveRequestsModal()
-  }
-  searchStore.doSearch(reviewStatus.value, false)
 }
 
 const emit = defineEmits(['close'])
@@ -427,107 +341,6 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
               <pep-pharos-button slot="footer" @click.prevent.stop="submitRequests">
                 Submit
               </pep-pharos-button>
-            </pep-pharos-modal>
-          </Teleport>
-        </div>
-        <div v-else-if="showApproveRequestsButton" class="justify-self-end sm-justify-self-start">
-          <pep-pharos-button
-            icon-left="checkmark-inverse"
-            data-modal-id="approve-requests-modal"
-            @click="openApproveRequestsModal"
-          >
-            {{
-              currentUnapprovedRequests.length > 1
-                ? `Approve ${currentUnapprovedRequests.length} Items`
-                : 'Approve Item'
-            }}
-          </pep-pharos-button>
-          <Teleport to="body">
-            <pep-pharos-modal
-              id="approve-requests-modal-modal"
-              :key="approveRequestsUpdateKey"
-              :header="`Approve Material`"
-              :open="showApproveRequestsModal"
-              @pharos-modal-closed="showApproveRequestsModal = false"
-            >
-              <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-              <p slot="description" class="mb-3">
-                <span
-                  >This will approve all pending requests for
-                  {{
-                    makeGrammaticalList(
-                      selectorApproveGroupOptions.map((group: Group) => group.name),
-                    )
-                  }}.</span
-                >
-                <span v-if="currentDeniedRequests.length"
-                  >&nbsp;Articles that were previously denied may be approved now.</span
-                >
-              </p>
-
-              <GroupSelector
-                :groups="selectorApproveGroupOptions"
-                :feature-name="`approve_requests`"
-                :start-full="true"
-                multiple
-                @change="handleGroupSelection($event, 'approve_requests')"
-              />
-              <div v-if="currentDeniedRequests.length">
-                <pep-pharos-checkbox-group
-                  :value="requestApprovalReversals"
-                  @input="handleRequestApprovalReversals"
-                >
-                  <ul>
-                    <!-- Search Result for Bulk Approvals -->
-                    <li
-                      v-for="(doc, index) in currentDeniedRequests"
-                      :key="doc.iid"
-                      :class="{ 'pt-6': index > 0 }"
-                    >
-                      <div>
-                        <div class="display-flex flex-direction-row">
-                          <pep-pharos-icon
-                            name="exclamation-inverse"
-                            class="mr-3 mb-0 fill-coral-50"
-                          />
-                          <SearchResult
-                            :doc="doc"
-                            :hide-details="true"
-                            :hide-buttons="true"
-                            small
-                          />
-                        </div>
-                        <div class="ml-7 mt-4">
-                          <pep-pharos-checkbox
-                            :checked="requestApprovalReversals.includes(doc._id)"
-                            :value="doc._id"
-                          >
-                            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                            <span slot="label" class="display-flex"> Approve with the set? </span>
-                          </pep-pharos-checkbox>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </pep-pharos-checkbox-group>
-              </div>
-
-              <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-              <pep-pharos-button
-                slot="footer"
-                variant="secondary"
-                @click.prevent.stop="showApproveRequestsModal = false"
-              >
-                Cancel
-              </pep-pharos-button>
-              <pep-pharos-button
-                slot="footer"
-                :disabled="!selectedGroups['approve_requests'].length"
-                @click.prevent.stop="submitApproveRequests"
-              >
-                Submit
-              </pep-pharos-button>
-              <!-- eslint-enable vue/no-deprecated-slot-attribute -->
             </pep-pharos-modal>
           </Teleport>
         </div>
