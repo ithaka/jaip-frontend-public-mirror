@@ -624,7 +624,7 @@ describe('Requests page', () => {
           .first()
           .find('table tr')
           .eq(2)
-          .contains('Sexually explicit/pornographic')
+          .contains('Sexually explicit')
           .should('be.visible')
   
         cy.get('[id^=history-modal]')

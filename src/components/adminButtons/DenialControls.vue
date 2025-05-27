@@ -45,13 +45,13 @@ const denyGroups = ref(
 )
 const incompleteReason = 'Missing required information'
 const reasons = [
-  'Sexually explicit/pornographic',
+  'Sexually explicit',
   'Instructive for explosives, weapons, or escapes',
   'Inflammatory or inciting violence, uprisings, or riots',
   'Detrimental to the good order of the facility or rehabilitation',
   incompleteReason,
 ]
-const selectedReason = ref('Sexually explicit/pornographic')
+const selectedReason = ref('Sexually explicit')
 const otherReason = ref('')
 const comments = ref('')
 const invalidComments = ref('')

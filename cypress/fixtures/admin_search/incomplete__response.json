@@ -28,7 +28,8 @@
           "statusDetails": {
             "comments": "Test",
             "reason": "Missing Required Information"
-          }        },
+          }
+        },
         {
           "status": "Denied",
           "statusLabel": "",
@@ -86,7 +87,7 @@
           "groupID": 1,
           "statusDetails": {
             "comments": "Test",
-            "reason": "Sexually explicit/pornographic"
+            "reason": "Sexually explicit"
           }
         },
         {
@@ -98,7 +99,7 @@
           "groupID": 1,
           "statusDetails": {
             "comments": "Test",
-            "reason": "Sexually explicit/pornographic"
+            "reason": "Sexually explicit"
           }
         },
         {
@@ -111,7 +112,8 @@
           "statusDetails": {
             "comments": "Test",
             "reason": "Missing Required Information"
-          }        },
+          }
+        },
         {
           "status": "Incomplete",
           "statusLabel": "",
@@ -133,7 +135,7 @@
           "groupID": 1,
           "statusDetails": {
             "comments": "Test",
-            "reason": "Sexually explicit/pornographic"
+            "reason": "Sexually explicit"
           }
         },
         {
@@ -157,7 +159,7 @@
           "groupID": 1,
           "statusDetails": {
             "comments": "Test",
-            "reason": "Sexually explicit/pornographic"
+            "reason": "Sexually explicit"
           }
         },
         {
