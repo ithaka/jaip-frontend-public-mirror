@@ -5,7 +5,7 @@ import { useSearchStore } from '@/stores/search'
 
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
@@ -17,11 +17,12 @@ import {
 } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
+import { changeRoute } from '@/utils/helpers'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const userStore = useUserStore()
-const { reviewStatus } = storeToRefs(searchStore)
+const { reviewStatus, searchTerms, pageNo } = storeToRefs(searchStore)
 const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(userStore)
 
 const props = defineProps({
@@ -59,7 +60,9 @@ const closeApproveModal = () => {
   approveModalKey.value++
 }
 
+const router = useRouter()
 const route = useRoute()
+const emit = defineEmits(['approvalSubmitted', 'close'])
 
 const handleApproval = async () => {
   if (featureDetails.value['approve_requests'].groups.length === 1) {
@@ -78,6 +81,9 @@ const handleApproval = async () => {
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
     emit('approvalSubmitted')
+    if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
+      changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
+    }
   } catch {
     const msg = 'There was an error and your approval was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
@@ -99,8 +105,6 @@ const selectorGroupOptions = ref(
     return arr
   }, [] as Group[]),
 )
-
-const emit = defineEmits(['approvalSubmitted'])
 </script>
 
 <template>

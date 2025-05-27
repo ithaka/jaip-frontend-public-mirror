@@ -5,7 +5,7 @@ import { useSearchStore } from '@/stores/search'
 
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
@@ -18,12 +18,13 @@ import {
   getGroupsWithStatus,
 } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
+import { changeRoute } from '@/utils/helpers'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const userStore = useUserStore()
-const { reviewStatus } = storeToRefs(searchStore)
+const { reviewStatus, searchTerms, pageNo } = storeToRefs(searchStore)
 const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(userStore)
 
 const props = defineProps({
@@ -99,7 +100,10 @@ const selectorGroupOptions = ref(
 const handleGroupChange = (event: GroupSelection) => {
   denyGroups.value = event.groups
 }
+
+const router = useRouter()
 const route = useRoute()
+const emit = defineEmits(['denialSubmitted', 'close'])
 
 const selectAllGroups = () => {
   selectedGroups.value['deny_requests'] = featureDetails.value['deny_requests'].groups
@@ -139,6 +143,9 @@ const handleDenial = async () => {
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
     emit('denialSubmitted')
+    if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
+      changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
+    }
   } catch {
     const msg = 'There was an error and your denial was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
@@ -146,7 +153,6 @@ const handleDenial = async () => {
     closeDenyModal()
   }
 }
-const emit = defineEmits(['denialSubmitted'])
 </script>
 
 <template>
