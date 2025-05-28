@@ -1,5 +1,6 @@
 import type { AxiosInstance } from 'axios'
 import type ApiObject from '@/interfaces/ApiObject'
+import type { Log } from '@/interfaces/Log'
 const global_path = 'api'
 const global_version = 'v2'
 const global_route_prefix = `/${global_path}`
@@ -81,6 +82,13 @@ export const routes = {
   },
 }
 export default ($axios: AxiosInstance): ApiObject => ({
+  log: (log: Log) => {
+    // This is an odd workaround for the fact that Beacon API does not support sending
+    // JSON data directly. We need to stringify the log object and send it as a Blob with
+    // the correct MIME type.
+    const blob = new Blob([JSON.stringify(log)], { type: 'application/json; charset=UTF-8' })
+    navigator.sendBeacon(`${global_route_prefix_versioned}/log`, blob)
+  },
   auth: {
     session: () =>
       $axios

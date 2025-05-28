@@ -15,6 +15,7 @@ import type RequestArgs from '@/interfaces/RequestArgs'
 import type { Journal } from './Journal'
 import type { SubdomainsResponse } from './Subdomains'
 import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
+import type { Log } from './Log'
 interface Documents {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown, unknown>>
   pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
@@ -33,6 +34,7 @@ interface Approvals {
   request: (arg: RequestArgs) => Promise<AxiosResponse<unknown, unknown>>
 }
 export default interface ApiObject {
+  log: (arg: Log) => void
   auth: {
     session: () => Promise<AxiosResponse<User, unknown>>
     features: {
