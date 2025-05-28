@@ -2,10 +2,17 @@
 import StudentHelp from '@/components/help/StudentHelp.vue'
 import AdminHelp from '@/components/help/AdminHelp.vue'
 import { useUserStore } from '@/stores/user'
+import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 
 const userStore = useUserStore()
 const { isAuthenticatedAdmin } = storeToRefs(userStore)
+
+const coreStore = useCoreStore()
+coreStore.$api.log({
+  eventtype: 'pep_landing_help_view',
+  event_description: 'User has landed on the help view.',
+})
 </script>
 
 <template>

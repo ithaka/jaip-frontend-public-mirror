@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
+import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import GroupsManager from '@/components/groups/GroupsManager.vue'
@@ -23,6 +24,11 @@ for (const key in sortedUngroupedFeatures.value) {
 const filteredOrderedCategories = categories.filter((value) =>
   Object.keys(filteredCategories.value).includes(value),
 )
+const coreStore = useCoreStore()
+coreStore.$api.log({
+  eventtype: 'pep_landing_account_management_view',
+  event_description: 'User has landed on the account management view.',
+})
 </script>
 
 <template>

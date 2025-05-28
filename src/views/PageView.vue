@@ -104,6 +104,11 @@ const handleFullscreenToggle = () => {
     })
   }
 }
+
+coreStore.$api.log({
+  eventtype: 'pep_landing_pages_view',
+  event_description: 'User has landed on the page view.',
+})
 </script>
 
 <template>

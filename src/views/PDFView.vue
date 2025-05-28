@@ -92,6 +92,11 @@ const getDocument = async () => {
 
 getDocument()
 const hasStructuredClone = ref(typeof window.structuredClone === 'function')
+
+coreStore.$api.log({
+  eventtype: 'pep_landing_pdf_view',
+  event_description: 'User has landed on the pdf view.',
+})
 </script>
 
 <template>

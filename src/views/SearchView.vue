@@ -233,6 +233,11 @@ const handleContentTypeSelection = (e: InputFileEvent) => {
   }
   searchStore.doSearch('', false)
 }
+
+api.log({
+  eventtype: 'pep_landing_search_view',
+  event_description: 'User has landed on the search view.',
+})
 </script>
 
 <template>

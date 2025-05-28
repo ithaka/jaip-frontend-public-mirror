@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
+import { useCoreStore } from '@/stores/core'
 
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -45,6 +46,12 @@ const visibleEntity = ref(
     ? ('users' as EntityTypes)
     : ('facilities' as EntityTypes),
 )
+
+const coreStore = useCoreStore()
+coreStore.$api.log({
+  eventtype: 'pep_landing_account_view',
+  event_description: 'User has landed on the account view.',
+})
 </script>
 
 <template>

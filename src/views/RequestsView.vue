@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { useSearchStore } from '@/stores/search'
+import { useCoreStore } from '@/stores/core'
 import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -108,6 +109,12 @@ const newSearch = () => {
   )
   searchStore.doSearch(reviewStatus.value, false)
 }
+
+const coreStore = useCoreStore()
+coreStore.$api.log({
+  eventtype: 'pep_landing_requests_view',
+  event_description: 'User has landed on the requests view.',
+})
 </script>
 
 <template>

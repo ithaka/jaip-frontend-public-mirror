@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCoreStore } from '@/stores/core'
+
+const coreStore = useCoreStore()
+coreStore.$api.log({
+  eventtype: 'pep_landing_not_found_view',
+  event_description: 'User has landed on the not found view.',
+})
+</script>
 
 <template>
   <div class="help page">
