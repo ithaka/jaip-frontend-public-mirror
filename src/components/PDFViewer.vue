@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, toRaw } from 'vue'
+import { ref, toRaw, onBeforeUnmount } from 'vue'
 import * as pdfjsLib from 'pdfjs-dist'
 import * as viewer from 'pdfjs-dist/web/pdf_viewer.mjs'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { Log } from '@/interfaces/Log'
+import { useCoreStore } from '@/stores/core'
 
 const props = defineProps({
   iid: {
@@ -16,6 +17,7 @@ const props = defineProps({
   },
 })
 
+const coreStore = useCoreStore()
 const logEvent: Log = {
   eventtype: 'pep_pdf_viewer_access_attempt',
   event_description: 'A user attempted to access the PDF viewer, but an error occurred.',
@@ -45,6 +47,7 @@ const createLoadingTask = (src: string) => {
     return loadingTask
   } catch (err) {
     logEvent.frontend_error = `CREATE LOADING TASK: ${JSON.stringify(err)}`
+    coreStore.$api.log(logEvent)
     hasError.value = true
   }
 }
@@ -70,6 +73,7 @@ const createViewer = () => {
     return pdfViewer
   } catch (err) {
     logEvent.frontend_error = `CREATE VIEWER: ${JSON.stringify(err)}`
+    coreStore.$api.log(logEvent)
     hasError.value = true
   }
 }
@@ -89,11 +93,24 @@ const preparePage = async () => {
     }
   } catch (err) {
     logEvent.frontend_error = `PREPARE PAGE: ${JSON.stringify(err)}`
+    coreStore.$api.log(logEvent)
     hasError.value = true
   }
 }
 
 preparePage()
+
+const interval = setInterval(() => {
+  coreStore.$api.log({
+    eventtype: 'pep_pdf_view',
+    event_description: 'user is viewing the PDF',
+    itemid: props.iid,
+  })
+}, 1000 * 60)
+
+onBeforeUnmount(() => {
+  clearInterval(interval)
+})
 </script>
 
 <template>

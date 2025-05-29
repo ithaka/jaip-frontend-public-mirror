@@ -248,6 +248,7 @@ export default {
       pageNumberUpdateCallback: undefined,
       isFirstLoad: true,
       enableSavedZoomImage: false,
+      interval: null,
     }
   },
   computed: {
@@ -403,6 +404,20 @@ export default {
 
     if (this.isInFullscreen) {
       this.$refs.iiifViewerWrapper.focus()
+    }
+
+    this.interval = setInterval(() => {
+      coreStore.$api.log({
+        eventtype: 'pep_page_view',
+        event_description: 'user is viewing a page',
+        itemid: props.iid,
+        page_index: this.currentPageIndex,
+      })
+    }, 1000 * 60)
+  },
+  beforeUnmount() {
+    if (this.interval) {
+      clearInterval(this.interval)
     }
   },
   methods: {
