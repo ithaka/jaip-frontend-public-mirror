@@ -116,6 +116,12 @@ const submitRequests = async () => {
       args.dois.length > 1 ? `Your requests have been submitted` : `Your request has been submitted`
     await searchStore.doSearch('', false)
     coreStore.toast(msg, 'success')
+    coreStore.$api.log({
+      eventtype: 'pep_request_submitted',
+      event_description: 'user submitted request',
+      dois: args.dois,
+      comments: args.comments,
+    })
   } catch {
     const msg = `There was a server error and your ${args.dois.length ? 'requests were' : 'request was'} not submitted.`
     coreStore.toast(`Oops! ${msg}`, 'error')
@@ -233,6 +239,14 @@ const submitApproveAll = async () => {
     await coreStore.$api.approvals.bulk(args)
     const msg = 'Your approval has been submitted.'
     coreStore.toast(msg, 'success')
+    coreStore.$api.log({
+      eventtype: 'pep_bulk_approval_submitted',
+      event_description: 'user submitted bulk approval',
+      groups: args.groups,
+      journals: args.journals,
+      disciplines: args.disciplines,
+      dois: args.documents,
+    })
   } catch (err: unknown) {
     console.error(err)
     const msg = 'There was an error and your denial was not submitted.'

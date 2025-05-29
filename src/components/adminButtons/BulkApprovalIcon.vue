@@ -101,6 +101,12 @@ const submitBulkApproval = async () => {
     const resp = await coreStore.$api.disciplines()
     disciplineList.value = resp.data as Discipline[]
     emit('render')
+    coreStore.$api.log({
+      eventtype: 'pep_bulk_undo_submitted',
+      event_description: 'user submitted bulk undo',
+      groups: args.groups,
+      code: args.code,
+    })
   } catch {
     const msg = 'There was an error and the change was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')

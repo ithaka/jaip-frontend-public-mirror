@@ -146,6 +146,20 @@ const handleDenial = async () => {
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
+    coreStore.$api.log({
+      eventtype:
+        selectedReason.value === incompleteReason
+          ? 'pep_incomplete_submitted'
+          : 'pep_denial_submitted',
+      event_description:
+        selectedReason.value === incompleteReason
+          ? 'user submitted incomplete'
+          : 'user submitted denial',
+      dois: [args.doi],
+      groups: args.groups,
+      reason: args.reason,
+      comments: args.comments,
+    })
   } catch {
     const msg = 'There was an error and your denial was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
