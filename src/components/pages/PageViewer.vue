@@ -181,6 +181,7 @@ import {
 
 import { v4 as uuidv4 } from 'uuid'
 import OpenSeadragon from 'openseadragon'
+import { useCoreStore } from '@/stores/core'
 
 const VIEWPORT_MARGIN = 10
 
@@ -405,15 +406,17 @@ export default {
     if (this.isInFullscreen) {
       this.$refs.iiifViewerWrapper.focus()
     }
-
-    this.interval = setInterval(() => {
+    const coreStore = useCoreStore()
+    const self = this
+    function log() {
       coreStore.$api.log({
         eventtype: 'pep_page_view',
         event_description: 'user is viewing a page',
-        itemid: props.iid,
-        page_index: this.currentPageIndex,
+        itemid: self.metadata?.id,
+        page_index: self.currentPageIndex,
       })
-    }, 1000 * 60)
+    }
+    this.interval = setInterval(log, 1000 * 60)
   },
   beforeUnmount() {
     if (this.interval) {
