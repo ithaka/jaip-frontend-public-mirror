@@ -276,7 +276,9 @@ const handleDenial = async () => {
         <span v-if="denyGroups.length"
           >&nbsp;for use in
           {{
-            makeGrammaticalList(denyGroups.map((group) => (groupMap.get(group) || {}).name || ''))
+            makeGrammaticalList(
+              selectedGroups['deny_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
+            )
           }}</span
         >
         <span>.</span>

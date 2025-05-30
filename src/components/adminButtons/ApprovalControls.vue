@@ -141,7 +141,7 @@ const selectorGroupOptions = ref(
           >&nbsp;for use in
           {{
             makeGrammaticalList(
-              approveGroups.map((group) => (groupMap.get(group) || {}).name || ''),
+              selectedGroups['approve_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
             )
           }}</span
         >
