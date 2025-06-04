@@ -28,7 +28,9 @@
 .ephemeral-env:
   variables:
     API_TARGET: test
-    APP_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA
+    # The ithaka/app label is used for cost allocation, so we should not dynamically generate it with a branch suffix in epehemeral like we do with the EUREKA_SERVICE_NAME itself.
+    APP_NAME: jaip-frontend
+    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA
     DEPLOY_JOB: ephemeral
     ENVIRONMENT: test
     NGINX_CONFIG: nginx.conf.ephemeral
@@ -43,6 +45,7 @@
   variables:
     API_TARGET: test
     APP_NAME: jaip-frontend
+    EUREKA_SERVICE_NAME: jaip-frontend
     ENVIRONMENT: test
     NGINX_CONFIG: nginx.conf.persistent
     PROMOTE_TO: release-candidate
@@ -53,6 +56,7 @@
   variables:
     API_TARGET: prod
     APP_NAME: jaip-frontend
+    EUREKA_SERVICE_NAME: jaip-frontend
     DEPLOY_JOB: persistent
     ENVIRONMENT: prod
     NGINX_CONFIG: nginx.conf.persistent
