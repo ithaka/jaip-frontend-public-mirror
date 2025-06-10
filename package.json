@@ -35,11 +35,11 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@babel/types": "^7.27.3",
+    "@babel/types": "^7.27.6",
     "@tsconfig/node22": "^22.0.2",
     "@types/html-truncate": "^1.2.4",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.15.29",
+    "@types/node": "^22.15.30",
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue-jsx": "^4.2.0",
@@ -50,7 +50,7 @@
     "cypress": "^13.17.0",
     "eslint": "^9.28.0",
     "eslint-plugin-cypress": "^4.3.0",
-    "eslint-plugin-vue": "^10.1.0",
+    "eslint-plugin-vue": "^10.2.0",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
