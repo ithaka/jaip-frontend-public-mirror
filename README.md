@@ -14,6 +14,19 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
+## Subdomains
+Many aspects of this project are highly dependent on the subdomain. Perhaps most importantly, the difference between the student and admin versions of the site is largely determined by whether the user is visiting the `pep` subdomain or the `admin.pep` subdomain.
+
+In some browsers, including Chrome and Firefox, it is possible to simply use `http://pep.localhost:5173/` and `http://admin.pep.localhost:5173/` as the domains for the site. This requires a modification of `/etc/hosts` and will not work in Safari.
+
+Specifically, a line like the following can be added to `/etc/hosts`, which will allow browsers to use the subdomains properly:
+````
+127.0.0.1 pep.localhost admin.pep.localhost
+````
+
+## Environment
+The `.env.example` file includes some values and notes that may be useful to place into a `.env` file.
+
 ## Project Setup
 
 ```sh
