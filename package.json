@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@babel/types": "^7.27.6",
+    "@ithaka/eslint-config-base": "^2.0.1",
+    "@ithaka/eslint-config-vue": "^5.1.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/html-truncate": "^1.2.4",
     "@types/jsdom": "^21.1.7",
