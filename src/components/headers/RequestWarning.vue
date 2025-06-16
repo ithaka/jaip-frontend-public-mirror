@@ -22,8 +22,9 @@ const router = useRouter()
             @click.prevent.stop="
               changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined)
             "
-            >search results</pep-pharos-link
           >
+            search results
+          </pep-pharos-link>
         </li>
         <li>
           Browsing approved

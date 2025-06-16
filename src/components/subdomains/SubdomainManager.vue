@@ -143,7 +143,9 @@ const handleEditSubdomain = async (i: number) => {
             :class="{ inactive: !subdomain.is_active }"
           >
             <div class="md-mb-6">
-              <pep-pharos-heading :level="2">{{ subdomain.subdomain }}</pep-pharos-heading>
+              <pep-pharos-heading :level="2">
+                {{ subdomain.subdomain }}
+              </pep-pharos-heading>
             </div>
             <div class="buttons">
               <pep-pharos-button

@@ -30,7 +30,7 @@ coreStore.$api.log({
       </div>
     </pep-pharos-layout>
 
-    <div class="cols-12 mt--4 mb-7 hero"></div>
+    <div class="cols-12 mt--4 mb-7 hero" />
 
     <pep-pharos-layout row-gap="0">
       <AdminHelp v-if="isAuthenticatedAdmin" class="cols-12" />

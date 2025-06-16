@@ -160,12 +160,16 @@ const handleEditFeature = async (i: number) => {
           >
             <div class="md-mb-6">
               <div class="mb-3">
-                <pep-pharos-heading :level="2">{{ feature.display_name }}</pep-pharos-heading>
+                <pep-pharos-heading :level="2">
+                  {{ feature.display_name }}
+                </pep-pharos-heading>
                 <pep-pharos-heading :level="3" preset="legend">
                   Category: {{ feature.category }}
                 </pep-pharos-heading>
               </div>
-              <p class="description">{{ feature.description }}</p>
+              <p class="description">
+                {{ feature.description }}
+              </p>
             </div>
             <div class="buttons">
               <pep-pharos-button

@@ -45,7 +45,9 @@ const component = ref(props.small ? 'small' : 'span')
       <div>
         <!-- Content Type -->
         <div class="text-color-gray-40 text-uppercase text-weight-bold text-size-sm">
-          <component :is="component">{{ doc.contentType }}</component>
+          <component :is="component">
+            {{ doc.contentType }}
+          </component>
         </div>
         <div class="search-result-title">
           <!-- Title -->

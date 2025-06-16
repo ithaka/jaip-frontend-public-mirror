@@ -190,9 +190,9 @@ const handleDenial = async () => {
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p slot="description" class="mb-3">
-        <!-- eslint-disable-next-line vue/no-v-html  -->
         What is your reason to deny access
-        <span v-if="doc.title">to <em v-html="doc.title"></em></span
+        <!-- eslint-disable-next-line vue/no-v-html  -->
+        <span v-if="doc.title">to <em v-html="doc.title" /></span
         ><span v-if="!denyGroups.length">?</span>
         <span v-if="denyGroups.length"
           >&nbsp;for

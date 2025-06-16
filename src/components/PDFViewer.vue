@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
       </pep-pharos-select>
       <div v-if="enableViewer" class="viewerPage">
         <div id="viewerContainer">
-          <div id="viewer" class="pdfViewer"></div>
+          <div id="viewer" class="pdfViewer" />
         </div>
       </div>
     </div>

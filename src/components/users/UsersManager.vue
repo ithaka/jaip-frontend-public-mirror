@@ -117,7 +117,9 @@ const handleAddAdmin = async (i: number) => {
         >
           <div class="pa-6 display-flex flex-direction-row justify-content-space-between">
             <div>
-              <pep-pharos-heading :level="2">{{ user.name }}</pep-pharos-heading>
+              <pep-pharos-heading :level="2">
+                {{ user.name }}
+              </pep-pharos-heading>
               <p>{{ user.contact }}</p>
             </div>
             <div class="buttons">

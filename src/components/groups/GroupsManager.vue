@@ -126,7 +126,7 @@ const handleClearHistory = async (i: number) => {
     </div>
     <pep-pharos-loading-spinner v-if="gettingGroups" />
     <div v-else-if="!currentGroups.length">
-      <pep-pharos-heading :level="2" preset="legend">No groups found</pep-pharos-heading>
+      <pep-pharos-heading :level="2" preset="legend"> No groups found </pep-pharos-heading>
     </div>
     <div v-else>
       <div v-for="(group, i) in currentGroups" :key="`group_${i}`">
@@ -139,7 +139,9 @@ const handleClearHistory = async (i: number) => {
             :class="{ inactive: !group.is_active }"
           >
             <div>
-              <pep-pharos-heading :level="2">{{ group.name }}</pep-pharos-heading>
+              <pep-pharos-heading :level="2">
+                {{ group.name }}
+              </pep-pharos-heading>
             </div>
             <div class="buttons">
               <pep-pharos-button

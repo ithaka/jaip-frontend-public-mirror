@@ -407,16 +407,17 @@ export default {
       this.$refs.iiifViewerWrapper.focus()
     }
     const coreStore = useCoreStore()
-    const self = this
-    function log() {
-      coreStore.$api.log({
-        eventtype: 'pep_page_view',
-        event_description: 'user is viewing a page',
-        itemid: self.metadata?.id,
-        page_index: self.currentPageIndex,
-      })
-    }
-    this.interval = setInterval(log, 1000 * 60)
+
+    this.interval = setInterval(
+      () =>
+        coreStore.$api.log({
+          eventtype: 'pep_page_view',
+          event_description: 'user is viewing a page',
+          itemid: this.metadata?.id,
+          page_index: this.currentPageIndex,
+        }),
+      1000 * 60,
+    )
   },
   beforeUnmount() {
     if (this.interval) {
@@ -452,13 +453,28 @@ export default {
       this.goToPage(currentPage + 1)
     },
     handlePageLeft() {
-      this.isRightToLeft ? this.goToNextPage() : this.goToPreviousPage()
+      if (this.isRightToLeft) {
+        this.goToNextPage()
+      } else {
+        this.goToPreviousPage()
+      }
     },
     handlePageRight() {
-      this.isRightToLeft ? this.goToPreviousPage() : this.goToNextPage()
+      if (this.isRightToLeft) {
+        this.goToPreviousPage()
+      } else {
+        this.goToNextPage()
+      }
     },
     closeThisViewer() {
-      typeof this.viewerClosedCallback === 'function' && this.viewerClosedCallback(this.contentId)
+      if (
+        typeof this.viewerClosedCallback === 'function' &&
+        this.viewerClosedCallback(this.contentId)
+      ) {
+        return true
+      } else {
+        return false
+      }
     },
     setZoomParam() {
       if (this.enableSavedZoomImage) {
@@ -502,16 +518,27 @@ export default {
     },
     fitView() {
       const viewport = this.viewer.viewport
-      this.fitHeight ? viewport.fitHorizontally(true) : viewport.fitVertically(true)
+      if (this.fitHeight) {
+        viewport.fitHorizontally(true)
+      } else {
+        viewport.fitVertically(true)
+      }
       viewport.panTo(new OpenSeadragon.Point(0.5, 0))
       viewport.applyConstraints(true)
       this.fitHeight = !this.fitHeight
     },
     toggleFullscreen() {
-      typeof this.fullscreenToggledCallback === 'function' && this.fullscreenToggledCallback()
       setTimeout(() => {
         this.$refs.iiifViewerWrapper.focus()
       })
+      if (
+        typeof this.fullscreenToggledCallback === 'function' &&
+        this.fullscreenToggledCallback()
+      ) {
+        return true
+      } else {
+        return false
+      }
     },
     handleZoomKeyPress(keyCode) {
       // we are handling the zoom here because neither zoomPerScroll nor zoomPerClick seem to affect
@@ -524,7 +551,11 @@ export default {
       canvas.dispatchEvent(new KeyboardEvent('keydown', { keyCode: code }))
     },
     handleChangePageKeyPress(keyCode) {
-      keyCode === LEFT_BRACKET_KEY ? this.handlePageLeft() : this.handlePageRight()
+      if (keyCode === LEFT_BRACKET_KEY) {
+        this.handlePageLeft()
+      } else {
+        this.handlePageRight()
+      }
     },
     initializeHandlers() {
       this.viewer?.addHandler('open', () => {
@@ -533,10 +564,9 @@ export default {
 
       this.viewer?.addHandler('page', (event) => {
         this.currentPageIndex = event.page
-        this.isPrimary &&
-          typeof this.primaryPageChangedCallback === 'function' &&
+        if (this.isPrimary && this.primaryPageChangedCallback === 'function') {
           this.primaryPageChangedCallback(this.currentPageIndex)
-
+        }
         setTimeout(
           () =>
             this.isPageRightDisabled &&
