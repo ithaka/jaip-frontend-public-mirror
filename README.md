@@ -25,7 +25,7 @@ Specifically, a line like the following can be added to `/etc/hosts`, which will
 ````
 
 ## Environment
-The `.env.example` file includes some values and notes that may be useful to place into a `.env` file.
+The `.env.example` file includes some values and notes that may be useful to place into a `.env` file. Note that when using a remote server for the API_URL, this will affect the application's environment. The `prod` API will use production data and return `prod` in the environment check that determines the URL of the login button.
 
 ## Project Setup
 
