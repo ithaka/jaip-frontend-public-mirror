@@ -123,7 +123,7 @@ const iconKey = ref(displayList.value.map(() => 0))
                   <BulkApprovalIcon
                     v-if="item.bulk_approval && getBulkApprovalStatus(item.bulk_approval, groupIDs)"
                     :key="iconKey[i]"
-                    :tooltip-id="`${getLabel(item).replace(/\s/g, '')}_approval`"
+                    :tooltip-id="`approval_${item.code}`"
                     :text="`Articles in ${getLabel(item)} are generally approved automatically.`"
                     :disc="item"
                     @render="iconKey[i]++"

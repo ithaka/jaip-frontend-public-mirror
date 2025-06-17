@@ -12,7 +12,7 @@ import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 
 const props = defineProps({
-  tooltipID: {
+  tooltipId: {
     type: String,
     default: 'tooltip',
   },
@@ -114,18 +114,19 @@ const submitBulkApproval = async () => {
     closeBulkApproveModal()
   }
 }
+console.log(props.tooltipId, props.text)
 </script>
 <template>
   <div>
     <div>
       <pep-pharos-icon
-        :data-tooltip-id="tooltipID"
+        :data-tooltip-id="tooltipId"
         :name="icon"
-        :aria-describedby="tooltipID"
+        :aria-describedby="tooltipId"
         :class="{ 'fill-jstor-red': color }"
         @click.prevent.stop="openBulkApprovalModal"
       />
-      <pep-pharos-tooltip :id="tooltipID" :placement="placement">
+      <pep-pharos-tooltip :id="tooltipId" :placement="placement">
         <span class="text-none">{{ text }}</span>
       </pep-pharos-tooltip>
     </div>
