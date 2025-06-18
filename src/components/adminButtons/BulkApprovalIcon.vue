@@ -114,7 +114,6 @@ const submitBulkApproval = async () => {
     closeBulkApproveModal()
   }
 }
-console.log(props.tooltipId, props.text)
 </script>
 <template>
   <div>
