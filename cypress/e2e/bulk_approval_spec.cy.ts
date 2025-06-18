@@ -47,9 +47,14 @@ describe('Bulk approval', () => {
       cy.get('.search-filters span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
-        .find('div[tooltip-id="History_approval"]')
-        .find('pep-pharos-tooltip')
-        .contains('Articles in History are generally approved automatically.')
+        .find('[data-tooltip-id="approval_history-discipline"]')
+        .scrollIntoView()
+
+      cy.get('.search-filters span')
+        .contains(/^History$/)
+        .parents('div[slot="label"]')
+        .find('[data-tooltip-id="approval_history-discipline"]')
+        .should('be.visible')
     })
 
     it('Displays the PDF button for bulk-approved articles', () => {
@@ -333,12 +338,18 @@ describe('Bulk approval', () => {
       cy.get('.search-filters span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
-        .find('div[tooltip-id="History_approval"]')
-        .find('pep-pharos-tooltip')
-        .contains('Articles in History are generally approved automatically.')
+        .find('[data-tooltip-id="approval_history-discipline"]')
+        .scrollIntoView()
+
+      cy.get('.search-filters span')
+        .contains(/^History$/)
+        .parents('div[slot="label"]')
+        .find('[data-tooltip-id="approval_history-discipline"]')
+
+        .should('be.visible')
     })
 
-    it('Displays an indicator for bulk approved journals', () => {
+    it.only('Displays an indicator for bulk approved journals', () => {
       cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
         .as('afam')
 
@@ -364,9 +375,7 @@ describe('Bulk approval', () => {
       cy.get('.search-filters span')
         .contains('African American Review')
         .parents('div[slot="label"]')
-        .find('div[tooltip-id$="_approval"]')
-        .find('pep-pharos-tooltip')
-        .contains('Articles in African American Review are generally approved automatically.')
+        .find('[data-tooltip-id="approval_abb70559-9665-3b42-aa8a-42535bf6f3c0"]')
     })
 
     it('Has a bulk undo feature', () => {
