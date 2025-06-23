@@ -73,12 +73,12 @@
   },
   "lint-staged": {
     "src/**/*.ts": [
-      "eslint ./src --fix",
-      "prettier --write src/"
+      "prettier --write src/",
+      "eslint ./src --fix"
     ],
     "src/**/*.vue": [
-      "eslint ./src --fix",
-      "prettier --write src/"
+      "prettier --write src/",
+      "eslint ./src --fix"
     ]
   },
   "packageManager": "yarn@4.9.2"
