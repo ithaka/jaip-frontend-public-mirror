@@ -26,6 +26,7 @@ export interface MediaRecord {
   tb: string
   title: string
   year: number
+  is_blocked?: boolean
 }
 
 export interface History {

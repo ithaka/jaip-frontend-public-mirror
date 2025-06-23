@@ -79,7 +79,7 @@ const handleBlock = async () => {
     reason: selectedReason.value.trim(),
   }
   try {
-    await coreStore.$api.approvals.block(args)
+    await coreStore.$api.global_blocks.block(args)
     const msg = 'Your block has been submitted.'
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
@@ -94,7 +94,6 @@ const handleBlock = async () => {
       eventtype: 'pep_block_submitted',
       event_description: 'user submitted block',
       dois: [args.doi],
-      groups: args.groups,
       reason: args.reason,
     })
   } catch {
@@ -109,7 +108,7 @@ const handleUnblock = async () => {
     doi: props.doc.doi,
   }
   try {
-    await coreStore.$api.approvals.unblock(args)
+    await coreStore.$api.global_blocks.unblock(args)
     const msg = 'Your unblock has been submitted.'
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
@@ -215,7 +214,7 @@ const handleUnblock = async () => {
       </p>
 
       <!-- eslint-disable-next-line -->
-      <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeDenyModal">
+      <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeBlockModal">
         Cancel
       </pep-pharos-button>
 
