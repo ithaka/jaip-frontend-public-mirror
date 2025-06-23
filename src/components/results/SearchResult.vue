@@ -89,16 +89,24 @@ const readRoute = ref(
 <template>
   <div class="search-result">
     <div class="pr-6">
-      <BibliographicalData :doc="doc" :small="small" />
+      <BibliographicalData
+        :doc="doc"
+        :small="small"
+      />
 
       <!-- Text Details -->
       <div v-if="!hideDetails">
         <!-- Semantic Terms -->
         <div v-if="doc.semanticTerms">
           <b>Topics: </b>
-          <span v-for="(topic, key) in doc.semanticTerms" :key="key">
-            <a href="#" @click.prevent.stop="searchFor(topic)">{{ topic }}</a
-            ><span v-if="key + 1 != doc.semanticTerms.length">, </span>
+          <span
+            v-for="(topic, key) in doc.semanticTerms"
+            :key="key"
+          >
+            <a
+              href="#"
+              @click.prevent.stop="searchFor(topic)"
+            >{{ topic }}</a><span v-if="key + 1 != doc.semanticTerms.length">, </span>
           </span>
         </div>
         <!-- OCR -->
@@ -120,12 +128,22 @@ const readRoute = ref(
           small
         />
         <!-- Snippets -->
-        <div v-if="(doc.snippets || []).length && !hideSnippets" class="mt-4">
-          <div v-for="(snip, i) in doc.snippets" :key="`snippet_${i}`" class="text-size-sm">
+        <div
+          v-if="(doc.snippets || []).length && !hideSnippets"
+          class="mt-4"
+        >
+          <div
+            v-for="(snip, i) in doc.snippets"
+            :key="`snippet_${i}`"
+            class="text-size-sm"
+          >
             <!-- eslint-disable vue/no-v-html -->
             <small v-if="snip.text">
               ...
-              <span :class="{ 'text-size-xs': small }" v-html="snip.text" />
+              <span
+                :class="{ 'text-size-xs': small }"
+                v-html="snip.text"
+              />
               ...
             </small>
             <!-- eslint-enable vue/no-v-html -->
@@ -164,9 +182,9 @@ const readRoute = ref(
         <pep-pharos-button
           v-if="
             status === 'approved' &&
-            !pdfView &&
-            ((featureDetails['view_pdf'] || {}).enabled ||
-              (featureDetails['view_document'] || {}).enabled)
+              !pdfView &&
+              ((featureDetails['view_pdf'] || {}).enabled ||
+                (featureDetails['view_document'] || {}).enabled)
           "
           full-width
           class="mb-3"
@@ -202,13 +220,18 @@ const readRoute = ref(
       </div>
 
       <!-- Statuses -->
-      <div v-if="!hideStatuses" class="display-flex justify-content-end flex-direction-column">
-        <span v-for="(statusData, key) in doc.mediaReviewStatuses" :key="`status_${key}`">
+      <div
+        v-if="!hideStatuses"
+        class="display-flex justify-content-end flex-direction-column"
+      >
+        <span
+          v-for="(statusData, key) in doc.mediaReviewStatuses"
+          :key="`status_${key}`"
+        >
           <p>
             <small :class="{ 'text-size-xs': small }">
               <strong>Status:&nbsp;</strong>
-              <span>{{ statusData.statusLabel || statusData.status }}</span
-              ><span v-if="isAuthenticatedAdmin">&nbsp;({{ statusData.groupName }})</span> <br />
+              <span>{{ statusData.statusLabel || statusData.status }}</span><span v-if="isAuthenticatedAdmin">&nbsp;({{ statusData.groupName }})</span> <br>
               <span v-if="statusData.createdAt">{{
                 new Date(statusData.createdAt).toLocaleDateString()
               }}</span>
@@ -216,14 +239,14 @@ const readRoute = ref(
                 <span
                   v-if="
                     statusData.status.toLowerCase() === 'denied' ||
-                    statusData.status.toLowerCase() === 'incomplete' ||
-                    isAuthenticatedAdmin
+                      statusData.status.toLowerCase() === 'incomplete' ||
+                      isAuthenticatedAdmin
                   "
                 >
                   <span
                     v-if="
                       statusData.statusDetails!.reason ||
-                      statusData.status.toLowerCase() !== 'incomplete'
+                        statusData.status.toLowerCase() !== 'incomplete'
                     "
                   >
                     {{ statusData.statusDetails!.reason }} -&nbsp;

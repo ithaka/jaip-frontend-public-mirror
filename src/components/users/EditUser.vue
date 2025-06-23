@@ -185,7 +185,10 @@ const selectAllInCategory = (category: string | number) => {
             @click="selectAll()"
           >
             <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <span slot="label" class="text-weight-bold"> Select All </span>
+            <span
+              slot="label"
+              class="text-weight-bold"
+            > Select All </span>
           </pep-pharos-checkbox>
         </div>
         <div>
@@ -194,7 +197,11 @@ const selectAllInCategory = (category: string | number) => {
               v-for="(category, label, index) in sortedEnabledUngroupedFeatures"
               :key="`ungrouped_category_${index}`"
             >
-              <pep-pharos-heading class="" preset="legend" :level="3">
+              <pep-pharos-heading
+                class=""
+                preset="legend"
+                :level="3"
+              >
                 <pep-pharos-checkbox
                   :checked="checkAllFeaturesInCategory(label)"
                   :indeterminate="checkSomeFeaturesInCategory(label)"
@@ -202,14 +209,20 @@ const selectAllInCategory = (category: string | number) => {
                   @click="selectAllInCategory(label)"
                 >
                   <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                  <span slot="label" class="text-weight-bold">
+                  <span
+                    slot="label"
+                    class="text-weight-bold"
+                  >
                     {{ label }}
                   </span>
                 </pep-pharos-checkbox>
               </pep-pharos-heading>
               <pep-pharos-checkbox-group v-if="Object.keys(category).length">
                 <ul class="checkbox-group">
-                  <li v-for="(feature, name) of category" :key="`feature_${name}`">
+                  <li
+                    v-for="(feature, name) of category"
+                    :key="`feature_${name}`"
+                  >
                     <pep-pharos-checkbox
                       :checked="newUser.ungrouped_features![name!]?.enabled"
                       :value="name"

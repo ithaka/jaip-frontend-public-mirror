@@ -52,7 +52,10 @@ const emit = defineEmits(['close'])
 </script>
 
 <template>
-  <component :is="sidenav ? 'div' : 'pep-pharos-dropdown-menu-nav'" id="nav">
+  <component
+    :is="sidenav ? 'div' : 'pep-pharos-dropdown-menu-nav'"
+    id="nav"
+  >
     <div>
       <!-- Start with an routes that don't have a dropdown (possibly just "Home") 
       Grouping routes keeps the header narrow, which means we don't need an drawer
@@ -70,7 +73,10 @@ const emit = defineEmits(['close'])
       >
         <!-- Display any icon specififed in the route's meta.icon property. 
         NOTE: This keeps the menu options level with the dropdowns. -->
-        <pep-pharos-icon v-if="route.meta.icon" :name="route.meta.icon" />
+        <pep-pharos-icon
+          v-if="route.meta.icon"
+          :name="route.meta.icon"
+        />
         <span class="text-capitalize pt-1 ml-1">
           {{ String(route.name) }}
         </span>
@@ -107,7 +113,10 @@ const emit = defineEmits(['close'])
           changeRoute(router, emit, route_group.path, searchTerms, pageNo, undefined, undefined)
         "
       >
-        <component :is="sidenav ? 'span' : 'pep-pharos-dropdown-menu-nav-link'" subtle>
+        <component
+          :is="sidenav ? 'span' : 'pep-pharos-dropdown-menu-nav-link'"
+          subtle
+        >
           <span class="text-capitalize">
             {{ String(route_group.name) }}
           </span>

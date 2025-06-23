@@ -43,14 +43,20 @@ const errorMessage = computed(() => {
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <div slot="description" class="mb-3">
+      <div
+        slot="description"
+        class="mb-3"
+      >
         <p>
           Are you sure you want to erase the media review history from {{ props.name }}? This will
           leave no record of any media review or bulk approval.
         </p>
       </div>
       <form @submit.prevent.stop="submitForm">
-        <input type="text" hidden />
+        <input
+          type="text"
+          hidden
+        >
         <pep-pharos-input-group
           :id="`clear_history_${props.groupId}`"
           :value="clearInstruction"

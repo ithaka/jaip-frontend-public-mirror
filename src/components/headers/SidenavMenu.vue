@@ -100,7 +100,11 @@ const emit = defineEmits(['close'])
 
     <!-- If the user is on the admin site and not authenticated, include the login button. -->
     <div v-if="showLogin">
-      <pep-pharos-sidenav-link bold :href="loginUrl" flex>
+      <pep-pharos-sidenav-link
+        bold
+        :href="loginUrl"
+        flex
+      >
         <span class="text-capitalize pt-1 ml-1"> Log In </span>
       </pep-pharos-sidenav-link>
     </div>

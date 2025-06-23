@@ -10,7 +10,11 @@ const userStore = useUserStore()
 const { invalidUserEmail } = storeToRefs(userStore)
 </script>
 <template>
-  <pep-pharos-layout v-if="isAdminSubdomain && invalidUserEmail" class="mt-2 mb-7" row-gap="0">
+  <pep-pharos-layout
+    v-if="isAdminSubdomain && invalidUserEmail"
+    class="mt-2 mb-7"
+    row-gap="0"
+  >
     <div class="cols-12">
       <p class="notice">
         <small>

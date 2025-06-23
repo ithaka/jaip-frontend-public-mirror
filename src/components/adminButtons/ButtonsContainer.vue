@@ -52,8 +52,14 @@ const readRoute = ref(
   <div
     class="display-flex justify-content-end md-flex-direction-column lg-flex-direction-row flex-direction-column"
   >
-    <ApprovalControls :doc="doc" @approval-submitted="emit('approvalSubmitted')" />
-    <DenialControls :doc="doc" @denial-submitted="emit('denialSubmitted')" />
+    <ApprovalControls
+      :doc="doc"
+      @approval-submitted="emit('approvalSubmitted')"
+    />
+    <DenialControls
+      :doc="doc"
+      @denial-submitted="emit('denialSubmitted')"
+    />
     <pep-pharos-button
       v-if="hasHistory"
       full-width
@@ -116,7 +122,10 @@ const readRoute = ref(
             Global Statuses
           </pep-pharos-toggle-button>
         </pep-pharos-toggle-button-group>
-        <DocumentHistory :doc="doc" :scope="isGlobal ? 'global' : 'local'" />
+        <DocumentHistory
+          :doc="doc"
+          :scope="isGlobal ? 'global' : 'local'"
+        />
       </pep-pharos-modal>
     </Teleport>
   </div>

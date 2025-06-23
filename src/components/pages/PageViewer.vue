@@ -78,7 +78,10 @@
                   </ControlBar>
                 </div>
 
-                <ControlBar v-if="showFullscreenToggle" class="viewer-control-button">
+                <ControlBar
+                  v-if="showFullscreenToggle"
+                  class="viewer-control-button"
+                >
                   <ViewerControlButton
                     :text="fullscreenToggleButtonText"
                     :tooltip-text="fullscreenToggleTooltipText"
@@ -143,7 +146,10 @@
             </div>
           </div>
 
-          <pep-pharos-loading-spinner v-if="!metadata" class="loading-spinner-wrapper" />
+          <pep-pharos-loading-spinner
+            v-if="!metadata"
+            class="loading-spinner-wrapper"
+          />
           <div
             :id="viewerId"
             ref="iiifViewer"
@@ -151,9 +157,15 @@
             oncontextmenu="return false;"
           />
 
-          <div v-show="metadata && (openFailed || !hasTileSources)" class="viewer-error">
+          <div
+            v-show="metadata && (openFailed || !hasTileSources)"
+            class="viewer-error"
+          >
             <div>{{ errorText }}</div>
-            <div v-show="!isUnauthorized && hasTileSources" ref="downloadMountPoint" />
+            <div
+              v-show="!isUnauthorized && hasTileSources"
+              ref="downloadMountPoint"
+            />
           </div>
         </div>
       </div>

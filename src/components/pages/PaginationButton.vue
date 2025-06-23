@@ -83,11 +83,21 @@ export default {
       :data-tooltip-id="tooltipId"
       @click="$emit('page', direction)"
     >
-      <pep-pharos-icon :name="`arrow-${direction}`" class="button-icon" />
+      <pep-pharos-icon
+        :name="`arrow-${direction}`"
+        class="button-icon"
+      />
     </button>
-    <pep-pharos-tooltip v-if="tooltipText" :id="tooltipId" :placement="tooltipPosition">
+    <pep-pharos-tooltip
+      v-if="tooltipText"
+      :id="tooltipId"
+      :placement="tooltipPosition"
+    >
       {{ tooltipText }}
-      (<span v-if="keyboardShortcut" class="tooltip__shortcut"> {{ keyboardShortcut }} </span>)
+      (<span
+        v-if="keyboardShortcut"
+        class="tooltip__shortcut"
+      > {{ keyboardShortcut }} </span>)
     </pep-pharos-tooltip>
   </div>
 </template>

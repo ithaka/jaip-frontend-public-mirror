@@ -120,7 +120,11 @@ coreStore.$api.log({
 <template>
   <main class="page">
     <pep-pharos-layout row-gap="0">
-      <pep-pharos-heading class="text-capitalize cols-12" :level="1" preset="5--bold">
+      <pep-pharos-heading
+        class="text-capitalize cols-12"
+        :level="1"
+        preset="5--bold"
+      >
         {{ reviewStatus }} Requests
       </pep-pharos-heading>
 
@@ -149,7 +153,11 @@ coreStore.$api.log({
           @update:model-value="handleDateSelection"
         >
           <template #trigger>
-            <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="2">
+            <pep-pharos-heading
+              class="mb-2 pb-0"
+              preset="legend"
+              :level="2"
+            >
               Status Date
             </pep-pharos-heading>
             <pep-pharos-button
@@ -164,7 +172,11 @@ coreStore.$api.log({
           <template #action-row="{ internalModelValue, selectDate, disabled, closePicker }">
             <div class="action-row justify-self-end">
               <div class="">
-                <pep-pharos-button variant="secondary" class="mr-2" @click="closePicker">
+                <pep-pharos-button
+                  variant="secondary"
+                  class="mr-2"
+                  @click="closePicker"
+                >
                   Cancel
                 </pep-pharos-button>
                 <pep-pharos-button
@@ -178,8 +190,15 @@ coreStore.$api.log({
           </template>
         </VueDatePicker>
       </div>
-      <div class="cols-md-8 cols-6 md-ml-0 ml-13" style="width: 100%">
-        <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="2">
+      <div
+        class="cols-md-8 cols-6 md-ml-0 ml-13"
+        style="width: 100%"
+      >
+        <pep-pharos-heading
+          class="mb-2 pb-0"
+          preset="legend"
+          :level="2"
+        >
           Status
         </pep-pharos-heading>
         <div>
@@ -191,7 +210,10 @@ coreStore.$api.log({
           >
             Status: {{ (statuses.find((opt) => opt.value === reviewStatus) || {}).label }}
           </pep-pharos-button>
-          <pep-pharos-dropdown-menu id="status-drop" full-width>
+          <pep-pharos-dropdown-menu
+            id="status-drop"
+            full-width
+          >
             <pep-pharos-dropdown-menu-item
               v-for="status in statuses"
               :key="status.value"
@@ -214,7 +236,10 @@ coreStore.$api.log({
             @input="updateStatusQuery($event.target.value)"
           >
             <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <span slot="label" class="display-flex align-items-center">
+            <span
+              slot="label"
+              class="display-flex align-items-center"
+            >
               <span>Search</span>
             </span>
             <pep-pharos-button

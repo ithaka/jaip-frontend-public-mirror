@@ -249,7 +249,10 @@ api.log({
             <div class="hidden display-grid-md">
               <div class="mx-5 px-2">
                 <div class="mx-3 my-7">
-                  <pep-pharos-button full-width @click="showSearchFilters = !showSearchFilters">
+                  <pep-pharos-button
+                    full-width
+                    @click="showSearchFilters = !showSearchFilters"
+                  >
                     {{ showSearchFilters ? 'Hide Search Filters' : 'Show Search Filters' }}
                   </pep-pharos-button>
                 </div>
@@ -259,19 +262,30 @@ api.log({
               :class="{ 'hidden-md': !showSearchFilters }"
               class="md-mx-5 md-px-4 md-pb-8 background-color-gray-97"
             >
-              <pep-pharos-heading class="pt-7 px-6 pb-5" preset="2" :level="2">
+              <pep-pharos-heading
+                class="pt-7 px-6 pb-5"
+                preset="2"
+                :level="2"
+              >
                 Refine Results
               </pep-pharos-heading>
               <!-- Search within results -->
               <div>
                 <!--Content Type -->
                 <div>
-                  <pep-pharos-heading class="pt-5 pb-3 px-6" preset="legend" :level="3">
+                  <pep-pharos-heading
+                    class="pt-5 pb-3 px-6"
+                    preset="legend"
+                    :level="3"
+                  >
                     CONTENT TYPE
                   </pep-pharos-heading>
                   <pep-pharos-checkbox-group class="px-6 ml-0">
                     <ul>
-                      <li v-for="(type, i) in contentTypes" :key="`content_types_${i}`">
+                      <li
+                        v-for="(type, i) in contentTypes"
+                        :key="`content_types_${i}`"
+                      >
                         <pep-pharos-checkbox
                           :checked="selectedContentTypes.includes(type.value)"
                           :value="type.value"
@@ -288,11 +302,18 @@ api.log({
                 </div>
 
                 <!--Search Heading -->
-                <pep-pharos-heading class="py-5 px-6" preset="legend" :level="3">
+                <pep-pharos-heading
+                  class="py-5 px-6"
+                  preset="legend"
+                  :level="3"
+                >
                   Search within results
                 </pep-pharos-heading>
                 <!-- Additional search terms form -->
-                <form class="pt-0 px-6 pb-3" @submit.prevent.stop="handleAdditionalTerms">
+                <form
+                  class="pt-0 px-6 pb-3"
+                  @submit.prevent.stop="handleAdditionalTerms"
+                >
                   <pep-pharos-input-group
                     :value="additionalTerms"
                     name="search-within"
@@ -313,7 +334,11 @@ api.log({
 
               <!-- Date Heading -->
               <div>
-                <pep-pharos-heading class="py-5 px-6" preset="legend" :level="3">
+                <pep-pharos-heading
+                  class="py-5 px-6"
+                  preset="legend"
+                  :level="3"
+                >
                   <span class="display-flex align-items-center">
                     <span>Publication Year</span>
                     <pep-pharos-icon
@@ -322,7 +347,10 @@ api.log({
                       class="mt-0 pl-3"
                       aria-describedby="date-tooltip"
                     />
-                    <pep-pharos-tooltip id="date-tooltip" placement="top">
+                    <pep-pharos-tooltip
+                      id="date-tooltip"
+                      placement="top"
+                    >
                       <span class="text-none">Enter date as a four digit year (YYYY).</span>
                     </pep-pharos-tooltip>
                   </span>
@@ -342,7 +370,10 @@ api.log({
                         @input="startYear = $event.target.value"
                       >
                         <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                        <span slot="label" class="text-color-gray-20">from</span>
+                        <span
+                          slot="label"
+                          class="text-color-gray-20"
+                        >from</span>
                       </pep-pharos-input-group>
                       <pep-pharos-input-group
                         :value="endYear"
@@ -351,10 +382,16 @@ api.log({
                         @input="endYear = $event.target.value"
                       >
                         <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                        <span slot="label" class="text-color-gray-20">to</span>
+                        <span
+                          slot="label"
+                          class="text-color-gray-20"
+                        >to</span>
                       </pep-pharos-input-group>
                     </div>
-                    <span v-if="invalidatedStartYear || invalidatedEndYear" class="error">
+                    <span
+                      v-if="invalidatedStartYear || invalidatedEndYear"
+                      class="error"
+                    >
                       {{ dateErrorMessage }}
                     </span>
                   </div>
@@ -377,7 +414,11 @@ api.log({
               <div>
                 <!-- Discipline Heading -->
                 <div class="display-flex flex-direction-row">
-                  <pep-pharos-heading class="py-5 pl-6 pr-2" preset="legend" :level="3">
+                  <pep-pharos-heading
+                    class="py-5 pl-6 pr-2"
+                    preset="legend"
+                    :level="3"
+                  >
                     Subject
                   </pep-pharos-heading>
                   <pep-pharos-button
@@ -403,7 +444,10 @@ api.log({
                     @input="handleDisciplineSelection"
                   />
                 </div>
-                <div v-else-if="gettingDisciplines" class="position-relative pt-6 pb-5">
+                <div
+                  v-else-if="gettingDisciplines"
+                  class="position-relative pt-6 pb-5"
+                >
                   <pep-pharos-loading-spinner />
                 </div>
               </div>
@@ -412,7 +456,11 @@ api.log({
               <div>
                 <!-- Journal Discipline Heading -->
                 <div class="display-flex flex-direction-row">
-                  <pep-pharos-heading class="py-5 pl-6 pr-2" preset="legend" :level="3">
+                  <pep-pharos-heading
+                    class="py-5 pl-6 pr-2"
+                    preset="legend"
+                    :level="3"
+                  >
                     <span class="display-flex align-items-center">
                       <span>Journal</span>
                       <pep-pharos-icon
@@ -421,11 +469,12 @@ api.log({
                         class="mt-0 pl-3"
                         aria-describedby="journal-discipline-tooltip"
                       />
-                      <pep-pharos-tooltip id="journal-discipline-tooltip" placement="top">
-                        <span class="text-none"
-                          >First select a subject, then select journals within that subject. You may
-                          select multiple subjects.</span
-                        >
+                      <pep-pharos-tooltip
+                        id="journal-discipline-tooltip"
+                        placement="top"
+                      >
+                        <span class="text-none">First select a subject, then select journals within that subject. You may
+                          select multiple subjects.</span>
                       </pep-pharos-tooltip>
                     </span>
                   </pep-pharos-heading>
@@ -459,7 +508,10 @@ api.log({
                       </pep-pharos-combobox>
                     </form>
                   </div>
-                  <div v-if="gettingJournals" class="position-relative mt-3 pb-9">
+                  <div
+                    v-if="gettingJournals"
+                    class="position-relative mt-3 pb-9"
+                  >
                     <pep-pharos-loading-spinner />
                   </div>
                   <!-- Journal List (Grouped by Discipline) -->
@@ -468,7 +520,11 @@ api.log({
                       v-for="(discipline, index) in visibleJournalDisciplines"
                       :key="`journal_discipline_${discipline}`"
                     >
-                      <pep-pharos-heading class="mt-3 mb-1 pb-2 px-6" preset="legend" :level="4">
+                      <pep-pharos-heading
+                        class="mt-3 mb-1 pb-2 px-6"
+                        preset="legend"
+                        :level="4"
+                      >
                         <span class="display-flex align-items-center">
                           <span>
                             {{ disciplineObject[discipline].label }}
@@ -503,7 +559,12 @@ api.log({
                           @input="handleJournalSelection($event, discipline)"
                         />
                       </div>
-                      <div v-else class="pt-0 pb-3">No journals available</div>
+                      <div
+                        v-else
+                        class="pt-0 pb-3"
+                      >
+                        No journals available
+                      </div>
                     </div>
                   </div>
                 </div>

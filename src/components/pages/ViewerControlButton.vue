@@ -17,7 +17,11 @@
     </strong>
   </button>
 
-  <pep-pharos-tooltip v-if="tooltipText" :id="tooltipId" :placement="tooltipPosition">
+  <pep-pharos-tooltip
+    v-if="tooltipText"
+    :id="tooltipId"
+    :placement="tooltipPosition"
+  >
     {{ tooltipText }}
     <template v-if="keyboardShortcut && !hideShortcutText">
       (<span class="tooltip__shortcut"> {{ keyboardShortcut }} </span>)

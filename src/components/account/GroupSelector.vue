@@ -98,7 +98,10 @@ const handleGroupSelection = (e: InputFileEvent) => {
 </script>
 
 <template>
-  <div v-if="possibleGroups.length > 1" class="cols-12 mt-3 mb-6">
+  <div
+    v-if="possibleGroups.length > 1"
+    class="cols-12 mt-3 mb-6"
+  >
     <pep-pharos-combobox
       class="group-selector-combobox"
       :value="comboboxValue"
@@ -119,8 +122,17 @@ const handleGroupSelection = (e: InputFileEvent) => {
           <!-- ($event: InputFileEvent)=>{$event.target.value=''; return handleGroupSelection($event)} -->
         </div>
       </div>
-      <option v-if="props.multiple" :value="comboboxAllValue">All Groups</option>
-      <option v-for="(grp, index) in possibleGroups" :key="`group_option_${index}`" :value="grp">
+      <option
+        v-if="props.multiple"
+        :value="comboboxAllValue"
+      >
+        All Groups
+      </option>
+      <option
+        v-for="(grp, index) in possibleGroups"
+        :key="`group_option_${index}`"
+        :value="grp"
+      >
         {{ (groupMap.get(grp) || {}).name }}
       </option>
     </pep-pharos-combobox>

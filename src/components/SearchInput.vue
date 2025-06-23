@@ -48,7 +48,10 @@ const handleSubmit = () => {
       @input="searchTerms = $event.target.value"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <span v-if="label" slot="label">{{ label }}</span>
+      <span
+        v-if="label"
+        slot="label"
+      >{{ label }}</span>
       <pep-pharos-button
         name="search-button"
         icon="search"

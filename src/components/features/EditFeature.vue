@@ -107,7 +107,10 @@ const descriptionErrorMessage = computed(() => {
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p slot="description" class="mb-3">
+      <p
+        slot="description"
+        class="mb-3"
+      >
         Fill out the form to edit {{ props.feature.display_name }}.
       </p>
       <form @submit.prevent.stop="submitForm">
@@ -140,8 +143,8 @@ const descriptionErrorMessage = computed(() => {
           @keydown.enter.prevent.stop="submitForm"
           @input="
             ((duplicateDisplayName = false),
-            (touchedDisplayName = true),
-            (newFeature.display_name = $event.target.value))
+             (touchedDisplayName = true),
+             (newFeature.display_name = $event.target.value))
           "
         >
           <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
@@ -186,7 +189,10 @@ const descriptionErrorMessage = computed(() => {
           <span slot="label">Active</span>
         </pep-pharos-checkbox>
 
-        <div v-if="!props.ungrouped" class="mt-3">
+        <div
+          v-if="!props.ungrouped"
+          class="mt-3"
+        >
           <pep-pharos-checkbox
             :id="`admin_checkbox-${props.feature.id}`"
             class="mr-5"

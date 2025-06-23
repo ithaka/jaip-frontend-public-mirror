@@ -293,16 +293,29 @@ const disciplineFilterDescription = computed(() => {
 const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
 </script>
 <template>
-  <div id="results" ref="resultsArea" class="search-results-area">
-    <div class="my-5 py-5 search-results" :class="{ 'request-results': requestsPage }">
+  <div
+    id="results"
+    ref="resultsArea"
+    class="search-results-area"
+  >
+    <div
+      class="my-5 py-5 search-results"
+      :class="{ 'request-results': requestsPage }"
+    >
       <div
         class="search-results-header results-list mx-0"
         :class="{ 'search-results-header-margins': !requestsPage }"
       >
-        <pep-pharos-heading preset="3--bold" :level="2">
+        <pep-pharos-heading
+          preset="3--bold"
+          :level="2"
+        >
           {{ getResultsCountLabel(searchTotal) }}
         </pep-pharos-heading>
-        <div v-if="reqs.length" class="justify-self-end">
+        <div
+          v-if="reqs.length"
+          class="justify-self-end"
+        >
           <pep-pharos-button
             id="requests-button"
             icon-left="view-list"
@@ -324,12 +337,18 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
               :open="showRequestsModal"
             >
               <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-              <p slot="description">Enter your information to submit your reading requests.</p>
+              <p slot="description">
+                Enter your information to submit your reading requests.
+              </p>
 
               <div class="modal-search-results">
                 <ul>
                   <!-- Search Result for Student Requests -->
-                  <li v-for="(article, index) in reqs" :key="`request_${index}`" class="pt-4">
+                  <li
+                    v-for="(article, index) in reqs"
+                    :key="`request_${index}`"
+                    class="pt-4"
+                  >
                     <SearchResult
                       :doc="JSON.parse(article)"
                       :hide-details="true"
@@ -358,7 +377,10 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
             </pep-pharos-modal>
           </Teleport>
         </div>
-        <div v-else-if="showApproveAllButton" class="justify-self-end sm-justify-self-start">
+        <div
+          v-else-if="showApproveAllButton"
+          class="justify-self-end sm-justify-self-start"
+        >
           <pep-pharos-button
             icon-left="checkmark-inverse"
             data-modal-id="approve-all-modal"
@@ -375,18 +397,20 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
             @pharos-modal-closed="showApproveAllModal = false"
           >
             <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <p slot="description" class="mb-3">
-              <span
-                >This will add all material in {{ disciplineFilterDescription }} from
-                {{ journalFilterDescription }}.</span
-              >
-              <span v-if="secondarySearchTotal && secondarySearchResults.length"
-                >&nbsp;This includes articles that were previously denied.</span
-              >
+            <p
+              slot="description"
+              class="mb-3"
+            >
+              <span>This will add all material in {{ disciplineFilterDescription }} from
+                {{ journalFilterDescription }}.</span>
+              <span v-if="secondarySearchTotal && secondarySearchResults.length">&nbsp;This includes articles that were previously denied.</span>
             </p>
             <pep-pharos-loading-spinner v-if="secondarySearching" />
             <div v-else>
-              <div v-if="featureDetails['bulk_approve'].groups.length > 1" class="mb-3">
+              <div
+                v-if="featureDetails['bulk_approve'].groups.length > 1"
+                class="mb-3"
+              >
                 <GroupSelector
                   :groups="selectorBulkApproveGroupOptions"
                   :feature-name="`bulk_approve`"
@@ -412,7 +436,12 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
                           name="exclamation-inverse"
                           class="mr-3 mb-0 fill-coral-50"
                         />
-                        <SearchResult :doc="doc" :hide-details="true" :hide-buttons="true" small />
+                        <SearchResult
+                          :doc="doc"
+                          :hide-details="true"
+                          :hide-buttons="true"
+                          small
+                        />
                       </div>
                       <div class="ml-7 mt-4">
                         <pep-pharos-checkbox
@@ -420,7 +449,10 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
                           :value="doc._id"
                         >
                           <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                          <span slot="label" class="display-flex"> Approve with the set? </span>
+                          <span
+                            slot="label"
+                            class="display-flex"
+                          > Approve with the set? </span>
                         </pep-pharos-checkbox>
                       </div>
                     </div>
@@ -460,7 +492,10 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
         </div>
       </div>
     </div>
-    <div v-if="searchTotal" :class="{ 'search-results': !requestsPage }">
+    <div
+      v-if="searchTotal"
+      :class="{ 'search-results': !requestsPage }"
+    >
       <div class="results-list display-grid">
         <div>
           <pep-pharos-button
@@ -470,7 +505,10 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
           >
             Sort By: {{ (sortOptions.find((opt) => opt.value === sort) || {}).label }}
           </pep-pharos-button>
-          <pep-pharos-dropdown-menu id="sort-by-drop" full-width>
+          <pep-pharos-dropdown-menu
+            id="sort-by-drop"
+            full-width
+          >
             <pep-pharos-dropdown-menu-item
               v-for="opt in sortOptions"
               :key="opt.value"
@@ -482,7 +520,11 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
         </div>
         <ol>
           <!-- Search Result -->
-          <li v-for="doc in searchResults" :key="doc.iid" class="mt-7">
+          <li
+            v-for="doc in searchResults"
+            :key="doc.iid"
+            class="mt-7"
+          >
             <SearchResult
               :doc="doc"
               :hide-description="!userStore.features['view_book_description']"

@@ -96,11 +96,18 @@ const addEntityModal = () => {
 <template>
   <!-- class="pt-5 pb-8 md-pt-4 md-pb-7" -->
   <pep-pharos-layout row-gap="0">
-    <pep-pharos-heading class="text-capitalize cols-12 pt-5 md-pt-4" :level="2" preset="4">
+    <pep-pharos-heading
+      class="text-capitalize cols-12 pt-5 md-pt-4"
+      :level="2"
+      preset="4"
+    >
       <span class="button-row">
         <span>{{ entity.titleSingular }} Management</span>
         <span v-if="hasAddEntity">
-          <pep-pharos-button icon-left="add" @click.prevent.stop="addEntityModal">
+          <pep-pharos-button
+            icon-left="add"
+            @click.prevent.stop="addEntityModal"
+          >
             <span>{{ `Add ${entity.titleSingular}` }}</span>
           </pep-pharos-button>
         </span>
@@ -129,7 +136,10 @@ const addEntityModal = () => {
         @change="doSearch"
       />
     </div>
-    <form class="cols-8" @submit.prevent.stop="doSearch">
+    <form
+      class="cols-8"
+      @submit.prevent.stop="doSearch"
+    >
       <pep-pharos-input-group
         :id="`${entity.title}_search`"
         :value="query"
@@ -151,11 +161,20 @@ const addEntityModal = () => {
         />
       </pep-pharos-input-group>
     </form>
-    <div v-if="searching" class="position-relative mt-8 cols-12">
+    <div
+      v-if="searching"
+      class="position-relative mt-8 cols-12"
+    >
       <pep-pharos-loading-spinner />
     </div>
-    <div v-else-if="entityCount" class="cols-12">
-      <div v-for="(ent, grp, index) in entities" :key="`${entity.type}_${index}`">
+    <div
+      v-else-if="entityCount"
+      class="cols-12"
+    >
+      <div
+        v-for="(ent, grp, index) in entities"
+        :key="`${entity.type}_${index}`"
+      >
         <EntityCard
           :class="index !== Object.keys(entities).length - 1 ? 'entity-card' : 'mt-7'"
           :entity="ent"
@@ -164,8 +183,15 @@ const addEntityModal = () => {
         />
       </div>
     </div>
-    <div v-else-if="!searching && !entityCount" class="cols-12 mt-6">
-      <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="3">
+    <div
+      v-else-if="!searching && !entityCount"
+      class="cols-12 mt-6"
+    >
+      <pep-pharos-heading
+        class="mb-2 pb-0"
+        preset="legend"
+        :level="3"
+      >
         No Results
       </pep-pharos-heading>
     </div>

@@ -69,12 +69,18 @@ const logout = () => {
   <div>
     <div class="top my-3 flex-direction-column">
       <div class="px-3">
-        <pep-pharos-alert v-if="alert && alert.status" :status="alert.status">
+        <pep-pharos-alert
+          v-if="alert && alert.status"
+          :status="alert.status"
+        >
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
       <ProviderBar />
-      <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
+      <RequestWarning
+        v-if="showRequestWarning"
+        class="my-3 px-3"
+      />
     </div>
     <div class="header__content pa-5 justify-content-space-between">
       <pep-pharos-link
@@ -88,7 +94,7 @@ const logout = () => {
           class="header-logo"
           alt="JSTOR Logo"
           data-cy="home"
-        />
+        >
       </pep-pharos-link>
       <div>
         <pep-pharos-sidenav-button
@@ -96,13 +102,21 @@ const logout = () => {
           @click.prevent.stop="showSidenav = true"
         />
       </div>
-      <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
+      <pep-pharos-button
+        v-if="showLogin"
+        name="login-button"
+        :href="loginUrl"
+        class="ml-13 mr-3"
+      >
         Log in
       </pep-pharos-button>
     </div>
     <pep-pharos-sidenav :slide="showSidenav">
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <div slot="top" class="display-flex flex-direction-column gap-4">
+      <div
+        slot="top"
+        class="display-flex flex-direction-column gap-4"
+      >
         <div>
           <div
             @click.stop="changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)"
@@ -112,7 +126,7 @@ const logout = () => {
               class="header-logo svg-white"
               alt="JSTOR Logo"
               data-cy="home"
-            />
+            >
           </div>
         </div>
         <pep-pharos-button
@@ -122,7 +136,11 @@ const logout = () => {
         >
           Logout
         </pep-pharos-button>
-        <pep-pharos-button v-else-if="showLogin" name="login-button" :href="loginUrl">
+        <pep-pharos-button
+          v-else-if="showLogin"
+          name="login-button"
+          :href="loginUrl"
+        >
           Log in
         </pep-pharos-button>
       </div>
@@ -141,17 +159,29 @@ const logout = () => {
           :label="name"
           :a11y-label="name"
         >
-          <span v-if="isAuthenticatedAdmin" class="ml-7">
+          <span
+            v-if="isAuthenticatedAdmin"
+            class="ml-7"
+          >
             <strong>{{ name }}</strong>
           </span>
-          <span v-else-if="isAuthenticatedStudent" class="ml-8"
-            >Participating through {{ groups }}</span
-          >
+          <span
+            v-else-if="isAuthenticatedStudent"
+            class="ml-8"
+          >Participating through {{ groups }}</span>
         </component>
       </div>
     </pep-pharos-sidenav>
-    <div v-if="showSidenav" class="sidenav-container" @click.prevent.stop="showSidenav = false" />
-    <SearchInput v-if="$route.meta.showSearch && !isUnauthenticated" id="small" class="mx-6 mb-2" />
+    <div
+      v-if="showSidenav"
+      class="sidenav-container"
+      @click.prevent.stop="showSidenav = false"
+    />
+    <SearchInput
+      v-if="$route.meta.showSearch && !isUnauthenticated"
+      id="small"
+      class="mx-6 mb-2"
+    />
   </div>
 </template>
 

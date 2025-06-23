@@ -13,7 +13,10 @@
     </small>
   </pep-pharos-dropdown-menu-nav-link>
   <!-- Dropdown box with additional information -->
-  <pep-pharos-dropdown-menu id="top-menu" placement="bottom">
+  <pep-pharos-dropdown-menu
+    id="top-menu"
+    placement="bottom"
+  >
     <div class="pa-5">
       <p>Please contact an administrator for additional help and information.</p>
     </div>
