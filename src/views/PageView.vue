@@ -132,6 +132,7 @@ coreStore.$api.log({
         :include-pdf="!!page_index"
         @approval-submitted="getDocument"
         @denial-submitted="getDocument"
+        @block-submitted="getDocument"
       />
     </div>
     <div

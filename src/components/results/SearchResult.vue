@@ -79,7 +79,7 @@ const canRequest = computed(() => {
     !props.hideRequests
   )
 })
-const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted'])
+const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'blockSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
     ? `/page/${props.doc.iid}/0`
@@ -216,6 +216,7 @@ const readRoute = ref(
           :include-pdf="includePdf"
           @approval-submitted="emit('approvalSubmitted')"
           @denial-submitted="emit('denialSubmitted')"
+          @block-submitted="emit('blockSubmitted')"
         />
       </div>
 

@@ -10,22 +10,13 @@ import { useRoute, useRouter } from 'vue-router'
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
-import {
-  makeGrammaticalList,
-  arraysAreEqual,
-  combineArrays,
-  hideButton,
-  getGroupsWithStatus,
-} from '@/utils/helpers'
-import GroupSelector from '@/components/account/GroupSelector.vue'
 import { changeRoute } from '@/utils/helpers'
-import type { Group, GroupSelection } from '@/interfaces/Group'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const userStore = useUserStore()
 const { reviewStatus, searchTerms, pageNo } = storeToRefs(searchStore)
-const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(userStore)
+const { enabledUngroupedFeatures, entityName } = storeToRefs(userStore)
 
 const props = defineProps({
   doc: {
@@ -34,186 +25,153 @@ const props = defineProps({
   },
 })
 
-const isSingleGroup = userStore.isSingleGroupFeature('deny_requests')
-const statuses = ref(props.doc.mediaReviewStatuses)
-const showDeny = !hideButton(featureDetails.value, statuses.value, 'denied', 'deny_requests')
-const showDenyModal = ref(false)
-const denyModalKey = ref(0)
-const denyGroups = ref(
-  isSingleGroup
-    ? featureDetails.value['deny_requests'].groups
-    : getGroupsWithStatus(statuses.value, 'denied'),
-)
-const incompleteReason = 'Missing required information'
+const hasBlock = ref(enabledUngroupedFeatures.value['manage_block_list']?.enabled)
+const showBlock = ref(hasBlock.value && !props.doc.is_blocked)
+const showUnblock = ref(hasBlock.value && props.doc.is_blocked)
+
+const showBlockModal = ref(false)
+const blockModalKey = ref(0)
+
 const reasons = [
   'Sexually explicit',
   'Instructive for explosives, weapons, or escapes',
   'Inflammatory or inciting violence, uprisings, or riots',
   'Detrimental to the good order of the facility or rehabilitation',
-  incompleteReason,
 ]
 const selectedReason = ref('Sexually explicit')
 const otherReason = ref('')
-const comments = ref('')
-const invalidComments = ref('')
 const invalidReason = ref(false)
 
 const handleReasonInput = (e: InputFileEvent) => {
   otherReason.value = e.target.value
   selectedReason.value = otherReason.value
 }
-const handleCommentInput = (e: InputFileEvent) => {
-  comments.value = e.target.value
-  if (!comments.value.trim()) {
-    invalidComments.value = 'Additional details are required'
-  } else if (comments.value.length > 3000) {
-    invalidComments.value = 'Please enter a shorter comment'
-  } else {
-    invalidComments.value = ''
-  }
-}
+
 const handleSelectedReason = (e: InputFileEvent) => {
   selectedReason.value = e.target.value.trim()
   invalidReason.value = !selectedReason.value
 }
 
-const openDenyModal = () => {
-  denyModalKey.value++
-  showDenyModal.value = true
+const openBlockModal = () => {
+  blockModalKey.value++
+  showBlockModal.value = true
 }
-const closeDenyModal = () => {
-  showDenyModal.value = false
-  denyModalKey.value++
-}
-
-selectedGroups.value['deny_requests'] = []
-const selectorGroupOptions = ref(
-  featureDetails.value['deny_requests'].groups.reduce((arr, id: number) => {
-    const group = groupMap.value.get(id)
-    if (group) {
-      arr.push(group)
-    }
-    return arr
-  }, [] as Group[]),
-)
-
-const handleGroupChange = (event: GroupSelection) => {
-  denyGroups.value = event.groups
+const closeBlockModal = () => {
+  showBlockModal.value = false
+  blockModalKey.value++
 }
 
 const router = useRouter()
 const route = useRoute()
-const emit = defineEmits(['denialSubmitted', 'close'])
+const emit = defineEmits(['blockSubmitted', 'close'])
 
-const selectAllGroups = () => {
-  selectedGroups.value['deny_requests'] = featureDetails.value['deny_requests'].groups
-}
-if (featureDetails.value['deny_requests'].groups.length === 1) {
-  selectAllGroups()
-}
-
-const handleDenial = async () => {
-  if (!comments.value) {
-    invalidComments.value = 'Additional details are required'
-    return
-  } else if (!selectedReason.value) {
+const handleBlock = async () => {
+  if (!selectedReason.value.trim()) {
     invalidReason.value = true
     return
-  } else if (invalidComments.value || invalidReason.value) {
+  } else if (invalidReason.value) {
     return
-  } else if (
-    !selectedGroups.value['deny_requests'] ||
-    !selectedGroups.value['deny_requests'].length
-  ) {
+  } else if (!hasBlock.value) {
     return
   }
   const args = {
     doi: props.doc.doi,
-    groups: selectedGroups.value['deny_requests'],
     reason: selectedReason.value.trim(),
-    comments: comments.value.trim(),
   }
   try {
-    if (selectedReason.value === incompleteReason) {
-      await coreStore.$api.approvals.incomplete(args)
-    } else {
-      await coreStore.$api.approvals.deny(args)
-    }
-    const msg = 'Your denial has been submitted.'
+    await coreStore.$api.approvals.block(args)
+    const msg = 'Your block has been submitted.'
     coreStore.toast(msg, 'success')
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
-    emit('denialSubmitted')
+    emit('blockSubmitted', {
+      ...args,
+      reason: selectedReason.value,
+    })
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
     coreStore.$api.log({
-      eventtype:
-        selectedReason.value === incompleteReason
-          ? 'pep_incomplete_submitted'
-          : 'pep_denial_submitted',
-      event_description:
-        selectedReason.value === incompleteReason
-          ? 'user submitted incomplete'
-          : 'user submitted denial',
+      eventtype: 'pep_block_submitted',
+      event_description: 'user submitted block',
       dois: [args.doi],
       groups: args.groups,
       reason: args.reason,
-      comments: args.comments,
     })
   } catch {
-    const msg = 'There was an error and your denial was not submitted.'
+    const msg = 'There was an error and your block was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
-    closeDenyModal()
+    closeBlockModal()
+  }
+}
+const handleUnblock = async () => {
+  const args = {
+    doi: props.doc.doi,
+  }
+  try {
+    await coreStore.$api.approvals.unblock(args)
+    const msg = 'Your unblock has been submitted.'
+    coreStore.toast(msg, 'success')
+    searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
+    emit('blockSubmitted', {
+      ...args,
+    })
+    if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
+      changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
+    }
+    coreStore.$api.log({
+      eventtype: 'pep_unblock_submitted',
+      event_description: 'user submitted unblock',
+      dois: [args.doi],
+    })
+  } catch {
+    const msg = 'There was an error and your unblock was not submitted.'
+    coreStore.toast(`Oops! ${msg}`, 'error')
+  } finally {
+    closeBlockModal()
   }
 }
 </script>
 
 <template>
   <pep-pharos-button
-    v-if="showDeny"
+    v-if="showBlock"
     full-width
     class="mb-2 lg-mr-3"
     icon-left="checkmark-inverse"
-    :data-modal-id="`deny-modal-${doc.iid}`"
+    :data-modal-id="`block-modal-${doc.iid}`"
     variant="secondary"
-    @click.prevent.stop="openDenyModal"
+    @click.prevent.stop="openBlockModal"
   >
-    <span>Deny</span>
+    <span>Block</span>
+  </pep-pharos-button>
+  <pep-pharos-button
+    v-if="showUnblock"
+    full-width
+    class="mb-2 lg-mr-3"
+    icon-left="checkmark-inverse"
+    :data-modal-id="`unblock-modal-${doc.iid}`"
+    variant="secondary"
+    @click.prevent.stop="handleUnblock"
+  >
+    <span>Unblock</span>
   </pep-pharos-button>
   <Teleport to="body">
     <pep-pharos-modal
-      :id="`deny-modal-${doc.iid}`"
-      :key="denyModalKey"
-      header="Deny Material"
-      :open="showDenyModal"
+      :id="`block-modal-${doc.iid}`"
+      :key="blockModalKey"
+      header="Block Material"
+      :open="showBlockModal"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p
         slot="description"
         class="mb-3"
       >
-        What is your reason to deny access
+        What is your reason to block access
         <!-- eslint-disable-next-line vue/no-v-html  -->
-        <span v-if="doc.title">to <em v-html="doc.title" /></span><span v-if="!denyGroups.length">?</span>
-        <span v-if="denyGroups.length">&nbsp;for
-          {{
-            makeGrammaticalList(denyGroups.map((group) => (groupMap.get(group) || {}).name || ''))
-          }}?</span>
+        <span v-if="doc.title">to <em v-html="doc.title" /> globally?</span>
       </p>
-
-      <div
-        v-if="featureDetails['deny_requests'].groups.length > 1"
-        class="mb-3"
-      >
-        <GroupSelector
-          :groups="selectorGroupOptions"
-          :feature-name="'deny_requests'"
-          :start-full="false"
-          multiple
-          @change="handleGroupChange"
-        />
-      </div>
       <pep-pharos-radio-group
         :value="selectedReason"
         @input="handleSelectedReason"
@@ -230,21 +188,6 @@ const handleDenial = async () => {
           <span slot="label">
             <span class="display-flex align-items-center">
               {{ reason }}
-              <span v-if="reason === incompleteReason">
-                <pep-pharos-icon
-                  :data-tooltip-id="`incomplete_explanation`"
-                  name="question-inverse"
-                  class="mt-0 pl-2 fill-gray-40 small-icon"
-                  :aria-describedby="`incomplete_explanation`"
-                />
-                <pep-pharos-tooltip
-                  :id="`incomplete_explanation`"
-                  placement="top"
-                >
-                  <span class="text-none">Selecting this option will list the item as Incomplete rather than
-                    Denied.</span>
-                </pep-pharos-tooltip>
-              </span>
             </span>
           </span>
         </pep-pharos-radio-button>
@@ -266,30 +209,9 @@ const handleDenial = async () => {
         </pep-pharos-radio-button>
       </pep-pharos-radio-group>
 
-      <pep-pharos-textarea
-        :value="comments"
-        :invalidated="invalidComments.length"
-        :message="invalidComments"
-        placeholder="Contains a map of the area on page 46."
-        class="mb-4"
-        @input="handleCommentInput"
-      >
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-        <div slot="label">
-          Notes
-        </div>
-      </pep-pharos-textarea>
-
       <p>
-        <span>The record will show that {{ entityName }} denied <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}</span>
-        <span v-if="denyGroups.length">&nbsp;for use in
-          {{
-            makeGrammaticalList(
-              selectedGroups['deny_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
-            )
-          }}</span>
-        <span>.</span>
+        <span>The record will show that {{ entityName }} globally denied <em>{{ doc.title }}</em> on
+          {{ new Date().toLocaleDateString() }}.</span>
       </p>
 
       <!-- eslint-disable-next-line -->
@@ -300,21 +222,9 @@ const handleDenial = async () => {
       <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
-        :disabled="
-          !selectedGroups['deny_requests'] ||
-            !selectedGroups['deny_requests'].length ||
-            !denyGroups.length ||
-            arraysAreEqual(
-              denyGroups,
-              combineArrays(
-                getGroupsWithStatus(statuses, 'denied'),
-                getGroupsWithStatus(statuses, 'incomplete'),
-              ),
-            )
-        "
-        @click.prevent.stop="handleDenial"
+        @click.prevent.stop="handleBlock"
       >
-        Deny
+        Block
       </pep-pharos-button>
       <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
