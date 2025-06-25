@@ -85,7 +85,6 @@ const handleBlock = async () => {
     searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
     emit('blockSubmitted', {
       ...args,
-      reason: selectedReason.value,
     })
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
@@ -111,7 +110,9 @@ const handleUnblock = async () => {
     await coreStore.$api.global_blocks.unblock(args)
     const msg = 'Your unblock has been submitted.'
     coreStore.toast(msg, 'success')
-    searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
+    if (route.path !== '/block-list') {
+      await searchStore.doSearch(route.path === '/requests' ? reviewStatus.value : '', false)
+    }
     emit('blockSubmitted', {
       ...args,
     })

@@ -29,6 +29,7 @@ const props = defineProps({
   hideStatuses: Boolean,
   hideAccess: Boolean,
   includePdf: Boolean,
+  isBlockList: Boolean,
   small: Boolean,
   buttonName: {
     type: String,
@@ -250,7 +251,8 @@ const readRoute = ref(
                         statusData.status.toLowerCase() !== 'incomplete'
                     "
                   >
-                    {{ statusData.statusDetails!.reason }} -&nbsp;
+                    {{ statusData.statusDetails!.reason }}
+                    <span v-if="statusData.statusDetails!.comments">-&nbsp;</span>
                   </span>
                   <span>{{ statusData.statusDetails!.comments }}</span>
                 </span>
@@ -258,6 +260,9 @@ const readRoute = ref(
             </small>
           </p>
         </span>
+      </div>
+      <div v-if="isBlockList">
+        <p>{{ doc.blocked_reason }}</p>
       </div>
     </div>
     <Teleport to="div#app">

@@ -78,6 +78,7 @@ export const routes = {
   global_blocks: {
     block: `${global_route_prefix_versioned}/global-blocks/block`,
     unblock: `${global_route_prefix_versioned}/global-blocks/unblock`,
+    get: `${global_route_prefix_versioned}/global-blocks/get`,
   },
   documents: {
     pdfs: (iid: string) => `${global_route_prefix_versioned}/page/${iid}`,
@@ -204,6 +205,7 @@ export default ($axios: AxiosInstance): ApiObject => ({
   global_blocks: {
     block: (data) => $axios.post(routes.global_blocks.block, data),
     unblock: (data) => $axios.post(routes.global_blocks.unblock, data),
+    get: (data) => $axios.post(routes.global_blocks.get, data),
   },
   documents: {
     pdfs: (iid: string) => {

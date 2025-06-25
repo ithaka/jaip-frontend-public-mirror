@@ -37,6 +37,11 @@ interface Approvals {
 interface GlobalBlocks {
   block: (arg: BlockArgs) => Promise<AxiosResponse<unknown, unknown>>
   unblock: (arg: UnblockArgs) => Promise<AxiosResponse<unknown, unknown>>
+  get: (arg: {
+    term: string
+    page: number
+    limit: number
+  }) => Promise<AxiosResponse<SearchResponse, unknown>>
 }
 export default interface ApiObject {
   log: (arg: Log) => void

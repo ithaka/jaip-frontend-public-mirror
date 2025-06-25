@@ -63,7 +63,7 @@ const readRoute = ref(
     />
     <BlockControls
       :doc="doc"
-      @denial-submitted="emit('blockSubmitted')"
+      @block-submitted="emit('blockSubmitted')"
     />
     <pep-pharos-button
       v-if="hasHistory"
