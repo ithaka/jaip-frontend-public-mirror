@@ -21,26 +21,18 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 <template>
   <tr :class="[scope, 'display-grid']">
     <td>
-      <span
-        ><small>{{ history.statusLabel || history.status }}</small></span
-      >
+      <span><small>{{ history.statusLabel || history.status }}</small></span>
     </td>
     <td v-if="!isGlobal">
-      <span
-        ><small>{{ history.entityName }}</small></span
-      >
+      <span><small>{{ history.entityName }}</small></span>
     </td>
     <td>
-      <span
-        ><small>{{ history.groupName }}</small></span
-      >
+      <span><small>{{ history.groupName }}</small></span>
     </td>
     <td>
-      <span
-        ><small>{{
-          new Date(history.statusCreatedAt).toLocaleString('en', dateOptions)
-        }}</small></span
-      >
+      <span><small>{{
+        new Date(history.statusCreatedAt).toLocaleString('en', dateOptions)
+      }}</small></span>
     </td>
     <td>
       <span v-if="history.statusDetails?.reason || history.statusDetails?.comments">

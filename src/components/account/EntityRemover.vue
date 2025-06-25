@@ -77,7 +77,10 @@ const removeEntity = async () => {
             )
           }}. Are you sure you wish to proceed?
         </span>
-        <span v-else class="error">
+        <span
+          v-else
+          class="error"
+        >
           <span>Please select at least one group to remove {{ entity.name }} from.</span>
         </span>
       </p>

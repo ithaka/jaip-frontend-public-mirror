@@ -78,11 +78,12 @@ const emit = defineEmits(['close', 'submit'])
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable next-line vue/no-deprecated-slot-attribute -->
-      <p slot="description" class="mb-3">
-        <span
-          >Add {{ props.user.name }} as an administrator in any where they do not already have
-          administrative privileges.</span
-        >
+      <p
+        slot="description"
+        class="mb-3"
+      >
+        <span>Add {{ props.user.name }} as an administrator in any where they do not already have
+          administrative privileges.</span>
         <span v-if="groupNamesWithAllFeatures.length">
           Note that {{ props.user.name }} is already an administrator in
           {{
@@ -93,7 +94,10 @@ const emit = defineEmits(['close', 'submit'])
         </span>
       </p>
       <form @submit.prevent.stop="submitForm">
-        <input type="text" hidden />
+        <input
+          type="text"
+          hidden
+        >
         <pep-pharos-input-group
           :id="`add_admin_${props.user.id}`"
           :value="addInstruction"

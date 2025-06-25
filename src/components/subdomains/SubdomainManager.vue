@@ -105,7 +105,10 @@ const handleEditSubdomain = async (i: number) => {
       />
     </div>
     <div>
-      <form class="cols-8" @submit.prevent.stop="getSubdomains">
+      <form
+        class="cols-8"
+        @submit.prevent.stop="getSubdomains"
+      >
         <pep-pharos-input-group
           :id="`subdomain_search`"
           :value="query"
@@ -125,15 +128,25 @@ const handleEditSubdomain = async (i: number) => {
             type="submit"
           />
         </pep-pharos-input-group>
-        <pep-pharos-checkbox :checked="isActive" class="mb-5" @change="toggleActive">
+        <pep-pharos-checkbox
+          :checked="isActive"
+          class="mb-5"
+          @change="toggleActive"
+        >
           <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-          <span slot="label" class="text-weight-bold"> Get Active Subdomains Only </span>
+          <span
+            slot="label"
+            class="text-weight-bold"
+          > Get Active Subdomains Only </span>
         </pep-pharos-checkbox>
       </form>
     </div>
     <pep-pharos-loading-spinner v-if="gettingSubdomains" />
     <div v-else>
-      <div v-for="(subdomain, i) in currentSubdomains" :key="`user_${i}`">
+      <div
+        v-for="(subdomain, i) in currentSubdomains"
+        :key="`user_${i}`"
+      >
         <div
           class="group-card"
           :class="i !== Object.keys(currentSubdomains).length - 1 ? 'underline' : ''"

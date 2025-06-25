@@ -10,11 +10,12 @@ const { searchTerms, pageNo } = storeToRefs(searchStore)
 const router = useRouter()
 </script>
 <template>
-  <pep-pharos-alert status="warning" class="alert">
+  <pep-pharos-alert
+    status="warning"
+    class="alert"
+  >
     <div>
-      <span class="mb-2"
-        >Requests are temporarily disabled at this site. To browse pre-approved material, try:</span
-      >
+      <span class="mb-2">Requests are temporarily disabled at this site. To browse pre-approved material, try:</span>
       <ul>
         <li>
           Filtering for Subjects or Journals in your

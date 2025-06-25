@@ -115,11 +115,20 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div v-if="hasError" class="mt-8 mb-10">
-      <pep-pharos-heading :level="2" preset="5" class="error text-align-center">
+    <div
+      v-if="hasError"
+      class="mt-8 mb-10"
+    >
+      <pep-pharos-heading
+        :level="2"
+        preset="5"
+        class="error text-align-center"
+      >
         PDF Viewer Error
       </pep-pharos-heading>
-      <p class="text-align-center">An error occurred while loading the PDF viewer.</p>
+      <p class="text-align-center">
+        An error occurred while loading the PDF viewer.
+      </p>
     </div>
     <div v-else>
       <pep-pharos-select
@@ -140,9 +149,15 @@ onBeforeUnmount(() => {
           {{ page }}
         </option>
       </pep-pharos-select>
-      <div v-if="enableViewer" class="viewerPage">
+      <div
+        v-if="enableViewer"
+        class="viewerPage"
+      >
         <div id="viewerContainer">
-          <div id="viewer" class="pdfViewer" />
+          <div
+            id="viewer"
+            class="pdfViewer"
+          />
         </div>
       </div>
     </div>

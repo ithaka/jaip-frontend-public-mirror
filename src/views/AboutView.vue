@@ -20,7 +20,10 @@ coreStore.$api.log({
   <main class="about page">
     <InvalidLogin />
     <pep-pharos-layout row-gap="0">
-      <component :is="isAuthenticatedAdmin ? AdminAbout : About" class="cols-12" />
+      <component
+        :is="isAuthenticatedAdmin ? AdminAbout : About"
+        class="cols-12"
+      />
     </pep-pharos-layout>
   </main>
 </template>

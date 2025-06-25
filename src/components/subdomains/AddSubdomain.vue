@@ -42,9 +42,17 @@ const errorMessage = computed(() => {
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p slot="description" class="mb-3">Enter a unique name to add a new subdomain.</p>
+      <p
+        slot="description"
+        class="mb-3"
+      >
+        Enter a unique name to add a new subdomain.
+      </p>
       <form @submit.prevent.stop="submitForm">
-        <input type="text" hidden />
+        <input
+          type="text"
+          hidden
+        >
         <pep-pharos-input-group
           :id="`subdomain_name`"
           :value="newName"

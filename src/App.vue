@@ -84,10 +84,16 @@ const showRequestWarning = computed(
 <template>
   <div>
     <!-- Keeping the spinner outside the layout will allow it to fill the page. Useful for initial loading. -->
-    <pep-pharos-loading-spinner v-if="gettingUser || searching" class="position-fixed" />
+    <pep-pharos-loading-spinner
+      v-if="gettingUser || searching"
+      class="position-fixed"
+    />
 
     <!-- Placing the toaster here will put toast in the top right corner of the browser window. -->
-    <pep-pharos-toaster :key="toastKey" ref="toaster" />
+    <pep-pharos-toaster
+      :key="toastKey"
+      ref="toaster"
+    />
 
     <!-- Headers -->
     <MainHeader
@@ -122,58 +128,77 @@ const showRequestWarning = computed(
 
     <pep-pharos-footer id="footer">
       <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-      <div slot="links-group" class="display-flex flex-direction-column mb-6 cols-md-8">
+      <div
+        slot="links-group"
+        class="display-flex flex-direction-column mb-6 cols-md-8"
+      >
         <span> Brought to you by: </span>
         <img
           v-if="!isAuthenticatedAdmin"
           src="@/assets/images/JSTOR_Labs_Logo.png"
           class="footer-logo"
           alt="JSTOR Labs Logo"
-        />
-        <a v-else href="https://labs.jstor.org">
+        >
+        <a
+          v-else
+          href="https://labs.jstor.org"
+        >
           <img
             src="@/assets/images/JSTOR_Labs_Logo.png"
             class="footer-logo"
             alt="JSTOR Labs Logo"
-          />
+          >
         </a>
       </div>
-      <span slot="links-group" class="display-flex flex-direction-column mb-6 pr-6 cols-md-8">
+      <span
+        slot="links-group"
+        class="display-flex flex-direction-column mb-6 pr-6 cols-md-8"
+      >
         <span> Made possible with funding from: </span>
         <img
           v-if="!isAuthenticatedAdmin"
           src="@/assets/images/Mellon_Logomark_Lockup_White.png"
           class="footer-logo"
           alt="Mellon Foundation Logo"
-        />
-        <a v-else href="https://www.mellon.org">
+        >
+        <a
+          v-else
+          href="https://www.mellon.org"
+        >
           <img
             src="@/assets/images/Mellon_Logomark_Lockup_White.png"
             class="footer-logo"
             alt="Mellon Foundation Logo"
-          />
+          >
         </a>
         <img
           v-if="!isAuthenticatedAdmin"
           src="@/assets/images/ASC_Reverse.png"
           class="footer-logo"
           alt="Ascendium Foundation Logo"
-        />
-        <a v-else href="https://www.ascendiumphilanthropy.org">
+        >
+        <a
+          v-else
+          href="https://www.ascendiumphilanthropy.org"
+        >
           <img
             src="@/assets/images/ASC_Reverse.png"
             class="footer-logo"
             alt="Ascendium Foundation Logo"
-          />
+          >
         </a>
       </span>
-      <span slot="links-group" class="cols-3">
+      <span
+        slot="links-group"
+        class="cols-3"
+      >
         <span class="mb-4">
           JSTOR is part of
           <span v-if="isAdminSubdomain">
-            <pep-pharos-link :on-background.attr="true" href="https://ithaka.org"
-              >ITHAKA</pep-pharos-link
-            >
+            <pep-pharos-link
+              :on-background.attr="true"
+              href="https://ithaka.org"
+            >ITHAKA</pep-pharos-link>
           </span>
           <span v-else>ITHAKA</span>, a not-for-profit organization helping the academic community
           use digital technologies to preserve the scholarly record and to advance research and

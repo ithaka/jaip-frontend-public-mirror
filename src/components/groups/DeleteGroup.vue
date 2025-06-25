@@ -43,9 +43,17 @@ const errorMessage = computed(() => {
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p slot="description" class="mb-3">Are you sure you want to delete {{ props.name }}?</p>
+      <p
+        slot="description"
+        class="mb-3"
+      >
+        Are you sure you want to delete {{ props.name }}?
+      </p>
       <form @submit.prevent.stop="submitForm">
-        <input type="text" hidden />
+        <input
+          type="text"
+          hidden
+        >
         <pep-pharos-input-group
           :id="`delete_${props.groupId}`"
           :value="deleteInstruction"

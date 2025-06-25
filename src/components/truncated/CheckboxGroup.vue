@@ -111,15 +111,24 @@ const iconKey = ref(displayList.value.map(() => 0))
 
     <div class="pt-0 px-6 pb-3">
       <div v-if="displayList.length">
-        <pep-pharos-checkbox-group :value="checkboxes" @input="handleSelection">
+        <pep-pharos-checkbox-group
+          :value="checkboxes"
+          @input="handleSelection"
+        >
           <ul>
-            <li v-for="(item, i) in displayList" :key="`item_${i}`">
+            <li
+              v-for="(item, i) in displayList"
+              :key="`item_${i}`"
+            >
               <pep-pharos-checkbox
                 :checked="initialSelections.includes(getValue(item))"
                 :value="getValue(item)"
               >
                 <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                <div slot="label" class="display-flex">
+                <div
+                  slot="label"
+                  class="display-flex"
+                >
                   <BulkApprovalIcon
                     v-if="item.bulk_approval && getBulkApprovalStatus(item.bulk_approval, groupIDs)"
                     :key="iconKey[i]"

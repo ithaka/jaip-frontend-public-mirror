@@ -75,6 +75,11 @@ export const routes = {
     approve: `${global_route_prefix_versioned}/media-review/approve`,
     request: `${global_route_prefix_versioned}/media-review/request`,
   },
+  global_blocks: {
+    block: `${global_route_prefix_versioned}/global-blocks/block`,
+    unblock: `${global_route_prefix_versioned}/global-blocks/unblock`,
+    get: `${global_route_prefix_versioned}/global-blocks/get`,
+  },
   documents: {
     pdfs: (iid: string) => `${global_route_prefix_versioned}/page/${iid}`,
     metadata: (iid: string) => `${global_route_prefix_versioned}/metadata/${iid}`,
@@ -196,6 +201,11 @@ export default ($axios: AxiosInstance): ApiObject => ({
     incomplete: (data) => $axios.post(routes.approvals.incomplete, data),
     approve: (data) => $axios.post(routes.approvals.approve, data),
     request: (data) => $axios.post(routes.approvals.request, data),
+  },
+  global_blocks: {
+    block: (data) => $axios.post(routes.global_blocks.block, data),
+    unblock: (data) => $axios.post(routes.global_blocks.unblock, data),
+    get: (data) => $axios.post(routes.global_blocks.get, data),
   },
   documents: {
     pdfs: (iid: string) => {

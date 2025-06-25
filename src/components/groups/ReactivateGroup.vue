@@ -29,7 +29,12 @@ const submitForm = async () => {
       @pharos-modal-closed="emit('close')"
     >
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p slot="description" class="mb-3">Are you sure you want to reactivate {{ props.name }}?</p>
+      <p
+        slot="description"
+        class="mb-3"
+      >
+        Are you sure you want to reactivate {{ props.name }}?
+      </p>
 
       <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">

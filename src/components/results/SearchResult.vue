@@ -29,6 +29,7 @@ const props = defineProps({
   hideStatuses: Boolean,
   hideAccess: Boolean,
   includePdf: Boolean,
+  isBlockList: Boolean,
   small: Boolean,
   buttonName: {
     type: String,
@@ -79,7 +80,7 @@ const canRequest = computed(() => {
     !props.hideRequests
   )
 })
-const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted'])
+const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'blockSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
     ? `/page/${props.doc.iid}/0`
@@ -89,16 +90,24 @@ const readRoute = ref(
 <template>
   <div class="search-result">
     <div class="pr-6">
-      <BibliographicalData :doc="doc" :small="small" />
+      <BibliographicalData
+        :doc="doc"
+        :small="small"
+      />
 
       <!-- Text Details -->
       <div v-if="!hideDetails">
         <!-- Semantic Terms -->
         <div v-if="doc.semanticTerms">
           <b>Topics: </b>
-          <span v-for="(topic, key) in doc.semanticTerms" :key="key">
-            <a href="#" @click.prevent.stop="searchFor(topic)">{{ topic }}</a
-            ><span v-if="key + 1 != doc.semanticTerms.length">, </span>
+          <span
+            v-for="(topic, key) in doc.semanticTerms"
+            :key="key"
+          >
+            <a
+              href="#"
+              @click.prevent.stop="searchFor(topic)"
+            >{{ topic }}</a><span v-if="key + 1 != doc.semanticTerms.length">, </span>
           </span>
         </div>
         <!-- OCR -->
@@ -120,12 +129,22 @@ const readRoute = ref(
           small
         />
         <!-- Snippets -->
-        <div v-if="(doc.snippets || []).length && !hideSnippets" class="mt-4">
-          <div v-for="(snip, i) in doc.snippets" :key="`snippet_${i}`" class="text-size-sm">
+        <div
+          v-if="(doc.snippets || []).length && !hideSnippets"
+          class="mt-4"
+        >
+          <div
+            v-for="(snip, i) in doc.snippets"
+            :key="`snippet_${i}`"
+            class="text-size-sm"
+          >
             <!-- eslint-disable vue/no-v-html -->
             <small v-if="snip.text">
               ...
-              <span :class="{ 'text-size-xs': small }" v-html="snip.text" />
+              <span
+                :class="{ 'text-size-xs': small }"
+                v-html="snip.text"
+              />
               ...
             </small>
             <!-- eslint-enable vue/no-v-html -->
@@ -164,9 +183,9 @@ const readRoute = ref(
         <pep-pharos-button
           v-if="
             status === 'approved' &&
-            !pdfView &&
-            ((featureDetails['view_pdf'] || {}).enabled ||
-              (featureDetails['view_document'] || {}).enabled)
+              !pdfView &&
+              ((featureDetails['view_pdf'] || {}).enabled ||
+                (featureDetails['view_document'] || {}).enabled)
           "
           full-width
           class="mb-3"
@@ -198,17 +217,23 @@ const readRoute = ref(
           :include-pdf="includePdf"
           @approval-submitted="emit('approvalSubmitted')"
           @denial-submitted="emit('denialSubmitted')"
+          @block-submitted="emit('blockSubmitted')"
         />
       </div>
 
       <!-- Statuses -->
-      <div v-if="!hideStatuses" class="display-flex justify-content-end flex-direction-column">
-        <span v-for="(statusData, key) in doc.mediaReviewStatuses" :key="`status_${key}`">
+      <div
+        v-if="!hideStatuses"
+        class="display-flex justify-content-end flex-direction-column"
+      >
+        <span
+          v-for="(statusData, key) in doc.mediaReviewStatuses"
+          :key="`status_${key}`"
+        >
           <p>
             <small :class="{ 'text-size-xs': small }">
               <strong>Status:&nbsp;</strong>
-              <span>{{ statusData.statusLabel || statusData.status }}</span
-              ><span v-if="isAuthenticatedAdmin">&nbsp;({{ statusData.groupName }})</span> <br />
+              <span>{{ statusData.statusLabel || statusData.status }}</span><span v-if="isAuthenticatedAdmin">&nbsp;({{ statusData.groupName }})</span> <br>
               <span v-if="statusData.createdAt">{{
                 new Date(statusData.createdAt).toLocaleDateString()
               }}</span>
@@ -216,17 +241,18 @@ const readRoute = ref(
                 <span
                   v-if="
                     statusData.status.toLowerCase() === 'denied' ||
-                    statusData.status.toLowerCase() === 'incomplete' ||
-                    isAuthenticatedAdmin
+                      statusData.status.toLowerCase() === 'incomplete' ||
+                      isAuthenticatedAdmin
                   "
                 >
                   <span
                     v-if="
                       statusData.statusDetails!.reason ||
-                      statusData.status.toLowerCase() !== 'incomplete'
+                        statusData.status.toLowerCase() !== 'incomplete'
                     "
                   >
-                    {{ statusData.statusDetails!.reason }} -&nbsp;
+                    {{ statusData.statusDetails!.reason }}
+                    <span v-if="statusData.statusDetails!.comments">-&nbsp;</span>
                   </span>
                   <span>{{ statusData.statusDetails!.comments }}</span>
                 </span>
@@ -234,6 +260,9 @@ const readRoute = ref(
             </small>
           </p>
         </span>
+      </div>
+      <div v-if="isBlockList">
+        <p>{{ doc.blocked_reason }}</p>
       </div>
     </div>
     <Teleport to="div#app">

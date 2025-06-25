@@ -9,6 +9,7 @@ import { changeRoute } from '@/utils/helpers'
 import { useUserStore } from '@/stores/user'
 import ApprovalControls from '@/components/adminButtons/ApprovalControls.vue'
 import DenialControls from '@/components/adminButtons/DenialControls.vue'
+import BlockControls from '@/components/adminButtons/BlockControls.vue'
 import DocumentHistory from '@/components/results/DocumentHistory.vue'
 import AccessButtons from '@/components/AccessButtons.vue'
 
@@ -28,7 +29,7 @@ const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
 
 const router = useRouter()
-const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted'])
+const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'blockSubmitted'])
 
 const hasHistory = (props.doc.history || []).length || (props.doc.national_history || []).length
 const showHistoryModal = ref(false)
@@ -52,8 +53,18 @@ const readRoute = ref(
   <div
     class="display-flex justify-content-end md-flex-direction-column lg-flex-direction-row flex-direction-column"
   >
-    <ApprovalControls :doc="doc" @approval-submitted="emit('approvalSubmitted')" />
-    <DenialControls :doc="doc" @denial-submitted="emit('denialSubmitted')" />
+    <ApprovalControls
+      :doc="doc"
+      @approval-submitted="emit('approvalSubmitted')"
+    />
+    <DenialControls
+      :doc="doc"
+      @denial-submitted="emit('denialSubmitted')"
+    />
+    <BlockControls
+      :doc="doc"
+      @block-submitted="emit('blockSubmitted')"
+    />
     <pep-pharos-button
       v-if="hasHistory"
       full-width
@@ -116,7 +127,10 @@ const readRoute = ref(
             Global Statuses
           </pep-pharos-toggle-button>
         </pep-pharos-toggle-button-group>
-        <DocumentHistory :doc="doc" :scope="isGlobal ? 'global' : 'local'" />
+        <DocumentHistory
+          :doc="doc"
+          :scope="isGlobal ? 'global' : 'local'"
+        />
       </pep-pharos-modal>
     </Teleport>
   </div>

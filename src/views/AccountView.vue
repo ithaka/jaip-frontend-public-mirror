@@ -56,8 +56,15 @@ coreStore.$api.log({
 
 <template>
   <main class="page">
-    <pep-pharos-layout row-gap="0" preset="1-col">
-      <pep-pharos-heading class="text-capitalize cols-8" :level="1" preset="5--bold">
+    <pep-pharos-layout
+      row-gap="0"
+      preset="1-col"
+    >
+      <pep-pharos-heading
+        class="text-capitalize cols-8"
+        :level="1"
+        preset="5--bold"
+      >
         Account Management
       </pep-pharos-heading>
     </pep-pharos-layout>
@@ -84,7 +91,10 @@ coreStore.$api.log({
     <div>
       <!-- We can safely assume that the entity object matching visibleEntity will exist because the value of visibleEntity can only
           be one of the available entity types -->
-      <EntitySearch :key="`${visibleEntity}_search`" :entity="entityObject[visibleEntity]!" />
+      <EntitySearch
+        :key="`${visibleEntity}_search`"
+        :entity="entityObject[visibleEntity]!"
+      />
     </div>
   </main>
 </template>
