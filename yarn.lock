@@ -1333,90 +1333,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-android-arm64@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.67"
+"@napi-rs/canvas-android-arm64@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.70"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-arm64@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.67"
+"@napi-rs/canvas-darwin-arm64@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.70"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-x64@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.67"
+"@napi-rs/canvas-darwin-x64@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.70"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.67"
+"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.70"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.67"
+"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.70"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-musl@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.67"
+"@napi-rs/canvas-linux-arm64-musl@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.70"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.67"
+"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.70"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-gnu@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.67"
+"@napi-rs/canvas-linux-x64-gnu@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.70"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-musl@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.67"
+"@napi-rs/canvas-linux-x64-musl@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.70"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-x64-msvc@npm:0.1.67":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.67"
+"@napi-rs/canvas-win32-x64-msvc@npm:0.1.70":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.70"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:^0.1.65":
-  version: 0.1.67
-  resolution: "@napi-rs/canvas@npm:0.1.67"
+"@napi-rs/canvas@npm:^0.1.67":
+  version: 0.1.70
+  resolution: "@napi-rs/canvas@npm:0.1.70"
   dependencies:
-    "@napi-rs/canvas-android-arm64": "npm:0.1.67"
-    "@napi-rs/canvas-darwin-arm64": "npm:0.1.67"
-    "@napi-rs/canvas-darwin-x64": "npm:0.1.67"
-    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.67"
-    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.67"
-    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.67"
-    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.67"
-    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.67"
-    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.67"
-    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.67"
+    "@napi-rs/canvas-android-arm64": "npm:0.1.70"
+    "@napi-rs/canvas-darwin-arm64": "npm:0.1.70"
+    "@napi-rs/canvas-darwin-x64": "npm:0.1.70"
+    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.70"
+    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.70"
+    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.70"
+    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.70"
+    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.70"
+    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.70"
+    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.70"
   dependenciesMeta:
     "@napi-rs/canvas-android-arm64":
       optional: true
@@ -1438,7 +1438,7 @@ __metadata:
       optional: true
     "@napi-rs/canvas-win32-x64-msvc":
       optional: true
-  checksum: 10c0/d4dc943365d2aecfd67f34c4f7fab507c9a79678c06f086fdb091fe94782af05b3477357fdea288b92e74b7fc787910b6e4b325c9fa90f3d36966ee191e95928
+  checksum: 10c0/0855e9d65f24811006d5b6b9a37f70c9742ba12fd7f7d2968f49a7bcec17bd49e209ce3f0ee9f88e2df97466e14c4e829b8664a4277b2d64fe873cf5cfcff9f0
   languageName: node
   linkType: hard
 
@@ -5788,7 +5788,7 @@ __metadata:
     npm-run-all2: "npm:^7.0.2"
     openseadragon: "npm:^5.0.1"
     path: "npm:^0.12.7"
-    pdfjs-dist: "npm:^4.10.38"
+    pdfjs-dist: "npm:^5.3.31"
     pinia: "npm:^3.0.3"
     prettier: "npm:^3.6.2"
     print-js: "npm:^1.6.0"
@@ -7056,15 +7056,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pdfjs-dist@npm:^4.10.38":
-  version: 4.10.38
-  resolution: "pdfjs-dist@npm:4.10.38"
+"pdfjs-dist@npm:^5.3.31":
+  version: 5.3.31
+  resolution: "pdfjs-dist@npm:5.3.31"
   dependencies:
-    "@napi-rs/canvas": "npm:^0.1.65"
+    "@napi-rs/canvas": "npm:^0.1.67"
   dependenciesMeta:
     "@napi-rs/canvas":
       optional: true
-  checksum: 10c0/77b022109be7aac00372750a53decea3979409e6ef1cf93bf554351569cd4d1fafc70afae4a9a3e4b4de3facf59d3acd54d324b0fcff781374bcb00493d449ce
+  checksum: 10c0/7abbd2bff8ebec77892cd03eb6b3367e1ffec1b15efd188937e07be7851e1892e99aba498debc3c42fe8e044ec451030923cee3108196c8fa71068d99487c3c1
   languageName: node
   linkType: hard
 
