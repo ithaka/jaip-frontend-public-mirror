@@ -1,10 +1,7 @@
-# --- vulns in the underlying nginx image ---
-CVE-2024-56171
-CVE-2025-24928
-CVE-2025-27113
-CVE-2024-8176
-CVE-2024-55549
-CVE-2025-24855
-CVE-2025-31115
-CVE-2025-32414
-CVE-2025-32415
+# NGINX VULNERABILITIES
+# This occurs when reading XML documents with the Python API, which does not happen here.
+CVE-2025-32414 exp:2025-08-30
+
+# We do not receive XML documents, so this isn't relevant.
+CVE-2025-32415 exp:2025-08-30
+
