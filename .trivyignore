@@ -1,0 +1,7 @@
+# NGINX VULNERABILITIES
+# This occurs when reading XML documents with the Python API, which does not happen here.
+CVE-2025-32414 exp:2025-08-30
+
+# We do not receive XML documents, so this isn't relevant.
+CVE-2025-32415 exp:2025-08-30
+
