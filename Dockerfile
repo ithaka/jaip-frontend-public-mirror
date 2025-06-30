@@ -1,4 +1,4 @@
-FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:22.17.0-alpine AS build-stage
+FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:22.17.0-alpine AS build-stage 
 WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
@@ -8,7 +8,7 @@ RUN yarn install --immutable
 COPY ./ .
 RUN yarn build-only
 
-FROM docker-virtual.artifactory.acorn.cirrostratus.org/nginx:22.17.0-alpine AS production-stage
+FROM docker-virtual.artifactory.acorn.cirrostratus.org/nginx:stable-alpine AS production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY --from=build-stage /app/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build-stage /app/nginx/shared/ /etc/nginx/shared
