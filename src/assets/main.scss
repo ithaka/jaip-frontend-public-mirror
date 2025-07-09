@@ -158,15 +158,15 @@ body {
   max-width: 70rem;
   display: flex;
   flex-direction: column;
-  &.about,
-  &.help {
-    @media screen and (max-width: $pharos-breakpoint-medium) {
-      margin-bottom: var(--pharos-spacing-5-x);
-    }
-    @media screen and (max-width: $pharos-breakpoint-xlarge) {
-      margin-bottom: calc(var(--pharos-spacing-5-x) * 2);
-    }
-    margin-bottom: calc(var(--pharos-spacing-5-x) * 3);
+}
+.page.help,
+.page.about {
+  margin-bottom: calc(var(--pharos-spacing-5-x) * 3);
+  @media screen and (max-width: $pharos-breakpoint-medium) {
+    margin-bottom: var(--pharos-spacing-5-x);
+  }
+  @media screen and (max-width: $pharos-breakpoint-xlarge) {
+    margin-bottom: calc(var(--pharos-spacing-5-x) * 2);
   }
 }
 .markdown-body {

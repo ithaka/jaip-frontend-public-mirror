@@ -791,39 +791,43 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
   @media screen and (min-width: 48rem) {
     display: none !important;
   }
-
-  display: inline-block !important;
+  & {
+    display: inline-block !important;
+  }
 }
 
 .viewer-show-for-medium-up {
   @media screen and (min-width: 48rem) {
     display: inline-block !important;
   }
-
-  display: none !important;
+  & {
+    display: none !important;
+  }
 }
 
 .viewer-show-for-large-down {
-  @media screen and (min-width: 48rem) and (max-width: calc(1056 - 1)px) {
+  @media screen and (min-width: 48rem) and (max-width: 1055px) {
     display: flex !important;
   }
-
-  display: none !important;
+  & {
+    display: none !important;
+  }
 }
 
 .viewer-show-for-large-up {
   @media screen and (min-width: 66rem) {
     display: flex !important;
   }
-
-  display: none !important;
+  & {
+    display: none !important;
+  }
 }
 
 .viewer-controls-thumbnail {
   position: absolute !important;
   left: $button-offset;
   top: $button-offset;
-  @media screen and (min-width: 22.5rem) and (max-width: calc(1056 - 1)px) {
+  @media screen and (min-width: 22.5rem) and (max-width: 1055px) {
     display: none;
   }
 }
