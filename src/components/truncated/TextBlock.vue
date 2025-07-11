@@ -24,11 +24,7 @@ const component = ref(props.small ? 'small' : 'span')
   <div>
     <component :is="component">
       <!-- eslint-disable vue/no-v-html -->
-      <span
-        v-if="expand"
-        :class="[{ 'text-size-xs': small }, 'inline']"
-        v-html="text"
-      />
+      <span v-if="expand" :class="[{ 'text-size-xs': small }, 'inline']" v-html="text" />
       <!-- eslint-enable vue/no-v-html -->
       <!-- eslint-disable vue/no-v-html -->
       <span

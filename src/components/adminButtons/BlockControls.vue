@@ -163,20 +163,12 @@ const handleUnblock = async () => {
       header="Block Material"
       :open="showBlockModal"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p
-        slot="description"
-        class="mb-3"
-      >
+      <p slot="description" class="mb-3">
         What is your reason to block access
         <!-- eslint-disable-next-line vue/no-v-html  -->
         <span v-if="doc.title">to <em v-html="doc.title" /> globally?</span>
       </p>
-      <pep-pharos-radio-group
-        :value="selectedReason"
-        @input="handleSelectedReason"
-      >
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+      <pep-pharos-radio-group :value="selectedReason" @input="handleSelectedReason">
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
           v-for="(reason, index) in reasons"
@@ -184,18 +176,13 @@ const handleUnblock = async () => {
           :value="reason"
           :checked="reason === selectedReason"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">
             <span class="display-flex align-items-center">
               {{ reason }}
             </span>
           </span>
         </pep-pharos-radio-button>
-        <pep-pharos-radio-button
-          :value="otherReason"
-          :checked="otherReason === selectedReason"
-        >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+        <pep-pharos-radio-button :value="otherReason" :checked="otherReason === selectedReason">
           <span slot="label">
             <pep-pharos-text-input
               :value="otherReason"
@@ -210,8 +197,10 @@ const handleUnblock = async () => {
       </pep-pharos-radio-group>
 
       <p>
-        <span>The record will show that {{ entityName }} globally denied <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}.</span>
+        <span
+          >The record will show that {{ entityName }} globally denied <em>{{ doc.title }}</em> on
+          {{ new Date().toLocaleDateString() }}.</span
+        >
       </p>
 
       <!-- eslint-disable-next-line -->
@@ -220,12 +209,7 @@ const handleUnblock = async () => {
       </pep-pharos-button>
 
       <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-      <pep-pharos-button
-        slot="footer"
-        @click.prevent.stop="handleBlock"
-      >
-        Block
-      </pep-pharos-button>
+      <pep-pharos-button slot="footer" @click.prevent.stop="handleBlock"> Block </pep-pharos-button>
       <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>

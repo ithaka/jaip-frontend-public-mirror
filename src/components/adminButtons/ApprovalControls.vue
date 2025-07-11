@@ -131,16 +131,19 @@ const selectorGroupOptions = ref(
       size="large"
       :open="showApproveModal"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p slot="description">
-        <span>The record will show that {{ entityName }} approved <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}</span>
-        <span v-if="approveGroups.length">&nbsp;for use in
+        <span
+          >The record will show that {{ entityName }} approved <em>{{ doc.title }}</em> on
+          {{ new Date().toLocaleDateString() }}</span
+        >
+        <span v-if="approveGroups.length"
+          >&nbsp;for use in
           {{
             makeGrammaticalList(
               selectedGroups['approve_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
             )
-          }}</span>
+          }}</span
+        >
         <span>.</span>
       </p>
       <div v-if="featureDetails['approve_requests'].groups.length > 1">
@@ -151,10 +154,7 @@ const selectorGroupOptions = ref(
           multiple
         />
       </div>
-      <span
-        v-if="!selectedGroups['approve_requests'].length"
-        class="error"
-      >
+      <span v-if="!selectedGroups['approve_requests'].length" class="error">
         At least one group must be selected
       </span>
 
@@ -168,7 +168,7 @@ const selectorGroupOptions = ref(
         slot="footer"
         :disabled="
           !approveGroups.length ||
-            arraysAreEqual(approveGroups, getGroupsWithStatus(statuses, 'approved'))
+          arraysAreEqual(approveGroups, getGroupsWithStatus(statuses, 'approved'))
         "
         @click.prevent.stop="handleApproval"
       >

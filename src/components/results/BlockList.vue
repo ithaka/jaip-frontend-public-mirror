@@ -47,16 +47,10 @@ const getResultsCountLabel = (count: number) => {
 </script>
 
 <template>
-  <div
-    v-if="searching"
-    class="position-relative mt-8 cols-12"
-  >
+  <div v-if="searching" class="position-relative mt-8 cols-12">
     <pep-pharos-loading-spinner />
   </div>
-  <div
-    v-else
-    class="cols-12 mb-6"
-  >
+  <div v-else class="cols-12 mb-6">
     <div>
       <form @submit.prevent.stop="getBlockedItems">
         <pep-pharos-input-group
@@ -67,11 +61,7 @@ const getResultsCountLabel = (count: number) => {
           :value="term"
           @input="term = $event.target.value"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-          <span
-            slot="label"
-            class="display-flex align-items-center"
-          >
+          <span slot="label" class="display-flex align-items-center">
             <span>Search</span>
           </span>
           <pep-pharos-button
@@ -85,22 +75,11 @@ const getResultsCountLabel = (count: number) => {
         </pep-pharos-input-group>
       </form>
     </div>
-    <div
-      v-if="docs.length"
-      class="mt-5"
-    >
-      <pep-pharos-heading
-        preset="3--bold"
-        :level="2"
-        class="mb-6"
-      >
+    <div v-if="docs.length" class="mt-5">
+      <pep-pharos-heading preset="3--bold" :level="2" class="mb-6">
         {{ getResultsCountLabel(total) }}
       </pep-pharos-heading>
-      <div
-        v-for="doc in docs"
-        :key="doc.iid"
-        class="mb-8"
-      >
+      <div v-for="doc in docs" :key="doc.iid" class="mb-8">
         <SearchResult
           :key="doc.iid"
           :doc="doc"
@@ -110,16 +89,8 @@ const getResultsCountLabel = (count: number) => {
         />
       </div>
     </div>
-    <div
-      v-else
-      class="cols-12 mt-5 mb-7"
-    >
-      <pep-pharos-heading
-        preset="3--bold"
-        :level="2"
-      >
-        No blocked items found.
-      </pep-pharos-heading>
+    <div v-else class="cols-12 mt-5 mb-7">
+      <pep-pharos-heading preset="3--bold" :level="2"> No blocked items found. </pep-pharos-heading>
     </div>
     <pep-pharos-pagination
       v-if="!searching && total > docs.length"

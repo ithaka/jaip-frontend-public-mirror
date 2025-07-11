@@ -87,10 +87,7 @@ const handleAddAdmin = async (i: number) => {
       />
     </div>
     <div>
-      <form
-        class="cols-8"
-        @submit.prevent.stop="getUsers"
-      >
+      <form class="cols-8" @submit.prevent.stop="getUsers">
         <pep-pharos-input-group
           :id="`user_search`"
           :value="query"
@@ -98,7 +95,6 @@ const handleAddAdmin = async (i: number) => {
           :name="`user_search`"
           @input="query = $event.target.value"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">User Search</span>
           <pep-pharos-button
             name="search-button"
@@ -113,10 +109,7 @@ const handleAddAdmin = async (i: number) => {
     </div>
     <pep-pharos-loading-spinner v-if="gettingUsers" />
     <div v-else>
-      <div
-        v-for="(user, id, i) in currentUsers"
-        :key="`user_${i}`"
-      >
+      <div v-for="(user, id, i) in currentUsers" :key="`user_${i}`">
         <div
           class="group-card"
           :class="i !== Object.keys(currentUsers).length - 1 ? 'underline' : ''"
@@ -154,7 +147,7 @@ const handleAddAdmin = async (i: number) => {
           <div
             v-if="
               user.ungrouped_features &&
-                Object.keys(userStore.getEnabledFeatures(user.ungrouped_features)).length > 0
+              Object.keys(userStore.getEnabledFeatures(user.ungrouped_features)).length > 0
             "
             class="pb-6 pl-6 pr-6 pt-0 display-flex flex-direction-row justify-content-space-between"
           >
@@ -166,18 +159,11 @@ const handleAddAdmin = async (i: number) => {
                 :key="`feature-category-${index}`"
                 :data-panel-id="`feature-category-${index}`"
               >
-                <pep-pharos-heading
-                  class=""
-                  preset="legend"
-                  :level="3"
-                >
+                <pep-pharos-heading class="" preset="legend" :level="3">
                   {{ label }}
                 </pep-pharos-heading>
                 <ul>
-                  <li
-                    v-for="feature of category"
-                    :key="`feature_${feature.name}`"
-                  >
+                  <li v-for="feature of category" :key="`feature_${feature.name}`">
                     <span class="display-flex align-items-center">
                       <span>{{ feature.display_name }}</span>
                       <pep-pharos-icon
@@ -186,10 +172,7 @@ const handleAddAdmin = async (i: number) => {
                         class="mt-0 pl-2 fill-gray-40 small-icon"
                         :aria-describedby="`feature-tooltip-${feature.name}`"
                       />
-                      <pep-pharos-tooltip
-                        :id="`feature-tooltip-${feature.name}`"
-                        placement="top"
-                      >
+                      <pep-pharos-tooltip :id="`feature-tooltip-${feature.name}`" placement="top">
                         <span class="text-none">{{ feature.description }}</span>
                       </pep-pharos-tooltip>
                     </span>
@@ -202,11 +185,7 @@ const handleAddAdmin = async (i: number) => {
             v-else
             class="pb-6 pl-6 pr-6 pt-0 display-flex flex-direction-row justify-content-space-between"
           >
-            <pep-pharos-heading
-              class=""
-              preset="legend"
-              :level="3"
-            >
+            <pep-pharos-heading class="" preset="legend" :level="3">
               No Features Enabled
             </pep-pharos-heading>
           </div>

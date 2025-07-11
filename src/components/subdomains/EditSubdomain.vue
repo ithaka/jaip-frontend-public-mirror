@@ -50,18 +50,11 @@ const errorMessage = computed(() => {
       :open="props.show"
       @pharos-modal-closed="emit('close')"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p
-        slot="description"
-        class="mb-3"
-      >
+      <p slot="description" class="mb-3">
         Edit {{ props.subdomain.subdomain }} by adding a unique new name.
       </p>
       <form @submit.prevent.stop="submitForm">
-        <input
-          type="text"
-          hidden
-        >
+        <input type="text" hidden />
         <pep-pharos-input-group
           :id="`subdomain_name`"
           :value="newName"
@@ -73,7 +66,6 @@ const errorMessage = computed(() => {
           @keydown.enter.prevent.stop="submitForm"
           @input="((duplicateName = false), (touchedName = true), (newName = $event.target.value))"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Subdomain</span>
         </pep-pharos-input-group>
       </form>

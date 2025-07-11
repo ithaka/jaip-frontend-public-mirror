@@ -106,11 +106,7 @@ const descriptionErrorMessage = computed(() => {
       :open="props.show"
       @pharos-modal-closed="emit('close')"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p
-        slot="description"
-        class="mb-3"
-      >
+      <p slot="description" class="mb-3">
         Fill out the form to edit {{ props.feature.display_name }}.
       </p>
       <form @submit.prevent.stop="submitForm">
@@ -128,7 +124,6 @@ const descriptionErrorMessage = computed(() => {
             ((duplicateName = false), (touchedName = true), (newFeature.name = $event.target.value))
           "
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Name</span>
         </pep-pharos-input-group>
         <pep-pharos-input-group
@@ -143,11 +138,10 @@ const descriptionErrorMessage = computed(() => {
           @keydown.enter.prevent.stop="submitForm"
           @input="
             ((duplicateDisplayName = false),
-             (touchedDisplayName = true),
-             (newFeature.display_name = $event.target.value))
+            (touchedDisplayName = true),
+            (newFeature.display_name = $event.target.value))
           "
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Display Name</span>
         </pep-pharos-input-group>
         <pep-pharos-input-group
@@ -162,7 +156,6 @@ const descriptionErrorMessage = computed(() => {
           @keydown.enter.prevent.stop="submitForm"
           @input="((touchedCategory = true), (newFeature.category = $event.target.value))"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Category</span>
         </pep-pharos-input-group>
         <pep-pharos-input-group
@@ -177,7 +170,6 @@ const descriptionErrorMessage = computed(() => {
           @keydown.enter.prevent.stop="submitForm"
           @input="((touchedDescription = true), (newFeature.description = $event.target.value))"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Description</span>
         </pep-pharos-input-group>
 
@@ -185,21 +177,16 @@ const descriptionErrorMessage = computed(() => {
           :checked="newFeature.is_active"
           @change="newFeature.is_active = !newFeature.is_active"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Active</span>
         </pep-pharos-checkbox>
 
-        <div
-          v-if="!props.ungrouped"
-          class="mt-3"
-        >
+        <div v-if="!props.ungrouped" class="mt-3">
           <pep-pharos-checkbox
             :id="`admin_checkbox-${props.feature.id}`"
             class="mr-5"
             :checked="newFeature.is_admin_only"
             @change="newFeature.is_admin_only = !newFeature.is_admin_only"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
             <span slot="label">Admin Only</span>
           </pep-pharos-checkbox>
           <pep-pharos-checkbox
@@ -207,7 +194,6 @@ const descriptionErrorMessage = computed(() => {
             :checked="newFeature.is_protected"
             @change="newFeature.is_protected = !newFeature.is_protected"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
             <span slot="label">Protected</span>
           </pep-pharos-checkbox>
         </div>

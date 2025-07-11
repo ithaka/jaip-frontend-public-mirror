@@ -102,15 +102,9 @@ coreStore.$api.log({
 <template>
   <pep-pharos-layout row-gap="0">
     <Teleport to="body">
-      <pep-pharos-loading-spinner
-        v-if="gettingDocument"
-        class="position-fixed"
-      />
+      <pep-pharos-loading-spinner v-if="gettingDocument" class="position-fixed" />
     </Teleport>
-    <div
-      v-if="doc"
-      class="cols-12 mt-5 mb-7"
-    >
+    <div v-if="doc" class="cols-12 mt-5 mb-7">
       <SearchResult
         :key="updateKey"
         :doc="doc"
@@ -128,16 +122,10 @@ coreStore.$api.log({
       class="cols-12"
       :class="[{ 'mt-10': error.code !== 403 }]"
     >
-      <pep-pharos-heading
-        class="mb-2 mb-4 pb-0"
-        preset="5--bold"
-        :level="1"
-      >
+      <pep-pharos-heading class="mb-2 mb-4 pb-0" preset="5--bold" :level="1">
         {{ error.message }}
       </pep-pharos-heading>
-      <p v-if="!page_index || pdfData">
-        You do not have access to this document.
-      </p>
+      <p v-if="!page_index || pdfData">You do not have access to this document.</p>
     </div>
     <PDFViewer
       v-if="!page_index && !error.status && hasStructuredClone"

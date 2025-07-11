@@ -188,24 +188,20 @@ const handleDenial = async () => {
       header="Deny Material"
       :open="showDenyModal"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p
-        slot="description"
-        class="mb-3"
-      >
+      <p slot="description" class="mb-3">
         What is your reason to deny access
         <!-- eslint-disable-next-line vue/no-v-html  -->
-        <span v-if="doc.title">to <em v-html="doc.title" /></span><span v-if="!denyGroups.length">?</span>
-        <span v-if="denyGroups.length">&nbsp;for
+        <span v-if="doc.title">to <em v-html="doc.title" /></span
+        ><span v-if="!denyGroups.length">?</span>
+        <span v-if="denyGroups.length"
+          >&nbsp;for
           {{
             makeGrammaticalList(denyGroups.map((group) => (groupMap.get(group) || {}).name || ''))
-          }}?</span>
+          }}?</span
+        >
       </p>
 
-      <div
-        v-if="featureDetails['deny_requests'].groups.length > 1"
-        class="mb-3"
-      >
+      <div v-if="featureDetails['deny_requests'].groups.length > 1" class="mb-3">
         <GroupSelector
           :groups="selectorGroupOptions"
           :feature-name="'deny_requests'"
@@ -214,11 +210,7 @@ const handleDenial = async () => {
           @change="handleGroupChange"
         />
       </div>
-      <pep-pharos-radio-group
-        :value="selectedReason"
-        @input="handleSelectedReason"
-      >
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+      <pep-pharos-radio-group :value="selectedReason" @input="handleSelectedReason">
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
           v-for="(reason, index) in reasons"
@@ -226,7 +218,6 @@ const handleDenial = async () => {
           :value="reason"
           :checked="reason === selectedReason"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">
             <span class="display-flex align-items-center">
               {{ reason }}
@@ -237,22 +228,17 @@ const handleDenial = async () => {
                   class="mt-0 pl-2 fill-gray-40 small-icon"
                   :aria-describedby="`incomplete_explanation`"
                 />
-                <pep-pharos-tooltip
-                  :id="`incomplete_explanation`"
-                  placement="top"
-                >
-                  <span class="text-none">Selecting this option will list the item as Incomplete rather than
-                    Denied.</span>
+                <pep-pharos-tooltip :id="`incomplete_explanation`" placement="top">
+                  <span class="text-none"
+                    >Selecting this option will list the item as Incomplete rather than
+                    Denied.</span
+                  >
                 </pep-pharos-tooltip>
               </span>
             </span>
           </span>
         </pep-pharos-radio-button>
-        <pep-pharos-radio-button
-          :value="otherReason"
-          :checked="otherReason === selectedReason"
-        >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+        <pep-pharos-radio-button :value="otherReason" :checked="otherReason === selectedReason">
           <span slot="label">
             <pep-pharos-text-input
               :value="otherReason"
@@ -274,21 +260,22 @@ const handleDenial = async () => {
         class="mb-4"
         @input="handleCommentInput"
       >
-        <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-        <div slot="label">
-          Notes
-        </div>
+        <div slot="label">Notes</div>
       </pep-pharos-textarea>
 
       <p>
-        <span>The record will show that {{ entityName }} denied <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}</span>
-        <span v-if="denyGroups.length">&nbsp;for use in
+        <span
+          >The record will show that {{ entityName }} denied <em>{{ doc.title }}</em> on
+          {{ new Date().toLocaleDateString() }}</span
+        >
+        <span v-if="denyGroups.length"
+          >&nbsp;for use in
           {{
             makeGrammaticalList(
               selectedGroups['deny_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
             )
-          }}</span>
+          }}</span
+        >
         <span>.</span>
       </p>
 
@@ -302,15 +289,15 @@ const handleDenial = async () => {
         slot="footer"
         :disabled="
           !selectedGroups['deny_requests'] ||
-            !selectedGroups['deny_requests'].length ||
-            !denyGroups.length ||
-            arraysAreEqual(
-              denyGroups,
-              combineArrays(
-                getGroupsWithStatus(statuses, 'denied'),
-                getGroupsWithStatus(statuses, 'incomplete'),
-              ),
-            )
+          !selectedGroups['deny_requests'].length ||
+          !denyGroups.length ||
+          arraysAreEqual(
+            denyGroups,
+            combineArrays(
+              getGroupsWithStatus(statuses, 'denied'),
+              getGroupsWithStatus(statuses, 'incomplete'),
+            ),
+          )
         "
         @click.prevent.stop="handleDenial"
       >

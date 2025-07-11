@@ -83,11 +83,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
 
 <template>
   <div>
-    <pep-pharos-heading
-      class="mb-2 pb-0"
-      preset="5"
-      :level="3"
-    >
+    <pep-pharos-heading class="mb-2 pb-0" preset="5" :level="3">
       <span class="button-row">
         <span>{{ entity.name }}</span>
         <span class="button-row-buttons">
@@ -112,21 +108,13 @@ const handleGroupSelection = (e: InputFileEvent) => {
         </span>
       </span>
     </pep-pharos-heading>
-    <pep-pharos-heading
-      class="mb-2 pb-0"
-      preset="legend"
-      :level="3"
-    >
+    <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="3">
       {{ entity.contact }}
     </pep-pharos-heading>
 
     <div class="mt-4">
       <div v-if="(entity.groups || []).length === 1">
-        <pep-pharos-heading
-          class="mb-2 pb-0"
-          preset="3"
-          :level="3"
-        >
+        <pep-pharos-heading class="mb-2 pb-0" preset="3" :level="3">
           {{ entity.groups![0].name || 'Unknown Group' }}
         </pep-pharos-heading>
       </div>
@@ -144,10 +132,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
         >
           {{ selectedGroup.name }}
         </pep-pharos-button>
-        <pep-pharos-dropdown-menu
-          :id="`group_selector_${entity.id}`"
-          full-width
-        >
+        <pep-pharos-dropdown-menu :id="`group_selector_${entity.id}`" full-width>
           <pep-pharos-dropdown-menu-item
             v-for="(group, id) in sortedGroups"
             :key="`${entity.id}_${id}`"
@@ -157,26 +142,18 @@ const handleGroupSelection = (e: InputFileEvent) => {
           </pep-pharos-dropdown-menu-item>
         </pep-pharos-dropdown-menu>
       </div>
-      <div
-        v-else-if="(entity.groups || []).length >= groupThreshold"
-        class="mb-5"
-      >
+      <div v-else-if="(entity.groups || []).length >= groupThreshold" class="mb-5">
         <pep-pharos-select
           class="group-selector-dropdown"
           :value="selectedGroupId"
           @change="handleGroupSelection"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <div slot="label">
             <div class="display-flex align-items-center">
               <span>Features for</span>
             </div>
           </div>
-          <option
-            v-for="(group, id) in sortedGroups"
-            :key="`${entity.id}_${id}`"
-            :value="group.id"
-          >
+          <option v-for="(group, id) in sortedGroups" :key="`${entity.id}_${id}`" :value="group.id">
             {{ group.name }}
           </option>
         </pep-pharos-select>
@@ -184,22 +161,12 @@ const handleGroupSelection = (e: InputFileEvent) => {
     </div>
     <ul>
       <div class="entity-features">
-        <li
-          v-for="(category, label, index) in categorizedFeatures"
-          :key="`category_${index}`"
-        >
-          <pep-pharos-heading
-            class=""
-            preset="legend"
-            :level="3"
-          >
+        <li v-for="(category, label, index) in categorizedFeatures" :key="`category_${index}`">
+          <pep-pharos-heading class="" preset="legend" :level="3">
             {{ label }}
           </pep-pharos-heading>
           <ul v-if="category.length">
-            <li
-              v-for="feature in category"
-              :key="`feature_${feature.name}`"
-            >
+            <li v-for="feature in category" :key="`feature_${feature.name}`">
               <span class="display-flex align-items-center">
                 <span>{{ feature.display_name }}</span>
                 <pep-pharos-icon
@@ -208,10 +175,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
                   class="mt-0 pl-2 fill-gray-40 small-icon"
                   :aria-describedby="`feature-tooltip-${feature.name}`"
                 />
-                <pep-pharos-tooltip
-                  :id="`feature-tooltip-${feature.name}`"
-                  placement="top"
-                >
+                <pep-pharos-tooltip :id="`feature-tooltip-${feature.name}`" placement="top">
                   <span class="text-none">{{ feature.description }}</span>
                 </pep-pharos-tooltip>
               </span>

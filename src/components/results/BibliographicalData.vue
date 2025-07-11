@@ -51,26 +51,16 @@ const component = ref(props.small ? 'small' : 'span')
         </div>
         <div class="search-result-title">
           <!-- Title -->
-          <pep-pharos-heading
-            :level="3"
-            preset="3"
-          >
-            <DocumentTitle
-              :title="doc.title"
-              :subtitle="doc.subtitle"
-              :small="small"
-            />
+          <pep-pharos-heading :level="3" preset="3">
+            <DocumentTitle :title="doc.title" :subtitle="doc.subtitle" :small="small" />
           </pep-pharos-heading>
           <!-- Pages -->
-          <pep-pharos-heading
-            :level="3"
-            preset="3"
-          >
+          <pep-pharos-heading :level="3" preset="3">
             <span
               v-if="doc.cty === 'chapter' && (doc.fpage || doc.lpage)"
               class="text-size-md text-color-gray-40 text-font-sans"
             >
-              {{ getPages(doc) }} <br>
+              {{ getPages(doc) }} <br />
             </span>
           </pep-pharos-heading>
         </div>
@@ -86,7 +76,10 @@ const component = ref(props.small ? 'small' : 'span')
             <component :is="component">From:&nbsp;</component>
           </span>
           <span v-if="doc.tb">
-            <component :is="component"><em>{{ doc.tb }}</em><span v-if="getPublisher(doc)">,&nbsp;</span></component>
+            <component :is="component"
+              ><em>{{ doc.tb }}</em
+              ><span v-if="getPublisher(doc)">,&nbsp;</span></component
+            >
           </span>
           <span v-if="getPublisher(doc)">
             <component :is="component">{{ getPublisher(doc) }}</component>
@@ -96,15 +89,9 @@ const component = ref(props.small ? 'small' : 'span')
           </span>
         </div>
         <!-- Metadata Citation Line -->
-        <component
-          :is="component"
-          v-else
-        >
+        <component :is="component" v-else>
           <!-- eslint-disable vue/no-v-html -->
-          <span
-            class="text-color-gray-40"
-            v-html="doc.citation_line"
-          />
+          <span class="text-color-gray-40" v-html="doc.citation_line" />
           <!-- eslint-enable vue/no-v-html  -->
         </component>
       </div>

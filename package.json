@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
@@ -16,7 +17,7 @@
     "test:unit:dev": "cypress open --component",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "lint": "eslint . --fix",
+    "lint": "eslint *.{js,ts} src/**/*.{ts,js,vue} --fix",
     "format": "prettier --write src/"
   },
   "dependencies": {
@@ -36,7 +37,6 @@
   },
   "devDependencies": {
     "@babel/types": "^7.27.7",
-    "@ithaka/eslint-config-base": "^2.0.1",
     "@ithaka/eslint-config-vue": "^5.1.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/html-truncate": "^1.2.4",
@@ -45,14 +45,13 @@
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^5.2.4",
     "@vitejs/plugin-vue-jsx": "^4.2.0",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.5.1",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
     "cypress": "^13.17.0",
-    "eslint": "^9.30.0",
-    "eslint-plugin-cypress": "^4.3.0",
-    "eslint-plugin-vue": "^10.2.0",
+    "eslint": "^9.30.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-cypress": "^5.1.0",
+    "globals": "^16.3.0",
     "husky": "^9.1.7",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",

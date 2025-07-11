@@ -119,10 +119,7 @@ const handleEditFeature = async (i: number) => {
       />
     </div>
     <div>
-      <form
-        class="cols-8"
-        @submit.prevent.stop="getFeatures"
-      >
+      <form class="cols-8" @submit.prevent.stop="getFeatures">
         <pep-pharos-input-group
           :id="`${props.ungrouped ? 'ungrouped_' : ''}feature_search`"
           :value="query"
@@ -131,7 +128,6 @@ const handleEditFeature = async (i: number) => {
           class="mb-5"
           @input="query = $event.target.value"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">{{
             props.ungrouped ? 'Ungrouped Feature Search' : 'Feature Search'
           }}</span>
@@ -144,25 +140,14 @@ const handleEditFeature = async (i: number) => {
             type="submit"
           />
         </pep-pharos-input-group>
-        <pep-pharos-checkbox
-          :checked="isActive"
-          class="mb-5"
-          @change="toggleActive"
-        >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-          <span
-            slot="label"
-            class="text-weight-bold"
-          > Get Active Features Only </span>
+        <pep-pharos-checkbox :checked="isActive" class="mb-5" @change="toggleActive">
+          <span slot="label" class="text-weight-bold"> Get Active Features Only </span>
         </pep-pharos-checkbox>
       </form>
     </div>
     <pep-pharos-loading-spinner v-if="gettingFeatures" />
     <div v-else>
-      <div
-        v-for="(feature, i) in currentFeatures"
-        :key="`user_${i}`"
-      >
+      <div v-for="(feature, i) in currentFeatures" :key="`user_${i}`">
         <div
           class="group-card"
           :class="i !== Object.keys(currentFeatures).length - 1 ? 'underline' : ''"
@@ -176,10 +161,7 @@ const handleEditFeature = async (i: number) => {
                 <pep-pharos-heading :level="2">
                   {{ feature.display_name }}
                 </pep-pharos-heading>
-                <pep-pharos-heading
-                  :level="3"
-                  preset="legend"
-                >
+                <pep-pharos-heading :level="3" preset="legend">
                   Category: {{ feature.category }}
                 </pep-pharos-heading>
               </div>

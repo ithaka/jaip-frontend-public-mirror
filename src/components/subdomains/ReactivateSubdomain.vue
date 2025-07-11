@@ -26,11 +26,7 @@ const submitForm = async () => {
       :open="props.show"
       @pharos-modal-closed="emit('close')"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-      <p
-        slot="description"
-        class="mb-3"
-      >
+      <p slot="description" class="mb-3">
         Are you sure you want to reactivate {{ props.subdomain.subdomain }}?
       </p>
 

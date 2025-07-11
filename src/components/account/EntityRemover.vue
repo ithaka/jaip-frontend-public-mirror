@@ -65,7 +65,6 @@ const removeEntity = async () => {
       :open="showModal"
       @pharos-modal-closed="emit('close')"
     >
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p slot="description">
         <span v-if="(selectedGroups[featureName] || []).length">
           This will remove {{ entity.name }} from
@@ -77,10 +76,7 @@ const removeEntity = async () => {
             )
           }}. Are you sure you wish to proceed?
         </span>
-        <span
-          v-else
-          class="error"
-        >
+        <span v-else class="error">
           <span>Please select at least one group to remove {{ entity.name }} from.</span>
         </span>
       </p>

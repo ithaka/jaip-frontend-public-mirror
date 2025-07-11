@@ -32,10 +32,7 @@ coreStore.$api.log({
 </script>
 
 <template>
-  <div
-    v-if="hasCategories"
-    class="management page"
-  >
+  <div v-if="hasCategories" class="management page">
     <pep-pharos-layout row-gap="0">
       <pep-pharos-tabs class="cols-12">
         <pep-pharos-tab
@@ -43,10 +40,7 @@ coreStore.$api.log({
           :key="`group-${index}`"
           :data-panel-id="`group-${index}`"
         >
-          <pep-pharos-heading
-            :level="1"
-            preset="1--bold"
-          >
+          <pep-pharos-heading :level="1" preset="1--bold">
             {{ key }}
           </pep-pharos-heading>
         </pep-pharos-tab>
@@ -60,17 +54,12 @@ coreStore.$api.log({
           <GroupsManager v-if="key === 'Groups'" />
           <UsersManager v-else-if="key === 'Users'" />
           <SubdomainManager v-else-if="key === 'Subdomains'" />
-          <FeatureManager
-            v-else-if="key === 'Ungrouped Features'"
-            ungrouped
-          />
+          <FeatureManager v-else-if="key === 'Ungrouped Features'" ungrouped />
           <FeatureManager v-else-if="key === 'Features'" />
         </pep-pharos-tab-panel>
         <!-- eslint-enable vue/no-deprecated-slot-attribute -->
       </pep-pharos-tabs>
     </pep-pharos-layout>
   </div>
-  <div v-else>
-    No management features are currently available.
-  </div>
+  <div v-else>No management features are currently available.</div>
 </template>

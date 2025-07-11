@@ -157,7 +157,6 @@ const selectAllInCategory = (category: string | number) => {
           @keydown.enter.prevent.stop="submitForm"
           @input="((touchedName = true), (newUser.name = $event.target.value))"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Name</span>
         </pep-pharos-input-group>
         <pep-pharos-input-group
@@ -173,7 +172,6 @@ const selectAllInCategory = (category: string | number) => {
           @keydown.enter.prevent.stop="submitForm"
           @input="((touchedContact = true), (newUser.contact = $event.target.value))"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Email</span>
         </pep-pharos-input-group>
 
@@ -184,11 +182,7 @@ const selectAllInCategory = (category: string | number) => {
             :indeterminate="hasSomeFeatures"
             @click="selectAll()"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <span
-              slot="label"
-              class="text-weight-bold"
-            > Select All </span>
+            <span slot="label" class="text-weight-bold"> Select All </span>
           </pep-pharos-checkbox>
         </div>
         <div>
@@ -197,32 +191,21 @@ const selectAllInCategory = (category: string | number) => {
               v-for="(category, label, index) in sortedEnabledUngroupedFeatures"
               :key="`ungrouped_category_${index}`"
             >
-              <pep-pharos-heading
-                class=""
-                preset="legend"
-                :level="3"
-              >
+              <pep-pharos-heading class="" preset="legend" :level="3">
                 <pep-pharos-checkbox
                   :checked="checkAllFeaturesInCategory(label)"
                   :indeterminate="checkSomeFeaturesInCategory(label)"
                   class="mb-2"
                   @click="selectAllInCategory(label)"
                 >
-                  <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                  <span
-                    slot="label"
-                    class="text-weight-bold"
-                  >
+                  <span slot="label" class="text-weight-bold">
                     {{ label }}
                   </span>
                 </pep-pharos-checkbox>
               </pep-pharos-heading>
               <pep-pharos-checkbox-group v-if="Object.keys(category).length">
                 <ul class="checkbox-group">
-                  <li
-                    v-for="(feature, name) of category"
-                    :key="`feature_${name}`"
-                  >
+                  <li v-for="(feature, name) of category" :key="`feature_${name}`">
                     <pep-pharos-checkbox
                       :checked="newUser.ungrouped_features![name!]?.enabled"
                       :value="name"
@@ -231,7 +214,6 @@ const selectAllInCategory = (category: string | number) => {
                           !newUser.ungrouped_features![name!]?.enabled || false
                       "
                     >
-                      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
                       <span slot="label">
                         <span class="display-flex align-items-center">
                           <span>{{ feature.display_name }}</span>

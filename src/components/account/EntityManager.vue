@@ -314,7 +314,6 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
           :invalidated="invalidName"
           @input="handleNameInput"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Name</span>
         </pep-pharos-input-group>
 
@@ -329,7 +328,6 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
           :invalidated="invalidContact"
           @input="handleContactInput"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">{{ entity.type === 'users' ? 'Email' : 'Site Code' }}</span>
         </pep-pharos-input-group>
         <div v-if="entity.type === 'facilities' && canManageFacilities">
@@ -339,11 +337,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             class="mb-4"
             @input="includeSubdomain = !includeSubdomain"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <span
-              slot="label"
-              class="text-weight-bold"
-            > Use Subdomain </span>
+            <span slot="label" class="text-weight-bold"> Use Subdomain </span>
           </pep-pharos-checkbox>
           <pep-pharos-combobox
             v-if="includeSubdomain"
@@ -354,7 +348,6 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             :message="subdomainMessage"
             @change="handleSubdomain"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
             <div slot="label">
               <div class="display-flex align-items-center">
                 <span>Subdomains</span>
@@ -378,16 +371,12 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             :invalidated="showInvalidPrimarySitecode"
             @input="handlePrimarySitecode"
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
             <span slot="label">{{ 'Primary Sitecode' }}</span>
           </pep-pharos-input-group>
         </div>
       </div>
       <div v-if="entity.type === 'users'">
-        <div
-          v-if="action === 'add'"
-          class="mb-4"
-        >
+        <div v-if="action === 'add'" class="mb-4">
           <GroupSelector
             :groups="selectorGroupOptions"
             :feature-name="featureName"
@@ -395,25 +384,18 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             multiple
             @change="handleGroupSelection"
           />
-          <span
-            v-if="!selectedGroups[featureName].length"
-            class="error"
-          >
+          <span v-if="!selectedGroups[featureName].length" class="error">
             At least one group must be selected
           </span>
         </div>
         <!-- Group Selector for Features -->
-        <div
-          v-if="selectedGroups[featureName].length > 1"
-          class="mb-4"
-        >
+        <div v-if="selectedGroups[featureName].length > 1" class="mb-4">
           <div v-if="selectedGroups[featureName].length >= groupThreshold">
             <pep-pharos-select
               class="group-selector-dropdown"
               :value="focusedGroup"
               @change="handleFeatureGroupSelection"
             >
-              <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
               <div slot="label">
                 <div class="display-flex align-items-center">
                   <span>Enable Features</span>
@@ -431,11 +413,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             </pep-pharos-select>
           </div>
           <div v-else>
-            <pep-pharos-heading
-              class="mb-2 pb-0"
-              preset="legend"
-              :level="3"
-            >
+            <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="3">
               Enable Features
             </pep-pharos-heading>
             <pep-pharos-button
@@ -447,10 +425,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             >
               {{ (groupMap.get(focusedGroup) || {}).name }}
             </pep-pharos-button>
-            <pep-pharos-dropdown-menu
-              :id="`group_selector_manager_${entity.id}`"
-              full-width
-            >
+            <pep-pharos-dropdown-menu :id="`group_selector_manager_${entity.id}`" full-width>
               <pep-pharos-dropdown-menu-item
                 v-for="group in selectorGroupOptions.filter((group: Group) =>
                   selectedGroups[featureName].includes(group.id),
@@ -464,29 +439,19 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
           </div>
         </div>
       </div>
-      <div
-        v-else-if="action === 'add'"
-        class="mb-4"
-      >
+      <div v-else-if="action === 'add'" class="mb-4">
         <GroupSelector
           :groups="selectorGroupOptions"
           :feature-name="featureName"
           :start-full="true"
           @change="handleGroupSelection"
         />
-        <span
-          v-if="!selectedGroups[featureName].length"
-          class="error"
-        >
+        <span v-if="!selectedGroups[featureName].length" class="error">
           A group must be selected
         </span>
       </div>
       <div v-else-if="selectedGroups[featureName].length === 1">
-        <pep-pharos-heading
-          class="mb-2 pb-0"
-          preset="3"
-          :level="3"
-        >
+        <pep-pharos-heading class="mb-2 pb-0" preset="3" :level="3">
           {{ (groupMap.get(selectedGroups[featureName][0]) || {}).name }}
         </pep-pharos-heading>
       </div>
@@ -504,8 +469,8 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             :indeterminate="
               Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
                 .length &&
-                Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                  .length !== features.length
+              Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
+                .length !== features.length
             "
             class="mb-4"
             @input="
@@ -515,24 +480,13 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               )
             "
           >
-            <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-            <span
-              slot="label"
-              class="text-weight-bold"
-            > Select All </span>
+            <span slot="label" class="text-weight-bold"> Select All </span>
           </pep-pharos-checkbox>
         </div>
         <div>
           <ul class="entity-features">
-            <li
-              v-for="(category, label, index) in categorizedFeatures"
-              :key="`category_${index}`"
-            >
-              <pep-pharos-heading
-                class=""
-                preset="legend"
-                :level="3"
-              >
+            <li v-for="(category, label, index) in categorizedFeatures" :key="`category_${index}`">
+              <pep-pharos-heading class="" preset="legend" :level="3">
                 <pep-pharos-checkbox
                   :checked="
                     category.every(
@@ -543,36 +497,25 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                     category.some(
                       (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
                     ) &&
-                      !category.every(
-                        (feature: Feature) => selectedFeatures[focusedGroup][feature.name],
-                      )
+                    !category.every(
+                      (feature: Feature) => selectedFeatures[focusedGroup][feature.name],
+                    )
                   "
                   class="mb-2"
                   @input="selectCategoryFeatures(category)"
                 >
-                  <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-                  <span
-                    slot="label"
-                    class="text-weight-bold"
-                  >
+                  <span slot="label" class="text-weight-bold">
                     {{ label }}
                   </span>
                 </pep-pharos-checkbox>
               </pep-pharos-heading>
-              <pep-pharos-checkbox-group
-                v-if="category.length"
-                @input="handleFeatureSelection"
-              >
+              <pep-pharos-checkbox-group v-if="category.length" @input="handleFeatureSelection">
                 <ul class="checkbox-group">
-                  <li
-                    v-for="feature in category"
-                    :key="`feature_${feature.name}`"
-                  >
+                  <li v-for="feature in category" :key="`feature_${feature.name}`">
                     <pep-pharos-checkbox
                       :checked="(selectedFeatures[focusedGroup] || {})[feature.name]"
                       :value="feature.name"
                     >
-                      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
                       <span slot="label">
                         <span class="display-flex align-items-center">
                           <span>{{ feature.display_name }}</span>

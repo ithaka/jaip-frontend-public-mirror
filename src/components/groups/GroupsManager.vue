@@ -98,10 +98,7 @@ const handleClearHistory = async (i: number) => {
       />
     </div>
     <div>
-      <form
-        class="cols-8"
-        @submit.prevent.stop="getGroups"
-      >
+      <form class="cols-8" @submit.prevent.stop="getGroups">
         <pep-pharos-input-group
           :id="`group_search`"
           :value="query"
@@ -110,7 +107,6 @@ const handleClearHistory = async (i: number) => {
           class="mb-5"
           @input="query = $event.target.value"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <span slot="label">Group Search</span>
           <pep-pharos-button
             name="search-button"
@@ -121,33 +117,17 @@ const handleClearHistory = async (i: number) => {
             type="submit"
           />
         </pep-pharos-input-group>
-        <pep-pharos-checkbox
-          :checked="isActive"
-          class="mb-5"
-          @change="toggleActive"
-        >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-          <span
-            slot="label"
-            class="text-weight-bold"
-          > Get Active Groups Only </span>
+        <pep-pharos-checkbox :checked="isActive" class="mb-5" @change="toggleActive">
+          <span slot="label" class="text-weight-bold"> Get Active Groups Only </span>
         </pep-pharos-checkbox>
       </form>
     </div>
     <pep-pharos-loading-spinner v-if="gettingGroups" />
     <div v-else-if="!currentGroups.length">
-      <pep-pharos-heading
-        :level="2"
-        preset="legend"
-      >
-        No groups found
-      </pep-pharos-heading>
+      <pep-pharos-heading :level="2" preset="legend"> No groups found </pep-pharos-heading>
     </div>
     <div v-else>
-      <div
-        v-for="(group, i) in currentGroups"
-        :key="`group_${i}`"
-      >
+      <div v-for="(group, i) in currentGroups" :key="`group_${i}`">
         <div
           class="group-card"
           :class="i !== Object.keys(currentGroups).length - 1 ? 'underline' : ''"

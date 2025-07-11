@@ -125,10 +125,7 @@ const submitBulkApproval = async () => {
         :class="{ 'fill-jstor-red': color }"
         @click.prevent.stop="openBulkApprovalModal"
       />
-      <pep-pharos-tooltip
-        :id="tooltipId"
-        :placement="placement"
-      >
+      <pep-pharos-tooltip :id="tooltipId" :placement="placement">
         <span class="text-none">{{ text }}</span>
       </pep-pharos-tooltip>
     </div>
@@ -142,30 +139,24 @@ const submitBulkApproval = async () => {
           :open="showBulkApprovalModal"
           @pharos-modal-closed="closeBulkApproveModal()"
         >
-          <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
           <p class="my-4">
             <span
               v-if="
                 selectedGroups['undo_bulk_approve'] && selectedGroups['undo_bulk_approve'].length
               "
-            >The record will show that {{ entityName }} revoked approval for {{ disc.label }} in
+              >The record will show that {{ entityName }} revoked approval for {{ disc.label }} in
               {{
                 makeGrammaticalList(
                   (selectedGroups['undo_bulk_approve'] || []).map(
                     (group: number) => (groupMap.get(group) || {}).name || '',
                   ),
                 )
-              }}. Material in this discipline will no longer be automatically available.</span>
-            <span
-              v-else
-              class="error"
-            >Please select at least one group to revoke approval.</span>
+              }}. Material in this discipline will no longer be automatically available.</span
+            >
+            <span v-else class="error">Please select at least one group to revoke approval.</span>
           </p>
 
-          <div
-            v-if="possibleBulkUndoGroups.length > 1"
-            class="mb-3"
-          >
+          <div v-if="possibleBulkUndoGroups.length > 1" class="mb-3">
             <GroupSelector
               :groups="selectorGroupOptions"
               :feature-name="`undo_bulk_approve`"

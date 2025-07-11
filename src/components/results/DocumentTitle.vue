@@ -28,24 +28,13 @@ const component = ref(props.small ? 'small' : 'span')
   <span>
     <span>
       <!-- eslint-disable vue/no-v-html -->
-      <component
-        :is="component"
-        v-if="title"
-        class="document-title"
-      >
+      <component :is="component" v-if="title" class="document-title">
         <span v-html="title" />
       </component>
       <!-- eslint-enable vue/no-v-html  -->
 
-      <component
-        :is="component"
-        v-else
-        class="document-title"
-      > [Untitled] </component>
-      <component
-        :is="component"
-        v-if="Array.isArray(subtitle) && (subtitle || []).length"
-      >
+      <component :is="component" v-else class="document-title"> [Untitled] </component>
+      <component :is="component" v-if="Array.isArray(subtitle) && (subtitle || []).length">
         <!-- eslint-disable vue/no-v-html -->
         <span
           v-for="(sub, i) in subtitle"
@@ -54,10 +43,7 @@ const component = ref(props.small ? 'small' : 'span')
         />
         <!-- eslint-enable vue/no-v-html  -->
       </component>
-      <component
-        :is="component"
-        v-else-if="subtitle && !Array.isArray(subtitle)"
-      >
+      <component :is="component" v-else-if="subtitle && !Array.isArray(subtitle)">
         <!-- eslint-disable vue/no-v-html -->
         <span v-html="separateSubtitle(title, subtitle as string)" />
         <!-- eslint-enable vue/no-v-html  -->

@@ -30,14 +30,7 @@ const histories = computed(() => {
 
 <template>
   <div>
-    <BibliographicalData
-      :doc="doc"
-      small
-      class="mb-5"
-    />
-    <ResultsTable
-      :history="histories[scope].slice().reverse()"
-      :scope="scope"
-    />
+    <BibliographicalData :doc="doc" small class="mb-5" />
+    <ResultsTable :history="histories[scope].slice().reverse()" :scope="scope" />
   </div>
 </template>

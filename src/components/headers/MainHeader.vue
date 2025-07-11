@@ -60,28 +60,19 @@ const emit = defineEmits(['logout', 'close'])
   <pep-pharos-header>
     <!-- Top of the page, above the logo and menus -->
     <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-    <div
-      slot="top"
-      class="full-width"
-    >
-      <div
-        v-if="alert && alert.status"
-        class="px-3 mb-3"
-      >
+    <div slot="top" class="full-width">
+      <div v-if="alert && alert.status" class="px-3 mb-3">
         <pep-pharos-alert :status="alert.status">
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
       <ProviderBar v-if="!isUnauthenticated" />
-      <RequestWarning
-        v-if="showRequestWarning"
-        class="my-3 px-3"
-      />
+      <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
     <!-- eslint-enable vue/no-deprecated-slot-attribute -->
 
     <!-- Logo -->
-    <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+
     <div slot="start">
       <pep-pharos-link
         @click.prevent.stop="
@@ -93,25 +84,17 @@ const emit = defineEmits(['logout', 'close'])
           class="header-logo"
           alt="JSTOR Logo"
           data-cy="home"
-        >
+        />
       </pep-pharos-link>
     </div>
 
     <!-- Search Bar -->
-    <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-    <div
-      v-if="$route.meta.showSearch && !isUnauthenticated"
-      slot="center"
-      class="mb-3"
-    >
-      <SearchInput
-        id="main"
-        label="Search"
-        a11y-label="Search"
-      />
+
+    <div v-if="$route.meta.showSearch && !isUnauthenticated" slot="center" class="mb-3">
+      <SearchInput id="main" label="Search" a11y-label="Search" />
     </div>
     <!-- User Information -->
-    <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+
     <div slot="end-top">
       <pep-pharos-dropdown-menu-nav v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
         <pep-pharos-dropdown-menu-nav-link
@@ -121,7 +104,9 @@ const emit = defineEmits(['logout', 'close'])
           href
           @click.prevent.stop
         >
-          <span><strong>{{ name }}</strong></span>
+          <span
+            ><strong>{{ name }}</strong></span
+          >
         </pep-pharos-dropdown-menu-nav-link>
 
         <!-- Dropdown with user options -->
@@ -145,26 +130,15 @@ const emit = defineEmits(['logout', 'close'])
         </pep-pharos-dropdown-menu>
       </pep-pharos-dropdown-menu-nav>
       <div v-if="showLogin">
-        <pep-pharos-button
-          v-if="showLogin"
-          name="login-button"
-          :href="loginUrl"
-          class=""
-        >
+        <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="">
           Log in
         </pep-pharos-button>
       </div>
     </div>
     <!-- Navigation Menu -->
-    <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
-    <div
-      slot="end-bottom"
-      class="hidden-md"
-    >
-      <NavigationMenu
-        :key="updateKey"
-        :show-login="showLogin"
-      />
+
+    <div slot="end-bottom" class="hidden-md">
+      <NavigationMenu :key="updateKey" :show-login="showLogin" />
     </div>
   </pep-pharos-header>
 </template>
