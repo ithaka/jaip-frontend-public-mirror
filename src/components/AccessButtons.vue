@@ -98,7 +98,6 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
         (featureDetails['view_pdf'].enabled && includePdf) ||
         (featureDetails['view_document'].enabled && isPDFPage),
     }"
-    data-cy="download-pdf-button"
     @click="downloadPDF"
   >
     <pep-pharos-loading-spinner v-if="isDisabledDownload" />
@@ -107,7 +106,6 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   <pep-pharos-button
     v-if="featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()"
     icon-left="view-list"
-    a11y-label="Print PDF"
     class="mb-2"
     :class="{
       'lg-mr-3':
@@ -117,7 +115,6 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     :variant="variant"
     full-width
     :disabled="isDisabledPrint"
-    data-cy="print-pdf-button"
     @click.prevent.stop="printPDF"
   >
     <pep-pharos-loading-spinner v-if="isDisabledPrint" />
@@ -128,10 +125,8 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
       hasStaticBlock() && featureDetails['view_pdf'].enabled && includePdf && hasStructuredClone
     "
     icon-left="filetype-pdf"
-    a11y-label="View PDF"
     class="mb-2"
     full-width
-    data-cy="view-pdf-button"
     :variant="variant"
     :href="hasBrowserPDFViewer() ? `/api/v2/page/${iid}` : `/pdf/${iid}`"
   >
@@ -140,7 +135,6 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   <pep-pharos-button
     v-else-if="featureDetails['view_document'].enabled && isPDFPage"
     icon-left="filetype-pdf"
-    a11y-label="View Document"
     class="mb-2"
     full-width
     :variant="variant"

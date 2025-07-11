@@ -97,10 +97,8 @@ const logout = () => {
         >
       </pep-pharos-link>
       <div>
-        <pep-pharos-button
+        <pep-pharos-sidenav-button
           class="display-float-right"
-          icon="menu"
-          a11y-label="Open navigation menu"
           @click.prevent.stop="showSidenav = true"
         />
       </div>
