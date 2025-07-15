@@ -41,6 +41,16 @@
     K8S_ACTION: apply
     BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA.apps.test.cirrostratus.org/jaip/api
 
+.student-env:
+  variables:
+    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-student
+    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-student.apps.test.cirrostratus.org/jaip/api
+
+.admin-env:
+  variables:
+    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-admin
+    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-admin.apps.test.cirrostratus.org/jaip/api
+
 .test-env:
   variables:
     API_TARGET: test

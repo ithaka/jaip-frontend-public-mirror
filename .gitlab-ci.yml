@@ -27,11 +27,21 @@ include:
 # integration tests against them, though at the moment we run those in our
 # pre-deploy pipeline.) They run in the ephemeral cluster and have names that
 # are pinned to a SHA.
-trigger deploy merge request:
+trigger deploy merge request for student:
   extends:
     - .test-rules
     - .deploy
     - .ephemeral-env
+    - .student-env
+  trigger:
+    include: .gitlab/deploy/ephemeral.yml
+
+trigger deploy merge request for admin:
+  extends:
+    - .test-rules
+    - .deploy
+    - .ephemeral-env
+    - .admin-env
   trigger:
     include: .gitlab/deploy/ephemeral.yml
 
