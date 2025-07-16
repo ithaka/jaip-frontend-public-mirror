@@ -21,7 +21,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@ithaka/pharos": "^13.4.0",
+    "@ithaka/pharos": "^14.16.1",
     "@vuepic/vue-datepicker": "^11.0.2",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
     "axios": "^1.10.0",

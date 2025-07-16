@@ -29,6 +29,7 @@ export default [
     files: ["*.vue", "**/*.vue"],
     rules: {
       "vue/no-v-html": "off",
+      "@typescript-eslint/no-explicit-any": "warn"
     },
   },
 ];

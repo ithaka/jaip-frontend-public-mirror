@@ -482,7 +482,6 @@ Here’s an important note: If a source is cited in your paper, it must be liste
 To create your Works Cited page, add sources to the page as you cite them. This means that you’ll be transferring your source information from your note card, or research log document. As you add sources to your Works Cited page, be sure that:<br />
 
 - Citations are formatted according to your style guide
-
   - All the necessary elements of each citation are present<br />
   - Punctuation, capitalization, and italics are used in keeping with your style guide<br />
 

@@ -88,6 +88,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   <pep-pharos-button
     v-if="featureDetails['download_pdf'].enabled"
     full-width
+    data-cy="download-pdf-button"
     :variant="variant"
     icon-left="download"
     :disabled="isDisabledDownload"
@@ -107,6 +108,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     v-if="featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()"
     icon-left="view-list"
     class="mb-2"
+    data-cy="print-pdf-button"
     :class="{
       'lg-mr-3':
         (featureDetails['view_pdf'].enabled && includePdf) ||

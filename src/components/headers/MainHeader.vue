@@ -66,7 +66,7 @@ const emit = defineEmits(['logout', 'close'])
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
-      <ProviderBar v-if="!isUnauthenticated" />
+      <ProviderBar v-if="!isUnauthenticated" :groups="groups" />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
     <!-- eslint-enable vue/no-deprecated-slot-attribute -->

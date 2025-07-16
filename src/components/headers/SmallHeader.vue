@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ProviderBar from '@/components/headers/ProviderBar.vue'
 import { ref } from 'vue'
+import ProviderBar from '@/components/headers/ProviderBar.vue'
 import NavigationMenu from '@/components/headers/NavigationMenu.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import RequestWarning from '@/components/headers/RequestWarning.vue'
@@ -10,6 +10,7 @@ import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
+import JstorLogo from './JstorLogo.vue'
 
 defineProps({
   loginUrl: {
@@ -58,11 +59,24 @@ const { alert } = storeToRefs(coreStore)
 const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 
-const showSidenav = ref(false)
-
 const logout = () => {
   emit('logout')
-  showSidenav.value = false
+}
+
+const handleLogoClick = () => {
+  onCloseSidenav()
+  changeRoute(router, emit, '/', searchTerms.value, pageNo.value, undefined, undefined)
+}
+
+const isSidenavVisible = ref(false)
+
+const onOpenSidenav = () => {
+  isSidenavVisible.value = true
+}
+
+const onCloseSidenav = () => {
+  isSidenavVisible.value = false
+  emit('close')
 }
 </script>
 <template>
@@ -73,9 +87,10 @@ const logout = () => {
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
-      <ProviderBar />
+      <ProviderBar :groups="groups" />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
+    <!-- Header -->
     <div class="header__content pa-5 justify-content-space-between">
       <pep-pharos-link
         class="mr-4"
@@ -91,84 +106,90 @@ const logout = () => {
         />
       </pep-pharos-link>
       <div>
-        <pep-pharos-sidenav-button
+        <pep-pharos-button
           class="display-float-right"
-          @click.prevent.stop="showSidenav = true"
+          icon="menu"
+          a11y-label="Open sidenav"
+          @click="onOpenSidenav"
         />
       </div>
       <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
         Log in
       </pep-pharos-button>
     </div>
-    <pep-pharos-sidenav :slide="showSidenav">
-      <div slot="top" class="display-flex flex-direction-column gap-4">
-        <div>
-          <div
-            @click.stop="changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)"
-          >
-            <img
-              src="@/assets/images/JSTOR_Logo.svg"
-              class="header-logo svg-white"
-              alt="JSTOR Logo"
-              data-cy="home"
-            />
-          </div>
-        </div>
-        <pep-pharos-button
-          v-if="isAuthenticatedAdmin"
-          name="logout-button"
-          @click.prevent.stop="logout"
-        >
-          Logout
-        </pep-pharos-button>
-        <pep-pharos-button v-else-if="showLogin" name="login-button" :href="loginUrl">
-          Log in
-        </pep-pharos-button>
-      </div>
-
+    <!-- Mobile Sidenav -->
+    <pep-pharos-sidenav
+      id="pep-sidenav"
+      has-close-button
+      :open="isSidenavVisible"
+      class="side-navigation"
+      @pharos-sidenav-close="onCloseSidenav"
+    >
+      <JstorLogo :is-big-logo="true" @logo-click="handleLogoClick" />
+      <pep-pharos-button
+        v-if="isAuthenticatedAdmin"
+        class="side-navigation__top"
+        name="logout-button"
+        @click.prevent.stop="logout"
+      >
+        Logout
+      </pep-pharos-button>
+      <pep-pharos-button
+        v-else-if="showLogin"
+        class="side-navigation__top"
+        name="login-button"
+        :href="loginUrl"
+      >
+        Log in
+      </pep-pharos-button>
       <pep-pharos-sidenav-section>
-        <NavigationMenu
-          :key="updateKey"
-          :login-url="loginUrl"
-          sidenav
-          @close="showSidenav = false"
-        />
+        <NavigationMenu :key="updateKey" :login-url="loginUrl" sidenav />
       </pep-pharos-sidenav-section>
-      <div class="sidenav-bottom">
-        <component
-          :is="isAuthenticatedStudent ? 'pep-pharos-sidenav-menu' : 'div'"
-          :label="name"
-          :a11y-label="name"
-        >
-          <span v-if="isAuthenticatedAdmin" class="ml-7">
-            <strong>{{ name }}</strong>
-          </span>
-          <span v-else-if="isAuthenticatedStudent" class="ml-8"
-            >Participating through {{ groups }}</span
-          >
-        </component>
-      </div>
+      <pep-pharos-sidenav-link
+        v-if="isAuthenticatedAdmin || isAuthenticatedStudent"
+        href="#"
+        class="side-navigation__bottom"
+        >{{ name }}</pep-pharos-sidenav-link
+      >
     </pep-pharos-sidenav>
-    <div v-if="showSidenav" class="sidenav-container" @click.prevent.stop="showSidenav = false" />
+    <div
+      v-if="isSidenavVisible"
+      class="side-navigation__background"
+      @click.prevent.stop="onCloseSidenav"
+    />
+    <!-- Search Input component -->
     <SearchInput v-if="$route.meta.showSearch && !isUnauthenticated" id="small" class="mx-6 mb-2" />
   </div>
 </template>
 
-<style>
-.top {
+<style scoped lang="scss">
+.header__top {
+  padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x);
   display: flex;
-  justify-content: center;
-}
-.header__content {
-  border-top: 1px solid var(--pharos-color-ui-40);
-  border-bottom: 1px solid var(--pharos-color-ui-40);
-  padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x) 0;
-  display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  transition:
+    background-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
 }
 
-.sidenav-container {
+.side-navigation {
+  &__top {
+    display: grid;
+    grid-template-columns: auto 1.5rem;
+    grid-template-rows: auto;
+    padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-one-quarter-x);
+  }
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 50vh;
+  }
+}
+.side-navigation__background {
   position: fixed;
   top: 0;
   left: 0;
@@ -178,11 +199,13 @@ const logout = () => {
   z-index: 99;
   overflow: hidden;
 }
-.fade-in {
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0s ease-in-out;
-  visibility: visible;
-  opacity: 1;
+
+.header__content {
+  border-top: 1px solid var(--pharos-color-ui-40);
+  border-bottom: 1px solid var(--pharos-color-ui-40);
+  padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x) 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>

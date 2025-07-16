@@ -32,11 +32,11 @@ describe('Page Viewer', () => {
     // check for a specific button, but we can check that there are no buttons. We just repeat
     // the same test for print.
     it('does not show download button', () => {
-      cy.get('pep-pharos-button').should('not.exist')
+      cy.get('[data-cy="download-pdf-button"]').should('not.exist')
     })
 
     it('does not show print button', () => {
-      cy.get('pep-pharos-button').should('not.exist')
+      cy.get('[data-cy="print-pdf-button"]').should('not.exist')
     })
   })
 
@@ -133,8 +133,8 @@ describe('Page Viewer', () => {
       cy.get('pep-pharos-button').contains("Download", { matchCase: false }).should('be.visible')
       // We used to verify that the file download worked, because the download button created a blob based on the
       // previously downloaded base64 encoded pdf. The download button now uses the same endpoint as the view pdf
-      // button, so there's little point in verifying that the download works, because it would only be verifying that 
-      // we've intercepted an http request. We can, however, verify that the button exists. 
+      // button, so there's little point in verifying that the download works, because it would only be verifying that
+      // we've intercepted an http request. We can, however, verify that the button exists.
     })
 
     it('shows print button', () => {
