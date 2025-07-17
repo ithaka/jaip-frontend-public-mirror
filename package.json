@@ -43,7 +43,7 @@
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.16.4",
     "@types/pnpapi": "^0.0.5",
-    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitejs/plugin-vue": "^6.0.0",
     "@vitejs/plugin-vue-jsx": "^5.0.1",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
