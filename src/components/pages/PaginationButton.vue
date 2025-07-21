@@ -83,7 +83,12 @@ export default {
       :data-tooltip-id="tooltipId"
       @click="$emit('page', direction)"
     >
-      <pep-pharos-icon :name="`arrow-${direction}`" class="button-icon" />
+      <pep-pharos-icon
+        :name="`arrow-${direction}`"
+        :a11y-title="`arrow-${direction}`"
+        a11y-hidden="false"
+        class="button-icon"
+      />
     </button>
     <pep-pharos-tooltip v-if="tooltipText" :id="tooltipId" :placement="tooltipPosition">
       {{ tooltipText }}

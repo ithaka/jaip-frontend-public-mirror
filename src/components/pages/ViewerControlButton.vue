@@ -9,6 +9,8 @@
     <pep-pharos-icon
       v-if="iconName"
       :name="iconName"
+      :a11y-title="iconName"
+      a11y-hidden="false"
       :class="text ? 'icon-with-right-padding' : 'icon'"
     />
 

@@ -15,14 +15,14 @@ const handleLogoClick = () => {
 </script>
 
 <template>
-  <mfe-is-sidebar-nav-pharos-link id="jstor-logo" slot="top" @click.prevent.stop="handleLogoClick">
+  <pep-pharos-link id="jstor-logo" slot="top" @click.prevent.stop="handleLogoClick">
     <img
       :class="['jstor-logo-img', { 'jstor-logo-img-big': isBigLogo }]"
       alt="Jstor Logo"
       data-cy="home"
       :src="jstorLogo"
     />
-  </mfe-is-sidebar-nav-pharos-link>
+  </pep-pharos-link>
 </template>
 
 <style scoped>

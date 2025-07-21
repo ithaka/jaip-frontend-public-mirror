@@ -57,10 +57,10 @@ const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 </script>
 <template>
-  <pep-pharos-header>
+  <pep-pharos-header class="pep-pharos-header--main" data-cy="main-header">
     <!-- Top of the page, above the logo and menus -->
     <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-    <div slot="top" class="full-width">
+    <div slot="top" class="pep-pharos-header__top">
       <div v-if="alert && alert.status" class="px-3 mb-3">
         <pep-pharos-alert :status="alert.status">
           {{ alert.text }}
@@ -142,3 +142,19 @@ const emit = defineEmits(['logout', 'close'])
     </div>
   </pep-pharos-header>
 </template>
+
+<style scoped lang="scss">
+.pep-pharos-header {
+  .pep-pharos-header__top {
+    padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    transition:
+      background-color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+  }
+}
+</style>

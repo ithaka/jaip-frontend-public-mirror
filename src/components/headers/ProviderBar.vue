@@ -24,9 +24,11 @@ defineProps({
     </small>
   </pep-pharos-dropdown-menu-nav-link>
   <!-- Dropdown box with additional information -->
-  <pep-pharos-dropdown-menu id="top-menu" placement="bottom">
+  <pep-pharos-dropdown-menu id="top-menu" placement="bottom" tabindex="-1">
     <div class="pa-5">
       <p>In partnership with the JSTOR Access in Prisons Initiative</p>
     </div>
   </pep-pharos-dropdown-menu>
 </template>
+
+<style scoped lang="scss"></style>

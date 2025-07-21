@@ -107,7 +107,7 @@ const onCloseSidenav = () => {
       </pep-pharos-link>
       <div>
         <pep-pharos-button
-          class="display-float-right"
+          variant="subtle"
           icon="menu"
           a11y-label="Open sidenav"
           @click="onOpenSidenav"
@@ -142,15 +142,19 @@ const onCloseSidenav = () => {
       >
         Log in
       </pep-pharos-button>
-      <pep-pharos-sidenav-section>
-        <NavigationMenu :key="updateKey" :login-url="loginUrl" sidenav />
+      <pep-pharos-sidenav-section showDivider="true">
+        <NavigationMenu
+          :key="updateKey"
+          :login-url="loginUrl"
+          sidenav
+          @close-sidenav="onCloseSidenav"
+        />
       </pep-pharos-sidenav-section>
-      <pep-pharos-sidenav-link
-        v-if="isAuthenticatedAdmin || isAuthenticatedStudent"
-        href="#"
-        class="side-navigation__bottom"
-        >{{ name }}</pep-pharos-sidenav-link
-      >
+      <pep-pharos-sidenav-section v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
+        <pep-pharos-sidenav-link class="side-navigation__bottom" href="/">
+          {{ name }}
+        </pep-pharos-sidenav-link>
+      </pep-pharos-sidenav-section>
     </pep-pharos-sidenav>
     <div
       v-if="isSidenavVisible"
@@ -183,10 +187,6 @@ const onCloseSidenav = () => {
     padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-one-quarter-x);
   }
   &__bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 50vh;
   }
 }
 .side-navigation__background {

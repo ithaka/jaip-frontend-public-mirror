@@ -79,6 +79,12 @@ const showRequestWarning = computed(
   () =>
     !features.value['submit_requests'] && isAuthenticatedStudent.value && !isAdminSubdomain.value,
 )
+
+const truncatedGramaticalGroupsList = computed(() => {
+  const isOverlong = groups.value.length > 3
+  const truncated = isOverlong ? groups.value.slice(0, 3) : groups.value
+  return makeGrammaticalList(truncated.map((group) => group.name)) + (isOverlong ? ' et al.' : '')
+})
 </script>
 
 <template>
@@ -92,7 +98,7 @@ const showRequestWarning = computed(
     <!-- Headers -->
     <MainHeader
       class="hidden-md"
-      :groups="makeGrammaticalList(groups.map((group) => group.name))"
+      :groups="truncatedGramaticalGroupsList"
       :show-login="!isAuthenticatedAdmin && isAdminSubdomain"
       :login-url="loginUrl"
       :update-key="updateKey"
@@ -113,7 +119,7 @@ const showRequestWarning = computed(
       :is-unauthenticated="isUnauthenticated"
       :show-request-warning="!!showRequestWarning"
       :name="entityName"
-      :groups="makeGrammaticalList(groups.map((group) => group.name))"
+      :groups="truncatedGramaticalGroupsList"
       @logout="logout"
     />
 

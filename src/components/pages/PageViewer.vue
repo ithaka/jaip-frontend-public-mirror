@@ -776,35 +776,31 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
 }
 
 .viewer-show-for-medium-down {
+  display: inline-block !important;
   @media screen and (min-width: 48rem) {
     display: none !important;
   }
-
-  display: inline-block !important;
 }
 
 .viewer-show-for-medium-up {
+  display: none !important;
   @media screen and (min-width: 48rem) {
     display: inline-block !important;
   }
-
-  display: none !important;
 }
 
 .viewer-show-for-large-down {
+  display: none !important;
   @media screen and (min-width: 48rem) and (max-width: calc(1056 - 1)px) {
     display: flex !important;
   }
-
-  display: none !important;
 }
 
 .viewer-show-for-large-up {
+  display: none !important;
   @media screen and (min-width: 66rem) {
     display: flex !important;
   }
-
-  display: none !important;
 }
 
 .viewer-controls-thumbnail {

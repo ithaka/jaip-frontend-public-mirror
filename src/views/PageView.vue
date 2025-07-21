@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useCoreStore } from '@/stores/core'
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import type { Cedar } from '@/interfaces/Metadata'
 import PageViewer from '@/components/pages/PageViewer.vue'
@@ -30,6 +30,18 @@ const error = ref({
 })
 
 const updateKey = ref(0)
+/**
+ * Fetches document data and optional metadata based on the provided `iid` and `page_index`.
+ *
+ * - Initiates a search API call to retrieve the document.
+ * - If `page_index` is provided, also fetches document metadata.
+ * - Handles API errors, setting appropriate error states for 403 (Unauthorized), 404 (Not Found), and other server errors.
+ * - Updates `doc`, `metadata`, and error state variables accordingly.
+ * - Ensures UI state is updated via `updateKey` and `gettingDocument`.
+ *
+ * @async
+ * @throws Sets error state on API failure.
+ */
 const getDocument = async () => {
   try {
     const args = {
@@ -90,7 +102,22 @@ const getDocument = async () => {
   }
 }
 
-getDocument()
+/**
+ * @vue Lifecycle hook: mounted
+ * @description
+ * Executes when the component is mounted.
+ * - If a valid `iid` (document ID) exists, invokes `getDocument()` to retrieve document data.
+ * - If `iid` is absent or invalid, updates the error state with status, message, and error code (400).
+ */
+onMounted(() => {
+  if (iid) {
+    getDocument()
+  } else {
+    error.value.status = true
+    error.value.message = 'Invalid Document ID'
+    error.value.code = 400
+  }
+})
 
 const iiifViewerController = ref(null)
 const isInFullscreen = ref(false)
@@ -108,6 +135,14 @@ const handleFullscreenToggle = () => {
 coreStore.$api.log({
   eventtype: 'pep_landing_pages_view',
   event_description: 'User has landed on the page view.',
+})
+
+const showDocument = computed(() => {
+  return page_index && !pdfData.value && !error.value.status
+})
+
+const accessDenied = computed(() => {
+  return !page_index || pdfData.value
 })
 </script>
 
@@ -137,9 +172,9 @@ coreStore.$api.log({
       <pep-pharos-heading class="mb-2 mb-4 pb-0" preset="5--bold" :level="1">
         {{ error.message }}
       </pep-pharos-heading>
-      <p v-if="!page_index || pdfData">You do not have access to this document.</p>
+      <p v-if="accessDenied">You do not have access to this document.</p>
     </div>
-    <div v-if="page_index && !pdfData" ref="iiifViewerController" class="cols-12">
+    <div v-if="showDocument" ref="iiifViewerController" class="cols-12">
       <PageViewer
         :metadata="metadata"
         :initial-page-index="initial_page_index"
