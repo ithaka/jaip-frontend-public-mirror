@@ -43,13 +43,15 @@
 
 .student-env:
   variables:
-    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-student
-    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-student.apps.test.cirrostratus.org/jaip/api
+    USER_TYPE: student
+    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-$USER_TYPE
+    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-$USER_TYPE.apps.test.cirrostratus.org/jaip/api
 
 .admin-env:
   variables:
-    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-admin
-    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-admin.apps.test.cirrostratus.org/jaip/api
+    USER_TYPE: admin
+    EUREKA_SERVICE_NAME: jaip-frontend-$CI_COMMIT_SHORT_SHA-$USER_TYPE
+    BASE_URL: https://jaip-frontend-$CI_COMMIT_SHORT_SHA-$USER_TYPE.apps.test.cirrostratus.org/jaip/api
 
 .test-env:
   variables:

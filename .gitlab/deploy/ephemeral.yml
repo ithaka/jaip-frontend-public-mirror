@@ -3,6 +3,13 @@ include:
   - project: capstan/pow/gitlab-templates
     file: /ephemeral-deployer/template.yml
     ref: ephemeral-deployer-v3
+  - project: capstan/platform-apps/blueprint/glab-ci-link-to-build
+    file: template.gitlab-ci.yml
+    ref: "1"
+    inputs:
+      build_url: "https://$EUREKA_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org"
+      build_link_text: "${APP_NAME} ephemeral deployment for commit ${CI_COMMIT_SHORT_SHA} for $USER_TYPE users"
+      stage_name: notifications
 
 deploy:
   stage: deploy
