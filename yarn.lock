@@ -1250,9 +1250,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ithaka/pharos@npm:^14.16.1":
-  version: 14.16.1
-  resolution: "@ithaka/pharos@npm:14.16.1"
+"@ithaka/pharos@npm:^14.16.2":
+  version: 14.16.2
+  resolution: "@ithaka/pharos@npm:14.16.2"
   dependencies:
     "@floating-ui/dom": "npm:^1.7.2"
     "@ithaka/focus-trap": "npm:2.0.1"
@@ -1262,7 +1262,7 @@ __metadata:
     uuid: "npm:^11.1.0"
   peerDependencies:
     sass: ^1.89.1
-  checksum: 10c0/49f60ec71faaad314a765bb342e8c7373eaf010b4abde7480079614709ddf0e77c1cb682b72c9617fd5666af40e5fc8ebc57d37e319d81fa9b0bc44fbdfc2893
+  checksum: 10c0/de9ecd33f65594c567182153f0fa012f84f51e38ad044e3f108513145c53463282eaf5e4d0d12ae94ba8c3efcf1e5402f5cf035c102b781d571fdabbc428bcd5
   languageName: node
   linkType: hard
 
@@ -2945,7 +2945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.10.0, axios@npm:^1.8.2":
+"axios@npm:^1.11.0, axios@npm:^1.8.2":
   version: 1.11.0
   resolution: "axios@npm:1.11.0"
   dependencies:
@@ -5648,7 +5648,7 @@ __metadata:
   dependencies:
     "@babel/types": "npm:^7.28.1"
     "@ithaka/eslint-config-vue": "npm:^5.1.0"
-    "@ithaka/pharos": "npm:^14.16.1"
+    "@ithaka/pharos": "npm:^14.16.2"
     "@tsconfig/node22": "npm:^22.0.2"
     "@types/html-truncate": "npm:^1.2.4"
     "@types/jsdom": "npm:^21.1.7"
@@ -5660,7 +5660,7 @@ __metadata:
     "@vue/tsconfig": "npm:^0.7.0"
     "@vuepic/vue-datepicker": "npm:^11.0.2"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.10.0"
+    axios: "npm:^1.11.0"
     cypress: "npm:^14.5.2"
     eslint: "npm:^9.31.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -5668,7 +5668,7 @@ __metadata:
     globals: "npm:^16.3.0"
     html-truncate: "npm:^1.2.2"
     husky: "npm:^9.1.7"
-    jiti: "npm:^2.4.2"
+    jiti: "npm:^2.5.0"
     jsdom: "npm:^26.1.0"
     lint-staged: "npm:^15.5.2"
     npm-run-all: "npm:^4.1.5"
@@ -5695,12 +5695,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"jiti@npm:^2.4.2":
-  version: 2.4.2
-  resolution: "jiti@npm:2.4.2"
+"jiti@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "jiti@npm:2.5.0"
   bin:
     jiti: lib/jiti-cli.mjs
-  checksum: 10c0/4ceac133a08c8faff7eac84aabb917e85e8257f5ad659e843004ce76e981c457c390a220881748ac67ba1b940b9b729b30fb85cbaf6e7989f04b6002c94da331
+  checksum: 10c0/62fa20669dbe038bf20f65bb2aa4a2c78d3c1a9c12e669cc93b7c2e61b8d85fa7363a4c927fceda35bc07e85195421abc7f878dd67a9bf1368cfe55da702f54a
   languageName: node
   linkType: hard
 
