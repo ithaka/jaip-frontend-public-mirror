@@ -122,6 +122,7 @@ const submitBulkApproval = async () => {
         :data-tooltip-id="tooltipId"
         :name="icon"
         :aria-describedby="tooltipId"
+        :a11y-title="'Pre-Approved Discipline'"
         :class="{ 'fill-jstor-red': color }"
         @click.prevent.stop="openBulkApprovalModal"
       />

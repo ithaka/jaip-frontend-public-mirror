@@ -407,6 +407,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
                       <div class="display-flex flex-direction-row">
                         <pep-pharos-icon
                           name="exclamation-inverse"
+                          :a11y-title="'Previously Denied Material'"
                           class="mr-3 mb-0 fill-coral-50"
                         />
                         <SearchResult :doc="doc" :hide-details="true" :hide-buttons="true" small />

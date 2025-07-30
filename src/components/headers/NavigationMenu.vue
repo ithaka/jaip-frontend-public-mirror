@@ -70,7 +70,11 @@ const emit = defineEmits(['close'])
       >
         <!-- Display any icon specififed in the route's meta.icon property. 
         NOTE: This keeps the menu options level with the dropdowns. -->
-        <pep-pharos-icon v-if="route.meta.icon" :name="route.meta.icon" />
+        <pep-pharos-icon
+          v-if="route.meta.icon"
+          :a11y-title="'Route Icon'"
+          :name="route.meta.icon"
+        />
         <span class="text-capitalize pt-1 ml-1">
           {{ String(route.name) }}
         </span>

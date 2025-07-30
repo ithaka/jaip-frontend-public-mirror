@@ -522,6 +522,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                           <pep-pharos-icon
                             :data-tooltip-id="`feature-manager-tooltip-${feature.name}`"
                             name="question-inverse"
+                            :a11y-title="`Feature: ${feature.display_name}`"
                             class="mt-0 pl-2 fill-gray-40 small-icon"
                             :aria-describedby="`feature-manager-tooltip-${feature.name}`"
                           />

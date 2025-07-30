@@ -225,6 +225,7 @@ const handleDenial = async () => {
                 <pep-pharos-icon
                   :data-tooltip-id="`incomplete_explanation`"
                   name="question-inverse"
+                  :a11y-title="'Incomplete Reason Explanation'"
                   class="mt-0 pl-2 fill-gray-40 small-icon"
                   :aria-describedby="`incomplete_explanation`"
                 />

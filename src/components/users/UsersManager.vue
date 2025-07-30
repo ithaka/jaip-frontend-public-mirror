@@ -169,6 +169,7 @@ const handleAddAdmin = async (i: number) => {
                       <pep-pharos-icon
                         :data-tooltip-id="`feature-tooltip-${feature.name}`"
                         name="question-inverse"
+                        :a11y-title="'Pre-Approved Discipline'"
                         class="mt-0 pl-2 fill-gray-40 small-icon"
                         :aria-describedby="`feature-tooltip-${feature.name}`"
                       />

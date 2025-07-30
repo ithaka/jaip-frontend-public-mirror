@@ -319,6 +319,7 @@ api.log({
                       data-tooltip-id="date-tooltip"
                       name="question-inverse"
                       class="mt-0 pl-3"
+                      :a11y-title="'Publication Year Tooltip'"
                       aria-describedby="date-tooltip"
                     />
                     <pep-pharos-tooltip id="date-tooltip" placement="top">
@@ -416,6 +417,7 @@ api.log({
                         data-tooltip-id="journal-discipline-tooltip"
                         name="question-inverse"
                         class="mt-0 pl-3"
+                        :a11y-title="'Journal Tooltip'"
                         aria-describedby="journal-discipline-tooltip"
                       />
                       <pep-pharos-tooltip id="journal-discipline-tooltip" placement="top">

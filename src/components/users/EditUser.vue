@@ -220,6 +220,7 @@ const selectAllInCategory = (category: string | number) => {
                           <pep-pharos-icon
                             :data-tooltip-id="`feature-manager-tooltip-${name}`"
                             name="question-inverse"
+                            :a11y-title="`Feature: ${feature.display_name}`"
                             class="mt-0 pl-2 fill-gray-40 small-icon"
                             :aria-describedby="`feature-manager-tooltip-${name}`"
                           />
