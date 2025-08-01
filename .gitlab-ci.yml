@@ -7,7 +7,7 @@
 # Expected dev workflow:
 # Update _setup.yml with the latest $TAG and create a merge request.
 
-image: ${DOCKER_VIRTUAL}/node:20
+image: docker-virtual.artifactory.acorn.cirrostratus.org/node:20
 
 stages:
   - test
@@ -69,7 +69,7 @@ trigger deploy prod:
     - .deploy
     - .prod-env
   trigger:
-    include: .gitlab/deploy/persistent.yml    
+    include: .gitlab/deploy/persistent.yml
 
 # We don't need to undeploy apps in merge requests. Since they deploy to ephemeral,
 # they clean up automatically.

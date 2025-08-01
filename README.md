@@ -29,8 +29,20 @@ The `.env.example` file includes some values and notes that may be useful to pla
 
 ## Project Setup
 
-```sh
-yarn
+[Install `nvm` for managing the project node version.](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+
+Activate the pinned node version based on this project's `.nvmrc` file.
+
+```
+$ nvm use
+```
+
+If you do not have that node version on your local machine, `nvm` will say so. Use `nvm install` to install the pinned version.
+
+Finally, install project depdendencies:
+
+```
+$ yarn install
 ```
 
 ### Compile and Hot-Reload for Development
