@@ -943,7 +943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdit-vue/plugin-component@npm:^2.1.3":
+"@mdit-vue/plugin-component@npm:^2.1.4":
   version: 2.1.4
   resolution: "@mdit-vue/plugin-component@npm:2.1.4"
   dependencies:
@@ -953,7 +953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdit-vue/plugin-frontmatter@npm:^2.1.3":
+"@mdit-vue/plugin-frontmatter@npm:^2.1.4":
   version: 2.1.4
   resolution: "@mdit-vue/plugin-frontmatter@npm:2.1.4"
   dependencies:
@@ -965,7 +965,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdit-vue/types@npm:2.1.4, @mdit-vue/types@npm:^2.1.0":
+"@mdit-vue/types@npm:2.1.4, @mdit-vue/types@npm:^2.1.4":
   version: 2.1.4
   resolution: "@mdit-vue/types@npm:2.1.4"
   checksum: 10c0/e3b4a43b6893e7963589a7f922d731a34ca74018c59b9d6f6acef32bc5def485f449e1e5c6b6909eb5f7b73a8d04dfc440d0f8f26e12508ad7d74240d87ef29c
@@ -5066,7 +5066,7 @@ __metadata:
     start-server-and-test: "npm:^2.0.12"
     typescript: "npm:~5.8.3"
     typescript-cookie: "npm:^1.0.6"
-    unplugin-vue-markdown: "npm:^28.3.1"
+    unplugin-vue-markdown: "npm:^29.1.0"
     uuid: "npm:^11.1.0"
     vite: "npm:^6.3.5"
     vite-plugin-dynamic-import: "npm:^1.6.0"
@@ -5563,7 +5563,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it-async@npm:^2.0.0":
+"markdown-it-async@npm:^2.2.0":
   version: 2.2.0
   resolution: "markdown-it-async@npm:2.2.0"
   dependencies:
@@ -7827,25 +7827,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-markdown@npm:^28.3.1":
-  version: 28.3.1
-  resolution: "unplugin-vue-markdown@npm:28.3.1"
+"unplugin-vue-markdown@npm:^29.1.0":
+  version: 29.1.0
+  resolution: "unplugin-vue-markdown@npm:29.1.0"
   dependencies:
-    "@mdit-vue/plugin-component": "npm:^2.1.3"
-    "@mdit-vue/plugin-frontmatter": "npm:^2.1.3"
-    "@mdit-vue/types": "npm:^2.1.0"
+    "@mdit-vue/plugin-component": "npm:^2.1.4"
+    "@mdit-vue/plugin-frontmatter": "npm:^2.1.4"
+    "@mdit-vue/types": "npm:^2.1.4"
     "@types/markdown-it": "npm:^14.1.2"
     markdown-it: "npm:^14.1.0"
-    markdown-it-async: "npm:^2.0.0"
-    unplugin: "npm:^2.2.0"
+    markdown-it-async: "npm:^2.2.0"
+    unplugin: "npm:^2.3.5"
     unplugin-utils: "npm:^0.2.4"
   peerDependencies:
-    vite: ^2.0.0 || ^3.0.0-0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0
-  checksum: 10c0/67eea4c604d6468e3407b45974cf357c467a9270f996ffabda158c11ee3f31f46fe98aaa1e2b95043754c28ab51e54eccea3c9110254f6c1430eb1ec38da7613
+    vite: ^2.0.0 || ^3.0.0-0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0 || ^7.0.0
+  checksum: 10c0/f987dee7cb4035390bf25249db7aeae3884d7c3d46c304e6bc181f43eaab110d1e1e154ab5b6c9288875a581fec7327035b9f4490eb406eb5401f45be746d9a2
   languageName: node
   linkType: hard
 
-"unplugin@npm:^2.2.0":
+"unplugin@npm:^2.3.5":
   version: 2.3.5
   resolution: "unplugin@npm:2.3.5"
   dependencies:
