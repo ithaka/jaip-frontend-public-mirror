@@ -127,7 +127,7 @@ const selectorGroupOptions = ref(
     <pep-pharos-modal
       :id="`approve-modal-${doc.iid}`"
       :key="approveModalKey"
-      header="Approve Material"
+      header="Approve material"
       size="large"
       :open="showApproveModal"
     >

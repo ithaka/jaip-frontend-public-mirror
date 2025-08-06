@@ -9,6 +9,10 @@ const props = defineProps({
     type: Object as PropType<MediaRecord>,
     default: () => ({}),
   },
+  showRestrictedLabel: {
+    type: Boolean,
+    default: false,
+  },
   small: Boolean,
 })
 
@@ -51,8 +55,18 @@ const component = ref(props.small ? 'small' : 'span')
         </div>
         <div class="search-result-title">
           <!-- Title -->
-          <pep-pharos-heading :level="3" preset="3">
-            <DocumentTitle :title="doc.title" :subtitle="doc.subtitle" :small="small" />
+          <pep-pharos-heading
+            :level="3"
+            preset="3"
+            class="display-flex align-items-center full-width"
+          >
+            <DocumentTitle
+              :id="doc.iid"
+              :title="doc.title"
+              :subtitle="doc.subtitle"
+              :small="small"
+              :show-restricted-label="showRestrictedLabel"
+            />
           </pep-pharos-heading>
           <!-- Pages -->
           <pep-pharos-heading :level="3" preset="3">

@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { ref } from 'vue'
-
+import RestrictedItemLabel from './RestrictedItemLabel.vue'
 const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     default: '[Untitled]',
@@ -10,6 +14,10 @@ const props = defineProps({
   subtitle: {
     type: [Array<string>, String] as PropType<string[] | string>,
     default: '',
+  },
+  showRestrictedLabel: {
+    type: Boolean,
+    default: false,
   },
   small: Boolean,
 })
@@ -25,29 +33,62 @@ const component = ref(props.small ? 'small' : 'span')
 </script>
 
 <template>
-  <span>
-    <span>
+  <span class="document-title-container">
+    <span class="title-and-subtitle">
       <!-- eslint-disable vue/no-v-html -->
-      <component :is="component" v-if="title" class="document-title">
-        <span v-html="title" />
-      </component>
+      <span v-if="title" class="document-title">
+        <component :is="component">
+          <span v-html="title" />
+        </component>
+        <RestrictedItemLabel v-if="showRestrictedLabel && !subtitle?.length && !small" :id="id" />
+      </span>
+
       <!-- eslint-enable vue/no-v-html  -->
 
-      <component :is="component" v-else class="document-title"> [Untitled] </component>
-      <component :is="component" v-if="Array.isArray(subtitle) && (subtitle || []).length">
-        <!-- eslint-disable vue/no-v-html -->
-        <span
-          v-for="(sub, i) in subtitle"
-          :key="`subtitle_${i}`"
-          v-html="separateSubtitle(title, sub as string)"
-        />
-        <!-- eslint-enable vue/no-v-html  -->
-      </component>
-      <component :is="component" v-else-if="subtitle && !Array.isArray(subtitle)">
-        <!-- eslint-disable vue/no-v-html -->
-        <span v-html="separateSubtitle(title, subtitle as string)" />
-        <!-- eslint-enable vue/no-v-html  -->
-      </component>
+      <span v-else>
+        <component :is="component" class="document-title">
+          <span>[Untitled]</span>
+        </component>
+        <RestrictedItemLabel v-if="showRestrictedLabel && !subtitle?.length && !small" :id="id" />
+      </span>
+
+      <span v-if="Array.isArray(subtitle) && (subtitle || []).length">
+        <component :is="component" class="document-subtitle">
+          <!-- eslint-disable vue/no-v-html -->
+          <span
+            v-for="(sub, i) in subtitle"
+            :key="`subtitle_${i}`"
+            v-html="separateSubtitle(title, sub as string)"
+          />
+          <!-- eslint-enable vue/no-v-html  -->
+        </component>
+        <RestrictedItemLabel v-if="showRestrictedLabel && !small" :id="id" />
+      </span>
+
+      <span v-else-if="subtitle && !Array.isArray(subtitle)">
+        <component :is="component" class="document-subtitle">
+          <!-- eslint-disable vue/no-v-html -->
+          <span v-html="separateSubtitle(title, subtitle as string)" />
+          <!-- eslint-enable vue/no-v-html  -->
+        </component>
+        <RestrictedItemLabel v-if="showRestrictedLabel && !small" :id="id" />
+      </span>
     </span>
+
+    <pep-pharos-tooltip :id="`restricted-tooltip-${id}`" placement="top">
+      <span class="text-none">
+        Item not accessible in facilities that subscribe to the Restricted Items list. Reviewers can
+        still access item.
+      </span>
+    </pep-pharos-tooltip>
   </span>
 </template>
+<style lang="scss" scoped>
+.title-and-subtitle {
+  .document-subtitle,
+  .document-title {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+</style>

@@ -16,7 +16,7 @@ import type { Journal } from './Journal'
 import type { SubdomainsResponse } from './Subdomains'
 import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
 import type { Log } from './Log'
-import type { BlockArgs, UnblockArgs } from './BlockArgs'
+import type { RestrictArgs, UnrestrictArgs } from './RestrictArgs'
 interface Documents {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown, unknown>>
   pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
@@ -34,14 +34,18 @@ interface Approvals {
   approve: (arg: ApprovalArgs) => Promise<AxiosResponse<unknown, unknown>>
   request: (arg: RequestArgs) => Promise<AxiosResponse<unknown, unknown>>
 }
-interface GlobalBlocks {
-  block: (arg: BlockArgs) => Promise<AxiosResponse<unknown, unknown>>
-  unblock: (arg: UnblockArgs) => Promise<AxiosResponse<unknown, unknown>>
+interface GlobalRestricts {
+  restrict: (arg: RestrictArgs) => Promise<AxiosResponse<unknown, unknown>>
+  unrestrict: (arg: UnrestrictArgs) => Promise<AxiosResponse<unknown, unknown>>
   get: (arg: {
     term: string
     page: number
     limit: number
   }) => Promise<AxiosResponse<SearchResponse, unknown>>
+  download: () => Promise<AxiosResponse<unknown, unknown>>
+  last_updated: {
+    get: () => Promise<AxiosResponse<{ last_updated: Date | undefined }, unknown>>
+  }
 }
 export default interface ApiObject {
   log: (arg: Log) => void
@@ -95,6 +99,6 @@ export default interface ApiObject {
   journals: (arg: string) => Promise<AxiosResponse<Journal[], unknown>>
   search: Search
   approvals: Approvals
-  global_blocks: GlobalBlocks
+  global_restricts: GlobalRestricts
   documents: Documents
 }

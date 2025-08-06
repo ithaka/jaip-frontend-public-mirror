@@ -11,7 +11,6 @@ import EntityManager from '@/components/account/EntityManager.vue'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import type { Entity } from '@/interfaces/Entities'
-import { setCookie } from 'typescript-cookie'
 
 const props = defineProps({
   entity: {
@@ -21,8 +20,7 @@ const props = defineProps({
 })
 const coreStore = useCoreStore()
 const userStore = useUserStore()
-const { featureDetails, groupMap, selectedGroups, type, groups, entityName, gettingUser } =
-  storeToRefs(userStore)
+const { featureDetails, groupMap, selectedGroups } = storeToRefs(userStore)
 
 const searchStore = useSearchStore()
 const { secondaryLimit } = storeToRefs(searchStore)
@@ -59,16 +57,7 @@ const doSearch = async () => {
 }
 const handleUpdate = async () => {
   doSearch()
-  gettingUser.value = true
-  const { data } = await coreStore.$api.auth.session()
-  if (data?.uuid) {
-    const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
-    setCookie('uuid', data.uuid, { expires: inOneDay })
-  }
-  groups.value = data.groups
-  type.value = data.type
-  entityName.value = data.name
-  gettingUser.value = false
+  await userStore.getCurrentUser()
 }
 
 const changePage = (p: number) => {

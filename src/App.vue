@@ -12,7 +12,8 @@ import SmallHeader from '@/components/headers/SmallHeader.vue'
 import type { StringString } from '@/interfaces/BasicObjects'
 
 const coreStore = useCoreStore()
-const { isAdminSubdomain, routePath, routeQuery, toastKey, environment } = storeToRefs(coreStore)
+const { isAdminSubdomain, routePath, routeQuery, toastKey, environment, isSpinning } =
+  storeToRefs(coreStore)
 
 const userStore = useUserStore()
 const {
@@ -90,7 +91,10 @@ const truncatedGramaticalGroupsList = computed(() => {
 <template>
   <div>
     <!-- Keeping the spinner outside the layout will allow it to fill the page. Useful for initial loading. -->
-    <pep-pharos-loading-spinner v-if="gettingUser || searching" class="position-fixed" />
+    <pep-pharos-loading-spinner
+      v-if="gettingUser || searching || isSpinning"
+      class="position-fixed"
+    />
 
     <!-- Placing the toaster here will put toast in the top right corner of the browser window. -->
     <pep-pharos-toaster :key="toastKey" ref="toaster" />

@@ -1,0 +1,578 @@
+{
+    "docs": [
+        {
+            "_id": "10.2307/27755147",
+            "doi": "10.2307/27755147",
+            "iid": "1e194eb0-8c26-3acb-9f1a-213c40e86081",
+            "authors": [],
+            "score": 39.64865,
+            "contentType": "Journal Article",
+            "title": "Activity Pattern Segregation of Carnivores in the High Andes",
+            "subtitle": [],
+            "citation_line": "<cite>Journal of Mammalogy</cite>, Vol. 90, No. 6 (Dec., 2009), pp. 1404-1409",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "1404",
+            "lpage": "1409",
+            "tb": "",
+            "year": 2009,
+            "abstract": "Intraguild competition may be reduced if ecologically similar species segregate temporally. Using data from 1,596 camera-trap photos, we present the 1st quantitative analyses of the activity patterns of Andean cats (Leopardus jacobita), Pampas cats (Leopardus colocolo), culpeos (Lycalopex culpaeus), and pumas (Puma concolor) in high-altitude deserts of the Andes. We compared daily activity patterns for these carnivores with those of mountain vizcachas (Lagidium viscacia), the main prey of Andean cats. Activity patterns of all species were positively skewed toward night. Pampas cats displayed the greatest proportion of nocturnal activity, whereas Andean cats were the most diurnal. Activity of Andean cats differed significantly only from that of Pampas cats; Pampas cats also differed from pumas. Activity of Andean cats was generally similar to that of mountain vizcachas. The dissimilar activity patterns of Andean and Pampas cats support the hypothesis of temporal niche segregation of these fields.",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-31T23:07:01.290Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-31T23:07:01.290Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                }
+            },
+            "history": [
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-07-03T13:42:33.941Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka"
+                },
+                {
+                    "status": "Denied",
+                    "statusLabel": "Denied",
+                    "statusDetails": {
+                        "comments": "test",
+                        "reason": "Sexually explicit"
+                    },
+                    "statusCreatedAt": "2025-07-03T13:41:44.332Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka"
+                },
+                {
+                    "status": "Denied",
+                    "statusLabel": "Denied",
+                    "statusDetails": {
+                        "comments": "test",
+                        "reason": "Sexually explicit"
+                    },
+                    "statusCreatedAt": "2025-07-03T13:41:44.332Z",
+                    "groupID": 2,
+                    "groupName": "Ilium"
+                },
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-07-03T13:38:23.812Z",
+                    "groupID": 2,
+                    "groupName": "Ilium"
+                },
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-07-03T13:38:23.812Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka"
+                },
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-07-01T17:19:09.664Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka"
+                }
+            ],
+            "is_restricted": true,
+            "restricted_reason": "Detrimental to the good order of the facility or rehabilitation"
+        },
+        {
+            "_id": "10.2307/resrep62409",
+            "doi": "10.2307/resrep62409",
+            "iid": "82e66553-6a22-3fb5-a3c3-278adcfdd3bd",
+            "authors": [],
+            "score": 49.980583,
+            "contentType": "Research Report",
+            "title": "Arctic Geopolitics and Governance:",
+            "subtitle": [
+                "An Indian Perspective"
+            ],
+            "citation_line": "Aug. 15, 2024",
+            "book_publisher": "[{\"publisher\":\"East-West Center\",\"code\":\"eastwestcenter\",\"role\":\"LICENSOR\"}]",
+            "cty": "research_report",
+            "cty_str": "research_report",
+            "fpage": "",
+            "lpage": "",
+            "tb": "Arctic Geopolitics and Governance:",
+            "year": 2024,
+            "abstract": "",
+            "book_description": "\n<p>The Arctic region is undergoing a significant transformation, driven by environmental changes, strategic realignments, and geopolitical tensions among major actors like the United States, China, Russia, and NATO. The melting ice caps have opened new shipping routes, intensifying competition for strategic dominance and access to untapped resources, leading to a complex power struggle. The strained relationship between the West and Russia also poses a significant risk of military confrontation in the Arctic. Increasing polarization and hostility, coupled with the abandonment of cooperative mechanisms, elevate the danger of misunderstandings and miscommunication leading to conflict escalation. Given the evolving dynamics, India needs</p>\n",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:14:01.737Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:14:01.737Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Detrimental to the good order of the facility or rehabilitation"
+                    }
+                }
+            },
+            "history": [
+                {
+                    "status": "Pending",
+                    "statusLabel": "Pending",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-06-05T17:14:41.991Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "entityName": "ITHAKA Facility",
+                    "entityID": 4
+                }
+            ],
+            "is_restricted": true,
+            "restricted_reason": "Detrimental to the good order of the facility or rehabilitation"
+        },
+        {
+            "_id": "10.2307/resrep62411",
+            "doi": "10.2307/resrep62411",
+            "iid": "2f79f022-1ba9-31d0-95c3-497d81e818ed",
+            "authors": [],
+            "score": 49.980583,
+            "contentType": "Research Report",
+            "title": "How Will the Probowo Administration Shape Indonesia’s Foreign Policy as a Middle Power?",
+            "subtitle": [],
+            "citation_line": "Aug. 20, 2024",
+            "book_publisher": "[{\"publisher\":\"East-West Center\",\"code\":\"eastwestcenter\",\"role\":\"LICENSOR\"}]",
+            "cty": "research_report",
+            "cty_str": "research_report",
+            "fpage": "",
+            "lpage": "",
+            "tb": "How Will the Probowo Administration Shape Indonesia’s Foreign Policy as a Middle Power?",
+            "year": 2024,
+            "abstract": "",
+            "book_description": "\n<p>Indonesia’s President Joko Widodo, early during his first term of office, declared his country a middle power. However, long before “middle power” became a common phrase in diplomatic and political circles, Indonesia acted like a middle power: building regional institutions, setting norms of international relations, mediating conflict resolution processes, and promoting multilateral dialogue.</p>\n<p>What is a middle power? Scholars and pundits cannot seem to agree on a common definition. According to Dr. Dino Patti Djalal, Chairman and Founder of the Foreign Policy Community of Indonesia (FPCI), a middle power must meet three criteria: size, in terms of population and territorial</p>\n",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-22T17:46:08.486Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Sexually explicit"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-22T17:46:08.486Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Sexually explicit"
+                    }
+                }
+            },
+            "history": [
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-05-30T17:43:32.673Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka"
+                },
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-05-30T17:43:32.673Z",
+                    "groupID": 2,
+                    "groupName": "Ilium"
+                },
+                {
+                    "status": "Approved",
+                    "statusLabel": "Approved",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-05-29T14:14:07.691Z",
+                    "groupID": 2,
+                    "groupName": "Ilium"
+                },
+                {
+                    "status": "Pending",
+                    "statusLabel": "Pending",
+                    "statusDetails": {
+                        "comments": "",
+                        "reason": ""
+                    },
+                    "statusCreatedAt": "2025-05-16T18:10:07.265Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "entityName": "Ryan McCarthy",
+                    "entityID": 3
+                }
+            ],
+            "is_restricted": true,
+            "restricted_reason": "Sexually explicit"
+        },
+        {
+            "_id": "10.2307/20452663",
+            "doi": "10.2307/20452663",
+            "iid": "06d158e4-d18e-3ba8-acd3-edea68f9f863",
+            "authors": [],
+            "score": 39.17881,
+            "contentType": "Journal Article",
+            "title": "Discourses of Danger: Locating Emma Goldman",
+            "subtitle": [],
+            "citation_line": "<cite>Political Theory</cite>, Vol. 36, No. 5 (Oct., 2008), pp. 735-761",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "735",
+            "lpage": "761",
+            "tb": "",
+            "year": 2008,
+            "abstract": "Government, media, and medical accounts of Emma Goldman converged to create her public presence in the U.S. as a \"dangerous individual.\" The prevailing discourses constituted Goldman as violent, utilizing her alleged menace to distract attention from far more egregious violence against labor by state and corporate forces. Goldman responded by denying, confronting, and redirecting the alarmed gaze toward greater risks left underarticulated in hegemonic accounts. Goldman's bold confrontations with authorities constituted a kind of anarchist parrhesia, fearless speech, a relentless truth-telling practice that risked her own security in pursuit of her \"beautiful ideal.\" The labor of remembering America's history of class violence hones our attention to the complex discursive processes by which some historical facts come to count in prevailing narratives, while others fade into obscurity.",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:55.610Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:55.610Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/j.ctt1287j69.67",
+            "doi": "10.2307/j.ctt1287j69.67",
+            "iid": "bd0c4e77-0d83-3f8a-8ff0-64930b3f8ad5",
+            "authors": [],
+            "score": 42.31579,
+            "contentType": "Book Chapter",
+            "title": "Terror",
+            "subtitle": [],
+            "citation_line": "2014",
+            "book_publisher": "[{\"publisher\":\"NYU Press\",\"code\":\"nyupress\",\"role\":\"PUBLISHER\"},{\"publisher\":\"NYU Press\",\"code\":\"nyupress\",\"role\":\"LICENSOR\"}]",
+            "cty": "chapter",
+            "cty_str": "chapter",
+            "fpage": "239",
+            "lpage": "242",
+            "tb": "Keywords for American Cultural Studies, Second Edition",
+            "year": 2014,
+            "abstract": "<p>“Terror” is a complex word that refers both to physical violence and to the emotional response produced by that violence. While this dual meaning has persisted for centuries, the term’s connotations have shifted in the modern era in relation to the perceived source of such force. In contrast to earlier usages that reference punitive measures of the state, such as political violence and persecution, terror is now used to name threats posed by nonstate actors. Though amplified in the United States after 9/11, this shift began in the context of conflict with militant left and liberation struggles throughout the nineteenth</p>",
+            "book_description": "<p>Since its initial publication, scholars and students alike have turned to<em>Keywords for American Cultural Studies</em>as an invaluable resource for understanding key terms and debates in the fields of American studies and cultural studies. As scholarship has continued to evolve, this revised and expanded second edition offers indispensable meditations on new and developing concepts used in American studies, cultural studies, and beyond. It is equally useful for college students who are trying to understand what their teachers are talking about, for general readers who want to know what's new in scholarly research, and for professors who just want to keep up.</p><p>Designed as a print-digital hybrid publication,<em>Keywords</em>collects more than 90 essays-30 of which are new to this edition-from interdisciplinary scholars, each on a single term such as \"America,\" \"culture,\" \"law,\" and \"religion.\" Alongside \"community,\" \"prison,\" \"queer,\" \"region,\" and many others, these words are the nodal points in many of today's most dynamic and vexed discussions of political and social life, both inside and outside of the academy. The<em>Keywords</em>website, which features 33 essays, provides pedagogical tools that engage the entirety of the book, both in print and online.</p><p>The publication brings together essays by scholars working in literary studies and political economy, cultural anthropology and ethnic studies, African American history and performance studies, gender studies and political theory. Some entries are explicitly argumentative; others are more descriptive. All are clear, challenging, and critically engaged. As a whole,<em>Keywords for American Cultural Studies</em>provides an accessible A to Z survey of prevailing academic buzzwords and a flexible tool for carving out new areas of inquiry.</p>",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:41.974Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:41.974Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/25101093",
+            "doi": "10.2307/25101093",
+            "iid": "344dd67c-b06d-3459-9ab7-5f2cdafcd615",
+            "authors": [],
+            "score": 7.769826,
+            "contentType": "Journal Article",
+            "title": "A Defense of Anarchism",
+            "subtitle": [],
+            "citation_line": "<cite>The North American Review</cite>, Vol. 143, No. 357 (Aug., 1886), p. 204",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "204",
+            "lpage": "204",
+            "tb": "",
+            "year": 1886,
+            "abstract": "",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:15.960Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:33:15.960Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/3840430",
+            "doi": "10.2307/3840430",
+            "iid": "a06f1782-76ff-39a6-8885-5716f427badc",
+            "authors": [],
+            "score": 37.875,
+            "contentType": "Journal Article",
+            "title": "\"Your Body Is Yours\": Anarchism, Birth Control, and Eugenics in Interwar France",
+            "subtitle": [],
+            "citation_line": "<cite>Journal of the History of Sexuality</cite>, Vol. 14, No. 4 (Oct., 2005), pp. 415-432",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "415",
+            "lpage": "432",
+            "tb": "",
+            "year": 2005,
+            "abstract": "",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:50.172Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:50.172Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/2139424",
+            "doi": "10.2307/2139424",
+            "iid": "e902a4bc-9db4-3870-a02e-b2f8c3ad6ca9",
+            "authors": [],
+            "score": 22.889763,
+            "contentType": "Journal Article",
+            "title": "Scientific Anarchism",
+            "subtitle": [],
+            "citation_line": "<cite>Political Science Quarterly</cite>, Vol. 4, No. 1 (Mar., 1889), pp. 1-36",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "1",
+            "lpage": "36",
+            "tb": "",
+            "year": 1889,
+            "abstract": "",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:45.987Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:45.987Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/41879237",
+            "doi": "10.2307/41879237",
+            "iid": "f07467b6-922b-3add-a3f2-1c6076e1f4d4",
+            "authors": [],
+            "score": 40.64789,
+            "contentType": "Journal Article",
+            "title": "Paul Goodman: Finding an Audience for Anarchism in Twentieth-Century America",
+            "subtitle": [],
+            "citation_line": "<cite>Journal for the Study of Radicalism</cite>, Vol. 5, No. 2 (FALL 2011), pp. 1-33",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "1",
+            "lpage": "33",
+            "tb": "",
+            "year": 2011,
+            "abstract": "",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:37.951Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:32:37.951Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Inflammatory or inciting violence, uprisings, or riots"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Inflammatory or inciting violence, uprisings, or riots"
+        },
+        {
+            "_id": "10.2307/30029965",
+            "doi": "10.2307/30029965",
+            "iid": "4896f463-a9e7-3eda-8dba-b8795aab4326",
+            "authors": [],
+            "score": 37.875,
+            "contentType": "Journal Article",
+            "title": "Emergent Shakespeare and the Politics of Protest: \"2 Henry VI\" in Historical Contexts",
+            "subtitle": [],
+            "citation_line": "<cite>ELH</cite>, Vol. 72, No. 1 (Spring, 2005), pp. 129-158",
+            "book_publisher": "",
+            "cty": "journal",
+            "cty_str": "journal",
+            "fpage": "129",
+            "lpage": "158",
+            "tb": "",
+            "year": 2005,
+            "abstract": "",
+            "book_description": "",
+            "mediaReviewStatuses": {
+                "1": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:15:06.598Z",
+                    "groupID": 1,
+                    "groupName": "Ithaka",
+                    "statusDetails": {
+                        "reason": "Sexually explicit"
+                    }
+                },
+                "2": {
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
+                    "statusCreatedAt": "2025-07-17T17:15:06.598Z",
+                    "groupID": 2,
+                    "groupName": "Ilium",
+                    "statusDetails": {
+                        "reason": "Sexually explicit"
+                    }
+                }
+            },
+            "is_restricted": true,
+            "restricted_reason": "Sexually explicit"
+        }
+    ],
+    "total": 23
+}

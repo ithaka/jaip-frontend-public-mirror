@@ -20,6 +20,7 @@ import {
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import { changeRoute } from '@/utils/helpers'
 import type { Group, GroupSelection } from '@/interfaces/Group'
+import { DenialReasons } from '@/interfaces/MediaReview'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
@@ -44,15 +45,14 @@ const denyGroups = ref(
     ? featureDetails.value['deny_requests'].groups
     : getGroupsWithStatus(statuses.value, 'denied'),
 )
-const incompleteReason = 'Missing required information'
 const reasons = [
-  'Sexually explicit',
-  'Instructive for explosives, weapons, or escapes',
-  'Inflammatory or inciting violence, uprisings, or riots',
-  'Detrimental to the good order of the facility or rehabilitation',
-  incompleteReason,
+  DenialReasons.Sex,
+  DenialReasons.Instruction,
+  DenialReasons.Violence,
+  DenialReasons.Order,
+  DenialReasons.Incomplete,
 ]
-const selectedReason = ref('Sexually explicit')
+const selectedReason = ref(DenialReasons.Sex as DenialReasons | string)
 const otherReason = ref('')
 const comments = ref('')
 const invalidComments = ref('')
@@ -134,7 +134,7 @@ const handleDenial = async () => {
     comments: comments.value.trim(),
   }
   try {
-    if (selectedReason.value === incompleteReason) {
+    if (selectedReason.value === DenialReasons.Incomplete) {
       await coreStore.$api.approvals.incomplete(args)
     } else {
       await coreStore.$api.approvals.deny(args)
@@ -148,11 +148,11 @@ const handleDenial = async () => {
     }
     coreStore.$api.log({
       eventtype:
-        selectedReason.value === incompleteReason
+        selectedReason.value === DenialReasons.Incomplete
           ? 'pep_incomplete_submitted'
           : 'pep_denial_submitted',
       event_description:
-        selectedReason.value === incompleteReason
+        selectedReason.value === DenialReasons.Incomplete
           ? 'user submitted incomplete'
           : 'user submitted denial',
       dois: [args.doi],
@@ -185,7 +185,7 @@ const handleDenial = async () => {
     <pep-pharos-modal
       :id="`deny-modal-${doc.iid}`"
       :key="denyModalKey"
-      header="Deny Material"
+      header="Deny material"
       :open="showDenyModal"
     >
       <p slot="description" class="mb-3">
@@ -210,7 +210,7 @@ const handleDenial = async () => {
           @change="handleGroupChange"
         />
       </div>
-      <pep-pharos-radio-group :value="selectedReason" @input="handleSelectedReason">
+      <pep-pharos-radio-group :value="selectedReason" class="mb-6" @input="handleSelectedReason">
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
           v-for="(reason, index) in reasons"
@@ -221,7 +221,7 @@ const handleDenial = async () => {
           <span slot="label">
             <span class="display-flex align-items-center">
               {{ reason }}
-              <span v-if="reason === incompleteReason">
+              <span v-if="reason === DenialReasons.Incomplete">
                 <pep-pharos-icon
                   :data-tooltip-id="`incomplete_explanation`"
                   name="question-inverse"

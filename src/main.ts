@@ -67,6 +67,7 @@ const {
   groupIDs,
   ungroupedFeatures,
   id,
+  facilities,
 } = storeToRefs(userStore)
 const { pageNo, reviewStatus, statusQuery } = storeToRefs(searchStore)
 
@@ -149,6 +150,7 @@ const logout = () => {
     },
   })
 }
+const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
 
 // Handle auth and the initial fetching of features
 const auth = async (app: App) => {
@@ -178,7 +180,8 @@ const auth = async (app: App) => {
 
   // Set UUID Cookie and remove hash
   if (valid && isAdminSubdomain.value && (location || {}).hash) {
-    setCookie('uuid', uuid)
+    setCookie('uuid', uuid, { expires: inOneDay, sameSite: 'None', secure: true })
+
     duplicateRoute = true
     if (router) {
       router.replace({ path: app.config.globalProperties.$route.path })
@@ -207,8 +210,7 @@ const auth = async (app: App) => {
           }
         }
         if (data?.uuid) {
-          const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
-          setCookie('uuid', data.uuid, { expires: inOneDay })
+          setCookie('uuid', data.uuid, { expires: inOneDay, sameSite: 'None', secure: true })
         }
         if (data.invalid_email) {
           invalidUserEmail.value = data.invalid_email
@@ -219,6 +221,7 @@ const auth = async (app: App) => {
           type.value = data.type
           entityName.value = data.name
           gettingUser.value = false
+          facilities.value = data.facilities || []
         }
       }
     } catch {

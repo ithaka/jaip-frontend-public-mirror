@@ -9,6 +9,7 @@ export interface User {
   email?: string
   groups: Array<Group>
   uuid: string
+  facilities?: Array<Entity>
 }
 
 export interface Entity {

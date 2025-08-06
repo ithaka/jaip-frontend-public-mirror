@@ -6,7 +6,7 @@ describe('Main site content', () => {
   context('Unauthenticated', () => {
     context('General', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
+        cy.intercept('GET', routes.auth.get, { statusCode: 401 }) // no user
           .as('auth')
         cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
           .as('env')
@@ -14,7 +14,7 @@ describe('Main site content', () => {
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
           .as('subdomains') 
-        cy.visit('/')
+        handleLocation('/', cy, 'index', 'pep')
       })
       it('includes about text', () => {
         cy.visit('/')

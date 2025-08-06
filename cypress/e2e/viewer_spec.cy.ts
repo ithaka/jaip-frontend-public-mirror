@@ -40,6 +40,44 @@ describe('Page Viewer', () => {
     })
   })
 
+  context('As student with restricted item', () => {
+    beforeEach(() => {
+      const route = `/page/${iid}/0?term=&page=1`
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
+        .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
+          .as('features')
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one_restricted__response.json' })
+        .as('search')
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+        .as('alerts')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
+        .as('metadata')
+      handleLocation(route, cy, 'viewer', 'pep')
+
+      cy.visit(route)
+
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+    })
+
+    it('does not show download button', () => {
+      cy.get('[data-cy="download-pdf-button"]').should('not.exist')
+    })
+
+    it('does not show print button', () => {
+      cy.get('[data-cy="print-pdf-button"]').should('not.exist')
+    })
+
+    it('shows item unavailable', () => {
+        cy.get('.search-result')
+          .contains('Item unavailable', { matchCase: false })
+          .should('be.visible')
+    })
+  })
+
+
   context('As admin', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
@@ -143,4 +181,38 @@ describe('Page Viewer', () => {
       // with the probable exception of IE.
     })
   })
+
+  context('As admin with manage restricted list', () => {
+    beforeEach(() => {
+      const route = `/page/${iid}/0?term=&page=1`
+      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_manage_restricted_list_one_group_media_access__response.json' })
+        .as('auth')
+      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
+        .as('env')
+      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
+        .as('features')
+      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one_restricted__response.json' })
+        .as('search')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
+        .as('metadata')
+      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+        .as('alerts')
+      handleLocation(route, cy, 'viewer', 'pep-admin')
+
+      cy.visit(route)
+
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+    })
+
+    it('shows restricted label', () => {
+      cy.get('pep-pharos-heading').contains("Restricted", { matchCase: false }).should('be.visible')
+    })
+    it('shows unrestrict button', () => {
+      cy.get('pep-pharos-button').contains("Unrestrict", { matchCase: false }).should('be.visible')
+    })
+  })
+
 })
+
+
+

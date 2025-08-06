@@ -11,7 +11,14 @@ import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 
 const userStore = useUserStore()
-const { isAuthenticatedAdmin, groupIDs, groupMap, selectedGroups } = storeToRefs(userStore)
+const {
+  isAuthenticatedAdmin,
+  groupIDs,
+  groupMap,
+  selectedGroups,
+  ungroupedFeatures,
+  canViewRestrictedList,
+} = storeToRefs(userStore)
 
 const searchStore = useSearchStore()
 const { reviewStatus, statusStartDate, statusEndDate, statusQuery } = storeToRefs(searchStore)
@@ -89,8 +96,18 @@ const statuses = [
   { label: 'Denied', value: 'denied' },
   { label: 'Approved', value: 'approved' },
 ]
+
+if (canViewRestrictedList.value) {
+  statuses.push({ label: 'Restricted', value: 'restricted' })
+}
+
 const handleStatusSelection = (status: string) => {
   reviewStatus.value = status
+  if (status === 'restricted') {
+    coreStore.$api.global_restricts.last_updated.get().then((response) => {
+      searchStore.restrictedListLastUpdated = response.data.last_updated
+    })
+  }
   newSearch()
 }
 
@@ -121,9 +138,16 @@ coreStore.$api.log({
   <main class="page">
     <pep-pharos-layout row-gap="0">
       <pep-pharos-heading class="text-capitalize cols-12" :level="1" preset="5--bold">
-        {{ reviewStatus }} Requests
+        <span v-if="reviewStatus === 'restricted'">{{ reviewStatus }} Items</span>
+        <span v-else>{{ reviewStatus }} Requests</span>
       </pep-pharos-heading>
-
+      <div v-if="ungroupedFeatures['manage_restricted_list']?.enabled" class="cols-7">
+        <pep-pharos-alert status="info">
+          Users at participating facilities are unable to request these items. Administrators can
+          opt-in from their account.
+          <strong>Management of this list is for internal ITHAKA use only.</strong>
+        </pep-pharos-alert>
+      </div>
       <div
         v-if="isAuthenticatedAdmin && groupIDs.length > 1"
         class="cols-12 mb-3 mt-3 groups-selection"

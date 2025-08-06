@@ -75,6 +75,8 @@ export const useSearchStore = defineStore('search', {
       secondarySearching: false,
 
       searchResultsKey: 0,
+
+      restrictedListLastUpdated: undefined as Date | undefined,
     }
   },
   actions: {

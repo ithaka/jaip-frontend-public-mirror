@@ -12,10 +12,10 @@ const limit = 10
 const page = ref(1)
 const term = ref('')
 
-const getBlockedItems = async () => {
+const getRestrictedItems = async () => {
   try {
     searching.value = true
-    const resp = await coreStore.$api.global_blocks.get({
+    const resp = await coreStore.$api.global_restricts.get({
       term: term.value,
       page: page.value,
       limit: limit,
@@ -24,7 +24,7 @@ const getBlockedItems = async () => {
     total.value = resp.data.total || 0
     searching.value = false
   } catch (error) {
-    console.error('Error fetching blocked items:', error)
+    console.error('Error fetching restricted items:', error)
   } finally {
     searching.value = false
   }
@@ -32,17 +32,17 @@ const getBlockedItems = async () => {
 
 const changePage = (newPage: number) => {
   page.value = newPage
-  getBlockedItems()
+  getRestrictedItems()
 }
 
-getBlockedItems()
+getRestrictedItems()
 
 coreStore.$api.log({
-  eventtype: 'pep_block_list_view',
-  event_description: 'User has landed on the block list view.',
+  eventtype: 'pep_restricted_items_list_view',
+  event_description: 'User has landed on the restricted items view.',
 })
 const getResultsCountLabel = (count: number) => {
-  return count === 1 ? '1 blocked item' : `${count} blocked items`
+  return count === 1 ? '1 restricted item' : `${count} restricted items`
 }
 </script>
 
@@ -52,11 +52,11 @@ const getResultsCountLabel = (count: number) => {
   </div>
   <div v-else class="cols-12 mb-6">
     <div>
-      <form @submit.prevent.stop="getBlockedItems">
+      <form @submit.prevent.stop="getRestrictedItems">
         <pep-pharos-input-group
-          id="block_list_query"
+          id="restricted_list_query"
           placeholder="Enter a term to search reasons"
-          name="block_list_query"
+          name="restricted_list_query"
           class="mt-4 mb-7"
           :value="term"
           @input="term = $event.target.value"
@@ -84,13 +84,15 @@ const getResultsCountLabel = (count: number) => {
           :key="doc.iid"
           :doc="doc"
           hide-statuses
-          is-block-list
-          @block-submitted="getBlockedItems"
+          is-restricted-list
+          @block-submitted="getRestrictedItems"
         />
       </div>
     </div>
     <div v-else class="cols-12 mt-5 mb-7">
-      <pep-pharos-heading preset="3--bold" :level="2"> No blocked items found. </pep-pharos-heading>
+      <pep-pharos-heading preset="3--bold" :level="2">
+        No restricted items found.
+      </pep-pharos-heading>
     </div>
     <pep-pharos-pagination
       v-if="!searching && total > docs.length"

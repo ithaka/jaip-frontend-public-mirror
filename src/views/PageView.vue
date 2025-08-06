@@ -161,7 +161,7 @@ const accessDenied = computed(() => {
         :include-pdf="!!page_index"
         @approval-submitted="getDocument"
         @denial-submitted="getDocument"
-        @block-submitted="getDocument"
+        @restrict-submitted="getDocument"
       />
     </div>
     <div

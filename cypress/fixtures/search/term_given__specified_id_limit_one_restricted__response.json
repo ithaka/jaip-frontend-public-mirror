@@ -22,14 +22,16 @@
             "lpage": "95",
             "mediaReviewStatuses": {
                 "1": {
-                    "status": "Approved",
-                    "statusLabel": "Approved by Discipline",
+                    "status": "Restricted",
+                    "statusLabel": "Restricted",
                     "statusCreatedAt": "2022-11-18T16:34:37.802396Z",
                     "groupName": "Ithaka",
                     "groupID": 1,
                     "statusDetails": null
                 }
             },
+            "is_restricted": true,
+            "restricted_reason": "Sexually explicit",
             "national_history": null,
             "snippets": [
                 {

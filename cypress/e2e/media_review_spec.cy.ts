@@ -131,7 +131,36 @@ describe('Media Review', () => {
           .contains('Request this', { matchCase: false })
           .should('not.exist')      
       })
+
+
+      it('Does not let students access restricted items', () => {
+        // There exists a restricted
+        cy.get('.search-result')
+          .contains('Item unavailable', { matchCase: false })
+          .parents('.search-result')
+          .contains('Request this', { matchCase: false })
+          .should('not.exist')
+
+        cy.get('.search-result')
+          .contains('Item unavailable', { matchCase: false })
+          .parents('.search-result')
+          .contains('Read', { matchCase: false })
+          .should('not.exist')
+      })
+
+      it('Does not let students restrict or unrestrict items', () => {
+        cy.get('.search-result')
+          .find('pep-pharos-button')
+          .contains('Restrict', { matchCase: false })
+          .should('not.exist')
+
+        cy.get('.search-result')
+          .find('pep-pharos-button')
+          .contains('Unrestrict', { matchCase: false })
+          .should('not.exist')
+      })
     })
+
     context('With alternate search response', () => {
       beforeEach(() => {
         cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__with_denial__response.json' })
@@ -485,6 +514,18 @@ describe('Media Review', () => {
             .parents('.search-result')
             .contains('t - Need to generate a denial for testing purposes')
         })
+
+        it('Does not let admins restrict or unrestrict items', () => {
+          cy.get('.search-result')
+            .find('pep-pharos-button')
+            .contains('Restrict', { matchCase: false })
+            .should('not.exist')
+
+          cy.get('.search-result')
+            .find('pep-pharos-button')
+            .contains('Unrestrict', { matchCase: false })
+            .should('not.exist')
+        })
       })
     })
 
@@ -512,5 +553,50 @@ describe('Media Review', () => {
         cy.wait('@search')
       })  
     })
+
+    context('With manage restrictions', () => {
+      beforeEach(() => {
+        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_manage_restricted_list__response.json' })
+          .as('auth')
+        cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' })
+          .as('disciplines')
+        cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__response.json' })
+          .as('search')
+        cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
+        cy.intercept('POST', routes.global_restricts.restrict, { body: '' }).as('restrict')
+        cy.intercept('POST', routes.global_restricts.unrestrict, { body: '' }).as('unrestrict')
+        handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep-admin')
+        cy.visit('/search?term=mary+mcleod+bethune')
+        cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@features', '@disciplines'])  
+
+      })
+
+      it('Allows restrict', () => {
+        cy.get('.search-result')
+          .find('pep-pharos-button')
+          .contains('Restrict', { matchCase: false })
+          .click()
+
+        cy.get('[id^=restrict-modal-]')
+          .find('pep-pharos-button')
+          .contains('Restrict')
+          .click()
+        cy.wait('@restrict')
+      })
+
+      it('Allows unrestrict', () => {
+        cy.get('.search-result')
+          .find('pep-pharos-button')
+          .contains('Unrestrict', { matchCase: false })
+          .click()
+        cy.get('[id^=unrestrict-modal-]')
+          .find('pep-pharos-button')
+          .contains('Confirm')
+          .click()
+
+        cy.wait('@unrestrict')
+      })  
+    })
+
   })
 })

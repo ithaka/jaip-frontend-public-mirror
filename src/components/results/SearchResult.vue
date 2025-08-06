@@ -9,11 +9,12 @@ import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { getStatus } from '@/utils/helpers'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import BibliographicalData from '@/components/results/BibliographicalData.vue'
 import { ref, computed } from 'vue'
+import UnrestrictButton from '@/components/adminButtons/UnrestrictButton.vue'
 
 const props = defineProps({
   doc: {
@@ -29,7 +30,7 @@ const props = defineProps({
   hideStatuses: Boolean,
   hideAccess: Boolean,
   includePdf: Boolean,
-  isBlockList: Boolean,
+  isRestrictedList: Boolean,
   small: Boolean,
   buttonName: {
     type: String,
@@ -42,8 +43,16 @@ const coreStore = useCoreStore()
 const { reqs } = storeToRefs(coreStore)
 
 const userStore = useUserStore()
-const { featureDetails, isAuthenticatedStudent, isAuthenticatedAdmin, groupIDs } =
-  storeToRefs(userStore)
+const {
+  featureDetails,
+  isAuthenticatedStudent,
+  isAuthenticatedAdmin,
+  groupIDs,
+  hasPossibleSubscriptionFacilities,
+  canViewRestrictedList,
+  hasUnsubscribedFacilities,
+  ungroupedFeatures,
+} = storeToRefs(userStore)
 
 const searchStore = useSearchStore()
 const { searchTerms, pageNo, searchResultsKey } = storeToRefs(searchStore)
@@ -76,21 +85,55 @@ const canRequest = computed(() => {
     !reqs.value.includes(JSON.stringify(props.doc)) &&
     status.value !== 'approved' &&
     status.value !== 'pending' &&
+    status.value !== 'restricted' &&
     userStore.features['submit_requests'] &&
     !props.hideRequests
   )
 })
-const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'blockSubmitted'])
+const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'restrictSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
     ? `/page/${props.doc.iid}/0`
     : `/pdf/${props.doc.iid}`,
 )
+
+const showRestrictedLabel: ComputedRef<boolean> = computed(() => {
+  return !!(
+    props.doc.is_restricted &&
+    canViewRestrictedList.value &&
+    !hasPossibleSubscriptionFacilities.value
+  )
+})
+const showRestrictedAlert: ComputedRef<boolean> = computed(() => {
+  return !!(props.doc.is_restricted && hasPossibleSubscriptionFacilities.value)
+})
+
+const hideSearchSnippets: ComputedRef<boolean> = computed(() => {
+  return !!((props.doc.is_restricted && isAuthenticatedStudent.value) || props.hideSnippets)
+})
+
+const showReviewerAccess = computed(() => {
+  return (
+    isAuthenticatedAdmin.value &&
+    props.doc.is_restricted &&
+    !hasUnsubscribedFacilities.value &&
+    !props.pdfView &&
+    !ungroupedFeatures.value['manage_restricted_list']
+  )
+})
+const showReaderRestrictedLabel = computed(() => {
+  return (
+    isAuthenticatedAdmin.value &&
+    props.doc.is_restricted &&
+    !hasUnsubscribedFacilities.value &&
+    props.pdfView
+  )
+})
 </script>
 <template>
   <div class="search-result">
     <div class="pr-6">
-      <BibliographicalData :doc="doc" :small="small" />
+      <BibliographicalData :doc="doc" :small="small" :show-restricted-label="showRestrictedLabel" />
 
       <!-- Text Details -->
       <div v-if="!hideDetails">
@@ -121,7 +164,7 @@ const readRoute = ref(
           small
         />
         <!-- Snippets -->
-        <div v-if="(doc.snippets || []).length && !hideSnippets" class="mt-4">
+        <div v-if="(doc.snippets || []).length && !hideSearchSnippets" class="mt-4">
           <div v-for="(snip, i) in doc.snippets" :key="`snippet_${i}`" class="text-size-sm">
             <!-- eslint-disable vue/no-v-html -->
             <small v-if="snip.text">
@@ -133,6 +176,24 @@ const readRoute = ref(
           </div>
         </div>
       </div>
+      <pep-pharos-alert
+        v-if="showRestrictedAlert"
+        class="mt-3"
+        status="warning"
+        icon="exclamation-inverse"
+        :dismissible="false"
+      >
+        <span>
+          Item restricted at other facilities.
+          <pep-pharos-link
+            @click.prevent.stop="
+              changeRoute(router, emit, '/account', searchTerms, pageNo, undefined, undefined)
+            "
+            >Edit facility permissions</pep-pharos-link
+          >
+          to subscribe to Restricted Items.
+        </span>
+      </pep-pharos-alert>
     </div>
 
     <!-- Media Review -->
@@ -189,22 +250,46 @@ const readRoute = ref(
       </div>
       <!-- Admin Buttons -->
       <div v-if="isAuthenticatedAdmin">
+        <div v-if="showReviewerAccess">
+          <pep-pharos-button
+            full-width
+            class="mb-2 lg-mr-3"
+            variant="secondary"
+            icon-left="filetype-pdf"
+            @click.prevent.stop="
+              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)
+            "
+          >
+            <span>Reviewer Access</span>
+          </pep-pharos-button>
+        </div>
+        <div v-else-if="showReaderRestrictedLabel" class="restricted-label">
+          <pep-pharos-heading preset="1--bold" :level="4" class="heading">
+            Restricted
+          </pep-pharos-heading>
+          <p>Item restricted in this facility based on content guidelines.</p>
+          <p><strong>Reason:&nbsp;</strong> {{ doc.restricted_reason }}</p>
+          <UnrestrictButton :doc="doc" class="restricted-label__button" />
+        </div>
         <!-- We want to re-render the admin buttons after a new search, because the statuses
         may have been updated. -->
         <ButtonsContainer
-          v-if="!hideButtons"
+          v-else-if="!hideButtons"
           :key="searchResultsKey"
           :pdf-view="pdfView"
           :doc="doc"
           :include-pdf="includePdf"
           @approval-submitted="emit('approvalSubmitted')"
           @denial-submitted="emit('denialSubmitted')"
-          @block-submitted="emit('blockSubmitted')"
+          @restrict-submitted="emit('restrictSubmitted')"
         />
       </div>
 
       <!-- Statuses -->
-      <div v-if="!hideStatuses" class="display-flex justify-content-end flex-direction-column">
+      <div
+        v-if="!hideStatuses && status !== 'restricted'"
+        class="display-flex justify-content-end flex-direction-column"
+      >
         <span v-for="(statusData, key) in doc.mediaReviewStatuses" :key="`status_${key}`">
           <p>
             <small :class="{ 'text-size-xs': small }">
@@ -238,8 +323,21 @@ const readRoute = ref(
           </p>
         </span>
       </div>
-      <div v-if="isBlockList">
-        <p>{{ doc.blocked_reason }}</p>
+      <div
+        v-else-if="status === 'restricted' && isAuthenticatedStudent"
+        class="display-flex justify-content-end flex-direction-column"
+      >
+        <pep-pharos-heading
+          :level="3"
+          preset="1--bold"
+          no-margin
+          class="restricted-label text-align-center"
+        >
+          <span>Item unavailable</span>
+        </pep-pharos-heading>
+      </div>
+      <div v-if="isRestrictedList">
+        <p>{{ doc.restricted_reason }}</p>
       </div>
     </div>
     <Teleport to="div#app">
@@ -275,3 +373,23 @@ const readRoute = ref(
     </Teleport>
   </div>
 </template>
+<style lang="scss" scoped>
+.restricted-label {
+  border: 1px solid var(--pharos-color-marble-gray-50);
+  border-radius: 4px;
+  vertical-align: middle;
+  padding: var(--pharos-spacing-one-half-x);
+  &__button {
+    margin-top: var(--pharos-spacing-one-half-x);
+  }
+  .heading {
+    color: var(--pharos-color-living-coral-53);
+  }
+  p {
+    margin-bottom: var(--pharos-spacing-one-half-x);
+  }
+  span {
+    color: var(--pharos-color-marble-gray-20);
+  }
+}
+</style>

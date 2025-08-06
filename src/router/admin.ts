@@ -26,15 +26,6 @@ const config = {
       component: () => import('@/views/RequestsView.vue'),
     },
     {
-      path: '/block-list',
-      name: 'Block List',
-      meta: {
-        group: 'support',
-        requiresAnyUngrouped: ['manage_block_list'],
-      },
-      component: () => import('@/views/BlockListView.vue'),
-    },
-    {
       path: '/management',
       name: 'Management',
       meta: {

@@ -23,7 +23,8 @@ const props = defineProps({
 })
 
 const userStore = useUserStore()
-const { groupMap, featureDetails, selectedGroups, isAuthenticatedAdmin } = storeToRefs(userStore)
+const { groupMap, featureDetails, selectedGroups, isAuthenticatedAdmin, canViewRestrictedList } =
+  storeToRefs(userStore)
 
 const searchStore = useSearchStore()
 const {
@@ -50,6 +51,7 @@ const {
   reviewStatus,
   selectedContentTypes,
   pseudoDisciplines,
+  restrictedListLastUpdated,
 } = storeToRefs(searchStore)
 
 const coreStore = useCoreStore()
@@ -291,15 +293,25 @@ const disciplineFilterDescription = computed(() => {
 })
 
 const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
+
+const showDownloadButton = computed(() => {
+  return (
+    props.requestsPage &&
+    reviewStatus.value === 'restricted' &&
+    searchTotal.value > 0 &&
+    !secondarySearching.value &&
+    canViewRestrictedList.value
+  )
+})
 </script>
 <template>
   <div id="results" ref="resultsArea" class="search-results-area">
-    <div class="my-5 py-5 search-results" :class="{ 'request-results': requestsPage }">
+    <div class="my-5 pt-5 search-results" :class="{ 'request-results': requestsPage }">
       <div
         class="search-results-header results-list mx-0"
         :class="{ 'search-results-header-margins': !requestsPage }"
       >
-        <pep-pharos-heading preset="3--bold" :level="2">
+        <pep-pharos-heading no-margin preset="3--bold" :level="2">
           {{ getResultsCountLabel(searchTotal) }}
         </pep-pharos-heading>
         <div v-if="reqs.length" class="justify-self-end">
@@ -367,7 +379,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
           <pep-pharos-modal
             id="approve-all-modal"
             :key="approveAllUpdateKey"
-            :header="`Approve Material`"
+            :header="`Approve material`"
             :open="showApproveAllModal"
             size="large"
             @pharos-modal-closed="showApproveAllModal = false"
@@ -456,10 +468,33 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
           </pep-pharos-modal>
         </div>
       </div>
+      <div
+        v-if="restrictedListLastUpdated && showDownloadButton"
+        class="search-results-header__last_updated"
+      >
+        Last Updated:
+        {{
+          new Date(restrictedListLastUpdated).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        }}
+      </div>
     </div>
     <div v-if="searchTotal" :class="{ 'search-results': !requestsPage }">
       <div class="results-list display-grid">
         <div>
+          <pep-pharos-button
+            v-if="showDownloadButton"
+            class="mr-5"
+            variant="secondary"
+            icon-left="download"
+            @click.prevent.stop="coreStore.$api.global_restricts.download"
+          >
+            Download full list
+          </pep-pharos-button>
+
           <pep-pharos-button
             variant="secondary"
             icon-right="chevron-down"
@@ -501,3 +536,15 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+// BEM Style CSS
+.search-results-header {
+  &__last_updated {
+    font-size: var(--pharos-type-scale-2);
+    color: var(--pharos-color-marble-gray-40);
+    grid-column: span 12;
+    margin-bottom: var(--pharos-spacing-one-half-x);
+  }
+}
+</style>

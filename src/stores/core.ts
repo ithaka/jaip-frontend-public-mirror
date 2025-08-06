@@ -13,15 +13,17 @@ export const useCoreStore = defineStore('core', {
       helpTab: 0,
       subdomain: '',
       customSubdomains: [] as string[],
-      base_test_url: 'https://test-pep.jstor.org',
-      ephemeral_student_ending: 'student.apps.test.cirrostratus.org',
-      ephemeral_admin_ending: 'admin.apps.test.cirrostratus.org',
+      baseTestURL: 'https://test-pep.jstor.org',
+      baseAdminURL: 'https://admin.test-pep.jstor.org',
+      ephemeralStudentEnding: 'student.apps.test.cirrostratus.org',
+      ephemeralAdminEnding: 'admin.apps.test.cirrostratus.org',
       adminSubdomains: ['pep-admin', 'admin.pep', 'admin.test-pep'],
       studentSubdomain: 'pep',
       routePath: '/',
       routeQuery: '',
       toastKey: 0,
       environment: '',
+      isSpinning: false,
       $api: {} as ApiObject,
       alert: {} as Alert,
     }
@@ -31,10 +33,10 @@ export const useCoreStore = defineStore('core', {
       return [...this.customSubdomains, ...this.adminSubdomains, this.studentSubdomain]
     },
     isEphemeralStudent(): boolean {
-      return window.location.hostname.endsWith(this.ephemeral_student_ending)
+      return window.location.hostname.endsWith(this.ephemeralStudentEnding)
     },
     isEphemeralAdmin(): boolean {
-      return window.location.hostname.endsWith(this.ephemeral_admin_ending)
+      return window.location.hostname.endsWith(this.ephemeralAdminEnding)
     },
     hasValidSubdomain(): boolean {
       return (
@@ -45,8 +47,9 @@ export const useCoreStore = defineStore('core', {
     },
     hasValidStudentSubdomain(): boolean {
       return (
-        this.validSubdomains.includes(this.subdomain) &&
-        (!this.adminSubdomains.includes(this.subdomain) || this.isEphemeralStudent)
+        this.isEphemeralStudent ||
+        (this.validSubdomains.includes(this.subdomain) &&
+          !this.adminSubdomains.includes(this.subdomain))
       )
     },
     isAdminSubdomain(): boolean {

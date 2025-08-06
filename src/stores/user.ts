@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import type { Group } from '@/interfaces/Group'
 import { useCoreStore } from './core'
-import { removeCookie } from 'typescript-cookie'
 import { useFeaturesStore } from './features'
 import type { UngroupedFeatureDetails, FeatureBoolean, FeatureDetails } from '@/interfaces/Features'
 import type { Subdomain } from '@/interfaces/Subdomains'
 import { setCookie } from 'typescript-cookie'
+import type { Entity } from '@/interfaces/Entities'
 
 const hasAdminFeatures = (group: Group) => {
   const features = useFeaturesStore()
@@ -45,6 +45,7 @@ export const useUserStore = defineStore('user', {
       id: 0,
       entityName: '',
       groups: [] as Group[],
+      facilities: [] as Entity[],
       type: '',
       gettingUser: false,
       selectedGroups: {} as { [key: string]: number[] },
@@ -65,7 +66,8 @@ export const useUserStore = defineStore('user', {
       this.entityName = ''
       this.groups = []
       this.type = ''
-      removeCookie('uuid')
+      this.facilities = []
+      // removeCookie('uuid')
     },
     async getCurrentUser() {
       this.gettingUser = true
@@ -74,13 +76,14 @@ export const useUserStore = defineStore('user', {
 
       if (data?.uuid) {
         const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
-        setCookie('uuid', data.uuid, { expires: inOneDay })
+        setCookie('uuid', data.uuid, { expires: inOneDay, sameSite: 'None', secure: true })
       }
 
       this.groups = data.groups
       this.type = data.type
       this.entityName = data.name
       this.ungroupedFeatures = data.ungrouped_features
+      this.facilities = data.facilities || []
       this.gettingUser = false
     },
     groupsWithFeature(groups: Array<Group>, feature: string): Array<Group> {
@@ -95,6 +98,9 @@ export const useUserStore = defineStore('user', {
     groupIDsWithFeature(groups: Array<Group>, feature: string): Array<number> {
       return this.groupsWithFeature(groups, feature).map((grp: Group) => grp.id)
     },
+    // Determines if a user has a given feature in only a single group.
+    // This is useful for determining if the user can be treated as a single group user
+    // for the purposes of that feature (e.g., do we need to show a group selector for denials)
     isSingleGroupFeature(feature: string): boolean {
       const foundGroups = []
       for (let i = 0; i < this.groups.length; i++) {
@@ -197,6 +203,93 @@ export const useUserStore = defineStore('user', {
     },
     sortedEnabledUngroupedFeatures(): { [key: string]: UngroupedFeatureDetails } {
       return sortUngroupedFeatures(this.enabledUngroupedFeatures)
+    },
+    isRestrictedListSubscriber(): boolean {
+      return this.groups.some((group) => {
+        return group.features['restricted_items_subscription']
+      })
+    },
+    canViewRestrictedListInGroups(): Array<number> {
+      // If the user can manage the restricted list, then they can view it (this is the
+      // ITHAKA-only permission)
+      if (this.ungroupedFeatures['manage_restricted_list']?.enabled) {
+        return this.groups.map((group) => group.id)
+      }
+
+      // If the user can do any media reviews or manage facilities then they can view the restricted list.
+      return this.groups
+        .filter((group) => {
+          return (
+            group.features['approve_requests'] ||
+            group.features['deny_requests'] ||
+            group.features['bulk_approve'] ||
+            group.features['undo_bulk_approve'] ||
+            group.features['edit_facilities'] ||
+            group.features['manage_facilities'] ||
+            group.features['add_or_edit_users'] ||
+            group.features['remove_users']
+          )
+        })
+        .map((group) => group.id)
+    },
+    // If any group has the privileges necessary to view the restricted list, then the user can view it.
+    canViewRestrictedList(): boolean {
+      return this.canViewRestrictedListInGroups.length > 0
+    },
+    canSubscribeToRestrictedList(): boolean {
+      return this.groups.some((group) => {
+        return group.features['edit_facilities'] || group.features['manage_facilities']
+      })
+    },
+    // In general, it only matters if the user can view the list in any group, but when we're determining
+    // if the user can subscribe to the restricted list, we need to get the facilities where the user would have
+    // subscription privileges, which requires getting the facilities in groups where the user has the appropriate
+    // permissions.
+    canSubscribeToRestrictedListInGroups(): Array<number> {
+      return this.groups
+        .filter((group) => {
+          return group.features['edit_facilities'] || group.features['manage_facilities']
+        })
+        .map((group) => group.id)
+    },
+    // Returns an array of facilities in the user's groups that do not subscribe to the restricted list.
+    unsubscribedFacilities(): Array<Entity> {
+      return this.facilities.filter((facility) => {
+        // If we have groups and a facility id (which we should)
+        if (facility.groups && facility.groups[0] && facility.id) {
+          // Then we can check if the facility does not subscribe to the restricted list
+          return !facility.groups[0].features['restricted_items_subscription']
+        }
+      })
+    },
+    // Returns true if the user has unsubscribed facilities
+    hasUnsubscribedFacilities(): boolean {
+      return this.unsubscribedFacilities.length > 0
+    },
+    // Returns an array of unsubscribed facilities that the user can subscribe to the restricted list in.
+    possibleSubscriptionFacilities(): Array<Entity> {
+      return this.unsubscribedFacilities.filter((facility) => {
+        // We know that there is a group and that the facility has an ID because we check that in unsubscribedFacilities.
+        // Now we just filter out those groups where the user does not have permission to subscribe to the restricted list.
+        const facility_group = facility.groups![0]
+        return (
+          !facility_group.features['restricted_items_subscription'] &&
+          this.canSubscribeToRestrictedListInGroups.includes(facility_group.id)
+        )
+      })
+    },
+    // Returns true if the user has any facilities that they can subscribe to the restricted list in.
+    hasPossibleSubscriptionFacilities(): boolean {
+      return this.possibleSubscriptionFacilities.length > 0
+    },
+    allFacilitiesAreRestricted(): boolean {
+      return this.facilities.every((facility) => {
+        return (
+          facility.groups &&
+          facility.groups[0] &&
+          facility.groups[0].features['restricted_items_subscription']
+        )
+      })
     },
   },
 })

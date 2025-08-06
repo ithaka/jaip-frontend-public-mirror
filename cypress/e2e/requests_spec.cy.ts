@@ -68,7 +68,8 @@ describe('Requests page', () => {
         const req = request.request.body
         // NOTE: This will likely fail when running locally, because of UTC issues.
         expect(req.statusStartDate).to.contain(`2022-01-01`)
-        expect(req.statusEndDate).to.contain(`2022-01-03`)
+        expect(req.statusEndDate).to.contain(`2022-01`)
+        expect(req.statusEndDate).not.to.contain('2022-01-01')
       })
     })
 
@@ -262,6 +263,33 @@ describe('Requests page', () => {
       .contains('GROUP', { matchCase: false })
       .should('not.exist')
     })
+  
+    it('Does not let students select Restricted articles', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('completed')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
+
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .should('not.exist')
+    })
+  
+    it('Does not let students download restricted list', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Download full list')
+        .should('not.exist')
+    })
+
   })
 
   context('Admin', () => {
@@ -663,6 +691,76 @@ describe('Requests page', () => {
         cy.get('[id^=history-modal] table').contains('Denied').should('have.length', 0)
       })
     })
+
+    it('Does not allow restricted list download unless Restricted is selected', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Download full list')
+        .should('not.exist')
+    })
+
+
+    it('Lets admins select Restricted articles', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
+        .as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
+        .as('last_updated')
+      cy.intercept('GET', routes.global_restricts.download, {}).as('download')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-button')
+        .contains('Restricted Item', { matchCase: false })
+        .should('be.visible')
+
+      cy.get('pep-pharos-button')
+        .contains('reviewer access', { matchCase: false })
+        .should('be.visible')
+    })
+
+    it('Lets admins download Restricted articles', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
+        .as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
+        .as('last_updated')
+      cy.intercept('GET', routes.global_restricts.download, {}).as('download')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .click()
+
+      cy.wait('@last_updated')
+      cy.wait('@restricted')
+
+      cy.get('pep-pharos-button')
+        .contains('Download full list')
+        .click()
+      
+      cy.wait('@download')
+
+    })
   })
 
   context('Admin with two groups', () => {
@@ -711,7 +809,7 @@ describe('Requests page', () => {
     })
 
 
-    it.only('Requires group selection', () => {
+    it('Requires group selection', () => {
       cy.get('.search-result')
         .first()
         .find('pep-pharos-button')
@@ -813,6 +911,104 @@ describe('Requests page', () => {
 
       cy.wait('@pending')
     })
+
+
+    it('Lets admins select Restricted articles', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
+        .as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
+        .as('last_updated')
+      cy.intercept('GET', routes.global_restricts.download, {}).as('download')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-button')
+        .contains('Restricted Item', { matchCase: false })
+        .should('be.visible')
   })
 
+
+    it('Lets admins manage access for unsubscribed facilities', () => {
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
+        .as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
+        .as('last_updated')
+      cy.intercept('GET', routes.global_restricts.download, {}).as('download')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-button')
+        .contains('Restricted Item', { matchCase: false })
+        .should('be.visible')
+
+      cy.get('pep-pharos-button')
+        .contains('reviewer access', { matchCase: false })
+        .should('not.exist')
+
+      cy.get('pep-pharos-button')
+        .contains('approve', { matchCase: false })
+        .should('be.visible')
+      cy.get('pep-pharos-button')
+        .contains('deny', { matchCase: false })
+        .should('be.visible')
+      cy.get('pep-pharos-button')
+        .contains('history', { matchCase: false })
+        .should('be.visible')
+    })
+
+    it('Lets admins download restricted list', ()=>{
+      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
+        .as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
+        .as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
+        .as('last_updated')
+      cy.intercept('GET', routes.global_restricts.download, {}).as('download')
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
+  
+      cy.get('pep-pharos-button')
+        .contains('Status:', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-dropdown-menu')
+        .contains('Restricted', { matchCase: false })
+        .click()
+
+      cy.get('pep-pharos-button')
+        .contains('Restricted Item', { matchCase: false })
+        .should('be.visible')
+
+
+      cy.wait('@last_updated')
+      cy.wait('@restricted')
+
+      cy.get('pep-pharos-button')
+        .contains('Download full list')
+        .click()
+      
+      cy.wait('@download')
+
+    })
+  })
 })

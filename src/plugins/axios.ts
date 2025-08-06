@@ -10,16 +10,22 @@ import { storeToRefs } from 'pinia'
 export default {
   install: (app: App) => {
     const coreStore = useCoreStore()
-    const { isEphemeralAdmin, isEphemeralStudent, $api, base_test_url } = storeToRefs(coreStore)
+    const { isEphemeralAdmin, isEphemeralStudent, $api, baseTestURL, baseAdminURL } =
+      storeToRefs(coreStore)
     // This creates the axios instance that the app will use.
+    let baseURL = `${window.location.protocol}//${window.location.host}`
+    if (isEphemeralAdmin.value) {
+      baseURL = baseAdminURL.value
+    } else if (isEphemeralStudent.value) {
+      baseURL = baseTestURL.value
+    }
+
     app.config.globalProperties.$axios = axios.create({
       headers: {
         Accept: 'text/plain, application/json',
       },
-      baseURL:
-        isEphemeralAdmin.value || isEphemeralStudent.value
-          ? base_test_url.value
-          : `${window.location.protocol}//${window.location.host}`,
+      baseURL,
+      withCredentials: true,
     })
 
     // This adds the api routes to the global properties so we can manage it entirely from one file

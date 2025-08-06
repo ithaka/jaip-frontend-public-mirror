@@ -92,7 +92,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     :variant="variant"
     icon-left="download"
     :disabled="isDisabledDownload"
-    class="mb-2"
+    class="access-button"
     :class="{
       'lg-mr-3':
         (featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()) ||
@@ -107,7 +107,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   <pep-pharos-button
     v-if="featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()"
     icon-left="view-list"
-    class="mb-2"
+    class="access-button"
     data-cy="print-pdf-button"
     :class="{
       'lg-mr-3':
@@ -127,7 +127,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
       hasStaticBlock() && featureDetails['view_pdf'].enabled && includePdf && hasStructuredClone
     "
     icon-left="filetype-pdf"
-    class="mb-2"
+    class="access-button"
     full-width
     :variant="variant"
     :href="hasBrowserPDFViewer() ? `/api/v2/page/${iid}` : `/pdf/${iid}`"
@@ -137,7 +137,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   <pep-pharos-button
     v-else-if="featureDetails['view_document'].enabled && isPDFPage"
     icon-left="filetype-pdf"
-    class="mb-2"
+    class="access-button"
     full-width
     :variant="variant"
     :href="`/page/${iid}/0`"
@@ -145,3 +145,9 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     Read
   </pep-pharos-button>
 </template>
+<style lang="scss" scoped>
+.access-button {
+  margin-bottom: var(--pharos-spacing-one-quarter-x);
+  text-wrap: nowrap;
+}
+</style>

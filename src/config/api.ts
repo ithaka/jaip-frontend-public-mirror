@@ -75,10 +75,14 @@ export const routes = {
     approve: `${global_route_prefix_versioned}/media-review/approve`,
     request: `${global_route_prefix_versioned}/media-review/request`,
   },
-  global_blocks: {
-    block: `${global_route_prefix_versioned}/global-blocks/block`,
-    unblock: `${global_route_prefix_versioned}/global-blocks/unblock`,
-    get: `${global_route_prefix_versioned}/global-blocks/get`,
+  global_restricts: {
+    restrict: `${global_route_prefix_versioned}/global-restricted-list/restrict`,
+    unrestrict: `${global_route_prefix_versioned}/global-restricted-list/unrestrict`,
+    get: `${global_route_prefix_versioned}/global-restricted-list/get`,
+    download: `${global_route_prefix_versioned}/global-restricted-list/download`,
+    last_updated: {
+      get: `${global_route_prefix_versioned}/global-restricted-list/last-updated`,
+    },
   },
   documents: {
     pdfs: (iid: string) => `${global_route_prefix_versioned}/page/${iid}`,
@@ -95,14 +99,17 @@ export default ($axios: AxiosInstance): ApiObject => ({
     navigator.sendBeacon(`${global_route_prefix_versioned}/log`, blob)
   },
   auth: {
-    session: () =>
-      $axios
-        .get(routes.auth.get)
-        // We need to catch and return the error here because we may need it to display a
-        // message to an unauthorized user.
-        .catch((error) => {
-          return error
-        }),
+    session: () => {
+      return (
+        $axios
+          .get(routes.auth.get)
+          // We need to catch and return the error here because we may need it to display a
+          // message to an unauthorized user.
+          .catch((error) => {
+            return error
+          })
+      )
+    },
     features: {
       basic: {
         get: (data) =>
@@ -202,11 +209,37 @@ export default ($axios: AxiosInstance): ApiObject => ({
     approve: (data) => $axios.post(routes.approvals.approve, data),
     request: (data) => $axios.post(routes.approvals.request, data),
   },
-  global_blocks: {
-    block: (data) => $axios.post(routes.global_blocks.block, data),
-    unblock: (data) => $axios.post(routes.global_blocks.unblock, data),
-    get: (data) => $axios.post(routes.global_blocks.get, data),
+  global_restricts: {
+    restrict: (data) => $axios.post(routes.global_restricts.restrict, data),
+    unrestrict: (data) => $axios.post(routes.global_restricts.unrestrict, data),
+    get: (data) => $axios.post(routes.global_restricts.get, data),
+    download: () =>
+      $axios
+        .get(routes.global_restricts.download, {
+          responseType: 'blob',
+          headers: {
+            Accept: 'text/csv',
+          },
+        })
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          link.setAttribute(
+            'download',
+            `restricted_list_${new Date().toISOString().slice(0, 10)}.csv`,
+          )
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(url)
+          return response
+        }),
+    last_updated: {
+      get: () => $axios.get(routes.global_restricts.last_updated.get),
+    },
   },
+
   documents: {
     pdfs: (iid: string) => {
       const config = {
