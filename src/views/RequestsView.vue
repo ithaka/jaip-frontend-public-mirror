@@ -135,7 +135,7 @@ coreStore.$api.log({
 </script>
 
 <template>
-  <main class="page">
+  <main>
     <pep-pharos-layout row-gap="0">
       <pep-pharos-heading class="text-capitalize cols-12" :level="1" preset="5--bold">
         <span v-if="reviewStatus === 'restricted'">{{ reviewStatus }} Items</span>
@@ -251,7 +251,7 @@ coreStore.$api.log({
           </pep-pharos-input-group>
         </form>
       </div>
-      <div class="mb-12 cols-12">
+      <div class="cols-12">
         <SearchResults requests-page />
       </div>
     </pep-pharos-layout>

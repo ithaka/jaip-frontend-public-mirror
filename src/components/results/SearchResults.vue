@@ -439,7 +439,7 @@ const showDownloadButton = computed(() => {
               <div class="display-grid">
                 <pep-pharos-pagination
                   v-if="secondarySearchTotal > secondaryLimit"
-                  class="justify-self-end"
+                  class="pagination"
                   :total-results="secondarySearchTotal"
                   :page-size="secondaryLimit"
                   :current-page="secondaryPageNo"
@@ -525,7 +525,7 @@ const showDownloadButton = computed(() => {
         </ol>
         <pep-pharos-pagination
           v-if="searchTotal > pageLimit"
-          class="justify-self-end"
+          class="pagination"
           :total-results="searchTotal"
           :page-size="pageLimit"
           :current-page="pageNo"
@@ -536,9 +536,14 @@ const showDownloadButton = computed(() => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-// BEM Style CSS
+<style scoped lang="scss">
+.pagination {
+  justify-self: end;
+  margin-top: var(--pharos-spacing-2-x) !important;
+  margin-bottom: var(
+    --pharos-spacing-5-x
+  ) !important; // Adjusted for spacing on 2 columns view to match other pages
+}
 .search-results-header {
   &__last_updated {
     font-size: var(--pharos-type-scale-2);

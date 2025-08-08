@@ -38,6 +38,10 @@ defineProps({
     type: Boolean,
     required: true,
   },
+  isAdminSubdomain: {
+    type: Boolean,
+    default: false,
+  },
   showRequestWarning: {
     type: Boolean,
     default: false,
@@ -66,7 +70,13 @@ const emit = defineEmits(['logout', 'close'])
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
-      <ProviderBar v-if="!isUnauthenticated" :groups="groups" />
+      <ProviderBar
+        :groups="groups"
+        :is-admin-subdomain="isAdminSubdomain"
+        :is-authenticated-admin="isAuthenticatedAdmin"
+        :is-authenticated-student="isAuthenticatedStudent"
+        :login-url="loginUrl"
+      />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
     <!-- eslint-enable vue/no-deprecated-slot-attribute -->

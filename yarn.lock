@@ -1540,13 +1540,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/html-truncate@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "@types/html-truncate@npm:1.2.4"
-  checksum: 10c0/6e2cd98040aba3711738de7d7fe13875e1525d5f7e58b5707611bc9fbc64d453ff01af87a84b8a65af3a60f33da1389c25e4489e2e4addf46334c6c09b57e926
-  languageName: node
-  linkType: hard
-
 "@types/jsdom@npm:^21.1.7":
   version: 21.1.7
   resolution: "@types/jsdom@npm:21.1.7"
@@ -4405,13 +4398,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-truncate@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "html-truncate@npm:1.2.2"
-  checksum: 10c0/cb40e11e2044668a3b358344dbb9c98e5463372887777e9930993c307e7577198885bbea70036b41e9f293b075d710bc8e98596ee036f5ec6cb91100a8f1736a
-  languageName: node
-  linkType: hard
-
 "http-cache-semantics@npm:^4.1.1":
   version: 4.2.0
   resolution: "http-cache-semantics@npm:4.2.0"
@@ -5012,7 +4998,6 @@ __metadata:
     "@ithaka/eslint-config-vue": "npm:^5.1.0"
     "@ithaka/pharos": "npm:^14.16.2"
     "@tsconfig/node22": "npm:^22.0.2"
-    "@types/html-truncate": "npm:^1.2.4"
     "@types/jsdom": "npm:^21.1.7"
     "@types/node": "npm:^22.17.0"
     "@types/pnpapi": "npm:^0.0.5"
@@ -5028,7 +5013,6 @@ __metadata:
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-cypress: "npm:^5.1.0"
     globals: "npm:^16.3.0"
-    html-truncate: "npm:^1.2.2"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.5.1"
     jsdom: "npm:^26.1.0"

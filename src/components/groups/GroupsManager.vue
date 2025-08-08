@@ -221,7 +221,7 @@ const handleClearHistory = async (i: number) => {
       </div>
       <pep-pharos-pagination
         v-if="total > limit"
-        class="justify-self-end mt-7"
+        class="pagination"
         :total-results="total"
         :page-size="limit"
         :current-page="page"
@@ -231,3 +231,10 @@ const handleClearHistory = async (i: number) => {
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.pagination {
+  justify-self: end;
+  margin-top: var(--pharos-spacing-2-x) !important;
+}
+</style>

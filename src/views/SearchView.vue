@@ -517,7 +517,8 @@ api.log({
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+$pharos-breakpoint-medium: 48rem; // 768px
 :deep(.highlight) {
   background-color: #ff6;
   color: #000;
@@ -528,5 +529,17 @@ api.log({
 }
 :deep(.inline *) {
   display: inline;
+}
+.search-view {
+  display: grid;
+  // The 272px comes from jstor.org
+  grid-template-columns: 272px auto;
+  // Negative margin is to account for the padding on the main container
+  margin-top: calc(-1 * var(--pharos-spacing-2-x));
+  margin-bottom: calc(-1 * var(--pharos-spacing-5-x));
+
+  @media screen and (max-width: $pharos-breakpoint-medium) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 </style>

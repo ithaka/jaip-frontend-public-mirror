@@ -159,7 +159,7 @@ const addEntityModal = () => {
     </div>
     <pep-pharos-pagination
       v-if="!searching && entityCount > secondaryLimit"
-      class="mt-8 cols-12 justify-self-end"
+      class="pagination cols-12"
       :total-results="entityCount"
       :page-size="secondaryLimit"
       :current-page="page"
@@ -168,3 +168,10 @@ const addEntityModal = () => {
     />
   </pep-pharos-layout>
 </template>
+
+<style scoped lang="scss">
+.pagination {
+  justify-self: end;
+  margin-top: var(--pharos-spacing-2-x) !important;
+}
+</style>

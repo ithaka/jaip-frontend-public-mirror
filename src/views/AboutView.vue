@@ -17,7 +17,7 @@ coreStore.$api.log({
 </script>
 
 <template>
-  <main class="about page">
+  <main>
     <InvalidLogin />
     <pep-pharos-layout row-gap="0">
       <component :is="isAuthenticatedAdmin ? AdminAbout : About" class="cols-12" />

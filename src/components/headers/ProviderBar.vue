@@ -4,6 +4,22 @@ defineProps({
     type: String,
     default: '',
   },
+  isAdminSubdomain: {
+    type: Boolean,
+    default: false,
+  },
+  isAuthenticatedAdmin: {
+    type: Boolean,
+    default: false,
+  },
+  isAuthenticatedStudent: {
+    type: Boolean,
+    default: false,
+  },
+  loginUrl: {
+    type: String,
+    default: '',
+  },
 })
 </script>
 
@@ -16,11 +32,18 @@ defineProps({
     no-hover
     class="display-flex justify-content-center full-width"
   >
-    <small>
+    <small v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
       <span>Access provided by&nbsp;</span>
       <span
         ><strong>{{ groups }}</strong></span
       >
+    </small>
+    <small v-else-if="isAdminSubdomain && !isAuthenticatedAdmin">
+      <span>Have faculty access?&nbsp;</span>
+      <pep-pharos-link :href="loginUrl" class="text-decoration-underline">Log in</pep-pharos-link>
+    </small>
+    <small v-else>
+      <span>You do not have access at this facility.</span>
     </small>
   </pep-pharos-dropdown-menu-nav-link>
   <!-- Dropdown box with additional information -->

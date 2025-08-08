@@ -96,7 +96,7 @@ const getResultsCountLabel = (count: number) => {
     </div>
     <pep-pharos-pagination
       v-if="!searching && total > docs.length"
-      class="mt-8 cols-12 justify-self-end"
+      class="cols-12 pagination"
       :total-results="total"
       :page-size="limit"
       :current-page="page"
@@ -105,5 +105,9 @@ const getResultsCountLabel = (count: number) => {
     />
   </div>
 </template>
-
-<style></style>
+<style scoped lang="scss">
+.pagination {
+  justify-self: end;
+  margin-top: var(--pharos-spacing-2-x) !important;
+}
+</style>

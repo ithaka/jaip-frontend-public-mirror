@@ -37,6 +37,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  isAdminSubdomain: {
+    type: Boolean,
+    default: false,
+  },
   showRequestWarning: {
     type: Boolean,
     default: false,
@@ -87,7 +91,13 @@ const onCloseSidenav = () => {
           {{ alert.text }}
         </pep-pharos-alert>
       </div>
-      <ProviderBar :groups="groups" />
+      <ProviderBar
+        :groups="groups"
+        :is-admin-subdomain="isAdminSubdomain"
+        :is-authenticated-admin="isAuthenticatedAdmin"
+        :is-authenticated-student="isAuthenticatedStudent"
+        :login-url="loginUrl"
+      />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
     <!-- Header -->

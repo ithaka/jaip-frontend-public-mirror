@@ -9,6 +9,7 @@ import { watch, computed } from 'vue'
 import updateRoutes from './router/updateRoutes'
 import MainHeader from '@/components/headers/MainHeader.vue'
 import SmallHeader from '@/components/headers/SmallHeader.vue'
+import TheFooter from './components/footer/TheFooter.vue'
 import type { StringString } from '@/interfaces/BasicObjects'
 
 const coreStore = useCoreStore()
@@ -109,6 +110,7 @@ const truncatedGramaticalGroupsList = computed(() => {
       :is-unauthenticated="isUnauthenticated"
       :is-authenticated-admin="isAuthenticatedAdmin"
       :is-authenticated-student="isAuthenticatedStudent"
+      :is-admin-subdomain="isAdminSubdomain"
       :show-request-warning="!!showRequestWarning"
       :name="entityName"
       @logout="logout"
@@ -121,6 +123,7 @@ const truncatedGramaticalGroupsList = computed(() => {
       :is-authenticated-admin="isAuthenticatedAdmin"
       :is-authenticated-student="isAuthenticatedStudent"
       :is-unauthenticated="isUnauthenticated"
+      :is-admin-subdomain="isAdminSubdomain"
       :show-request-warning="!!showRequestWarning"
       :name="entityName"
       :groups="truncatedGramaticalGroupsList"
@@ -128,76 +131,18 @@ const truncatedGramaticalGroupsList = computed(() => {
     />
 
     <!-- Main Content -->
-    <RouterView class="cols-12" />
-
-    <pep-pharos-footer id="footer">
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
-      <div slot="links-group" class="display-flex flex-direction-column mb-6 cols-md-8">
-        <span> Brought to you by: </span>
-        <img
-          v-if="!isAuthenticatedAdmin"
-          src="@/assets/images/JSTOR_Labs_Logo.png"
-          class="footer-logo"
-          alt="JSTOR Labs Logo"
-        />
-        <a v-else href="https://labs.jstor.org">
-          <img
-            src="@/assets/images/JSTOR_Labs_Logo.png"
-            class="footer-logo"
-            alt="JSTOR Labs Logo"
-          />
-        </a>
-      </div>
-      <span slot="links-group" class="display-flex flex-direction-column mb-6 pr-6 cols-md-8">
-        <span> Made possible with funding from: </span>
-        <img
-          v-if="!isAuthenticatedAdmin"
-          src="@/assets/images/Mellon_Logomark_Lockup_White.png"
-          class="footer-logo"
-          alt="Mellon Foundation Logo"
-        />
-        <a v-else href="https://www.mellon.org">
-          <img
-            src="@/assets/images/Mellon_Logomark_Lockup_White.png"
-            class="footer-logo"
-            alt="Mellon Foundation Logo"
-          />
-        </a>
-        <img
-          v-if="!isAuthenticatedAdmin"
-          src="@/assets/images/ASC_Reverse.png"
-          class="footer-logo"
-          alt="Ascendium Foundation Logo"
-        />
-        <a v-else href="https://www.ascendiumphilanthropy.org">
-          <img
-            src="@/assets/images/ASC_Reverse.png"
-            class="footer-logo"
-            alt="Ascendium Foundation Logo"
-          />
-        </a>
-      </span>
-      <span slot="links-group" class="cols-3">
-        <span class="mb-4">
-          JSTOR is part of
-          <span v-if="isAdminSubdomain">
-            <pep-pharos-link :on-background.attr="true" href="https://ithaka.org"
-              >ITHAKA</pep-pharos-link
-            >
-          </span>
-          <span v-else>ITHAKA</span>, a not-for-profit organization helping the academic community
-          use digital technologies to preserve the scholarly record and to advance research and
-          teaching in sustainable ways.
-        </span>
-        <span class="display-block mt-4 copyright">
-          ©2000-{{ new Date().getFullYear().toString() }} ITHAKA. All Rights Reserved. JSTOR®, the
-          JSTOR logo, JPASS®, Artstor®, Reveal Digital™ and ITHAKA® are registered trademarks of
-          ITHAKA.
-        </span>
-      </span>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
-    </pep-pharos-footer>
+    <RouterView class="main" />
+    <TheFooter
+      :is-authenticated-admin="isAuthenticatedAdmin"
+      :is-admin-subdomain="isAdminSubdomain"
+    />
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.main {
+  margin-top: var(--pharos-spacing-2-x);
+  margin-bottom: var(--pharos-spacing-5-x);
+  grid-column: span 12;
+}
+</style>

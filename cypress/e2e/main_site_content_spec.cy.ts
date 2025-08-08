@@ -2,7 +2,7 @@ import { handleLocation } from './helpers'
 import { routes } from '../../src/config/api'
 
 describe('Main site content', () => {
-  
+
   context('Unauthenticated', () => {
     context('General', () => {
       beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Main site content', () => {
         cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
-          .as('subdomains') 
+          .as('subdomains')
         handleLocation('/', cy, 'index', 'pep')
       })
       it('includes about text', () => {
@@ -24,23 +24,23 @@ describe('Main site content', () => {
         cy.visit('/about')
         cy.location('pathname').should('eq', '/')
       })
-  
+
       it('includes logos in the footer', () => {
         cy.visit('/')
-        cy.get('#footer [alt="JSTOR Labs Logo"]').should('be.visible')
-        cy.get('#footer [alt="Mellon Foundation Logo"]').should('be.visible')
-        cy.get('#footer [alt="Ascendium Foundation Logo"]').should('be.visible')
+        cy.get('[data-cy="footer-jstor-labs-logo-linkless"]').should('be.visible')
+        cy.get('[data-cy="footer-mellon-logo-linkless"]').should('be.visible')
+        cy.get('[data-cy="footer-ascendium-logo-linkless"]').should('be.visible')
       })
-  
+
       it('includes copyright dates in the footer', () => {
         cy.visit('/')
-        cy.get('#footer span.copyright').contains(`©2000-${ new Date().getFullYear().toString() }`).should('be.visible')
+        cy.get('[data-cy="footer-copyright"]').contains(`©2000-${ new Date().getFullYear().toString() }`).should('be.visible')
       })
-  
+
       it('includes only one link in nav, for home', () => {
         cy.visit('/')
         cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('be.visible').should('have.length', 1).contains('home')
-      })  
+      })
     })
     context('General with Alert', () =>{
       beforeEach(() => {
@@ -51,7 +51,7 @@ describe('Main site content', () => {
         cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
-          .as('subdomains') 
+          .as('subdomains')
       })
       it('includes alert', () => {
         cy.visit('/')
@@ -71,7 +71,7 @@ describe('Main site content', () => {
           .as('alerts')
         handleLocation('/', cy, 'index', 'pep-admin')
       })
-  
+
       it('includes log in button', () => {
         cy.visit('/')
         cy.wait(['@index', '@alerts', '@env', '@auth'])
@@ -138,7 +138,7 @@ describe('Main site content', () => {
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
     })
-  
+
     it('links to about', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
@@ -162,16 +162,14 @@ describe('Main site content', () => {
     it('does not link to Mellon', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-
-      cy.get('#footer [alt="Mellon Foundation Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-mellon-logo-linkless"]').should('be.visible')
       cy.get('a[href="https://www.mellon.org"]').should('not.exist')
     })
 
     it('does not link to Ascendium', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-
-      cy.get('#footer [alt="Ascendium Foundation Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-ascendium-logo-linkless"]').should('be.visible')
       cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('not.exist')
     })
 
@@ -179,7 +177,7 @@ describe('Main site content', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
 
-      cy.get('#footer [alt="JSTOR Labs Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-jstor-labs-logo-linkless"]').should('be.visible')
       cy.get('a[href="https://labs.jstor.org"]').should('not.exist')
     })
   })
@@ -207,21 +205,21 @@ describe('Main site content', () => {
     it('links to Mellon', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('#footer [alt="Mellon Foundation Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-mellon-logo-linked"]').should('be.visible')
       cy.get('a[href="https://www.mellon.org"]').should('have.length', 1)
     })
 
     it('links to Ascendium', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('#footer [alt="Ascendium Foundation Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-ascendium-logo-linked"]').should('be.visible')
       cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('have.length', 1)
     })
 
     it('links to Labs', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('#footer [alt="JSTOR Labs Logo"]').should('be.visible')
+      cy.get('[data-cy="footer-jstor-labs-logo-linked"]').should('be.visible')
       cy.get('a[href="https://labs.jstor.org"]').should('have.length', 1)
     })
 
@@ -245,7 +243,7 @@ describe('Main site content', () => {
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').should('be.visible')
     })
-    
+
     it('links to search', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
@@ -260,10 +258,10 @@ describe('Main site content', () => {
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
     })
-  
+
     it('links to about', () => {
       cy.visit('/')
-      
+
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
       cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()

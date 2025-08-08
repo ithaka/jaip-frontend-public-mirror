@@ -16,7 +16,7 @@ coreStore.$api.log({
 </script>
 
 <template>
-  <div class="help page">
+  <div>
     <pep-pharos-layout row-gap="0">
       <component :is="isAuthenticatedAdmin ? AdminHelp : StudentHelp" class="cols-12" />
     </pep-pharos-layout>
