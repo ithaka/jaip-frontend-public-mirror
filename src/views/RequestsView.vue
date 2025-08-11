@@ -141,7 +141,10 @@ coreStore.$api.log({
         <span v-if="reviewStatus === 'restricted'">{{ reviewStatus }} Items</span>
         <span v-else>{{ reviewStatus }} Requests</span>
       </pep-pharos-heading>
-      <div v-if="ungroupedFeatures['manage_restricted_list']?.enabled" class="cols-7">
+      <div
+        v-if="ungroupedFeatures['manage_restricted_list']?.enabled && reviewStatus === 'restricted'"
+        class="cols-7"
+      >
         <pep-pharos-alert status="info">
           Users at participating facilities are unable to request these items. Administrators can
           opt-in from their account.
