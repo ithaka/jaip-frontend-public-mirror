@@ -144,5 +144,9 @@ const truncatedGramaticalGroupsList = computed(() => {
   margin-top: var(--pharos-spacing-2-x);
   margin-bottom: var(--pharos-spacing-5-x);
   grid-column: span 12;
+
+  @media screen and (min-width: 1024px) {
+    min-height: calc(100vh - 500px); //Calculated from height of headers + footer
+  }
 }
 </style>

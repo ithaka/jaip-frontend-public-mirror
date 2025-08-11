@@ -453,7 +453,6 @@ api.log({
                           :key="`journal_discipline_${index}`"
                           :value="discipline.code"
                         >
-                          <pep-pharos-icon name="exclamation-inverse" />
                           {{ discipline.label }}
                         </option>
                       </pep-pharos-combobox>

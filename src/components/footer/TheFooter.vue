@@ -3,8 +3,9 @@ import { storeToRefs } from 'pinia'
 import { useSearchStore } from '@/stores/search'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
+import { computed } from 'vue'
 
-defineProps({
+const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
   isAuthenticatedAdmin: {
     type: Boolean,
     required: true,
@@ -18,7 +19,7 @@ defineProps({
 const linkGroup = [
   {
     id: 'home',
-    path: '/about',
+    path: '/',
     text: 'Home',
     eventType: 'footer-home-link-click',
   },
@@ -35,6 +36,12 @@ const linkGroup = [
     eventType: 'footer-requests-click',
   },
   {
+    id: 'account',
+    path: '/account',
+    text: 'Account',
+    eventType: 'footer-account-click',
+  },
+  {
     id: 'about',
     path: '/about',
     text: 'About',
@@ -47,6 +54,14 @@ const linkGroup = [
     eventType: 'footer-help-click',
   },
 ]
+
+const formattedLinkGroup = computed(() => {
+  if (isAuthenticatedAdmin && isAdminSubdomain) {
+    return linkGroup
+  } else {
+    return linkGroup.filter((link) => link.id !== 'account')
+  }
+})
 
 const emit = defineEmits(['close'])
 const router = useRouter()
@@ -70,13 +85,12 @@ const onLinkClick = (path: string) => {
         <div class="footer__columnn--left">
           <div class="footer__links-wrapper">
             <pep-pharos-link
-              v-for="link in linkGroup"
+              v-for="link in formattedLinkGroup"
               :id="link.id"
               :key="link.id"
               :href="link.path"
               .isOnBackground="true"
               subtle
-              target="_blank"
               @click="onLinkClick(link.path)"
             >
               {{ link.text }}
@@ -94,14 +108,22 @@ const onLinkClick = (path: string) => {
                 alt="JSTOR Labs Logo"
                 data-cy="footer-jstor-labs-logo-linkless"
               />
-              <a v-else href="https://labs.jstor.org">
+              <pep-pharos-link
+                v-else
+                href="https://labs.jstor.org"
+                data-cy="footer-jstor-labs-logo-link"
+                a11y-label="JSTOR Labs"
+                .isOnBackground="true"
+                subtle
+                target="_blank"
+              >
                 <img
                   src="@/assets/images/JSTOR_Labs_Logo.png"
                   class="footer__logo"
                   alt="JSTOR Labs Logo"
                   data-cy="footer-jstor-labs-logo-linked"
                 />
-              </a>
+              </pep-pharos-link>
             </div>
             <div class="footer__group footer__group--sponsor-group">
               <pep-pharos-heading
@@ -119,14 +141,22 @@ const onLinkClick = (path: string) => {
                 alt="Mellon Foundation Logo"
                 data-cy="footer-mellon-logo-linkless"
               />
-              <a v-else href="https://www.mellon.org">
+              <pep-pharos-link
+                v-else
+                href="https://www.mellon.org"
+                a11y-label="Mellon Foundation"
+                data-cy="footer-mellon-logo-link"
+                .isOnBackground="true"
+                subtle
+                target="_blank"
+              >
                 <img
                   src="@/assets/images/Mellon_Logomark_Lockup_White.png"
                   class="footer__logo"
                   alt="Mellon Foundation Logo"
                   data-cy="footer-mellon-logo-linked"
                 />
-              </a>
+              </pep-pharos-link>
               <img
                 v-if="!isAuthenticatedAdmin"
                 src="@/assets/images/ASC_Reverse.png"
@@ -134,14 +164,22 @@ const onLinkClick = (path: string) => {
                 alt="Ascendium Foundation Logo"
                 data-cy="footer-ascendium-logo-linkless"
               />
-              <a v-else href="https://www.ascendiumphilanthropy.org">
+              <pep-pharos-link
+                v-else
+                href="https://www.ascendiumphilanthropy.org"
+                data-cy="footer-ascendium-logo-link"
+                a11y-label="Ascendium Foundation"
+                .isOnBackground="true"
+                subtle
+                target="_blank"
+              >
                 <img
                   src="@/assets/images/ASC_Reverse.png"
                   class="footer__logo"
                   alt="Ascendium Foundation Logo"
                   data-cy="footer-ascendium-logo-linked"
                 />
-              </a>
+              </pep-pharos-link>
             </div>
           </div>
         </div>
@@ -188,6 +226,10 @@ const onLinkClick = (path: string) => {
     grid-area: main;
     max-width: 70rem;
     justify-self: center;
+
+    @media (width <= 570px) {
+      max-width: calc(100vw - 2rem);
+    }
 
     .footer__row {
       display: grid;
@@ -261,11 +303,15 @@ const onLinkClick = (path: string) => {
     }
 
     .footer__links-wrapper {
-      grid-column: 1 / 5;
+      grid-column: 1 / 6;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(1, auto);
       gap: var(--pharos-spacing-1-x);
+
+      @media (width <= 570px) {
+        gap: var(--pharos-spacing-one-half-x);
+      }
     }
 
     .footer__statement {

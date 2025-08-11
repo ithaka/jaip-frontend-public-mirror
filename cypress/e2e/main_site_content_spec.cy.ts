@@ -163,14 +163,14 @@ describe('Main site content', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('[data-cy="footer-mellon-logo-linkless"]').should('be.visible')
-      cy.get('a[href="https://www.mellon.org"]').should('not.exist')
+      cy.get('[data-cy="footer-mellon-logo-link"]').should('not.exist')
     })
 
     it('does not link to Ascendium', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
       cy.get('[data-cy="footer-ascendium-logo-linkless"]').should('be.visible')
-      cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('not.exist')
+      cy.get('[data-cy="footer-ascendium-logo-link"]').should('not.exist')
     })
 
     it('does not link to Labs', () => {
@@ -178,7 +178,7 @@ describe('Main site content', () => {
       cy.wait(['@index', '@alerts', '@env', '@auth'])
 
       cy.get('[data-cy="footer-jstor-labs-logo-linkless"]').should('be.visible')
-      cy.get('a[href="https://labs.jstor.org"]').should('not.exist')
+      cy.get('[data-cy="footer-jstor-labs-logo-link"]').should('not.exist')
     })
   })
 
@@ -206,21 +206,21 @@ describe('Main site content', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('[data-cy="footer-mellon-logo-linked"]').should('be.visible')
-      cy.get('a[href="https://www.mellon.org"]').should('have.length', 1)
+      cy.get('[data-cy="footer-mellon-logo-link"]').should('have.length', 1)
     })
 
     it('links to Ascendium', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('[data-cy="footer-ascendium-logo-linked"]').should('be.visible')
-      cy.get('a[href="https://www.ascendiumphilanthropy.org"]').should('have.length', 1)
+      cy.get('[data-cy="footer-ascendium-logo-link"]').should('have.length', 1)
     })
 
     it('links to Labs', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
       cy.get('[data-cy="footer-jstor-labs-logo-linked"]').should('be.visible')
-      cy.get('a[href="https://labs.jstor.org"]').should('have.length', 1)
+      cy.get('[data-cy="footer-jstor-labs-logo-link"]').should('have.length', 1)
     })
 
     it('links to home', () => {
