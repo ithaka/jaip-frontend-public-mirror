@@ -84,3 +84,8 @@ yarn test:e2e
 ```sh
 yarn lint
 ```
+
+## Logging
+Logs are sent from the frontend to the backend using the [Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API) in order to send non-blocking requests to the server. Log events must include and `eventtype` and `event_description`. The remaining fields necessary for Captain's Logging will be added by the backend. Additional fields can be added as needed.
+
+Frontend logging works locally as well as in the `TEST` and `PROD` environments. In the ephemeral cluster, however, it will return `405 Method Not Allowed` errors as a result of CORS issues. This does mean frontend logs will not work in the ephemeral environment. 
