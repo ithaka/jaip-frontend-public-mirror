@@ -14,6 +14,7 @@ import type { Discipline } from '@/interfaces/Discipline'
 import type { Journal } from '@/interfaces/Journal'
 import type { AxiosResponse } from 'axios'
 import type { Group, GroupSelection } from '@/interfaces/Group'
+import type { SearchResponse } from '@/interfaces/SearchResponse'
 
 const props = defineProps({
   requestsPage: {
@@ -52,6 +53,7 @@ const {
   selectedContentTypes,
   pseudoDisciplines,
   restrictedListLastUpdated,
+  secondarySearchResp,
 } = storeToRefs(searchStore)
 
 const coreStore = useCoreStore()
@@ -216,7 +218,19 @@ const openApproveAllModal = () => {
     selectedGroups.value['status_search'] = featureDetails.value['bulk_approve'].groups
   }
 
-  searchStore.doSearch('denied', true)
+  // Our database cannot filter statuses by content type, disciplines, or journals. In order to
+  // make the list of previously denied articles behave predictably, we can only show that list
+  // if none of those filters are applied.
+  if (
+    selectedContentTypes.value.length ||
+    selectedDisciplines.value.length ||
+    selectedJournalIDs.value.length
+  ) {
+    secondarySearchResp.value = {} as SearchResponse
+  } else {
+    // If no filters are applied, we can show all the previously denied articles.
+    searchStore.doSearch('denied', true)
+  }
 
   approveAllUpdateKey.value++
   showApproveAllModal.value = true
