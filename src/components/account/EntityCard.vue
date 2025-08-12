@@ -167,16 +167,19 @@ const handleGroupSelection = (e: InputFileEvent) => {
           </pep-pharos-heading>
           <ul v-if="category.length">
             <li v-for="feature in category" :key="`feature_${feature.name}`">
-              <span class="display-flex align-items-center">
+              <span class="entity-card__icon-wrapper">
                 <span>{{ feature.display_name }}</span>
                 <pep-pharos-icon
-                  :data-tooltip-id="`feature-tooltip-${feature.name}`"
+                  class="entity-card__tooltip-icon"
                   name="question-inverse"
-                  class="mt-0 pl-2 fill-gray-40 small-icon"
+                  a11y-title="Hover over to see feature description"
+                  a11y-hidden="false"
                   :aria-describedby="`feature-tooltip-${feature.name}`"
-                />
+                  :data-tooltip-id="`feature-tooltip-${feature.name}`"
+                >
+                </pep-pharos-icon>
                 <pep-pharos-tooltip :id="`feature-tooltip-${feature.name}`" placement="top">
-                  <span class="text-none">{{ feature.description }}</span>
+                  {{ feature.description }}
                 </pep-pharos-tooltip>
               </span>
             </li>
@@ -206,3 +209,20 @@ const handleGroupSelection = (e: InputFileEvent) => {
     />
   </div>
 </template>
+
+<style scoped lang="scss">
+.entity-card {
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &__tooltip-icon {
+    padding-left: var(--pharos-spacing-one-quarter-x);
+    width: var(--pharos-line-height-xsmall);
+    cursor: pointer;
+    fill: var(--pharos-color-marble-gray-40);
+  }
+}
+</style>

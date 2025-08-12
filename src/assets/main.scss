@@ -161,9 +161,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
 }
-.checkbox-group {
-  margin-left: -var(--pharos-spacing-one-eighth-x);
-}
 
 .local {
   grid-template-columns:

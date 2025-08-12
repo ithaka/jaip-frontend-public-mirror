@@ -144,7 +144,7 @@ const selectAllInCategory = (category: string | number) => {
       :open="props.show"
       @pharos-modal-closed="emit('close')"
     >
-      <form @submit.prevent.stop="submitForm">
+      <form class="edit-user" @submit.prevent.stop="submitForm">
         <pep-pharos-input-group
           :id="`user_name`"
           :value="newUser.name"
@@ -204,7 +204,7 @@ const selectAllInCategory = (category: string | number) => {
                 </pep-pharos-checkbox>
               </pep-pharos-heading>
               <pep-pharos-checkbox-group v-if="Object.keys(category).length">
-                <ul class="checkbox-group">
+                <ul class="edit-user__checkbox-group">
                   <li v-for="(feature, name) of category" :key="`feature_${name}`">
                     <pep-pharos-checkbox
                       :checked="newUser.ungrouped_features![name!]?.enabled"
@@ -249,3 +249,10 @@ const selectAllInCategory = (category: string | number) => {
     </pep-pharos-modal>
   </Teleport>
 </template>
+<style lang="scss" scoped>
+.edit-user {
+  &__checkbox-group {
+    margin-left: var(--pharos-spacing-one-eighth-x);
+  }
+}
+</style>

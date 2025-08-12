@@ -509,32 +509,37 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                   </span>
                 </pep-pharos-checkbox>
               </pep-pharos-heading>
-              <pep-pharos-checkbox-group v-if="category.length" @input="handleFeatureSelection">
-                <ul class="checkbox-group">
+              <pep-pharos-checkbox-group
+                v-if="category.length"
+                class="entity-manager__jaip-checkbox-group"
+                @input="handleFeatureSelection"
+              >
+                <ul class="jaip-checkbox-group">
                   <li v-for="feature in category" :key="`feature_${feature.name}`">
                     <pep-pharos-checkbox
                       :checked="(selectedFeatures[focusedGroup] || {})[feature.name]"
                       :value="feature.name"
                     >
                       <span slot="label">
-                        <span class="display-flex align-items-center">
+                        <span class="entity-manager__icon-wrapper">
                           <span>{{ feature.display_name }}</span>
                           <pep-pharos-icon
-                            :data-tooltip-id="`feature-manager-tooltip-${feature.name}`"
+                            class="entity-manager__tooltip-icon"
                             name="question-inverse"
-                            :a11y-title="`Feature: ${feature.display_name}`"
-                            class="mt-0 pl-2 fill-gray-40 small-icon"
+                            a11y-title="Hover over to see feature description"
+                            a11y-hidden="false"
                             :aria-describedby="`feature-manager-tooltip-${feature.name}`"
+                            :data-tooltip-id="`feature-manager-tooltip-${feature.name}`"
                           />
-                          <pep-pharos-tooltip
-                            :id="`feature-manager-tooltip-${feature.name}`"
-                            placement="top"
-                          >
-                            <span class="text-none">{{ feature.description }}</span>
-                          </pep-pharos-tooltip>
                         </span>
                       </span>
                     </pep-pharos-checkbox>
+                    <pep-pharos-tooltip
+                      :id="`feature-manager-tooltip-${feature.name}`"
+                      placement="top"
+                    >
+                      {{ feature.description }}
+                    </pep-pharos-tooltip>
                   </li>
                 </ul>
               </pep-pharos-checkbox-group>
@@ -553,3 +558,24 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
     </pep-pharos-modal>
   </Teleport>
 </template>
+
+<style scoped lang="scss">
+.entity-manager {
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &__tooltip-icon {
+    padding-left: var(--pharos-spacing-one-quarter-x);
+    width: var(--pharos-line-height-xsmall);
+    cursor: pointer;
+    fill: var(--pharos-color-marble-gray-40);
+  }
+
+  &__jaip-checkbox-group {
+    contain: unset;
+  }
+}
+</style>
