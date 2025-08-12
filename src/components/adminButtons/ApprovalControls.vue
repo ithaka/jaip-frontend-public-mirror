@@ -158,12 +158,10 @@ const selectorGroupOptions = ref(
         At least one group must be selected
       </span>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeApproveModal">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="
@@ -174,7 +172,6 @@ const selectorGroupOptions = ref(
       >
         Approve
       </pep-pharos-button>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

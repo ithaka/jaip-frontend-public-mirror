@@ -375,7 +375,6 @@ const showDownloadButton = computed(() => {
                   <p>Notes</p>
                 </div>
               </pep-pharos-textarea>
-              <!-- eslint-disable-next-line -->
               <pep-pharos-button slot="footer" @click.prevent.stop="submitRequests">
                 Submit
               </pep-pharos-button>
@@ -462,8 +461,6 @@ const showDownloadButton = computed(() => {
                 />
               </div>
             </div>
-
-            <!-- eslint-disable vue/no-deprecated-slot-attribute -->
             <pep-pharos-button
               slot="footer"
               variant="secondary"
@@ -478,7 +475,6 @@ const showDownloadButton = computed(() => {
             >
               Submit
             </pep-pharos-button>
-            <!-- eslint-enable vue/no-deprecated-slot-attribute -->
           </pep-pharos-modal>
         </div>
       </div>

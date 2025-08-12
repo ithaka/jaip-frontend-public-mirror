@@ -190,7 +190,6 @@ const handleDenial = async () => {
     >
       <p slot="description" class="mb-3">
         What is your reason to deny access
-        <!-- eslint-disable-next-line vue/no-v-html  -->
         <span v-if="doc.title">to <em v-html="doc.title" /></span
         ><span v-if="!denyGroups.length">?</span>
         <span v-if="denyGroups.length"
@@ -280,12 +279,10 @@ const handleDenial = async () => {
         <span>.</span>
       </p>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeDenyModal">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="
@@ -304,7 +301,6 @@ const handleDenial = async () => {
       >
         Deny
       </pep-pharos-button>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

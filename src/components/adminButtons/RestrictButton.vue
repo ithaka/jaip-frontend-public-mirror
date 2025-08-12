@@ -108,10 +108,8 @@ const handleRestrict = async () => {
   </pep-pharos-button>
   <Teleport to="body">
     <pep-pharos-modal :id="`restrict-modal-${doc.iid}`" header="Restrict material">
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p slot="description" class="mb-3">
         What is your reason to restrict access
-        <!-- eslint-disable-next-line vue/no-v-html  -->
         <span v-if="doc.title">to <em v-html="doc.title" /> globally?</span>
       </p>
       <pep-pharos-radio-group :value="selectedReason" class="mb-6" @input="handleSelectedReason">
@@ -149,12 +147,10 @@ const handleRestrict = async () => {
         >
       </p>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" data-modal-close>
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :data-modal-close="invalidReason ? undefined : true"
@@ -162,7 +158,6 @@ const handleRestrict = async () => {
       >
         Restrict
       </pep-pharos-button>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

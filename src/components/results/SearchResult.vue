@@ -166,13 +166,11 @@ const showReaderRestrictedLabel = computed(() => {
         <!-- Snippets -->
         <div v-if="(doc.snippets || []).length && !hideSearchSnippets" class="mt-4">
           <div v-for="(snip, i) in doc.snippets" :key="`snippet_${i}`" class="text-size-sm">
-            <!-- eslint-disable vue/no-v-html -->
             <small v-if="snip.text">
               ...
               <span :class="{ 'text-size-xs': small }" v-html="snip.text" />
               ...
             </small>
-            <!-- eslint-enable vue/no-v-html -->
           </div>
         </div>
       </div>

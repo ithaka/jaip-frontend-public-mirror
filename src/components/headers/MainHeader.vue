@@ -63,7 +63,6 @@ const emit = defineEmits(['logout', 'close'])
 <template>
   <pep-pharos-header class="pep-pharos-header--main" data-cy="main-header">
     <!-- Top of the page, above the logo and menus -->
-    <!-- eslint-disable vue/no-deprecated-slot-attribute -->
     <div slot="top" class="pep-pharos-header__top">
       <div v-if="alert && alert.status" class="px-3 mb-3">
         <pep-pharos-alert :status="alert.status">
@@ -79,7 +78,6 @@ const emit = defineEmits(['logout', 'close'])
       />
       <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
-    <!-- eslint-enable vue/no-deprecated-slot-attribute -->
 
     <!-- Logo -->
 

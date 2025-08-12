@@ -35,15 +35,12 @@ const component = ref(props.small ? 'small' : 'span')
 <template>
   <span class="document-title-container">
     <span class="title-and-subtitle">
-      <!-- eslint-disable vue/no-v-html -->
       <span v-if="title" class="document-title">
         <component :is="component">
           <span v-html="title" />
         </component>
         <RestrictedItemLabel v-if="showRestrictedLabel && !subtitle?.length && !small" :id="id" />
       </span>
-
-      <!-- eslint-enable vue/no-v-html  -->
 
       <span v-else>
         <component :is="component" class="document-title">
@@ -54,22 +51,18 @@ const component = ref(props.small ? 'small' : 'span')
 
       <span v-if="Array.isArray(subtitle) && (subtitle || []).length">
         <component :is="component" class="document-subtitle">
-          <!-- eslint-disable vue/no-v-html -->
           <span
             v-for="(sub, i) in subtitle"
             :key="`subtitle_${i}`"
             v-html="separateSubtitle(title, sub as string)"
           />
-          <!-- eslint-enable vue/no-v-html  -->
         </component>
         <RestrictedItemLabel v-if="showRestrictedLabel && !small" :id="id" />
       </span>
 
       <span v-else-if="subtitle && !Array.isArray(subtitle)">
         <component :is="component" class="document-subtitle">
-          <!-- eslint-disable vue/no-v-html -->
           <span v-html="separateSubtitle(title, subtitle as string)" />
-          <!-- eslint-enable vue/no-v-html  -->
         </component>
         <RestrictedItemLabel v-if="showRestrictedLabel && !small" :id="id" />
       </span>

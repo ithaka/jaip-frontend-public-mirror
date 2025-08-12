@@ -44,7 +44,6 @@ coreStore.$api.log({
             {{ key }}
           </pep-pharos-heading>
         </pep-pharos-tab>
-        <!-- eslint-disable vue/no-deprecated-slot-attribute -->
         <pep-pharos-tab-panel
           v-for="(key, index) in filteredOrderedCategories"
           :id="`group-${index}`"
@@ -57,7 +56,6 @@ coreStore.$api.log({
           <FeatureManager v-else-if="key === 'Ungrouped Features'" ungrouped />
           <FeatureManager v-else-if="key === 'Features'" />
         </pep-pharos-tab-panel>
-        <!-- eslint-enable vue/no-deprecated-slot-attribute -->
       </pep-pharos-tabs>
     </pep-pharos-layout>
   </div>

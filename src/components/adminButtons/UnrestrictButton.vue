@@ -79,25 +79,20 @@ const handleUnrestrict = async () => {
   </pep-pharos-button>
   <Teleport to="body">
     <pep-pharos-modal :id="`unrestrict-modal-${doc.iid}`" header="Unrestrict material">
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <p slot="description" class="mb-3">
         This will make
-        <!-- eslint-disable-next-line vue/no-v-html  -->
         <span v-if="doc.title"
           ><em v-html="doc.title" />&nbsp;available for request at all facilities.</span
         >
       </p>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" data-modal-close>
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button slot="footer" data-modal-close @click="handleUnrestrict">
         Confirm
       </pep-pharos-button>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

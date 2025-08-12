@@ -22,13 +22,9 @@ const component = ref(props.small ? 'small' : 'span')
 <template>
   <div>
     <component :is="component">
-      <!-- eslint-disable vue/no-v-html -->
       <span v-if="expand" :class="[{ 'text-size-xs': small }, 'inline text-full']" v-html="text" />
-      <!-- eslint-enable vue/no-v-html -->
-      <!-- eslint-disable vue/no-v-html -->
       <span v-else :class="[{ 'text-size-xs': small }, 'inline text-truncate']" v-html="text" />
     </component>
-    <!-- eslint-enable vue/no-v-html -->
     <pep-pharos-button
       v-if="(text || []).length > limit"
       variant="subtle"

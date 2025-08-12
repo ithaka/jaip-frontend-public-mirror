@@ -543,12 +543,10 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
         </div>
       </div>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" @click.prevent.stop="handleSubmit">
         Submit
       </pep-pharos-button>

@@ -104,9 +104,7 @@ const component = ref(props.small ? 'small' : 'span')
         </div>
         <!-- Metadata Citation Line -->
         <component :is="component" v-else>
-          <!-- eslint-disable vue/no-v-html -->
           <span class="text-color-gray-40" v-html="doc.citation_line" />
-          <!-- eslint-enable vue/no-v-html  -->
         </component>
       </div>
     </div>

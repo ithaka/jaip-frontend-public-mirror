@@ -17,7 +17,6 @@ import Research from '@/assets/markdown/research-basics.md'
       <pep-pharos-tab id="help-tab-3" data-panel-id="help-panel-3">
         How to Research?
       </pep-pharos-tab>
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-tab-panel id="help-panel-1" slot="panel">
         <JSTOR />
       </pep-pharos-tab-panel>
@@ -27,7 +26,6 @@ import Research from '@/assets/markdown/research-basics.md'
       <pep-pharos-tab-panel id="help-panel-3" slot="panel">
         <Research />
       </pep-pharos-tab-panel>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-tabs>
   </section>
 </template>

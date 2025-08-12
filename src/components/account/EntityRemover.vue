@@ -86,12 +86,10 @@ const removeEntity = async () => {
         :start-full="true"
         multiple
       />
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable vue/no-deprecated-slot-attribute -->
       <pep-pharos-button
         slot="footer"
         :disabled="!(selectedGroups[featureName] || []).length"
@@ -99,7 +97,6 @@ const removeEntity = async () => {
       >
         Remove
       </pep-pharos-button>
-      <!-- eslint-enable vue/no-deprecated-slot-attribute -->
     </pep-pharos-modal>
   </Teleport>
 </template>

@@ -30,12 +30,10 @@ const submitForm = async () => {
     >
       <p slot="description" class="mb-3">Are you sure you want to reactivate {{ props.name }}?</p>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" @click.prevent.stop="submitForm"> Submit </pep-pharos-button>
     </pep-pharos-modal>
   </Teleport>

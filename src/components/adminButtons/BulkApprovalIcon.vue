@@ -166,7 +166,6 @@ const submitBulkApproval = async () => {
               @change="handleGroupSelection"
             />
           </div>
-          <!-- eslint-disable vue/no-deprecated-slot-attribute -->
           <pep-pharos-button
             slot="footer"
             variant="secondary"
@@ -183,7 +182,6 @@ const submitBulkApproval = async () => {
           >
             Submit
           </pep-pharos-button>
-          <!-- eslint-enable vue/no-deprecated-slot-attribute -->
         </pep-pharos-modal>
       </Teleport>
     </div>

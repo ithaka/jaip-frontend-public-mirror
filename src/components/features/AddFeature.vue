@@ -191,12 +191,10 @@ const descriptionErrorMessage = computed(() => {
         </div>
       </form>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">
         Cancel
       </pep-pharos-button>
 
-      <!-- eslint-disable-next-line -->
       <pep-pharos-button slot="footer" @click.prevent.stop="submitForm"> Submit </pep-pharos-button>
     </pep-pharos-modal>
   </Teleport>
