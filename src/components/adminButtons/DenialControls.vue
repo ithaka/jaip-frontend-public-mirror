@@ -13,7 +13,6 @@ import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import {
   makeGrammaticalList,
   arraysAreEqual,
-  combineArrays,
   hideButton,
   getGroupsWithStatus,
 } from '@/utils/helpers'
@@ -66,6 +65,8 @@ const handleCommentInput = (e: InputFileEvent) => {
   comments.value = e.target.value
   if (!comments.value.trim()) {
     invalidComments.value = 'Additional details are required'
+  } else if (comments.value.trim().length < 2) {
+    invalidComments.value = 'Please provide additional information'
   } else if (comments.value.length > 3000) {
     invalidComments.value = 'Please enter a shorter comment'
   } else {
@@ -289,13 +290,7 @@ const handleDenial = async () => {
           !selectedGroups['deny_requests'] ||
           !selectedGroups['deny_requests'].length ||
           !denyGroups.length ||
-          arraysAreEqual(
-            denyGroups,
-            combineArrays(
-              getGroupsWithStatus(statuses, 'denied'),
-              getGroupsWithStatus(statuses, 'incomplete'),
-            ),
-          )
+          arraysAreEqual(denyGroups, getGroupsWithStatus(statuses, 'denied'))
         "
         @click.prevent.stop="handleDenial"
       >

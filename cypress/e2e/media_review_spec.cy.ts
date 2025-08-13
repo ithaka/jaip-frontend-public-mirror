@@ -413,7 +413,7 @@ describe('Media Review', () => {
             .find('textarea')
             // This is only a single letter because occasionally the Cypress
             // type command seems to scramble the letters.
-            .type('t')
+            .type('ttt')
           cy.get('[id^=deny-modal]')
             .contains('The Sacrifices and Achievements of African-American')
             .parents('[id^=deny-modal]')
@@ -428,6 +428,74 @@ describe('Media Review', () => {
           cy.wait('@search')
         })
 
+
+        context('With an incomplete article', () => {
+          beforeEach(() => {
+            cy.intercept('POST', routes.search.basic, { fixture: 'admin_search/term_given__incomplete__response.json' })
+              .as('search')
+            cy.visit('/search?term=mary+mcleod+bethune')
+            cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@features', '@disciplines'])
+          })
+          it('Lets admins deny an incomplete article', () => {
+            cy.intercept('POST', routes.approvals.deny, { body: '' })
+              .as('deny')
+    
+            cy.get('.search-result')
+              .contains('Status: Incomplete')
+              .parents('.search-result')
+              .contains('Deny')
+              .click()
+
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('.group-selector-combobox')
+              .should('be.visible')
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('.group-selector-combobox')
+              .click()
+
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('.group-selector-combobox')
+              .shadow()
+              .find('li[role="option"]')
+              .contains('all groups', { matchCase: false })
+              .click()
+      
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('pep-pharos-radio-button')
+              .eq(3)
+              .click()
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('pep-pharos-textarea')
+              .shadow()
+              .find('textarea')
+              // This is only a single letter because occasionally the Cypress
+              // type command seems to scramble the letters.
+              .type('ttt')
+            cy.get('[id^=deny-modal]')
+              .contains('The Sacrifices and Achievements of African-American')
+              .parents('[id^=deny-modal]')
+              .find('pep-pharos-button')
+              .contains('Deny')
+              .click()
+      
+            cy.fixture('admin_requests/deny__two_groups__request.json').then((request) => {
+              cy.wait('@deny').its('request.body').should('deep.eq', request)
+          })
+  
+          cy.wait('@search')
+        })
+
+        })
         it("Offers only the deny option, when all the admin's groups have approved an article", () => {
           // Multiple groups have approved the first article
           cy.get('.search-result').first()

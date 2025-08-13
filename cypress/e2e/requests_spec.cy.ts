@@ -385,7 +385,7 @@ describe('Requests page', () => {
         .find('textarea')
         // This is only a single letter because occasionally the Cypress
         // type command seems to scramble the letters.
-        .type('t')
+        .type('ttt')
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-button')
@@ -827,7 +827,7 @@ describe('Requests page', () => {
         .find('textarea')
         // This is only a single letter because occasionally the Cypress
         // type command seems to scramble the letters.
-        .type('t')
+        .type('ttt')
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-button')
@@ -871,7 +871,7 @@ describe('Requests page', () => {
         .find('textarea')
         // This is only a single letter because occasionally the Cypress
         // type command seems to scramble the letters.
-        .type('t')
+        .type('ttt')
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-button')
