@@ -39,7 +39,7 @@ defineProps({
       >
     </small>
     <small v-else-if="isAdminSubdomain && !isAuthenticatedAdmin">
-      <span>Have faculty access?&nbsp;</span>
+      <span>Have facility access?&nbsp;</span>
       <pep-pharos-link :href="loginUrl" class="text-decoration-underline">Log in</pep-pharos-link>
     </small>
     <small v-else>
