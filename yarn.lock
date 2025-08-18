@@ -867,9 +867,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ithaka/pharos@npm:^14.16.2":
-  version: 14.16.2
-  resolution: "@ithaka/pharos@npm:14.16.2"
+"@ithaka/pharos@npm:^14.17.0":
+  version: 14.17.0
+  resolution: "@ithaka/pharos@npm:14.17.0"
   dependencies:
     "@floating-ui/dom": "npm:^1.7.2"
     "@ithaka/focus-trap": "npm:2.0.1"
@@ -879,7 +879,7 @@ __metadata:
     uuid: "npm:^11.1.0"
   peerDependencies:
     sass: ^1.89.1
-  checksum: 10c0/de9ecd33f65594c567182153f0fa012f84f51e38ad044e3f108513145c53463282eaf5e4d0d12ae94ba8c3efcf1e5402f5cf035c102b781d571fdabbc428bcd5
+  checksum: 10c0/a9c63ec831ad9050c43578cc61717502688557d968fb49c0d46e95a1ad95d6e6cbe11bf79824f08322f64a07ee1e21e77e89d810627e1a539a63705de13b7cfe
   languageName: node
   linkType: hard
 
@@ -1574,12 +1574,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.17.1":
-  version: 22.17.1
-  resolution: "@types/node@npm:22.17.1"
+"@types/node@npm:^22.17.2":
+  version: 22.17.2
+  resolution: "@types/node@npm:22.17.2"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/b04063bdabfc4146af05d14d4fd23ee68615194473d0ef971ddef549b80b791f52c8f93abdd8d1092ee0257f3dea862fa233519244fd051e79233cdce614de14
+  checksum: 10c0/23cd13aa35da6322a6d66cf4b3a45dbd40764ba726ab8681960270156c3abba776dd8dc173250c467f708d40612ecd725755d7659b775b513904680d5205eaff
   languageName: node
   linkType: hard
 
@@ -3265,14 +3265,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "eslint-plugin-cypress@npm:5.1.0"
+"eslint-plugin-cypress@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "eslint-plugin-cypress@npm:5.1.1"
   dependencies:
     globals: "npm:^16.2.0"
   peerDependencies:
     eslint: ">=9"
-  checksum: 10c0/a1616d29c29dd4188e6f4f2ada8a6c3d217e37d8ac79fcef93978be664054853548d230aeef485702dc1ac4075d521911dce4732e1871278a649b9189594861b
+  checksum: 10c0/63f196b23c8fc70da79e966b3db6f1dd04a558ad3e04e85b004af3169c27d4b0702d8f0a9f476093cbf3fe5262f2fb1324f8d978b223db5d039e449f7da27178
   languageName: node
   linkType: hard
 
@@ -4416,10 +4416,10 @@ __metadata:
   dependencies:
     "@babel/types": "npm:^7.28.2"
     "@ithaka/eslint-config-vue": "npm:^5.1.2"
-    "@ithaka/pharos": "npm:^14.16.2"
+    "@ithaka/pharos": "npm:^14.17.0"
     "@tsconfig/node22": "npm:^22.0.2"
     "@types/jsdom": "npm:^21.1.7"
-    "@types/node": "npm:^22.17.1"
+    "@types/node": "npm:^22.17.2"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.1"
     "@vitejs/plugin-vue-jsx": "npm:^5.0.1"
@@ -4431,7 +4431,7 @@ __metadata:
     cypress: "npm:^14.5.4"
     eslint: "npm:^9.33.0"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-cypress: "npm:^5.1.0"
+    eslint-plugin-cypress: "npm:^5.1.1"
     globals: "npm:^16.3.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.5.1"

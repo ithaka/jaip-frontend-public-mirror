@@ -21,7 +21,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@ithaka/pharos": "^14.16.2",
+    "@ithaka/pharos": "^14.17.0",
     "@vuepic/vue-datepicker": "^11.0.2",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
     "axios": "^1.11.0",
@@ -39,7 +39,7 @@
     "@ithaka/eslint-config-vue": "^5.1.2",
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.17.1",
+    "@types/node": "^22.17.2",
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.0.1",
@@ -48,7 +48,7 @@
     "cypress": "^14.5.4",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-cypress": "^5.1.0",
+    "eslint-plugin-cypress": "^5.1.1",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
     "jiti": "^2.5.1",
