@@ -210,7 +210,12 @@ const handleDenial = async () => {
           @change="handleGroupChange"
         />
       </div>
-      <pep-pharos-radio-group :value="selectedReason" class="mb-6" @input="handleSelectedReason">
+      <pep-pharos-radio-group
+        :value="selectedReason"
+        class="mb-6"
+        required
+        @input="handleSelectedReason"
+      >
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
           v-for="(reason, index) in reasons"
@@ -259,9 +264,10 @@ const handleDenial = async () => {
         :message="invalidComments"
         placeholder="Contains a map of the area on page 46."
         class="mb-4"
+        required
         @input="handleCommentInput"
       >
-        <div slot="label">Notes</div>
+        <span slot="label"> Notes </span>
       </pep-pharos-textarea>
 
       <p>
