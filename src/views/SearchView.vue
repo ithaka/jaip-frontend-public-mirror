@@ -209,10 +209,7 @@ const handleJournalSelection = (e: CheckboxEvent, disc: string) => {
   }
   searchStore.doSearch('', false)
 }
-const clearJournals = () => {
-  selectedJournals.value = []
-  searchStore.doSearch('', false)
-}
+
 const showSearchFilters = ref(false)
 
 const handleContentTypeSelection = (e: InputFileEvent) => {
@@ -243,272 +240,244 @@ api.log({
 <template>
   <main>
     <div class="search-view">
-      <div>
-        <div class="search-filters-container">
-          <div class="search-filters">
-            <div class="hidden display-grid-md">
-              <div class="mx-5 px-2">
-                <div class="mx-3 my-7">
-                  <pep-pharos-button full-width @click="showSearchFilters = !showSearchFilters">
-                    {{ showSearchFilters ? 'Hide Search Filters' : 'Show Search Filters' }}
-                  </pep-pharos-button>
-                </div>
-              </div>
-            </div>
-            <div
-              :class="{ 'hidden-md': !showSearchFilters }"
-              class="md-mx-5 md-px-4 md-pb-8 background-color-gray-97"
-            >
-              <pep-pharos-heading class="pt-7 px-6 pb-5" preset="2" :level="2">
-                Refine Results
+      <div class="search-facets">
+        <div class="search-facets--mobile">
+          <pep-pharos-button full-width @click="showSearchFilters = !showSearchFilters">
+            {{ showSearchFilters ? 'Hide Search Filters' : 'Show Search Filters' }}
+          </pep-pharos-button>
+        </div>
+        <div :class="{ 'hidden-md': !showSearchFilters }" class="search-facets__area">
+          <pep-pharos-heading class="search-facets__title" preset="2" :level="2">
+            Refine Results
+          </pep-pharos-heading>
+
+          <!--Content Type -->
+          <section class="search-facets__section">
+            <pep-pharos-heading class="search-facets__sub-heading" preset="legend" :level="3">
+              CONTENT TYPE
+            </pep-pharos-heading>
+            <pep-pharos-checkbox-group>
+              <ul>
+                <li v-for="(type, i) in contentTypes" :key="`content_types_${i}`">
+                  <pep-pharos-checkbox
+                    :checked="selectedContentTypes.includes(type.value)"
+                    :value="type.value"
+                    @input="handleContentTypeSelection"
+                  >
+                    <span slot="label">
+                      {{ type.label }}
+                    </span>
+                  </pep-pharos-checkbox>
+                </li>
+              </ul>
+            </pep-pharos-checkbox-group>
+          </section>
+
+          <!-- Search within results -->
+          <section class="search-facets__section">
+            <pep-pharos-heading class="search-facets__sub-heading" preset="legend" :level="3">
+              Search within results
+            </pep-pharos-heading>
+            <!-- Additional search terms form -->
+            <form @submit.prevent.stop="handleAdditionalTerms">
+              <pep-pharos-input-group
+                :value="additionalTerms"
+                name="search-within"
+                hide-label
+                @input="additionalTerms = $event.target.value"
+              >
+                <pep-pharos-button
+                  name="search-button"
+                  icon="search"
+                  variant="subtle"
+                  label="search"
+                  a11y-label="Search"
+                  type="submit"
+                />
+              </pep-pharos-input-group>
+            </form>
+          </section>
+
+          <!-- Publication Year -->
+          <section class="search-facets__section">
+            <div class="search-facets__icon-wrapper">
+              <pep-pharos-heading class="search-facets__sub-heading" preset="legend" :level="3">
+                <span>Publication Year</span>
               </pep-pharos-heading>
-              <!-- Search within results -->
-              <div>
-                <!--Content Type -->
-                <div>
-                  <pep-pharos-heading class="pt-5 pb-3 px-6" preset="legend" :level="3">
-                    CONTENT TYPE
-                  </pep-pharos-heading>
-                  <pep-pharos-checkbox-group class="px-6 ml-0">
-                    <ul>
-                      <li v-for="(type, i) in contentTypes" :key="`content_types_${i}`">
-                        <pep-pharos-checkbox
-                          :checked="selectedContentTypes.includes(type.value)"
-                          :value="type.value"
-                          @input="handleContentTypeSelection"
-                        >
-                          <span slot="label">
-                            {{ type.label }}
-                          </span>
-                        </pep-pharos-checkbox>
-                      </li>
-                    </ul>
-                  </pep-pharos-checkbox-group>
-                </div>
-
-                <!--Search Heading -->
-                <pep-pharos-heading class="py-5 px-6" preset="legend" :level="3">
-                  Search within results
-                </pep-pharos-heading>
-                <!-- Additional search terms form -->
-                <form class="pt-0 px-6 pb-3" @submit.prevent.stop="handleAdditionalTerms">
-                  <pep-pharos-input-group
-                    :value="additionalTerms"
-                    name="search-within"
-                    hide-label
-                    @input="additionalTerms = $event.target.value"
-                  >
-                    <pep-pharos-button
-                      name="search-button"
-                      icon="search"
-                      variant="subtle"
-                      label="search"
-                      a11y-label="Search"
-                      type="submit"
-                    />
-                  </pep-pharos-input-group>
-                </form>
-              </div>
-
-              <!-- Date Heading -->
-              <div>
-                <pep-pharos-heading class="py-5 px-6" preset="legend" :level="3">
-                  <span class="display-flex align-items-center">
-                    <span>Publication Year</span>
-                    <pep-pharos-icon
-                      data-tooltip-id="date-tooltip"
-                      name="question-inverse"
-                      class="mt-0 pl-3"
-                      :a11y-title="'Publication Year Tooltip'"
-                      aria-describedby="date-tooltip"
-                    />
-                    <pep-pharos-tooltip id="date-tooltip" placement="top">
-                      <span class="text-none">Enter date as a four digit year (YYYY).</span>
-                    </pep-pharos-tooltip>
-                  </span>
-                </pep-pharos-heading>
-                <!-- Date Form -->
-                <form
-                  class="pt-0 px-6 pb-3 date-filters"
-                  @submit.prevent.stop="handleDateSelection"
+              <pep-pharos-icon
+                data-tooltip-id="date-tooltip"
+                name="question-inverse"
+                class="search-facets__tooltip-icon"
+                :a11y-title="'Publication Year Tooltip'"
+                aria-describedby="date-tooltip"
+              />
+            </div>
+            <pep-pharos-tooltip id="date-tooltip" placement="top">
+              Enter date as a four digit year (YYYY).
+            </pep-pharos-tooltip>
+            <!-- Publication Year Form -->
+            <form
+              data-cy="date-filters"
+              class="search-facets__dates"
+              @submit.prevent.stop="handleDateSelection"
+            >
+              <div class="search-facets__dates-row">
+                <pep-pharos-input-group
+                  :value="startYear"
+                  :invalidated="invalidatedStartYear"
+                  name="search-within-min"
+                  @input="startYear = $event.target.value"
                 >
-                  <div>
-                    <div class="display-flex flex-direction-row">
-                      <pep-pharos-input-group
-                        :value="startYear"
-                        :invalidated="invalidatedStartYear"
-                        name="search-within-min"
-                        class="mr-3"
-                        @input="startYear = $event.target.value"
-                      >
-                        <span slot="label" class="text-color-gray-20">from</span>
-                      </pep-pharos-input-group>
-                      <pep-pharos-input-group
-                        :value="endYear"
-                        :invalidated="invalidatedEndYear"
-                        name="search-within-max"
-                        @input="endYear = $event.target.value"
-                      >
-                        <span slot="label" class="text-color-gray-20">to</span>
-                      </pep-pharos-input-group>
-                    </div>
-                    <span v-if="invalidatedStartYear || invalidatedEndYear" class="error">
-                      {{ dateErrorMessage }}
-                    </span>
-                  </div>
-                  <div class="display-flex justify-content-end">
-                    <pep-pharos-button
-                      name="search-button"
-                      variant="primary"
-                      label="Apply"
-                      a11y-label="Apply"
-                      type="submit"
-                      class="mt-3"
-                    >
-                      Apply
-                    </pep-pharos-button>
-                  </div>
-                </form>
+                  <span slot="label" class="text-color-gray-20">from</span>
+                </pep-pharos-input-group>
+                <pep-pharos-input-group
+                  :value="endYear"
+                  :invalidated="invalidatedEndYear"
+                  name="search-within-max"
+                  @input="endYear = $event.target.value"
+                >
+                  <span slot="label" class="text-color-gray-20">to</span>
+                </pep-pharos-input-group>
               </div>
+              <span
+                v-if="invalidatedStartYear || invalidatedEndYear"
+                class="error"
+                data-cy="date-filters-error"
+              >
+                {{ dateErrorMessage }}
+              </span>
+              <pep-pharos-button
+                name="search-button"
+                variant="primary"
+                label="Apply"
+                a11y-label="Apply"
+                type="submit"
+                class="search-facets__apply-button"
+              >
+                Apply
+              </pep-pharos-button>
+            </form>
+          </section>
 
-              <!-- Discipline -->
-              <div>
-                <!-- Discipline Heading -->
-                <div class="display-flex flex-direction-row">
-                  <pep-pharos-heading class="py-5 pl-6 pr-2" preset="legend" :level="3">
-                    Subject
-                  </pep-pharos-heading>
-                  <pep-pharos-button
-                    v-if="selectedDisciplines.length"
-                    variant="subtle"
-                    @click="clearDisciplines()"
+          <!-- Discipline -->
+          <section class="search-facets__section">
+            <!-- Discipline Heading -->
+            <div class="search-facets__icon-wrapper">
+              <pep-pharos-heading class="search-facets__sub-heading" preset="legend" :level="3">
+                Subject
+              </pep-pharos-heading>
+              <pep-pharos-button
+                v-if="selectedDisciplines.length"
+                variant="subtle"
+                @click="clearDisciplines()"
+              >
+                <small class="text-weight-regular">clear</small>
+              </pep-pharos-button>
+            </div>
+            <CheckboxGroup
+              v-if="disciplineList && !gettingDisciplines"
+              :source-list="disciplineList"
+              :initial-list-length="5"
+              :initial-selections="[...selectedDisciplines]"
+              :filter-function="
+                (disc: Discipline, term: string) =>
+                  disc.label.includes(term) || disc.code.includes(term)
+              "
+              :get-value="(disc: Discipline) => disc.code"
+              :get-label="(disc: Discipline) => disc.label"
+              @input="handleDisciplineSelection"
+            />
+            <pep-pharos-loading-spinner v-else-if="gettingDisciplines" />
+          </section>
+
+          <!-- Journals -->
+          <section class="search-facets__section search-facets__section--journals">
+            <div class="search-facets__icon-wrapper">
+              <pep-pharos-heading class="search-facets__sub-heading" preset="legend" :level="3">
+                <span>Journal</span>
+              </pep-pharos-heading>
+              <pep-pharos-icon
+                data-tooltip-id="journal-discipline-tooltip"
+                name="question-inverse"
+                class="search-facets__tooltip-icon"
+                :a11y-title="'Journal Tooltip'"
+                aria-describedby="journal-discipline-tooltip"
+              />
+            </div>
+
+            <pep-pharos-tooltip id="journal-discipline-tooltip" placement="top">
+              First select a subject, then select journals within that subject. You may select
+              multiple subjects.
+            </pep-pharos-tooltip>
+            <!-- Journals -->
+            <div class="journal-filter">
+              <!-- Journal Discipline Combobox -->
+              <form @submit.prevent.stop>
+                <pep-pharos-combobox
+                  ref="combobox"
+                  placeholder="Select a subject"
+                  loose-match
+                  label="Journal Subject"
+                  a11y-label="Journal Subject"
+                  @change="handleJournalDisciplineSelection"
+                >
+                  <option
+                    v-for="(discipline, index) in disciplineList"
+                    :key="`journal_discipline_${index}`"
+                    :value="discipline.code"
                   >
-                    <small class="text-weight-regular">clear</small>
-                  </pep-pharos-button>
-                </div>
-                <!-- Discipline Checkbox Group -->
-                <div v-if="disciplineList && !gettingDisciplines">
-                  <CheckboxGroup
-                    :source-list="disciplineList"
-                    :initial-list-length="5"
-                    :initial-selections="[...selectedDisciplines]"
-                    :filter-function="
-                      (disc: Discipline, term: string) =>
-                        disc.label.includes(term) || disc.code.includes(term)
-                    "
-                    :get-value="(disc: Discipline) => disc.code"
-                    :get-label="(disc: Discipline) => disc.label"
-                    @input="handleDisciplineSelection"
-                  />
-                </div>
-                <div v-else-if="gettingDisciplines" class="position-relative pt-6 pb-5">
-                  <pep-pharos-loading-spinner />
-                </div>
+                    {{ discipline.label }}
+                  </option>
+                </pep-pharos-combobox>
+              </form>
+              <div v-if="gettingJournals" class="journal-filter__loading-spinner">
+                <pep-pharos-loading-spinner />
               </div>
-
-              <!-- Journals -->
-              <div>
-                <!-- Journal Discipline Heading -->
-                <div class="display-flex flex-direction-row">
-                  <pep-pharos-heading class="py-5 pl-6 pr-2" preset="legend" :level="3">
-                    <span class="display-flex align-items-center">
-                      <span>Journal</span>
-                      <pep-pharos-icon
-                        data-tooltip-id="journal-discipline-tooltip"
-                        name="question-inverse"
-                        class="mt-0 pl-3"
-                        :a11y-title="'Journal Tooltip'"
-                        aria-describedby="journal-discipline-tooltip"
+              <!-- Journal List (Grouped by Discipline) -->
+              <div v-if="visibleJournalDisciplines.length">
+                <div
+                  v-for="(discipline, index) in visibleJournalDisciplines"
+                  :key="`journal_discipline_${discipline}`"
+                >
+                  <pep-pharos-heading preset="legend" :level="4">
+                    <span class="journal-filter__sub-heading">
+                      <span>
+                        {{ disciplineObject[discipline].label }}
+                      </span>
+                      <pep-pharos-button
+                        name="journal-close-button"
+                        icon="close"
+                        variant="subtle"
+                        label="remove subject"
+                        a11y-label="remove subject"
+                        type="submit"
+                        @click="removeJournalDiscipline(index, discipline)"
                       />
-                      <pep-pharos-tooltip id="journal-discipline-tooltip" placement="top">
-                        <span class="text-none"
-                          >First select a subject, then select journals within that subject. You may
-                          select multiple subjects.</span
-                        >
-                      </pep-pharos-tooltip>
                     </span>
                   </pep-pharos-heading>
-                  <pep-pharos-button
-                    v-if="selectedJournals.length"
-                    variant="subtle"
-                    @click="clearJournals()"
-                  >
-                    <small class="text-weight-regular">clear</small>
-                  </pep-pharos-button>
-                </div>
-                <div class="journal-filter">
-                  <!-- Journal Discipline Combobox -->
-                  <div class="px-6">
-                    <form @submit.prevent.stop>
-                      <pep-pharos-combobox
-                        ref="combobox"
-                        placeholder="Select a subject"
-                        loose-match
-                        label="Journal Subject"
-                        a11y-label="Journal Subject"
-                        @change="handleJournalDisciplineSelection"
-                      >
-                        <option
-                          v-for="(discipline, index) in disciplineList"
-                          :key="`journal_discipline_${index}`"
-                          :value="discipline.code"
-                        >
-                          {{ discipline.label }}
-                        </option>
-                      </pep-pharos-combobox>
-                    </form>
+                  <div v-if="Object.keys(allJournals[discipline] || []).length">
+                    <!-- Journal Checkbox Group -->
+                    <CheckboxGroup
+                      :source-list="Object.values(allJournals[discipline])"
+                      :initial-list-length="5"
+                      :initial-selections="[
+                        ...selectedJournals
+                          .filter((j: Journal) => j.discipline === discipline)
+                          .map((j) => j.headid),
+                      ]"
+                      :filter-function="
+                        (j: Journal, term: string) => j.headTitle.title.toLowerCase().includes(term)
+                      "
+                      :get-value="(j: Journal) => j.headid"
+                      :get-label="(j: Journal) => j.headTitle.title"
+                      @input="handleJournalSelection($event, discipline)"
+                    />
                   </div>
-                  <div v-if="gettingJournals" class="position-relative mt-3 pb-9">
-                    <pep-pharos-loading-spinner />
-                  </div>
-                  <!-- Journal List (Grouped by Discipline) -->
-                  <div v-if="visibleJournalDisciplines.length">
-                    <div
-                      v-for="(discipline, index) in visibleJournalDisciplines"
-                      :key="`journal_discipline_${discipline}`"
-                    >
-                      <pep-pharos-heading class="mt-3 mb-1 pb-2 px-6" preset="legend" :level="4">
-                        <span class="display-flex align-items-center">
-                          <span>
-                            {{ disciplineObject[discipline].label }}
-                          </span>
-                          <pep-pharos-button
-                            name="journal-close-button"
-                            icon="close"
-                            variant="subtle"
-                            label="remove subject"
-                            a11y-label="remove subject"
-                            type="submit"
-                            @click="removeJournalDiscipline(index, discipline)"
-                          />
-                        </span>
-                      </pep-pharos-heading>
-                      <div v-if="Object.keys(allJournals[discipline] || []).length">
-                        <!-- Journal Checkbox Group -->
-                        <CheckboxGroup
-                          :source-list="Object.values(allJournals[discipline])"
-                          :initial-list-length="5"
-                          :initial-selections="[
-                            ...selectedJournals
-                              .filter((j: Journal) => j.discipline === discipline)
-                              .map((j) => j.headid),
-                          ]"
-                          :filter-function="
-                            (j: Journal, term: string) =>
-                              j.headTitle.title.toLowerCase().includes(term)
-                          "
-                          :get-value="(j: Journal) => j.headid"
-                          :get-label="(j: Journal) => j.headTitle.title"
-                          @input="handleJournalSelection($event, discipline)"
-                        />
-                      </div>
-                      <div v-else class="pt-0 pb-3">No journals available</div>
-                    </div>
-                  </div>
+                  <div v-else class="journal-filter__error">No journals available</div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
       <SearchResults />
@@ -518,27 +487,129 @@ api.log({
 
 <style scoped lang="scss">
 $pharos-breakpoint-medium: 48rem; // 768px
-:deep(.highlight) {
-  background-color: #ff6;
-  color: #000;
-  font-weight: 700;
-}
-:deep(.inline) {
-  display: inline;
-}
-:deep(.inline *) {
-  display: inline;
-}
 .search-view {
   display: grid;
   // The 272px comes from jstor.org
   grid-template-columns: 272px auto;
+  grid-template-rows: auto;
   // Negative margin is to account for the padding on the main container
   margin-top: calc(-1 * var(--pharos-spacing-2-x));
   margin-bottom: calc(-1 * var(--pharos-spacing-5-x));
 
-  @media screen and (max-width: $pharos-breakpoint-medium) {
-    grid-template-columns: minmax(0, 1fr);
+  & {
+    @media screen and (max-width: $pharos-breakpoint-medium) {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+  }
+}
+
+.search-facets {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow: hidden scroll;
+  padding-bottom: 2rem;
+  grid-row-end: span 5;
+  max-width: 100vw;
+  color: var(--pharos-color-marble-gray-20);
+  background-color: var(--pharos-color-marble-gray-97);
+
+  &--mobile {
+    margin: var(--pharos-spacing-2-x) var(--pharos-spacing-one-half-x) var(--pharos-spacing-2-x);
+    & {
+      @media screen and (min-width: $pharos-breakpoint-medium) {
+        display: none;
+      }
+    }
+  }
+  &__area {
+    padding: var(--pharos-spacing-2-x) var(--pharos-spacing-one-and-a-half-x)
+      var(--pharos-spacing-1-x);
+
+    & {
+      @media screen and (max-width: $pharos-breakpoint-medium) {
+        padding: 0 var(--pharos-spacing-one-half-x) var(--pharos-spacing-2-x);
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: var(--pharos-spacing-one-and-a-half-x);
+  }
+
+  &__section {
+    margin-bottom: var(--pharos-spacing-1-x);
+
+    &--journals {
+      margin-bottom: var(--pharos-combobox-size-height-list);
+    }
+  }
+
+  &__sub-heading {
+    margin: var(--pharos-spacing-1-x) 0;
+  }
+
+  &__icon-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    grid-gap: var(--pharos-spacing-one-quarter-x);
+  }
+
+  &__tooltip-icon {
+    padding-left: var(--pharos-spacing-one-quarter-x);
+    width: var(--pharos-line-height-small);
+    cursor: pointer;
+  }
+
+  &__dates {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__dates-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: var(--pharos-spacing-1-x);
+  }
+
+  &__apply-button {
+    margin-top: var(--pharos-spacing-1-x);
+    align-self: flex-end;
+  }
+
+  // This is to ensure that the search facets doesn't overflow on mobile
+  & {
+    @media screen and (max-width: $pharos-breakpoint-medium) {
+      max-height: none;
+      display: block;
+      position: relative;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.journal-filter {
+  &__loading-spinner {
+    position: relative;
+    margin-top: var(--pharos-spacing-3-x);
+  }
+
+  &__sub-heading {
+    margin: var(--pharos-spacing-1-x) 0 0 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__error {
+    margin-top: var(--pharos-spacing-1-x);
   }
 }
 </style>

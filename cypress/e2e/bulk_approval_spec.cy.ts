@@ -24,7 +24,7 @@ describe('Bulk approval', () => {
     it('Shows a status indicator for articles from bulk approved disciplines', () => {
       cy.get('.search-result')
         .first()
-        .contains('Status: Approved by Discipline')      
+        .contains('Status: Approved by Discipline')
     })
 
     it('Shows a status indicator for articles from bulk approved journals', () => {
@@ -43,7 +43,7 @@ describe('Bulk approval', () => {
         .click()
 
       // There is no cy.hover(), and cy.trigger() doesn't work with the pharos tooltip.
-      // So there is no good way to test the visibility of the tooltip text. 
+      // So there is no good way to test the visibility of the tooltip text.
       cy.get('.search-filters span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
@@ -116,7 +116,7 @@ describe('Bulk approval', () => {
         cy.get('.search-filters pep-pharos-button')
           .contains('Show 68 More', { matchCase: false })
           .click()
-  
+
         cy.get('pep-pharos-checkbox[value="research_report"]')
           .last()
           .should('have.attr', 'checked')
@@ -177,14 +177,14 @@ describe('Bulk approval', () => {
           .contains('Approve All', { matchCase: false })
           .should('not.exist')
       })
-      
+
     })
 
-    it('Approves all disciplines when no journals or disciplines are selected', () => {      
+    it('Approves all disciplines when no journals or disciplines are selected', () => {
       cy.get('pep-pharos-button')
         .contains('Approve All', { matchCase: false })
         .click()
-      
+
       cy.get('#approve-all-modal pep-pharos-button')
         .contains('Submit', { matchCase: false })
         .click()
@@ -243,7 +243,7 @@ describe('Bulk approval', () => {
       cy.get('.search-filters')
         .contains('African American Studies', { matchCase: false })
         .click()
-        
+
       // The page rerenders after each search, and triggers a search after each
       // click of a discipline filter; we need to make sure all these rerenders
       // have completed for the button to be present & clickable.
@@ -255,20 +255,20 @@ describe('Bulk approval', () => {
         .click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
-  
+
       cy.get('.search-filters')
         .contains('Law')
         .click()
       cy.wait(['@search', '@law'])
       cy.contains('We Specialize in the Wholly Impossible', { matchCase: false })
-  
+
       cy.get('pep-pharos-button')
         .contains('Approve all', { matchCase: false })
         .click()
 
       cy.get('#approve-all-modal')
         .contains('This will add all material in African American Studies, Criminology & Criminal Justice, and Law from all journals.')
-      
+
       cy.get('#approve-all-modal pep-pharos-button')
         .contains('Submit', { matchCase: false })
         .click()
@@ -276,7 +276,7 @@ describe('Bulk approval', () => {
       cy.fixture('approvals/bulk__disciplines__request.json').then((request) => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
-    
+
       cy.wait(['@denied', '@disciplines'])
     })
 
@@ -306,14 +306,14 @@ describe('Bulk approval', () => {
       cy.get('pep-pharos-checkbox')
         .contains('Fire!!!')
         .click()
-      
+
       cy.wait(['@search'])
       cy.contains('Mary McLeod Bethune')
 
       cy.get('pep-pharos-button')
         .contains('Approve all', { matchCase: false })
         .click()
-      
+
       cy.get('#approve-all-modal')
         .contains('This will add all material in all subjects from Fire!!!')
 
@@ -371,8 +371,8 @@ describe('Bulk approval', () => {
       cy.get('pep-pharos-checkbox')
         .contains('African American Review')
         .parents('pep-pharos-checkbox')
-      
-      cy.get('.search-filters span')
+
+      cy.get('[data-cy="filter-checkbox-label"]')
         .contains('African American Review')
         .parents('div[slot="label"]')
         .find('[data-tooltip-id="approval_abb70559-9665-3b42-aa8a-42535bf6f3c0"]')
@@ -390,7 +390,7 @@ describe('Bulk approval', () => {
         .parents('div[slot="label"]')
         .find('pep-pharos-icon')
         .scrollIntoView()
-      
+
       cy.get('.search-filters span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
@@ -432,8 +432,8 @@ describe('Bulk approval', () => {
       cy.visit('/search?term=&page=1')
       cy.wait(['@searchPage', '@alerts', '@env', '@auth', '@features', '@disciplines', '@search'])
     })
-  
-    it('Approves all disciplines in both groups when no journals or disciplines are selected', () => {      
+
+    it('Approves all disciplines in both groups when no journals or disciplines are selected', () => {
       cy.get('pep-pharos-button')
         .contains('Approve All', { matchCase: false })
         .click()
@@ -482,7 +482,7 @@ describe('Bulk approval', () => {
       cy.get('.search-filters')
         .contains('African American Studies', { matchCase: false })
         .click()
-        
+
       cy.wait(['@search', '@afam'])
       cy.contains('Mary McLeod Bethune', { matchCase: false })
 
@@ -491,20 +491,20 @@ describe('Bulk approval', () => {
         .click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
-  
+
       cy.get('.search-filters')
         .contains('Law')
         .click()
       cy.wait(['@search', '@law'])
       cy.contains('We Specialize in the Wholly Impossible', { matchCase: false })
-  
+
       cy.get('pep-pharos-button')
         .contains('Approve all', { matchCase: false })
         .click()
 
       cy.get('#approve-all-modal')
         .contains('This will add all material in African American Studies, Criminology & Criminal Justice, and Law from all journals.')
-      
+
       cy.get('pep-pharos-modal:visible .group-selector-combobox')
         .should('be.visible')
       cy.get('pep-pharos-modal:visible .group-selector-combobox')
@@ -521,7 +521,7 @@ describe('Bulk approval', () => {
         .eq(2)
         .contains('Ithaka', { matchCase: false })
 
-      
+
       cy.get('#approve-all-modal pep-pharos-button')
         .contains('Submit', { matchCase: false })
         .click()
@@ -529,7 +529,7 @@ describe('Bulk approval', () => {
       cy.fixture('approvals/bulk__two_groups_disciplines__request.json').then((request) => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
-    
+
       cy.wait(['@denied', '@disciplines'])
     })
 
@@ -559,14 +559,14 @@ describe('Bulk approval', () => {
       cy.get('pep-pharos-checkbox')
         .contains('Fire!!!')
         .click()
-      
+
       cy.wait(['@search'])
       cy.contains('Mary McLeod Bethune')
 
       cy.get('pep-pharos-button')
         .contains('Approve all', { matchCase: false })
         .click()
-      
+
       cy.get('#approve-all-modal')
         .contains('This will add all material in all subjects from Fire!!!')
 

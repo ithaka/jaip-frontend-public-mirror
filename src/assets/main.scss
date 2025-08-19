@@ -58,26 +58,11 @@ body {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(61deg) brightness(106%) contrast(102%);
 }
 
-.search-view {
-  display: grid;
-  // The 272px comes from jstor.org
-  grid-template-columns: 272px auto;
-}
 .inactive {
   background-color: var(--pharos-color-marble-gray-97);
   color: var(--pharos-color-marble-gray-20);
 }
 
-.search-filters-container {
-  max-height: 100vh;
-  overflow: hidden scroll;
-  padding-bottom: var(--pharos-spacing-5-x);
-  position: sticky;
-  top: 0;
-  background-color: var(--pharos-color-marble-gray-97);
-  color: var(--pharos-color-marble-gray-20);
-  padding-bottom: calc(2 * var(--pharos-spacing-10-x));
-}
 .error {
   color: var(--pharos-color-living-coral-53);
   margin-top: var(--pharos-spacing-one-half-x);
@@ -106,10 +91,6 @@ body {
 .search-result {
   display: grid;
   grid-template-columns: auto 15rem;
-}
-.journal-filter {
-  padding-top: 0;
-  padding-bottom: var(--pharos-spacing-one-quarter-x);
 }
 .search-result-title {
   grid-gap: 0.25rem;
@@ -672,24 +653,12 @@ $flex-direction-options: (row, row-reverse, column, column-reverse);
   .header-logo {
     height: 62px;
   }
-  .search-view {
-    grid-template-columns: minmax(0, 1fr);
-  }
   .search-results-header-margins {
     margin-left: 2rem;
     margin-right: 2rem;
   }
   .search-results {
     grid-template-columns: 2rem minmax(auto, 1200px) 2rem;
-  }
-  .search-filters-container {
-    max-height: none;
-    display: block;
-    position: relative;
-    padding-bottom: 0;
-  }
-  .journal-filter {
-    margin-bottom: calc(1.5 * var(--pharos-spacing-10-x));
   }
   .entity-features {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

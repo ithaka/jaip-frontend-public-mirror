@@ -43,7 +43,7 @@ describe('Search', () => {
     handleLocation("/search?term=&page=1", cy, 'searchPage', 'pep')
   })
   context('General', () => {
-    
+
     context('Sorting', () => {
       context('When no search term is given', () => {
         beforeEach(() => {
@@ -56,7 +56,7 @@ describe('Search', () => {
           cy.wait(['@searchPage', '@auth', '@alerts', '@env', '@disciplines'])
         })
 
-        it('Sorts by date (newest first)', () => {  
+        it('Sorts by date (newest first)', () => {
           // The expected params are sent to the API
           cy.fixture('search/no_term_given__request.json').then((request) => {
             request.filters = updateYear(request.filters)
@@ -67,9 +67,9 @@ describe('Search', () => {
           cy.get('pep-pharos-dropdown-menu').contains('Newest', { matchCase: false }).click()
           // // Date sort has actually been performed
           cy.get('.document-title').first()
-            .should('contain.text', 'Civil Rights Litigation in the Lower Courts')          
+            .should('contain.text', 'Civil Rights Litigation in the Lower Courts')
         })
-  
+
         it('Suppresses relevance sorting when no search term given', () => {
           cy.fixture('search/no_term_given__request.json').then((request) => {
             request.filters = updateYear(request.filters)
@@ -85,7 +85,7 @@ describe('Search', () => {
           cy.visit('/search?term=&page=1')
           cy.wait(['@searchPage', '@auth', '@alerts', '@env', '@search', '@disciplines'])
           cy.get('#main_search').shadow().find('input').type('mary mcleod bethune{enter}')
-  
+
           cy.contains('Sort by: Relevance', { matchCase: false }).should('be.visible')
         })
       })
@@ -99,7 +99,7 @@ describe('Search', () => {
             .as('alerts')
           handleLocation("/search?term=mary+mcleod+bethune", cy, 'searchPageWithQuery', 'pep')
         })
-        
+
         it('Defaults to relevance sorting', () => {
           cy.visit('/search?term=mary+mcleod+bethune')
           cy.fixture('search/term_given__request.json').then((request) => {
@@ -127,7 +127,7 @@ describe('Search', () => {
             .shadow()
             .find('button')
             .click()
-    
+
           cy.fixture('search/term_given__newest__request.json').then((request) => {
             request.filters = updateYear(request.filters)
             // We need to wait for search twice here, because the first one is on page load, and
@@ -138,7 +138,7 @@ describe('Search', () => {
             .should('contain.text', 'Rooted in DC')
 
             cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
-          })  
+          })
 
         it('Lets users choose oldest-first sort', () => {
           // Initial page visit.
@@ -149,7 +149,7 @@ describe('Search', () => {
           cy.wait('@search')
           cy.get('pep-pharos-button').contains('Sort By:', { matchCase: false }).click()
           cy.get('pep-pharos-dropdown-menu').contains('Oldest', { matchCase: false }).click()
-    
+
           cy.fixture('search/term_given__oldest__request.json').then((request) => {
             request.filters = updateYear(request.filters)
             cy.wait('@search').its('request.body').should('deep.eq', request)
@@ -173,7 +173,7 @@ describe('Search', () => {
             .should('contain.text', 'MARY McLEOD BETHUNE')
 
             cy.wait(['@searchPageWithQuery', '@auth', '@alerts', '@env', '@disciplines'])
-          })  
+          })
       })
     })
 
@@ -202,7 +202,7 @@ describe('Search', () => {
       //     })
       //     cy.get('#results .text-subtitle-2').each((span) => {
       //       cy.wrap(span).should('have.text', value)
-      //     })  
+      //     })
       //   })
       // })
 
@@ -230,7 +230,7 @@ describe('Search', () => {
         })
         cy.get('.document-title').first()
           .should('have.text', '[INDEX OF AUTHORS]')
-      })    
+      })
 
       it('Lets users filter by publication year (min only)', () => {
         cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__min_year__response.json` })
@@ -257,7 +257,7 @@ describe('Search', () => {
         })
         cy.get('.document-title').first()
           .should('have.text', 'Policing Suspicion')
-      })    
+      })
 
       it('Lets users filter by publication year (max and min)', () => {
         cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__min_max_year__response.json` })
@@ -288,14 +288,14 @@ describe('Search', () => {
           .shadow()
           .find('input')
           .type('1792{enter}')
-    
+
         cy.fixture('search/no_term_given__min_max_year__request.json').then((request) => {
           cy.wait(['@alerts', '@env', '@auth', '@disciplines'])
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
         cy.get('.document-title').first()
           .should('have.text', 'Observations on the Atmospheres of Venus and the Moon, Their Respective Densities, Perpendicular Heights, and the Twi-Light Occasioned by Them. By John Jerome Schroeter, Esq. of Lilienthal, in the Dutchy of Bremen. Translated from the German')
-      })    
+      })
 
       it('Lets users filter by discipline', () => {
         cy.intercept('POST', routes.search.basic, { fixture: `search/no_term_given__discipline__response.json` })
@@ -312,7 +312,7 @@ describe('Search', () => {
           cy.wait('@search').its('request.body').should('deep.eq', request)
         })
         cy.get('.document-title').first()
-          .should('have.text', 'ACADEMIC PATHWAYS FOR FORMERLY INCARCERATED STUDENTS')        
+          .should('have.text', 'ACADEMIC PATHWAYS FOR FORMERLY INCARCERATED STUDENTS')
       })
 
       it('Lets users filter by journal', () => {
@@ -375,12 +375,12 @@ describe('Search', () => {
         .shadow()
         .find('input')
         .type('a{enter}')
-        cy.get('.date-filters .error')
+        cy.get('[data-cy="date-filters-error"]')
           .first()
           .should('be.visible')
           .contains('Enter numeric values only')
       })
-  
+
       it('Requires end year to be an integer', () => {
         cy.get('pep-pharos-input-group[name="search-within-max"]')
           .scrollIntoView()
@@ -395,12 +395,12 @@ describe('Search', () => {
         .shadow()
         .find('input')
         .type('1a{enter}')
-        cy.get('.date-filters .error')
+        cy.get('[data-cy="date-filters-error"]')
           .first()
           .should('be.visible')
           .contains('Enter numeric values only')
       })
-  
+
       it('Requires start year to precede end year', () => {
         cy.get('pep-pharos-input-group[name="search-within-min"]')
           .scrollIntoView()
@@ -425,7 +425,7 @@ describe('Search', () => {
         .shadow()
         .find('input')
         .type('1980{enter}')
-        cy.get('.date-filters .error')
+        cy.get('[data-cy="date-filters-error"]')
           .first()
           .should('be.visible')
           .contains('Start date must come before end date.')

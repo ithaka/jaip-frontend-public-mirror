@@ -80,7 +80,7 @@ const iconKey = ref(displayList.value.map(() => 0))
 <template>
   <div>
     <!-- Array Filter Form -->
-    <div class="pt-0 px-6 pb-3">
+    <div class="filter-checkbox-group">
       <form @submit.prevent.stop="handleArraySearch">
         <pep-pharos-input-group
           :value="filterTerm"
@@ -109,7 +109,7 @@ const iconKey = ref(displayList.value.map(() => 0))
       </form>
     </div>
 
-    <div class="pt-0 px-6 pb-3">
+    <div>
       <div v-if="displayList.length">
         <pep-pharos-checkbox-group :value="checkboxes" @input="handleSelection">
           <ul>
@@ -118,7 +118,7 @@ const iconKey = ref(displayList.value.map(() => 0))
                 :checked="initialSelections.includes(getValue(item))"
                 :value="getValue(item)"
               >
-                <div slot="label" class="display-flex">
+                <div slot="label" class="filter-checkbox-group__label-group">
                   <BulkApprovalIcon
                     v-if="item.bulk_approval && getBulkApprovalStatus(item.bulk_approval, groupIDs)"
                     :key="iconKey[i]"
@@ -127,7 +127,7 @@ const iconKey = ref(displayList.value.map(() => 0))
                     :disc="item"
                     @render="iconKey[i]++"
                   />
-                  <span>{{ getLabel(item) }}</span>
+                  <span data-cy="filter-checkbox-label">{{ getLabel(item) }}</span>
                 </div>
               </pep-pharos-checkbox>
             </li>
@@ -137,6 +137,7 @@ const iconKey = ref(displayList.value.map(() => 0))
         <pep-pharos-button
           v-if="filteredList.length > props.initialListLength"
           variant="subtle"
+          data-cy="filter-truncate-toggle-button"
           @click="truncateArray = !truncateArray"
         >
           {{
@@ -152,3 +153,12 @@ const iconKey = ref(displayList.value.map(() => 0))
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.filter-checkbox-group {
+  padding-bottom: var(--pharos-spacing-one-half-x) !important;
+
+  &__label-group {
+    display: inline-flex;
+  }
+}
+</style>
