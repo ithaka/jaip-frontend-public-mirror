@@ -38,19 +38,19 @@ describe('Bulk approval', () => {
     })
 
     it('Shows a status icon for bulk approved disciplines', () => {
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
         .click()
 
       // There is no cy.hover(), and cy.trigger() doesn't work with the pharos tooltip.
       // So there is no good way to test the visibility of the tooltip text.
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('[data-tooltip-id="approval_history-discipline"]')
         .scrollIntoView()
 
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('[data-tooltip-id="approval_history-discipline"]')
@@ -113,7 +113,7 @@ describe('Bulk approval', () => {
           .first()
           .click()
 
-        cy.get('.search-filters pep-pharos-button')
+        cy.get('.search-facets pep-pharos-button')
           .contains('Show 68 More', { matchCase: false })
           .click()
 
@@ -236,11 +236,11 @@ describe('Bulk approval', () => {
       cy.intercept('GET', routes.journals.get('criminologycriminaljustice-discipline'), { body: '' })
         .as('crim')
 
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('African American Studies', { matchCase: false })
         .click()
 
@@ -250,13 +250,13 @@ describe('Bulk approval', () => {
       cy.wait(['@search', '@afam'])
       cy.contains('Mary McLeod Bethune', { matchCase: false })
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('Criminology & Criminal Justice')
         .click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('Law')
         .click()
       cy.wait(['@search', '@law'])
@@ -299,7 +299,7 @@ describe('Bulk approval', () => {
         .type('{downarrow}{enter}')
       cy.wait('@afam')
 
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 13 More', { matchCase: false })
         .click()
 
@@ -331,17 +331,17 @@ describe('Bulk approval', () => {
     it('Displays an indicator for bulk approved disciplines', () => {
       cy.intercept('POST', routes.disciplines.get, { fixture: 'disciplines/with_bulk_approval__response.json' })
 
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('[data-tooltip-id="approval_history-discipline"]')
         .scrollIntoView()
 
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('[data-tooltip-id="approval_history-discipline"]')
@@ -381,17 +381,17 @@ describe('Bulk approval', () => {
     it('Has a bulk undo feature', () => {
       cy.intercept('POST', routes.approvals.bulkUndo, { body: '' })
         .as('bulkUndo')
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('pep-pharos-icon')
         .scrollIntoView()
 
-      cy.get('.search-filters span')
+      cy.get('.search-facets span')
         .contains(/^History$/)
         .parents('div[slot="label"]')
         .find('pep-pharos-icon')
@@ -475,24 +475,24 @@ describe('Bulk approval', () => {
       cy.intercept('GET', routes.journals.get('criminologycriminaljustice-discipline'), { body: '' })
         .as('crim')
 
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('African American Studies', { matchCase: false })
         .click()
 
       cy.wait(['@search', '@afam'])
       cy.contains('Mary McLeod Bethune', { matchCase: false })
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('Criminology & Criminal Justice')
         .click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
 
-      cy.get('.search-filters')
+      cy.get('.search-facets')
         .contains('Law')
         .click()
       cy.wait(['@search', '@law'])
@@ -552,7 +552,7 @@ describe('Bulk approval', () => {
         .type('{downarrow}{enter}')
       cy.wait('@afam')
 
-      cy.get('.search-filters pep-pharos-button')
+      cy.get('.search-facets pep-pharos-button')
         .contains('Show 13 More', { matchCase: false })
         .click()
 
@@ -632,10 +632,10 @@ describe('Bulk approval', () => {
 
     context('The bulk unto option', () => {
       it('Does not appear when admin does not have access', () => {
-        cy.get('.search-filters pep-pharos-button')
+        cy.get('.search-facets pep-pharos-button')
           .contains('Show 68 More', { matchCase: false })
           .click()
-        cy.get('.search-filters span')
+        cy.get('.search-facets span')
           .contains(/^History$/)
           .parents('div[slot="label"]')
           .find('pep-pharos-icon')

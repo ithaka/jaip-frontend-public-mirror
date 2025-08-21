@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, useTemplateRef } from 'vue'
 import { useRouter } from 'vue-router'
 import SearchResult from '@/components/results/SearchResult.vue'
 import { makeGrammaticalList, changeRoute } from '@/utils/helpers'
@@ -136,6 +136,17 @@ const statusQuery = computed(() => {
   const params = new URLSearchParams(location.search || '')
   return params.get('statusq') || undefined
 })
+const resultsArea = useTemplateRef('results-area')
+
+const focusToTop = () => {
+  const active = document.activeElement as HTMLElement
+  active?.blur()
+
+  resultsArea.value?.focus({ preventScroll: true })
+  resultsArea.value?.scrollIntoView({
+    behavior: 'smooth',
+  })
+}
 
 const router = useRouter()
 const changePage = (page: number) => {
@@ -148,9 +159,7 @@ const changePage = (page: number) => {
     props.requestsPage ? selectedGroups.value['status_search'] : undefined,
     statusQuery.value,
   )
-  if (resultsArea.value) {
-    resultsArea!.value?.scrollIntoView({ behavior: 'smooth' })
-  }
+  focusToTop()
 }
 const changeSecondaryPage = (page: number) => {
   secondaryPageNo.value = page
@@ -192,7 +201,6 @@ const handleGroupSelection = (event: GroupSelection, action: string) => {
 }
 
 const emit = defineEmits(['close'])
-const resultsArea = ref<HTMLInputElement | null>(null)
 const hasOriginalDates = ref(
   pubYearStart.value === 1665 && pubYearEnd.value === new Date().getFullYear(),
 )
@@ -319,7 +327,14 @@ const showDownloadButton = computed(() => {
 })
 </script>
 <template>
-  <div id="results" ref="resultsArea" class="search-results-area">
+  <div
+    id="results"
+    ref="results-area"
+    class="search-results-area"
+    tabindex="-1"
+    role="region"
+    :aria-label="`search results page ${pageNo}`"
+  >
     <div class="my-5 pt-5 search-results" :class="{ 'request-results': requestsPage }">
       <div
         class="search-results-header results-list mx-0"
