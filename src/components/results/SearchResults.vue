@@ -167,29 +167,29 @@ const changeSecondaryPage = (page: number) => {
 }
 
 const selectorApproveGroupOptions = ref(
-  (featureDetails.value['approve_requests'] || {}).groups.reduce((arr, id: number) => {
+  featureDetails.value['approve_requests']?.groups.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
     if (group) {
       arr.push(group)
     }
     return arr
-  }, [] as Group[]),
+  }, [] as Group[]) || [],
 )
 const selectorApproveGroupOptionIDs = computed(() => {
   return selectorApproveGroupOptions.value.map((group: Group) => group.id)
 })
 
 const selectorBulkApproveGroupOptions = ref(
-  (featureDetails.value['bulk_approve'] || {}).groups.reduce((arr, id: number) => {
+  featureDetails.value['bulk_approve']?.groups.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
     if (group) {
       arr.push(group)
     }
     return arr
-  }, [] as Group[]),
+  }, [] as Group[]) || [],
 )
 const selectorBulkApproveGroupOptionIDs = computed(() => {
-  return selectorBulkApproveGroupOptions.value.map((group: Group) => group.id)
+  return selectorBulkApproveGroupOptions.value?.map((group: Group) => group.id) || ([] as number[])
 })
 selectedGroups.value['bulk_approve'] = selectorBulkApproveGroupOptionIDs.value
 selectedGroups.value['approve_requests'] = selectorApproveGroupOptionIDs.value
@@ -207,7 +207,7 @@ const hasOriginalDates = ref(
 const showApproveAllButton = computed(() => {
   return (
     isAuthenticatedAdmin.value &&
-    featureDetails.value['bulk_approve'].groups.length &&
+    featureDetails.value['bulk_approve']?.groups.length &&
     searchTotal.value > 0 &&
     hasOriginalDates.value &&
     !lastSearchTerms.value &&
@@ -223,7 +223,7 @@ const openApproveAllModal = () => {
   statusStartDate.value = new Date('2022-01-01')
   statusEndDate.value = new Date(new Date().setUTCHours(23, 59, 59, 999))
   if (!(selectedGroups.value['status_search'] || []).length) {
-    selectedGroups.value['status_search'] = featureDetails.value['bulk_approve'].groups
+    selectedGroups.value['status_search'] = featureDetails.value['bulk_approve']?.groups || []
   }
 
   // Our database cannot filter statuses by content type, disciplines, or journals. In order to
@@ -254,7 +254,7 @@ const submitApproveAll = async () => {
       ? []
       : disciplineList.value.map((disc: Discipline) => disc.code)
   const args = {
-    groups: selectedGroups.value['bulk_approve'],
+    groups: selectedGroups.value['bulk_approve'] || [],
     journals: selectedJournalIDs.value,
     disciplines: disciplines,
     documents: bulkApproveReversals.value,
@@ -273,7 +273,7 @@ const submitApproveAll = async () => {
     })
   } catch (err: unknown) {
     console.error(err)
-    const msg = 'There was an error and your denial was not submitted.'
+    const msg = 'There was an error and your pre-approval was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
     closeApproveAllModal()
@@ -281,6 +281,7 @@ const submitApproveAll = async () => {
 
   const resp: AxiosResponse = await coreStore.$api.disciplines()
   disciplineList.value = resp.data
+  searchStore.getJournals()
   searchStore.doSearch('', false)
 }
 const bulkApproveReversals = ref([] as string[])
@@ -423,7 +424,7 @@ const showDownloadButton = computed(() => {
             </p>
             <pep-pharos-loading-spinner v-if="secondarySearching" />
             <div v-else>
-              <div v-if="featureDetails['bulk_approve'].groups.length > 1" class="mb-3">
+              <div v-if="(featureDetails['bulk_approve']?.groups.length || 0) > 1" class="mb-3">
                 <GroupSelector
                   :groups="selectorBulkApproveGroupOptions"
                   :feature-name="`bulk_approve`"
@@ -485,7 +486,7 @@ const showDownloadButton = computed(() => {
             </pep-pharos-button>
             <pep-pharos-button
               slot="footer"
-              :disabled="secondarySearching || !selectedGroups['bulk_approve'].length"
+              :disabled="secondarySearching || !selectedGroups['bulk_approve']?.length"
               @click.prevent.stop="submitApproveAll"
             >
               Submit

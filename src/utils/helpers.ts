@@ -52,7 +52,7 @@ export const getBulkApprovalStatus = (opts: History[] | BulkHistory[], groups: n
   if (!numStatuses) return false
   let hasApproved = false
   for (let i = 0; i < opts.length; i++) {
-    if (groups.includes(opts[i].groupID) && opts[i].status === 'Approved') {
+    if (opts[i]?.groupID && groups.includes(opts[i]!.groupID) && opts[i]!.status === 'Approved') {
       hasApproved = true
     }
   }
@@ -61,7 +61,10 @@ export const getBulkApprovalStatus = (opts: History[] | BulkHistory[], groups: n
 
 export const getStatus = (opts: { [key: string]: History }, groups: number[]): string => {
   if (!Object.keys(opts || {}).length) return ''
-  const status = (opts[groups[0]] || {}).status || ''
+  let status = ''
+  if (groups[0] && opts[groups[0]]) {
+    status = opts[groups[0]]!.status || ''
+  }
   const returnStatus =
     status == 'Approved by Discipline' || status == 'Approved by Journal' ? 'Approved' : status
   return returnStatus.toLowerCase()
@@ -94,7 +97,7 @@ export const changeRoute = (
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const combineArrays = (array1: Array<any>, array2: Array<any>) => {
-  return [...new Set([...array1, ...array2])]
+  return Array.from(new Set([...array1, ...array2]))
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -143,11 +146,11 @@ export const hideButton = (
   fname: string,
 ): boolean => {
   const feature = featureDetails[fname]
-  if (!feature.enabled) {
+  if (!feature?.enabled) {
     return true
   }
   const groupsWithStatus = getGroupsWithStatus(statuses, status)
-  return !feature.groups.some((id: number) => !groupsWithStatus.includes(id))
+  return !feature?.groups.some((id: number) => !groupsWithStatus.includes(id))
 }
 
 export const isEmail = (email: string): boolean => {

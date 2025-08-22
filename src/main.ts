@@ -24,7 +24,7 @@ function checkIfValidUUID(str: string) {
 
 function get_subdomain(host: string): string {
   const split_host = host.split('.')
-  const ending = split_host[split_host.length - 1].startsWith('localhost:') ? -1 : -2
+  const ending = split_host[split_host.length - 1]?.startsWith('localhost:') ? -1 : -2
   return split_host.slice(0, ending).join('.')
 }
 

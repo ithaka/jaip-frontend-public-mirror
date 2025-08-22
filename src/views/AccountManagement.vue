@@ -17,7 +17,7 @@ const hasCategories =
   0
 const filteredCategories = ref({} as { [key: string]: UngroupedFeatureDetails })
 for (const key in sortedUngroupedFeatures.value) {
-  if (categories.includes(key)) {
+  if (categories.includes(key) && sortedUngroupedFeatures.value[key]) {
     filteredCategories.value[key] = sortedUngroupedFeatures.value[key]
   }
 }

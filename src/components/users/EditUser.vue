@@ -23,7 +23,7 @@ const props = defineProps({
 
 const disenable = (ufd: UngroupedFeatureDetails) => {
   return Object.keys(ufd).reduce((obj, key) => {
-    obj[key] = { ...ufd[key] }
+    obj[key] = { ...ufd[key]! }
     obj[key].enabled = false
     return obj
   }, {} as UngroupedFeatureDetails)
@@ -48,7 +48,7 @@ const newUserSortedUngroupedFeatures = computed(() =>
 
 const hasAllFeatures = computed(() => {
   for (const key in newUser.value.ungrouped_features) {
-    if (!newUser.value.ungrouped_features[key].enabled) return false
+    if (!newUser.value.ungrouped_features[key]?.enabled) return false
   }
   return true
 })
@@ -56,7 +56,7 @@ const hasAllFeatures = computed(() => {
 const checkAllFeaturesInCategory = (category: string | number) => {
   const sortedFeatures = userStore.sortUngroupedFeatures(newUser.value.ungrouped_features!)
   for (const key in sortedFeatures[category]) {
-    if (!sortedFeatures[category][key].enabled) return false
+    if (!sortedFeatures[category][key]?.enabled) return false
   }
   return true
 }
@@ -65,7 +65,7 @@ const checkSomeFeaturesInCategory = (category: string | number) => {
   if (checkAllFeaturesInCategory(category)) return false
 
   for (const key in sortedFeatures[category]) {
-    if (sortedFeatures[category][key].enabled) return true
+    if (sortedFeatures[category][key]?.enabled) return true
   }
   return false
 }
@@ -73,7 +73,7 @@ const checkSomeFeaturesInCategory = (category: string | number) => {
 const hasSomeFeatures = computed(() => {
   if (hasAllFeatures.value) return false
   for (const key in newUser.value.ungrouped_features) {
-    if (newUser.value.ungrouped_features[key].enabled) return true
+    if (newUser.value.ungrouped_features[key]?.enabled) return true
   }
   return false
 })
@@ -124,14 +124,14 @@ const selectAll = () => {
 
 const selectAllInCategory = (category: string | number) => {
   let newValue = {} as UngroupedFeatureDetails
-  if (checkAllFeaturesInCategory(category)) {
+  if (checkAllFeaturesInCategory(category) && newUserSortedUngroupedFeatures.value[category]) {
     newValue = disenable(newUserSortedUngroupedFeatures.value[category])
   } else {
-    newValue = sortedUngroupedFeatures.value[category]
+    newValue = sortedUngroupedFeatures.value[category] || {}
   }
   for (const key in newUser.value.ungrouped_features) {
-    if (newUser.value.ungrouped_features[key].category === category) {
-      newUser.value.ungrouped_features[key].enabled = newValue[key].enabled
+    if (newUser.value.ungrouped_features[key]?.category === category) {
+      newUser.value.ungrouped_features[key].enabled = !!newValue[key]?.enabled
     }
   }
 }
@@ -210,7 +210,7 @@ const selectAllInCategory = (category: string | number) => {
                       :checked="newUser.ungrouped_features![name!]?.enabled"
                       :value="name"
                       @change="
-                        newUser.ungrouped_features![name].enabled =
+                        newUser.ungrouped_features![name]!.enabled =
                           !newUser.ungrouped_features![name!]?.enabled || false
                       "
                     >

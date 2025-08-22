@@ -40,11 +40,12 @@ const showApprove = !hideButton(
   'approve_requests',
 )
 const useApproveModal = ref(
-  showApprove && featureDetails.value['approve_requests'].groups.length > 1,
+  showApprove && (featureDetails.value['approve_requests']?.groups?.length || 0) > 1,
 )
+
 const showApproveModal = ref(false)
 const approveModalKey = ref(0)
-const approveGroups = ref(featureDetails.value['approve_requests'].groups)
+const approveGroups = ref(featureDetails.value['approve_requests']?.groups || [])
 
 selectedGroups.value['approve_requests'] = approveGroups.value
 const openApproveModal = () => {
@@ -65,14 +66,14 @@ const route = useRoute()
 const emit = defineEmits(['approvalSubmitted', 'close'])
 
 const handleApproval = async () => {
-  if (featureDetails.value['approve_requests'].groups.length === 1) {
+  if (featureDetails.value['approve_requests']?.groups.length === 1) {
     selectedGroups.value['approve_requests'] = featureDetails.value['approve_requests'].groups
   }
   const args = {
     doi: props.doc.doi,
-    groups: selectedGroups.value['approve_requests'],
+    groups: selectedGroups.value['approve_requests'] || [],
   }
-  if (!args.groups.length || args.doi === '') {
+  if (!args.groups?.length || args.doi === '') {
     return
   }
   try {
@@ -98,18 +99,18 @@ const handleApproval = async () => {
   }
 }
 const handleSingleGroupApproval = () => {
-  selectedGroups.value['approve_requests'] = featureDetails.value['approve_requests'].groups
+  selectedGroups.value['approve_requests'] = featureDetails.value['approve_requests']?.groups || []
   handleApproval()
 }
 
 const selectorGroupOptions = ref(
-  (featureDetails.value['approve_requests'] || {}).groups.reduce((arr, id: number) => {
+  featureDetails.value['approve_requests']?.groups?.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
     if (group) {
       arr.push(group)
     }
     return arr
-  }, [] as Group[]),
+  }, [] as Group[]) || [],
 )
 </script>
 
@@ -140,13 +141,15 @@ const selectorGroupOptions = ref(
           >&nbsp;for use in
           {{
             makeGrammaticalList(
-              selectedGroups['approve_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
+              selectedGroups['approve_requests']?.map(
+                (id) => (groupMap.get(id) || {}).name || '',
+              ) || [],
             )
           }}</span
         >
         <span>.</span>
       </p>
-      <div v-if="featureDetails['approve_requests'].groups.length > 1">
+      <div v-if="(featureDetails['approve_requests']?.groups?.length || 0) > 1">
         <GroupSelector
           :groups="selectorGroupOptions"
           :feature-name="'approve_requests'"
@@ -154,7 +157,7 @@ const selectorGroupOptions = ref(
           multiple
         />
       </div>
-      <span v-if="!selectedGroups['approve_requests'].length" class="error">
+      <span v-if="!selectedGroups['approve_requests']?.length" class="error">
         At least one group must be selected
       </span>
 

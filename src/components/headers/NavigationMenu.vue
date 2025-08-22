@@ -29,7 +29,7 @@ const routesObject = (): RoutesObject => {
         if (!obj.grouped[route.meta.group]) {
           obj.grouped[route.meta.group] = []
         }
-        obj.grouped[route.meta.group].push(route)
+        obj.grouped[route.meta.group]?.push(route)
       } else {
         obj.ungrouped.push(route)
       }

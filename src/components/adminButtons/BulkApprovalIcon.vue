@@ -10,6 +10,7 @@ import type { PropType } from 'vue'
 import { makeGrammaticalList } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group, GroupSelection } from '@/interfaces/Group'
+import type { Journal } from '@/interfaces/Journal'
 
 const props = defineProps({
   tooltipId: {
@@ -33,7 +34,7 @@ const props = defineProps({
     default: true,
   },
   disc: {
-    type: Object as PropType<Discipline>,
+    type: Object as PropType<Discipline> | PropType<Journal>,
     default: () => ({}),
   },
 })
@@ -56,11 +57,13 @@ const getInitialBulkApprovalState = (approval: BulkHistory[]) => {
 const initialBulkApprovalState = getInitialBulkApprovalState(props.disc.bulk_approval || [])
 const updateKey = ref(0)
 const showBulkApprovalModal = ref(false)
+const itemId = ref('code' in props.disc ? props.disc.code : props.disc.headid)
+const label = ref('code' in props.disc ? props.disc.label : props.disc.headTitle.title)
 
 // We only want to show groups where the user has the ability to undo bulk approvals and that are currently bulk approved.
 const possibleBulkUndoGroups = ref(
   initialBulkApprovalState.filter((group: number) =>
-    featureDetails.value['undo_bulk_approve'].groups.includes(group),
+    featureDetails.value['undo_bulk_approve']?.groups.includes(group),
   ),
 )
 const selectorGroupOptions = ref(
@@ -78,7 +81,7 @@ const handleGroupSelection = (event: GroupSelection) => {
 }
 
 const openBulkApprovalModal = () => {
-  if (featureDetails.value['undo_bulk_approve'].enabled) {
+  if (featureDetails.value['undo_bulk_approve']?.enabled) {
     showBulkApprovalModal.value = true
   }
 }
@@ -90,8 +93,8 @@ const emit = defineEmits(['render'])
 
 const submitBulkApproval = async () => {
   const args = {
-    groups: selectedGroups.value['undo_bulk_approve'],
-    code: props.disc.code,
+    groups: selectedGroups.value['undo_bulk_approve'] || [],
+    code: itemId.value,
   }
 
   try {
@@ -113,6 +116,7 @@ const submitBulkApproval = async () => {
   } finally {
     closeBulkApproveModal()
   }
+  searchStore.getJournals()
 }
 </script>
 <template>
@@ -133,8 +137,8 @@ const submitBulkApproval = async () => {
     <div>
       <Teleport to="body">
         <pep-pharos-modal
-          v-if="featureDetails['undo_bulk_approve'].enabled"
-          :id="`bulk-${disc.code}-modal`"
+          v-if="featureDetails['undo_bulk_approve']?.enabled"
+          :id="`bulk-${itemId}-modal`"
           :key="updateKey"
           :header="`Revoke Approval`"
           :open="showBulkApprovalModal"
@@ -145,7 +149,7 @@ const submitBulkApproval = async () => {
               v-if="
                 selectedGroups['undo_bulk_approve'] && selectedGroups['undo_bulk_approve'].length
               "
-              >The record will show that {{ entityName }} revoked approval for {{ disc.label }} in
+              >The record will show that {{ entityName }} revoked approval for {{ label }} in
               {{
                 makeGrammaticalList(
                   (selectedGroups['undo_bulk_approve'] || []).map(

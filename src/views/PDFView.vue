@@ -50,14 +50,14 @@ const getDocument = async () => {
     const results = await Promise.all(apiCalls)
     const search = results[0]
 
-    if (((search.data || {}).docs || []).length) {
-      doc.value = search.data.docs[0]
+    if (((search?.data || {}).docs || []).length) {
+      doc.value = search!.data.docs[0]!
     }
 
     if (page_index) {
       metadata.value = {
         ...metadata.value,
-        ...results[1].data,
+        ...results[1]?.data,
       }
       if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
         initial_page_index = metadata.value.pageCount - 1
@@ -131,7 +131,7 @@ coreStore.$api.log({
       v-if="!page_index && !error.status && hasStructuredClone"
       class="cols-12"
       :iid="iid"
-      :enable-viewer="featureDetails['view_pdf'].enabled"
+      :enable-viewer="featureDetails['view_pdf']?.enabled || false"
     />
   </pep-pharos-layout>
 </template>

@@ -9,12 +9,12 @@ import { useUserStore } from '@/stores/user'
 import type SearchArgs from '@/interfaces/SearchArgs'
 
 const formatSearchString = (arr: string[]) => {
-  arr = arr.map((item) => `"${item}"`)
+  arr = arr.map((item) => `"${item}"`).filter((item) => !!item)
   let str = ''
   if (arr.length > 1) {
     str = `(${arr.join(' OR ')})`
-  } else {
-    str = arr[0]
+  } else if (arr.length === 1) {
+    str = arr[0]!
   }
   return str
 }
@@ -80,6 +80,34 @@ export const useSearchStore = defineStore('search', {
     }
   },
   actions: {
+    async getJournals() {
+      const coreStore = useCoreStore()
+      try {
+        coreStore.isSpinning = true
+        const promises = this.selectedJournalDisciplines.map((disc: string) => {
+          return coreStore.$api.journals(disc)
+        })
+        const results = await Promise.allSettled(promises)
+        for (const r in results) {
+          if (results[r]) {
+            if (results[r].status === 'rejected') {
+              throw results[r].reason
+            } else {
+              for (const journal of results[r].value.data) {
+                if (this.selectedJournalDisciplines[r]) {
+                  this.allJournals[this.selectedJournalDisciplines[r]]![journal.headid] = journal
+                }
+              }
+            }
+          }
+        }
+      } catch {
+        const msg = 'There was an error refreshing your data. Please refresh your browser.'
+        coreStore.toast(`Oops! ${msg}`, 'error')
+      } finally {
+        coreStore.isSpinning = false
+      }
+    },
     setSearchTerms(newSearchTerms: string, path: string) {
       if (path === '/requests') {
         this.sort = 'new'
@@ -167,6 +195,14 @@ export const useSearchStore = defineStore('search', {
     },
     selectedJournalIDs(): string[] {
       return this.selectedJournals.map((journal) => journal.headid)
+    },
+    selectedJournalDisciplines(): string[] {
+      return this.selectedJournals.reduce((arr: string[], journal: Journal) => {
+        if (journal.discipline && !arr.includes(journal.discipline)) {
+          arr.push(journal.discipline)
+        }
+        return arr
+      }, [] as string[])
     },
     dateFilter(): string {
       return `year: [${this.pubYearStart} TO ${this.pubYearEnd}]`

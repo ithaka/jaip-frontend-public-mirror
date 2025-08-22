@@ -9,7 +9,7 @@ import { useFeaturesStore } from '@/stores/features'
 import { storeToRefs } from 'pinia'
 import { ref, computed } from 'vue'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { Feature } from '@/interfaces/Features'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import { useSubdomainStore } from '@/stores/subdomains'
@@ -63,37 +63,44 @@ if (!selectedGroups.value[featureName.value]) {
 }
 
 const selectorGroupOptions = ref(
-  (featureDetails.value[featureName.value] || {}).groups.reduce((arr, id: number) => {
+  featureDetails.value[featureName.value]?.groups.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
     if (group) {
       arr.push(group)
     }
     return arr
-  }, [] as Group[]),
+  }, [] as Group[]) || [],
 )
 
 if (props.action === 'edit') {
   if (props.entity.type === 'users') {
-    selectedGroups.value[featureName.value] = selectorGroupOptions.value.map(
-      (group: Group) => group.id,
-    )
+    selectedGroups.value[featureName.value] =
+      selectorGroupOptions.value?.map((group: Group) => group.id) || []
   } else if (props.entity.type === 'facilities') {
-    selectedGroups.value[featureName.value] = [selectorGroupOptions.value[0].id]
+    selectedGroups.value[featureName.value] = selectorGroupOptions.value![0]?.id
+      ? [selectorGroupOptions.value![0].id]
+      : []
   }
 }
 
-const focusedGroup = ref(selectorGroupOptions.value.length ? selectorGroupOptions.value[0].id : 0)
+const focusedGroup = ref(
+  selectorGroupOptions.value?.length ? selectorGroupOptions.value![0]?.id : 0,
+) as Ref<number>
 
-if ((featureDetails.value[featureName.value] || {}).groups.length === 1) {
-  selectedGroups.value[featureName.value] = [selectorGroupOptions.value[0].id]
+if (featureDetails.value[featureName.value]?.groups.length === 1) {
+  selectedGroups.value[featureName.value] = selectorGroupOptions.value![0]?.id
+    ? [selectorGroupOptions.value![0].id]
+    : []
 }
 if (
   props.entity.type === 'facilities' &&
   props.action === 'edit' &&
   (props.entity.groups || []).length === 1
 ) {
-  selectedGroups.value[featureName.value] = [props.entity.groups![0].id]
-  focusedGroup.value = props.entity.groups![0].id
+  selectedGroups.value[featureName.value] = props.entity.groups![0]?.id
+    ? [props.entity.groups![0].id]
+    : []
+  focusedGroup.value = props.entity.groups![0]?.id || 0
 }
 const invalidName = ref(false)
 const invalidContact = ref(false)
@@ -130,7 +137,7 @@ const handleSubmit = async () => {
   // Validation
   validateName(newEntity.value.name || '')
   validateContact(newEntity.value.contact || '')
-  const hasGroups = selectedGroups.value[featureName.value].length
+  const hasGroups = selectedGroups.value[featureName.value]?.length
   const anyInvalid =
     invalidName.value ||
     invalidContact.value ||
@@ -154,12 +161,12 @@ const handleSubmit = async () => {
   }
 
   newEntity.value.groups = selectedGroups.value[featureName.value]
-    .map((group) => {
+    ?.map((group: number) => {
       const g = groupMap.value.get(group)
       return {
         id: g!.id,
         name: g!.name,
-        features: selectedFeatures.value[group],
+        features: selectedFeatures.value[group] || {},
       }
     })
     .filter((group) => {
@@ -179,22 +186,27 @@ const handleSubmit = async () => {
 }
 
 const newEntity = ref({ ...props.entity })
-const categorizedFeatures = computed(() =>
-  featuresStore.categorizedFeatures(
+const categorizedFeatures = computed(() => {
+  return featuresStore.categorizedFeatures(
     groupMap.value.get(focusedGroup.value),
     props.entity.type,
     true,
-  ),
-)
+  )
+})
 const selectedFeatures = ref({} as { [group: number]: { [feature: string]: boolean } })
-selectorGroupOptions.value.forEach((group) => {
+selectorGroupOptions.value?.forEach((group) => {
   selectedFeatures.value[group.id] = {}
   for (const key in categorizedFeatures.value) {
-    categorizedFeatures.value[key].forEach((feature) => {
+    categorizedFeatures.value[key]?.forEach((feature) => {
       if (newEntity.value.groups) {
         const currentGroup = newEntity.value.groups.find((g: Group) => g.id === group.id)
-        if (currentGroup) {
-          selectedFeatures.value[group.id][feature.name] = currentGroup.features[feature.name]
+        if (
+          currentGroup &&
+          selectedFeatures.value[group.id]?.[feature.name] &&
+          currentGroup.features[feature.name]
+        ) {
+          selectedFeatures.value[group.id]![feature.name] =
+            currentGroup.features[feature.name] || false
         }
       }
     })
@@ -216,24 +228,28 @@ const selectAllFeatures = (emptying: boolean) => {
 
 const selectCategoryFeatures = (category: Array<Feature>) => {
   const hasCategoryFeature = category.some((feature: Feature) => {
-    return selectedFeatures.value[focusedGroup.value][feature.name]
+    return selectedFeatures.value[focusedGroup.value]?.[feature.name]
   })
   category.forEach((feature: Feature) => {
-    selectedFeatures.value[focusedGroup.value][feature.name] =
-      !selectedFeatures.value[focusedGroup.value] || !hasCategoryFeature
+    if (selectedFeatures.value[focusedGroup.value]?.[feature.name]) {
+      selectedFeatures.value[focusedGroup.value]![feature.name] =
+        !selectedFeatures.value[focusedGroup.value] || !hasCategoryFeature
+    }
   })
 }
 const handleFeatureSelection = (e: InputFileEvent) => {
-  selectedFeatures.value[focusedGroup.value][e.target.value] = !e.target.checked
+  if (selectedFeatures.value[focusedGroup.value]) {
+    selectedFeatures.value[focusedGroup.value]![e.target.value] = !e.target.checked
+  }
 }
 
 const handleGroupSelection = (event: GroupSelection) => {
-  const hasGroup = selectedGroups.value[featureName.value].includes(event.target)
+  const hasGroup = selectedGroups.value[featureName.value]?.includes(event.target)
   const hasAny = event.groups.length
   if (hasGroup) {
     focusedGroup.value = event.target
   } else if (hasAny) {
-    focusedGroup.value = event.groups[0]
+    focusedGroup.value = event.groups[0] || 0
   } else {
     focusedGroup.value = 0
   }
@@ -384,16 +400,17 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             multiple
             @change="handleGroupSelection"
           />
-          <span v-if="!selectedGroups[featureName].length" class="error">
+          <span v-if="!selectedGroups[featureName]?.length" class="error">
             At least one group must be selected
           </span>
         </div>
         <!-- Group Selector for Features -->
-        <div v-if="selectedGroups[featureName].length > 1" class="mb-4">
-          <div v-if="selectedGroups[featureName].length >= groupThreshold">
+        <div v-if="(selectedGroups[featureName]?.length || 0) > 1" class="mb-4">
+          <div v-if="(selectedGroups[featureName]?.length || 0) >= groupThreshold">
             <pep-pharos-select
               class="group-selector-dropdown"
               :value="focusedGroup"
+              data-cy="feature_group_selector"
               @change="handleFeatureGroupSelection"
             >
               <div slot="label">
@@ -403,7 +420,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               </div>
               <option
                 v-for="group in selectorGroupOptions.filter((group: Group) =>
-                  selectedGroups[featureName].includes(group.id),
+                  selectedGroups[featureName]?.includes(group.id),
                 )"
                 :key="`${entity.id}_group_${group}`"
                 :value="group.id"
@@ -428,7 +445,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             <pep-pharos-dropdown-menu :id="`group_selector_manager_${entity.id}`" full-width>
               <pep-pharos-dropdown-menu-item
                 v-for="group in selectorGroupOptions.filter((group: Group) =>
-                  selectedGroups[featureName].includes(group.id),
+                  selectedGroups[featureName]?.includes(group.id),
                 )"
                 :key="`${entity.id}_group_${group}`"
                 @click="focusedGroup = group.id"
@@ -446,18 +463,18 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
           :start-full="true"
           @change="handleGroupSelection"
         />
-        <span v-if="!selectedGroups[featureName].length" class="error">
+        <span v-if="!selectedGroups[featureName]?.length" class="error">
           A group must be selected
         </span>
       </div>
-      <div v-else-if="selectedGroups[featureName].length === 1">
+      <div v-else-if="selectedGroups[featureName]?.length === 1">
         <pep-pharos-heading class="mb-2 pb-0" preset="3" :level="3">
-          {{ (groupMap.get(selectedGroups[featureName][0]) || {}).name }}
+          {{ groupMap.get(selectedGroups[featureName]?.[0] || -1)?.name }}
         </pep-pharos-heading>
       </div>
       <!-- Features -->
       <div
-        v-if="focusedGroup && selectedGroups[featureName] && selectedGroups[featureName].length"
+        v-if="focusedGroup && selectedGroups[featureName] && selectedGroups[featureName]?.length"
         class="feature-selection"
       >
         <div>
@@ -475,7 +492,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             class="mb-4"
             @input="
               selectAllFeatures(
-                Object.values(selectedFeatures[focusedGroup]).filter((val: boolean) => val)
+                Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
                   .length === features.length,
               )
             "
@@ -498,7 +515,7 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                       (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
                     ) &&
                     !category.every(
-                      (feature: Feature) => selectedFeatures[focusedGroup][feature.name],
+                      (feature: Feature) => selectedFeatures[focusedGroup]?.[feature.name],
                     )
                   "
                   class="mb-2"

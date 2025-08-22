@@ -59,24 +59,29 @@ const getDocument = async () => {
       apiCalls.push(coreStore.$api.documents.metadata(iid))
     }
     const results = await Promise.allSettled(apiCalls)
-    if (results[0].status === 'rejected') {
-      throw results[0].reason
-    } else {
-      const search = results[0].value
-      if (((search.data || {}).docs || []).length) {
-        doc.value = search.data.docs[0]
+    if (results[0]) {
+      if (results[0].status === 'rejected') {
+        throw results[0].reason
+      } else {
+        const search = results[0].value
+        if (((search.data || {}).docs || []).length) {
+          doc.value = search.data.docs[0]!
+        }
       }
     }
-    if (results[1]?.status === 'rejected') {
-      throw results[1].reason
-    } else {
-      if (page_index) {
-        metadata.value = {
-          ...metadata.value,
-          ...results[1].value.data,
-        }
-        if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
-          initial_page_index = metadata.value.pageCount - 1
+
+    if (results[1]) {
+      if (results[1]?.status === 'rejected') {
+        throw results[1].reason
+      } else {
+        if (page_index) {
+          metadata.value = {
+            ...metadata.value,
+            ...results[1].value.data,
+          }
+          if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
+            initial_page_index = metadata.value.pageCount - 1
+          }
         }
       }
     }

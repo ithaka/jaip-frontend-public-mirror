@@ -21,7 +21,8 @@
                 "bulk_approve": true,
                 "undo_bulk_approve": true,
                 "get_facilities": true,
-                "edit_facilities": false
+                "edit_facilities": true,
+                "test_feature": true
             }
         },
         {

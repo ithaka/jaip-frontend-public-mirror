@@ -27,7 +27,7 @@ export const useFeaturesStore = defineStore('features', {
               categories[feature.category] = []
             }
             if (group.features[feature.name] || includeAll) {
-              categories[feature.category].push(feature)
+              categories[feature.category]?.push(feature)
             }
           }
         })

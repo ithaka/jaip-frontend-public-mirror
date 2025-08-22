@@ -277,7 +277,7 @@ describe('Bulk approval', () => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
 
-      cy.wait(['@denied', '@disciplines'])
+      cy.wait(['@disciplines'])
     })
 
     it('Lets you add journals to the bulk approval list', () => {
@@ -325,7 +325,7 @@ describe('Bulk approval', () => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
 
-      cy.wait(['@denied', '@disciplines'])
+      cy.wait(['@disciplines'])
     })
 
     it('Displays an indicator for bulk approved disciplines', () => {
@@ -349,7 +349,7 @@ describe('Bulk approval', () => {
         .should('be.visible')
     })
 
-    it.only('Displays an indicator for bulk approved journals', () => {
+    it('Displays an indicator for bulk approved journals', () => {
       cy.intercept('GET', routes.journals.get('africanamericanstudies-discipline'), { fixture: 'disciplines/afam__response.json' })
         .as('afam')
 
@@ -530,7 +530,7 @@ describe('Bulk approval', () => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
 
-      cy.wait(['@denied', '@disciplines'])
+      cy.wait(['@disciplines'])
     })
 
     it('Lets you add journals to the bulk approval list', () => {
@@ -594,7 +594,7 @@ describe('Bulk approval', () => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })
 
-      cy.wait(['@denied', '@disciplines'])
+      cy.wait(['@disciplines'])
     })
 
   })

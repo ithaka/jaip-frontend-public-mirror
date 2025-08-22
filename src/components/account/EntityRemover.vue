@@ -29,16 +29,18 @@ const featureName = ref(props.entity.type === 'users' ? 'remove_users' : 'manage
 const emit = defineEmits(['close', 'update'])
 
 if (props.entity.groups && props.entity.groups.length === 1) {
-  selectedGroups.value[featureName.value] = [props.entity.groups[0].id]
+  selectedGroups.value[featureName.value] = props.entity.groups![0]?.id
+    ? [props.entity.groups![0].id]
+    : []
 }
 const removeEntity = async () => {
-  if (!selectedGroups.value[featureName.value].length) {
+  if (!selectedGroups.value[featureName.value]?.length) {
     return
   }
   const args = {
     ...props.entity,
     groups: (props.entity.groups || []).filter((group: Group) =>
-      selectedGroups.value[featureName.value].includes(group.id),
+      selectedGroups.value[featureName.value]?.includes(group.id),
     ),
   }
 
@@ -70,9 +72,9 @@ const removeEntity = async () => {
           This will remove {{ entity.name }} from
           {{
             makeGrammaticalList(
-              selectedGroups[featureName].map(
+              selectedGroups[featureName]?.map(
                 (group: number) => (groupMap.get(group) || {}).name || '',
-              ),
+              ) || [],
             )
           }}. Are you sure you wish to proceed?
         </span>

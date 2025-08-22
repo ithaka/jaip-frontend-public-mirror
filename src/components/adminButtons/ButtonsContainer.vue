@@ -44,7 +44,7 @@ const closeHistoryModal = () => {
 }
 const isGlobal = ref((props.doc.history || []).length ? false : true)
 const readRoute = ref(
-  featureDetails.value['view_document'].enabled
+  featureDetails.value['view_document']?.enabled
     ? `/page/${props.doc.iid}/0`
     : `/pdf/${props.doc.iid}`,
 )
@@ -80,7 +80,7 @@ const readRoute = ref(
         <pep-pharos-button
           v-if="
             !pdfView &&
-            (featureDetails['view_pdf'].enabled || featureDetails['view_document'].enabled)
+            (featureDetails['view_pdf']?.enabled || featureDetails['view_document']?.enabled)
           "
           full-width
           class="mb-2 mr-3"

@@ -723,10 +723,14 @@ describe('Account Management', () => {
 
         
         it('Submits user edit', () => {  
+          cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')
+            .contains('select all', { matchCase: false })
+            .click()
+
           cy.get('pep-pharos-modal:visible pep-pharos-button')
             .contains('ithaka', { matchCase: false })
             .click()
-
+  
           cy.get('pep-pharos-modal:visible pep-pharos-dropdown-menu-item')
             .contains('ilium', { matchCase: false })
             .click()

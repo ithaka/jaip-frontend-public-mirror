@@ -42,7 +42,7 @@ const entityObject = computed(() => {
 })
 
 const visibleEntity = ref(
-  featureDetails.value['get_users'].enabled
+  featureDetails.value['get_users']?.enabled
     ? ('users' as EntityTypes)
     : ('facilities' as EntityTypes),
 )

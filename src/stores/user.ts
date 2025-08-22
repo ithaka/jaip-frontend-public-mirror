@@ -22,17 +22,19 @@ const sortUngroupedFeatures = (
   const sorted = {} as { [key: string]: UngroupedFeatureDetails }
   for (const key in ungroupedFeatures) {
     const feature = ungroupedFeatures[key]
-    if (!sorted[feature.category]) {
+    if (feature?.category && !sorted[feature.category]) {
       sorted[feature.category] = {}
     }
-    sorted[feature.category][key] = { ...feature }
+    if (key && feature) {
+      sorted[feature.category]![key] = { ...feature }
+    }
   }
   return sorted
 }
 
 const getEnabledFeatures = (features: UngroupedFeatureDetails): UngroupedFeatureDetails => {
   return Object.keys(features).reduce((obj, key) => {
-    if (features[key].enabled) {
+    if (features[key]?.enabled) {
       obj[key] = features[key]
     }
     return obj
@@ -89,7 +91,7 @@ export const useUserStore = defineStore('user', {
     groupsWithFeature(groups: Array<Group>, feature: string): Array<Group> {
       const withFeature = []
       for (const i in groups) {
-        if (groups[i].features[feature]) {
+        if (groups[i]?.features[feature]) {
           withFeature.push(groups[i])
         }
       }
@@ -104,8 +106,8 @@ export const useUserStore = defineStore('user', {
     isSingleGroupFeature(feature: string): boolean {
       const foundGroups = []
       for (let i = 0; i < this.groups.length; i++) {
-        if ((this.groups[i].features || {})[feature]) {
-          foundGroups.push(this.groups[i].id)
+        if ((this.groups[i]?.features || {})[feature] && this.groups[i]?.id) {
+          foundGroups.push(this.groups[i]!.id)
         }
       }
       return foundGroups.length == 1
@@ -113,8 +115,12 @@ export const useUserStore = defineStore('user', {
     hasFeatureInGroups(groups: Array<number>, feature: string): boolean {
       const foundGroups = []
       for (let i = 0; i < this.groups.length; i++) {
-        if (groups.includes(this.groups[i].id) && (this.groups[i].features || {})[feature]) {
-          foundGroups.push(this.groups[i].id)
+        if (
+          this.groups[i]?.id &&
+          groups.includes(this.groups[i]!.id) &&
+          (this.groups[i]?.features || {})[feature]
+        ) {
+          foundGroups.push(this.groups[i]!.id)
         }
       }
       return groups.length > 0 && groups.length === foundGroups.length
@@ -272,10 +278,13 @@ export const useUserStore = defineStore('user', {
         // We know that there is a group and that the facility has an ID because we check that in unsubscribedFacilities.
         // Now we just filter out those groups where the user does not have permission to subscribe to the restricted list.
         const facility_group = facility.groups![0]
-        return (
-          !facility_group.features['restricted_items_subscription'] &&
-          this.canSubscribeToRestrictedListInGroups.includes(facility_group.id)
-        )
+        if (facility_group?.id) {
+          return (
+            !facility_group?.features['restricted_items_subscription'] &&
+            this.canSubscribeToRestrictedListInGroups.includes(facility_group?.id)
+          )
+        }
+        return false
       })
     },
     // Returns true if the user has any facilities that they can subscribe to the restricted list in.

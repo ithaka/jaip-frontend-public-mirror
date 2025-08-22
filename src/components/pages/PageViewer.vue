@@ -791,7 +791,7 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
 
 .viewer-show-for-large-down {
   display: none !important;
-  @media screen and (min-width: 48rem) and (max-width: calc(1056 - 1)px) {
+  @media screen and (min-width: 48rem) and (max-width: calc(1056px - 1px)) {
     display: flex !important;
   }
 }
@@ -807,7 +807,7 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
   position: absolute !important;
   left: $button-offset;
   top: $button-offset;
-  @media screen and (min-width: 22.5rem) and (max-width: calc(1056 - 1)px) {
+  @media screen and (min-width: 22.5rem) and (max-width: calc(1056px - 1px)) {
     display: none;
   }
 }

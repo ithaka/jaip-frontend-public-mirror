@@ -41,7 +41,7 @@ const showDenyModal = ref(false)
 const denyModalKey = ref(0)
 const denyGroups = ref(
   isSingleGroup
-    ? featureDetails.value['deny_requests'].groups
+    ? featureDetails.value['deny_requests']?.groups
     : getGroupsWithStatus(statuses.value, 'denied'),
 )
 const reasons = [
@@ -89,13 +89,13 @@ const closeDenyModal = () => {
 
 selectedGroups.value['deny_requests'] = []
 const selectorGroupOptions = ref(
-  featureDetails.value['deny_requests'].groups.reduce((arr, id: number) => {
+  featureDetails.value['deny_requests']?.groups.reduce((arr, id: number) => {
     const group = groupMap.value.get(id)
     if (group) {
       arr.push(group)
     }
     return arr
-  }, [] as Group[]),
+  }, [] as Group[]) || [],
 )
 
 const handleGroupChange = (event: GroupSelection) => {
@@ -107,9 +107,9 @@ const route = useRoute()
 const emit = defineEmits(['denialSubmitted', 'close'])
 
 const selectAllGroups = () => {
-  selectedGroups.value['deny_requests'] = featureDetails.value['deny_requests'].groups
+  selectedGroups.value['deny_requests'] = featureDetails.value['deny_requests']?.groups || []
 }
-if (featureDetails.value['deny_requests'].groups.length === 1) {
+if (featureDetails.value['deny_requests']?.groups.length === 1) {
   selectAllGroups()
 }
 
@@ -192,8 +192,8 @@ const handleDenial = async () => {
       <p slot="description" class="mb-3">
         What is your reason to deny access
         <span v-if="doc.title">to <em v-html="doc.title" /></span
-        ><span v-if="!denyGroups.length">?</span>
-        <span v-if="denyGroups.length"
+        ><span v-if="!denyGroups?.length">?</span>
+        <span v-if="denyGroups?.length"
           >&nbsp;for
           {{
             makeGrammaticalList(denyGroups.map((group) => (groupMap.get(group) || {}).name || ''))
@@ -201,7 +201,7 @@ const handleDenial = async () => {
         >
       </p>
 
-      <div v-if="featureDetails['deny_requests'].groups.length > 1" class="mb-3">
+      <div v-if="(featureDetails['deny_requests']?.groups?.length || 0) > 1" class="mb-3">
         <GroupSelector
           :groups="selectorGroupOptions"
           :feature-name="'deny_requests'"
@@ -275,11 +275,12 @@ const handleDenial = async () => {
           >The record will show that {{ entityName }} denied <em>{{ doc.title }}</em> on
           {{ new Date().toLocaleDateString() }}</span
         >
-        <span v-if="denyGroups.length"
+        <span v-if="denyGroups?.length"
           >&nbsp;for use in
           {{
             makeGrammaticalList(
-              selectedGroups['deny_requests'].map((id) => (groupMap.get(id) || {}).name || ''),
+              selectedGroups['deny_requests']?.map((id) => (groupMap.get(id) || {}).name || '') ||
+                [],
             )
           }}</span
         >
@@ -295,7 +296,7 @@ const handleDenial = async () => {
         :disabled="
           !selectedGroups['deny_requests'] ||
           !selectedGroups['deny_requests'].length ||
-          !denyGroups.length ||
+          !denyGroups?.length ||
           arraysAreEqual(denyGroups, getGroupsWithStatus(statuses, 'denied'))
         "
         @click.prevent.stop="handleDenial"

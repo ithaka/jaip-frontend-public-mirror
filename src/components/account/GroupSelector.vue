@@ -43,7 +43,7 @@ const possibleGroups = computed(() => {
     return g.filter((groupId: number) => sortedGroups.some((group: Group) => group.id === groupId))
   }
   return g.filter((groupId: number) =>
-    (featureDetails.value[props.featureName] || {}).groups.includes(groupId),
+    featureDetails.value[props.featureName]?.groups.includes(groupId),
   )
 })
 const emit = defineEmits(['change'])
@@ -58,7 +58,7 @@ if (props.startFull) {
   if (props.multiple) {
     comboboxValue.value = comboboxAllValue
   }
-  if (!arraysAreEqual(selectedGroups.value[props.featureName], possibleGroups.value)) {
+  if (!arraysAreEqual(selectedGroups.value[props.featureName] || [], possibleGroups.value)) {
     selectedGroups.value[props.featureName] = possibleGroups.value
     emit('change', { groups: selectedGroups.value[props.featureName], target: 0 })
   }
@@ -67,30 +67,33 @@ const handleGroupSelection = (e: InputFileEvent) => {
   const val = parseInt(e.target.value, 10)
   if (
     e.target.value === comboboxAllValue &&
-    selectedGroups.value[props.featureName].length !== possibleGroups.value.length
+    selectedGroups.value[props.featureName]?.length !== possibleGroups.value.length
   ) {
     selectedGroups.value[props.featureName] = possibleGroups.value
   } else if (val < 0 || e.target.value === '') {
     selectedGroups.value[props.featureName] = []
-  } else if (selectedGroups.value[props.featureName].includes(val)) {
-    selectedGroups.value[props.featureName] = selectedGroups.value[props.featureName].filter(
-      (group: number) => {
+  } else if (
+    selectedGroups.value[props.featureName] &&
+    selectedGroups.value[props.featureName]?.includes(val)
+  ) {
+    selectedGroups.value[props.featureName] =
+      selectedGroups.value[props.featureName]?.filter((group: number) => {
         if (e.target.getAttribute('data-pharos-component') === 'PharosButton') {
           return group !== val
         } else {
           return group === val
         }
-      },
-    )
+      }) || []
   } else {
     if (props.multiple) {
-      selectedGroups.value[props.featureName] = selectedGroups.value[props.featureName].concat(val)
+      selectedGroups.value[props.featureName] =
+        selectedGroups.value[props.featureName]?.concat(val) || []
     } else {
       selectedGroups.value[props.featureName] = [val]
     }
   }
   comboboxValue.value =
-    selectedGroups.value[props.featureName].length === possibleGroups.value.length
+    selectedGroups.value[props.featureName]?.length === possibleGroups.value.length
       ? comboboxAllValue
       : ''
   emit('change', { groups: selectedGroups.value[props.featureName], target: val })
@@ -108,7 +111,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
         <div class="display-flex align-items-center">
           <span>Groups</span>
           <pep-pharos-button
-            v-if="selectedGroups[featureName].length"
+            v-if="selectedGroups[featureName]?.length"
             variant="subtle"
             value=""
             @click.prevent.stop="handleGroupSelection"
@@ -124,7 +127,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
       </option>
     </pep-pharos-combobox>
     <div
-      v-if="selectedGroups[featureName].length !== possibleGroups.length"
+      v-if="selectedGroups[featureName]?.length !== possibleGroups.length"
       class="display-flex text-wrap-wrap"
     >
       <pep-pharos-button

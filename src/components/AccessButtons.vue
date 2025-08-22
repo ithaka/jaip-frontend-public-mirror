@@ -86,7 +86,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 
 <template>
   <pep-pharos-button
-    v-if="featureDetails['download_pdf'].enabled"
+    v-if="featureDetails['download_pdf']?.enabled"
     full-width
     data-cy="download-pdf-button"
     :variant="variant"
@@ -95,9 +95,9 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     class="access-button"
     :class="{
       'lg-mr-3':
-        (featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()) ||
-        (featureDetails['view_pdf'].enabled && includePdf) ||
-        (featureDetails['view_document'].enabled && isPDFPage),
+        (featureDetails['print_pdf']?.enabled && hasBrowserPDFViewer()) ||
+        (featureDetails['view_pdf']?.enabled && includePdf) ||
+        (featureDetails['view_document']?.enabled && isPDFPage),
     }"
     @click="downloadPDF"
   >
@@ -105,14 +105,14 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     Download
   </pep-pharos-button>
   <pep-pharos-button
-    v-if="featureDetails['print_pdf'].enabled && hasBrowserPDFViewer()"
+    v-if="featureDetails['print_pdf']?.enabled && hasBrowserPDFViewer()"
     icon-left="view-list"
     class="access-button"
     data-cy="print-pdf-button"
     :class="{
       'lg-mr-3':
-        (featureDetails['view_pdf'].enabled && includePdf) ||
-        (featureDetails['view_document'].enabled && isPDFPage),
+        (featureDetails['view_pdf']?.enabled && includePdf) ||
+        (featureDetails['view_document']?.enabled && isPDFPage),
     }"
     :variant="variant"
     full-width
@@ -124,7 +124,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
   </pep-pharos-button>
   <pep-pharos-button
     v-if="
-      hasStaticBlock() && featureDetails['view_pdf'].enabled && includePdf && hasStructuredClone
+      hasStaticBlock() && featureDetails['view_pdf']?.enabled && includePdf && hasStructuredClone
     "
     icon-left="filetype-pdf"
     class="access-button"
@@ -135,7 +135,7 @@ const hasStructuredClone = ref(typeof window.structuredClone === 'function')
     View PDF
   </pep-pharos-button>
   <pep-pharos-button
-    v-else-if="featureDetails['view_document'].enabled && isPDFPage"
+    v-else-if="featureDetails['view_document']?.enabled && isPDFPage"
     icon-left="filetype-pdf"
     class="access-button"
     full-width

@@ -41,7 +41,7 @@ const groupObject = ref(
 const initGroups = props.entity.groups || []
 const sortedGroups = initGroups.sort((a: Group, b: Group) => a.name.localeCompare(b.name))
 
-const selectedGroupId = ref(sortedGroups.length ? (sortedGroups[0] || {}).id : -1)
+const selectedGroupId = ref(sortedGroups.length ? (sortedGroups[0] || {}).id || -1 : -1)
 const selectedGroup = computed(() => {
   return groupObject.value[selectedGroupId.value]
 })
@@ -52,15 +52,15 @@ const categorizedFeatures = computed(() =>
 
 const hasEdit = computed(() => {
   return props.entity.type === 'users'
-    ? featureDetails.value['add_or_edit_users'].enabled
-    : featureDetails.value['edit_facilities'].enabled ||
-        (featureDetails.value['manage_facilities'] || {}).enabled ||
+    ? featureDetails.value['add_or_edit_users']?.enabled
+    : featureDetails.value['edit_facilities']?.enabled ||
+        featureDetails.value['manage_facilities']?.enabled ||
         false
 })
 const hasRemove = computed(() => {
   return props.entity.type === 'users'
-    ? featureDetails.value['remove_users'].enabled
-    : (featureDetails.value['manage_facilities'] || {}).enabled || false
+    ? featureDetails.value['remove_users']?.enabled
+    : featureDetails.value['manage_facilities']?.enabled || false
 })
 const showEntityModal = ref(false)
 const entityModalUpdateKey = ref(0)
@@ -115,7 +115,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
     <div class="mt-4">
       <div v-if="(entity.groups || []).length === 1">
         <pep-pharos-heading class="mb-2 pb-0" preset="3" :level="3">
-          {{ entity.groups![0].name || 'Unknown Group' }}
+          {{ entity.groups![0]!.name || 'Unknown Group' }}
         </pep-pharos-heading>
       </div>
       <div
@@ -130,7 +130,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
           class="mb-3"
           icon-left="chevron-down"
         >
-          {{ selectedGroup.name }}
+          {{ selectedGroup?.name || 'Unknown Group' }}
         </pep-pharos-button>
         <pep-pharos-dropdown-menu :id="`group_selector_${entity.id}`" full-width>
           <pep-pharos-dropdown-menu-item

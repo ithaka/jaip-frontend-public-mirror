@@ -71,8 +71,8 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   timeZone: 'UTC',
 }
 const handleDateSelection = (dates: Array<Date>) => {
-  statusStartDate.value = new Date(dates[0].setHours(0, 0, 0, 0))
-  statusEndDate.value = new Date((dates[1] || dates[0]).setHours(23, 59, 59, 999))
+  statusStartDate.value = new Date(dates[0]!.setHours(0, 0, 0, 0))
+  statusEndDate.value = new Date((dates[1] || dates[0])!.setHours(23, 59, 59, 999))
   newSearch()
 }
 const dates = computed(() => {

@@ -30,7 +30,7 @@ const page = ref(1)
 const searching = ref(false)
 const entities = ref({} as { [key: string]: Entity })
 const entityCount = ref(0)
-const entityGroups = ref(featureDetails.value[`get_${props.entity.type}`].groups)
+const entityGroups = ref(featureDetails.value[`get_${props.entity.type}`]?.groups || [])
 selectedGroups.value[`get_${props.entity.type}`] = entityGroups.value
 const selectorGroupOptions = ref(
   entityGroups.value.reduce((arr, id: number) => {
@@ -45,7 +45,7 @@ const selectorGroupOptions = ref(
 const doSearch = async () => {
   searching.value = true
   const args: EntitiesArgs = {
-    groups: selectedGroups.value[`get_${props.entity.type}`],
+    groups: selectedGroups.value[`get_${props.entity.type}`] || [],
     query: query.value,
     limit: secondaryLimit.value,
     page: page.value,
@@ -68,7 +68,7 @@ doSearch()
 
 const hasAddEntity = computed(() => {
   return props.entity.type === 'users'
-    ? featureDetails.value['add_or_edit_users'].enabled
+    ? featureDetails.value['add_or_edit_users']?.enabled
     : (featureDetails.value['manage_facilities'] || {}).enabled
 })
 const showAddEntityModal = ref(false)
@@ -76,8 +76,9 @@ const addAction = 'add' as EntityActions
 
 const addEntityModal = () => {
   const featureName = props.entity.type === 'users' ? 'add_or_edit_users' : 'manage_facilities'
-  const isSingleGroup = (featureDetails.value[featureName] || {}).groups.length === 1
-  selectedGroups.value[featureName] = isSingleGroup ? [selectorGroupOptions.value[0].id] : []
+  const isSingleGroup = featureDetails.value[featureName]?.groups.length === 1
+  selectedGroups.value[featureName] =
+    isSingleGroup && selectorGroupOptions.value?.[0]?.id ? [selectorGroupOptions.value[0].id] : []
   showAddEntityModal.value = true
 }
 </script>
@@ -107,7 +108,7 @@ const addEntityModal = () => {
     />
 
     <div
-      v-if="featureDetails[`get_${props.entity.type}`].groups.length > 1"
+      v-if="(featureDetails[`get_${props.entity.type}`]?.groups?.length || 0) > 1"
       class="cols-12 mt-3 mb-6"
     >
       <GroupSelector

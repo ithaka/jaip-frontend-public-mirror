@@ -24,6 +24,7 @@ const {
   disciplineObject,
   selectedDisciplines,
   selectedJournals,
+  selectedJournalDisciplines,
   contentTypes,
   selectedContentTypes,
   pseudoDisciplines,
@@ -120,8 +121,8 @@ const getJournals = async (code: string) => {
     gettingJournals.value = true
     const { data } = await api.journals(code)
     allJournals.value[code] = {}
-    ;(data || []).forEach((journal: Journal) => {
-      allJournals.value[code][journal.headid] = journal
+    data?.forEach((journal: Journal) => {
+      allJournals.value[code]![journal.headid] = journal
     })
     gettingJournals.value = false
   }
@@ -164,16 +165,7 @@ const clearDisciplines = () => {
 
 // Journals
 // Journal Disciplines
-const selectedJournalDisciplines: string[] = selectedJournals.value.reduce(
-  (arr: string[], journal: Journal) => {
-    if (journal.discipline && !arr.includes(journal.discipline)) {
-      arr.push(journal.discipline)
-    }
-    return arr
-  },
-  [] as string[],
-)
-const visibleJournalDisciplines = ref(selectedJournalDisciplines)
+const visibleJournalDisciplines = ref([...selectedJournalDisciplines.value])
 const combobox = ref(null)
 const handleJournalDisciplineSelection = async (e: InputFileEvent) => {
   await getJournals(e.target.value)
@@ -182,7 +174,7 @@ const handleJournalDisciplineSelection = async (e: InputFileEvent) => {
     // This is an awkward solution, but the combobox doesn't appear to allow programmatic value
     // changes, and the input event doesn't fire, so this reaches into the component and clears the
     // value manually.
-    // @ts-expect-error This is using a private method from the component
+    // @ts-expect-error: _handleInputClear is an internal method
     ;(combobox.value || {})._handleInputClear()
   }
 }
@@ -198,10 +190,14 @@ const removeJournalDiscipline = (i: number, disc: string) => {
 // Selected Journals
 const handleJournalSelection = (e: CheckboxEvent, disc: string) => {
   if (e.newValue) {
-    selectedJournals.value.push({
-      ...allJournals.value[disc][e.newValue],
-      discipline: disc,
-    })
+    const journal = allJournals.value[disc]?.[e.newValue]
+    if (journal && journal.headid) {
+      selectedJournals.value.push({
+        ...journal,
+        headid: journal.headid as string,
+        discipline: disc,
+      })
+    }
   } else {
     selectedJournals.value = selectedJournals.value.filter((journal) =>
       e.checkboxes.includes(journal.headid),
@@ -442,7 +438,7 @@ api.log({
                   <pep-pharos-heading preset="legend" :level="4">
                     <span class="journal-filter__sub-heading">
                       <span>
-                        {{ disciplineObject[discipline].label }}
+                        {{ disciplineObject[discipline]?.label }}
                       </span>
                       <pep-pharos-button
                         name="journal-close-button"
@@ -458,7 +454,7 @@ api.log({
                   <div v-if="Object.keys(allJournals[discipline] || []).length">
                     <!-- Journal Checkbox Group -->
                     <CheckboxGroup
-                      :source-list="Object.values(allJournals[discipline])"
+                      :source-list="Object.values(allJournals[discipline] || {})"
                       :initial-list-length="5"
                       :initial-selections="[
                         ...selectedJournals

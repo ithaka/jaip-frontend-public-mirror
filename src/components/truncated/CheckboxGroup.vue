@@ -75,7 +75,7 @@ const handleSelection = async (e: InputFileEvent) => {
     newValue,
   })
 }
-const iconKey = ref(displayList.value.map(() => 0))
+const iconKey = ref(Array(props.initialListLength).fill(0))
 </script>
 <template>
   <div>
@@ -125,7 +125,7 @@ const iconKey = ref(displayList.value.map(() => 0))
                     :tooltip-id="`approval_${item.code || item.headid}`"
                     :text="`Articles in ${getLabel(item)} are generally approved automatically.`"
                     :disc="item"
-                    @render="iconKey[i]++"
+                    @render="iconKey[i] = (iconKey[i] ?? 0) + 1"
                   />
                   <span data-cy="filter-checkbox-label">{{ getLabel(item) }}</span>
                 </div>
