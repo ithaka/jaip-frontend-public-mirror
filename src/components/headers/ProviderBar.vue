@@ -24,7 +24,8 @@ defineProps({
 </script>
 
 <template>
-  <pep-pharos-dropdown-menu-nav-link
+  <pep-pharos-dropdown-menu-nav-category
+    id="top-menu-category"
     data-dropdown-menu-id="top-menu"
     data-dropdown-menu-hover=""
     subtle
@@ -32,22 +33,29 @@ defineProps({
     no-hover
     class="display-flex justify-content-center full-width"
   >
-    <small v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
-      <span>Access provided by&nbsp;</span>
-      <span
-        ><strong>{{ groups }}</strong></span
-      >
-    </small>
-    <small v-else-if="isAdminSubdomain && !isAuthenticatedAdmin">
-      <span>Have facility access?&nbsp;</span>
-      <pep-pharos-link :href="loginUrl" class="text-decoration-underline">Log in</pep-pharos-link>
-    </small>
-    <small v-else>
-      <span>You do not have access at this facility.</span>
-    </small>
-  </pep-pharos-dropdown-menu-nav-link>
+    <span slot="category">
+      <small v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
+        <span>Access provided by&nbsp;</span>
+        <span
+          ><strong>{{ groups }}</strong></span
+        >
+      </small>
+      <small v-else-if="isAdminSubdomain && !isAuthenticatedAdmin">
+        <span>Have facility access?&nbsp;</span>
+        <pep-pharos-link :href="loginUrl" class="text-decoration-underline">Log in</pep-pharos-link>
+      </small>
+      <small v-else>
+        <span>You do not have access at this facility.</span>
+      </small>
+    </span>
+  </pep-pharos-dropdown-menu-nav-category>
   <!-- Dropdown box with additional information -->
-  <pep-pharos-dropdown-menu id="top-menu" placement="bottom" tabindex="-1">
+  <pep-pharos-dropdown-menu
+    id="top-menu"
+    placement="bottom"
+    tabindex="-1"
+    data-dropdown-menu-hover=""
+  >
     <div class="pa-5">
       <p>In partnership with the JSTOR Access in Prisons Initiative</p>
     </div>

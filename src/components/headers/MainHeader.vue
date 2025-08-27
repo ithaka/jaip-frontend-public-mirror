@@ -80,7 +80,6 @@ const emit = defineEmits(['logout', 'close'])
     </div>
 
     <!-- Logo -->
-
     <div slot="start">
       <pep-pharos-link
         @click.prevent.stop="
@@ -97,44 +96,32 @@ const emit = defineEmits(['logout', 'close'])
     </div>
 
     <!-- Search Bar -->
-
     <div v-if="$route.meta.showSearch && !isUnauthenticated" slot="center" class="mb-3">
       <SearchInput id="main" label="Search" a11y-label="Search" />
     </div>
-    <!-- User Information -->
 
+    <!-- User Information -->
     <div slot="end-top">
       <pep-pharos-dropdown-menu-nav v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
-        <pep-pharos-dropdown-menu-nav-link
-          data-dropdown-menu-id="user_menu"
+        <pep-pharos-dropdown-menu-nav-category
+          id="user-category"
+          data-dropdown-menu-id="user-menu"
           data-dropdown-menu-hover=""
-          flex
-          href
-          @click.prevent.stop
         >
-          <span
-            ><strong>{{ name }}</strong></span
-          >
-        </pep-pharos-dropdown-menu-nav-link>
-
+          <span slot="category">{{ name }}</span>
+        </pep-pharos-dropdown-menu-nav-category>
         <!-- Dropdown with user options -->
-        <pep-pharos-dropdown-menu id="user_menu">
-          <!-- Admins have a logout button -->
-          <div v-if="isAuthenticatedAdmin">
-            <pep-pharos-dropdown-menu-item @click.prevent="emit('logout')">
-              <pep-pharos-dropdown-menu-nav-link subtle>
-                <span class="text-capitalize">Logout</span>
-              </pep-pharos-dropdown-menu-nav-link>
-            </pep-pharos-dropdown-menu-item>
-          </div>
-          <!-- Students get a note about the group where they're participating-->
-          <div v-else-if="isAuthenticatedStudent">
-            <pep-pharos-dropdown-menu-item>
-              <pep-pharos-dropdown-menu-nav-link subtle>
-                <span>Participating through {{ groups }}</span>
-              </pep-pharos-dropdown-menu-nav-link>
-            </pep-pharos-dropdown-menu-item>
-          </div>
+        <pep-pharos-dropdown-menu id="user-menu" a11y-label="User menu" data-dropdown-menu-hover="">
+          <pep-pharos-dropdown-menu-item
+            v-if="isAuthenticatedAdmin"
+            href
+            @click.prevent="emit('logout')"
+          >
+            Logout
+          </pep-pharos-dropdown-menu-item>
+          <pep-pharos-dropdown-menu-item v-else-if="isAuthenticatedStudent" href>
+            Participating through {{ groups }}
+          </pep-pharos-dropdown-menu-item>
         </pep-pharos-dropdown-menu>
       </pep-pharos-dropdown-menu-nav>
       <div v-if="showLogin">
@@ -144,7 +131,6 @@ const emit = defineEmits(['logout', 'close'])
       </div>
     </div>
     <!-- Navigation Menu -->
-
     <div slot="end-bottom" class="hidden-md">
       <NavigationMenu :key="updateKey" :show-login="showLogin" />
     </div>

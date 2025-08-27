@@ -39,7 +39,7 @@ describe('Main site content', () => {
 
       it('includes only one link in nav, for home', () => {
         cy.visit('/')
-        cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('be.visible').should('have.length', 1).contains('home')
+        cy.get('[data-cy="nav-link-home"]').should('be.visible').should('have.length', 1)
       })
     })
     context('General with Alert', () =>{
@@ -110,53 +110,53 @@ describe('Main site content', () => {
     it('links to home', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('home').should('be.visible')
+      cy.get('[data-cy="nav-link-home"]').should('be.visible')
     })
 
     it('links to support', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').should('be.visible')
     })
 
     it('links to research', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').should('be.visible')
     })
 
     it('links to search', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('search').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').click()
+      cy.get('[data-cy="nav-link-search"]').should('be.visible')
     })
 
     it('links to requests', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').click()
+      cy.get('[data-cy="nav-link-requests"]').should('be.visible')
     })
 
     it('links to about', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('about').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').click()
+      cy.get('[data-cy="nav-link-about"]').should('be.visible')
     })
 
     it('links to help', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('help').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').click()
+      cy.get('[data-cy="nav-link-help"]').should('be.visible')
     })
 
     it('has exactly seven links', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 7).should('be.visible')
+      cy.get('.nav-menu-item').should('have.length', 7).should('be.visible')
     })
 
     it('does not link to Mellon', () => {
@@ -227,36 +227,36 @@ describe('Main site content', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('home').should('be.visible')
+      cy.get('[data-cy="nav-link-home"]').should('be.visible')
     })
 
     it('links to support', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').should('be.visible')
     })
 
     it('links to research', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').should('be.visible')
     })
 
     it('links to search', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('search').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').click()
+      cy.get('[data-cy="nav-link-search"]').should('be.visible')
     })
 
     it('links to requests', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('research').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('requests').should('be.visible')
+      cy.get('[data-cy="nav-link-research"]').click()
+      cy.get('[data-cy="nav-link-requests"]').should('be.visible')
     })
 
     it('links to about', () => {
@@ -264,22 +264,22 @@ describe('Main site content', () => {
 
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('about').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').click()
+      cy.get('[data-cy="nav-link-about"]').should('be.visible')
     })
 
     it('links to help', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('help').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').click()
+      cy.get('[data-cy="nav-link-help"]').should('be.visible')
     })
 
     it('has exactly seven links', () => {
       cy.visit('/')
-      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 7).should('be.visible')
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
+      cy.get('.nav-menu-item').should('have.length', 7).should('be.visible')
     })
   })
 
@@ -301,15 +301,15 @@ describe('Main site content', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('support').click()
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').contains('account').should('be.visible')
+      cy.get('[data-cy="nav-link-support"]').click()
+      cy.get('[data-cy="nav-link-account"]').should('be.visible')
     })
 
     it('has exactly eight links', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
 
-      cy.get('#nav pep-pharos-dropdown-menu-nav-link').should('have.length', 8).should('be.visible')
+      cy.get('.nav-menu-item').should('have.length', 8).should('be.visible')
     })
   })
 

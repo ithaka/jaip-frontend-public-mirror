@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ProviderBar from '@/components/headers/ProviderBar.vue'
-import NavigationMenu from '@/components/headers/NavigationMenu.vue'
+import SidenavMenu from '@/components/headers/SidenavMenu.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import RequestWarning from '@/components/headers/RequestWarning.vue'
 
@@ -152,14 +152,7 @@ const onCloseSidenav = () => {
       >
         Log in
       </pep-pharos-button>
-      <pep-pharos-sidenav-section showDivider="true">
-        <NavigationMenu
-          :key="updateKey"
-          :login-url="loginUrl"
-          sidenav
-          @close-sidenav="onCloseSidenav"
-        />
-      </pep-pharos-sidenav-section>
+      <SidenavMenu :key="updateKey" @close-sidenav="onCloseSidenav" />
       <pep-pharos-sidenav-section v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
         <pep-pharos-sidenav-link class="side-navigation__bottom" href="/">
           {{ name }}

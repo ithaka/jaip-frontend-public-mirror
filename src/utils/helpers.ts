@@ -1,6 +1,7 @@
 import type { FeatureDetails } from '@/interfaces/Features'
 import type { BulkHistory, History } from '@/interfaces/MediaRecord'
-import type { Router } from 'vue-router'
+import type { Router, RouteRecordNormalized } from 'vue-router'
+import type { RoutesObject } from '@/interfaces/Routes'
 
 export const ensureError = (value: unknown): Error => {
   if (value instanceof Error) return value
@@ -156,4 +157,38 @@ export const hideButton = (
 export const isEmail = (email: string): boolean => {
   const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   return emailRegex.test(email)
+}
+
+export const formatRouteName = (route: RouteRecordNormalized): string => {
+  if (route.name) {
+    return capitalize(String(route.name))
+  }
+  return ''
+}
+
+/**
+ * Organizes routes into grouped and ungrouped categories based on their metadata.
+ */
+export const getOrganizedRoutes = (router: Router): RoutesObject => {
+  const routes = router.getRoutes()
+  return routes.reduce(
+    (obj: RoutesObject, route) => {
+      if (route.meta.hidden) {
+        return obj
+      }
+      if (route.meta.group) {
+        if (!obj.grouped[route.meta.group]) {
+          obj.grouped[route.meta.group] = []
+        }
+        obj.grouped[route.meta.group]?.push(route)
+      } else {
+        obj.ungrouped.push(route)
+      }
+      return obj
+    },
+    {
+      grouped: {},
+      ungrouped: [],
+    } as RoutesObject,
+  )
 }
