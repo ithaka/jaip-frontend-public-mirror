@@ -249,6 +249,7 @@ const handleDenial = async () => {
             <pep-pharos-text-input
               :value="otherReason"
               :invalidated="invalidReason"
+              :disabled="otherReason !== selectedReason"
               :message="invalidReason ? 'A reason is required' : ''"
               @focus="selectedReason = otherReason"
               @input="handleReasonInput"
