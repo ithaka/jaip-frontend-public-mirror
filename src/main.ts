@@ -14,6 +14,7 @@ import { useFeaturesStore } from '@/stores/features'
 import { useSearchStore } from './stores/search'
 import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
+import { capitalize } from '@/utils/helpers'
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
@@ -89,6 +90,10 @@ let duplicateRoute = false
 // We don't need to refetch auth data with every route change.
 // This only runs those api calls when necessary.
 const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+  document.title = to.name
+    ? capitalize(to.name.toString()) + ' | JSTOR Access in Prison'
+    : 'JSTOR Access in Prison'
+
   // If we're only chaning the page because we're removing the hash for the uuid
   // cooke, then that's all we need to do.
   if (duplicateRoute) {
