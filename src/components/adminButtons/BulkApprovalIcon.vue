@@ -128,10 +128,12 @@ const submitBulkApproval = async () => {
         :aria-describedby="tooltipId"
         :a11y-title="'Pre-Approved Discipline'"
         :class="{ 'fill-jstor-red': color }"
+        role="button"
+        tabindex="0"
         @click.prevent.stop="openBulkApprovalModal"
       />
       <pep-pharos-tooltip :id="tooltipId" :placement="placement">
-        <span class="text-none">{{ text }}</span>
+        <span>{{ text }}</span>
       </pep-pharos-tooltip>
     </div>
     <div>

@@ -306,6 +306,8 @@ api.log({
                 class="search-facets__tooltip-icon"
                 :a11y-title="'Publication Year Tooltip'"
                 aria-describedby="date-tooltip"
+                role="button"
+                tabindex="0"
               />
             </div>
             <pep-pharos-tooltip id="date-tooltip" placement="top">
@@ -397,6 +399,8 @@ api.log({
                 name="question-inverse"
                 class="search-facets__tooltip-icon"
                 :a11y-title="'Journal Tooltip'"
+                role="button"
+                tabindex="0"
                 aria-describedby="journal-discipline-tooltip"
               />
             </div>

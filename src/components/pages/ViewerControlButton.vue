@@ -11,6 +11,8 @@
       :name="iconName"
       :a11y-title="iconName"
       a11y-hidden="false"
+      role="button"
+      tabindex="0"
       :class="text ? 'icon-with-right-padding' : 'icon'"
     />
 

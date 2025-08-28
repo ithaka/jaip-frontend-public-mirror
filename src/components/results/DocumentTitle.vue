@@ -69,7 +69,7 @@ const component = ref(props.small ? 'small' : 'span')
     </span>
 
     <pep-pharos-tooltip :id="`restricted-tooltip-${id}`" placement="top">
-      <span class="text-none">
+      <span>
         Item not accessible in facilities that subscribe to the Restricted Items list. Reviewers can
         still access item.
       </span>

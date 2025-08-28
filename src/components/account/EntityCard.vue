@@ -174,6 +174,8 @@ const handleGroupSelection = (e: InputFileEvent) => {
                   name="question-inverse"
                   a11y-title="Hover over to see feature description"
                   a11y-hidden="false"
+                  role="button"
+                  tabindex="0"
                   :aria-describedby="`feature-tooltip-${feature.name}`"
                   :data-tooltip-id="`feature-tooltip-${feature.name}`"
                 >

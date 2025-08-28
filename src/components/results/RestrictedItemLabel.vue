@@ -12,6 +12,8 @@ defineProps({
     :aria-describedby="`restricted-tooltip-${id}`"
     variant="subtle"
     icon-left="exclamation-inverse"
+    role="button"
+    tabindex="0"
     class="restricted-label"
   >
     Restricted Item

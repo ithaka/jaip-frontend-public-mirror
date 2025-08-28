@@ -232,10 +232,12 @@ const handleDenial = async () => {
                   name="question-inverse"
                   :a11y-title="'Incomplete Reason Explanation'"
                   class="mt-0 pl-2 fill-gray-40 small-icon"
+                  role="button"
+                  tabindex="0"
                   :aria-describedby="`incomplete_explanation`"
                 />
                 <pep-pharos-tooltip :id="`incomplete_explanation`" placement="top">
-                  <span class="text-none"
+                  <span
                     >Selecting this option will list the item as Incomplete rather than
                     Denied.</span
                   >

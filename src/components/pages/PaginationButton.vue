@@ -88,6 +88,8 @@ export default {
         :a11y-title="`arrow-${direction}`"
         a11y-hidden="false"
         class="button-icon"
+        role="button"
+        tabindex="0"
       />
     </button>
     <pep-pharos-tooltip v-if="tooltipText" :id="tooltipId" :placement="tooltipPosition">

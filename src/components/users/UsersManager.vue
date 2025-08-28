@@ -170,10 +170,12 @@ const handleAddAdmin = async (i: number) => {
                         :data-tooltip-id="`feature-tooltip-${feature.name}`"
                         name="question-inverse"
                         class="mt-0 pl-2 fill-gray-40 small-icon"
+                        role="button"
+                        tabindex="0"
                         :aria-describedby="`feature-tooltip-${feature.name}`"
                       />
                       <pep-pharos-tooltip :id="`feature-tooltip-${feature.name}`" placement="top">
-                        <span class="text-none">{{ feature.description }}</span>
+                        <span>{{ feature.description }}</span>
                       </pep-pharos-tooltip>
                     </span>
                   </li>

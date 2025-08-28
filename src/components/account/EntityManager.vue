@@ -545,6 +545,8 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                             name="question-inverse"
                             a11y-title="Hover over to see feature description"
                             a11y-hidden="false"
+                            role="button"
+                            tabindex="0"
                             :aria-describedby="`feature-manager-tooltip-${feature.name}`"
                             :data-tooltip-id="`feature-manager-tooltip-${feature.name}`"
                           />
