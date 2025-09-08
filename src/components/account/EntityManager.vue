@@ -200,11 +200,7 @@ selectorGroupOptions.value?.forEach((group) => {
     categorizedFeatures.value[key]?.forEach((feature) => {
       if (newEntity.value.groups) {
         const currentGroup = newEntity.value.groups.find((g: Group) => g.id === group.id)
-        if (
-          currentGroup &&
-          selectedFeatures.value[group.id]?.[feature.name] &&
-          currentGroup.features[feature.name]
-        ) {
+        if (currentGroup && currentGroup.features[feature.name]) {
           selectedFeatures.value[group.id]![feature.name] =
             currentGroup.features[feature.name] || false
         }
@@ -231,7 +227,7 @@ const selectCategoryFeatures = (category: Array<Feature>) => {
     return selectedFeatures.value[focusedGroup.value]?.[feature.name]
   })
   category.forEach((feature: Feature) => {
-    if (selectedFeatures.value[focusedGroup.value]?.[feature.name]) {
+    if (selectedFeatures.value[focusedGroup.value]) {
       selectedFeatures.value[focusedGroup.value]![feature.name] =
         !selectedFeatures.value[focusedGroup.value] || !hasCategoryFeature
     }
