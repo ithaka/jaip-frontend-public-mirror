@@ -1,13 +1,36 @@
-<script setup lang="ts">
-import Help from '@/assets/markdown/admin-help.md'
-</script>
-
 <template>
-  <section>
-    <pep-pharos-heading class="cols-12" :level="1" preset="5--bold">
+  <section class="admin-help">
+    <pep-pharos-heading :level="1" preset="5--bold">
       JSTOR Access in Prison Help
     </pep-pharos-heading>
-
-    <Help />
+    <div class="admin-help__content">
+      <p>
+        <strong>Search and Bulk Approval</strong> will let you filter the available materials by
+        date, content type, discipline or journal title to preview the material and then approve any
+        collection of content.
+      </p>
+      <p>
+        <strong>Manage Requests</strong> allows administration of the individual document requests
+        from incarcerated learners in your group, and provides a workflow system for review and
+        approval of these requests, including reporting of all reviews.
+      </p>
+      <p>
+        Have a question? Please contact us! Email Stacy Burnett, JSTOR Access in Prisons Manager at
+        <pep-pharos-link href="Mailto:stacy.burnett@ithaka.org"
+          >stacy.burnett[at]ithaka.org</pep-pharos-link
+        >
+      </p>
+    </div>
   </section>
 </template>
+<style scoped lang="scss">
+.admin-help {
+  .admin-help__content {
+    max-width: 100%;
+    margin-top: var(--pharos-spacing-2-x);
+  }
+  p {
+    margin-bottom: var(--pharos-spacing-2-x);
+  }
+}
+</style>
