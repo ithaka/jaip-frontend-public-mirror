@@ -2808,9 +2808,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "cypress@npm:15.1.0"
+"cypress@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "cypress@npm:15.2.0"
   dependencies:
     "@cypress/request": "npm:^3.0.9"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -2858,7 +2858,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10c0/af763099acefc037357f73b1233cb45848287127e528f0150da0c5f58df7502fff5be00667d63815f47a1da38b28a4c2495f586ffc174cf31ca4132759fd7343
+  checksum: 10c0/afd9dc9042dc523234f57878ad0d5db2e5dffd502b77374077478512c5ea11338e85188ee6c39eaa7be35e24fa96b21aedd6a3b39b8b6e330218f7c105d9b2e8
   languageName: node
   linkType: hard
 
@@ -3958,10 +3958,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.2.0, globals@npm:^16.3.0":
+"globals@npm:^16.2.0":
   version: 16.3.0
   resolution: "globals@npm:16.3.0"
   checksum: 10c0/c62dc20357d1c0bf2be4545d6c4141265d1a229bf1c3294955efb5b5ef611145391895e3f2729f8603809e81b30b516c33e6c2597573844449978606aad6eb38
+  languageName: node
+  linkType: hard
+
+"globals@npm:^16.4.0":
+  version: 16.4.0
+  resolution: "globals@npm:16.4.0"
+  checksum: 10c0/a14b447a78b664b42f6d324e8675fcae6fe5e57924fecc1f6328dce08af9b2ca3a3138501e1b1f244a49814a732dc60cfc1aa24e714e0b64ac8bd18910bfac90
   languageName: node
   linkType: hard
 
@@ -4438,11 +4445,11 @@ __metadata:
     "@vuepic/vue-datepicker": "npm:^11.0.2"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
     axios: "npm:^1.11.0"
-    cypress: "npm:^15.1.0"
+    cypress: "npm:^15.2.0"
     eslint: "npm:^9.35.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-cypress: "npm:^5.1.1"
-    globals: "npm:^16.3.0"
+    globals: "npm:^16.4.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.5.1"
     jsdom: "npm:^26.1.0"
