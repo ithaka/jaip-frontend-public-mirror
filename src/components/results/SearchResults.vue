@@ -435,6 +435,7 @@ const showDownloadButton = computed(() => {
               </div>
               <pep-pharos-checkbox-group
                 :value="bulkApproveReversals"
+                aria-describedby="bulk-approve-modal-description"
                 @input="handleBulkApproveReversals"
               >
                 <ul>
@@ -447,6 +448,7 @@ const showDownloadButton = computed(() => {
                     <div>
                       <div class="display-flex flex-direction-row">
                         <pep-pharos-icon
+                          id="bulk-approve-modal-description"
                           name="exclamation-inverse"
                           :a11y-title="'Previously Denied Material'"
                           class="mr-3 mb-0 fill-coral-50"
