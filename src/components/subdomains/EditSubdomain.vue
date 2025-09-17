@@ -70,7 +70,7 @@ const errorMessage = computed(() => {
         </pep-pharos-input-group>
       </form>
 
-      <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="emit('close')">
+      <pep-pharos-button slot="footer" variant="secondary" data-modal-close="">
         Cancel
       </pep-pharos-button>
 

@@ -152,7 +152,7 @@ const handleEditSubdomain = async (i: number) => {
                 icon-left="edit"
                 full-width
                 class="mb-2"
-                @click="showEditSubdomainModal[i] = true"
+                :data-modal-id="`edit-subdomain-modal-${subdomain.id}`"
               >
                 Edit
               </pep-pharos-button>

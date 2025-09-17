@@ -43,23 +43,9 @@ const useApproveModal = ref(
   showApprove && (featureDetails.value['approve_requests']?.groups?.length || 0) > 1,
 )
 
-const showApproveModal = ref(false)
-const approveModalKey = ref(0)
 const approveGroups = ref(featureDetails.value['approve_requests']?.groups || [])
 
 selectedGroups.value['approve_requests'] = approveGroups.value
-const openApproveModal = () => {
-  if (useApproveModal.value) {
-    approveModalKey.value++
-    showApproveModal.value = true
-  } else {
-    handleSingleGroupApproval()
-  }
-}
-const closeApproveModal = () => {
-  showApproveModal.value = false
-  approveModalKey.value++
-}
 
 const router = useRouter()
 const route = useRoute()
@@ -95,7 +81,7 @@ const handleApproval = async () => {
     const msg = 'There was an error and your approval was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
-    closeApproveModal()
+    emit('close')
   }
 }
 const handleSingleGroupApproval = () => {
@@ -116,22 +102,25 @@ const selectorGroupOptions = ref(
 
 <template>
   <pep-pharos-button
-    v-if="showApprove"
+    v-if="showApprove && !useApproveModal"
     full-width
     class="mb-2 lg-mr-3"
     icon-left="checkmark-inverse"
-    @click.prevent.stop="openApproveModal"
+    @click.prevent.stop="handleSingleGroupApproval"
+  >
+    <span>Approve</span>
+  </pep-pharos-button>
+  <pep-pharos-button
+    v-else-if="useApproveModal"
+    full-width
+    class="mb-2 lg-mr-3"
+    icon-left="checkmark-inverse"
+    :data-modal-id="`approve-modal-${doc.iid}`"
   >
     <span>Approve</span>
   </pep-pharos-button>
   <Teleport to="body">
-    <pep-pharos-modal
-      :id="`approve-modal-${doc.iid}`"
-      :key="approveModalKey"
-      header="Approve material"
-      size="large"
-      :open="showApproveModal"
-    >
+    <pep-pharos-modal :id="`approve-modal-${doc.iid}`" header="Approve material" size="large">
       <p slot="description">
         <span
           >The record will show that {{ entityName }} approved <em>{{ doc.title }}</em> on
@@ -161,7 +150,7 @@ const selectorGroupOptions = ref(
         At least one group must be selected
       </span>
 
-      <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeApproveModal">
+      <pep-pharos-button slot="footer" variant="secondary" data-modal-close="">
         Cancel
       </pep-pharos-button>
 
