@@ -37,8 +37,9 @@ coreStore.$api.log({
       <pep-pharos-tabs class="cols-12">
         <pep-pharos-tab
           v-for="(key, index) in filteredOrderedCategories"
-          :key="`group-${index}`"
-          :data-panel-id="`group-${index}`"
+          :id="`group-tab-${index}`"
+          :key="`group-tab-${index}`"
+          :data-panel-id="`group-panel-${index}`"
         >
           <pep-pharos-heading :level="1" preset="1--bold">
             {{ key }}
@@ -46,7 +47,7 @@ coreStore.$api.log({
         </pep-pharos-tab>
         <pep-pharos-tab-panel
           v-for="(key, index) in filteredOrderedCategories"
-          :id="`group-${index}`"
+          :id="`group-panel-${index}`"
           :key="`group-panel-${index}`"
           slot="panel"
         >
