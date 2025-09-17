@@ -86,9 +86,8 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
           .as('auth')
-        
-          cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
+        cy.visit('/management?term=&page=1')
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -117,7 +116,7 @@ describe('Management', () => {
         })
       })
 
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -138,9 +137,8 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_group__response.json' })
           .as('auth')
-        
-          cy.visit('/management?term=&page=1')
-          cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
+        cy.visit('/management?term=&page=1')
+        cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
       it('Has group management panel', () => {
         cy.get('pep-pharos-tab')
@@ -150,7 +148,7 @@ describe('Management', () => {
       it('Does not allow adding groups', () => {
         cy.contains('Add Group', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -164,6 +162,27 @@ describe('Management', () => {
           .should('not.contain', 'Reactivate')
           .should('not.contain', 'Clear History')
       })
+      it('Does not allow blank inputs', () => {
+        cy.get('.group-card')
+          .first()
+          .find('pep-pharos-button')
+          .contains('edit', { matchCase: false })
+          .click()
+
+        cy.get('[data-cy="edit-group-modal"]').should('be.visible')
+        cy.get('[data-cy="edit-group-modal"]').contains('Submit', { matchCase: false }).should('be.visible')
+        cy.get('[data-cy="edit-group-modal"]')
+          .find('form')
+          .find('pep-pharos-input-group')
+          .shadow()
+          .find('input')
+        cy.get('[data-cy="edit-group-modal"]').contains('Submit', { matchCase: false }).click()
+        cy.get('[data-cy="edit-group-modal"]')
+          .find('form')
+          .find('pep-pharos-input-group')
+          .should('have.prop', 'invalidated')
+      })
+
       it('Allows editing', () => {
         cy.get('.group-card')
           .first()
@@ -171,30 +190,22 @@ describe('Management', () => {
           .contains('edit', { matchCase: false })
           .click()
 
-        cy.get('#edit-group-modal').should('be.visible')
-        cy.get('#edit-group-modal').contains('Submit', { matchCase: false }).should('be.visible')
-        cy.get('#edit-group-modal')
+        cy.get('[data-cy="edit-group-modal"]').should('be.visible')
+        cy.get('[data-cy="edit-group-modal"]').contains('Submit', { matchCase: false }).should('be.visible')
+        cy.get('[data-cy="edit-group-modal"]')
           .find('form')
           .find('pep-pharos-input-group')
           .shadow()
-          .find('input')
-          .clear()
-        cy.get('#edit-group-modal').contains('Submit', { matchCase: false }).click()
-        cy.get('#edit-group-modal')
-          .find('form')
-          .find('pep-pharos-input-group')
-          .should('have.prop', 'invalidated')
-        cy.get('#edit-group-modal')
-          .find('form')
-          .find('pep-pharos-input-group')
+        cy.get('[data-cy="edit-group-modal"] form pep-pharos-input-group')
           .shadow()
-          .find('input')
-          .type('t')
-        cy.get('#edit-group-modal').contains('Submit', { matchCase: false }).click()
+          .find('input').then(($inputs) => {
+            cy.wrap($inputs[0]).clear()
+            cy.wrap($inputs[0]).type('t', {force: true})
+          })
+        cy.get('[data-cy="edit-group-modal"]').contains('Submit', { matchCase: false }).click()
         cy.fixture('auth/groups/edit_group__request.json').then((request) => {
           cy.wait('@editGroup').its('request.body').should('deep.eq', request)
         })
-  
       })
 
     })
@@ -203,7 +214,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_delete_group__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
@@ -215,7 +226,7 @@ describe('Management', () => {
       it('Does not allow adding groups', () => {
         cy.contains('Add Group', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -259,7 +270,7 @@ describe('Management', () => {
         cy.fixture('auth/groups/delete_group__request.json').then((request) => {
           cy.wait('@deleteGroup').its('request.body').should('deep.eq', request)
         })
-  
+
       })
 
     })
@@ -271,7 +282,7 @@ describe('Management', () => {
 
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_group__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroupsInactive'])
       })
@@ -283,7 +294,7 @@ describe('Management', () => {
       it('Allows adding groups', () => {
         cy.contains('Add Group', { matchCase: false }).should('be.visible')
       })
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -310,7 +321,7 @@ describe('Management', () => {
         cy.fixture('auth/groups/reactivate_group__request.json').then((request) => {
           cy.wait('@reactivateGroup').its('request.body').should('deep.eq', request)
         })
-  
+
       })
 
     })
@@ -319,7 +330,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_clear_history__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getGroups'])
       })
@@ -331,7 +342,7 @@ describe('Management', () => {
       it('Allows adding groups', () => {
         cy.contains('Add Group', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -375,7 +386,7 @@ describe('Management', () => {
         cy.fixture('auth/groups/clear_history__request.json').then((request) => {
           cy.wait('@clearHistory').its('request.body').should('deep.eq', request)
         })
-  
+
       })
 
     })
@@ -384,7 +395,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_manage_superusers__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUsers'])
       })
@@ -438,7 +449,7 @@ describe('Management', () => {
           cy.wait(['@auth', '@getUsers'])
         })
       })
-      
+
       it('Allows editing users', () => {
         cy.contains('Edit', { matchCase: false })
           .first()
@@ -477,7 +488,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_create_group_admins__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getUsers'])
       })
@@ -558,7 +569,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_add_subdomain__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomains'])
       })
@@ -589,7 +600,7 @@ describe('Management', () => {
         })
       })
 
-      
+
       it('Shows subdomain list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -609,7 +620,7 @@ describe('Management', () => {
       beforeEach(() => {
         cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_edit_subdomain__response.json' })
           .as('auth')
-        
+
           cy.visit('/management?term=&page=1')
           cy.wait(['@managementPage', '@alerts', '@env', '@auth', '@getFeatures', '@getSubdomains'])
       })
@@ -621,7 +632,7 @@ describe('Management', () => {
       it('Does not allow adding subdomains', () => {
         cy.contains('Add Subdomain', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows group list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -664,7 +675,7 @@ describe('Management', () => {
         cy.fixture('auth/subdomains/edit_subdomain__request.json').then((request) => {
           cy.wait('@editSubdomain').its('request.body').should('deep.eq', request)
         })
-  
+
       })
 
     })
@@ -684,7 +695,7 @@ describe('Management', () => {
       it('Does not allow adding subdomains', () => {
         cy.contains('Add Subdomain', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows subdomain list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -727,7 +738,7 @@ describe('Management', () => {
         cy.fixture('auth/groups/delete_group__request.json').then((request) => {
           cy.wait('@deleteSubdomain').its('request.body').should('deep.eq', request)
         })
-  
+
       })
     })
 
@@ -749,7 +760,7 @@ describe('Management', () => {
       it('Allows adding subdomains', () => {
         cy.contains('Add Subdomain', { matchCase: false }).should('be.visible')
       })
-      
+
       it('Shows subdomain list', () => {
         cy.get('.group-card')
         .should('have.length', 2)
@@ -775,7 +786,7 @@ describe('Management', () => {
         cy.fixture('auth/subdomains/reactivate_subdomain__request.json').then((request) => {
           cy.wait('@reactivateSubdomain').its('request.body').should('deep.eq', request)
         })
-  
+
       })
 
     })
@@ -840,7 +851,7 @@ describe('Management', () => {
         })
       })
 
-      
+
       it('Shows feature list', () => {
         cy.get('.group-card')
         .should('have.length', 15)
@@ -872,7 +883,7 @@ describe('Management', () => {
       it('Does not allow adding features', () => {
         cy.contains('Add Feature', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows features list', () => {
         cy.get('.group-card')
         .should('have.length', 15)
@@ -957,7 +968,7 @@ describe('Management', () => {
           .shadow()
           .find('input')
           .type('t')
-    
+
         cy.get('#edit-feature-modal-1')
           .find('form')
           .find('pep-pharos-checkbox#admin_checkbox-1')
@@ -972,7 +983,7 @@ describe('Management', () => {
         cy.fixture('auth/features/edit_feature__request.json').then((request) => {
           cy.wait('@editFeature').its('request.body').should('deep.eq', request)
         })
-  
+
       })
     })
 
@@ -991,7 +1002,7 @@ describe('Management', () => {
       it('Does not allow adding features', () => {
         cy.contains('Add Feature', { matchCase: false }).should('not.exist')
       })
-      
+
       it('Shows features list', () => {
         cy.get('.group-card')
         .should('have.length', 15)
@@ -1087,7 +1098,7 @@ describe('Management', () => {
         cy.fixture('auth/features/reactivate_feature__request.json').then((request) => {
           cy.wait('@reactivateFeature').its('request.body').should('deep.eq', request)
         })
-  
+
       })
     })
 
@@ -1152,7 +1163,7 @@ describe('Management', () => {
         })
       })
 
-      
+
       it('Shows feature list', () => {
         cy.get('.group-card')
         .should('have.length', 11)
@@ -1186,7 +1197,7 @@ describe('Management', () => {
           .contains('Add Feature')
           .should('not.exist')
       })
-      
+
       it('Shows features list', () => {
         cy.get('.group-card')
         .should('have.length', 11)
@@ -1271,7 +1282,7 @@ describe('Management', () => {
           .shadow()
           .find('input')
           .type('t')
-    
+
         cy.get('#edit-feature-modal-1')
           .find('form')
           .find('pep-pharos-checkbox#admin_checkbox-1')
@@ -1286,7 +1297,7 @@ describe('Management', () => {
         cy.fixture('auth/features/edit_ungrouped_feature__request.json').then((request) => {
           cy.wait('@editUngroupedFeature').its('request.body').should('deep.eq', request)
         })
-  
+
       })
     })
 
@@ -1307,7 +1318,7 @@ describe('Management', () => {
           .contains('Add Feature', { matchCase: false })
           .should('not.exist')
       })
-      
+
       it('Shows features list', () => {
         cy.get('.group-card')
         .should('have.length', 11)
@@ -1403,7 +1414,7 @@ describe('Management', () => {
         cy.fixture('auth/features/reactivate_feature__request.json').then((request) => {
           cy.wait('@reactivateUngroupedFeature').its('request.body').should('deep.eq', request)
         })
-  
+
       })
     })
 

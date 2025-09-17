@@ -248,15 +248,18 @@ const handleDenial = async () => {
         </pep-pharos-radio-button>
         <pep-pharos-radio-button :value="otherReason" :checked="otherReason === selectedReason">
           <span slot="label">
+            Other:
             <pep-pharos-text-input
               :value="otherReason"
               :invalidated="invalidReason"
-              :disabled="otherReason !== selectedReason"
               :message="invalidReason ? 'A reason is required' : ''"
+              :hideLabel="true"
+              placeholder="Describe reason"
               @focus="selectedReason = otherReason"
               @input="handleReasonInput"
               @click.prevent.stop
-            />
+              ><span slot="label" class="sr-only"> Describe reason </span>
+            </pep-pharos-text-input>
           </span>
         </pep-pharos-radio-button>
       </pep-pharos-radio-group>

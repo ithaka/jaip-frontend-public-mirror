@@ -14,6 +14,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  modalId: {
+    type: String,
+    required: true,
+  },
 })
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {
@@ -43,22 +47,17 @@ const errorMessage = computed(() => {
 </script>
 <template>
   <Teleport to="div#app">
-    <pep-pharos-modal
-      id="edit-group-modal"
-      header="Edit Group"
-      :open="props.show"
-      @pharos-modal-closed="emit('close')"
-    >
+    <pep-pharos-modal :id="modalId" header="Edit Group" data-cy="edit-group-modal">
       <p slot="description" class="mb-3">Edit {{ props.name }} by adding a unique new name.</p>
       <form @submit.prevent.stop="submitForm">
         <input type="text" hidden />
         <pep-pharos-input-group
-          :id="`group_name`"
+          :id="`edit_${props.groupId}`"
           :value="newName"
           :placeholder="'Enter group name'"
           :message="errorMessage"
           :invalidated="invalidName"
-          :name="`group_name`"
+          :name="`edit_${props.groupId}`"
           maxlength="255"
           @keydown.enter.prevent.stop="submitForm"
           @input="((duplicateName = false), (touchedName = true), (newName = $event.target.value))"

@@ -144,11 +144,11 @@ const handleClearHistory = async (i: number) => {
             <div class="buttons">
               <pep-pharos-button
                 v-if="ungroupedFeatures['edit_group']?.enabled"
+                :data-modal-id="`edit-group-modal-${i}`"
                 variant="primary"
                 icon-left="edit"
                 full-width
                 class="mb-2"
-                @click="showEditGroupModal[i] = true"
               >
                 Edit
               </pep-pharos-button>
@@ -172,7 +172,6 @@ const handleClearHistory = async (i: number) => {
               >
                 Reactivate
               </pep-pharos-button>
-
               <pep-pharos-button
                 v-if="ungroupedFeatures['clear_history']?.enabled"
                 variant="secondary"
@@ -212,11 +211,10 @@ const handleClearHistory = async (i: number) => {
         />
         <EditGroup
           v-if="ungroupedFeatures['edit_group']?.enabled"
-          :show="showEditGroupModal[i]"
           :name="group.name || ''"
           :group-id="group.id || 0"
+          :modal-id="`edit-group-modal-${i}`"
           @submit="handleEditGroup(i)"
-          @close="showEditGroupModal[i] = false"
         />
       </div>
       <pep-pharos-pagination
