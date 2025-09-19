@@ -895,19 +895,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ithaka/pharos@npm:^14.18.1":
-  version: 14.18.1
-  resolution: "@ithaka/pharos@npm:14.18.1"
+"@ithaka/pharos@npm:^14.19.0":
+  version: 14.19.0
+  resolution: "@ithaka/pharos@npm:14.19.0"
   dependencies:
     "@floating-ui/dom": "npm:^1.7.2"
     "@ithaka/focus-trap": "npm:2.0.1"
     "@lit-labs/scoped-registry-mixin": "npm:^1.0.4"
     "@open-wc/dedupe-mixin": "npm:^2.0.1"
     lit: "npm:^3.3.1"
-    uuid: "npm:^11.1.0"
+    uuid: "npm:^13.0.0"
   peerDependencies:
     sass: ^1.89.1
-  checksum: 10c0/cc5e9edac1e5b787a6a2155839d50492fe8707d0d604ad2ab22af6d2baa595ce42fdcd67d3adfae3c7fd7061cc6d3f2abd1a067e9caf59169bb6cd1f4062f85c
+  checksum: 10c0/c6a29374cc745f81234958c169e9f790fa282731eeab177ca433593f2ce8c9012a96199f19ac6b022ff4f43755bce467e819443cc95023527889c332074dc592
   languageName: node
   linkType: hard
 
@@ -1602,12 +1602,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.18.1":
-  version: 22.18.1
-  resolution: "@types/node@npm:22.18.1"
+"@types/node@npm:^22.18.4":
+  version: 22.18.6
+  resolution: "@types/node@npm:22.18.6"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/1912b0ea6cb9ef59722b0fed64652388e13b41d52569c16198f1278a882837bbf4c8a4ec913e852893356f07c0c44b4e00fbca289ac7222741d03449104e22fe
+  checksum: 10c0/7ba190da2e64e56c59270661af8cd682c830a1375b6f965ab153be90baabfdaa867aa1d63f87b42de80956996d46dfe1cf93ecefe982d9a16e485b6756949f9a
   languageName: node
   linkType: hard
 
@@ -2335,7 +2335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.11.0":
+"axios@npm:^1.11.0, axios@npm:^1.12.2":
   version: 1.12.2
   resolution: "axios@npm:1.12.2"
   dependencies:
@@ -4433,10 +4433,10 @@ __metadata:
   dependencies:
     "@babel/types": "npm:^7.28.4"
     "@ithaka/eslint-config-vue": "npm:^5.1.2"
-    "@ithaka/pharos": "npm:^14.18.1"
+    "@ithaka/pharos": "npm:^14.19.0"
     "@tsconfig/node22": "npm:^22.0.2"
     "@types/jsdom": "npm:^21.1.7"
-    "@types/node": "npm:^22.18.1"
+    "@types/node": "npm:^22.18.4"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.1"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.1"
@@ -4444,7 +4444,7 @@ __metadata:
     "@vue/tsconfig": "npm:^0.8.1"
     "@vuepic/vue-datepicker": "npm:^11.0.2"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.11.0"
+    axios: "npm:^1.12.2"
     cypress: "npm:^15.2.0"
     eslint: "npm:^9.35.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -6777,15 +6777,6 @@ __metadata:
   dependencies:
     inherits: "npm:2.0.3"
   checksum: 10c0/d29f6893e406b63b088ce9924da03201df89b31490d4d011f1c07a386ea4b3dbe907464c274023c237da470258e1805d806c7e4009a5974cd6b1d474b675852a
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "uuid@npm:11.1.0"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 10c0/34aa51b9874ae398c2b799c88a127701408cd581ee89ec3baa53509dd8728cbb25826f2a038f9465f8b7be446f0fbf11558862965b18d21c993684297628d4d3
   languageName: node
   linkType: hard
 
