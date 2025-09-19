@@ -170,28 +170,18 @@ const onCloseSidenav = () => {
 </template>
 
 <style scoped lang="scss">
-.header__top {
-  padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  transition:
-    background-color 0.3s ease-in-out,
-    border-color 0.3s ease-in-out;
-}
-
 .side-navigation {
   &__top {
     display: grid;
     grid-template-columns: auto 1.5rem;
-    grid-template-rows: auto;
     padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-one-quarter-x);
   }
-  &__bottom {
-  }
 }
+.side-navigation::-webkit-scrollbar,
+.side-navigation__background::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
 .side-navigation__background {
   position: fixed;
   top: 0;
