@@ -3,5 +3,4 @@
 CVE-2025-32414 exp:2025-08-30
 
 # We do not receive XML documents, so this isn't relevant.
-CVE-2025-32415 exp:2025-08-30
-
+CVE-2025-59375 exp:2025-09-30
