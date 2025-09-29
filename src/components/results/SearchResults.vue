@@ -15,6 +15,7 @@ import type { Journal } from '@/interfaces/Journal'
 import type { AxiosResponse } from 'axios'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 import type { SearchResponse } from '@/interfaces/SearchResponse'
+import SkipToDestination from '../SkipToDestination.vue'
 
 const props = defineProps({
   requestsPage: {
@@ -336,6 +337,9 @@ const showDownloadButton = computed(() => {
     role="region"
     :aria-label="`search results page ${pageNo}`"
   >
+    <SkipToDestination v-if="!requestsPage" target="filters">
+      This is search results. Skip to search filters.
+    </SkipToDestination>
     <div class="my-5 pt-5 search-results" :class="{ 'request-results': requestsPage }">
       <div
         class="search-results-header results-list mx-0"

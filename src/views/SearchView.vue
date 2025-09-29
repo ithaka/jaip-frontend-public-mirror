@@ -12,6 +12,7 @@ import type { Discipline } from '@/interfaces/Discipline'
 import type CheckboxEvent from '@/interfaces/Events/Checkbox'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { AxiosResponse } from 'axios'
+import SkipToDestination from '@/components/SkipToDestination.vue'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
@@ -236,7 +237,10 @@ api.log({
 <template>
   <main>
     <div class="search-view">
-      <div class="search-facets">
+      <div id="filters" class="search-facets">
+        <SkipToDestination target="results"
+          >This is search filters. Skip to search results.</SkipToDestination
+        >
         <div class="search-facets--mobile">
           <pep-pharos-button full-width @click="showSearchFilters = !showSearchFilters">
             {{ showSearchFilters ? 'Hide Search Filters' : 'Show Search Filters' }}

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SkipToDestination from '@/components/SkipToDestination.vue'
+
 defineProps({
   groups: {
     type: String,
@@ -24,6 +26,7 @@ defineProps({
 </script>
 
 <template>
+  <SkipToDestination target="main-content"> Skip to main content </SkipToDestination>
   <pep-pharos-dropdown-menu-nav-category
     id="top-menu-category"
     data-dropdown-menu-id="top-menu"
