@@ -8,7 +8,6 @@ import RequestWarning from '@/components/headers/RequestWarning.vue'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
-import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 import JstorLogo from './JstorLogo.vue'
 
@@ -57,9 +56,6 @@ defineProps({
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
 
-const coreStore = useCoreStore()
-const { alert } = storeToRefs(coreStore)
-
 const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 
@@ -86,11 +82,6 @@ const onCloseSidenav = () => {
 <template>
   <div>
     <div class="top my-3 flex-direction-column">
-      <div class="px-3">
-        <pep-pharos-alert v-if="alert && alert.status" :status="alert.status">
-          {{ alert.text }}
-        </pep-pharos-alert>
-      </div>
       <ProviderBar
         :groups="groups"
         :is-admin-subdomain="isAdminSubdomain"

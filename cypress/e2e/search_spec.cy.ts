@@ -36,7 +36,7 @@ describe('Search', () => {
       .as('disciplines')
     cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
       .as('auth')
-    cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+    cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
       .as('alerts')
     cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
       .as('env')
@@ -95,7 +95,7 @@ describe('Search', () => {
         beforeEach(() => {
           cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
             .as('search')
-          cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+          cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
             .as('alerts')
           handleLocation("/search?term=mary+mcleod+bethune", cy, 'searchPageWithQuery', 'pep')
         })

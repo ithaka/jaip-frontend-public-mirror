@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios'
-import type { PaginatedQuery } from '@/interfaces/Queries'
+import type { PaginatedQuery, PaginatedGroupedQuery } from '@/interfaces/Queries'
 import type { Feature, FeatureRequest, FeatureResponse } from '@/interfaces/Features'
 import type { SubdomainRequest } from '@/interfaces/Subdomains'
 import type { EntitiesArgs } from '@/interfaces/AccountManagement'
@@ -17,6 +17,7 @@ import type { SubdomainsResponse } from './Subdomains'
 import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
 import type { Log } from './Log'
 import type { RestrictArgs, UnrestrictArgs } from './RestrictArgs'
+import type { Alert } from './Alert'
 interface Documents {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown, unknown>>
   pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
@@ -47,6 +48,19 @@ interface GlobalRestricts {
     get: () => Promise<AxiosResponse<{ last_updated: Date | undefined }, unknown>>
   }
 }
+
+interface AlertsResponse {
+  alerts: Alert[]
+  total: number
+}
+interface Alerts {
+  get: () => Promise<AxiosResponse<AlertsResponse, unknown>>
+  getPaginated: (arg: PaginatedGroupedQuery) => Promise<AxiosResponse<AlertsResponse, unknown>>
+  add: (arg: Alert) => Promise<AxiosResponse<Alert, unknown>>
+  edit: (arg: Alert) => Promise<AxiosResponse<Alert, unknown>>
+  delete: (id: number) => Promise<AxiosResponse<unknown, unknown>>
+}
+
 export default interface ApiObject {
   log: (arg: Log) => void
   auth: {
@@ -101,4 +115,5 @@ export default interface ApiObject {
   approvals: Approvals
   global_restricts: GlobalRestricts
   documents: Documents
+  alerts: Alerts
 }

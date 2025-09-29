@@ -6,7 +6,7 @@ describe('Account Management', () => {
   context('For admins', () => {
     beforeEach(() => {
       handleLocation('/account?term=&page=1', cy, 'accountPage', 'pep-admin')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
         cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
@@ -543,7 +543,7 @@ describe('Account Management', () => {
   context('For admins in multiple groups', () => {
     beforeEach(() => {
       handleLocation('/account?term=&page=1', cy, 'accountPage', 'pep-admin')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')

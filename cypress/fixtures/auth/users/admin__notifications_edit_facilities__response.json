@@ -1,0 +1,75 @@
+{
+  "name": "Edit Only Admin",
+  "id": 7,
+  "type": "users",
+  "groups": [
+    {
+      "id": 1,
+      "name": "Ithaka",
+      "role": "admin",
+      "features": {
+        "add_or_edit_users": false,
+        "approve_requests": false,
+        "bulk_approve": false,
+        "deny_requests": false,
+        "download_pdf": false,
+        "edit_facilities": true,
+        "get_facilities": true,
+        "get_users": false,
+        "is_hidden_user": false,
+        "manage_facilities": false,
+        "print_pdf": false,
+        "remove_users": false,
+        "undo_bulk_approve": false,
+        "use_protected_features": false,
+        "view_abstract": false,
+        "view_book_description": false,
+        "view_hidden_users": false,
+        "view_snippet": false,
+        "view_document": false,
+        "view_pdf": false,
+        "test_feature": false
+      }
+    }
+  ],
+  "facilities": [
+    {
+      "id": 4,
+      "name": "ITHAKA Facility",
+      "contact": "ithaka@example.org",
+      "type": "facilities",
+      "ungrouped_features": {},
+      "groups": [
+        {
+          "id": 1,
+          "name": "Ithaka",
+          "role": "admin",
+          "features": {
+            "add_or_edit_users": false,
+            "approve_requests": false,
+            "bulk_approve": false,
+            "deny_requests": false,
+            "download_pdf": false,
+            "edit_facilities": true,
+            "get_facilities": true,
+            "get_users": false,
+            "is_hidden_user": false,
+            "manage_facilities": false,
+            "print_pdf": false,
+            "remove_users": false,
+            "submit_requests": false,
+            "undo_bulk_approve": false,
+            "use_protected_features": false,
+            "view_abstract": false,
+            "view_book_description": false,
+            "view_document": false,
+            "view_hidden_users": false,
+            "view_pdf": false,
+            "view_snippet": false
+          }
+        }
+      ]
+    }
+  ],
+  "ungrouped_features": {}
+}

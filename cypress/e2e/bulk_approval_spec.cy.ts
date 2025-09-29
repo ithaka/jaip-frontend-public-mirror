@@ -10,7 +10,7 @@ describe('Bulk approval', () => {
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
@@ -81,7 +81,7 @@ describe('Bulk approval', () => {
         .as('bulk')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
@@ -426,7 +426,7 @@ describe('Bulk approval', () => {
         .as('bulk')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')
@@ -614,7 +614,7 @@ describe('Bulk approval', () => {
         .as('bulk')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
         .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep-admin')
       cy.visit('/search?term=&page=1')

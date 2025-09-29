@@ -10,7 +10,7 @@ describe('Main site content', () => {
           .as('auth')
         cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
           .as('env')
-        cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+        cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
           .as('subdomains')
@@ -52,6 +52,7 @@ describe('Main site content', () => {
           .as('alerts')
         cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
           .as('subdomains')
+        handleLocation('/', cy, 'index', 'pep')
       })
       it('includes alert', () => {
         cy.visit('/')

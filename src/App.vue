@@ -11,6 +11,8 @@ import MainHeader from '@/components/headers/MainHeader.vue'
 import SmallHeader from '@/components/headers/SmallHeader.vue'
 import TheFooter from './components/footer/TheFooter.vue'
 import type { StringString } from '@/interfaces/BasicObjects'
+import NotificationsBar from './components/headers/NotificationsBar.vue'
+import { useNotificationsStore } from './stores/notifications'
 
 const coreStore = useCoreStore()
 const { isAdminSubdomain, routePath, routeQuery, toastKey, environment, isSpinning } =
@@ -26,8 +28,12 @@ const {
   groups,
   features,
 } = storeToRefs(userStore)
+
 const searchStore = useSearchStore()
 const { searching } = storeToRefs(searchStore)
+
+const notificationsStore = useNotificationsStore()
+const { notifications } = storeToRefs(notificationsStore)
 
 const route = useRoute()
 const redirectToParams = () => {
@@ -130,6 +136,10 @@ const truncatedGramaticalGroupsList = computed(() => {
       @logout="logout"
     />
 
+    <NotificationsBar
+      v-if="!isUnauthenticated && notifications.length"
+      :notifications="notifications"
+    />
     <!-- Main Content -->
     <RouterView id="main-content" class="main" />
     <TheFooter

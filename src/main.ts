@@ -15,6 +15,7 @@ import { useSearchStore } from './stores/search'
 import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize } from '@/utils/helpers'
+import { useNotificationsStore } from './stores/notifications'
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
@@ -42,13 +43,13 @@ const coreStore = useCoreStore()
 const featuresStore = useFeaturesStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()
+const notificationsStore = useNotificationsStore()
 
 // Make store values reactive
 const {
   subdomain,
   routePath,
   routeQuery,
-  alert,
   customSubdomains,
   hasValidSubdomain,
   isAdminSubdomain,
@@ -161,10 +162,7 @@ const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
 const auth = async (app: App) => {
   // Prepare Stores
   const api = app.config.globalProperties.$api
-  const alerts = await api.auth.alerts()
-  if (alerts.data) {
-    alert.value = alerts.data
-  }
+  await notificationsStore.getDisplayNotifications()
   if (!!subdomain.value && !hasValidSubdomain.value) {
     const subdomains = await api.auth.validateSubdomains()
     if (subdomains.data && subdomains.data.subdomain) {

@@ -12,7 +12,7 @@ describe('Media Review', () => {
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
     })
 
@@ -281,7 +281,7 @@ describe('Media Review', () => {
         .as('disciplines')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' })
         .as('search')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
     })
 
@@ -307,7 +307,7 @@ describe('Media Review', () => {
     beforeEach(() => {
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')

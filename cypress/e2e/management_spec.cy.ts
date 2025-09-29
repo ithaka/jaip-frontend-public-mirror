@@ -6,7 +6,7 @@ describe('Management', () => {
   context('For admins', () => {
     beforeEach(() => {
       handleLocation('/management?term=&page=1', cy, 'managementPage', 'pep-admin')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')

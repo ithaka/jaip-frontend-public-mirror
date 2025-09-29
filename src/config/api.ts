@@ -30,7 +30,11 @@ export const routes = {
     },
   },
   alerts: {
-    get: `${global_route_prefix_versioned}/alerts`,
+    get: `${global_route_prefix}/v3/alerts`,
+    getPaginated: `${global_route_prefix}/v3/alerts/get`,
+    add: `${global_route_prefix}/v3/alerts`,
+    edit: `${global_route_prefix}/v3/alerts`,
+    delete: `${global_route_prefix}/v3/alerts`,
   },
   validateSubdomains: {
     get: `${global_route_prefix_versioned}/subdomains/validate`,
@@ -259,5 +263,12 @@ export default ($axios: AxiosInstance): ApiObject => ({
         responseType: 'blob',
       })
     },
+  },
+  alerts: {
+    get: () => $axios.get(routes.alerts.get),
+    getPaginated: (data) => $axios.post(routes.alerts.getPaginated, data),
+    add: (data) => $axios.post(routes.alerts.add, data),
+    edit: (data) => $axios.patch(routes.alerts.edit, data),
+    delete: (id) => $axios.delete(routes.alerts.delete, { data: { id } }),
   },
 })

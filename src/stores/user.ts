@@ -141,6 +141,14 @@ export const useUserStore = defineStore('user', {
         return map
       }, new Map<number, Group>())
     },
+    facilityMap(): Map<number, Entity> {
+      return this.facilities.reduce((map, facility) => {
+        if (facility.id) {
+          map.set(facility.id, facility)
+        }
+        return map
+      }, new Map<number, Entity>())
+    },
     isAdmin(): boolean {
       // If the user has access to admin-only features, then the user is an admin
       return this.groups.some((group) => hasAdminFeatures(group))
@@ -299,6 +307,44 @@ export const useUserStore = defineStore('user', {
           facility.groups[0].features['restricted_items_subscription']
         )
       })
+    },
+    canManageFacilities(): boolean {
+      return this.manageableFacilities.length > 0
+    },
+    canEditFacilities(): boolean {
+      return this.editableFacilities.length > 0
+    },
+    changeableFacilities(): number[] {
+      // This returns all the distinct facilities that the user can either manage or edit.
+      return [...new Set([...this.manageableFacilities, ...this.editableFacilities])]
+    },
+    manageableGroups(): number[] {
+      return this.groups
+        .filter((group) => {
+          return group.features['manage_facilities']
+        })
+        .map((group) => group.id)
+    },
+    manageableFacilities(): number[] {
+      return this.facilities
+        .filter((facility) => {
+          return facility.groups?.[0]?.id && this.manageableGroups.includes(facility.groups[0].id)
+        })
+        .map((facility) => facility.id!)
+    },
+    editableGroups(): number[] {
+      return this.groups
+        .filter((group) => {
+          return group.features['edit_facilities']
+        })
+        .map((group) => group.id)
+    },
+    editableFacilities(): number[] {
+      return this.facilities
+        .filter((facility) => {
+          return facility.groups?.[0]?.id && this.editableGroups.includes(facility.groups[0].id)
+        })
+        .map((facility) => facility.id!)
     },
   },
 })

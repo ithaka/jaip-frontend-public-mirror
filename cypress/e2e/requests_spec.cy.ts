@@ -10,7 +10,7 @@ describe('Requests page', () => {
         .as('env')
       cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
         .as('completed')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
       cy.visit('/requests?term=&page=1')
@@ -140,7 +140,7 @@ describe('Requests page', () => {
         .as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
     })
@@ -302,7 +302,7 @@ describe('Requests page', () => {
         .as('pending')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
@@ -773,7 +773,7 @@ describe('Requests page', () => {
         .as('pending')
       cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
           .as('features')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')

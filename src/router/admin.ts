@@ -26,6 +26,16 @@ const config = {
       component: () => import('@/views/RequestsView.vue'),
     },
     {
+      path: '/notifications',
+      name: 'notifications',
+      meta: {
+        group: 'support',
+        requiresAny: ['edit_facilities', 'manage_facilities'],
+        showSearch: true,
+      },
+      component: () => import('@/views/NotificationsView.vue'),
+    },
+    {
       path: '/management',
       name: 'Management',
       meta: {

@@ -6,7 +6,6 @@ import RequestWarning from '@/components/headers/RequestWarning.vue'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
-import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 
 defineProps({
@@ -54,9 +53,6 @@ defineProps({
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
 
-const coreStore = useCoreStore()
-const { alert } = storeToRefs(coreStore)
-
 const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 </script>
@@ -64,11 +60,6 @@ const emit = defineEmits(['logout', 'close'])
   <pep-pharos-header class="pep-pharos-header--main" data-cy="main-header">
     <!-- Top of the page, above the logo and menus -->
     <div slot="top" class="pep-pharos-header__top">
-      <div v-if="alert && alert.status" class="px-3 mb-3">
-        <pep-pharos-alert :status="alert.status">
-          {{ alert.text }}
-        </pep-pharos-alert>
-      </div>
       <ProviderBar
         :groups="groups"
         :is-admin-subdomain="isAdminSubdomain"

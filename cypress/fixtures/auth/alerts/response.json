@@ -1,4 +1,28 @@
 {
-  "text": "Oh, no! This is an alert.",
-  "status": "warning"
+  "alerts": [
+    {
+      "id": 1,
+      "text": "Oh, no!",
+      "status": "warning",
+      "is_active": true,
+      "start_date": "2022-01-01T00:01:01Z",
+      "end_date": "2999-12-31T23:59:59.999Z",
+      "created_at": "2025-09-11T16:19:41.053Z",
+      "updated_at": "2025-09-11T16:19:41.053Z",
+      "alerts_subdomains": [],
+      "alerts_groups": [],
+      "alerts_facilities": [
+        {
+          "facilities": {
+            "jstor_id": "jstor.org",
+            "entities": {
+              "id": 4,
+              "name": "ITHAKA Facility"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "total": 1
 }

@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { ToastStatus } from '@ithaka/pharos/lib/components/toast/pharos-toast'
 import type ApiObject from '@/interfaces/ApiObject'
-import type Alert from '@/interfaces/Alert'
 
 export const useCoreStore = defineStore('core', {
   state: () => {
@@ -25,7 +24,6 @@ export const useCoreStore = defineStore('core', {
       environment: '',
       isSpinning: false,
       $api: {} as ApiObject,
-      alert: {} as Alert,
     }
   },
   getters: {

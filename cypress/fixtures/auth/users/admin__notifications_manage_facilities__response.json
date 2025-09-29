@@ -1,0 +1,140 @@
+{
+  "name": "Facilities Manager",
+  "id": 8,
+  "type": "users",
+  "groups": [
+    {
+      "id": 1,
+      "name": "Ithaka",
+      "role": "admin",
+      "features": {
+        "add_or_edit_users": false,
+        "approve_requests": false,
+        "bulk_approve": false,
+        "deny_requests": false,
+        "download_pdf": false,
+        "edit_facilities": true,
+        "get_facilities": true,
+        "get_users": false,
+        "is_hidden_user": false,
+        "manage_facilities": true,
+        "print_pdf": false,
+        "remove_users": false,
+        "undo_bulk_approve": false,
+        "use_protected_features": false,
+        "view_abstract": false,
+        "view_book_description": false,
+        "view_hidden_users": false,
+        "view_snippet": false,
+        "view_document": false,
+        "view_pdf": false,
+        "test_feature": false
+      }
+    },
+    {
+      "id": 2,
+      "name": "Ilium",
+      "role": "admin",
+      "features": {
+        "add_or_edit_users": false,
+        "approve_requests": false,
+        "bulk_approve": false,
+        "deny_requests": false,
+        "download_pdf": false,
+        "edit_facilities": true,
+        "get_facilities": true,
+        "get_users": false,
+        "is_hidden_user": false,
+        "manage_facilities": true,
+        "print_pdf": false,
+        "remove_users": false,
+        "undo_bulk_approve": false,
+        "use_protected_features": false,
+        "view_abstract": false,
+        "view_book_description": false,
+        "view_hidden_users": false,
+        "view_snippet": false,
+        "view_document": false,
+        "view_pdf": false,
+        "test_feature": false
+      }
+    }
+  ],
+  "facilities": [
+    {
+      "id": 4,
+      "name": "ITHAKA Facility",
+      "contact": "ithaka@example.org",
+      "type": "facilities",
+      "ungrouped_features": {},
+      "groups": [
+        {
+          "id": 1,
+          "name": "Ithaka",
+          "role": "admin",
+          "features": {
+            "add_or_edit_users": false,
+            "approve_requests": false,
+            "bulk_approve": false,
+            "deny_requests": false,
+            "download_pdf": false,
+            "edit_facilities": true,
+            "get_facilities": true,
+            "get_users": false,
+            "is_hidden_user": false,
+            "manage_facilities": true,
+            "print_pdf": false,
+            "remove_users": false,
+            "submit_requests": false,
+            "undo_bulk_approve": false,
+            "use_protected_features": false,
+            "view_abstract": false,
+            "view_book_description": false,
+            "view_document": false,
+            "view_hidden_users": false,
+            "view_pdf": false,
+            "view_snippet": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 406,
+      "name": "ILIUM Facility",
+      "contact": "ilium@example.org",
+      "type": "facilities",
+      "ungrouped_features": {},
+      "groups": [
+        {
+          "id": 2,
+          "name": "Ilium",
+          "role": "admin",
+          "features": {
+            "add_or_edit_users": false,
+            "approve_requests": false,
+            "bulk_approve": false,
+            "deny_requests": false,
+            "download_pdf": false,
+            "edit_facilities": true,
+            "get_facilities": true,
+            "get_users": false,
+            "is_hidden_user": false,
+            "manage_facilities": true,
+            "print_pdf": false,
+            "remove_users": false,
+            "submit_requests": false,
+            "undo_bulk_approve": false,
+            "use_protected_features": false,
+            "view_abstract": false,
+            "view_book_description": false,
+            "view_document": false,
+            "view_hidden_users": false,
+            "view_pdf": false,
+            "view_snippet": false
+          }
+        }
+      ]
+    }
+  ],
+  "ungrouped_features": {}
+}

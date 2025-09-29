@@ -17,7 +17,7 @@ describe('Page Viewer', () => {
           .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
         .as('search')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
@@ -51,7 +51,7 @@ describe('Page Viewer', () => {
           .as('features')
       cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one_restricted__response.json' })
         .as('search')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
@@ -91,7 +91,7 @@ describe('Page Viewer', () => {
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
@@ -123,7 +123,7 @@ describe('Page Viewer', () => {
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep')
 
@@ -155,7 +155,7 @@ describe('Page Viewer', () => {
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
@@ -195,7 +195,7 @@ describe('Page Viewer', () => {
         .as('search')
       cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
         .as('metadata')
-      cy.intercept('GET', routes.alerts.get, { statusCode: 204, body: '' }) // no alerts
+      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
