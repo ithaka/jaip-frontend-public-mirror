@@ -9,23 +9,28 @@ describe('Page Viewer', () => {
   context('As student', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_view_document__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_view_document__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
-        .as('search')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one__response.json',
+      }).as('search')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       handleLocation(route, cy, 'viewer', 'pep')
 
       cy.visit(route)
-
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
 
     // NOTE: There are no pep-pharos-buttons on the student PDF viewer. This means we can't
@@ -43,23 +48,29 @@ describe('Page Viewer', () => {
   context('As student with restricted item', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_media_access__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one_restricted__response.json' })
-        .as('search')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one_restricted__response.json',
+      }).as('search')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       handleLocation(route, cy, 'viewer', 'pep')
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
 
     it('does not show download button', () => {
@@ -71,104 +82,120 @@ describe('Page Viewer', () => {
     })
 
     it('shows item unavailable', () => {
-        cy.get('.search-result')
-          .contains('Item unavailable', { matchCase: false })
-          .should('be.visible')
+      cy.get('.search-result')
+        .contains('Item unavailable', { matchCase: false })
+        .should('be.visible')
     })
   })
-
 
   context('As admin', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__one_group_bulk_approve__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
-        .as('search')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one__response.json',
+      }).as('search')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
 
     it('does not show download button', () => {
-      cy.get('pep-pharos-button').contains("Download", { matchCase: false }).should('not.exist')
+      cy.get('pep-pharos-button').contains('Download', { matchCase: false }).should('not.exist')
     })
 
     it('does not show print button', () => {
-      cy.get('pep-pharos-button').contains("Print", { matchCase: false }).should('not.exist')
+      cy.get('pep-pharos-button').contains('Print', { matchCase: false }).should('not.exist')
     })
-
   })
 
   context('As student with media access', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_media_access__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
-        .as('search')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one__response.json',
+      }).as('search')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep')
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
     it('shows pdf button', () => {
-      cy.get('pep-pharos-button').contains("View PDF", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('be.visible')
     })
     it('shows download button', () => {
-      cy.get('pep-pharos-button').contains("Download", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('Download', { matchCase: false }).should('be.visible')
     })
     it('shows print button', () => {
-      cy.get('pep-pharos-button').contains("Print", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('Print', { matchCase: false }).should('be.visible')
     })
   })
 
   context('As admin with media access', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_access__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__one_group_media_access__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one__response.json' })
-        .as('search')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one__response.json',
+      }).as('search')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
 
     it('shows pdf button', () => {
-      cy.get('pep-pharos-button').contains("View PDF", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('be.visible')
     })
     it('shows download button', () => {
-      cy.get('pep-pharos-button').contains("Download", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('Download', { matchCase: false }).should('be.visible')
       // We used to verify that the file download worked, because the download button created a blob based on the
       // previously downloaded base64 encoded pdf. The download button now uses the same endpoint as the view pdf
       // button, so there's little point in verifying that the download works, because it would only be verifying that
@@ -176,7 +203,7 @@ describe('Page Viewer', () => {
     })
 
     it('shows print button', () => {
-      cy.get('pep-pharos-button').contains("Print", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('Print', { matchCase: false }).should('be.visible')
       // Actual print behavior is very difficult to test, apparently. So long as the button exists, we should be okay though,
       // with the probable exception of IE.
     })
@@ -185,34 +212,37 @@ describe('Page Viewer', () => {
   context('As admin with manage restricted list', () => {
     beforeEach(() => {
       const route = `/page/${iid}/0?term=&page=1`
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__ungrouped_manage_restricted_list_one_group_media_access__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture:
+          'auth/users/admin__ungrouped_manage_restricted_list_one_group_media_access__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__specified_id_limit_one_restricted__response.json' })
-        .as('search')
-      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' })
-        .as('metadata')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/term_given__specified_id_limit_one_restricted__response.json',
+      }).as('search')
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
+        'metadata',
+      )
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
       handleLocation(route, cy, 'viewer', 'pep-admin')
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], { requestTimeout: 20000 })
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
+        requestTimeout: 20000,
+      })
     })
 
     it('shows restricted label', () => {
-      cy.get('pep-pharos-heading').contains("Restricted", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-heading').contains('Restricted', { matchCase: false }).should('be.visible')
     })
     it('shows unrestrict button', () => {
-      cy.get('pep-pharos-button').contains("Unrestrict", { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('Unrestrict', { matchCase: false }).should('be.visible')
     })
   })
-
 })
-
-
-

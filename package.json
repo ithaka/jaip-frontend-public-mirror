@@ -75,6 +75,9 @@
     "src/**/*.vue": [
       "prettier --write src/",
       "eslint ./src --fix"
+    ],
+    "*.{js,ts,json,css,scss,md}": [
+      "prettier --write"
     ]
   },
   "packageManager": "yarn@4.10.3"

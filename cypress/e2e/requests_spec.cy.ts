@@ -4,15 +4,17 @@ import { routes } from '../../src/config/api'
 describe('Requests page', () => {
   context('General', () => {
     beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_no_features__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
+      handleLocation('/requests?term=&page=1', cy, 'requestsPage', 'pep')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
     })
@@ -23,10 +25,7 @@ describe('Requests page', () => {
       cy.get('pep-pharos-dropdown-menu').contains('Oldest', { matchCase: false }).click()
 
       cy.fixture('search/pending__request.json').then(() => {
-        cy.wait('@completed')
-          .its('request.body')
-          .its('sort')
-          .should('eq', 'old')
+        cy.wait('@completed').its('request.body').its('sort').should('eq', 'old')
       })
 
       // Back to newest
@@ -34,21 +33,23 @@ describe('Requests page', () => {
       cy.get('pep-pharos-dropdown-menu').contains('Newest', { matchCase: false }).click()
 
       cy.fixture('search/pending__request.json').then(() => {
-        cy.wait('@completed')
-          .its('request.body')
-          .its('sort')
-          .should('eq', 'new')
+        cy.wait('@completed').its('request.body').its('sort').should('eq', 'new')
       })
     })
 
     it('Can filter by date reviewed', () => {
       // Open date picker
-      cy.get('pep-pharos-button[id="datepicker-button"')
-        .click()
+      cy.get('pep-pharos-button[id="datepicker-button"').click()
       cy.get('.dp--preset-dates').contains('Today', { matchCase: false }).should('be.visible')
-      cy.get('.dp--preset-dates').contains('Last 30 Days', { matchCase: false }).should('be.visible')
-      cy.get('.dp--preset-dates').contains('Last 60 Days', { matchCase: false }).should('be.visible')
-      cy.get('.dp--preset-dates').contains('Last 90 Days', { matchCase: false }).should('be.visible')
+      cy.get('.dp--preset-dates')
+        .contains('Last 30 Days', { matchCase: false })
+        .should('be.visible')
+      cy.get('.dp--preset-dates')
+        .contains('Last 60 Days', { matchCase: false })
+        .should('be.visible')
+      cy.get('.dp--preset-dates')
+        .contains('Last 90 Days', { matchCase: false })
+        .should('be.visible')
 
       // // This test needs to use a date range wholly in the past, because prior
       // // to the 10th, the specified dates won't be selectable.
@@ -57,7 +58,7 @@ describe('Requests page', () => {
 
       cy.get('button[aria-label$="pen months overlay"').click()
       cy.get('div[role="gridcell"]').contains('Jan').click()
-      
+
       // Using regex to ensure that the number is the only value in the cell to avoid
       // selecting 31 when we want 1.
       cy.get('div[role="gridcell"]').contains(/^1$/).click()
@@ -74,88 +75,74 @@ describe('Requests page', () => {
     })
 
     it('Can filter by status', () => {
-      cy.intercept('POST', routes.search.status('pending'), { fixture: 'search/pending__response.json' } )
-        .as('pending')
+      cy.intercept('POST', routes.search.status('pending'), {
+        fixture: 'search/pending__response.json',
+      }).as('pending')
 
       // The responses here will have the same format, so we can just reuse the same fixture.
-      cy.intercept('POST', routes.search.status('denied'), { fixture: 'search/pending__response.json' } )
-        .as('denied')
-      cy.intercept('POST', routes.search.status('approved'), { fixture: 'search/pending__response.json' } )
-        .as('approved')
+      cy.intercept('POST', routes.search.status('denied'), {
+        fixture: 'search/pending__response.json',
+      }).as('denied')
+      cy.intercept('POST', routes.search.status('approved'), {
+        fixture: 'search/pending__response.json',
+      }).as('approved')
 
-        // Filter for pending items
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      // Filter for pending items
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Pending', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Pending', { matchCase: false }).click()
 
-
-      cy.wait('@pending')  // it fires a request to the pending endpoint 
-      cy.contains('Christmas Books')  // it contains pending content
+      cy.wait('@pending') // it fires a request to the pending endpoint
+      cy.contains('Christmas Books') // it contains pending content
 
       // Filter for completed items
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Completed', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Completed', { matchCase: false }).click()
 
-      cy.wait('@completed')  // it fires a request to the completed endpoint 
-      cy.contains('Sacrifices and Achievements')  // it contains completed content
+      cy.wait('@completed') // it fires a request to the completed endpoint
+      cy.contains('Sacrifices and Achievements') // it contains completed content
 
       // Filter for approved items
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Approved', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Approved', { matchCase: false }).click()
 
-      cy.wait('@approved')  // it fires a request to the completed endpoint 
-      cy.contains('Christmas Books')  // it contains completed content
+      cy.wait('@approved') // it fires a request to the completed endpoint
+      cy.contains('Christmas Books') // it contains completed content
 
       // Filter for denied items
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Denied', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Denied', { matchCase: false }).click()
 
-      cy.wait('@denied')  // it fires a request to the completed endpoint 
-      cy.contains('Christmas Books')  // it contains completed content
+      cy.wait('@denied') // it fires a request to the completed endpoint
+      cy.contains('Christmas Books') // it contains completed content
     })
   })
 
   context('Student', () => {
     beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_media_access__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_media_access__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep')
+      handleLocation('/requests?term=&page=1', cy, 'requestsPage', 'pep')
     })
 
     it('Lets students re-request denied articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
-        
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
+
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
-      cy.get('.search-result')
-        .first()
-        .contains('Status: Denied')
-      
+      cy.get('.search-result').first().contains('Status: Denied')
+
       cy.get('.search-result')
         .first()
         .find('pep-pharos-button')
@@ -163,16 +150,15 @@ describe('Requests page', () => {
     })
 
     it('Lets students re-request incomplete articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/incomplete__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/incomplete__response.json',
+      }).as('completed')
 
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
-      cy.get('.search-result')
-        .first()
-        .contains('Status: Incomplete')
-      
+      cy.get('.search-result').first().contains('Status: Incomplete')
+
       cy.get('.search-result')
         .first()
         .find('pep-pharos-button')
@@ -180,15 +166,14 @@ describe('Requests page', () => {
     })
 
     it('Lets students read approved articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
-      cy.get('.search-result')
-        .eq(1)
-        .contains('Status: Approved')
-      
+      cy.get('.search-result').eq(1).contains('Status: Approved')
+
       cy.get('.search-result')
         .eq(1)
         .find('pep-pharos-button')
@@ -196,15 +181,14 @@ describe('Requests page', () => {
     })
 
     it('Lets students download approved articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
-      cy.get('.search-result')
-        .eq(1)
-        .contains('Status: Approved')
-      
+      cy.get('.search-result').eq(1).contains('Status: Approved')
+
       cy.get('.search-result')
         .eq(1)
         .find('pep-pharos-button')
@@ -212,15 +196,14 @@ describe('Requests page', () => {
     })
 
     it('Lets students print approved articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
-      cy.get('.search-result')
-        .eq(1)
-        .contains('Status: Approved')
-      
+      cy.get('.search-result').eq(1).contains('Status: Approved')
+
       cy.get('.search-result')
         .eq(1)
         .find('pep-pharos-button')
@@ -228,92 +211,83 @@ describe('Requests page', () => {
     })
 
     it('Does not have a button for pending articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
 
-      cy.intercept('POST', routes.search.status('pending'), { fixture: 'search/pending__response.json' })
-        .as('pending')
+      cy.intercept('POST', routes.search.status('pending'), {
+        fixture: 'search/pending__response.json',
+      }).as('pending')
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Pending', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Pending', { matchCase: false }).click()
 
       cy.wait('@pending')
 
-      cy.get('.search-result')
-        .first()
-        .contains('Status: Pending')
-      
-      cy.get('.search-result pep-pharos-button')
-        .should('have.length', 0)
+      cy.get('.search-result').first().contains('Status: Pending')
+
+      cy.get('.search-result pep-pharos-button').should('have.length', 0)
     })
     it('Has no groups', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@auth', '@completed'])
 
-      cy.get('pep-pharos-heading')
-      .contains('GROUP', { matchCase: false })
-      .should('not.exist')
+      cy.get('pep-pharos-heading').contains('GROUP', { matchCase: false }).should('not.exist')
     })
-  
+
     it('Does not let students select Restricted articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('completed')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@completed'])
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
       cy.get('pep-pharos-dropdown-menu')
         .contains('Restricted', { matchCase: false })
         .should('not.exist')
     })
-  
+
     it('Does not let students download restricted list', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Download full list')
-        .should('not.exist')
+      cy.get('pep-pharos-button').contains('Download full list').should('not.exist')
     })
-
   })
 
   context('Admin', () => {
     beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_media_review__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__one_group_media_review__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
-        .as('pending')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+      cy.intercept('POST', routes.search.status('pending'), {
+        fixture: 'admin_search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
+      handleLocation('/requests?term=&page=1', cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@features', '@pending'])
     })
 
     it('Includes metadata for pending results', () => {
-      cy.get('pep-pharos-button')
-        .contains('History')
-        .should('be.visible')
-        .click()
+      cy.get('pep-pharos-button').contains('History').should('be.visible').click()
 
       cy.get('[id^=history-modal]')
         .first()
@@ -333,29 +307,29 @@ describe('Requests page', () => {
         .click()
       // // Inside of this block, result is a jQuery object, so only jQuery
       // // functions can be chained off it.
-      cy.get('.search-result').first().should((result) => {
-        expect(result).to.contain('Starting a Conversation on Racism, one Book Club at a Time')
-        expect(result).to.contain('Ithaka')
-        expect(result).to.contain('Deny')
-        expect(result).to.contain('Read')
-      })
-      cy.get('.search-result').eq(1).should((result) => {
-        expect(result).to.contain('Approve')
-      })
+      cy.get('.search-result')
+        .first()
+        .should((result) => {
+          expect(result).to.contain('Starting a Conversation on Racism, one Book Club at a Time')
+          expect(result).to.contain('Ithaka')
+          expect(result).to.contain('Deny')
+          expect(result).to.contain('Read')
+        })
+      cy.get('.search-result')
+        .eq(1)
+        .should((result) => {
+          expect(result).to.contain('Approve')
+        })
     })
 
     it('Has no groups', () => {
-      cy.get('pep-pharos-modal:visible .group-selector-combobox')
-        .should('not.exist')
+      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
     })
 
     it('Approves with the approve button', () => {
-      cy.intercept('POST', routes.approvals.approve, { body: '' })
-        .as('approve')
+      cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
 
-      cy.get('.search-result').eq(1).find('pep-pharos-button')
-        .contains('Approve')
-        .click()
+      cy.get('.search-result').eq(1).find('pep-pharos-button').contains('Approve').click()
 
       cy.fixture('admin_requests/approve__request.json').then((request) => {
         cy.wait('@approve').its('request.body').should('deep.eq', request)
@@ -365,19 +339,10 @@ describe('Requests page', () => {
     })
 
     it('Denies with the deny button', () => {
-      cy.intercept('POST', routes.approvals.deny, { body: '' })
-        .as('deny')
+      cy.intercept('POST', routes.approvals.deny, { body: '' }).as('deny')
 
-      cy.get('.search-result')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
-      cy.get('[id^=deny-modal]')
-        .first()
-        .find('pep-pharos-radio-button')
-        .eq(3)
-        .click()
+      cy.get('.search-result').first().find('pep-pharos-button').contains('Deny').click()
+      cy.get('[id^=deny-modal]').first().find('pep-pharos-radio-button').eq(3).click()
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-textarea')
@@ -386,12 +351,8 @@ describe('Requests page', () => {
         // This is only a single letter because occasionally the Cypress
         // type command seems to scramble the letters.
         .type('ttt')
-      cy.get('[id^=deny-modal]')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
-  
+      cy.get('[id^=deny-modal]').first().find('pep-pharos-button').contains('Deny').click()
+
       cy.fixture('admin_requests/deny__request.json').then((request) => {
         cy.wait('@deny').its('request.body').should('deep.eq', request)
       })
@@ -400,51 +361,40 @@ describe('Requests page', () => {
     })
 
     it('Has no groups in the deny modal', () => {
-      cy.intercept('POST', routes.approvals.deny, { body: '' })
-        .as('deny')
+      cy.intercept('POST', routes.approvals.deny, { body: '' }).as('deny')
 
-      cy.get('.search-result')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
-      cy.get('[id^=deny-modal]')
-        .first()
-        .contains('GROUP', { matchCase: false })
-        .should('not.exist')
+      cy.get('.search-result').first().find('pep-pharos-button').contains('Deny').click()
+      cy.get('[id^=deny-modal]').first().contains('GROUP', { matchCase: false }).should('not.exist')
     })
 
     it('Includes metadata for completed results', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/completed__response.json' })
-        .as('completed')
-        
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'admin_search/completed__response.json',
+      }).as('completed')
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Completed', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
+
+      cy.get('pep-pharos-dropdown-menu').contains('Completed', { matchCase: false }).click()
 
       cy.wait('@completed')
+      cy.get('.search-result').first()
+
       cy.get('.search-result')
         .first()
-      
-      cy.get('.search-result').first().should((result) => {
-        expect(result).to.contain('Starting a Conversation on Racism, one Book Club at a Time')
-        expect(result).to.contain('DAVID CLINE')
-        expect(result).to.contain('Approved')
-        expect(result).to.contain('Ithaka')
-      })  
+        .should((result) => {
+          expect(result).to.contain('Starting a Conversation on Racism, one Book Club at a Time')
+          expect(result).to.contain('DAVID CLINE')
+          expect(result).to.contain('Approved')
+          expect(result).to.contain('Ithaka')
+        })
     })
 
     it('Links to review history for pending items for that location only', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/pending__response.json' })
-        .as('pending')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'admin_search/pending__response.json',
+      }).as('pending')
 
-      cy.get('.search-result')
-      .contains('History')
-      .click()
+      cy.get('.search-result').contains('History').click()
       cy.get('[id^=history-modal]')
         .first()
         .shadow()
@@ -461,38 +411,23 @@ describe('Requests page', () => {
         .contains('History')
         .should('be.visible')
 
-      cy.get('[id^=history-modal]')
-        .first()
-        .find('table')
-        .contains('Ithaka')
-        .should('be.visible')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ithaka').should('be.visible')
 
-
-      cy.get('[id^=history-modal]')
-      .first()
-      .find('table')
-      .contains('Ilium')
-      .should('not.exist')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ilium').should('not.exist')
     })
 
     it('Links to review history for completed items for that location only', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'admin_search/completed__response.json' })
-      .as('completed')
-  
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'admin_search/completed__response.json',
+      }).as('completed')
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Completed', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
+
+      cy.get('pep-pharos-dropdown-menu').contains('Completed', { matchCase: false }).click()
 
       cy.wait('@completed')
 
-      cy.get('.search-result')  
-        .first()
-        .contains('History')
-        .click()
+      cy.get('.search-result').first().contains('History').click()
 
       cy.get('[id^=history-modal]')
         .first()
@@ -502,38 +437,23 @@ describe('Requests page', () => {
         .contains('History')
         .should('be.visible')
 
-      cy.get('[id^=history-modal]')
-        .first()
-        .find('table')
-        .contains('Ithaka')
-        .should('be.visible')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ithaka').should('be.visible')
 
-
-      cy.get('[id^=history-modal]')
-      .first()
-      .find('table')
-      .contains('Ilium')
-      .should('not.exist')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ilium').should('not.exist')
     })
 
     it('Links to review history for incomplete items for that location only', () => {
-      cy.intercept('POST', routes.search.status('incomplete'), { fixture: 'admin_search/incomplete__response.json' })
-        .as('incomplete')
-  
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.intercept('POST', routes.search.status('incomplete'), {
+        fixture: 'admin_search/incomplete__response.json',
+      }).as('incomplete')
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Incomplete', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
+
+      cy.get('pep-pharos-dropdown-menu').contains('Incomplete', { matchCase: false }).click()
 
       cy.wait('@incomplete')
 
-      cy.get('.search-result')  
-        .first()
-        .contains('History')
-        .click()
+      cy.get('.search-result').first().contains('History').click()
 
       cy.get('[id^=history-modal]')
         .first()
@@ -543,33 +463,24 @@ describe('Requests page', () => {
         .contains('History')
         .should('be.visible')
 
-      cy.get('[id^=history-modal]')
-        .first()
-        .find('table')
-        .contains('Ithaka')
-        .should('be.visible')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ithaka').should('be.visible')
 
-
-      cy.get('[id^=history-modal]')
-      .first()
-      .find('table')
-      .contains('Ilium')
-      .should('not.exist')
+      cy.get('[id^=history-modal]').first().find('table').contains('Ilium').should('not.exist')
     })
 
     context('History dialog', () => {
       beforeEach(() => {
-        cy.get('.search-result')
-          .contains('History')
-          .click()
+        cy.get('.search-result').contains('History').click()
       })
 
       it('Contains article metadata', () => {
-        cy.get('.search-result')
-          .contains('Starting a Conversation on Racism, one Book Club at a Time')
-        
-        cy.get('.search-result')
-          .contains('National Civic Review, Vol. 111, No. 4 (Winter 2023), pp. 42-49')
+        cy.get('.search-result').contains(
+          'Starting a Conversation on Racism, one Book Club at a Time',
+        )
+
+        cy.get('.search-result').contains(
+          'National Civic Review, Vol. 111, No. 4 (Winter 2023), pp. 42-49',
+        )
       })
 
       it('Contains a table of review actions', () => {
@@ -598,10 +509,10 @@ describe('Requests page', () => {
         // In the case of the test, we can't be sure what the server time will be when the test runs, so we need to
         // calculate the expected value from the time in the fixture.
         const dateOptions: Intl.DateTimeFormatOptions = {
-          dateStyle: "medium",
-          timeStyle: "short"
+          dateStyle: 'medium',
+          timeStyle: 'short',
         }
-        const time = new Date("2023-06-10T03:41:40.591448Z").toLocaleString("en", dateOptions)
+        const time = new Date('2023-06-10T03:41:40.591448Z').toLocaleString('en', dateOptions)
 
         cy.get('[id^=history-modal]')
           .first()
@@ -610,14 +521,12 @@ describe('Requests page', () => {
           .contains(time)
           .should('be.visible')
 
-
         cy.get('[id^=history-modal]')
           .first()
           .find('table tr')
           .eq(1)
           .contains('No Notes')
           .should('be.visible')
-
 
         cy.get('[id^=history-modal]')
           .first()
@@ -647,14 +556,13 @@ describe('Requests page', () => {
           .contains(time)
           .should('be.visible')
 
-
         cy.get('[id^=history-modal]')
           .first()
           .find('table tr')
           .eq(2)
           .contains('Sexually explicit')
           .should('be.visible')
-  
+
         cy.get('[id^=history-modal]')
           .first()
           .find('table tr')
@@ -664,13 +572,9 @@ describe('Requests page', () => {
       })
 
       it('Contains a local/global toggle button', () => {
-        cy.get('[id^=history-modal]')
-          .contains('Global Statuses')
-          .click()
+        cy.get('[id^=history-modal]').contains('Global Statuses').click()
 
-        cy.get('[id^=history-modal]')
-          .contains('Local History')
-          .click()
+        cy.get('[id^=history-modal]').contains('Local History').click()
       })
 
       it('Local history includes all changes for the specified group only', () => {
@@ -680,9 +584,7 @@ describe('Requests page', () => {
       })
 
       it('Global history includes only current approved/denied statuses', () => {
-        cy.get('[id^=history-modal]')
-          .contains('Global Statuses')
-          .click()
+        cy.get('[id^=history-modal]').contains('Global Statuses').click()
 
         cy.get('[id^=history-modal] table tr').should('have.length', 2)
         cy.get('[id^=history-modal] table').contains('Approved')
@@ -693,35 +595,32 @@ describe('Requests page', () => {
     })
 
     it('Does not allow restricted list download unless Restricted is selected', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Download full list')
-        .should('not.exist')
+      cy.get('pep-pharos-button').contains('Download full list').should('not.exist')
     })
 
-
     it('Lets admins select Restricted articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
-      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
-        .as('restricted')
-      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
-        .as('last_updated')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), {
+        fixture: 'search/restricted__response.json',
+      }).as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, {
+        last_updated: '2023-10-01T00:00:00Z',
+      }).as('last_updated')
       cy.intercept('GET', routes.global_restricts.download, {}).as('download')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Restricted', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Restricted', { matchCase: false }).click()
 
       cy.get('pep-pharos-button')
         .contains('Restricted Item', { matchCase: false })
@@ -733,64 +632,56 @@ describe('Requests page', () => {
     })
 
     it('Lets admins download Restricted articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
-      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
-        .as('restricted')
-      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
-        .as('last_updated')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), {
+        fixture: 'search/restricted__response.json',
+      }).as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, {
+        last_updated: '2023-10-01T00:00:00Z',
+      }).as('last_updated')
       cy.intercept('GET', routes.global_restricts.download, {}).as('download')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Restricted', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Restricted', { matchCase: false }).click()
 
       cy.wait('@last_updated')
       cy.wait('@restricted')
 
-      cy.get('pep-pharos-button')
-        .contains('Download full list')
-        .click()
-      
-      cy.wait('@download')
+      cy.get('pep-pharos-button').contains('Download full list').click()
 
+      cy.wait('@download')
     })
   })
 
   context('Admin with two groups', () => {
     beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__two_groups_media_review__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__two_groups_media_review__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.search.status('pending'), { fixture: 'admin_search/completed__response.json' })
-        .as('pending')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-          .as('features')
+      cy.intercept('POST', routes.search.status('pending'), {
+        fixture: 'admin_search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
       cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
         .as('alerts')
-      handleLocation("/requests?term=&page=1", cy, 'requestsPage', 'pep-admin')
+      handleLocation('/requests?term=&page=1', cy, 'requestsPage', 'pep-admin')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@features', '@pending'])
     })
-  
+
     it('Has two groups', () => {
-      cy.get('.group-selector-combobox')
-        .first()
-        .should('be.visible')
-      cy.get('.group-selector-combobox')
-        .first()
-        .click()
-      cy.get('.group-selector-combobox')
-        .first()
-        .find('option')
-        .should('have.length', 3)
+      cy.get('.group-selector-combobox').first().should('be.visible')
+      cy.get('.group-selector-combobox').first().click()
+      cy.get('.group-selector-combobox').first().find('option').should('have.length', 3)
       cy.get('.group-selector-combobox')
         .first()
         .find('option')
@@ -808,18 +699,9 @@ describe('Requests page', () => {
         .contains('Ithaka', { matchCase: false })
     })
 
-
     it('Requires group selection', () => {
-      cy.get('.search-result')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
-      cy.get('[id^=deny-modal]')
-        .first()
-        .find('pep-pharos-radio-button')
-        .eq(3)
-        .click()
+      cy.get('.search-result').first().find('pep-pharos-button').contains('Deny').click()
+      cy.get('[id^=deny-modal]').first().find('pep-pharos-radio-button').eq(3).click()
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-textarea')
@@ -837,19 +719,12 @@ describe('Requests page', () => {
     })
 
     it('Can deny for two groups', () => {
-      cy.intercept('POST', routes.approvals.deny, { body: '' })
-        .as('deny')
+      cy.intercept('POST', routes.approvals.deny, { body: '' }).as('deny')
 
-      cy.get('.search-result')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
+      cy.get('.search-result').first().find('pep-pharos-button').contains('Deny').click()
 
-      cy.get('pep-pharos-modal:visible .group-selector-combobox')
-        .should('be.visible')
-      cy.get('pep-pharos-modal:visible .group-selector-combobox')
-        .click()
+      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
+      cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
       cy.get('pep-pharos-modal:visible .group-selector-combobox')
         .find('option')
         .should('have.length', 3)
@@ -859,11 +734,7 @@ describe('Requests page', () => {
         .contains('all groups', { matchCase: false })
         .click()
 
-      cy.get('[id^=deny-modal]')
-        .first()
-        .find('pep-pharos-radio-button')
-        .eq(3)
-        .click()
+      cy.get('[id^=deny-modal]').first().find('pep-pharos-radio-button').eq(3).click()
       cy.get('[id^=deny-modal]')
         .first()
         .find('pep-pharos-textarea')
@@ -872,12 +743,8 @@ describe('Requests page', () => {
         // This is only a single letter because occasionally the Cypress
         // type command seems to scramble the letters.
         .type('ttt')
-      cy.get('[id^=deny-modal]')
-        .first()
-        .find('pep-pharos-button')
-        .contains('Deny')
-        .click()
-  
+      cy.get('[id^=deny-modal]').first().find('pep-pharos-button').contains('Deny').click()
+
       cy.fixture('admin_requests/deny__two_groups__request.json').then((request) => {
         cy.wait('@deny').its('request.body').should('deep.eq', request)
       })
@@ -885,19 +752,12 @@ describe('Requests page', () => {
       cy.wait('@pending')
     })
 
-
     it('Can approve for two groups', () => {
-      cy.intercept('POST', routes.approvals.approve, { body: '' })
-        .as('approve')
+      cy.intercept('POST', routes.approvals.approve, { body: '' }).as('approve')
 
-      cy.get('.search-result')
-        .eq(1)
-        .find('pep-pharos-button')
-        .contains('Approve')
-        .click()
-        
-      cy.get('[id^=approve-modal] .group-selector-combobox')
-        .should('be.visible')
+      cy.get('.search-result').eq(1).find('pep-pharos-button').contains('Approve').click()
+
+      cy.get('[id^=approve-modal] .group-selector-combobox').should('be.visible')
       cy.get('[id^=approve-modal]')
         .contains('Recent Developments in Alternatives to Animal Testing')
         .parents('[id^=approve-modal]')
@@ -912,50 +772,46 @@ describe('Requests page', () => {
       cy.wait('@pending')
     })
 
-
     it('Lets admins select Restricted articles', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
-      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
-        .as('restricted')
-      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
-        .as('last_updated')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), {
+        fixture: 'search/restricted__response.json',
+      }).as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, {
+        last_updated: '2023-10-01T00:00:00Z',
+      }).as('last_updated')
       cy.intercept('GET', routes.global_restricts.download, {}).as('download')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Restricted', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Restricted', { matchCase: false }).click()
 
       cy.get('pep-pharos-button')
         .contains('Restricted Item', { matchCase: false })
         .should('be.visible')
-  })
-
+    })
 
     it('Lets admins manage access for unsubscribed facilities', () => {
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
-      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
-        .as('restricted')
-      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
-        .as('last_updated')
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), {
+        fixture: 'search/restricted__response.json',
+      }).as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, {
+        last_updated: '2023-10-01T00:00:00Z',
+      }).as('last_updated')
       cy.intercept('GET', routes.global_restricts.download, {}).as('download')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
 
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Restricted', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-dropdown-menu').contains('Restricted', { matchCase: false }).click()
 
       cy.get('pep-pharos-button')
         .contains('Restricted Item', { matchCase: false })
@@ -965,50 +821,39 @@ describe('Requests page', () => {
         .contains('reviewer access', { matchCase: false })
         .should('not.exist')
 
-      cy.get('pep-pharos-button')
-        .contains('approve', { matchCase: false })
-        .should('be.visible')
-      cy.get('pep-pharos-button')
-        .contains('deny', { matchCase: false })
-        .should('be.visible')
-      cy.get('pep-pharos-button')
-        .contains('history', { matchCase: false })
-        .should('be.visible')
+      cy.get('pep-pharos-button').contains('approve', { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('deny', { matchCase: false }).should('be.visible')
+      cy.get('pep-pharos-button').contains('history', { matchCase: false }).should('be.visible')
     })
 
-    it('Lets admins download restricted list', ()=>{
-      cy.intercept('POST', routes.search.status('completed'), { fixture: 'search/completed__response.json' } )
-        .as('pending')
-      cy.intercept('POST', routes.search.status('restricted'), { fixture: 'search/restricted__response.json' } )
-        .as('restricted')
-      cy.intercept('GET', routes.global_restricts.last_updated.get, { last_updated: '2023-10-01T00:00:00Z' })
-        .as('last_updated')
+    it('Lets admins download restricted list', () => {
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('pending')
+      cy.intercept('POST', routes.search.status('restricted'), {
+        fixture: 'search/restricted__response.json',
+      }).as('restricted')
+      cy.intercept('GET', routes.global_restricts.last_updated.get, {
+        last_updated: '2023-10-01T00:00:00Z',
+      }).as('last_updated')
       cy.intercept('GET', routes.global_restricts.download, {}).as('download')
       cy.visit('/requests?term=&page=1')
       cy.wait(['@auth', '@alerts', '@env', '@features', '@pending'])
-  
-      cy.get('pep-pharos-button')
-        .contains('Status:', { matchCase: false })
-        .click()
 
-      cy.get('pep-pharos-dropdown-menu')
-        .contains('Restricted', { matchCase: false })
-        .click()
+      cy.get('pep-pharos-button').contains('Status:', { matchCase: false }).click()
+
+      cy.get('pep-pharos-dropdown-menu').contains('Restricted', { matchCase: false }).click()
 
       cy.get('pep-pharos-button')
         .contains('Restricted Item', { matchCase: false })
         .should('be.visible')
 
-
       cy.wait('@last_updated')
       cy.wait('@restricted')
 
-      cy.get('pep-pharos-button')
-        .contains('Download full list')
-        .click()
-      
-      cy.wait('@download')
+      cy.get('pep-pharos-button').contains('Download full list').click()
 
+      cy.wait('@download')
     })
   })
 })

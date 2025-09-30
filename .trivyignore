@@ -2,5 +2,6 @@
 # This occurs when reading XML documents with the Python API, which does not happen here.
 CVE-2025-32414 exp:2025-08-30
 
-# We do not receive XML documents, so this isn't relevant.
-CVE-2025-59375 exp:2025-09-30
+# We do not receive XML documents, so this isn't relevant. 
+# Extended to October 15 to cover any delayed fixes.
+CVE-2025-59375 exp:2025-10-15

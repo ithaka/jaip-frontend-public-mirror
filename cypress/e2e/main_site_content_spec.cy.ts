@@ -2,7 +2,6 @@ import { handleLocation } from './helpers'
 import { routes } from '../../src/config/api'
 
 describe('Main site content', () => {
-
   context('Unauthenticated', () => {
     context('General', () => {
       beforeEach(() => {
@@ -12,7 +11,9 @@ describe('Main site content', () => {
           .as('env')
         cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
           .as('alerts')
-        cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
+        cy.intercept('GET', routes.validateSubdomains.get, {
+          fixture: 'auth/subdomains/facilities.json',
+        }) // no alerts
           .as('subdomains')
         handleLocation('/', cy, 'index', 'pep')
       })
@@ -34,7 +35,9 @@ describe('Main site content', () => {
 
       it('includes copyright dates in the footer', () => {
         cy.visit('/')
-        cy.get('[data-cy="footer-copyright"]').contains(`©2000-${ new Date().getFullYear().toString() }`).should('be.visible')
+        cy.get('[data-cy="footer-copyright"]')
+          .contains(`©2000-${new Date().getFullYear().toString()}`)
+          .should('be.visible')
       })
 
       it('includes only one link in nav, for home', () => {
@@ -42,34 +45,38 @@ describe('Main site content', () => {
         cy.get('[data-cy="nav-link-home"]').should('be.visible').should('have.length', 1)
       })
     })
-    context('General with Alert', () =>{
+    context('General with Alert', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
-          .as('auth')
+        cy.intercept('GET', routes.auth.get, {
+          fixture: 'auth/users/student__one_group_no_features__response.json',
+        }).as('auth')
         cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
           .as('env')
-        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
-          .as('alerts')
-        cy.intercept('GET', routes.validateSubdomains.get, { fixture: 'auth/subdomains/facilities.json' }) // no alerts
+        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' }).as(
+          'alerts',
+        )
+        cy.intercept('GET', routes.validateSubdomains.get, {
+          fixture: 'auth/subdomains/facilities.json',
+        }) // no alerts
           .as('subdomains')
         handleLocation('/', cy, 'index', 'pep')
       })
       it('includes alert', () => {
         cy.visit('/')
         cy.wait(['@alerts', '@env', '@auth'])
-        cy.get('pep-pharos-alert')
-          .contains('Oh, no!')
-          .should('be.visible')
+        cy.get('pep-pharos-alert').contains('Oh, no!').should('be.visible')
       })
     })
-    context('Admin', ()=>{
+    context('Admin', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
-          .as('auth')
+        cy.intercept('GET', routes.auth.get, {
+          fixture: 'auth/users/student__one_group_no_features__response.json',
+        }).as('auth')
         cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
           .as('env')
-        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
-          .as('alerts')
+        cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' }).as(
+          'alerts',
+        )
         handleLocation('/', cy, 'index', 'pep-admin')
       })
 
@@ -81,14 +88,12 @@ describe('Main site content', () => {
     })
   })
 
-
-
   context('AuthenticatedStudent', () => {
     beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/student__one_group_no_features__response.json' })
-        .as('auth')
-      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
-        .as('alerts')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_no_features__response.json',
+      }).as('auth')
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' }).as('alerts')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
       handleLocation('/', cy, 'index', 'pep')
@@ -100,13 +105,12 @@ describe('Main site content', () => {
       cy.get('main').contains('Explore the world’s knowledge')
     })
 
-    it('shows authenticated users an error page on invalid paths', () =>{
+    it('shows authenticated users an error page on invalid paths', () => {
       cy.visit('/not-a-page')
       cy.wait(['@alerts', '@env', '@auth'])
       cy.contains('Page Not Found')
       // We should test that it returns 404, but it doesn't -- it returns 200!
     })
-
 
     it('links to home', () => {
       cy.visit('/')
@@ -183,20 +187,21 @@ describe('Main site content', () => {
     })
   })
 
-
   context('AuthenticatedAdmin', () => {
     beforeEach(() => {
       // An admin needs at least one admin feature.
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_bulk_approve__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__one_group_bulk_approve__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
-        .as('alerts')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' }).as('alerts')
       handleLocation('/', cy, 'index', 'pep-admin')
     })
+
     it('includes landing page text', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
@@ -287,14 +292,15 @@ describe('Main site content', () => {
   context('AuthenticatedAdminWithAccountManagement', () => {
     beforeEach(() => {
       // An admin needs at least one admin feature.
-      cy.intercept('GET', routes.auth.get, { fixture: 'auth/users/admin__one_group_get_users__response.json' })
-        .as('auth')
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/admin__one_group_get_users__response.json',
+      }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
-      cy.intercept('POST', routes.features.grouped.get, { fixture: 'auth/features/basic_features.json' })
-        .as('features')
-      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' })
-        .as('alerts')
+      cy.intercept('POST', routes.features.grouped.get, {
+        fixture: 'auth/features/basic_features.json',
+      }).as('features')
+      cy.intercept('GET', routes.alerts.get, { fixture: 'auth/alerts/response.json' }).as('alerts')
       handleLocation('/', cy, 'index', 'pep-admin')
     })
 
@@ -313,5 +319,4 @@ describe('Main site content', () => {
       cy.get('.nav-menu-item').should('have.length', 8).should('be.visible')
     })
   })
-
 })
