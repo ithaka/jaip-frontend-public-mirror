@@ -2625,7 +2625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.5.3":
+"chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -3689,7 +3689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.3.2":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -3743,6 +3743,18 @@ __metadata:
     picomatch:
       optional: true
   checksum: 10c0/45b559cff889934ebb8bc498351e5acba40750ada7e7d6bde197768d2fa67c149be8ae7f8ff34d03f4e1eb20f2764116e56440aaa2f6689e9a4aa7ef06acafe9
+  languageName: node
+  linkType: hard
+
+"fdir@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "fdir@npm:6.5.0"
+  peerDependencies:
+    picomatch: ^3 || ^4
+  peerDependenciesMeta:
+    picomatch:
+      optional: true
+  checksum: 10c0/e345083c4306b3aed6cb8ec551e26c36bab5c511e99ea4576a16750ddc8d3240e63826cc624f5ae17ad4dc82e68a253213b60d556c11bfad064b7607847ed07f
   languageName: node
   linkType: hard
 
@@ -3856,7 +3868,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^11.1.0, fs-extra@npm:^11.2.0":
+"fs-extra@npm:^11.2.0":
   version: 11.3.1
   resolution: "fs-extra@npm:11.3.1"
   dependencies:
@@ -3864,6 +3876,17 @@ __metadata:
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
   checksum: 10c0/61e5b7285b1ca72c68dfe1058b2514294a922683afac2a80aa90540f9bd85370763d675e3b408ef500077d355956fece3bd24b546790e261c3d3015967e2b2d9
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:^11.3.2":
+  version: 11.3.2
+  resolution: "fs-extra@npm:11.3.2"
+  dependencies:
+    graceful-fs: "npm:^4.2.0"
+    jsonfile: "npm:^6.0.1"
+    universalify: "npm:^2.0.0"
+  checksum: 10c0/f5d629e1bb646d5dedb4d8b24c5aad3deb8cc1d5438979d6f237146cd10e113b49a949ae1b54212c2fbc98e2d0995f38009a9a1d0520f0287943335e65fe919b
   languageName: node
   linkType: hard
 
@@ -4552,7 +4575,7 @@ __metadata:
     uuid: "npm:^13.0.0"
     vite: "npm:^6.3.6"
     vite-plugin-dynamic-import: "npm:^1.6.0"
-    vite-plugin-static-copy: "npm:^2.3.2"
+    vite-plugin-static-copy: "npm:^3.1.3"
     vite-plugin-vue-devtools: "npm:^7.7.7"
     vue: "npm:^3.5.13"
     vue-router: "npm:^4.5.1"
@@ -5670,7 +5693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^1.0.0, picocolors@npm:^1.1.1":
+"picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
   checksum: 10c0/e2e3e8170ab9d7c7421969adaa7e1b31434f789afb9b3f115f6b96d91945041ac3ceb02e9ec6fe6510ff036bcc0bf91e69a1772edc0b707e12b19c0f2d6bcf58
@@ -6566,6 +6589,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyglobby@npm:^0.2.15":
+  version: 0.2.15
+  resolution: "tinyglobby@npm:0.2.15"
+  dependencies:
+    fdir: "npm:^6.5.0"
+    picomatch: "npm:^4.0.3"
+  checksum: 10c0/869c31490d0d88eedb8305d178d4c75e7463e820df5a9b9d388291daf93e8b1eb5de1dad1c1e139767e4269fe75f3b10d5009b2cc14db96ff98986920a186844
+  languageName: node
+  linkType: hard
+
 "tldts-core@npm:^6.1.86":
   version: 6.1.86
   resolution: "tldts-core@npm:6.1.86"
@@ -6969,18 +7002,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "vite-plugin-static-copy@npm:2.3.2"
+"vite-plugin-static-copy@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "vite-plugin-static-copy@npm:3.1.3"
   dependencies:
-    chokidar: "npm:^3.5.3"
-    fast-glob: "npm:^3.2.11"
-    fs-extra: "npm:^11.1.0"
+    chokidar: "npm:^3.6.0"
+    fs-extra: "npm:^11.3.2"
     p-map: "npm:^7.0.3"
-    picocolors: "npm:^1.0.0"
+    picocolors: "npm:^1.1.1"
+    tinyglobby: "npm:^0.2.15"
   peerDependencies:
-    vite: ^5.0.0 || ^6.0.0
-  checksum: 10c0/6fdc7d21c99022d4c00dc0cec5d448a9aea73ad03547f669c73f600054935c675f23757fb586b9a05353d15a078574f7f8f4af40631e87ac03b6fc554db4ef2a
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+  checksum: 10c0/f58bf609246c440b4e3c0db10abf5965658c34ee03e72b94d4fc6ff35fa4568b5baa0fe36057234a4b1e84a9b4b3c2cdbff9f943b9e69d883d3a05353cbf9090
   languageName: node
   linkType: hard
 
