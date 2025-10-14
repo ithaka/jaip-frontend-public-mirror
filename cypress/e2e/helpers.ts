@@ -1,3 +1,5 @@
+import { routes } from '../../src/config/api'
+
 export const replaceHost = (cy: Cypress.cy & CyEventEmitter, subdomain: string) => {
   cy.on('window:before:load', (win) => {
     // @ts-expect-error We need to set the location property here to use the subdomain system
@@ -7,6 +9,7 @@ export const replaceHost = (cy: Cypress.cy & CyEventEmitter, subdomain: string) 
   })
 }
 export const intercept = (path: string, cy: Cypress.cy & CyEventEmitter, name: string) => {
+  cy.intercept(routes.log, (req) => req.destroy())
   cy.intercept('GET', path, (req) => {
     delete req.headers['if-modified-since']
     delete req.headers['if-none-match']

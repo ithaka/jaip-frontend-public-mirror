@@ -7,6 +7,7 @@ const global_route_prefix = `/${global_path}`
 const global_route_prefix_versioned = `${global_route_prefix}/${global_version}`
 
 export const routes = {
+  log: `${global_route_prefix_versioned}/log`,
   auth: {
     get: `${global_route_prefix_versioned}/auth`,
   },
@@ -100,7 +101,7 @@ export default ($axios: AxiosInstance): ApiObject => ({
     // JSON data directly. We need to stringify the log object and send it as a Blob with
     // the correct MIME type.
     const blob = new Blob([JSON.stringify(log)], { type: 'application/json; charset=UTF-8' })
-    navigator.sendBeacon(`${global_route_prefix_versioned}/log`, blob)
+    navigator.sendBeacon(routes.log, blob)
   },
   auth: {
     session: () => {
@@ -116,56 +117,24 @@ export default ($axios: AxiosInstance): ApiObject => ({
     },
     features: {
       basic: {
-        get: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/grouped/get`,
-            data,
-          ),
-        add: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/grouped`,
-            data,
-          ),
+        get: (data) => $axios.post(routes.features.grouped.get, data),
+        add: (data) => $axios.post(routes.features.grouped.add, data),
         remove: (data) =>
-          $axios.delete(`${global_route_prefix_versioned}/site-administration/features/grouped`, {
+          $axios.delete(routes.features.grouped.remove, {
             data,
           }),
-        edit: (data) =>
-          $axios.patch(
-            `${global_route_prefix_versioned}/site-administration/features/grouped`,
-            data,
-          ),
-        reactivate: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/grouped/reactivate`,
-            data,
-          ),
+        edit: (data) => $axios.patch(routes.features.grouped.edit, data),
+        reactivate: (data) => $axios.post(routes.features.grouped.reactivate, data),
       },
       ungrouped: {
-        get: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/ungrouped/get`,
-            data,
-          ),
-        add: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/ungrouped`,
-            data,
-          ),
+        get: (data) => $axios.post(routes.features.ungrouped.get, data),
+        add: (data) => $axios.post(routes.features.ungrouped.add, data),
         remove: (data) =>
-          $axios.delete(`${global_route_prefix_versioned}/site-administration/features/ungrouped`, {
+          $axios.delete(routes.features.ungrouped.remove, {
             data,
           }),
-        edit: (data) =>
-          $axios.patch(
-            `${global_route_prefix_versioned}/site-administration/features/ungrouped`,
-            data,
-          ),
-        reactivate: (data) =>
-          $axios.post(
-            `${global_route_prefix_versioned}/site-administration/features/ungrouped/reactivate`,
-            data,
-          ),
+        edit: (data) => $axios.patch(routes.features.ungrouped.edit, data),
+        reactivate: (data) => $axios.post(routes.features.ungrouped.reactivate, data),
       },
     },
     alerts: () => $axios.get(routes.alerts.get),

@@ -17,10 +17,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       assetsDir: "assets/generated",
-      // This is the default value, but it's being kept explicit
-      // here as a reminder because build targets have created issues 
-      // with outdated browsers in the past.
-      target: "modules",
+      // This is the default value for target:
+      // target: 'baseline-widely-available',
+      // We can't use the default because we're still supporting devices using Firefox 91 ESR
+      target: ['chrome107', 'edge107', 'firefox91', 'safari16'],
       keepNames: true,
       compilerOptions: {
         useDefineForClassFields: true,
