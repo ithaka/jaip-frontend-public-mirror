@@ -15,16 +15,19 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Subdomains
+
 Many aspects of this project are highly dependent on the subdomain. Perhaps most importantly, the difference between the student and admin versions of the site is largely determined by whether the user is visiting the `pep` subdomain or the `admin.pep` subdomain.
 
 In some browsers, including Chrome and Firefox, it is possible to simply use `http://pep.localhost:5173/` and `http://admin.pep.localhost:5173/` as the domains for the site. This requires a modification of `/etc/hosts` and will not work in Safari.
 
 Specifically, a line like the following can be added to `/etc/hosts`, which will allow browsers to use the subdomains properly:
-````
+
+```
 127.0.0.1 pep.localhost admin.pep.localhost
-````
+```
 
 ## Environment
+
 The `.env.example` file includes some values and notes that may be useful to place into a `.env` file. Note that when using a remote server for the API_URL, this will affect the application's environment. The `prod` API will use production data and return `prod` in the environment check that determines the URL of the login button.
 
 ## Project Setup
@@ -86,6 +89,17 @@ yarn lint
 ```
 
 ## Logging
+
 Logs are sent from the frontend to the backend using the [Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API) in order to send non-blocking requests to the server. Log events must include and `eventtype` and `event_description`. The remaining fields necessary for Captain's Logging will be added by the backend. Additional fields can be added as needed.
 
-Frontend logging works locally as well as in the `TEST` and `PROD` environments. In the ephemeral cluster, however, it will return `405 Method Not Allowed` errors as a result of CORS issues. This does mean frontend logs will not work in the ephemeral environment. 
+Frontend logging works locally as well as in the `TEST` and `PROD` environments. In the ephemeral cluster, however, it will return `405 Method Not Allowed` errors as a result of CORS issues. This does mean frontend logs will not work in the ephemeral environment.
+
+### Local docker image build
+
+The first time you run the docker image build locally, first run:
+
+```
+cp nginx/nginx.conf.persistent nginx/nginx.conf
+```
+
+This simulates the repo setup that takes place during the `build app image` job in our CICD setup.

@@ -21,6 +21,11 @@ serviceLocatable: false
 autoscaling:
   enabled: false
 
+replicas: # Ignored if autoscaling is enabled.
+  test: 1
+  # We want a minimum of 2 replicas in production, so that if the cluster needs to replace a node (which can happen daily), it can replace our active pods one at a time without disrupting end users.
+  prod: 2
+
 # This is the port to the nginx reverse proxy, providing
 # routing to the static app deployed in s3.
 internalPort: 80
