@@ -105,6 +105,9 @@ const component = ref(props.small ? 'small' : 'span')
         <!-- Metadata Citation Line -->
         <component :is="component" v-else>
           <span class="text-color-gray-40" v-html="doc.citation_line" />
+          <span v-if="doc.citation_line && doc.doi" class="text-color-gray-40"
+            >, doi: {{ doc.doi }}</span
+          >
         </component>
       </div>
     </div>
