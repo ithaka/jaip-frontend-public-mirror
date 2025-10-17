@@ -12,8 +12,7 @@ const userStore = useUserStore()
 const { canManageFacilities, changeableFacilities, facilityMap } = storeToRefs(userStore)
 
 const notificationsStore = useNotificationsStore()
-const { paginatedCount, paginatedNotifications, notifications, limit } =
-  storeToRefs(notificationsStore)
+const { paginatedCount, paginatedNotifications, limit } = storeToRefs(notificationsStore)
 
 // INITIAL VALUES
 const selectedGroups = ref(
@@ -150,7 +149,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
       </pep-pharos-checkbox>
     </div>
 
-    <div v-if="notifications?.length" class="notifications-table-container">
+    <div v-if="paginatedNotifications?.length" class="notifications-table-container">
       <table class="notifications-table" data-cy="notifications-table">
         <thead>
           <tr>
@@ -345,7 +344,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
       </table>
     </div>
     <div
-      v-if="paginatedCount > limit && notifications?.length"
+      v-if="paginatedCount > limit && paginatedNotifications?.length"
       class="notifications__pagination-container"
     >
       <pep-pharos-pagination
@@ -357,7 +356,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
         @next-page="nextPage"
       />
     </div>
-    <div v-else-if="!notifications?.length" class="notifications__empty">
+    <div v-else-if="!paginatedNotifications?.length" class="notifications__empty">
       <p class="notifications__empty-text" data-cy="notifications-empty-state">
         You don't have any active notifications.
       </p>
@@ -393,7 +392,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   }
   &__empty {
     padding: var(--pharos-spacing-5-x) 0;
-    text-align: left;
+    text-align: center;
     border: 3px dashed var(--pharos-color-marble-gray-80);
   }
   &__pagination-container {
@@ -462,6 +461,10 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 }
 
 @media (max-width: 768px) {
+  .notifications {
+    grid-column: span 8;
+  }
+
   .notifications-table-container {
     overflow-x: auto;
     padding-right: var(--pharos-spacing-2-x);
