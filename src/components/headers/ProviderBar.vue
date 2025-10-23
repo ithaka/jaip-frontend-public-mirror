@@ -60,7 +60,7 @@ defineProps({
     data-dropdown-menu-hover=""
   >
     <div class="pa-5">
-      <p>In partnership with the JSTOR Access in Prison Initiative</p>
+      <p>In partnership with the JSTOR Access in Prisons Initiative</p>
     </div>
   </pep-pharos-dropdown-menu>
 </template>
