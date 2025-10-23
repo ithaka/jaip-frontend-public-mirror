@@ -15,7 +15,7 @@
         approval of these requests, including reporting of all reviews.
       </p>
       <p>
-        Have a question? Please contact us! Email Stacy Burnett, JSTOR Access in Prisons Manager at
+        Have a question? Please contact us! Email Stacy Burnett, JSTOR Access in Prison Manager at
         <pep-pharos-link href="Mailto:stacy.burnett@ithaka.org"
           >stacy.burnett[at]ithaka.org</pep-pharos-link
         >
