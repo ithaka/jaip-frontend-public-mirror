@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+import { useCoreStore } from '@/stores/core'
+import { storeToRefs } from 'pinia'
+
+const coreStore = useCoreStore()
+const { supportEmail } = storeToRefs(coreStore)
+</script>
 <template>
   <section class="admin-help">
     <pep-pharos-heading :level="1" preset="5--bold">
@@ -15,10 +22,10 @@
         approval of these requests, including reporting of all reviews.
       </p>
       <p>
-        Have a question? Please contact us! Email Stacy Burnett, JSTOR Access in Prisons Manager at
-        <pep-pharos-link href="Mailto:stacy.burnett@ithaka.org"
-          >stacy.burnett[at]ithaka.org</pep-pharos-link
-        >
+        Have a question? Please contact us at
+        <pep-pharos-link :href="`mailto:${supportEmail}`">{{
+          supportEmail.replace('@', '[at]')
+        }}</pep-pharos-link>
       </p>
     </div>
   </section>

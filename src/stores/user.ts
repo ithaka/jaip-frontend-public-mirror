@@ -175,7 +175,7 @@ export const useUserStore = defineStore('user', {
       return core.isAdminSubdomain && this.isAdmin
     },
     isUnauthenticated(): boolean {
-      return !this.gettingUser && !this.isAuthenticatedStudent && !this.isAuthenticatedAdmin
+      return !this.isAuthenticatedStudent && !this.isAuthenticatedAdmin
     },
     features(): FeatureBoolean {
       const features: FeatureBoolean = {}

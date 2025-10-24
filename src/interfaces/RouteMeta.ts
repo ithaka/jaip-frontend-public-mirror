@@ -23,5 +23,11 @@ declare module 'vue-router' {
     // A route with this property will only be available if the user has
     // all of the ungrouped features included in this array.
     requiresAllUngrouped?: string[]
+    // If true, the route will not be shown in navigation menus.
+    hidden?: boolean
+    // If true, the route will be shown in the footer.
+    showInFooter?: boolean
+    // Label to use in navigation menus instead of the route name.
+    label: string
   }
 }

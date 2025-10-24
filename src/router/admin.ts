@@ -6,6 +6,9 @@ const config = {
     {
       path: '/',
       name: 'home',
+      meta: {
+        label: 'Home',
+      },
       component: () => import('@/views/HomeView.vue'),
     },
     {
@@ -14,6 +17,7 @@ const config = {
       meta: {
         group: 'research',
         showSearch: true,
+        label: 'Search',
       },
       component: () => import('@/views/SearchView.vue'),
     },
@@ -22,6 +26,7 @@ const config = {
       name: 'requests',
       meta: {
         group: 'research',
+        label: 'Requests',
       },
       component: () => import('@/views/RequestsView.vue'),
     },
@@ -32,6 +37,7 @@ const config = {
         group: 'support',
         requiresAny: ['edit_facilities', 'manage_facilities'],
         showSearch: true,
+        label: 'Notifications',
       },
       component: () => import('@/views/NotificationsView.vue'),
     },
@@ -58,6 +64,7 @@ const config = {
           'delete_ungrouped_feature',
         ],
         showSearch: true,
+        label: 'Management',
       },
       component: () => import('@/views/AccountManagement.vue'),
     },
@@ -68,6 +75,7 @@ const config = {
         group: 'support',
         requiresAny: ['get_users', 'get_facilities'],
         showSearch: true,
+        label: 'Account',
       },
       component: () => import('@/views/AccountView.vue'),
     },
@@ -77,6 +85,7 @@ const config = {
       meta: {
         group: 'support',
         showSearch: true,
+        label: 'About',
       },
       component: () => import('@/views/AboutView.vue'),
     },
@@ -86,24 +95,37 @@ const config = {
       meta: {
         group: 'support',
         showSearch: true,
+        label: 'Help',
       },
       component: () => import('@/views/HelpView.vue'),
     },
     {
+      path: '/accessibility',
+      name: 'accessibility',
+      meta: {
+        hidden: true,
+        showInFooter: true,
+        label: 'Accessibility',
+      },
+      component: () => import('@/views/AccessibilityView.vue'),
+    },
+    {
       path: '/pdf/:iid',
-      name: 'PDF Viewer',
+      name: 'pdfViewer',
       meta: {
         hidden: true,
         requiresAny: ['view_pdf'],
+        label: 'PDF Viewer',
       },
       component: () => import('@/views/PDFView.vue'),
     },
     {
       path: '/page/:iid/:pid',
-      name: 'Page Viewer',
+      name: 'pageViewer',
       meta: {
         hidden: true,
         requiresAny: ['view_document'],
+        label: 'Page Viewer',
       },
       component: () => import('@/views/PageView.vue'),
     },
@@ -112,6 +134,7 @@ const config = {
       name: 'NotFound',
       meta: {
         hidden: true,
+        label: 'Not Found',
       },
       component: () => import('@/views/NotFound.vue'),
     },

@@ -16,55 +16,15 @@ const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
   },
 })
 
-const linkGroup = [
-  {
-    id: 'home',
-    path: '/',
-    text: 'Home',
-    eventType: 'footer-home-link-click',
-  },
-  {
-    id: 'search',
-    path: '/search',
-    text: 'Search',
-    eventType: 'footer-search-click',
-  },
-  {
-    id: 'requests',
-    path: '/requests',
-    text: 'Requests',
-    eventType: 'footer-requests-click',
-  },
-  {
-    id: 'account',
-    path: '/account',
-    text: 'Account',
-    eventType: 'footer-account-click',
-  },
-  {
-    id: 'about',
-    path: '/about',
-    text: 'About',
-    eventType: 'footer-about-click',
-  },
-  {
-    id: 'help',
-    path: '/help',
-    text: 'Help',
-    eventType: 'footer-help-click',
-  },
-]
-
-const formattedLinkGroup = computed(() => {
-  if (isAuthenticatedAdmin && isAdminSubdomain) {
-    return linkGroup
-  } else {
-    return linkGroup.filter((link) => link.id !== 'account')
-  }
+const router = useRouter()
+const linkGroup = computed(() => {
+  const routes = router.getRoutes()
+  return routes.filter((route) => {
+    return !route.meta.hidden || route.meta.showInFooter
+  })
 })
 
 const emit = defineEmits(['close'])
-const router = useRouter()
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
 
@@ -85,15 +45,15 @@ const onLinkClick = (path: string) => {
         <div class="footer__columnn--left">
           <div class="footer__links-wrapper">
             <pep-pharos-link
-              v-for="link in formattedLinkGroup"
-              :id="link.id"
-              :key="link.id"
+              v-for="link in linkGroup"
+              :id="link.name"
+              :key="link.name"
               :href="link.path"
               .isOnBackground="true"
               subtle
               @click="onLinkClick(link.path)"
             >
-              {{ link.text }}
+              {{ link.meta.label }}
             </pep-pharos-link>
           </div>
           <div class="footer__row--bottom">

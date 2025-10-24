@@ -6,7 +6,9 @@ const config = {
     {
       path: '/',
       name: 'home',
-      meta: {},
+      meta: {
+        label: 'Home',
+      },
       component: () => import('@/views/HomeView.vue'),
     },
     {
@@ -15,6 +17,7 @@ const config = {
       meta: {
         group: 'research',
         showSearch: true,
+        label: 'Search',
       },
       component: () => import('@/views/SearchView.vue'),
     },
@@ -23,6 +26,7 @@ const config = {
       name: 'requests',
       meta: {
         group: 'research',
+        label: 'Requests',
       },
       component: () => import('@/views/RequestsView.vue'),
     },
@@ -31,6 +35,7 @@ const config = {
       name: 'about',
       meta: {
         group: 'support',
+        label: 'About',
       },
       component: () => import('@/views/AboutView.vue'),
     },
@@ -39,15 +44,27 @@ const config = {
       name: 'help',
       meta: {
         group: 'support',
+        label: 'Help',
       },
       component: () => import('@/views/HelpView.vue'),
     },
     {
+      path: '/accessibility',
+      name: 'accessibility',
+      meta: {
+        hidden: true,
+        showInFooter: true,
+        label: 'Accessibility',
+      },
+      component: () => import('@/views/AccessibilityView.vue'),
+    },
+    {
       path: '/page/:iid/:pid',
-      name: 'Page Viewer',
+      name: 'pageViewer',
       meta: {
         hidden: true,
         requiresAny: ['view_document'],
+        label: 'Page Viewer',
       },
       component: () => import('@/views/PageView.vue'),
     },
@@ -56,6 +73,7 @@ const config = {
       name: 'NotFound',
       meta: {
         hidden: true,
+        label: 'Not Found',
       },
       component: () => import('@/views/NotFound.vue'),
     },

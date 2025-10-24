@@ -18,6 +18,7 @@ export const useCoreStore = defineStore('core', {
       ephemeralAdminEnding: 'admin.apps.test.cirrostratus.org',
       adminSubdomains: ['pep-admin', 'admin.pep', 'admin.test-pep'],
       studentSubdomain: 'pep',
+      supportEmail: 'aip@jstor.org',
       routePath: '/',
       routeQuery: '',
       toastKey: 0,

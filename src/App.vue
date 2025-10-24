@@ -143,6 +143,7 @@ const truncatedGramaticalGroupsList = computed(() => {
     <!-- Main Content -->
     <RouterView id="main-content" class="main" />
     <TheFooter
+      :key="updateKey"
       :is-authenticated-admin="isAuthenticatedAdmin"
       :is-admin-subdomain="isAdminSubdomain"
     />

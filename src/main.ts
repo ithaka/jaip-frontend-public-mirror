@@ -16,6 +16,7 @@ import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
+import unauthenticatedRouteConfig from '@/router/unauthenticated'
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
@@ -142,14 +143,16 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
 }
 
 const logout = () => {
+  // This will get a list of route paths that are valid for unauthenticated users
+  const routes = unauthenticatedRouteConfig.routes.map((r) => r.path)
   const router = app.config.globalProperties.$router
   duplicateRoute = true
-  routePath.value = '/'
-  routeQuery.value = '?term=&page=1'
+  // Reset route to home if current route is not valid for unauthenticated users
+  routePath.value = routes.includes(routePath.value) ? routePath.value : '/'
   userStore.$reset()
   gettingUser.value = false
   router.push({
-    path: '/',
+    path: routePath.value,
     query: {
       term: '',
       page: 1,
