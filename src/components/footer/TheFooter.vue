@@ -271,6 +271,7 @@ const onLinkClick = (path: string) => {
 
       @media (width <= 570px) {
         gap: var(--pharos-spacing-one-half-x);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
