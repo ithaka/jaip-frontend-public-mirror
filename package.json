@@ -39,7 +39,7 @@
     "@ithaka/eslint-config-vue": "^5.1.2",
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^27.0.0",
-    "@types/node": "^22.18.13",
+    "@types/node": "^24.10.0",
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
