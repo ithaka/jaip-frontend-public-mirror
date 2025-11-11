@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useNotificationsStore } from '@/stores/notifications'
-import { useCoreStore } from '@/stores/core'
 const props = defineProps({
   show: {
     type: Boolean,
@@ -14,12 +13,8 @@ const props = defineProps({
 
 const handleSubmit = async () => {
   const notificationsStore = useNotificationsStore()
-  const coreStore = useCoreStore()
   try {
     await notificationsStore.deleteNotification(props.id)
-    coreStore.toast('Notification deleted', 'success')
-  } catch {
-    coreStore.toast('Error deleting notification', 'error')
   } finally {
     emit('submit')
   }
