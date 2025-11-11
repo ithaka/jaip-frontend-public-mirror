@@ -18,34 +18,41 @@ import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
 import type { Log } from './Log'
 import type { RestrictArgs, UnrestrictArgs } from './RestrictArgs'
 import type { Alert } from './Alert'
+import type { Collections, CustomMetadata } from './CustomContent'
+import type { Discipline } from './Discipline'
 interface Documents {
-  pdfs: (arg: string) => Promise<AxiosResponse<unknown, unknown>>
-  pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
-  metadata: (arg: string) => Promise<AxiosResponse<SearchResponse, unknown>>
+  pdfs: (arg: string) => Promise<AxiosResponse<unknown>>
+  pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown>>
+  metadata: (arg: string) => Promise<AxiosResponse<SearchResponse>>
+}
+
+interface CustomContent {
+  metadata: (collection: Collections) => Promise<AxiosResponse<CustomMetadata>>
+  pdf: (collection: Collections, filename: string) => Promise<AxiosResponse<Blob>>
 }
 interface Search {
-  basic: (arg: SearchArgs) => Promise<AxiosResponse<SearchResponse, unknown>>
-  status: (arg1: SearchArgs, arg2: string) => Promise<AxiosResponse<SearchResponse, unknown>>
+  basic: (arg: SearchArgs) => Promise<AxiosResponse<SearchResponse>>
+  status: (arg1: SearchArgs, arg2: string) => Promise<AxiosResponse<SearchResponse>>
 }
 interface Approvals {
-  bulk: (arg: BulkApprovalArgs) => Promise<AxiosResponse<unknown, unknown>>
-  bulkUndo: (arg: BulkApprovalUndoArgs) => Promise<AxiosResponse<unknown, unknown>>
-  deny: (arg: DenialArgs) => Promise<AxiosResponse<unknown, unknown>>
-  incomplete: (arg: DenialArgs) => Promise<AxiosResponse<unknown, unknown>>
-  approve: (arg: ApprovalArgs) => Promise<AxiosResponse<unknown, unknown>>
-  request: (arg: RequestArgs) => Promise<AxiosResponse<unknown, unknown>>
+  bulk: (arg: BulkApprovalArgs) => Promise<AxiosResponse<unknown>>
+  bulkUndo: (arg: BulkApprovalUndoArgs) => Promise<AxiosResponse<unknown>>
+  deny: (arg: DenialArgs) => Promise<AxiosResponse<unknown>>
+  incomplete: (arg: DenialArgs) => Promise<AxiosResponse<unknown>>
+  approve: (arg: ApprovalArgs) => Promise<AxiosResponse<unknown>>
+  request: (arg: RequestArgs) => Promise<AxiosResponse<unknown>>
 }
 interface GlobalRestricts {
-  restrict: (arg: RestrictArgs) => Promise<AxiosResponse<unknown, unknown>>
-  unrestrict: (arg: UnrestrictArgs) => Promise<AxiosResponse<unknown, unknown>>
+  restrict: (arg: RestrictArgs) => Promise<AxiosResponse<unknown>>
+  unrestrict: (arg: UnrestrictArgs) => Promise<AxiosResponse<unknown>>
   get: (arg: {
     term: string
     page: number
     limit: number
-  }) => Promise<AxiosResponse<SearchResponse, unknown>>
-  download: () => Promise<AxiosResponse<unknown, unknown>>
+  }) => Promise<AxiosResponse<SearchResponse>>
+  download: () => Promise<AxiosResponse<unknown>>
   last_updated: {
-    get: () => Promise<AxiosResponse<{ last_updated: Date | undefined }, unknown>>
+    get: () => Promise<AxiosResponse<{ last_updated: Date | undefined }>>
   }
 }
 
@@ -54,63 +61,64 @@ interface AlertsResponse {
   total: number
 }
 interface Alerts {
-  get: () => Promise<AxiosResponse<AlertsResponse, unknown>>
-  getPaginated: (arg: PaginatedGroupedQuery) => Promise<AxiosResponse<AlertsResponse, unknown>>
-  add: (arg: Alert) => Promise<AxiosResponse<Alert, unknown>>
-  edit: (arg: Alert) => Promise<AxiosResponse<Alert, unknown>>
-  delete: (id: number) => Promise<AxiosResponse<unknown, unknown>>
+  get: () => Promise<AxiosResponse<AlertsResponse>>
+  getPaginated: (arg: PaginatedGroupedQuery) => Promise<AxiosResponse<AlertsResponse>>
+  add: (arg: Alert) => Promise<AxiosResponse<Alert>>
+  edit: (arg: Alert) => Promise<AxiosResponse<Alert>>
+  delete: (id: number) => Promise<AxiosResponse<unknown>>
 }
 
 export default interface ApiObject {
   log: (arg: Log) => void
   auth: {
-    session: () => Promise<AxiosResponse<User, unknown>>
+    session: () => Promise<AxiosResponse<User>>
     features: {
       basic: {
-        get: (arg: FeatureRequest) => Promise<AxiosResponse<FeatureResponse, unknown>>
-        add: (arg: Feature) => Promise<AxiosResponse<SimpleResponse, unknown>>
-        remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
-        edit: (arg: Feature) => Promise<AxiosResponse<SimpleResponse, unknown>>
-        reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
+        get: (arg: FeatureRequest) => Promise<AxiosResponse<FeatureResponse>>
+        add: (arg: Feature) => Promise<AxiosResponse<SimpleResponse>>
+        remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
+        edit: (arg: Feature) => Promise<AxiosResponse<SimpleResponse>>
+        reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
       }
       ungrouped: {
-        get: (arg: PaginatedQuery) => Promise<AxiosResponse<FeatureResponse, unknown>>
-        add: (arg: Feature) => Promise<AxiosResponse<SimpleResponse, unknown>>
-        remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
-        edit: (arg: Feature) => Promise<AxiosResponse<SimpleResponse, unknown>>
-        reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
+        get: (arg: PaginatedQuery) => Promise<AxiosResponse<FeatureResponse>>
+        add: (arg: Feature) => Promise<AxiosResponse<SimpleResponse>>
+        remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
+        edit: (arg: Feature) => Promise<AxiosResponse<SimpleResponse>>
+        reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
       }
     }
-    alerts: () => Promise<AxiosResponse<unknown, unknown>>
-    validateSubdomains: () => Promise<AxiosResponse<unknown, unknown>>
+    alerts: () => Promise<AxiosResponse<unknown>>
+    validateSubdomains: () => Promise<AxiosResponse<unknown>>
     subdomains: {
-      get: (arg: SubdomainRequest) => Promise<AxiosResponse<SubdomainsResponse, unknown>>
-      add: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse, unknown>>
-      remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
-      edit: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse, unknown>>
-      reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
+      get: (arg: SubdomainRequest) => Promise<AxiosResponse<SubdomainsResponse>>
+      add: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse>>
+      remove: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
+      edit: (arg: SimpleRequest) => Promise<AxiosResponse<SimpleResponse>>
+      reactivate: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
     }
     entities: {
-      get: (arg1: EntitiesArgs, arg2: string) => Promise<AxiosResponse<EntityResponse, unknown>>
-      remove: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
-      add: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
-      edit: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown, unknown>>
+      get: (arg1: EntitiesArgs, arg2: string) => Promise<AxiosResponse<EntityResponse>>
+      remove: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown>>
+      add: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown>>
+      edit: (arg1: Entity, arg2: string) => Promise<AxiosResponse<unknown>>
     }
     groups: {
-      get: (arg: PaginatedQuery) => Promise<AxiosResponse<GroupResponse, unknown>>
-      remove: (arg: EditingGroup) => Promise<AxiosResponse<unknown, unknown>>
-      add: (arg: EditingGroup) => Promise<AxiosResponse<SimpleResponse, unknown>>
-      edit: (arg: EditingGroup) => Promise<AxiosResponse<SimpleResponse, unknown>>
-      reactivate: (arg: EditingGroup) => Promise<AxiosResponse<unknown, unknown>>
-      clearHistory: (arg: EditingGroup) => Promise<AxiosResponse<unknown, unknown>>
-      addAdministrator: (arg: SimpleRequest) => Promise<AxiosResponse<unknown, unknown>>
+      get: (arg: PaginatedQuery) => Promise<AxiosResponse<GroupResponse>>
+      remove: (arg: EditingGroup) => Promise<AxiosResponse<unknown>>
+      add: (arg: EditingGroup) => Promise<AxiosResponse<SimpleResponse>>
+      edit: (arg: EditingGroup) => Promise<AxiosResponse<SimpleResponse>>
+      reactivate: (arg: EditingGroup) => Promise<AxiosResponse<unknown>>
+      clearHistory: (arg: EditingGroup) => Promise<AxiosResponse<unknown>>
+      addAdministrator: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
     }
   }
+  custom_content: CustomContent
   environment: {
-    get: () => Promise<AxiosResponse<{ environment: string }, unknown>>
+    get: () => Promise<AxiosResponse<{ environment: string }>>
   }
-  disciplines: () => Promise<AxiosResponse<unknown, unknown>>
-  journals: (arg: string) => Promise<AxiosResponse<Journal[], unknown>>
+  disciplines: () => Promise<AxiosResponse<Discipline[]>>
+  journals: (arg: string) => Promise<AxiosResponse<Journal[]>>
   search: Search
   approvals: Approvals
   global_restricts: GlobalRestricts
