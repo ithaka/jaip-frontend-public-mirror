@@ -17,24 +17,102 @@ coreStore.$api.log({
 </script>
 
 <template>
-  <main class="mt-10">
+  <main class="home-view" data-cy="home-view">
     <pep-pharos-layout row-gap="0">
-      <pep-pharos-heading :level="1" preset="7" class="cols-12 hidden-sm display-block">
-        <span>Explore the world’s knowledge, cultures, and ideas</span>
+      <pep-pharos-heading
+        :level="1"
+        preset="7"
+        class="home-view__header home-view__header--large"
+        data-cy="home-view-header"
+      >
+        <span>Explore the world's knowledge, cultures, and ideas</span>
       </pep-pharos-heading>
-      <pep-pharos-heading :level="1" preset="5" class="cols-12 hidden display-block-sm">
-        <span>Explore the world’s knowledge, cultures, and ideas</span>
+      <pep-pharos-heading
+        :level="1"
+        preset="5"
+        class="home-view__header home-view__header--small"
+        data-cy="home-view-header"
+      >
+        <span>Explore the world's knowledge, cultures, and ideas</span>
       </pep-pharos-heading>
-      <div class="cols-10">
+      <div class="home-view__search-container">
         <SearchInput id="home" label="Search" a11y-label="Search" variant="prominent" />
       </div>
     </pep-pharos-layout>
 
-    <div class="cols-12 mt--4 mb-7 hero" />
+    <div class="home-view__hero" />
 
-    <pep-pharos-layout row-gap="0">
-      <AdminHelp v-if="isAuthenticatedAdmin" class="cols-12" />
-      <StudentHelp v-else-if="isAuthenticatedStudent" class="cols-12" />
+    <pep-pharos-layout row-gap="0" preset="1-col">
+      <AdminHelp v-if="isAuthenticatedAdmin" class="home-view__help-container" />
+      <StudentHelp v-else-if="isAuthenticatedStudent" class="home-view__help-container" />
     </pep-pharos-layout>
   </main>
 </template>
+
+<style lang="scss" scoped>
+.home-view {
+  margin-top: var(--pharos-spacing-3-x);
+
+  &__header {
+    width: 100%;
+    grid-column: span 12;
+
+    &--large {
+      display: none;
+
+      @media (min-width: 768px) {
+        display: block;
+      }
+    }
+
+    &--small {
+      display: block;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+
+      @media screen and (max-width: 48rem) {
+        grid-column: span 8;
+      }
+    }
+  }
+
+  &__search-container {
+    grid-column: span 10;
+
+    @media screen and (max-width: 48rem) {
+      grid-column: span 8;
+    }
+  }
+
+  &__hero {
+    width: 100%;
+    margin-top: -1rem; // negative margin to place it partially under the search bar
+    margin-bottom: var(--pharos-spacing-one-and-a-half-x);
+    overflow: hidden;
+    background-image: url('@/assets/images/PEP_hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    width: 100%;
+
+    @media (min-width: 426px) {
+      height: 40vh;
+    }
+
+    @media (max-width: 425px) {
+      height: 30vh;
+    }
+  }
+
+  &__help-container {
+    grid-column: span 12;
+    width: 100%;
+
+    @media screen and (max-width: 48rem) {
+      grid-column: span 8;
+    }
+  }
+}
+</style>

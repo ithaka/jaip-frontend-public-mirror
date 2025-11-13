@@ -102,7 +102,9 @@ describe('Main site content', () => {
     it('includes landing page text', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('main').contains('Explore the world’s knowledge')
+      cy.get('[data-cy="home-view-header"]').contains(
+        "Explore the world's knowledge, cultures, and ideas",
+      )
     })
 
     it('shows authenticated users an error page on invalid paths', () => {
@@ -205,7 +207,9 @@ describe('Main site content', () => {
     it('includes landing page text', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
-      cy.get('main').contains('Explore the world’s knowledge')
+      cy.get('[data-cy="home-view-header"]').contains(
+        "Explore the world's knowledge, cultures, and ideas",
+      )
     })
 
     it('links to Mellon', () => {

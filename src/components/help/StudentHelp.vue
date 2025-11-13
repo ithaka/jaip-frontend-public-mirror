@@ -6,9 +6,7 @@ import ResearchBasics from '@/components/help/helpContent/researchBasics/Researc
 
 <template>
   <section class="help-tabs">
-    <pep-pharos-heading :level="1" preset="5--bold">
-      JSTOR Access in Prison Help
-    </pep-pharos-heading>
+    <pep-pharos-heading :level="1" preset="5--bold"> Help Guides </pep-pharos-heading>
     <pep-pharos-tabs class="help-tabs__content" variant="secondary">
       <pep-pharos-tab id="help-tab-1" data-panel-id="help-panel-1"> What is JSTOR? </pep-pharos-tab>
       <pep-pharos-tab id="help-tab-2" data-panel-id="help-panel-2">

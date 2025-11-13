@@ -3,7 +3,7 @@
 @import '@ithaka/pharos/lib/styles/variables.css';
 @import '@ithaka/pharos/lib/styles/fonts.css';
 // @import '@ithaka/pharos/lib/styles/typography.scss';
-@import './base.css';
+@import './reset.css';
 $pharos-breakpoint-max: 99rem; // 1584px
 $pharos-breakpoint-xlarge: 85rem; // 1360px
 $pharos-breakpoint-large: 66rem; // 1056px
@@ -33,20 +33,12 @@ body {
 .header-logo {
   height: 90px;
 }
+/* UNUSED CLASS - No references found in codebase */
 .footer-logo {
   max-width: 300px;
   max-height: 90px;
   width: auto;
   height: auto;
-}
-.hero {
-  overflow: hidden;
-  background-image: url('@/assets/images/PEP_hero.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  height: 450px;
-  width: 100%;
 }
 .alert {
   ul {
@@ -125,11 +117,13 @@ body {
     }
   }
 }
+/* UNUSED CLASS - No references found in codebase */
 .sidenav-bottom {
   position: absolute;
   bottom: var(--pharos-spacing-2-x);
 }
 
+/* UNUSED CLASS - No references found in codebase */
 .markdown-body {
   p {
     margin-bottom: var(--pharos-spacing-1-x);
@@ -138,6 +132,7 @@ body {
     max-width: 600px;
   }
 }
+/* UNUSED CLASS - No references found in codebase */
 .groups-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));

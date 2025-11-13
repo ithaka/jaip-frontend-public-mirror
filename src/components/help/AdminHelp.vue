@@ -7,9 +7,7 @@ const { supportEmail } = storeToRefs(coreStore)
 </script>
 <template>
   <section class="admin-help">
-    <pep-pharos-heading :level="1" preset="5--bold">
-      JSTOR Access in Prison Help
-    </pep-pharos-heading>
+    <pep-pharos-heading :level="1" preset="5--bold"> Help Guides </pep-pharos-heading>
     <div class="admin-help__content">
       <p>
         <strong>Search and Bulk Approval</strong> will let you filter the available materials by
