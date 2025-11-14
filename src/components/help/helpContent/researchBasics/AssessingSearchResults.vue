@@ -4,7 +4,7 @@ import searchResultsList from '@/assets/markdown/img/searchResultsList.png'
 import refineSearch from '@/assets/markdown/img/refineSearch.png'
 </script>
 <template>
-  <pep-pharos-heading id="filter" ref="filter" :level="2" preset="5--bold">
+  <pep-pharos-heading id="filter" ref="filter" :level="2" preset="4--bold">
     Assessing Search Results</pep-pharos-heading
   >
   <p>
@@ -34,7 +34,7 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
   <p>
     <small>Figure 2: The search results page for the JSTOR Offline Index.</small>
   </p>
-  <pep-pharos-heading :level="3" preset="4">Build on Good Sources</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Build on Good Sources</pep-pharos-heading>
   <p>
     If you have already received access to a copy of one or more sources that are a good fit, you
     can also take a look at the references the author has used in their research. The references are
@@ -42,14 +42,14 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
     books. You may also find that the same author has published and cited previous works on the same
     topic.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Managing Information Overload</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Managing Information Overload</pep-pharos-heading>
   <p>
     After you feel confident selecting search terms and constructing a search string, you’ll find
     yourself with a list of search results that might look great—or might be overwhelming. You might
     also find yourself with search results that are related to your topic, but are not specifically
     what you need. In this lesson, you’ll learn strategies for managing information overload.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Strategies</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Strategies</pep-pharos-heading>
   <ul>
     <li>How to plan your research efficiently based on your project outline</li>
     <li>How to refine your search for a manageable set of relevant results</li>
@@ -62,7 +62,7 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
       getting the most relevant results.</small
     >
   </p>
-  <pep-pharos-heading :level="3" preset="4">Keep Project Goals In Mind</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Keep Project Goals In Mind</pep-pharos-heading>
   <p>
     Before you begin the search process, be sure to review your project outline. Aligning your
     search with the project’s requirements will save you time in the long run. For example, if your
@@ -75,7 +75,7 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
     a specific subtopic and move on to other needed information. You’ll be most efficient if you
     stop when you have enough information to complete your work.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Your search results</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Your search results</pep-pharos-heading>
   <p>
     When you’ve conducted your initial search, take a look at the results to get a sense of how
     effective your search string is.
@@ -98,7 +98,7 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
     useful, relevant set of results from the very first search string you enter.
   </p>
   <p>Next, you’ll learn how to adjust your search to get a broader or narrower set of results.</p>
-  <pep-pharos-heading :level="3" preset="4">Narrowing Search Results</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Narrowing Search Results</pep-pharos-heading>
   <p>
     If you’re overwhelmed with search results, there are several ways to work toward a more useful
     and workable set of results.
@@ -161,7 +161,7 @@ import refineSearch from '@/assets/markdown/img/refineSearch.png'
     If you’re using your best search skills and are still flooded with search results, it’s possible
     that your topic is just too broad.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Too Few Results</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Too Few Results</pep-pharos-heading>
   <p>
     If your search gives you fewer results than you had hoped or expected, you can make a few simple
     changes to your search string that will bring you a larger set of results.

@@ -2,8 +2,8 @@
 import linkedPhraseSearch from '@/assets/markdown/img/linkedPhraseSearch.png'
 </script>
 <template>
-  <pep-pharos-heading :level="2" preset="5--bold">Formulating a Search Strategy</pep-pharos-heading>
-  <pep-pharos-heading :level="3" preset="4">Choosing Search Terms</pep-pharos-heading>
+  <pep-pharos-heading :level="2" preset="4--bold">Formulating a Search Strategy</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Choosing Search Terms</pep-pharos-heading>
   <p>
     Think of a scholarly database as a vault that holds thousands upon thousands of articles, books,
     and other sources. Your key to unlock this vault is your search string: the set of words,
@@ -26,7 +26,7 @@ import linkedPhraseSearch from '@/assets/markdown/img/linkedPhraseSearch.png'
     search about cooking, you might want to use the related term recipes; it’s not exactly a
     synonym, but it will yield results that are closely related to your topic.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Putting Terms Together</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Putting Terms Together</pep-pharos-heading>
   <p>
     Once you’ve decided on a set of terms to use, it’s time to begin putting them together. The way
     you combine your search terms will serve as a set of instructions for the database, telling it
@@ -41,7 +41,7 @@ import linkedPhraseSearch from '@/assets/markdown/img/linkedPhraseSearch.png'
     “blue man group” in quotation marks will retrieve only articles where the words appear together
     in that order. The second group of search results is much smaller and easier to review.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Boolean Operators</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Boolean Operators</pep-pharos-heading>
   <p>
     Consider using special words called Boolean operators: AND, OR, and NOT. These words give the
     database additional information about how to process a search that uses more than one term.

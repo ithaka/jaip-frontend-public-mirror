@@ -9,7 +9,7 @@ import IssuesHighStakesTesting from '@/assets/markdown/img/IssuesHighStakesTesti
 import InArticleCitation from '@/assets/markdown/img/InArticleCitation.png'
 </script>
 <template>
-  <pep-pharos-heading :level="2" preset="5--bold">Assessing Your Sources</pep-pharos-heading>
+  <pep-pharos-heading :level="2" preset="4--bold">Assessing Your Sources</pep-pharos-heading>
   <p>
     Once you have received your research materials, it is important to assess whether they are
     trustworthy and credible. This section describes how to identify scholarly source material for
@@ -25,7 +25,7 @@ import InArticleCitation from '@/assets/markdown/img/InArticleCitation.png'
     we’ll look at sources and point out these attributes so that you can start to identify them on
     your own.
   </p>
-  <pep-pharos-heading :level="3" preset="4">Key Indicators</pep-pharos-heading>
+  <pep-pharos-heading :level="3" preset="2">Key Indicators</pep-pharos-heading>
   <p>
     An easy way to remember the key indicators of academic scholarship is by using your A-B-Cs:
     <b>authority</b>, <b>bias</b>, and <b>content</b>. Let’s get started by investigating the topic

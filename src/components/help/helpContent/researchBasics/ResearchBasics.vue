@@ -7,8 +7,8 @@ import CreatingBibliography from './CreatingBibliography.vue'
 </script>
 <template>
   <div class="help-tab__inner">
-    <pep-pharos-heading :level="2" preset="5--bold"> Research Basics</pep-pharos-heading>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="2" preset="4--bold"> Research Basics</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2"
       >An offline course for learning about academic research</pep-pharos-heading
     >
     <p class="help-tab__paragraph">

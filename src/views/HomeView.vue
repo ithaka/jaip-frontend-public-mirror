@@ -60,7 +60,7 @@ coreStore.$api.log({
     &--large {
       display: none;
 
-      @media (min-width: 768px) {
+      @media (min-width: 426px) {
         display: block;
       }
     }
@@ -68,11 +68,11 @@ coreStore.$api.log({
     &--small {
       display: block;
 
-      @media (min-width: 768px) {
+      @media (min-width: 426px) {
         display: none;
       }
 
-      @media screen and (max-width: 48rem) {
+      @media (max-width: 48rem) {
         grid-column: span 8;
       }
     }
@@ -81,7 +81,7 @@ coreStore.$api.log({
   &__search-container {
     grid-column: span 10;
 
-    @media screen and (max-width: 48rem) {
+    @media (max-width: 48rem) {
       grid-column: span 8;
     }
   }
@@ -98,7 +98,7 @@ coreStore.$api.log({
     width: 100%;
 
     @media (min-width: 426px) {
-      height: 40vh;
+      height: 35vh;
     }
 
     @media (max-width: 425px) {

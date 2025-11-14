@@ -11,7 +11,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
 </script>
 <template>
   <div class="help-tab__inner">
-    <pep-pharos-heading :level="2" preset="5--bold">Citing Scholarly Work</pep-pharos-heading>
+    <pep-pharos-heading :level="2" preset="4--bold">Citing Scholarly Work</pep-pharos-heading>
     <p>
       You’re doing research for a paper on youth voting. You come across two articles that provide
       different numbers for how many young people voted in the most recent election. One source
@@ -28,7 +28,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       <li>Where to find the necessary information for a citation</li>
       <li>How to compose your own citations</li>
     </ul>
-    <pep-pharos-heading :level="3" preset="4">Why Cite?</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Why Cite?</pep-pharos-heading>
     <p>
       Citing your sources serves you, and it serves your readers. When you provide citations for the
       work you’ve used in your paper, it gives readers a way to follow up and find more information
@@ -38,7 +38,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       Using proper citation also gives you credibility as an author. It allows readers to
       distinguish between your ideas and those of your sources.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Citation Styles</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Citation Styles</pep-pharos-heading>
     <p>
       There are a variety of ways to format citations. Citation styles are issued by the major
       professional organizations in a discipline or field. The citation styles are published in
@@ -67,7 +67,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
         same article.
       </figcaption>
     </figure>
-    <pep-pharos-heading :level="3" preset="4">Elements of a Citation: Print</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Elements of a Citation: Print</pep-pharos-heading>
     <p>
       Print materials include books, popular magazines, and articles from scholarly journals. A
       complete citation for a print source will point your readers to the exact source you used —
@@ -101,7 +101,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       must include the name of the database you used, the medium (the web, rather than print), and
       the date you accessed the material.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Collecting Citation Elements</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Collecting Citation Elements</pep-pharos-heading>
     <p>
       So, where do you start finding the elements of a citation? When you’re looking at a book, you
       can find most or all of these elements at the beginning of the book, on the title page and the
@@ -130,7 +130,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       programs are free, and your school may subscribe to others. Ask your teacher or librarian
       about the best citation manager to use.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Composing a Citation</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Composing a Citation</pep-pharos-heading>
     <p>
       When it’s time to put together your citations, you’ll need the information you’ve gathered
       about your sources — but you’ll also need information about what is required for a particular
@@ -168,7 +168,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       <img :src="BronteSistersCitation" class="help-tab__image" alt="" />
       <figcaption>Figure 16: Bronte sisters citation</figcaption>
     </figure>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="3" preset="2"
       >Citing and paraphrasing a scholarly work</pep-pharos-heading
     >
     <p>
@@ -181,7 +181,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       <li>Learn the difference between quoting, paraphrasing, and summarizing your sources</li>
       <li>Learn how to cite sources within the body of your paper</li>
     </ul>
-    <pep-pharos-heading :level="3" preset="4">When to Cite</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">When to Cite</pep-pharos-heading>
     <p>
       When do you need to cite a source? Each time you incorporate someone else’s information or
       idea into your own work, you must provide a citation. So, even if you are using your own words
@@ -213,7 +213,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       If you are unsure about whether a citation is necessary, it’s always better to provide one.
       It’s much better to cite too heavily than to run the risk of plagiarism.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Plagiarism</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Plagiarism</pep-pharos-heading>
     <p>
       Plagiarism is the use of another person’s words or ideas without providing proper credit. When
       you think of the word “plagiarism,” you might think of someone downloading a paper from the
@@ -230,7 +230,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       accidents. It’s essential to be conscious of giving credit to your sources.
     </p>
     <p>Remember: When in doubt, cite.</p>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="3" preset="2"
       >Quoting, Paraphrasing, and Summarizing</pep-pharos-heading
     >
     <p>There are different ways to use information from your sources in your own writing.</p>
@@ -256,7 +256,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       Whether you’re quoting, paraphrasing, or summarizing information from a source, you must
       provide a citation.
     </p>
-    <pep-pharos-heading :level="3" preset="4">In-Text Citations</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">In-Text Citations</pep-pharos-heading>
     <p>
       In general, a citation has two parts: a brief mention of the source within the body of the
       paper, and a more detailed list at the end of the paper, called a Works Cited page. Here,
@@ -291,7 +291,7 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       <img :src="IntextcitationHarrisAPA" alt="" class="help-tab__image" />
       <figcaption>Figure 18: Example of an in text APA style citation</figcaption>
     </figure>
-    <pep-pharos-heading :level="3" preset="4">Offset Citations</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Offset Citations</pep-pharos-heading>
     <p>
       Sometimes you will need to use a longer quotation as a part of your work. Rather than being
       inserted into the rest of the text, longer quotations should be indented to make the

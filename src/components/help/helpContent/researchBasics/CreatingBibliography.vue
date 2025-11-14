@@ -4,7 +4,7 @@ import footnotesandendnotes from '@/assets/markdown/img/footnotesandendnotes.png
 </script>
 <template>
   <div class="help-tab__inner">
-    <pep-pharos-heading :level="2" preset="5--bold"
+    <pep-pharos-heading :level="2" preset="4--bold"
       >Creating your Works Cited or Bibliography</pep-pharos-heading
     >
     <p>
@@ -20,7 +20,7 @@ import footnotesandendnotes from '@/assets/markdown/img/footnotesandendnotes.png
         You’ll also learn how to use notes to provide your readers with additional information.
       </li>
     </ul>
-    <pep-pharos-heading :level="3" preset="4">Tracking Your Sources</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Tracking Your Sources</pep-pharos-heading>
     <p>
       Now you’ve learned how to find and collect the elements necessary for a complete citation.
       Having all of this information handy will make it much simpler to compile your Works Cited
@@ -40,7 +40,7 @@ import footnotesandendnotes from '@/assets/markdown/img/footnotesandendnotes.png
       Use whatever method is most efficient for you. If you’re having trouble tracking down a piece
       of information you need for a citation, ask your teacher or librarian for help.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Works Cited</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Works Cited</pep-pharos-heading>
     <p>
       As you know, in-text citations tell the reader which ideas and facts come from your source
       material. At the end of your paper, you’ll include a comprehensive list of all the sources
@@ -85,7 +85,7 @@ import footnotesandendnotes from '@/assets/markdown/img/footnotesandendnotes.png
       than one source from the same author, alphabetize those sources by title. For entries
       following the first one, you’ll replace the author’s name with three hyphens.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Works Cited vs Bibliography</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Works Cited vs Bibliography</pep-pharos-heading>
     <p>
       You’ve probably heard the word “bibliography” used to talk about a list of citations. It’s
       important to note that a bibliography is not the same as a Works Cited page.
@@ -106,7 +106,7 @@ import footnotesandendnotes from '@/assets/markdown/img/footnotesandendnotes.png
       clear on what your teacher is asking for, be sure to get more detail about what’s expected of
       you. You don’t want to do the extra work to prepare a bibliography unless it’s required.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Endnotes and Footnotes</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Endnotes and Footnotes</pep-pharos-heading>
     <p>
       What if there’s a great article on your topic that you didn’t cite, but you think your readers
       would be interested in? You can do this by including notes in your paper. Notes are a way to

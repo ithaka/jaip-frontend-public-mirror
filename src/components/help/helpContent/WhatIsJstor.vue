@@ -3,7 +3,7 @@ import jstorLogo from '@/assets/images/help/J_horizontal.svg'
 </script>
 <template>
   <div class="help-tab__inner">
-    <pep-pharos-heading :level="2" preset="5--bold"> What is JSTOR? </pep-pharos-heading>
+    <pep-pharos-heading :level="2" preset="4--bold"> What is JSTOR? </pep-pharos-heading>
     <p class="help-tab__paragraph">
       JSTOR is a digital library of academic journals and books. More than 11,000 institutions
       around the world—including colleges and universities, secondary schools, public libraries, and
@@ -14,7 +14,7 @@ import jstorLogo from '@/assets/images/help/J_horizontal.svg'
       course included in this tool.
     </p>
     <img alt="Jstor Logo horizontal" :src="jstorLogo" class="help-tab__image" />
-    <pep-pharos-heading :level="2" preset="5--bold"> What is in JSTOR? </pep-pharos-heading>
+    <pep-pharos-heading :level="2" preset="4--bold"> What is in JSTOR? </pep-pharos-heading>
     <p class="help-tab__paragraph">
       JSTOR contains more than 2,600 journals from 1,200 publishers, with publication dates ranging
       from 1665 to 2015 (for certain titles). Journals are available in more than 70 disciplines in

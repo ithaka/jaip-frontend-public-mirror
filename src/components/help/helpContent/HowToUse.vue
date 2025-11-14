@@ -5,14 +5,14 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
 </script>
 <template>
   <div class="help-tab__inner">
-    <pep-pharos-heading :level="2" preset="5--bold"> How to use JSTOR </pep-pharos-heading>
+    <pep-pharos-heading :level="2" preset="4--bold"> How to use JSTOR </pep-pharos-heading>
     <p class="help-tab__paragraph">
       JSTOR supports full-text keyword searching across all of the content. JSTOR generally includes
       all the content from articles, books, and pamphlets, cover to cover. This makes it possible to
       search front matter and back matter, letters to the editor, advertisements, and other types of
       material along with scholarly articles and book chapters.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Search JSTOR</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Search JSTOR</pep-pharos-heading>
     <p class="help-tab__paragraph">
       The search form appears on the main page and also at the top of most content pages. You can
       type any search terms into the box and JSTOR will search for those terms across all of the
@@ -46,7 +46,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
         here and then click on the magnifying glass to do your first search.</small
       >
     </p>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="3" preset="2"
       >Combining Search Terms & Boolean Logic</pep-pharos-heading
     >
     <p class="help-tab__paragraph">
@@ -97,7 +97,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
         contain either the word sparrow or the word robin
       </li>
     </ul>
-    <pep-pharos-heading :level="3" preset="4">Searching for an exact phrase</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Searching for an exact phrase</pep-pharos-heading>
     <p class="help-tab__paragraph">
       If you want to include more than one term in a field search, use parentheses () to enclose
       your search terms, or quotation marks (" ") to search for an exact phrase. The example above
@@ -116,7 +116,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
         nations in the item title field
       </li>
     </ul>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="3" preset="2"
       >Searching for multiple spellings of a word</pep-pharos-heading
     >
     <p class="help-tab__paragraph">
@@ -150,20 +150,20 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
       You can combine search terms containing wild cards (wom?n AND "science education") and they
       may be used in a field search: au:sm?th or ti:shakespeare\*
     </p>
-    <pep-pharos-heading :level="3" preset="4">Proximity searching</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Proximity searching</pep-pharos-heading>
     <p class="help-tab__paragraph">
       JSTOR search allows you to find terms that are within a set number of words of each other
       using the tilde (~) symbol. In this example ("debt forgiveness"~10), you will only get results
       with the terms debt and forgiveness within ten words of each other. You can replace "10" with
       a different number of words.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Boosting term relevance</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Boosting term relevance</pep-pharos-heading>
     <p class="help-tab__paragraph">
       You may increase the importance of any term in your search by using the caret (^) symbol
       followed by a number that represents the rise in relevance. In the example above (cat^7 dog),
       an occurrence of the word cat in an item is seven times more important than the word dog.
     </p>
-    <pep-pharos-heading :level="3" preset="4">Using field abbreviations</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Using field abbreviations</pep-pharos-heading>
     <p class="help-tab__paragraph">
       You can narrow search results to the fields JSTOR uses for categorization of metadata. Each
       field is represented in a search by its abbreviation. The example above (au:smith) will find
@@ -257,7 +257,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
         </tr>
       </tbody>
     </table>
-    <pep-pharos-heading :level="3" preset="4"
+    <pep-pharos-heading :level="3" preset="2"
       >Limiting a search to content in a specific language</pep-pharos-heading
     >
     <p class="help-tab__paragraph">
@@ -338,10 +338,10 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
         </tr>
       </tbody>
     </table>
-    <pep-pharos-heading :level="2" preset="5--bold"
+    <pep-pharos-heading :level="2" preset="4--bold"
       >Understanding your search results</pep-pharos-heading
     >
-    <pep-pharos-heading :level="3" preset="4">Search relevance</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Search relevance</pep-pharos-heading>
     <p class="help-tab__paragraph">
       Relevance on JSTOR is a combination of many things. Key elements include:
     </p>
@@ -371,7 +371,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
       may not find articles from last year for some journals on JSTOR.
     </p>
 
-    <pep-pharos-heading id="request" ref="request" :level="2" preset="5--bold">
+    <pep-pharos-heading id="request" ref="request" :level="2" preset="4--bold">
       Requesting Materials
     </pep-pharos-heading>
     <p class="help-tab__paragraph">
@@ -394,7 +394,7 @@ import submitRequestMenu from '@/assets/markdown/img/submitRequestsMenu.png'
     <p class="help-tab__paragraph">
       <small>Figure 2: Clicking the "Request this" button.</small>
     </p>
-    <pep-pharos-heading :level="3" preset="4">Submitting your requests</pep-pharos-heading>
+    <pep-pharos-heading :level="3" preset="2">Submitting your requests</pep-pharos-heading>
     <p class="help-tab__paragraph">
       The "Your requests" button also lets you submit your requests for retrieval. When you're ready
       to submit a request, you may also include any notes about your request that could be useful to

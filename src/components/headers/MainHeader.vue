@@ -131,7 +131,6 @@ const emit = defineEmits(['logout', 'close'])
 <style scoped lang="scss">
 .pep-pharos-header {
   .pep-pharos-header__top {
-    padding: var(--pharos-spacing-one-half-x) var(--pharos-spacing-one-and-a-half-x);
     display: flex;
     align-items: center;
     justify-content: center;
