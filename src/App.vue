@@ -96,7 +96,7 @@ const truncatedGramaticalGroupsList = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div class="app-container">
     <!-- Keeping the spinner outside the layout will allow it to fill the page. Useful for initial loading. -->
     <pep-pharos-loading-spinner
       v-if="gettingUser || searching || isSpinning"
@@ -151,13 +151,16 @@ const truncatedGramaticalGroupsList = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.main {
-  margin-top: var(--pharos-spacing-2-x);
-  margin-bottom: var(--pharos-spacing-5-x);
-  grid-column: span 12;
-
-  @media screen and (min-width: 1024px) {
-    min-height: calc(100vh - 500px); //Calculated from height of headers + footer
+.app-container {
+  background-color: var(--pharos-color-white);
+  color: var(--pharos-color-text-base);
+  .main {
+    margin-top: var(--pharos-spacing-2-x);
+    margin-bottom: var(--pharos-spacing-5-x);
+    grid-column: span 12;
+    @media screen and (min-width: 1024px) {
+      min-height: calc(100vh - 500px); //Calculated from height of headers + footer
+    }
   }
 }
 </style>

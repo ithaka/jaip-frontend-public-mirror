@@ -73,7 +73,7 @@ const isShowing = ref(true)
     margin-right: var(--pharos-spacing-1-x);
     font-size: var(--pharos-font-size-base);
     line-height: var(--pharos-line-height-base);
-    color: var(--pharos-color-text-dark);
+    color: var(--pharos-color-text-base);
   }
 }
 </style>
