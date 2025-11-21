@@ -5,8 +5,7 @@ import { computed, onMounted, ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import type { Cedar } from '@/interfaces/Metadata'
 import PageViewer from '@/components/pages/PageViewer.vue'
-// @ts-expect-error The viewer utils are not typed
-import { requestFullscreen, exitFullscreen } from '@/utils/viewers'
+import { requestFullscreen, exitFullscreen } from '@/utils/viewers.ts'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 
 const route = useRoute()

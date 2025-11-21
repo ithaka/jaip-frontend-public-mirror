@@ -1,5 +1,5 @@
 export enum Collections {
-  REENTRY = 'reentry',
+  reentry = 'reentry',
 }
 
 export interface AlternateDocumentVersion {
@@ -8,10 +8,11 @@ export interface AlternateDocumentVersion {
   label: string
 }
 
-export interface CustomMetadata {
+export interface CollectionMetadata {
   title: string
   description: string
   filename: string
+  thumbnail: string
   creator: string
   contributor: string
   publisher: string

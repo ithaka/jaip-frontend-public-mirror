@@ -59,6 +59,16 @@ const config = {
       component: () => import('@/views/AccessibilityView.vue'),
     },
     {
+      path: '/collections/:collection/:filename',
+      name: 'collectionsItemViewer',
+      meta: {
+        hidden: true,
+        label: 'Collections Item View',
+        requiresAny: ['include_reentry_content'],
+      },
+      component: () => import('@/views/CollectionsItemView.vue'),
+    },
+    {
       path: '/page/:iid/:pid',
       name: 'pageViewer',
       meta: {

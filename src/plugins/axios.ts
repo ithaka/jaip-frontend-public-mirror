@@ -6,19 +6,14 @@ import type { AxiosInstance } from 'axios'
 import api from '@/config/api'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
+import { useBaseURL } from '@/composables/urls'
 
 export default {
   install: (app: App) => {
     const coreStore = useCoreStore()
-    const { isEphemeralAdmin, isEphemeralStudent, $api, baseTestURL, baseAdminURL } =
-      storeToRefs(coreStore)
+    const { $api } = storeToRefs(coreStore)
     // This creates the axios instance that the app will use.
-    let baseURL = `${window.location.protocol}//${window.location.host}`
-    if (isEphemeralAdmin.value) {
-      baseURL = baseAdminURL.value
-    } else if (isEphemeralStudent.value) {
-      baseURL = baseTestURL.value
-    }
+    const baseURL = useBaseURL()
 
     app.config.globalProperties.$axios = axios.create({
       headers: {

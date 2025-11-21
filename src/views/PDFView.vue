@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PDFViewer from '@/components/PDFViewer.vue'
+import PDFViewer from '@/components/Viewer/PDFViewer.vue'
 import { useRoute } from 'vue-router'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
@@ -137,5 +137,3 @@ coreStore.$api.log({
 </template>
 
 <style lang="scss"></style>
-
-@/utils/viewers

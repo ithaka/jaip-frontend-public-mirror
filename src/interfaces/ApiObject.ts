@@ -18,7 +18,7 @@ import type { SimpleRequest, SimpleResponse } from './BasicSubmissions'
 import type { Log } from './Log'
 import type { RestrictArgs, UnrestrictArgs } from './RestrictArgs'
 import type { Alert } from './Alert'
-import type { Collections, CustomMetadata } from './CustomContent'
+import type { Collections, CollectionMetadata } from './Collections'
 import type { Discipline } from './Discipline'
 interface Documents {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown>>
@@ -26,8 +26,8 @@ interface Documents {
   metadata: (arg: string) => Promise<AxiosResponse<SearchResponse>>
 }
 
-interface CustomContent {
-  metadata: (collection: Collections) => Promise<AxiosResponse<CustomMetadata>>
+interface CollectionsRoutes {
+  metadata: (collection: Collections) => Promise<AxiosResponse<CollectionMetadata[]>>
   pdf: (collection: Collections, filename: string) => Promise<AxiosResponse<Blob>>
 }
 interface Search {
@@ -113,7 +113,7 @@ export default interface ApiObject {
       addAdministrator: (arg: SimpleRequest) => Promise<AxiosResponse<unknown>>
     }
   }
-  custom_content: CustomContent
+  collections: CollectionsRoutes
   environment: {
     get: () => Promise<AxiosResponse<{ environment: string }>>
   }

@@ -1,3 +1,5 @@
+import type { Collections } from './Collections'
+
 export interface Log {
   eventtype: string
   event_description: string
@@ -11,4 +13,6 @@ export interface Log {
   disciplines?: string[]
   code?: string
   page_index?: number
+  collection?: Collections
+  filename?: string
 }

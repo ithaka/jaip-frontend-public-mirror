@@ -66,7 +66,11 @@ export default defineConfig(({ mode }) => {
           },
           {
             src: './node_modules/pdfjs-dist/build/pdf.worker.min.mjs',
-            dest: 'public/scripts/',
+            dest: 'public/scripts/pdfjs',
+          },
+          {
+            src: './node_modules/pdfjs-dist/wasm',
+            dest: 'public/scripts/pdfjs',
           },
         ],
       }),

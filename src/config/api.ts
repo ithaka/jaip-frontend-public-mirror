@@ -1,7 +1,7 @@
 import type { AxiosInstance } from 'axios'
 import type ApiObject from '@/interfaces/ApiObject'
 import type { Log } from '@/interfaces/Log'
-import type { Collections } from '@/interfaces/CustomContent'
+import type { Collections } from '@/interfaces/Collections'
 const global_path = 'api'
 const global_version = 'v2'
 const global_route_prefix = `/${global_path}`
@@ -95,7 +95,7 @@ export const routes = {
     metadata: (iid: string) => `${global_route_prefix_versioned}/metadata/${iid}`,
     pages: (iid: string, pid: string) => `${global_route_prefix_versioned}/page/${iid}/${pid}`,
   },
-  custom_content: {
+  collections: {
     metadata: (collection: Collections) =>
       `${global_route_prefix_versioned}/custom_content/metadata/${collection}`,
     pdf: (collection: Collections, filename: string) =>
@@ -247,15 +247,15 @@ export default ($axios: AxiosInstance): ApiObject => ({
     edit: (data) => $axios.patch(routes.alerts.edit, data),
     delete: (id) => $axios.delete(routes.alerts.delete, { data: { id } }),
   },
-  custom_content: {
-    metadata: (collection: Collections) => $axios.get(routes.custom_content.metadata(collection)),
+  collections: {
+    metadata: (collection: Collections) => $axios.get(routes.collections.metadata(collection)),
     pdf: (collection: Collections, filename: string) => {
       const config = {
         headers: {
           Accept: `application/pdf`,
         },
       }
-      return $axios.get(routes.custom_content.pdf(collection, filename), config)
+      return $axios.get(routes.collections.pdf(collection, filename), config)
     },
   },
 })

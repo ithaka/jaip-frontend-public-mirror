@@ -130,6 +130,26 @@ const config = {
       component: () => import('@/views/PageView.vue'),
     },
     {
+      path: '/collections/:collection/:filename',
+      name: 'collectionsItemViewer',
+      meta: {
+        hidden: true,
+        label: 'Collections Item View',
+        requiresAny: [
+          'include_reentry_content',
+          'add_or_edit_users',
+          'approve_requests',
+          'deny_requests',
+          'edit_facilities',
+          'manage_facilities',
+          'remove_users',
+          'bulk_approve',
+          'undo_bulk_approve',
+        ],
+      },
+      component: () => import('@/views/CollectionsItemView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       meta: {
