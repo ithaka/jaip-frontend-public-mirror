@@ -92,9 +92,6 @@ const createLoadingTask = async (src: string) => {
 }
 
 // PDF VIEWER CREATION
-const dispatchResizeEvent = () => {
-  window.dispatchEvent(new Event('resize'))
-}
 const createViewer = () => {
   try {
     const container = document.getElementById('viewer-container') as HTMLDivElement
@@ -109,9 +106,15 @@ const createViewer = () => {
     // In cases where the viewer size changes, the pdf needs to be re-fitted. We can use
     // the pdf.js event bus to listen for resize events and adjust the scale accordingly,
     // but we also need to dispatch resize events when the window is resized.
+    const dispatchResizeEvent = () => {
+      eventBus.dispatch('resize', {})
+    }
     window.addEventListener('resize', dispatchResizeEvent)
     eventBus.on('resize', function () {
       pdfViewer.currentScaleValue = 'page-fit'
+    })
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', dispatchResizeEvent)
     })
 
     // Set initial scale to fit page
@@ -210,7 +213,7 @@ const zoomOut = (ticks: number) => {
 const isInFullscreen = ref(false)
 const handleFullscreenToggle = () => {
   // If the fullscreen API is not available, we handle the toggle with CSS only.
-  if (canUseFullscreenAPI()) {
+  if (!canUseFullscreenAPI()) {
     handleFullscreenCSSToggle()
     return
   }
@@ -277,7 +280,6 @@ coreStore.$api.log({
 
 onBeforeUnmount(() => {
   removeFullscreenChangeListeners(handleFullscreenChange)
-  window.removeEventListener('resize', dispatchResizeEvent)
   coreStore.$api.log({
     eventtype: 'pep_fe_pdf_view_complete',
     event_description: 'user has stopped viewing the PDF',

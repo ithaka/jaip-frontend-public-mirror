@@ -35,7 +35,7 @@ export const requestFullscreen = async (
   }
 
   if (htmlElement.requestFullscreen) {
-    await htmlElement.requestFullscreen()
+    htmlElement.requestFullscreen()
     callback()
   } else if (htmlElement.webkitRequestFullscreen) {
     htmlElement.webkitRequestFullscreen()
