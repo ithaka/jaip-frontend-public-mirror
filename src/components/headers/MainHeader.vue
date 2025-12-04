@@ -57,9 +57,9 @@ const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
 </script>
 <template>
-  <pep-pharos-header class="pep-pharos-header--main" data-cy="main-header">
+  <pep-pharos-header class="main-header" data-cy="main-header">
     <!-- Top of the page, above the logo and menus -->
-    <div slot="top" class="pep-pharos-header__top">
+    <div slot="top" class="main-header__top">
       <ProviderBar
         :groups="groups"
         :is-admin-subdomain="isAdminSubdomain"
@@ -129,8 +129,8 @@ const emit = defineEmits(['logout', 'close'])
 </template>
 
 <style scoped lang="scss">
-.pep-pharos-header {
-  .pep-pharos-header__top {
+.main-header {
+  &__top {
     display: flex;
     align-items: center;
     justify-content: center;

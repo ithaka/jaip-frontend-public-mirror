@@ -41,7 +41,16 @@ const changeRouteHandler = (route: RouteRecordRaw) => {
         :a11y-title="route.meta.label || route.name"
         class="mr-1"
       />
-      {{ formatRouteName(route) }}
+      <!-- Include new pill for showAsNew meta-->
+      <span v-if="route.meta.showAsNew">
+        {{ formatRouteName(route) }}
+        <pep-pharos-pill v-if="route.meta.showAsNew" size="small" preset="2" class="sidenav-pill">
+          NEW</pep-pharos-pill
+        >
+      </span>
+      <span v-else>
+        {{ formatRouteName(route) }}
+      </span>
     </pep-pharos-sidenav-link>
 
     <div v-for="(routes, group) in organizedRoutes.grouped" :key="group">
@@ -58,3 +67,8 @@ const changeRouteHandler = (route: RouteRecordRaw) => {
     </div>
   </pep-pharos-sidenav-section>
 </template>
+<style lang="scss" scoped>
+.sidenav-pill {
+  margin-left: var(--pharos-spacing-one-half-x);
+}
+</style>

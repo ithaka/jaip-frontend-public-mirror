@@ -32,7 +32,11 @@ export const makeGrammaticalList = (original: Array<string>) => {
 }
 
 export const capitalize = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+    .join(' ')
 }
 
 export const hasStaticBlock = (): boolean => {
@@ -174,6 +178,10 @@ export const getOrganizedRoutes = (router: Router): RoutesObject => {
   return routes.reduce(
     (obj: RoutesObject, route) => {
       if (route.meta.hidden) {
+        return obj
+      }
+      if (route.name === 'home') {
+        obj.ungrouped.unshift(route)
         return obj
       }
       if (route.meta.group) {

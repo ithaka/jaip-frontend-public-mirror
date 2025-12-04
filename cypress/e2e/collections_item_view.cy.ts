@@ -3,8 +3,8 @@ import { routes } from '../../src/config/api'
 
 describe('Collections Item View', () => {
   const collection = 'reentry'
-  const filename = 'NYPL_JPS_Connections_2025.pdf'
-  const spanishFilename = 'NYPL_JPS_Conexiones_2025.pdf'
+  const filename = 'connections-2025-ny-en.pdf'
+  const spanishFilename = 'conexiones-2025-ny-es.pdf'
   const baseRoute = `/collections/${collection}/${filename}`
 
   const interceptCommonRequests = () => {
@@ -58,7 +58,7 @@ describe('Collections Item View', () => {
     )
     cy.get('[data-cy="custom-content-description"]').should(
       'contain',
-      'Annual reentry resource guide',
+      'Annual reentry resource guide for people returning to New York City',
     )
     cy.get('[data-cy="custom-content-creation"]')
       .should('contain', 'Created by New York Public Library, Jail & Prison Services')

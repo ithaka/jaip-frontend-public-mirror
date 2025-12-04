@@ -112,11 +112,11 @@ const hasPrintAndDownload = computed(() => {
           class="document-metadata__jurisdiction"
           data-cy="custom-content-jurisdiction"
         >
-          <span v-if="collectionMetadata.national">NATIONAL</span>
+          <span v-if="collectionMetadata.is_national">NATIONAL</span>
           <span v-else>{{ collectionMetadata.location }}</span>
           <span
             v-if="
-              (collectionMetadata.location || collectionMetadata.national) &&
+              (collectionMetadata.location || collectionMetadata.is_national) &&
               collectionMetadata.date
             "
             class="document-metadata__bullet"

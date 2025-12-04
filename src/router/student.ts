@@ -4,6 +4,17 @@ const config = {
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/collections/reentry',
+      name: 'reentry guides',
+      meta: {
+        label: 'Reentry Guides',
+        requiresAny: ['include_reentry_content'],
+        showAsNew: true,
+        showInFooter: true,
+      },
+      component: () => import('@/views/ReentryView.vue'),
+    },
+    {
       path: '/',
       name: 'home',
       meta: {

@@ -130,6 +130,17 @@ const config = {
       component: () => import('@/views/PageView.vue'),
     },
     {
+      path: '/collections/reentry',
+      name: 'reentry guides',
+      meta: {
+        label: 'Reentry Guides',
+        requiresAny: ['include_reentry_content'],
+        showAsNew: true,
+        showInFooter: true,
+      },
+      component: () => import('@/views/ReentryView.vue'),
+    },
+    {
       path: '/collections/:collection/:filename',
       name: 'collectionsItemViewer',
       meta: {

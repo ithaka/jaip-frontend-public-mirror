@@ -19,9 +19,20 @@ const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
 const router = useRouter()
 const linkGroup = computed(() => {
   const routes = router.getRoutes()
-  return routes.filter((route) => {
-    return !route.meta.hidden || route.meta.showInFooter
-  })
+  return routes.reduce(
+    (acc, route) => {
+      if (!route.meta?.hidden || route.meta?.showInFooter) {
+        // Insert 'home' route at the beginning, others at the end
+        if (route.name === 'home') {
+          acc.unshift(route)
+        } else {
+          acc.push(route)
+        }
+      }
+      return acc
+    },
+    [] as typeof routes,
+  )
 })
 
 const emit = defineEmits(['close'])
@@ -51,9 +62,17 @@ const onLinkClick = (path: string) => {
               :href="link.path"
               .isOnBackground="true"
               subtle
+              class="footer__links"
               @click="onLinkClick(link.path)"
             >
               {{ link.meta.label }}
+              <pep-pharos-pill
+                v-if="link.meta.showAsNew"
+                size="small"
+                preset="2"
+                class="sidenav-pill"
+                >NEW</pep-pharos-pill
+              >
             </pep-pharos-link>
           </div>
           <div class="footer__row--bottom">
@@ -263,15 +282,22 @@ const onLinkClick = (path: string) => {
     }
 
     .footer__links-wrapper {
-      grid-column: 1 / 6;
+      grid-column: 1 / 5;
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(1, auto);
-      gap: var(--pharos-spacing-1-x);
+      grid-template-columns: repeat(5, minmax(min-content, max-content));
+      grid-template-rows: repeat(2, auto);
+      gap: var(--pharos-spacing-1-x) var(--pharos-spacing-3-x);
 
       @media (width <= 570px) {
         gap: var(--pharos-spacing-one-half-x);
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer__links {
+        display: inline-flex;
+        flex-direction: row;
+        white-space: nowrap;
+        grid-gap: 0.25rem;
       }
     }
 

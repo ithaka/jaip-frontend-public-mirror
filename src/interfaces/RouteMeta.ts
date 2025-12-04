@@ -29,5 +29,7 @@ declare module 'vue-router' {
     showInFooter?: boolean
     // Label to use in navigation menus instead of the route name.
     label: string
+    // If true, will add a "New" badge next to the route in navigation menus.
+    showAsNew?: boolean
   }
 }

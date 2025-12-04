@@ -24,7 +24,8 @@ export interface CollectionMetadata {
   location: string
   language: string
   jurisdiction: string
-  national: boolean
+  page_count: number
+  is_national: boolean
   state_code: string
   subject_arr: string[]
 }
