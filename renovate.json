@@ -1,33 +1,21 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "github>ithaka/ithaka-renovate-presets//ithaka/base",
-        "github>ithaka/ithaka-renovate-presets//ithaka/recommended"
-    ],
-    "assignAutomerge": true,
-    "automerge": true,
-    "assigneesFromCodeOwners": true,
-    "lockFileMaintenance": {
-        "enabled": true
-    },
-    "packageRules": [
-        {
-            "groupName": "NodeJS dependencies",
-            "matchPackageNames": [
-                "node",
-                "docker-virtual.artifactory.acorn.cirrostratus.org/node"
-            ],
-            "matchFileNames": [
-                ".nvmrc",
-                "Dockerfile",
-                ".gitlab-ci.yml"
-            ]
-        },
-        {
-            "matchDepNames": [
-                "node"
-            ],
-            "allowedVersions": "<23"
-        }
-    ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>ithaka/ithaka-renovate-presets//ithaka/base",
+    "github>ithaka/ithaka-renovate-presets//ithaka/recommended"
+  ],
+  "assignAutomerge": true,
+  "automerge": true,
+  "assigneesFromCodeOwners": true,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "groupName": "NodeJS dependencies",
+      "matchPackageNames": ["node", "docker-virtual.artifactory.acorn.cirrostratus.org/node"],
+      "matchFileNames": [".nvmrc", "Dockerfile", ".gitlab-ci.yml"],
+      "allowedVersions": "<25"
+    }
+  ]
 }
