@@ -129,6 +129,7 @@ coreStore.$api.log({
     </div>
     <PDFViewer
       v-if="!page_index && !error.status && hasStructuredClone"
+      tabindex="-1"
       class="cols-12"
       :iid="iid"
       :enable-viewer="featureDetails['view_pdf']?.enabled || false"

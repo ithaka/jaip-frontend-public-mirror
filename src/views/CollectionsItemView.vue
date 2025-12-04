@@ -208,6 +208,7 @@ const hasPrintAndDownload = computed(() => {
     <PDFViewer
       v-if="collectionMetadata?.filename && !error.status && hasStructuredClone"
       class="pdf-viewer"
+      tabindex="-1"
       :collection="collection"
       :filename="collectionMetadata.filename"
       :enable-viewer="true"
