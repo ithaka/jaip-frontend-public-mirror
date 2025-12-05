@@ -71,10 +71,10 @@ const config = {
     },
     {
       path: '/collections/:collection/:filename',
-      name: 'collectionsItemViewer',
+      name: 'collection item',
       meta: {
         hidden: true,
-        label: 'Collections Item View',
+        label: 'Collection Item',
         requiresAny: ['include_reentry_content'],
       },
       component: () => import('@/views/CollectionsItemView.vue'),
