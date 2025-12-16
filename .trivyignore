@@ -1,7 +1,5 @@
-# NGINX VULNERABILITIES
-# This occurs when reading XML documents with the Python API, which does not happen here.
-CVE-2025-32414 exp:2025-08-30
-
-# We do not receive XML documents, so this isn't relevant. 
-# Extended to October 15 to cover any delayed fixes.
-CVE-2025-59375 exp:2025-10-15
+# ALPINE VULNERABILITIES
+# These are vulnerabilities in the libpng library in Alpine, which we are not using
+CVE-2025-64720 exp:2026-03-01
+CVE-2025-65018 exp:2026-03-01
+CVE-2025-66293 exp:2026-03-01
