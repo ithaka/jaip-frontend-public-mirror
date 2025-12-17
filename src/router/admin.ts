@@ -97,7 +97,8 @@ const config = {
         showSearch: true,
         label: 'Help',
       },
-      component: () => import('@/views/HelpView.vue'),
+      redirect:
+        'https://support.jstor.org/hc/en-us/sections/35991222174615-JSTOR-Access-in-Prison-Initiative',
     },
     {
       path: '/accessibility',

@@ -84,6 +84,11 @@ export const changeRoute = (
   groups: number[] | undefined,
   statusQuery: string | undefined,
 ) => {
+  const route = router.getRoutes().find((r) => r.path === path)
+  if (route?.redirect) {
+    window.open(route.redirect as string, '_blank')
+    return
+  }
   if (router.currentRoute.value.path !== path) {
     page = 1
   }

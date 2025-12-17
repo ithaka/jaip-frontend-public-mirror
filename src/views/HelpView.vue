@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import StudentHelp from '@/components/help/StudentHelp.vue'
-import AdminHelp from '@/components/help/AdminHelp.vue'
-import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
-import { storeToRefs } from 'pinia'
-
-const userStore = useUserStore()
-const { isAuthenticatedAdmin } = storeToRefs(userStore)
 
 const coreStore = useCoreStore()
 coreStore.$api.log({
@@ -18,7 +12,7 @@ coreStore.$api.log({
 <template>
   <div>
     <pep-pharos-layout row-gap="0">
-      <component :is="isAuthenticatedAdmin ? AdminHelp : StudentHelp" class="cols-12" />
+      <StudentHelp class="cols-12" />
     </pep-pharos-layout>
   </div>
 </template>

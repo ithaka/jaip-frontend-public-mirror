@@ -43,8 +43,8 @@ coreStore.$api.log({
     <div class="home-view__hero" />
 
     <pep-pharos-layout row-gap="0" preset="1-col">
-      <AdminHelp v-if="isAuthenticatedAdmin" class="home-view__help-container" />
-      <StudentHelp v-else-if="isAuthenticatedStudent" class="home-view__help-container" />
+      <StudentHelp v-if="isAuthenticatedStudent" class="home-view__help-container" />
+      <AdminHelp v-else-if="isAuthenticatedAdmin" class="home-view__help-container" />
     </pep-pharos-layout>
   </main>
 </template>
