@@ -176,9 +176,9 @@ const onLinkClick = (path: string) => {
             advance research and teaching in sustainable ways.
           </p>
           <p class="footer__statement" data-cy="footer-copyright">
-            ©2000-{{ new Date().getFullYear().toString() }} ITHAKA. All Rights Reserved. JSTOR®,
-            the JSTOR logo, JPASS®, Artstor®, Reveal Digital™ and ITHAKA® are registered
-            trademarks of ITHAKA.
+            ©2000-{{ new Date().getFullYear().toString() }} ITHAKA. All Rights Reserved. JSTOR®, the
+            JSTOR logo, JPASS®, Artstor®, Reveal Digital™ and ITHAKA® are registered trademarks of
+            ITHAKA.
           </p>
         </div>
       </div>

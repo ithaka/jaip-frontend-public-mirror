@@ -148,7 +148,7 @@
             :id="viewerId"
             ref="iiifViewer"
             :class="['iiif-viewer', { 'full-screen': isInFullscreen }]"
-            oncontextmenu="return false;"
+            oncontextmenu="return false"
           />
 
           <div v-show="metadata && (openFailed || !hasTileSources)" class="viewer-error">
