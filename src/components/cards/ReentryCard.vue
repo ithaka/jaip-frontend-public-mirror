@@ -98,21 +98,21 @@ const computedThumbnail = computed(() => {
       {{ locationDisplay }}
     </div>
     <div id="container${id}" slot="metadata">
-      <pep-pharos-link
-        :a11y-label="`link to reentry item ${title}`"
-        :href="`/collections/reentry/${filename}`"
-        subtle=""
-        class="reentry-card__metadata reentry-card__metadata--title"
-        data-cy="reentry-card-title-link"
+      <pep-pharos-heading
+        preset="1--bold"
+        :level="3"
+        class="reentry-card__metadata--heading"
+        data-cy="reentry-card-title"
       >
-        <pep-pharos-heading
-          preset="1--bold"
-          :level="3"
-          class="reentry-card__metadata--heading"
-          data-cy="reentry-card-title"
-          >{{ title }}</pep-pharos-heading
+        <pep-pharos-link
+          :a11y-label="`link to reentry item ${title}`"
+          :href="`/collections/reentry/${filename}`"
+          subtle=""
+          class="reentry-card__metadata reentry-card__metadata--title"
+          data-cy="reentry-card-title-link"
+          >{{ title }}</pep-pharos-link
         >
-      </pep-pharos-link>
+      </pep-pharos-heading>
     </div>
 
     <div slot="metadata" class="reentry-card__metadata" data-cy="reentry-card-description">
@@ -147,22 +147,17 @@ const computedThumbnail = computed(() => {
 
     &--location {
       font-weight: bold;
+      margin-top: var(--pharos-spacing-one-quarter-x);
     }
 
     &--title {
       margin-top: var(--pharos-spacing-one-quarter-x);
       text-decoration: none;
-
-      &:focus {
-        outline: 2px solid var(--pharos-color-interactive-base);
-        outline-offset: 2px;
-      }
     }
 
     &--heading {
-      overflow: hidden;
-      display: -webkit-box;
       white-space: normal;
+      margin-top: var(--pharos-spacing-one-quarter-x);
     }
 
     &--date {
@@ -178,6 +173,13 @@ const computedThumbnail = computed(() => {
 
   &__pill {
     margin: 0;
+  }
+
+  &__image {
+    border: 1px solid transparent;
+    &:hover {
+      background-color: var(--pharos-color-marble-gray-94);
+    }
   }
 }
 </style>

@@ -103,3 +103,21 @@ cp nginx/nginx.conf.persistent nginx/nginx.conf
 ```
 
 This simulates the repo setup that takes place during the `build app image` job in our CICD setup.
+
+## Collections
+
+The JSTOR Access in Prison platform now includes content that is distinct from the content available on JSTOR. The content is divided into collections. The current pilot includes a single collection for reentry content.
+
+The collections system provides structured access to curated content through the custom_content API endpoints.
+
+## Current Collections
+
+- **reentry**: Educational and reentry resources (primary collection)
+
+## Adding New Material to Reentry Collection
+
+New material is added to the reentry collection primarily via [jaip-backend repository](https://github.com/ithaka/jaip-backend), thumbnails for the collection items are located in `./public/thumbnails`.
+
+**Thumbnail Creation**:
+
+- Use the `thumbnail.zsh` script in this repository to generate any new thumbnails once the collection materials have been added to S3.
