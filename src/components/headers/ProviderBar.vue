@@ -82,12 +82,8 @@ defineProps({
     margin: 0;
   }
 
-  &__login-link {
-    text-decoration: underline;
-  }
-
   &__dropdown-content {
-    padding: var(--pharos-spacing-5-x);
+    padding: var(--pharos-spacing-1-x);
   }
 }
 </style>

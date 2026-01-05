@@ -134,11 +134,11 @@ const emit = defineEmits(['logout', 'close'])
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
     transition:
       background-color 0.3s ease-in-out,
       border-color 0.3s ease-in-out;
+    margin-bottom: calc(var(--pharos-spacing-one-half-x) * -1);
+    margin-top: calc(var(--pharos-spacing-one-half-x) * -1);
   }
 }
 </style>
