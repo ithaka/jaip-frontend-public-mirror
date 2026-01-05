@@ -133,6 +133,7 @@ onMounted(async () => {
   padding: 0 var(--pharos-spacing-1-x);
   grid-template-columns: 1fr 8fr 1fr;
 
+  /* Mobile: up to 767px */
   @media (max-width: 767px) {
     grid-template-columns:
       minmax(var(--pharos-spacing-1-x), var(--pharos-spacing-one-and-a-half-x))
@@ -140,17 +141,20 @@ onMounted(async () => {
       minmax(var(--pharos-spacing-1-x), var(--pharos-spacing-one-and-a-half-x));
   }
 
+  /* Tablet: 768px to 1055px */
   @media (min-width: 768px) and (max-width: 1055px) {
     grid-template-columns:
-      minmax(var(--pharos-spacing-one-and-a-half-x), var(--pharos-spacing-4-x))
+      minmax(var(--pharos-spacing-2-x), var(--pharos-spacing-3-x))
       1fr
-      minmax(var(--pharos-spacing-one-and-a-half-x), var(--pharos-spacing-4-x));
+      minmax(var(--pharos-spacing-2-x), var(--pharos-spacing-3-x));
   }
 
-  @media (min-width: 1360px) and (max-width: 1583px) {
-    grid-template-columns: minmax(8rem, 9rem) 1fr minmax(8rem, 9rem);
+  /* Desktop: 1056px to 1583px */
+  @media (min-width: 1056px) and (max-width: 1583px) {
+    grid-template-columns: minmax(7rem, 9rem) 1fr minmax(7rem, 9rem);
   }
 
+  /* Desktop Large: 1584px and above */
   @media (min-width: 1584px) {
     grid-template-columns:
       minmax(9rem, 1fr)
@@ -194,18 +198,27 @@ onMounted(async () => {
     gap: var(--pharos-spacing-1-x);
     grid-template-columns: 1fr;
 
-    @media (min-width: 376px) {
+    /* Small Mobile: 376px to 767px */
+    @media (min-width: 376px) and (max-width: 767px) {
       grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: var(--pharos-spacing-1-x) var(--pharos-spacing-2-x);
     }
 
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    /* Tablet: 768px to 1055px */
+    @media (min-width: 768px) and (max-width: 1055px) {
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: var(--pharos-spacing-one-and-a-half-x) var(--pharos-spacing-3-x);
     }
 
+    /* Desktop: 1056px to 1583px */
+    @media (min-width: 1056px) and (max-width: 1583px) {
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: var(--pharos-spacing-one-and-a-half-x) var(--pharos-spacing-3-x);
+    }
+
+    /* Desktop Large: 1584px and above */
     @media (min-width: 1584px) {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
       gap: var(--pharos-spacing-2-x) var(--pharos-spacing-3-x);
     }
   }
