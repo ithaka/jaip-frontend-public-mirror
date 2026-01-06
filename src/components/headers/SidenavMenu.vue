@@ -5,6 +5,7 @@ import { useSearchStore } from '@/stores/search'
 import { formatRouteName, changeRoute, capitalize, getOrganizedRoutes } from '@/utils/helpers'
 
 import type { RouteRecordRaw } from 'vue-router'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const emit = defineEmits(['close-sidenav', 'close'])
 
@@ -24,6 +25,8 @@ const changeRouteHandler = (route: RouteRecordRaw) => {
   changeRoute(router, emit, route.path, searchTerms.value, pageNo.value, undefined, undefined)
   emit('close-sidenav')
 }
+const { handleWithLog, logs } = useLogger()
+const { changeRouteLog } = logs.getHeaderLogs()
 </script>
 
 <template>
@@ -32,7 +35,9 @@ const changeRouteHandler = (route: RouteRecordRaw) => {
       v-for="route in organizedRoutes.ungrouped"
       :key="`route_${formatRouteName(route)}`"
       href="#"
-      @click.prevent.stop="changeRouteHandler(route)"
+      @click.prevent.stop="
+        handleWithLog(changeRouteLog(route.path), () => changeRouteHandler(route))
+      "
     >
       <!-- Include any icon specified in the meta.icon property-->
       <pep-pharos-icon
@@ -59,7 +64,9 @@ const changeRouteHandler = (route: RouteRecordRaw) => {
           v-for="route in routes"
           :key="route.path"
           href
-          @click.prevent.stop="changeRouteHandler(route)"
+          @click.prevent.stop="
+            handleWithLog(changeRouteLog(route.path), () => changeRouteHandler(route))
+          "
         >
           {{ formatRouteName(route) }}
         </pep-pharos-sidenav-link>

@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
+import { useLogger } from '@/composables/logging/useLogger'
 
 defineProps({
   loginUrl: {
@@ -55,6 +56,9 @@ const { searchTerms, pageNo } = storeToRefs(searchStore)
 
 const router = useRouter()
 const emit = defineEmits(['logout', 'close'])
+
+const { handleWithLog, logs } = useLogger()
+const { logOutLog, logInLog, jstorLogoClickLog } = logs.getHeaderLogs()
 </script>
 <template>
   <pep-pharos-header class="main-header" data-cy="main-header">
@@ -74,7 +78,9 @@ const emit = defineEmits(['logout', 'close'])
     <div slot="start">
       <pep-pharos-link
         @click.prevent.stop="
-          changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)
+          handleWithLog(jstorLogoClickLog, () =>
+            changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined),
+          )
         "
       >
         <img
@@ -106,7 +112,7 @@ const emit = defineEmits(['logout', 'close'])
           <pep-pharos-dropdown-menu-item
             v-if="isAuthenticatedAdmin"
             href
-            @click.prevent="emit('logout')"
+            @click.prevent="handleWithLog(logOutLog, () => emit('logout'))"
           >
             Logout
           </pep-pharos-dropdown-menu-item>
@@ -116,7 +122,13 @@ const emit = defineEmits(['logout', 'close'])
         </pep-pharos-dropdown-menu>
       </pep-pharos-dropdown-menu-nav>
       <div v-if="showLogin">
-        <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="">
+        <pep-pharos-button
+          v-if="showLogin"
+          name="login-button"
+          :href="loginUrl"
+          class=""
+          @click="handleWithLog(logInLog)"
+        >
           Log in
         </pep-pharos-button>
       </div>

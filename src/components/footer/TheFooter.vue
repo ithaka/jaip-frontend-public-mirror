@@ -4,6 +4,7 @@ import { useSearchStore } from '@/stores/search'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { computed } from 'vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
   isAuthenticatedAdmin: {
@@ -44,6 +45,9 @@ const onLinkClick = (path: string) => {
   const term = typeof searchTerms.value === 'string' ? searchTerms.value : ''
   changeRoute(router, emit, path, term, pageNo.value, undefined, undefined)
 }
+
+const { handleWithLog, logs } = useLogger()
+const { footerLinkClickLog } = logs.getFooterLogs()
 </script>
 
 <template>
@@ -63,7 +67,15 @@ const onLinkClick = (path: string) => {
               .isOnBackground="true"
               subtle
               class="footer__links"
-              @click="onLinkClick(link.path)"
+              @click="
+                handleWithLog(
+                  footerLinkClickLog({
+                    destination: link.path,
+                    is_new: Boolean(link.meta.showAsNew),
+                  }),
+                  () => onLinkClick(link.path),
+                )
+              "
             >
               {{ link.meta.label }}
               <pep-pharos-pill
@@ -95,6 +107,13 @@ const onLinkClick = (path: string) => {
                 .isOnBackground="true"
                 subtle
                 target="_blank"
+                @click="
+                  handleWithLog(
+                    footerLinkClickLog({
+                      destination: 'https://labs.jstor.org',
+                    }),
+                  )
+                "
               >
                 <img
                   src="@/assets/images/JSTOR_Labs_Logo.png"
@@ -128,6 +147,13 @@ const onLinkClick = (path: string) => {
                 .isOnBackground="true"
                 subtle
                 target="_blank"
+                @click="
+                  handleWithLog(
+                    footerLinkClickLog({
+                      destination: 'https://www.mellon.org',
+                    }),
+                  )
+                "
               >
                 <img
                   src="@/assets/images/Mellon_Logomark_Lockup_White.png"
@@ -151,6 +177,13 @@ const onLinkClick = (path: string) => {
                 .isOnBackground="true"
                 subtle
                 target="_blank"
+                @click="
+                  handleWithLog(
+                    footerLinkClickLog({
+                      destination: 'https://www.ascendiumphilanthropy.org',
+                    }),
+                  )
+                "
               >
                 <img
                   src="@/assets/images/ASC_Reverse.png"

@@ -2,6 +2,7 @@ import type { FeatureDetails } from '@/interfaces/Features'
 import type { BulkHistory, History } from '@/interfaces/MediaRecord'
 import type { Router, RouteRecordNormalized } from 'vue-router'
 import type { RoutesObject } from '@/interfaces/Routes'
+import type { ComponentInternalInstance } from 'vue'
 
 export const ensureError = (value: unknown): Error => {
   if (value instanceof Error) return value
@@ -204,4 +205,16 @@ export const getOrganizedRoutes = (router: Router): RoutesObject => {
       ungrouped: [],
     } as RoutesObject,
   )
+}
+
+export const getAncestorComponentNames = (
+  component: ComponentInternalInstance | null,
+  ancestors: string[] = [],
+): string[] => {
+  const parent = component?.parent
+  if (parent) {
+    ancestors.push(parent.type.__name || 'AnonymousComponent')
+    return getAncestorComponentNames(parent, ancestors)
+  }
+  return ancestors
 }

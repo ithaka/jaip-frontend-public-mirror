@@ -10,6 +10,7 @@ import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import JstorLogo from './JstorLogo.vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 defineProps({
   loginUrl: {
@@ -78,6 +79,10 @@ const onCloseSidenav = () => {
   isSidenavVisible.value = false
   emit('close')
 }
+
+const { handleWithLog, logs } = useLogger()
+const { logOutLog, logInLog, jstorLogoClickLog, openSidenavLog, closeSidenavLog } =
+  logs.getHeaderLogs()
 </script>
 <template>
   <div>
@@ -96,7 +101,9 @@ const onCloseSidenav = () => {
       <pep-pharos-link
         class="mr-4"
         @click.prevent.stop="
-          changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined)
+          handleWithLog(jstorLogoClickLog, () =>
+            changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined),
+          )
         "
       >
         <img
@@ -111,10 +118,16 @@ const onCloseSidenav = () => {
           variant="subtle"
           icon="menu"
           a11y-label="Open sidenav"
-          @click="onOpenSidenav"
+          @click="handleWithLog(openSidenavLog, onOpenSidenav)"
         />
       </div>
-      <pep-pharos-button v-if="showLogin" name="login-button" :href="loginUrl" class="ml-13 mr-3">
+      <pep-pharos-button
+        v-if="showLogin"
+        name="login-button"
+        :href="loginUrl"
+        class="ml-13 mr-3"
+        @click="handleWithLog(logInLog)"
+      >
         Log in
       </pep-pharos-button>
     </div>
@@ -124,14 +137,14 @@ const onCloseSidenav = () => {
       has-close-button
       :open="isSidenavVisible"
       class="side-navigation"
-      @pharos-sidenav-close="onCloseSidenav"
+      @pharos-sidenav-close="handleWithLog(closeSidenavLog, onCloseSidenav)"
     >
       <JstorLogo :is-big-logo="true" @logo-click="handleLogoClick" />
       <pep-pharos-button
         v-if="isAuthenticatedAdmin"
         class="side-navigation__top"
         name="logout-button"
-        @click.prevent.stop="logout"
+        @click.prevent.stop="handleWithLog(logOutLog, logout)"
       >
         Logout
       </pep-pharos-button>
@@ -143,7 +156,10 @@ const onCloseSidenav = () => {
       >
         Log in
       </pep-pharos-button>
-      <SidenavMenu :key="updateKey" @close-sidenav="onCloseSidenav" />
+      <SidenavMenu
+        :key="updateKey"
+        @close-sidenav="handleWithLog(closeSidenavLog, onCloseSidenav)"
+      />
       <pep-pharos-sidenav-section v-if="isAuthenticatedAdmin || isAuthenticatedStudent">
         <pep-pharos-sidenav-link class="side-navigation__bottom" href="/">
           {{ name }}
@@ -153,7 +169,7 @@ const onCloseSidenav = () => {
     <div
       v-if="isSidenavVisible"
       class="side-navigation__background"
-      @click.prevent.stop="onCloseSidenav"
+      @click.prevent.stop="handleWithLog(closeSidenavLog, onCloseSidenav)"
     />
     <!-- Search Input component -->
     <SearchInput v-if="$route.meta.showSearch && !isUnauthenticated" id="small" class="mx-6 mb-2" />

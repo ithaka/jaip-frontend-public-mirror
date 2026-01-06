@@ -4,6 +4,7 @@ import { useRouter, type RouteRecordNormalized } from 'vue-router'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { formatRouteName, changeRoute, capitalize, getOrganizedRoutes } from '@/utils/helpers'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
@@ -37,6 +38,9 @@ const handleRouteName = (route: RouteRecordNormalized) => {
   }
   return formatRouteName(route)
 }
+
+const { handleWithLog, logs } = useLogger()
+const { changeRouteLog } = logs.getHeaderLogs()
 </script>
 
 <template>
@@ -51,7 +55,9 @@ const handleRouteName = (route: RouteRecordNormalized) => {
       bold
       href
       @click.prevent.stop="
-        changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined)
+        handleWithLog(changeRouteLog(route.path), () =>
+          changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined),
+        )
       "
     >
       {{ handleRouteName(route) }}
@@ -88,7 +94,9 @@ const handleRouteName = (route: RouteRecordNormalized) => {
           class="nav-menu-item"
           href
           @click.prevent.stop="
-            changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined)
+            handleWithLog(changeRouteLog(route.path), () =>
+              changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined),
+            )
           "
         >
           {{ formatRouteName(route) }}

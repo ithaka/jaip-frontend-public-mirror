@@ -3,11 +3,15 @@ import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const emit = defineEmits(['logout', 'close'])
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
 const router = useRouter()
+
+const { handleWithLog, logs } = useLogger()
+const { searchLinkLog, requestsLinkLog } = logs.getRequestWarningLogs()
 </script>
 <template>
   <pep-pharos-alert status="warning" class="alert">
@@ -20,7 +24,9 @@ const router = useRouter()
           Filtering for Subjects or Journals in your
           <pep-pharos-link
             @click.prevent.stop="
-              changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined)
+              handleWithLog(searchLinkLog, () =>
+                changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined),
+              )
             "
           >
             search results
@@ -30,7 +36,9 @@ const router = useRouter()
           Browsing approved
           <pep-pharos-link
             @click.prevent.stop="
-              changeRoute(router, emit, '/requests', searchTerms, pageNo, undefined, undefined)
+              handleWithLog(requestsLinkLog, () =>
+                changeRoute(router, emit, '/requests', searchTerms, pageNo, undefined, undefined),
+              )
             "
           >
             requests

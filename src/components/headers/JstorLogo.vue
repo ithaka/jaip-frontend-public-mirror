@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import jstorLogo from '@/assets/images/jstor-red-on-white.svg'
+import { useLogger } from '@/composables/logging/useLogger'
 
 defineProps({
   isBigLogo: {
@@ -12,10 +13,17 @@ const emit = defineEmits(['logo-click'])
 const handleLogoClick = () => {
   emit('logo-click')
 }
+
+const { handleWithLog, logs } = useLogger()
+const { jstorLogoClickLog } = logs.getJstorLogoLogs()
 </script>
 
 <template>
-  <pep-pharos-link id="jstor-logo" slot="top" @click.prevent.stop="handleLogoClick">
+  <pep-pharos-link
+    id="jstor-logo"
+    slot="top"
+    @click.prevent.stop="handleWithLog(jstorLogoClickLog, handleLogoClick)"
+  >
     <img
       :class="['jstor-logo-img', { 'jstor-logo-img-big': isBigLogo }]"
       alt="Jstor Logo"

@@ -14,3 +14,9 @@ export interface PaginatedGroupedQuery extends PaginatedQuery {
   is_active?: boolean
   groups: number[]
 }
+
+export enum PaginationDirectionOptions {
+  prev = 'prev',
+  next = 'next',
+}
+export type PaginationDirections = PaginationDirectionOptions.prev | PaginationDirectionOptions.next

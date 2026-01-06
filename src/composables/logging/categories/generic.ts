@@ -1,0 +1,100 @@
+// GENERIC LOGS
+// These provide a baseline log structure for common actions that can be
+// customized as needed.
+
+import { LogEvent, type WorkingLog } from '@/interfaces/Log'
+import type { PaginationDirections } from '@/interfaces/Queries'
+
+export const generics = {
+  searchLog: (target: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.form_submit,
+      event_description: `Searched for ${target}`,
+      action: `search_${target}`,
+    }
+  },
+  changePage: (options: {
+    direction: PaginationDirections
+    results_type: string
+    newPage: number
+  }): WorkingLog => {
+    return {
+      eventtype: LogEvent.link_click,
+      event_description: `Changed to ${options.direction} page in ${options.results_type} query results`,
+      action: `${options.direction}_page`,
+      results_type: options.results_type,
+      page: options.newPage,
+    }
+  },
+  openModal: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.button_click,
+      event_description: `Opened ${type} modal`,
+      action: `open_${type}_modal`,
+    }
+  },
+  closeModal: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.modal_close,
+      event_description: `Closed ${type} modal`,
+      action: `close_${type}_modal`,
+    }
+  },
+  dropdownOpen: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.dropdown_open,
+      event_description: `Opened ${type} dropdown`,
+      action: `open_${type}_dropdown`,
+    }
+  },
+  dropdownSelect: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.dropdown_select,
+      event_description: `Selected item from ${type} dropdown`,
+      action: `select_${type}`,
+    }
+  },
+  dropdownMultiselect: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.dropdown_select,
+      event_description: `Selected values from ${type} dropdown`,
+      action: `select_${type}`,
+    }
+  },
+  dropdownMultiselectClear: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.dropdown_select,
+      event_description: `Cleared selections from ${type} dropdown`,
+      action: `clear_${type}_selections`,
+    }
+  },
+  checkboxToggle: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.checkbox_toggle,
+      event_description: `Toggled ${type}`,
+      action: `toggle_${type}`,
+    }
+  },
+  formSubmit: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.form_submit,
+      event_description: `Submitted ${type}`,
+      action: `submit_${type}`,
+    }
+  },
+  buttonClick: (type: string): WorkingLog => {
+    return {
+      eventtype: LogEvent.button_click,
+      event_description: `Clicked ${type} button`,
+      action: `${type}_button_clicked`,
+    }
+  },
+  linkClick: (destination: string, action = 'navigation'): WorkingLog => {
+    return {
+      eventtype: LogEvent.link_click,
+      event_description: `${destination} link clicked`,
+      action,
+      destination,
+    }
+  },
+}
