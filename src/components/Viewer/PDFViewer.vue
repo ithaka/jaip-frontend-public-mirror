@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, toRaw, onBeforeUnmount, useTemplateRef, type Ref, type PropType } from 'vue'
-import * as pdfjsLib from 'pdfjs-dist'
-import * as viewer from 'pdfjs-dist/web/pdf_viewer.mjs'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
+import * as viewer from 'pdfjs-dist/legacy/web/pdf_viewer.mjs'
 import type { Log } from '@/interfaces/Log'
 import { useCoreStore } from '@/stores/core'
 import ControlBar from './Controls/ControlBar.vue'
@@ -46,8 +46,6 @@ const logEvent: Log = {
 }
 
 // PDFJS CONFIGURATION
-const CMAP_URL = 'pdfjs-dist/cmaps/'
-const CMAP_PACKED = true
 const ENABLE_XFA = true
 const DEFAULT_SCALE_DELTA = 1.1
 const MIN_SCALE = 0.25
@@ -75,8 +73,6 @@ const createLoadingTask = async (src: string) => {
   try {
     const loadingTask = await pdfjsLib.getDocument({
       url: src,
-      cMapUrl: CMAP_URL,
-      cMapPacked: CMAP_PACKED,
       enableXfa: ENABLE_XFA,
       withCredentials: true,
       wasmUrl: OPENJPEG_WASM_URL,
@@ -96,7 +92,6 @@ const createViewer = () => {
   try {
     const container = document.getElementById('viewer-container') as HTMLDivElement
     const eventBus = new viewer.EventBus()
-
     const pdfViewer = new viewer.PDFViewer({
       container,
       eventBus,
@@ -130,7 +125,6 @@ const createViewer = () => {
     pdfView.value = pdfViewer
     return pdfViewer
   } catch (err) {
-    console.log(err)
     logEvent.frontend_error = `CREATE VIEWER: ${JSON.stringify(err)}`
 
     coreStore.$api.log(logEvent)
@@ -141,7 +135,10 @@ const createViewer = () => {
 // PDF PREPARATION
 const preparePage = async () => {
   try {
-    const workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).toString()
+    const workerSrc = new URL(
+      'pdfjs-dist/legacy/build/pdf.worker.min.mjs',
+      import.meta.url,
+    ).toString()
     pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc
 
     const url = useValidDownloadURL(props.iid, props.collection, props.filename)
