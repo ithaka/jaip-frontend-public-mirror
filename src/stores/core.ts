@@ -3,9 +3,19 @@ import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { ToastStatus } from '@ithaka/pharos/lib/components/toast/pharos-toast'
 import type ApiObject from '@/interfaces/ApiObject'
 
+const isLocalStorageAvailable = () => {
+  const test = 'test'
+  try {
+    localStorage.setItem(test, test)
+    localStorage.removeItem(test)
+    return true
+  } catch {
+    return false
+  }
+}
 export const useCoreStore = defineStore('core', {
   state: () => {
-    const stored = localStorage.getItem('requests') || ''
+    const stored = isLocalStorageAvailable() ? localStorage.getItem('requests') || '' : ''
     const reqs = stored ? JSON.parse(stored) : []
     return {
       reqs: reqs,
@@ -58,7 +68,9 @@ export const useCoreStore = defineStore('core', {
   actions: {
     saveReqs(reqs: MediaRecord[]) {
       this.reqs = reqs
-      localStorage.setItem('requests', JSON.stringify(reqs))
+      if (isLocalStorageAvailable()) {
+        localStorage.setItem('requests', JSON.stringify(reqs))
+      }
     },
     addRequest(article: string) {
       let reqList = []
