@@ -9,7 +9,7 @@ import type { EntityActions } from '@/interfaces/AccountManagement'
 import { useFeaturesStore } from '@/stores/features'
 import EntityManager from '@/components/account/EntityManager.vue'
 import EntityRemover from '@/components/account/EntityRemover.vue'
-import type InputFileEvent from '@/interfaces/Events/InputEvent'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   entity: {
@@ -68,17 +68,33 @@ const openEntityModal = () => {
   entityModalUpdateKey.value++
   showEntityModal.value = true
 }
+
+const closeEntityModal = () => {
+  showEntityModal.value = false
+}
 const showRemoveModal = ref(false)
 const removeModalUpdateKey = ref(0)
 const openRemoveModal = () => {
   removeModalUpdateKey.value++
   showRemoveModal.value = true
 }
+
+const closeRemoveModal = () => {
+  showRemoveModal.value = false
+}
 const editAction = 'edit' as EntityActions
 
-const handleGroupSelection = (e: InputFileEvent) => {
-  selectedGroupId.value = parseInt(e.target.value, 10)
+const handleGroupSelection = (g: number) => {
+  selectedGroupId.value = g
 }
+
+const { handleWithLog, logs } = useLogger()
+const { openEntityModalLog, groupSelectionLog, openGroupSelectionLog, openModalLog } =
+  logs.getEntityLogs({
+    group: selectedGroupId,
+    entity_type: props.entity.type,
+    entity_id: props.entity.id,
+  })
 </script>
 
 <template>
@@ -92,7 +108,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
             icon-left="close-inverse"
             variant="secondary"
             full-width
-            @click.prevent.stop="openRemoveModal"
+            @click.prevent.stop="handleWithLog(openModalLog, openRemoveModal)"
           >
             Remove
           </pep-pharos-button>
@@ -101,7 +117,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
             icon-left="edit"
             class="ml-3"
             full-width
-            @click.prevent.stop="openEntityModal"
+            @click.prevent.stop="handleWithLog(openEntityModalLog, openEntityModal)"
           >
             Edit
           </pep-pharos-button>
@@ -129,6 +145,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
           full-width
           class="mb-3"
           icon-left="chevron-down"
+          @click="handleWithLog(openGroupSelectionLog)"
         >
           {{ selectedGroup?.name || 'Unknown Group' }}
         </pep-pharos-button>
@@ -136,7 +153,9 @@ const handleGroupSelection = (e: InputFileEvent) => {
           <pep-pharos-dropdown-menu-item
             v-for="(group, id) in sortedGroups"
             :key="`${entity.id}_${id}`"
-            @click="selectedGroupId = group.id"
+            @click="
+              handleWithLog(groupSelectionLog(group.id), () => handleGroupSelection(group.id))
+            "
           >
             {{ group.name }}
           </pep-pharos-dropdown-menu-item>
@@ -146,7 +165,11 @@ const handleGroupSelection = (e: InputFileEvent) => {
         <pep-pharos-select
           class="group-selector-dropdown"
           :value="selectedGroupId"
-          @change="handleGroupSelection"
+          @change="
+            handleWithLog(groupSelectionLog(parseInt($event.target.value, 10)), () =>
+              handleGroupSelection(parseInt($event.target.value, 10)),
+            )
+          "
         >
           <div slot="label">
             <div class="display-flex align-items-center">
@@ -198,7 +221,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
       :entity-type="entityType"
       :show-modal="showEntityModal"
       :action="editAction"
-      @close="showEntityModal = false"
+      @close="closeEntityModal"
       @update="emit('update')"
     />
     <EntityRemover
@@ -206,7 +229,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
       :entity="entity"
       :entity-type="entityType"
       :show-modal="showRemoveModal"
-      @close="showRemoveModal = false"
+      @close="closeRemoveModal"
       @update="emit('update')"
     />
   </div>

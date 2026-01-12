@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import { makeGrammaticalList } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   entity: {
@@ -55,6 +56,12 @@ const removeEntity = async () => {
   emit('update')
   emit('close')
 }
+
+const { handleWithLog, logs } = useLogger()
+const { submitLog, closeRemoveModalLog } = logs.getEntityRemovalLogs({
+  entity_id: props.entity.id,
+  entity_type: props.entity.type,
+})
 </script>
 
 <template>
@@ -65,7 +72,7 @@ const removeEntity = async () => {
       :header="`Remove ${entityType}`"
       size="large"
       :open="showModal"
-      @pharos-modal-closed="emit('close')"
+      @pharos-modal-closed="handleWithLog(closeRemoveModalLog, () => emit('close'))"
     >
       <p slot="description">
         <span v-if="(selectedGroups[featureName] || []).length">
@@ -95,7 +102,7 @@ const removeEntity = async () => {
       <pep-pharos-button
         slot="footer"
         :disabled="!(selectedGroups[featureName] || []).length"
-        @click.prevent.stop="removeEntity"
+        @click.prevent.stop="handleWithLog(submitLog, removeEntity)"
       >
         Remove
       </pep-pharos-button>

@@ -11,6 +11,8 @@ import EntityManager from '@/components/account/EntityManager.vue'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import type { Entity } from '@/interfaces/Entities'
+import { useLogger } from '@/composables/logging/useLogger'
+import { PaginationDirectionOptions } from '@/interfaces/Queries'
 
 const props = defineProps({
   entity: {
@@ -81,6 +83,12 @@ const addEntityModal = () => {
     isSingleGroup && selectorGroupOptions.value?.[0]?.id ? [selectorGroupOptions.value[0].id] : []
   showAddEntityModal.value = true
 }
+
+const { handleWithLog, logs } = useLogger()
+const { changePageLog, addEntityLog, searchEntityLog } = logs.getEntitySearchLogs({
+  entity_type: props.entity.type,
+  query,
+})
 </script>
 
 <template>
@@ -90,7 +98,10 @@ const addEntityModal = () => {
       <span class="button-row">
         <span>{{ entity.titleSingular }} Management</span>
         <span v-if="hasAddEntity">
-          <pep-pharos-button icon-left="add" @click.prevent.stop="addEntityModal">
+          <pep-pharos-button
+            icon-left="add"
+            @click.prevent.stop="handleWithLog(addEntityLog, addEntityModal)"
+          >
             <span>{{ `Add ${entity.titleSingular}` }}</span>
           </pep-pharos-button>
         </span>
@@ -119,7 +130,7 @@ const addEntityModal = () => {
         @change="doSearch"
       />
     </div>
-    <form class="cols-8" @submit.prevent.stop="doSearch">
+    <form class="cols-8" @submit.prevent.stop="handleWithLog(searchEntityLog, doSearch)">
       <pep-pharos-input-group
         :id="`${entity.title}_search`"
         :value="query"
@@ -137,6 +148,7 @@ const addEntityModal = () => {
           label="search"
           a11y-label="search"
           type="submit"
+          @click="handleWithLog(searchEntityLog)"
         />
       </pep-pharos-input-group>
     </form>
@@ -164,8 +176,26 @@ const addEntityModal = () => {
       :total-results="entityCount"
       :page-size="secondaryLimit"
       :current-page="page"
-      @prev-page="changePage(page - 1)"
-      @next-page="changePage(page + 1)"
+      @prev-page="
+        handleWithLog(
+          changePageLog({
+            direction: PaginationDirectionOptions.prev,
+            entity_type: props.entity.type,
+            newPage: page - 1,
+          }),
+          () => changePage(page - 1),
+        )
+      "
+      @next-page="
+        handleWithLog(
+          changePageLog({
+            direction: PaginationDirectionOptions.next,
+            entity_type: props.entity.type,
+            newPage: page + 1,
+          }),
+          () => changePage(page + 1),
+        )
+      "
     />
   </pep-pharos-layout>
 </template>

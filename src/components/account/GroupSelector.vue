@@ -6,6 +6,7 @@ import type { Group } from '@/interfaces/Group'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { PropType } from 'vue'
 import { arraysAreEqual } from '@/utils/helpers'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   groups: {
@@ -64,7 +65,13 @@ if (props.startFull) {
   }
 }
 const handleGroupSelection = (e: InputFileEvent) => {
-  const val = parseInt(e.target.value, 10)
+  if (!e?.target?.value) {
+    selectedGroups.value[props.featureName] = []
+    comboboxValue.value = ''
+    emit('change', { groups: selectedGroups.value[props.featureName], target: 0 })
+    return
+  }
+  const val = parseInt(e?.target?.value, 10)
   if (
     e.target.value === comboboxAllValue &&
     selectedGroups.value[props.featureName]?.length !== possibleGroups.value.length
@@ -98,6 +105,11 @@ const handleGroupSelection = (e: InputFileEvent) => {
       : ''
   emit('change', { groups: selectedGroups.value[props.featureName], target: val })
 }
+
+const { handleWithLog, logs } = useLogger()
+const { groupSelectionLog, clearSelectionsLog } = logs.getGroupSelectorLogs({
+  groups: computed(() => selectedGroups.value[props.featureName] || []),
+})
 </script>
 
 <template>
@@ -105,7 +117,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
     <pep-pharos-combobox
       class="group-selector-combobox"
       :value="comboboxValue"
-      @change="handleGroupSelection"
+      @change="handleWithLog(groupSelectionLog, () => handleGroupSelection($event))"
     >
       <div slot="label">
         <div class="display-flex align-items-center">
@@ -114,7 +126,9 @@ const handleGroupSelection = (e: InputFileEvent) => {
             v-if="selectedGroups[featureName]?.length"
             variant="subtle"
             value=""
-            @click.prevent.stop="handleGroupSelection"
+            @click.prevent.stop="
+              handleWithLog(clearSelectionsLog, () => handleGroupSelection($event))
+            "
           >
             <small class="text-weight-regular pointer-events-none">clear</small>
           </pep-pharos-button>
@@ -136,7 +150,7 @@ const handleGroupSelection = (e: InputFileEvent) => {
         variant="subtle"
         icon-right="close"
         :value="grp"
-        @click.prevent.stop="handleGroupSelection"
+        @click.prevent.stop="handleWithLog(groupSelectionLog, () => handleGroupSelection($event))"
       >
         {{ (groupMap.get(grp) || {}).name }}
       </pep-pharos-button>

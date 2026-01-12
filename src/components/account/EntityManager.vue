@@ -13,6 +13,7 @@ import type { PropType, Ref } from 'vue'
 import type { Feature } from '@/interfaces/Features'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import { useSubdomainStore } from '@/stores/subdomains'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   entity: {
@@ -251,6 +252,10 @@ const handleGroupSelection = (event: GroupSelection) => {
   }
 }
 
+const getFeatureStatusInFocusedGroup = (featureName: string): boolean | undefined => {
+  return selectedFeatures.value[focusedGroup.value]?.[featureName]
+}
+
 const handleFeatureGroupSelection = (e: InputFileEvent) => {
   focusedGroup.value = parseInt(e.target.value, 10)
 }
@@ -300,17 +305,25 @@ const getSubdomains = async () => {
 if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSubdomains.value) {
   getSubdomains()
 }
+
+const { handleWithLog, logs } = useLogger()
+const {
+  closeEntityModalLog,
+  featureCheckboxToggleLog,
+  featureGroupSelectionLog,
+  submitEntityFormLog,
+} = logs.getEntityManagerLogs({ action: props.action, entity: newEntity })
 </script>
 
 <template>
   <Teleport to="body">
     <pep-pharos-modal
-      :id="`${action}-entity-modal-${entity.id || 0}`"
-      :key="`${action}-entity-modal-${entity.id || 0}`"
+      :id="`${action}-${entityType}-modal-${entity.id || 0}`"
+      :key="`${action}-${entityType}-modal-${entity.id || 0}`"
       :header="`${capitalize(action)} ${entityType}`"
       size="large"
       :open="showModal"
-      @pharos-modal-closed="emit('close')"
+      @pharos-modal-closed="handleWithLog(closeEntityModalLog, () => emit('close'))"
     >
       <div class="mb-6">
         <pep-pharos-input-group
@@ -347,7 +360,12 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             :id="`${entity.id || entity.type}_use_subdomain`"
             :checked="includeSubdomain"
             class="mb-4"
-            @input="includeSubdomain = !includeSubdomain"
+            @input="
+              handleWithLog(
+                featureCheckboxToggleLog('use_subdomain', 'Use Subdomain'),
+                () => (includeSubdomain = !includeSubdomain),
+              )
+            "
           >
             <span slot="label" class="text-weight-bold"> Use Subdomain </span>
           </pep-pharos-checkbox>
@@ -407,7 +425,9 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               class="group-selector-dropdown"
               :value="focusedGroup"
               data-cy="feature_group_selector"
-              @change="handleFeatureGroupSelection"
+              @change="
+                handleWithLog(featureGroupSelectionLog, () => handleFeatureGroupSelection($event))
+              "
             >
               <div slot="label">
                 <div class="display-flex align-items-center">
@@ -444,7 +464,11 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
                   selectedGroups[featureName]?.includes(group.id),
                 )"
                 :key="`${entity.id}_group_${group}`"
-                @click="focusedGroup = group.id"
+                @click="
+                  handleWithLog(featureGroupSelectionLog, () => {
+                    focusedGroup = group.id
+                  })
+                "
               >
                 {{ group.name }}
               </pep-pharos-dropdown-menu-item>
@@ -487,9 +511,11 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
             "
             class="mb-4"
             @input="
-              selectAllFeatures(
-                Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                  .length === features.length,
+              handleWithLog(featureCheckboxToggleLog('select_all_features', 'Select All'), () =>
+                selectAllFeatures(
+                  Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
+                    .length === features.length,
+                ),
               )
             "
           >
@@ -502,20 +528,25 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               <pep-pharos-heading class="" preset="legend" :level="3">
                 <pep-pharos-checkbox
                   :checked="
-                    category.every(
-                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
+                    category.every((feature: Feature) =>
+                      getFeatureStatusInFocusedGroup(feature.name),
                     )
                   "
                   :indeterminate="
-                    category.some(
-                      (feature: Feature) => (selectedFeatures[focusedGroup] || {})[feature.name],
+                    category.some((feature: Feature) =>
+                      getFeatureStatusInFocusedGroup(feature.name),
                     ) &&
-                    !category.every(
-                      (feature: Feature) => selectedFeatures[focusedGroup]?.[feature.name],
+                    !category.every((feature: Feature) =>
+                      getFeatureStatusInFocusedGroup(feature.name),
                     )
                   "
                   class="mb-2"
-                  @input="selectCategoryFeatures(category)"
+                  @input="
+                    handleWithLog(
+                      featureCheckboxToggleLog(`category_${label}`, String(label)),
+                      () => selectCategoryFeatures(category),
+                    )
+                  "
                 >
                   <span slot="label" class="text-weight-bold">
                     {{ label }}
@@ -525,13 +556,21 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
               <pep-pharos-checkbox-group
                 v-if="category.length"
                 class="entity-manager__jaip-checkbox-group"
-                @input="handleFeatureSelection"
+                @input="handleFeatureSelection($event)"
               >
                 <ul class="jaip-checkbox-group">
                   <li v-for="feature in category" :key="`feature_${feature.name}`">
                     <pep-pharos-checkbox
-                      :checked="(selectedFeatures[focusedGroup] || {})[feature.name]"
+                      :checked="getFeatureStatusInFocusedGroup(feature.name)"
                       :value="feature.name"
+                      @click="
+                        handleWithLog(
+                          featureCheckboxToggleLog(
+                            !getFeatureStatusInFocusedGroup(feature.name),
+                            feature.display_name,
+                          ),
+                        )
+                      "
                     >
                       <span slot="label">
                         <span class="entity-manager__icon-wrapper">
@@ -567,7 +606,10 @@ if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSu
         Cancel
       </pep-pharos-button>
 
-      <pep-pharos-button slot="footer" @click.prevent.stop="handleSubmit">
+      <pep-pharos-button
+        slot="footer"
+        @click.prevent.stop="handleWithLog(submitEntityFormLog, handleSubmit)"
+      >
         Submit
       </pep-pharos-button>
     </pep-pharos-modal>
