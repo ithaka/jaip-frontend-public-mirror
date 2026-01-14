@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -18,12 +18,15 @@ import {
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import { changeRoute } from '@/utils/helpers'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const userStore = useUserStore()
 const { reviewStatus, searchTerms, pageNo } = storeToRefs(searchStore)
 const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(userStore)
+
+const { handleWithLog, logs } = useLogger()
 
 const props = defineProps({
   doc: {
@@ -50,6 +53,9 @@ selectedGroups.value['approve_requests'] = approveGroups.value
 const router = useRouter()
 const route = useRoute()
 const emit = defineEmits(['approvalSubmitted', 'close'])
+const selectedApproveGroups = computed<number[]>(
+  () => selectedGroups.value['approve_requests'] || [],
+)
 
 const handleApproval = async () => {
   if (featureDetails.value['approve_requests']?.groups.length === 1) {
@@ -98,6 +104,11 @@ const selectorGroupOptions = ref(
     return arr
   }, [] as Group[]) || [],
 )
+
+const { approvalLog, openApproveModalLog, closeApproveModalLog } = logs.getMediaApprovalLogs({
+  groups: selectedApproveGroups,
+  doi: props.doc.doi,
+})
 </script>
 
 <template>
@@ -106,7 +117,7 @@ const selectorGroupOptions = ref(
     full-width
     class="mb-2 lg-mr-3"
     icon-left="checkmark-inverse"
-    @click.prevent.stop="handleSingleGroupApproval"
+    @click.prevent.stop="handleWithLog(approvalLog, handleSingleGroupApproval)"
   >
     <span>Approve</span>
   </pep-pharos-button>
@@ -116,6 +127,7 @@ const selectorGroupOptions = ref(
     class="mb-2 lg-mr-3"
     icon-left="checkmark-inverse"
     :data-modal-id="`approve-modal-${doc.iid}`"
+    @click="handleWithLog(openApproveModalLog)"
   >
     <span>Approve</span>
   </pep-pharos-button>
@@ -150,7 +162,12 @@ const selectorGroupOptions = ref(
         At least one group must be selected
       </span>
 
-      <pep-pharos-button slot="footer" variant="secondary" data-modal-close="">
+      <pep-pharos-button
+        slot="footer"
+        variant="secondary"
+        data-modal-close=""
+        @click="handleWithLog(closeApproveModalLog)"
+      >
         Cancel
       </pep-pharos-button>
 
@@ -160,7 +177,7 @@ const selectorGroupOptions = ref(
           !approveGroups.length ||
           arraysAreEqual(approveGroups, getGroupsWithStatus(statuses, 'approved'))
         "
-        @click.prevent.stop="handleApproval"
+        @click.prevent.stop="handleWithLog(approvalLog, handleApproval)"
       >
         Approve
       </pep-pharos-button>

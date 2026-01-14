@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Discipline } from '@/interfaces/Discipline'
 import type { BulkHistory } from '@/interfaces/MediaRecord'
 import type { PropType } from 'vue'
@@ -11,6 +11,7 @@ import { makeGrammaticalList } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 import type { Journal } from '@/interfaces/Journal'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   tooltipId: {
@@ -45,6 +46,8 @@ const { entityName, featureDetails, groupMap, selectedGroups } = storeToRefs(use
 
 const { disciplineList } = storeToRefs(searchStore)
 
+const { handleWithLog, logs } = useLogger()
+
 const getInitialBulkApprovalState = (approval: BulkHistory[]) => {
   return approval
     .filter((hist: BulkHistory) => {
@@ -76,22 +79,25 @@ const selectorGroupOptions = ref(
   }, [] as Group[]),
 )
 selectedGroups.value['undo_bulk_approve'] = possibleBulkUndoGroups.value
+const selectedBulkUndoGroups = computed<number[]>(
+  () => selectedGroups.value['undo_bulk_approve'] || [],
+)
 const handleGroupSelection = (event: GroupSelection) => {
   selectedGroups.value['undo_bulk_approve'] = event.groups
 }
 
-const openBulkApprovalModal = () => {
+const openBulkUndoModal = () => {
   if (featureDetails.value['undo_bulk_approve']?.enabled) {
     showBulkApprovalModal.value = true
   }
 }
-const closeBulkApproveModal = () => {
+const closeBulkUndoModal = () => {
   showBulkApprovalModal.value = false
   updateKey.value++
 }
 const emit = defineEmits(['render'])
 
-const submitBulkApproval = async () => {
+const submitBulkUndo = async () => {
   const args = {
     groups: selectedGroups.value['undo_bulk_approve'] || [],
     code: itemId.value,
@@ -114,10 +120,15 @@ const submitBulkApproval = async () => {
     const msg = 'There was an error and the change was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')
   } finally {
-    closeBulkApproveModal()
+    closeBulkUndoModal()
   }
   searchStore.getJournals()
 }
+
+const { openBulkUndoModalLog, closeBulkUndoModalLog, submitBulkUndoLog } = logs.getBulkUndoLogs({
+  groups: selectedBulkUndoGroups,
+  itemid: itemId.value,
+})
 </script>
 <template>
   <div>
@@ -130,7 +141,7 @@ const submitBulkApproval = async () => {
         :class="{ 'fill-jstor-red': color }"
         role="button"
         tabindex="0"
-        @click.prevent.stop="openBulkApprovalModal"
+        @click.prevent.stop="handleWithLog(openBulkUndoModalLog, openBulkUndoModal)"
       />
       <pep-pharos-tooltip :id="tooltipId" :placement="placement">
         <span>{{ text }}</span>
@@ -144,7 +155,7 @@ const submitBulkApproval = async () => {
           :key="updateKey"
           :header="`Revoke Approval`"
           :open="showBulkApprovalModal"
-          @pharos-modal-closed="closeBulkApproveModal()"
+          @pharos-modal-closed="handleWithLog(closeBulkUndoModalLog, closeBulkUndoModal)"
         >
           <p class="my-4">
             <span
@@ -175,7 +186,7 @@ const submitBulkApproval = async () => {
           <pep-pharos-button
             slot="footer"
             variant="secondary"
-            @click.prevent.stop="closeBulkApproveModal"
+            @click.prevent.stop="handleWithLog(closeBulkUndoModalLog, closeBulkUndoModal)"
           >
             Cancel
           </pep-pharos-button>
@@ -184,7 +195,7 @@ const submitBulkApproval = async () => {
             :disabled="
               !selectedGroups['undo_bulk_approve'] || !selectedGroups['undo_bulk_approve'].length
             "
-            @click.prevent.stop="submitBulkApproval"
+            @click.prevent.stop="handleWithLog(submitBulkUndoLog, submitBulkUndo)"
           >
             Submit
           </pep-pharos-button>

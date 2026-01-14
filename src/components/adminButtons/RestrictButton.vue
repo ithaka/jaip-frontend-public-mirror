@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useLogger } from '@/composables/logging/useLogger'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import { DenialReasons } from '@/interfaces/MediaReview'
@@ -30,6 +31,8 @@ const { ungroupedFeatures, entityName } = storeToRefs(userStore)
 const coreStore = useCoreStore()
 const { isSpinning } = storeToRefs(coreStore)
 
+const { handleWithLog, logs } = useLogger()
+
 const router = useRouter()
 const route = useRoute()
 
@@ -54,6 +57,14 @@ const handleSelectedReason = (e: InputFileEvent) => {
 }
 
 const emit = defineEmits(['restrictSubmitted', 'close'])
+
+const {
+  handleRestrictLog,
+  openRestrictModalLog,
+  closeRestrictModalLog,
+  cancelRestrictModalLog,
+  selectedReasonLog,
+} = logs.getRestrictLogs({ doi: props.doc.doi, reason: selectedReason })
 
 const handleRestrict = async () => {
   if (!selectedReason.value.trim()) {
@@ -103,16 +114,25 @@ const handleRestrict = async () => {
     icon-left="exclamation-inverse"
     :data-modal-id="`restrict-modal-${doc.iid}`"
     variant="secondary"
+    @click="handleWithLog(openRestrictModalLog)"
   >
     <span>Restrict</span>
   </pep-pharos-button>
   <Teleport to="body">
-    <pep-pharos-modal :id="`restrict-modal-${doc.iid}`" header="Restrict material">
+    <pep-pharos-modal
+      :id="`restrict-modal-${doc.iid}`"
+      header="Restrict material"
+      @pharos-modal-close="handleWithLog(closeRestrictModalLog)"
+    >
       <p slot="description" class="mb-3">
         What is your reason to restrict access
         <span v-if="doc.title">to <em v-html="doc.title" /> globally?</span>
       </p>
-      <pep-pharos-radio-group :value="selectedReason" class="mb-6" @input="handleSelectedReason">
+      <pep-pharos-radio-group
+        :value="selectedReason"
+        class="mb-6"
+        @input="handleWithLog(selectedReasonLog, handleSelectedReason)"
+      >
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
           v-for="(reason, index) in reasons"
@@ -147,14 +167,19 @@ const handleRestrict = async () => {
         >
       </p>
 
-      <pep-pharos-button slot="footer" variant="secondary" data-modal-close>
+      <pep-pharos-button
+        slot="footer"
+        variant="secondary"
+        data-modal-close
+        @click="handleWithLog(cancelRestrictModalLog)"
+      >
         Cancel
       </pep-pharos-button>
 
       <pep-pharos-button
         slot="footer"
         :data-modal-close="invalidReason ? undefined : true"
-        @click="handleRestrict"
+        @click="handleWithLog(handleRestrictLog, handleRestrict)"
       >
         Restrict
       </pep-pharos-button>

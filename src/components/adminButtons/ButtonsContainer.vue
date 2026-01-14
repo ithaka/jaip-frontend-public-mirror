@@ -12,6 +12,7 @@ import DenialControls from '@/components/adminButtons/DenialControls.vue'
 import RestrictedControls from '@/components/adminButtons/RestrictedControls.vue'
 import DocumentHistory from '@/components/results/DocumentHistory.vue'
 import AccessButtons from '@/components/AccessButtons.vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   doc: {
@@ -27,6 +28,8 @@ const { searchTerms, pageNo } = storeToRefs(searchStore)
 
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
+
+const { handleWithLog, logs } = useLogger()
 
 const router = useRouter()
 const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'restrictSubmitted'])
@@ -48,6 +51,11 @@ const readRoute = ref(
     ? `/page/${props.doc.iid}/0`
     : `/pdf/${props.doc.iid}`,
 )
+const { openHistoryModalLog, closeHistoryModalLog, readButtonLog, toggleGlobalHistoryLog } =
+  logs.getMediaHistoryLogs({
+    itemid: props.doc.doi,
+    is_global: isGlobal,
+  })
 </script>
 <template>
   <div>
@@ -65,7 +73,7 @@ const readRoute = ref(
           variant="secondary"
           icon-left="calendar"
           :data-modal-id="`history-modal-${doc.iid}`"
-          @click.prevent.stop="openHistoryModal"
+          @click.prevent.stop="handleWithLog(openHistoryModalLog, openHistoryModal)"
         >
           <span>History</span>
         </pep-pharos-button>
@@ -87,7 +95,9 @@ const readRoute = ref(
           variant="secondary"
           icon-left="filetype-pdf"
           @click.prevent.stop="
-            changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)
+            handleWithLog(readButtonLog, () =>
+              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined),
+            )
           "
         >
           <span>Read</span>
@@ -103,7 +113,7 @@ const readRoute = ref(
         size="large"
         header="History"
         :open="showHistoryModal"
-        @pharos-modal-closed="closeHistoryModal"
+        @pharos-modal-closed="handleWithLog(closeHistoryModalLog, closeHistoryModal)"
       >
         <pep-pharos-toggle-button-group
           v-if="(props.doc.history || []).length && (props.doc.national_history || []).length"
@@ -112,14 +122,22 @@ const readRoute = ref(
           <pep-pharos-toggle-button
             id="local-button"
             :selected="!isGlobal"
-            @click.prevent.stop="isGlobal = false"
+            @click.prevent.stop="
+              handleWithLog(toggleGlobalHistoryLog, () => {
+                isGlobal = false
+              })
+            "
           >
             Local History
           </pep-pharos-toggle-button>
           <pep-pharos-toggle-button
             id="global-button"
             :selected="isGlobal"
-            @click.prevent.stop="isGlobal = true"
+            @click.prevent.stop="
+              handleWithLog(toggleGlobalHistoryLog, () => {
+                isGlobal = true
+              })
+            "
           >
             Global Statuses
           </pep-pharos-toggle-button>

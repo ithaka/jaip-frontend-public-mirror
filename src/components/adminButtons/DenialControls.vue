@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -20,12 +20,15 @@ import GroupSelector from '@/components/account/GroupSelector.vue'
 import { changeRoute } from '@/utils/helpers'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 import { DenialReasons } from '@/interfaces/MediaReview'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const userStore = useUserStore()
 const { reviewStatus, searchTerms, pageNo } = storeToRefs(searchStore)
 const { featureDetails, selectedGroups, entityName, groupMap } = storeToRefs(userStore)
+
+const { handleWithLog, logs } = useLogger()
 
 const props = defineProps({
   doc: {
@@ -113,6 +116,22 @@ if (featureDetails.value['deny_requests']?.groups.length === 1) {
   selectAllGroups()
 }
 
+const isIncomplete = computed(() => selectedReason.value === DenialReasons.Incomplete)
+const selectedDenyGroups = computed<number[]>(() => selectedGroups.value['deny_requests'] || [])
+
+const {
+  openDenyModalLog,
+  closeDenyModalLog,
+  cancelDenyModalLog,
+  submitDenialLog,
+  selectedReasonLog,
+} = logs.getMediaDenialLogs({
+  itemid: props.doc.iid,
+  groups: selectedDenyGroups,
+  reason: selectedReason,
+  comments,
+  is_incomplete: isIncomplete,
+})
 const handleDenial = async () => {
   if (!comments.value) {
     invalidComments.value = 'Additional details are required'
@@ -135,7 +154,7 @@ const handleDenial = async () => {
     comments: comments.value.trim(),
   }
   try {
-    if (selectedReason.value === DenialReasons.Incomplete) {
+    if (isIncomplete.value) {
       await coreStore.$api.approvals.incomplete(args)
     } else {
       await coreStore.$api.approvals.deny(args)
@@ -148,14 +167,8 @@ const handleDenial = async () => {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
     coreStore.$api.log({
-      eventtype:
-        selectedReason.value === DenialReasons.Incomplete
-          ? 'pep_incomplete_submitted'
-          : 'pep_denial_submitted',
-      event_description:
-        selectedReason.value === DenialReasons.Incomplete
-          ? 'user submitted incomplete'
-          : 'user submitted denial',
+      eventtype: isIncomplete.value ? 'pep_incomplete_submitted' : 'pep_denial_submitted',
+      event_description: isIncomplete.value ? 'user submitted incomplete' : 'user submitted denial',
       dois: [args.doi],
       groups: args.groups,
       reason: args.reason,
@@ -178,7 +191,7 @@ const handleDenial = async () => {
     icon-left="checkmark-inverse"
     :data-modal-id="`deny-modal-${doc.iid}`"
     variant="secondary"
-    @click.prevent.stop="openDenyModal"
+    @click.prevent.stop="handleWithLog(openDenyModalLog, openDenyModal)"
   >
     <span>Deny</span>
   </pep-pharos-button>
@@ -188,6 +201,7 @@ const handleDenial = async () => {
       :key="denyModalKey"
       header="Deny material"
       :open="showDenyModal"
+      @pharos-modal-closed="handleWithLog(closeDenyModalLog)"
     >
       <p slot="description" class="mb-3">
         What is your reason to deny access
@@ -214,7 +228,7 @@ const handleDenial = async () => {
         :value="selectedReason"
         class="mb-6"
         required
-        @input="handleSelectedReason"
+        @input="handleWithLog(selectedReasonLog, () => handleSelectedReason($event))"
       >
         <span slot="legend"> Reason </span>
         <pep-pharos-radio-button
@@ -293,7 +307,11 @@ const handleDenial = async () => {
         <span>.</span>
       </p>
 
-      <pep-pharos-button slot="footer" variant="secondary" @click.prevent.stop="closeDenyModal">
+      <pep-pharos-button
+        slot="footer"
+        variant="secondary"
+        @click.prevent.stop="handleWithLog(cancelDenyModalLog, closeDenyModal)"
+      >
         Cancel
       </pep-pharos-button>
 
@@ -305,7 +323,7 @@ const handleDenial = async () => {
           !denyGroups?.length ||
           arraysAreEqual(denyGroups, getGroupsWithStatus(statuses, 'denied'))
         "
-        @click.prevent.stop="handleDenial"
+        @click.prevent.stop="handleWithLog(submitDenialLog, handleDenial)"
       >
         Deny
       </pep-pharos-button>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useLogger } from '@/composables/logging/useLogger'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
@@ -28,10 +29,19 @@ const { ungroupedFeatures } = storeToRefs(userStore)
 const coreStore = useCoreStore()
 const { isSpinning } = storeToRefs(coreStore)
 
+const { handleWithLog, logs } = useLogger()
+
 const router = useRouter()
 const route = useRoute()
 
 const emit = defineEmits(['restrictSubmitted', 'close'])
+
+const {
+  handleUnrestrictLog,
+  openUnrestrictModalLog,
+  closeUnrestrictModalLog,
+  cancelUnrestrictModalLog,
+} = logs.getUnrestrictLogs({ doi: props.doc.doi })
 
 const handleUnrestrict = async () => {
   if (!ungroupedFeatures.value['manage_restricted_list']?.enabled) {
@@ -74,11 +84,16 @@ const handleUnrestrict = async () => {
     icon-left="delete"
     :data-modal-id="`unrestrict-modal-${doc.iid}`"
     variant="secondary"
+    @click.prevent.stop="handleWithLog(openUnrestrictModalLog)"
   >
     <span>Unrestrict</span>
   </pep-pharos-button>
   <Teleport to="body">
-    <pep-pharos-modal :id="`unrestrict-modal-${doc.iid}`" header="Unrestrict material">
+    <pep-pharos-modal
+      :id="`unrestrict-modal-${doc.iid}`"
+      header="Unrestrict material"
+      @pharos-modal-close="handleWithLog(closeUnrestrictModalLog)"
+    >
       <p slot="description" class="mb-3">
         This will make
         <span v-if="doc.title"
@@ -86,11 +101,20 @@ const handleUnrestrict = async () => {
         >
       </p>
 
-      <pep-pharos-button slot="footer" variant="secondary" data-modal-close>
+      <pep-pharos-button
+        slot="footer"
+        variant="secondary"
+        data-modal-close
+        @click="handleWithLog(cancelUnrestrictModalLog)"
+      >
         Cancel
       </pep-pharos-button>
 
-      <pep-pharos-button slot="footer" data-modal-close @click="handleUnrestrict">
+      <pep-pharos-button
+        slot="footer"
+        data-modal-close
+        @click="handleWithLog(handleUnrestrictLog, handleUnrestrict)"
+      >
         Confirm
       </pep-pharos-button>
     </pep-pharos-modal>
