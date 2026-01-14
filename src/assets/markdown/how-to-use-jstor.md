@@ -142,6 +142,8 @@ la:spa = Spanish<br />
 la:swe = Swedish<br />
 la:tur = Turkish<br />
 
+To find results in another language, your search words need to be in that language, too. For example, to see content that contains that Spanish word “gato” (which means “cat” in Spanish), type: gato la:spa. If you had typed cat la:spa, you would only see results with those letters inside other Spanish words, like “Catilinarias” or “Cataluña”.
+
 ## Understanding your search results
 
 ### Search relevance
