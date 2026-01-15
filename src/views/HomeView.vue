@@ -18,29 +18,33 @@ coreStore.$api.log({
 
 <template>
   <main class="home-view" data-cy="home-view">
-    <pep-pharos-layout row-gap="0">
-      <pep-pharos-heading
-        :level="1"
-        preset="7"
-        class="home-view__header home-view__header--large"
-        data-cy="home-view-header"
-      >
-        <span>Explore the world's knowledge, cultures, and ideas</span>
-      </pep-pharos-heading>
-      <pep-pharos-heading
-        :level="1"
-        preset="5"
-        class="home-view__header home-view__header--small"
-        data-cy="home-view-header"
-      >
-        <span>Explore the world's knowledge, cultures, and ideas</span>
-      </pep-pharos-heading>
-      <div class="home-view__search-container">
-        <SearchInput id="home" label="Search" a11y-label="Search" variant="prominent" />
-      </div>
-    </pep-pharos-layout>
+    <div class="home-view__top-section">
+      <pep-pharos-layout row-gap="0">
+        <pep-pharos-heading
+          :level="1"
+          preset="7"
+          class="home-view__header home-view__header--large"
+          data-cy="home-view-header"
+        >
+          <span>Explore the world's knowledge, cultures, and ideas</span>
+        </pep-pharos-heading>
+        <pep-pharos-heading
+          :level="1"
+          preset="5"
+          class="home-view__header home-view__header--small"
+          data-cy="home-view-header"
+        >
+          <span>Explore the world's knowledge, cultures, and ideas</span>
+        </pep-pharos-heading>
+        <div class="home-view__search-container">
+          <SearchInput id="home" label="Search" a11y-label="Search" variant="prominent" />
+        </div>
+      </pep-pharos-layout>
+    </div>
 
-    <div class="home-view__hero" />
+    <div class="home-view__hero">
+      <img src="@/assets/images/PEP_hero.jpg" alt="" class="home-view__hero-image" />
+    </div>
 
     <pep-pharos-layout row-gap="0" preset="1-col">
       <StudentHelp v-if="isAuthenticatedStudent" class="home-view__help-container" />
@@ -52,6 +56,11 @@ coreStore.$api.log({
 <style lang="scss" scoped>
 .home-view {
   margin-top: var(--pharos-spacing-3-x);
+
+  &__top-section {
+    position: relative;
+    z-index: 10;
+  }
 
   &__header {
     width: 100%;
@@ -87,15 +96,12 @@ coreStore.$api.log({
   }
 
   &__hero {
+    position: relative;
+    z-index: 1;
     width: 100%;
     margin-top: -1rem; // negative margin to place it partially under the search bar
     margin-bottom: var(--pharos-spacing-one-and-a-half-x);
     overflow: hidden;
-    background-image: url('@/assets/images/PEP_hero.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    width: 100%;
 
     @media (min-width: 426px) {
       height: 35vh;
@@ -104,6 +110,13 @@ coreStore.$api.log({
     @media (max-width: 425px) {
       height: 30vh;
     }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right bottom;
   }
 
   &__help-container {

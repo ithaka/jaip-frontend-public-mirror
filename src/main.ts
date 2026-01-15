@@ -1,4 +1,7 @@
+import '@ithaka/pharos/lib/styles/fonts.css'
+import '@ithaka/pharos/lib/styles/typography.scss'
 import '@/assets/main.scss'
+import 'pdfjs-dist/legacy/web/pdf_viewer.css'
 
 import { createApp } from 'vue'
 import type { App } from 'vue'
