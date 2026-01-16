@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useCoreStore } from '@/stores/core'
 import type { Feature } from '@/interfaces/Features'
 import type { PropType } from 'vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const coreStore = useCoreStore()
 
@@ -14,6 +15,7 @@ const props = defineProps({
   },
   ungrouped: Boolean,
 })
+
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {
   // If delete hasn't been typed, do not submit
@@ -33,6 +35,11 @@ const errorMessage = computed(() => {
   if (noDelete.value) return 'Type "delete" to confirm deletion'
   return ''
 })
+
+const { handleWithLog, logs } = useLogger()
+const { submitDeleteFeatureLog, closeDeleteFeatureModalLog } = logs.getDeleteFeatureLogs({
+  featureId: props.feature.id,
+})
 </script>
 <template>
   <Teleport to="div#app">
@@ -40,13 +47,13 @@ const errorMessage = computed(() => {
       :id="`delete-feature-modal-${props.feature.id}`"
       header="Delete Feature"
       :open="props.show"
-      @pharos-modal-closed="emit('close')"
+      @pharos-modal-closed="handleWithLog(closeDeleteFeatureModalLog, () => emit('close'))"
     >
       <p slot="description" class="mb-3">
         Are you sure you want to delete {{ props.feature.display_name }}? Note that deactivating
         this feature will also remove it from any entities to which it might be connected.
       </p>
-      <form @submit.prevent.stop="submitForm">
+      <form @submit.prevent.stop="handleWithLog(submitDeleteFeatureLog, submitForm)">
         <input type="text" hidden />
         <pep-pharos-input-group
           :id="`delete_feature_${props.feature.id}`"
@@ -55,7 +62,7 @@ const errorMessage = computed(() => {
           :message="errorMessage"
           :invalidated="invalidName"
           :name="`delete_feature_${props.feature.id}`"
-          @keydown.enter.prevent.stop="submitForm"
+          @keydown.enter.prevent.stop="handleWithLog(submitDeleteFeatureLog, submitForm)"
           @input="((touchedInstruction = true), (deleteInstruction = $event.target.value))"
         >
           <span slot="label">Confirm</span>
@@ -66,7 +73,12 @@ const errorMessage = computed(() => {
         Cancel
       </pep-pharos-button>
 
-      <pep-pharos-button slot="footer" @click.prevent.stop="submitForm"> Submit </pep-pharos-button>
+      <pep-pharos-button
+        slot="footer"
+        @click.prevent.stop="handleWithLog(submitDeleteFeatureLog, submitForm)"
+      >
+        Submit
+      </pep-pharos-button>
     </pep-pharos-modal>
   </Teleport>
 </template>

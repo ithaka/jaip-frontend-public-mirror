@@ -9,6 +9,8 @@ import EditFeature from '@/components/features/EditFeature.vue'
 import DeleteFeature from '@/components/features/DeleteFeature.vue'
 import ReactivateFeature from '@/components/features/ReactivateFeature.vue'
 import type { Feature } from '@/interfaces/Features'
+import { useLogger } from '@/composables/logging/useLogger'
+import { PaginationDirectionOptions } from '@/interfaces/Queries'
 
 const props = defineProps({
   ungrouped: Boolean,
@@ -21,6 +23,7 @@ const { ungroupedFeatures } = storeToRefs(userStore)
 
 const featureStore = useFeaturesStore()
 const { features } = storeToRefs(featureStore)
+
 const gettingFeatures = ref(false)
 const currentFeatures = ref([] as Feature[])
 
@@ -29,6 +32,7 @@ const total = ref(0)
 const limit = ref(10)
 const page = ref(1)
 const isActive = ref(false)
+
 const getFeatures = async () => {
   gettingFeatures.value = true
 
@@ -98,6 +102,18 @@ const handleEditFeature = async (i: number) => {
   await getFeatures()
   showEditFeatureModal.value[i] = false
 }
+
+const { handleWithLog, logs } = useLogger()
+const {
+  fetchFeaturesLog,
+  clickFeatureSearchButtonLog,
+  toggleActiveFeaturesLog,
+  openAddFeatureModalLog,
+  openEditFeatureModalLog,
+  openDeleteFeatureModalLog,
+  openReactivateFeatureModalLog,
+  changePageLog,
+} = logs.getFeatureManagerLogs({ isActive })
 </script>
 <template>
   <div class="full-width">
@@ -106,7 +122,7 @@ const handleEditFeature = async (i: number) => {
         variant="primary"
         icon-left="add"
         class="mb-5"
-        @click="showAddFeatureModal = true"
+        @click="handleWithLog(openAddFeatureModalLog, () => (showAddFeatureModal = true))"
       >
         Add Feature
       </pep-pharos-button>
@@ -119,7 +135,7 @@ const handleEditFeature = async (i: number) => {
       />
     </div>
     <div>
-      <form class="cols-8" @submit.prevent.stop="getFeatures">
+      <form class="cols-8" @submit.prevent.stop="handleWithLog(fetchFeaturesLog, getFeatures)">
         <pep-pharos-input-group
           :id="`${props.ungrouped ? 'ungrouped_' : ''}feature_search`"
           :value="query"
@@ -138,9 +154,14 @@ const handleEditFeature = async (i: number) => {
             label="search"
             a11y-label="search"
             type="submit"
+            @click="handleWithLog(clickFeatureSearchButtonLog)"
           />
         </pep-pharos-input-group>
-        <pep-pharos-checkbox :checked="isActive" class="mb-5" @change="toggleActive">
+        <pep-pharos-checkbox
+          :checked="isActive"
+          class="mb-5"
+          @change="handleWithLog(toggleActiveFeaturesLog, toggleActive)"
+        >
           <span slot="label" class="text-weight-bold"> Get Active Features Only </span>
         </pep-pharos-checkbox>
       </form>
@@ -176,7 +197,12 @@ const handleEditFeature = async (i: number) => {
                 icon-left="edit"
                 class="mb-2"
                 full-width
-                @click="showEditFeatureModal[i] = true"
+                @click="
+                  handleWithLog(
+                    openEditFeatureModalLog(feature.id),
+                    () => (showEditFeatureModal[i] = true),
+                  )
+                "
               >
                 Edit
               </pep-pharos-button>
@@ -186,7 +212,12 @@ const handleEditFeature = async (i: number) => {
                 icon-left="add"
                 class="mb-2"
                 full-width
-                @click="showReactivateFeatureModal[i] = true"
+                @click="
+                  handleWithLog(
+                    openReactivateFeatureModalLog(feature.id),
+                    () => (showReactivateFeatureModal[i] = true),
+                  )
+                "
               >
                 Reactivate
               </pep-pharos-button>
@@ -196,7 +227,12 @@ const handleEditFeature = async (i: number) => {
                 icon-left="add"
                 class="mb-2"
                 full-width
-                @click="showDeleteFeatureModal[i] = true"
+                @click="
+                  handleWithLog(
+                    openDeleteFeatureModalLog(feature.id),
+                    () => (showDeleteFeatureModal[i] = true),
+                  )
+                "
               >
                 Delete
               </pep-pharos-button>
@@ -234,8 +270,18 @@ const handleEditFeature = async (i: number) => {
         :total-results="total"
         :page-size="limit"
         :current-page="page"
-        @prev-page="changePage(page - 1)"
-        @next-page="changePage(page + 1)"
+        @prev-page="
+          handleWithLog(
+            changePageLog({ direction: PaginationDirectionOptions.prev, newPage: page - 1 }),
+            () => changePage(page - 1),
+          )
+        "
+        @next-page="
+          handleWithLog(
+            changePageLog({ direction: PaginationDirectionOptions.next, newPage: page + 1 }),
+            () => changePage(page + 1),
+          )
+        "
       />
     </div>
   </div>

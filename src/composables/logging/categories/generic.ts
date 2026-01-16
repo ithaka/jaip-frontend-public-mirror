@@ -6,6 +6,15 @@ import { LogEvent, type WorkingLog } from '@/interfaces/Log'
 import type { PaginationDirections } from '@/interfaces/Queries'
 
 export const generics = {
+  error: (options: { message: string; code?: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.error,
+      event_description: `Error occurred: ${options.message}`,
+      action: 'error_occurred',
+      reason: options.message,
+      code: options.code,
+    }
+  },
   searchLog: (target: string): WorkingLog => {
     return {
       eventtype: LogEvent.form_submit,

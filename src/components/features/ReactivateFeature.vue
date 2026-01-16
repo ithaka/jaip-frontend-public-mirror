@@ -2,6 +2,7 @@
 import { useCoreStore } from '@/stores/core'
 import type { Feature } from '@/interfaces/Features'
 import type { PropType } from 'vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const coreStore = useCoreStore()
 
@@ -13,6 +14,7 @@ const props = defineProps({
   },
   ungrouped: Boolean,
 })
+
 const emit = defineEmits(['close', 'submit'])
 const submitForm = async () => {
   const type = props.ungrouped ? 'ungrouped' : 'basic'
@@ -20,6 +22,10 @@ const submitForm = async () => {
 
   emit('submit')
 }
+
+const { handleWithLog, logs } = useLogger()
+const { submitReactivateFeatureLog, closeReactivateFeatureModalLog } =
+  logs.getReactivateFeatureLogs({ featureId: props.feature.id })
 </script>
 <template>
   <Teleport to="div#app">
@@ -27,7 +33,7 @@ const submitForm = async () => {
       :id="`reactivate-subdomain-modal-${props.feature.id}`"
       header="Reactivate Feature"
       :open="props.show"
-      @pharos-modal-closed="emit('close')"
+      @pharos-modal-closed="handleWithLog(closeReactivateFeatureModalLog, () => emit('close'))"
     >
       <p slot="description" class="mb-3">
         Are you sure you want to reactivate {{ props.feature.display_name }}?
@@ -37,7 +43,12 @@ const submitForm = async () => {
         Cancel
       </pep-pharos-button>
 
-      <pep-pharos-button slot="footer" @click.prevent.stop="submitForm"> Submit </pep-pharos-button>
+      <pep-pharos-button
+        slot="footer"
+        @click.prevent.stop="handleWithLog(submitReactivateFeatureLog, submitForm)"
+      >
+        Submit
+      </pep-pharos-button>
     </pep-pharos-modal>
   </Teleport>
 </template>

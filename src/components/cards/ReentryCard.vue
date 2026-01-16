@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import FallbackImage from '@/assets/images/fallbackimage.png'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   id: {
@@ -73,14 +74,19 @@ const computedThumbnail = computed(() => {
   }
   return `${import.meta.env.BASE_URL}thumbnails/${props.thumbnail}`
 })
+
+const linkTo = `/collections/reentry/${props.filename}`
+const { handleWithLog, logs } = useLogger()
+const { cardClickLog, brokenCardImageLog } = logs.getCardLogs()
 </script>
 
 <template>
   <pep-pharos-image-card
-    :link="`/collections/reentry/${filename}`"
+    :link="linkTo"
     :error="isProjectImageBroken"
     class="reentry-card"
     data-cy="reentry-card"
+    @click="handleWithLog(cardClickLog(linkTo))"
   >
     <img
       slot="image"
@@ -88,7 +94,7 @@ const computedThumbnail = computed(() => {
       :alt="title"
       class="reentry-card__image"
       data-cy="reentry-card-image"
-      @error="handleBrokenImage"
+      @error="handleWithLog(brokenCardImageLog(computedThumbnail), handleBrokenImage)"
     />
     <div
       slot="metadata"

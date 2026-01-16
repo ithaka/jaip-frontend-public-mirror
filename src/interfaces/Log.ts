@@ -18,6 +18,7 @@ export enum LogEvent {
   page_landing = 'page_landing',
   radio_select = 'radio_select',
   form_submit = 'form_submit',
+  error = 'error',
 }
 
 export type EventType = `pep_fe_${LogEvent}`
@@ -65,6 +66,7 @@ interface BaseLog {
   user_id?: number
   user_name?: string
   user_contact?: string
+  source?: string
 }
 
 // WorkingLog is the log structure used within the application before being

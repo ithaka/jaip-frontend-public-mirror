@@ -94,10 +94,29 @@ const getRequestWarningLogs = () => {
   }
 }
 
+const getCardLogs = () => {
+  const cardClickLog =
+    (destination: string): (() => WorkingLog) =>
+    () => ({
+      ...generics.linkClick(destination),
+      event_description: `Clicked on card to navigate to ${destination}`,
+    })
+
+  const brokenCardImageLog = (image: string) => (): WorkingLog => ({
+    ...generics.error({ message: 'Image failed to load on card' }),
+    source: image,
+    action: 'card_image_load_error',
+  })
+  return {
+    cardClickLog,
+    brokenCardImageLog,
+  }
+}
 export const navigationLogs = {
   getFooterLogs,
   getSkipNavigationLogs,
   getJstorLogoLogs,
   getRequestWarningLogs,
   getHeaderLogs,
+  getCardLogs,
 }

@@ -2,12 +2,14 @@
 import { ref, computed } from 'vue'
 import { useCoreStore } from '@/stores/core'
 import type { Feature } from '@/interfaces/Features'
+import { useLogger } from '@/composables/logging/useLogger'
 const coreStore = useCoreStore()
 
 const props = defineProps({
   show: Boolean,
   ungrouped: Boolean,
 })
+
 const emit = defineEmits(['close', 'submit'])
 const emptyFeature = {
   name: '',
@@ -49,6 +51,7 @@ if (!props.ungrouped) {
   newFeature.value.is_protected = false
   newFeature.value.is_admin_only = false
 }
+
 const touchedName = ref(false)
 const duplicateName = ref(false)
 const noName = computed(() => newFeature.value.name.trim() === '')
@@ -98,6 +101,14 @@ const descriptionErrorMessage = computed(() => {
   if (noDescription.value) return 'A feature description is required'
   return ''
 })
+
+const { handleWithLog, logs } = useLogger()
+const {
+  closeAddFeatureModalLog,
+  submitAddFeatureLog,
+  toggleAddFeatureAdminOnlyLog,
+  toggleAddFeatureProtectedLog,
+} = logs.getAddFeatureLogs({ feature: newFeature })
 </script>
 <template>
   <Teleport to="div#app">
@@ -105,10 +116,10 @@ const descriptionErrorMessage = computed(() => {
       id="add-feature-modal"
       header="Add Feature"
       :open="props.show"
-      @pharos-modal-closed="emit('close')"
+      @pharos-modal-closed="handleWithLog(closeAddFeatureModalLog, () => emit('close'))"
     >
       <p slot="description" class="mb-3">Fill out the form to add a new feature.</p>
-      <form @submit.prevent.stop="submitForm">
+      <form @submit.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)">
         <input type="text" hidden />
         <pep-pharos-input-group
           :id="`feature_name`"
@@ -119,7 +130,7 @@ const descriptionErrorMessage = computed(() => {
           :name="`feature_name`"
           maxlength="255"
           :class="{ 'mb-4': !invalidName }"
-          @keydown.enter.prevent.stop="submitForm"
+          @keydown.enter.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)"
           @input="
             ((duplicateName = false), (touchedName = true), (newFeature.name = $event.target.value))
           "
@@ -135,7 +146,7 @@ const descriptionErrorMessage = computed(() => {
           :name="`feature_display_name`"
           maxlength="255"
           :class="{ 'mb-4': !invalidDisplayName }"
-          @keydown.enter.prevent.stop="submitForm"
+          @keydown.enter.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)"
           @input="
             ((duplicateDisplayName = false),
             (touchedDisplayName = true),
@@ -153,7 +164,7 @@ const descriptionErrorMessage = computed(() => {
           :name="`feature_category`"
           maxlength="255"
           :class="{ 'mb-4': !invalidCategory }"
-          @keydown.enter.prevent.stop="submitForm"
+          @keydown.enter.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)"
           @input="((touchedCategory = true), (newFeature.category = $event.target.value))"
         >
           <span slot="label">Category</span>
@@ -167,7 +178,7 @@ const descriptionErrorMessage = computed(() => {
           :name="`feature_description`"
           maxlength="255"
           :class="{ 'mb-4': !invalidDescription }"
-          @keydown.enter.prevent.stop="submitForm"
+          @keydown.enter.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)"
           @input="((touchedDescription = true), (newFeature.description = $event.target.value))"
         >
           <span slot="label">Description</span>
@@ -177,14 +188,24 @@ const descriptionErrorMessage = computed(() => {
             :id="`admin_checkbox`"
             class="mr-5"
             :checked="newFeature.is_admin_only"
-            @change="newFeature.is_admin_only = !newFeature.is_admin_only"
+            @change="
+              handleWithLog(
+                toggleAddFeatureAdminOnlyLog,
+                () => (newFeature.is_admin_only = !newFeature.is_admin_only),
+              )
+            "
           >
             <span slot="label">Admin Only</span>
           </pep-pharos-checkbox>
           <pep-pharos-checkbox
             :id="`protected_checkbox`"
             :checked="newFeature.is_protected"
-            @change="newFeature.is_protected = !newFeature.is_protected"
+            @change="
+              handleWithLog(
+                toggleAddFeatureProtectedLog,
+                () => (newFeature.is_protected = !newFeature.is_protected),
+              )
+            "
           >
             <span slot="label">Protected</span>
           </pep-pharos-checkbox>
@@ -195,7 +216,12 @@ const descriptionErrorMessage = computed(() => {
         Cancel
       </pep-pharos-button>
 
-      <pep-pharos-button slot="footer" @click.prevent.stop="submitForm"> Submit </pep-pharos-button>
+      <pep-pharos-button
+        slot="footer"
+        @click.prevent.stop="handleWithLog(submitAddFeatureLog, submitForm)"
+      >
+        Submit
+      </pep-pharos-button>
     </pep-pharos-modal>
   </Teleport>
 </template>
