@@ -334,9 +334,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss">
-@import 'pdfjs-dist/web/pdf_viewer.css';
-@import '@ithaka/pharos/lib/styles/variables.css';
-
 .viewer-wrapper {
   max-width: 100%;
   &--full-screen {

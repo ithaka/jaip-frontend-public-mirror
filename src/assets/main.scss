@@ -1,8 +1,4 @@
 @use 'sass:string';
-
-@import '@ithaka/pharos/lib/styles/variables.css';
-@import '@ithaka/pharos/lib/styles/fonts.css';
-// @import '@ithaka/pharos/lib/styles/typography.scss';
 @import './reset.css';
 $pharos-breakpoint-max: 99rem; // 1584px
 $pharos-breakpoint-xlarge: 85rem; // 1360px

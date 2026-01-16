@@ -78,7 +78,7 @@ export default defineConfig(({ mode }) => {
           }
         },
       }),
-  
+
     ],
     optimizeDeps: {
       include: [
