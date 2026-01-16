@@ -3,3 +3,8 @@
 CVE-2025-64720 exp:2026-03-01
 CVE-2025-65018 exp:2026-03-01
 CVE-2025-66293 exp:2026-03-01
+
+# PRISMA VULNERABILITIES
+# These are vulnerabilities in Hono, a Prisma dependency. We're not using the vulnerable code.
+CVE-2026-22817 exp: 2026-04-01
+CVE-2026-22818 exp: 2026-04-01
