@@ -47,3 +47,8 @@ export enum AlertStatus {
   ERROR = 'error',
   SUCCESS = 'success',
 }
+
+export interface AlertsResponse {
+  alerts: Alert[]
+  total: number
+}

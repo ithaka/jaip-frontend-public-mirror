@@ -91,10 +91,19 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        'vue': 'vue/dist/vue.esm-bundler.js',
         "/styles/icons": path.resolve(
           __dirname,
           "public/styles/icons/pharos"
         ),
+      }
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          quietDeps: true,
+          silenceDeprecations: ['if-function' as const],
+        }
       }
     },
   }

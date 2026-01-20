@@ -38,6 +38,9 @@ export const routes = {
     edit: `${global_route_prefix}/v3/alerts`,
     delete: `${global_route_prefix}/v3/alerts`,
   },
+  analytics: {
+    get: (group_id: string) => `${global_route_prefix_versioned}/analytics/${group_id}`,
+  },
   validateSubdomains: {
     get: `${global_route_prefix_versioned}/subdomains/validate`,
   },
@@ -257,5 +260,8 @@ export default ($axios: AxiosInstance): ApiObject => ({
       }
       return $axios.get(routes.collections.pdf(collection, filename), config)
     },
+  },
+  analytics: {
+    get: (group_id: string) => $axios.get(routes.analytics.get(group_id)),
   },
 })

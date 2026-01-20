@@ -1,5 +1,9 @@
 @use 'sass:string';
+@import '@ithaka/pharos/lib/styles/variables.css';
+@import '@ithaka/pharos/lib/styles/fonts.css';
+@import '@carbon/charts-vue/styles.css';
 @import './reset.css';
+
 $pharos-breakpoint-max: 99rem; // 1584px
 $pharos-breakpoint-xlarge: 85rem; // 1360px
 $pharos-breakpoint-large: 66rem; // 1056px
@@ -15,6 +19,14 @@ body {
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
 }
+// Set Carbon Charts font families
+.cds--cc--chart-wrapper {
+  --cds-charts-font-family: var(--pharos-font-family-body);
+  --cds-charts-font-family-condensed:
+    'GT America Condensed', 'Helvetica Neue Condensed', 'Helvetica Condensed', 'Arial Narrow',
+    'Segoe UI Semibold', 'Roboto Condensed', 'Droid Sans', sans-serif;
+}
+
 .notice {
   border: 1px solid var(--pharos-color-marble-gray-80);
   padding: var(--pharos-spacing-1-x);

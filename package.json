@@ -21,6 +21,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@carbon/charts-vue": "^1.27.2",
     "@ithaka/pharos": "^14.22.1",
     "@vuepic/vue-datepicker": "^11.0.3",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",

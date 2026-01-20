@@ -47,6 +47,7 @@ export const useUserStore = defineStore('user', {
       id: 0,
       entityName: '',
       groups: [] as Group[],
+      selectedGroupId: 0,
       facilities: [] as Entity[],
       type: '',
       gettingUser: false,
@@ -132,6 +133,9 @@ export const useUserStore = defineStore('user', {
     },
     getEnabledFeatures(features: UngroupedFeatureDetails): UngroupedFeatureDetails {
       return getEnabledFeatures(features)
+    },
+    setSelectedGroupId(groupId: number) {
+      this.selectedGroupId = groupId
     },
   },
   getters: {

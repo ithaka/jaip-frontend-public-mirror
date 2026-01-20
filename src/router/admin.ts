@@ -162,6 +162,17 @@ const config = {
       component: () => import('@/views/CollectionsItemView.vue'),
     },
     {
+      path: '/analytics',
+      name: 'analytics',
+      meta: {
+        hidden: true,
+        requiresAny: ['view_analytics'],
+        showSearch: false,
+        label: 'Analytics',
+      },
+      component: () => import('@/views/AnalyticsView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       meta: {

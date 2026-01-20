@@ -7,6 +7,7 @@ import { createApp } from 'vue'
 import type { App } from 'vue'
 import { createPinia, storeToRefs } from 'pinia'
 import { setCookie } from 'typescript-cookie'
+import ChartsVue from '@carbon/charts-vue'
 import VueApp from '@/App.vue'
 import pharos from '@/plugins/pharos'
 import axios from '@/plugins/axios'
@@ -37,9 +38,9 @@ function get_subdomain(host: string): string {
 // Start setting up app
 const app = createApp(VueApp)
 const pinia = createPinia()
+app.use(ChartsVue)
 app.use(pharos)
 app.use(datepicker)
-
 app.use(pinia)
 
 // Set up stores
