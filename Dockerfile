@@ -1,4 +1,4 @@
-FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:24.12.0-alpine AS build-stage
+FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:24.13.0-alpine AS build-stage
 WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
