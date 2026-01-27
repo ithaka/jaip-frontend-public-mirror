@@ -218,3 +218,17 @@ export const getAncestorComponentNames = (
   }
   return ancestors
 }
+
+/**
+ * Formats numbers over 999 with K for thousands and M for millions
+ * @param val - The number to format
+ * @returns Formatted string with K or M suffix
+ */
+export const formatDisplayNumbers = (val: number): string => {
+  if (val >= 1000000) {
+    return `${(val / 1000000).toFixed(1)}M`
+  } else if (val >= 1000) {
+    return `${(val / 1000).toFixed(1)}K`
+  }
+  return val.toString()
+}
