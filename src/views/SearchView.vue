@@ -13,6 +13,7 @@ import type CheckboxEvent from '@/interfaces/Events/Checkbox'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { AxiosResponse } from 'axios'
 import SkipToDestination from '@/components/SkipToDestination.vue'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
@@ -228,10 +229,8 @@ const handleContentTypeSelection = (e: InputFileEvent) => {
   searchStore.doSearch('', false)
 }
 
-api.log({
-  eventtype: 'pep_landing_search_view',
-  event_description: 'User has landed on the search view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

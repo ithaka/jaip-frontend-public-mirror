@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { Cedar } from '@/interfaces/Metadata'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const route = useRoute()
 const coreStore = useCoreStore()
@@ -93,10 +94,8 @@ const getDocument = async () => {
 getDocument()
 const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 
-coreStore.$api.log({
-  eventtype: 'pep_landing_pdf_view',
-  event_description: 'User has landed on the pdf view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

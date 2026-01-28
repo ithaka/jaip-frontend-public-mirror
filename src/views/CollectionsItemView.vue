@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useCoreStore } from '@/stores/core'
 import { computed, ref } from 'vue'
 import type { Collections, CollectionMetadata } from '@/interfaces/Collections'
 import PDFViewer from '@/components/Viewer/PDFViewer.vue'
@@ -9,9 +8,9 @@ import DownloadButton from '@/components/DownloadButton.vue'
 import { useUserStore } from '@/stores/user'
 import { useMetadataStore } from '@/stores/metadata'
 import { storeToRefs } from 'pinia'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const route = useRoute()
-const coreStore = useCoreStore()
 const metadataStore = useMetadataStore()
 const { metadata, metadataByFilename } = storeToRefs(metadataStore)
 const userStore = useUserStore()
@@ -60,13 +59,6 @@ getDocument()
 
 const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 
-coreStore.$api.log({
-  eventtype: 'pep_landing_collections_item_view',
-  event_description: `User has landed on the collections item view: ${collection}/${filename}`,
-  collection: collection,
-  filename: filename,
-})
-
 const hasPrint = computed(() => {
   return featureDetails.value['print_pdf']?.enabled
 })
@@ -76,6 +68,9 @@ const hasDownload = computed(() => {
 const hasPrintAndDownload = computed(() => {
   return hasPrint.value && hasDownload.value
 })
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

@@ -4,6 +4,7 @@ import { useCoreStore } from '@/stores/core'
 import { Collections } from '@/interfaces/Collections'
 import type { CollectionMetadata } from '@/interfaces/Collections'
 import ReentryCard from '@/components/cards/ReentryCard.vue'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const coreStore = useCoreStore()
 const stateMetadata = ref<CollectionMetadata[]>([])
@@ -46,14 +47,13 @@ const getMetadata = async () => {
 }
 
 onMounted(async () => {
-  coreStore.$api.log({
-    eventtype: 'pep_reentry_landing_view',
-    event_description: 'User has landed on the reentry list page',
-  })
   coreStore.isSpinning = true
   await getMetadata()
   coreStore.isSpinning = false
 })
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

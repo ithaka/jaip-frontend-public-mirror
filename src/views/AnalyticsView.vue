@@ -5,6 +5,7 @@ import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import { useAnalyticsStore } from '@/stores/analytics'
 import { TimePeriodLabels, type TimePeriod, type AnalyticsData } from '@/interfaces/Analytics'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import StudentItemViews from '@/components/analytics/StudentItemViews.vue'
 import DataBox from '@/components/analytics/DataBox.vue'
 
@@ -81,14 +82,15 @@ onBeforeMount(() => {
 })
 
 onMounted(async () => {
-  coreStore.$api.log({
-    eventtype: 'pep_admin_analytics_landing_view',
-    event_description: 'User has landed on the admin analytics page',
-  })
+  // TODO: Uncomment once loading state is confirmed with design
+  // coreStore.isSpinning = true
   isLoading.value = true
   await fetchAnalyticsData()
   isLoading.value = false
 })
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

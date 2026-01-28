@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { useCoreStore } from '@/stores/core'
 import NotificationsList from '@/components/notifications/NotificationsList.vue'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_about_view',
-  event_description: 'User has landed on the about view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

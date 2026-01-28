@@ -2,15 +2,15 @@
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const userStore = useUserStore()
 const { isAuthenticatedAdmin } = storeToRefs(userStore)
 
 const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_accessibility_view',
-  event_description: 'User has landed on the accessibility view.',
-})
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

@@ -7,6 +7,7 @@ import type { Cedar } from '@/interfaces/Metadata'
 import PageViewer from '@/components/pages/PageViewer.vue'
 import { requestFullscreen, exitFullscreen } from '@/utils/viewers.ts'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const route = useRoute()
 const coreStore = useCoreStore()
@@ -136,11 +137,6 @@ const handleFullscreenToggle = () => {
   }
 }
 
-coreStore.$api.log({
-  eventtype: 'pep_landing_pages_view',
-  event_description: 'User has landed on the page view.',
-})
-
 const showDocument = computed(() => {
   return page_index && !pdfData.value && !error.value.status
 })
@@ -148,6 +144,9 @@ const showDocument = computed(() => {
 const accessDenied = computed(() => {
   return !page_index || pdfData.value
 })
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
-import { useCoreStore } from '@/stores/core'
-
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
-
 import type { EntityOption, EntityObject, EntityTypes } from '@/interfaces/AccountManagement'
-
 import EntitySearch from '@/components/account/EntitySearch.vue'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
@@ -47,11 +44,8 @@ const visibleEntity = ref(
     : ('facilities' as EntityTypes),
 )
 
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_account_view',
-  event_description: 'User has landed on the account view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

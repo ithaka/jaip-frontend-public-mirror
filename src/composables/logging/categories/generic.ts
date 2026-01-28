@@ -106,4 +106,18 @@ export const generics = {
       destination,
     }
   },
+  pageLanding: (): WorkingLog => {
+    return {
+      eventtype: LogEvent.page_landing,
+      event_description: `Landed on page`,
+      action: `landed_on_page`,
+    }
+  },
+  pageExit: (): WorkingLog => {
+    return {
+      eventtype: LogEvent.page_exit,
+      event_description: `Exited page`,
+      action: `exited_page`,
+    }
+  },
 }

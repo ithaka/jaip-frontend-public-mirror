@@ -3,17 +3,14 @@ import StudentHelp from '@/components/help/StudentHelp.vue'
 import AdminHelp from '@/components/help/AdminHelp.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import { useUserStore } from '@/stores/user'
-import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const userStore = useUserStore()
 const { isAuthenticatedStudent, isAuthenticatedAdmin } = storeToRefs(userStore)
 
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_home_view',
-  event_description: 'User has landed on the home view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
-import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import GroupsManager from '@/components/groups/GroupsManager.vue'
@@ -8,6 +7,7 @@ import UsersManager from '@/components/users/UsersManager.vue'
 import SubdomainManager from '@/components/subdomains/SubdomainManager.vue'
 import FeatureManager from '@/components/features/FeatureManager.vue'
 import type { UngroupedFeatureDetails } from '@/interfaces/Features'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const userStore = useUserStore()
 const { sortedUngroupedFeatures } = storeToRefs(userStore)
@@ -24,11 +24,9 @@ for (const key in sortedUngroupedFeatures.value) {
 const filteredOrderedCategories = categories.filter((value) =>
   Object.keys(filteredCategories.value).includes(value),
 )
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_account_management_view',
-  event_description: 'User has landed on the account management view.',
-})
+
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

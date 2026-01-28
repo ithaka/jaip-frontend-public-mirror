@@ -9,7 +9,9 @@ import SearchResults from '@/components/results/SearchResults.vue'
 import { changeRoute } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
+const coreStore = useCoreStore()
 const userStore = useUserStore()
 const {
   isAuthenticatedAdmin,
@@ -127,11 +129,8 @@ const newSearch = () => {
   searchStore.doSearch(reviewStatus.value, false)
 }
 
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_requests_view',
-  event_description: 'User has landed on the requests view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>

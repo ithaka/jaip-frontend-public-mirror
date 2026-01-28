@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { useCoreStore } from '@/stores/core'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
-const coreStore = useCoreStore()
-coreStore.$api.log({
-  eventtype: 'pep_landing_not_found_view',
-  event_description: 'User has landed on the not found view.',
-})
+const { logPageView } = usePageViewLogger()
+logPageView()
 </script>
 
 <template>
