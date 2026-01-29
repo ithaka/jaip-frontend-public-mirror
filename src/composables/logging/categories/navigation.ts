@@ -112,6 +112,22 @@ const getCardLogs = () => {
     brokenCardImageLog,
   }
 }
+
+const getRouterLogs = () => {
+  const routeChangeLog =
+    (options: { to: string; from: string }): (() => WorkingLog) =>
+    () => ({
+      ...generics.routeChange(options),
+      event_description: `Navigated to ${options.to} from ${options.from}`,
+      destination: options.to,
+      origin_page: options.from,
+    })
+
+  return {
+    routeChangeLog,
+  }
+}
+
 export const navigationLogs = {
   getFooterLogs,
   getSkipNavigationLogs,
@@ -119,4 +135,5 @@ export const navigationLogs = {
   getRequestWarningLogs,
   getHeaderLogs,
   getCardLogs,
+  getRouterLogs,
 }

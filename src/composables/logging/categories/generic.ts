@@ -120,4 +120,13 @@ export const generics = {
       action: `exited_page`,
     }
   },
+  routeChange: (options: { to: string; from: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.route_change,
+      event_description: `Navigated to ${options.to} from ${options.from}`,
+      action: `navigated_to_${options.to.replace(/\//g, '_')}`,
+      destination: options.to,
+      origin_page: options.from,
+    }
+  },
 }

@@ -20,6 +20,7 @@ export enum LogEvent {
   error = 'error',
   page_landing = 'page_landing',
   page_exit = 'page_exit',
+  route_change = 'route_change',
 }
 
 export type EventType = `pep_fe_${LogEvent}`
@@ -69,6 +70,7 @@ interface BaseLog {
   user_contact?: string
   source?: string
   event_uuid?: string
+  origin_page?: string
 }
 
 // WorkingLog is the log structure used within the application before being

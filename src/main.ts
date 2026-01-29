@@ -21,6 +21,7 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
 import unauthenticatedRouteConfig from '@/router/unauthenticated'
+import { useLogger } from './composables/logging/useLogger'
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
@@ -142,6 +143,12 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
       if (to.path === '/search' || to.path === '/requests') {
         searchStore.doSearch(reviewStatus.value, false)
       }
+
+      // NOTE: These must be imported here to avoid attempting to use the logger
+      // before the router is initialized.
+      const { handleWithLog, logs } = useLogger()
+      const { routeChangeLog } = logs.getRouterLogs()
+      handleWithLog(routeChangeLog({ to: to.path, from: from.path }))
     }
   }
 }
