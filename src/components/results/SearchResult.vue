@@ -1,9 +1,8 @@
 a
 <script setup lang="ts">
 import TextBlock from '@/components/truncated/TextBlock.vue'
-import ButtonsContainer from '@/components/adminButtons/ButtonsContainer.vue'
+import ButtonsContainer from '@/components/buttons/adminButtons/ButtonsContainer.vue'
 import AccessButtons from '@/components/AccessButtons.vue'
-import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
@@ -14,7 +13,8 @@ import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import BibliographicalData from '@/components/results/BibliographicalData.vue'
 import { ref, computed } from 'vue'
-import UnrestrictButton from '@/components/adminButtons/UnrestrictButton.vue'
+import UnrestrictButton from '@/components/buttons/adminButtons/UnrestrictButton.vue'
+import RequestButton from '../buttons/RequestButton.vue'
 
 const props = defineProps({
   doc: {
@@ -38,9 +38,6 @@ const props = defineProps({
   },
   pdfView: Boolean,
 })
-
-const coreStore = useCoreStore()
-const { reqs } = storeToRefs(coreStore)
 
 const userStore = useUserStore()
 const {
@@ -68,28 +65,7 @@ const searchFor = (term: string) => {
   })
 }
 
-const showExcessiveRequestsWarningModal = ref(false)
-const cartFull = computed(() => reqs.value.length >= 10)
-// const parsedReqs = reqs.value.map((req: string) => JSON.parse(req))
-
-const addRequest = (doc: string) => {
-  if (!cartFull.value) {
-    coreStore.addRequest(doc)
-  } else {
-    showExcessiveRequestsWarningModal.value = true
-  }
-}
 const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.value))
-const canRequest = computed(() => {
-  return (
-    !reqs.value.includes(JSON.stringify(props.doc)) &&
-    status.value !== 'approved' &&
-    status.value !== 'pending' &&
-    status.value !== 'restricted' &&
-    userStore.features['submit_requests'] &&
-    !props.hideRequests
-  )
-})
 const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'restrictSubmitted'])
 const readRoute = ref(
   (featureDetails.value['view_document'] || {}).enabled
@@ -201,25 +177,7 @@ const showReaderRestrictedLabel = computed(() => {
         v-if="isAuthenticatedStudent && !hideButtons"
         class="display-flex justify-content-end flex-direction-column"
       >
-        <pep-pharos-button
-          v-if="canRequest"
-          full-width
-          class="mb-2"
-          icon-left="checkmark-inverse"
-          @click.prevent.stop="addRequest(JSON.stringify(doc))"
-        >
-          <span class="text-align-center">Request This</span>
-        </pep-pharos-button>
-        <pep-pharos-button
-          v-else-if="reqs.includes(JSON.stringify(doc)) && !hideRequests"
-          full-width
-          class="mb-2"
-          icon-left="close-inverse"
-          variant="secondary"
-          @click.prevent.stop="coreStore.removeRequest(JSON.stringify(doc))"
-        >
-          <span>{{ buttonName }}</span>
-        </pep-pharos-button>
+        <RequestButton :doc="doc" :hide-requests="hideRequests" :cancel-button-label="buttonName" />
         <!-- TODO: This won't work as it is, we'll need the actual pdf route and to create a pdf viewer -->
         <pep-pharos-button
           v-if="
@@ -338,37 +296,6 @@ const showReaderRestrictedLabel = computed(() => {
         <p>{{ doc.restricted_reason }}</p>
       </div>
     </div>
-    <Teleport to="div#app">
-      <pep-pharos-modal
-        v-if="showExcessiveRequestsWarningModal"
-        :id="`excessive-requests-warning-modal`"
-        :key="`excessive-requests-warning-modal`"
-        :header="`Too Many Requests`"
-        size="large"
-        :open="showExcessiveRequestsWarningModal"
-        @pharos-modal-closed="showExcessiveRequestsWarningModal = false"
-      >
-        <div slot="description">
-          <p class="mb-4">
-            Your cart is full. Please remove an item or submit your current requests before adding
-            more.
-          </p>
-          <p>
-            Media review can be time consuming. Reviewers may deny requests or limit access at times
-            when they are dealing with requests they deem excessive.
-          </p>
-        </div>
-
-        <template slot="footer">
-          <pep-pharos-button
-            variant="primary"
-            @click.prevent.stop="showExcessiveRequestsWarningModal = false"
-          >
-            Cancel
-          </pep-pharos-button>
-        </template>
-      </pep-pharos-modal>
-    </Teleport>
   </div>
 </template>
 <style lang="scss" scoped>

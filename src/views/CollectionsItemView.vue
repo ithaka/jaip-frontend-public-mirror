@@ -12,7 +12,7 @@ import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
 const route = useRoute()
 const metadataStore = useMetadataStore()
-const { metadata, metadataByFilename } = storeToRefs(metadataStore)
+const { metadataByFilename } = storeToRefs(metadataStore)
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
 
@@ -21,11 +21,6 @@ const collection = (route.params || {}).collection as Collections
 
 const gettingDocument = ref(false)
 const collectionMetadata = ref(undefined as CollectionMetadata | undefined)
-const error = ref({
-  message: '',
-  status: false,
-  code: 0,
-})
 
 const updateKey = ref(0)
 const getDocument = async () => {
@@ -35,21 +30,9 @@ const getDocument = async () => {
       await metadataStore.getMetadata(collection)
     }
     collectionMetadata.value = metadataByFilename.value[collection][filename]
-    if (!collectionMetadata.value) {
-      error.value.status = true
-      error.value.message = 'Not Found'
-      error.value.code = 404
-    }
   } catch (err: unknown) {
-    const errorResponse = err as { response: { status: number } }
-    error.value.status = true
-    error.value.code = errorResponse.response.status || 500
-    error.value.message = 'Server Error'
-    if (error.value.code === 403) {
-      error.value.message = 'Unauthorized'
-    } else if (error.value.code === 404) {
-      error.value.message = 'Not Found'
-    }
+    const errorResponse = err
+    console.log('Error fetching document metadata:', errorResponse)
   } finally {
     updateKey.value++
     gettingDocument.value = false
@@ -188,24 +171,14 @@ logPageView()
         </div>
       </div>
     </div>
-    <div
-      v-if="error.status && error.message"
-      class="pdf-viewer-error"
-      :class="[{ 'is-forbidden': error.code !== 403 }]"
-      data-cy="custom-content-error"
-    >
-      <pep-pharos-heading class="mb-2 mb-4 pb-0" preset="5--bold" :level="1">
-        {{ error.message }}
-      </pep-pharos-heading>
-      <p v-if="!metadata">You do not have access to this document.</p>
-    </div>
 
     <PDFViewer
-      v-if="collectionMetadata?.filename && !error.status && hasStructuredClone"
+      v-if="hasStructuredClone"
+      :key="collectionMetadata?.filename"
       class="pdf-viewer"
       tabindex="-1"
       :collection="collection"
-      :filename="collectionMetadata.filename"
+      :filename="collectionMetadata?.filename"
       :enable-viewer="true"
     />
   </pep-pharos-layout>

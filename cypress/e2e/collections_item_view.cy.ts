@@ -36,6 +36,24 @@ describe('Collections Item View', () => {
     }).as('pdfDocument')
   }
 
+  const interceptPdfNotFound = (pdfFilename: string) => {
+    cy.intercept('GET', routes.collections.pdf(collection, pdfFilename), {
+      statusCode: 404,
+      body: 'Not Found',
+    }).as('pdfDocument')
+  }
+
+  const interceptPdfInvalid = (pdfFilename: string) => {
+    cy.intercept('GET', routes.collections.pdf(collection, pdfFilename), {
+      statusCode: 200,
+      headers: {
+        'content-type': 'application/pdf',
+        'content-disposition': `inline; filename="${pdfFilename}"`,
+      },
+      body: 'not a pdf',
+    }).as('pdfDocument')
+  }
+
   it('displays metadata, alternate versions, and viewer actions', () => {
     interceptCommonRequests()
     interceptMetadata()
@@ -67,9 +85,7 @@ describe('Collections Item View', () => {
       .first()
       .should('have.attr', 'href', `/collections/${collection}/${spanishFilename}`)
       .and('contain', 'Ver en Español')
-    cy.get('[data-cy="custom-content-back-link"]')
-      .should('contain', 'Browse all guides')
-      .and('have.attr', 'href', `/collections/${collection}`)
+    cy.get('[data-cy="custom-content-back-link"]').should('contain', 'Browse all guides')
     cy.get('[data-cy="print-pdf-button"]').should('be.visible')
     cy.get('[data-cy="download-pdf-button"]').should('be.visible')
     cy.get('#viewer').should('exist')
@@ -89,7 +105,66 @@ describe('Collections Item View', () => {
       requestTimeout: 20000,
     })
 
-    cy.get('[data-cy="custom-content-error"]').should('contain', 'Not Found').and('be.visible')
-    cy.get('.pdf-viewer').should('not.exist')
+    cy.get('[data-cy="item-not-found"]').should('be.visible').and('contain', 'Item not found')
+    cy.contains(
+      'p',
+      'This guide may not exist or is no longer available on JSTOR. Try searching for another guide.',
+    ).should('be.visible')
+    cy.get('[data-cy="browse-guides-button"]').should('be.visible')
+    cy.get('#viewer').should('not.exist')
+  })
+
+  it('shows a guide not found error when the PDF is missing', () => {
+    interceptCommonRequests()
+    interceptMetadata()
+    interceptPdfNotFound(filename)
+    handleLocation(baseRoute, cy, 'custom-content', 'pep')
+
+    cy.visit(baseRoute)
+
+    cy.wait(['@custom-content', '@alerts', '@env', '@auth', '@collectionsMetadata'], {
+      requestTimeout: 20000,
+    })
+    cy.wait('@pdfDocument', { requestTimeout: 20000 })
+
+    cy.get('[data-cy="item-not-found"]').should('be.visible').and('contain', 'Item not found')
+    cy.contains(
+      'p',
+      'This guide may not exist or is no longer available on JSTOR. Try searching for another guide.',
+    ).should('be.visible')
+    cy.get('[data-cy="browse-guides-button"]').should('be.visible')
+    cy.get('#viewer').should('not.exist')
+  })
+
+  it('shows a guide not available error when the PDF is invalid', () => {
+    interceptCommonRequests()
+    interceptMetadata()
+    interceptPdfInvalid(filename)
+    handleLocation(baseRoute, cy, 'custom-content', 'pep')
+
+    cy.visit(baseRoute)
+
+    cy.wait(['@custom-content', '@alerts', '@env', '@auth', '@collectionsMetadata'], {
+      requestTimeout: 20000,
+    })
+    cy.wait('@pdfDocument', { requestTimeout: 20000 })
+
+    cy.get('[data-cy="item-not-available"]')
+      .should('be.visible')
+      .and('contain', 'Item not available')
+    cy.contains(
+      'p',
+      'Something went wrong while loading this guide. Try viewing other guides.',
+    ).should('be.visible')
+    cy.get('[data-cy="browse-guides-button"]').should('be.visible')
+    cy.get('[data-cy="item-not-available"]')
+      .should('be.visible')
+      .and('contain', 'Item not available')
+    cy.contains(
+      'p',
+      'Something went wrong while loading this guide. Try viewing other guides.',
+    ).should('be.visible')
+    cy.get('[data-cy="browse-guides-button"]').should('be.visible')
+    cy.get('#viewer').should('not.exist')
   })
 })

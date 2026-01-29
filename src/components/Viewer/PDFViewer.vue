@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRaw, onBeforeUnmount, useTemplateRef, type Ref, type PropType } from 'vue'
+import { ref, toRaw, onBeforeUnmount, useTemplateRef, type Ref, type PropType, computed } from 'vue'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
 import * as viewer from 'pdfjs-dist/legacy/web/pdf_viewer.mjs'
 import type { Log } from '@/interfaces/Log'
@@ -15,6 +15,12 @@ import {
 } from '@/utils/viewers.ts'
 import { useValidDownloadURL } from '@/composables/urls'
 import type { Collections } from '@/interfaces/Collections'
+import type { MediaRecord } from '@/interfaces/MediaRecord'
+import RequestButton from '../buttons/RequestButton.vue'
+import { useRoute, useRouter } from 'vue-router'
+import { changeRoute } from '@/utils/helpers'
+import { useSearchStore } from '@/stores/search'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
   iid: {
@@ -36,9 +42,16 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  doc: {
+    type: Object as PropType<MediaRecord>,
+    default: () => ({}),
+  },
 })
 
 const coreStore = useCoreStore()
+const searchStore = useSearchStore()
+const { searchTerms, pageNo } = storeToRefs(searchStore)
+
 const logEvent: Log = {
   eventtype: 'pep_pdf_viewer_access_attempt',
   event_description: 'A user attempted to access the PDF viewer, but an error occurred.',
@@ -59,7 +72,6 @@ const OPENJPEG_WASM_URL = `${import.meta.env.BASE_URL}scripts/pdfjs/wasm/`
 const paginationKey = ref(0)
 const pdfDocument = ref()
 const pdfView = ref({}) as Ref<viewer.PDFViewer>
-const hasError = ref(false)
 const handlePageSelection = (page: number) => {
   if (page && page > 0 && page <= (pdfDocument.value || {}).numPages) {
     toRaw(pdfView.value).currentPageNumber = +page
@@ -68,6 +80,11 @@ const handlePageSelection = (page: number) => {
 
 // PDF LOADING
 const isLoading = ref(false)
+const loadingError = ref({
+  message: '',
+  status: false,
+  code: 0,
+})
 const createLoadingTask = async (src: string) => {
   isLoading.value = true
   try {
@@ -79,17 +96,42 @@ const createLoadingTask = async (src: string) => {
     }).promise
     return loadingTask
   } catch (err) {
-    logEvent.frontend_error = `CREATE LOADING TASK: ${JSON.stringify(err)}`
+    if (err instanceof Error && 'status' in err) {
+      if (err.status === 404) {
+        loadingError.value.status = true
+        loadingError.value.message = 'Not Found'
+        loadingError.value.code = err.status
+      } else if (err.status === 200 && err.name === 'InvalidPDFException') {
+        loadingError.value.status = true
+        loadingError.value.message = 'Unable to retrieve PDF document'
+        loadingError.value.code = err.status
+      } else {
+        loadingError.value.status = true
+        loadingError.value.message = 'Server Error'
+        loadingError.value.code = typeof err.status === 'number' ? err.status : 500
+      }
+    } else {
+      loadingError.value.status = true
+      loadingError.value.message = 'Unknown Error'
+      loadingError.value.code = 200
+    }
+    logEvent.frontend_error = `CREATE LOADING TASK: ${JSON.stringify(loadingError.value)}`
     coreStore.$api.log(logEvent)
-    hasError.value = true
   } finally {
     isLoading.value = false
   }
 }
 
 // PDF VIEWER CREATION
+const isCreatingViewer = ref(false)
+const createViewerError = ref({
+  message: '',
+  status: false,
+})
 const createViewer = () => {
   try {
+    isCreatingViewer.value = true
+
     const container = document.getElementById('viewer-container') as HTMLDivElement
     const eventBus = new viewer.EventBus()
     const pdfViewer = new viewer.PDFViewer({
@@ -126,28 +168,41 @@ const createViewer = () => {
     return pdfViewer
   } catch (err) {
     logEvent.frontend_error = `CREATE VIEWER: ${JSON.stringify(err)}`
-
+    createViewerError.value = {
+      message: 'An error occurred while creating the PDF viewer.',
+      status: true,
+    }
     coreStore.$api.log(logEvent)
-    hasError.value = true
+  } finally {
+    isCreatingViewer.value = false
   }
 }
 
 // PDF PREPARATION
+const isPreparingPage = ref(false)
+const preparePageError = ref({
+  message: '',
+  status: false,
+  code: 0,
+})
 const preparePage = async () => {
+  const url = useValidDownloadURL(props.iid, props.collection, props.filename)
+  if (!url) {
+    preparePageError.value = {
+      message: 'A valid URL could not be generated for the PDF document.',
+      status: true,
+      code: 404,
+    }
+    logEvent.frontend_error = preparePageError.value.message
+    coreStore.$api.log(logEvent)
+    return
+  }
   try {
     const workerSrc = new URL(
       'pdfjs-dist/legacy/build/pdf.worker.min.mjs',
       import.meta.url,
     ).toString()
     pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc
-
-    const url = useValidDownloadURL(props.iid, props.collection, props.filename)
-    if (!url) {
-      logEvent.frontend_error = 'No valid URL for PDF document'
-      coreStore.$api.log(logEvent)
-      hasError.value = true
-      return
-    }
     if (props.enableViewer) {
       const doc = await createLoadingTask(url)
       const pdfViewer = createViewer() || ({} as viewer.PDFViewer)
@@ -157,9 +212,17 @@ const preparePage = async () => {
       }
     }
   } catch (err) {
-    logEvent.frontend_error = `PREPARE PAGE: ${JSON.stringify(err)}`
-    coreStore.$api.log(logEvent)
-    hasError.value = true
+    preparePageError.value = {
+      message: `An error occurred while preparing the PDF viewer.: ${JSON.stringify(err)}`,
+      status: true,
+      code: 0,
+    }
+    coreStore.$api.log({
+      ...logEvent,
+      frontend_error: preparePageError.value.message,
+    })
+  } finally {
+    isPreparingPage.value = false
   }
 }
 preparePage()
@@ -284,15 +347,172 @@ onBeforeUnmount(() => {
     collection: props.collection || undefined,
   })
 })
+
+const router = useRouter()
+const emit = defineEmits(['close'])
+const handleBrowseReentryLink = () => {
+  const newPath = route.path.split('/').slice(0, 3).join('/')
+  changeRoute(router, emit, newPath, searchTerms.value, pageNo.value, undefined, undefined)
+}
+const route = useRoute()
+const routeName = ref(route.name)
+const isReentryContent = computed(() => routeName.value === 'collection item')
+
+const toastContent = `This item was added to Your Requests. <pep-pharos-link is-on-background href='/search' variant='inline'>Return to Search</pep-pharos-link> to review it.`
+const fireToast = () => {
+  coreStore.toast(toastContent, 'success', 10000)
+}
 </script>
 
 <template>
   <div tabindex="0">
-    <div v-if="hasError" class="mt-8 mb-10">
-      <pep-pharos-heading :level="2" preset="5" class="error text-align-center">
-        PDF Viewer Error
-      </pep-pharos-heading>
-      <p class="text-align-center">An error occurred while loading the PDF viewer.</p>
+    <div v-if="loadingError.status || preparePageError.status || createViewerError.status">
+      <div
+        v-if="loadingError.code === 404 || preparePageError.code === 404"
+        class="error-container"
+      >
+        <div v-if="isReentryContent" class="error">
+          <pep-pharos-heading
+            :level="2"
+            preset="4--bold"
+            data-cy="item-not-found"
+            no-margin
+            class="error__heading"
+          >
+            Item not found
+          </pep-pharos-heading>
+          <p class="error__text">
+            This guide may not exist or is no longer available on JSTOR. Try searching for another
+            guide.
+          </p>
+          <pep-pharos-button
+            variant="primary"
+            data-cy="browse-guides-button"
+            @click="handleBrowseReentryLink"
+          >
+            Browse guides
+          </pep-pharos-button>
+        </div>
+        <div v-else class="error">
+          <pep-pharos-heading
+            :level="2"
+            preset="4--bold"
+            data-cy="item-not-found"
+            no-margin
+            class="error__heading"
+          >
+            Item not found
+          </pep-pharos-heading>
+          <p class="error__text">
+            This item may not exist or is no longer available on JSTOR. Try searching for another
+            item.
+          </p>
+          <pep-pharos-button variant="primary" :href="`/search`" data-cy="search-button"
+            >Search</pep-pharos-button
+          >
+        </div>
+      </div>
+      <div v-else-if="loadingError.code === 200" class="error-container">
+        <div v-if="isReentryContent" class="error">
+          <pep-pharos-heading
+            :level="2"
+            preset="4--bold"
+            data-cy="item-not-available"
+            no-margin
+            class="error__heading"
+          >
+            Item not available
+          </pep-pharos-heading>
+          <p class="error__text">
+            Something went wrong while loading this guide. Try viewing other guides.
+          </p>
+          <pep-pharos-button
+            variant="primary"
+            data-cy="browse-guides-button"
+            @click="handleBrowseReentryLink"
+            >Browse guides</pep-pharos-button
+          >
+        </div>
+        <div v-else class="error">
+          <pep-pharos-heading
+            :level="2"
+            preset="4--bold"
+            data-cy="item-not-available"
+            no-margin
+            class="error__heading"
+          >
+            Item not available
+          </pep-pharos-heading>
+          <p class="error__text">
+            Something went wrong while loading this item. Try searching for another item.
+          </p>
+          <pep-pharos-button variant="primary" :href="`/search`" data-cy="search-button"
+            >Search</pep-pharos-button
+          >
+        </div>
+      </div>
+      <div v-else-if="loadingError.code === 403">
+        <div v-if="doc.is_restricted" class="error-container">
+          <div class="error">
+            <pep-pharos-heading
+              :level="2"
+              preset="4--bold"
+              data-cy="item-unavailable"
+              class="error__heading"
+            >
+              Item unavailable
+            </pep-pharos-heading>
+            <p class="error__text">Try searching for another item.</p>
+            <pep-pharos-button variant="primary" :href="`/search`" data-cy="search-button"
+              >Search</pep-pharos-button
+            >
+          </div>
+        </div>
+        <div v-else class="error-container">
+          <div class="error">
+            <pep-pharos-heading
+              :level="2"
+              preset="4--bold"
+              data-cy="item-requires-approval"
+              no-margin
+              class="error__heading"
+            >
+              The item requires approval
+            </pep-pharos-heading>
+            <p class="error__text">Request this item for review and to keep searching.</p>
+            <RequestButton
+              :doc="doc"
+              :hide-requests="false"
+              :full-width="false"
+              :button-label="`Request`"
+              :cancel-button-label="`Cancel`"
+              data-cy="request-button"
+              @submit-request="fireToast"
+            />
+          </div>
+        </div>
+      </div>
+      <div v-else class="error-container">
+        <div v-if="isReentryContent" class="error">
+          <pep-pharos-heading :level="2" preset="4--bold" no-margin class="error__heading">
+            Item not viewable on this device
+          </pep-pharos-heading>
+          <p class="error__text">Try browsing other guides.</p>
+          <pep-pharos-button
+            variant="primary"
+            data-cy="browse-guides-button"
+            @click="handleBrowseReentryLink"
+            >Browse guides</pep-pharos-button
+          >
+        </div>
+        <div v-else class="error">
+          <pep-pharos-heading :level="2" preset="4--bold" no-margin class="error__heading">
+            Item not viewable on this device
+          </pep-pharos-heading>
+          <p class="error__text">Try searching for another item.</p>
+          <pep-pharos-button variant="primary" :href="`/search`">Search</pep-pharos-button>
+        </div>
+      </div>
     </div>
     <div v-else>
       <!-- This is conditionally moved to the body because some devices don't support fullscreen (notably iOS Safari).
@@ -334,6 +554,25 @@ onBeforeUnmount(() => {
 </template>
 
 <style lang="scss">
+.error-container {
+  padding: 10rem;
+  border: 1px solid var(--pharos-color-black);
+  @media (max-width: 767px) {
+    padding: 10rem var(--pharos-spacing-1-x);
+  }
+  .error {
+    text-align: center;
+    color: var(--pharos-color-black);
+    &__heading {
+      margin-bottom: var(--pharos-spacing-one-half-x);
+    }
+    &__text {
+      margin-bottom: var(--pharos-spacing-one-and-a-half-x);
+      max-width: 360px;
+      justify-self: center;
+    }
+  }
+}
 .viewer-wrapper {
   max-width: 100%;
   &--full-screen {

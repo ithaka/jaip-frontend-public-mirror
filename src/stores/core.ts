@@ -85,7 +85,7 @@ export const useCoreStore = defineStore('core', {
       reqList.splice(reqList.indexOf(article), 1)
       this.saveReqs(reqList)
     },
-    toast(msg: string, status: ToastStatus) {
+    toast(msg: string, status: ToastStatus, timeout: number = 5000) {
       const open = new CustomEvent('pharos-toast-open', {
         detail: {
           content: msg,
@@ -95,9 +95,11 @@ export const useCoreStore = defineStore('core', {
       document.dispatchEvent(open)
       // This is a bit ugly, but the pharos component seems to have an uncaught typeerror that prevents
       // it from closing normally. This avoids that by rerending to its default state (i.e., off).
-      setTimeout(() => {
-        this.toastKey++
-      }, 5000)
+      if (timeout > 0) {
+        setTimeout(() => {
+          this.toastKey++
+        }, timeout)
+      }
     },
   },
 })

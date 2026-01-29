@@ -6,8 +6,8 @@ import { storeToRefs } from 'pinia'
 
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
-import UnrestrictButton from '@/components/adminButtons/UnrestrictButton.vue'
-import RestrictButton from '@/components/adminButtons/RestrictButton.vue'
+import UnrestrictButton from '@/components/buttons/adminButtons/UnrestrictButton.vue'
+import RestrictButton from '@/components/buttons/adminButtons/RestrictButton.vue'
 
 const userStore = useUserStore()
 const { enabledUngroupedFeatures } = storeToRefs(userStore)

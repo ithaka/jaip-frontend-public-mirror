@@ -5,7 +5,7 @@ import RestrictedItemLabel from './RestrictedItemLabel.vue'
 const props = defineProps({
   id: {
     type: String,
-    required: true,
+    default: '',
   },
   title: {
     type: String,
