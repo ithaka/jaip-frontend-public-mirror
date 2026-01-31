@@ -2874,6 +2874,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.13.4":
+  version: 1.13.4
+  resolution: "axios@npm:1.13.4"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.4"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/474c00b7d71f4de4ad562589dae6b615149df7c2583bbc5ebba96229f3f85bfb0775d23705338df072f12e48d3e85685c065a3cf6855d58968a672d19214c728
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -4890,10 +4901,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^17.1.0":
-  version: 17.1.0
-  resolution: "globals@npm:17.1.0"
-  checksum: 10c0/4a4a17847676a09f164b8bdce7df105a4f484d6d44586e374087ba9ec7089cbf4c578b8648838dee9917074199c542ce157ea3c07b266f708dfb1652010900c8
+"globals@npm:^17.2.0":
+  version: 17.2.0
+  resolution: "globals@npm:17.2.0"
+  checksum: 10c0/fd25a98b08c1d31082337cbbb5ff1b90b9980e1db69a8621fb942bdb2cdca8aa54d61466742e8bf4910578ea5fa903b8bf83bffd1b2d45551cc614830dba910b
   languageName: node
   linkType: hard
 
@@ -5347,12 +5358,12 @@ __metadata:
     "@vue/tsconfig": "npm:^0.8.1"
     "@vuepic/vue-datepicker": "npm:^11.0.3"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.13.2"
+    axios: "npm:^1.13.4"
     cypress: "npm:^15.9.0"
     eslint: "npm:^9.39.2"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-cypress: "npm:^5.2.1"
-    globals: "npm:^17.1.0"
+    globals: "npm:^17.2.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.6.1"
     jsdom: "npm:^27.4.0"
@@ -5373,11 +5384,11 @@ __metadata:
     uuid: "npm:^13.0.0"
     vite: "npm:^7.3.1"
     vite-plugin-dynamic-import: "npm:^1.6.0"
-    vite-plugin-static-copy: "npm:^3.1.6"
+    vite-plugin-static-copy: "npm:^3.2.0"
     vite-plugin-vue-devtools: "npm:^8.0.5"
     vue: "npm:^3.5.13"
     vue-router: "npm:^4.6.4"
-    vue-tsc: "npm:^3.2.3"
+    vue-tsc: "npm:^3.2.4"
   languageName: unknown
   linkType: soft
 
@@ -8045,9 +8056,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:^3.1.6":
-  version: 3.1.6
-  resolution: "vite-plugin-static-copy@npm:3.1.6"
+"vite-plugin-static-copy@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "vite-plugin-static-copy@npm:3.2.0"
   dependencies:
     chokidar: "npm:^3.6.0"
     p-map: "npm:^7.0.4"
@@ -8055,7 +8066,7 @@ __metadata:
     tinyglobby: "npm:^0.2.15"
   peerDependencies:
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10c0/564ce62b24ce6e318e92546e60947d15e9ee66a63dc58f8eb069e951ae0131e8a3b3721dff72af521c8254f7f61946ebe2a438d448c08a324a86a5b52acdac54
+  checksum: 10c0/84fabc3cc49b3de7d487045569db105e2c3397eea7ca41ac43651f3e96daae4a0da822f6d493dbede8746c93b123ee30918ebd21cebe7b4f8051fe91e393c2fd
   languageName: node
   linkType: hard
 
@@ -8190,7 +8201,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^3.2.3":
+"vue-tsc@npm:^3.2.4":
   version: 3.2.4
   resolution: "vue-tsc@npm:3.2.4"
   dependencies:
