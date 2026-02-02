@@ -1,5 +1,6 @@
 import { useLogger } from '@/composables/logging/useLogger'
 import { onBeforeUnmount, onMounted } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
 
 // A composable to log page view and exit events. This will automatically log
 // page landing and exit events when the logPageView function is called.
@@ -8,7 +9,7 @@ const usePageViewLogger = () => {
   const { landingLog, exitLog } = logs.getPageLandingLogs()
 
   const logPageView = () => {
-    const uuid = crypto.randomUUID()
+    const uuid = uuidv4()
     onMounted(() => {
       handleWithLog(() => landingLog(uuid))
     })
