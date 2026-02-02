@@ -144,6 +144,7 @@ const { logOutLog, logInLog, jstorLogoClickLog } = logs.getHeaderLogs()
 .main-header {
   &__top {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     transition:
