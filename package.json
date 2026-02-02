@@ -25,7 +25,7 @@
     "@ithaka/pharos": "^14.22.1",
     "@vuepic/vue-datepicker": "^11.0.3",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
-    "axios": "^1.13.2",
+    "axios": "^1.13.4",
     "openseadragon": "^5.0.1",
     "pdfjs-dist": "^5.4.530",
     "pinia": "^3.0.4",
@@ -50,7 +50,7 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^5.2.1",
-    "globals": "^17.1.0",
+    "globals": "^17.2.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "jsdom": "^27.4.0",
@@ -65,9 +65,9 @@
     "unplugin-vue-markdown": "^29.2.0",
     "vite": "^7.3.1",
     "vite-plugin-dynamic-import": "^1.6.0",
-    "vite-plugin-static-copy": "^3.1.6",
+    "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-vue-devtools": "^8.0.5",
-    "vue-tsc": "^3.2.3"
+    "vue-tsc": "^3.2.4"
   },
   "lint-staged": {
     "src/**/*.ts": [
