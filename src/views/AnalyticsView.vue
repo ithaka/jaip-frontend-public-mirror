@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { computed, onBeforeMount, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
@@ -8,6 +8,10 @@ import { TimePeriodLabels, type TimePeriod, type AnalyticsData } from '@/interfa
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import StudentItemViews from '@/components/analytics/StudentItemViews.vue'
 import DataBox from '@/components/analytics/DataBox.vue'
+import ViewsByDiscipline from '@/components/analytics/ViewsByDiscipline.vue'
+import DayTimeHeatmap from '@/components/analytics/DayTimeHeatmap.vue'
+import DataBar from '@/components/analytics/DataBar.vue'
+import { formatDisplayDateTime } from '@/utils/helpers'
 
 /**
  * Store references. selectedGroupId is stored in user store to avoid duplicating group data.
@@ -16,7 +20,7 @@ const userStore = useUserStore()
 const { groups, selectedGroupId } = storeToRefs(userStore)
 
 const analyticsStore = useAnalyticsStore()
-const { selectedTimePeriod } = storeToRefs(analyticsStore)
+const { selectedTimePeriod, lastExported } = storeToRefs(analyticsStore)
 
 const coreStore = useCoreStore()
 const isLoading = ref(false)
@@ -38,7 +42,7 @@ const handleGroupChange = (event: Event) => {
   const groupId = target.value
   userStore.setSelectedGroupId(Number(groupId))
 
-  // Fetch only if not already cached
+  // Fetch only if not already retreieved
   const cachedData = analyticsStore.getAnalyticsDataByGroupId(groupId)
   if (!cachedData) {
     isLoading.value = true
@@ -60,7 +64,8 @@ const fetchAnalyticsData = async () => {
         'Reentry metadata has been successfully fetched for group ' +
         selectedGroupId.value.toString(),
     })
-    console.log('Fetched analytics data:', response.data)
+    // TODO: remove before production
+    console.log('🍏 Fetched analytics data:', response.data)
     analyticsStore.setAnalyticsData(response.data as unknown as AnalyticsData)
   } catch (err) {
     coreStore.toast('Error fetching analytics data. Please try again later.', 'error')
@@ -73,6 +78,11 @@ const fetchAnalyticsData = async () => {
     })
   }
 }
+
+const lastUpdatedMsg = computed(() => {
+  if (!lastExported.value) return ''
+  return `Last updated: ${formatDisplayDateTime(lastExported.value)}`
+})
 
 /** Sets default group if none selected. */
 onBeforeMount(() => {
@@ -109,6 +119,7 @@ logPageView()
         <pep-pharos-select
           a11y-label="Select your group(s)"
           :value="selectedGroupId || undefined"
+          :message="lastUpdatedMsg"
           @change="handleGroupChange"
         >
           <span slot="label">Your Group(s)</span>
@@ -149,6 +160,20 @@ logPageView()
         />
         <StudentItemViews metricType="student_item_views" :group-id="selectedGroupId.toString()" />
       </div>
+      <div class="analytics__section analytics__bottom-grid">
+        <ViewsByDiscipline
+          metricType="discipline_item_views"
+          :group-id="selectedGroupId.toString()"
+        />
+        <DayTimeHeatmap
+          metricType="time_of_day_item_views"
+          :group-id="selectedGroupId.toString()"
+        />
+      </div>
+      <pep-pharos-heading :level="3" preset="3--bold"> Media review </pep-pharos-heading>
+      <div class="analytics__section">
+        <DataBar metricType="media_reviews" :group-id="selectedGroupId.toString()" />
+      </div>
     </div>
   </main>
 </template>
@@ -156,8 +181,8 @@ logPageView()
 .analytics {
   display: grid;
   grid-template-areas: '. main .';
-  padding: 0 var(--pharos-spacing-1-x);
   grid-template-columns: 1fr 8fr 1fr;
+  padding: 0 var(--pharos-spacing-1-x);
 
   /* Mobile: up to 767px */
   @media (max-width: 767px) {
@@ -190,7 +215,6 @@ logPageView()
 
   &__content {
     grid-area: main;
-    max-width: 100%;
   }
 
   &__header {
@@ -199,18 +223,13 @@ logPageView()
 
   &__selectors {
     display: grid;
-    grid-template-columns: fit-content(50%) fit-content(50%);
+    grid-template-columns: repeat(2, fit-content(50%));
     gap: var(--pharos-spacing-1-x);
-    flex-wrap: wrap;
     margin-bottom: var(--pharos-spacing-2-x);
   }
 
-  &__divider {
-    background-color: var(--pharos-color-ui-40);
-    border: none;
-    height: 1px;
-    width: 100%;
-    margin: var(--pharos-spacing-2-x) 0;
+  &__section {
+    margin-bottom: var(--pharos-spacing-1-x);
   }
 
   &__top-grid {
@@ -234,7 +253,6 @@ logPageView()
       grid-area: chart;
     }
 
-    /* Mobile: up to 767px */
     @media (max-width: 767px) {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
@@ -243,18 +261,23 @@ logPageView()
         'chart chart';
     }
 
-    /* Tablet: 768px to 1055px */
     @media (min-width: 768px) and (max-width: 1055px) {
       grid-template-columns: minmax(auto, 125px) 1fr;
     }
   }
 
-  // Styles for child component chart containers (scoped here for specificity)
+  &__bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--pharos-spacing-1-x);
+  }
+
   &__chart-container {
     border: 2px solid var(--pharos-color-marble-gray-80);
     border-radius: var(--pharos-radius-base-standard);
     padding: var(--pharos-spacing-2-x);
     min-height: 300px;
+    max-height: 1000px;
 
     :deep(.cc--chart-holder) {
       width: 100% !important;

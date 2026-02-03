@@ -226,9 +226,27 @@ export const getAncestorComponentNames = (
  */
 export const formatDisplayNumbers = (val: number): string => {
   if (val >= 1000000) {
-    return `${(val / 1000000).toFixed(1)}M`
+    return `${parseFloat((val / 1000000).toFixed(1))}M`
   } else if (val >= 1000) {
-    return `${(val / 1000).toFixed(1)}K`
+    return `${parseFloat((val / 1000).toFixed(1))}K`
   }
   return val.toString()
+}
+
+/** Formats an ISO date string into a more readable format
+ * @param isoString - The ISO date string to format
+ * @returns Formatted date string
+ */
+export const formatDisplayDateTime = (isoString: string): string => {
+  const date = new Date(isoString)
+  if (isNaN(date.getTime())) {
+    return 'Invalid Date'
+  }
+  return date.toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 }

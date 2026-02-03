@@ -167,7 +167,7 @@ const areaOptions = computed(() => ({
     },
   },
   toolbar: {
-    enabled: false,
+    enabled: true,
     numberOfIcons: 1,
     controls: [
       {
@@ -190,7 +190,7 @@ const areaOptions = computed(() => ({
   },
   getFillColor: () => '#0ba2c0',
   getStrokeColor: () => '#0ba2c0',
-  accessibility: { svgAriaLabel: 'Views over time' },
+  accessibility: { svgAriaLabel: 'Views over time. Download CSV to view tabular data.' },
 }))
 </script>
 
@@ -200,14 +200,4 @@ const areaOptions = computed(() => ({
   </div>
 </template>
 
-<style lang="scss" scoped>
-.analytics__chart-container {
-  .chart-error {
-    padding: var(--pharos-spacing-2-x);
-    background: #f0f0f0;
-    border: 1px dashed #ccc;
-    text-align: center;
-    color: #666;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
