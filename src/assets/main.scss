@@ -10,6 +10,15 @@ $pharos-breakpoint-large: 66rem; // 1056px
 $pharos-breakpoint-medium: 48rem; // 768px
 $pharos-breakpoint-small: 22.5rem; // 360px
 
+#app {
+  color-scheme: only light;
+}
+
+pep-pharos-modal {
+  color-scheme: only light;
+  color: black;
+}
+
 html,
 body,
 #app {
@@ -24,6 +33,7 @@ body {
   line-height: var(--pharos-line-height-medium);
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
+  background-color: white;
 }
 // Set Carbon Charts font families
 .cds--cc--chart-wrapper {
