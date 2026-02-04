@@ -18,6 +18,39 @@ const useLogger = () => {
   // if it's undefined.
   const componentInstance = getCurrentInstance()
 
+  // Uses clientWidth/Height to get the dimensions.
+  const getDocumentDimensions = (): { width: number; height: number } | undefined => {
+    if (
+      document &&
+      document.documentElement &&
+      document.documentElement.clientWidth &&
+      document.documentElement.clientHeight
+    ) {
+      const width = Math.max(document.documentElement.clientWidth || 0)
+      const height = Math.max(document.documentElement.clientHeight || 0)
+      return { width, height }
+    }
+    return undefined
+  }
+
+  // Uses window.innerWidth/Height to get the dimensions.
+  const getWindowDimensions = (): { width: number; height: number } | undefined => {
+    if (window && window.innerWidth && window.innerHeight) {
+      const width = Math.max(window.innerWidth || 0)
+      const height = Math.max(window.innerHeight || 0)
+      return { width, height }
+    }
+    return undefined
+  }
+
+  // Determine if the user has dark mode enabled in their OS/browser settings.
+  const getIsDarkMode = (): boolean => {
+    if (window && window.matchMedia) {
+      return !!window.matchMedia('(prefers-color-scheme: dark)')
+    }
+    return false
+  }
+
   // Enhance the WorkingLog with additional context information to create a FinalLog.
   const enhanceLog = (log: WorkingLog): FinalLog => {
     return {
@@ -30,6 +63,9 @@ const useLogger = () => {
       component: componentInstance?.type.__name || 'AnonymousComponent',
       parents: getAncestorComponentNames(componentInstance),
       timestamp: new Date(),
+      window_dimensions: getWindowDimensions(),
+      document_dimensions: getDocumentDimensions(),
+      is_dark_mode: getIsDarkMode(),
     }
   }
 

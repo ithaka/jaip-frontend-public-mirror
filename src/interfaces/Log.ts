@@ -98,6 +98,9 @@ export interface FinalLog extends BaseLog {
   component: string
   parents: string[]
   timestamp: Date
+  window_dimensions?: { width: number; height: number }
+  document_dimensions?: { width: number; height: number }
+  is_dark_mode: boolean
 }
 
 // TODO: This is being kept temporarily to avoid breaking changes. It should be removed
