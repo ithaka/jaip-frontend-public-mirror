@@ -121,3 +121,27 @@ New material is added to the reentry collection primarily via [jaip-backend repo
 **Thumbnail Creation**:
 
 - Use the `thumbnail.zsh` script in this repository to generate any new thumbnails once the collection materials have been added to S3.
+
+## Limitations
+
+We try to make this software available on as many devices as possible. That often means being prepared to work on devices that don't have access to modern browser features like `structuredClone` or
+
+### JavaScript
+
+#### structuredClone
+
+PDF.js does not work without `structuredClone`. This generally means that browsers more than ~4 years old will not be supported. For now, we offer a page image viewer as an alternative, but as older browsers fade out, we will migrate away from that option.
+
+### CSS
+
+Some devices we need to support do not allow access to certain CSS properties or units.
+
+#### Viewport Units
+
+Viewport width and height properties, including all their various addons, are not available on all devices. The following fallback pattern is suggested for any CSS changes involving viewport heights or widths:
+
+1. `%`
+1. `vh`
+1. `dvh`
+
+In some cases, it may also be helpful to add a `min-height` or `min-width` property, typically using `px` units to ensure that a particular element is not only visible but appearing at a usable size.

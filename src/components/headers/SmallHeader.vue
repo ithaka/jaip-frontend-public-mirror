@@ -193,8 +193,8 @@ const { logOutLog, logInLog, jstorLogoClickLog, openSidenavLog, closeSidenavLog 
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 99;
   overflow: hidden;

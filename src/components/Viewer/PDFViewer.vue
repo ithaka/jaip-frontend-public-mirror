@@ -579,15 +579,25 @@ const fireToast = () => {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
     background-color: var(--pharos-color-black);
     display: flex;
     flex-direction: column;
   }
 }
 .viewer-and-controls {
+  // This number results in a somewhat odd height, but it seems to roughly accommodate a pdf
+  // and will work when in full screen or not. It's just slightly smaller than what we're told
+  // is the viewport height for some tablets. It's a fallback for devices that don't support
+  // vh.
+  min-height: 1100px;
+  min-height: 100vh;
+  height: 100%;
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   position: relative;
   background-color: var(--pharos-color-black);
@@ -600,12 +610,13 @@ const fireToast = () => {
   left: 0;
   right: 0;
   margin: auto;
+  height: 93%;
   height: 95vh;
+  height: 95dvh;
   &.full-screen {
     height: 100vh;
     min-height: 100%;
-    min-width: 100vw;
-    width: 100vw;
+    min-width: 100%;
   }
 }
 </style>

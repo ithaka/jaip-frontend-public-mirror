@@ -101,11 +101,15 @@ logPageView()
     overflow: hidden;
 
     @media (min-width: 426px) {
+      height: 28%;
       height: 35vh;
+      height: 35dvh;
     }
 
     @media (max-width: 425px) {
+      height: 20%;
       height: 30vh;
+      height: 30dvh;
     }
   }
 

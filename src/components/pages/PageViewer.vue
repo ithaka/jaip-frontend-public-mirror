@@ -657,15 +657,15 @@ $image-control-tray-with-detail-height-mobile: 132px;
 $button-offset: var(--pharos-spacing-one-and-a-half-x);
 
 .page-viewer-container {
+  height: 100%;
   height: 100vh;
-  min-height: 500px;
+  height: 100dvh;
+  min-height: 700px;
   width: 100%;
   margin-bottom: 100px;
   &.full-screen {
-    height: 100%;
     min-height: 100%;
-    min-width: 100vw;
-    width: 100vw;
+    min-width: 100%;
   }
 }
 

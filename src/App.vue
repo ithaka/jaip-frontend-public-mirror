@@ -100,7 +100,7 @@ const truncatedGramaticalGroupsList = computed(() => {
     <!-- Keeping the spinner outside the layout will allow it to fill the page. Useful for initial loading. -->
     <pep-pharos-loading-spinner
       v-if="gettingUser || searching || isSpinning"
-      class="position-fixed"
+      class="app-container__spinner"
     />
 
     <!-- Placing the toaster here will put toast in the top right corner of the browser window. -->
@@ -108,7 +108,7 @@ const truncatedGramaticalGroupsList = computed(() => {
 
     <!-- Headers -->
     <MainHeader
-      class="hidden-md"
+      class="app-container__header app-container__main-header"
       :groups="truncatedGramaticalGroupsList"
       :show-login="!isAuthenticatedAdmin && isAdminSubdomain"
       :login-url="loginUrl"
@@ -122,7 +122,7 @@ const truncatedGramaticalGroupsList = computed(() => {
       @logout="logout"
     />
     <SmallHeader
-      class="hidden display-grid-md"
+      class="app-container__header app-container__small-header"
       :show-login="!isAuthenticatedAdmin && isAdminSubdomain"
       :login-url="loginUrl"
       :update-key="updateKey"
@@ -139,11 +139,13 @@ const truncatedGramaticalGroupsList = computed(() => {
     <NotificationsBar
       v-if="!isUnauthenticated && notifications.length"
       :notifications="notifications"
+      class="app-container__notifications"
     />
     <!-- Main Content -->
-    <RouterView id="main-content" class="main" />
+    <RouterView id="main-content" class="app-container__main" />
     <TheFooter
       :key="updateKey"
+      class="app-container__footer"
       :is-authenticated-admin="isAuthenticatedAdmin"
       :is-admin-subdomain="isAdminSubdomain"
     />
@@ -154,11 +156,44 @@ const truncatedGramaticalGroupsList = computed(() => {
 .app-container {
   background-color: var(--pharos-color-white);
   color: var(--pharos-color-text-base);
-  .main {
+  display: grid;
+  min-height: 100%;
+  grid-template-areas:
+    'main-header'
+    'small-header'
+    'notifications'
+    'main'
+    'footer';
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  &__spinner {
+    position: fixed;
+  }
+  &__main-header {
+    grid-area: main-header;
+  }
+  &__small-header {
+    grid-area: small-header;
+    display: none;
+  }
+  &__notifications {
+    grid-area: notifications;
+  }
+  &__main {
+    grid-area: main;
+    min-height: 0;
     margin-top: var(--pharos-spacing-2-x);
     margin-bottom: var(--pharos-spacing-5-x);
-    @media screen and (min-width: 1024px) {
-      min-height: calc(100vh - 500px); //Calculated from height of headers + footer
+  }
+  &__footer {
+    grid-area: footer;
+  }
+
+  @media screen and (max-width: 48rem) {
+    &__main-header {
+      display: none;
+    }
+    &__small-header {
+      display: grid;
     }
   }
 }

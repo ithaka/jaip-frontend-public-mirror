@@ -501,7 +501,6 @@ $pharos-breakpoint-medium: 48rem; // 768px
 
   & {
     @media screen and (max-width: $pharos-breakpoint-medium) {
-      min-height: 100vh;
       position: relative;
       display: grid;
       grid-template-columns: 1fr;
@@ -513,11 +512,15 @@ $pharos-breakpoint-medium: 48rem; // 768px
 .search-facets {
   position: sticky;
   top: 0;
+  // This is a difficult fallback for devices that don't support vh. It will basically break the
+  // ability to scroll the facets independently of the search results, but at least it won't
+  // overflow the viewport.
+  max-height: 100%;
   max-height: 100vh;
+  max-height: 100dvh;
   overflow: hidden scroll;
   padding-bottom: 2rem;
   grid-row-end: span 5;
-  max-width: 100vw;
   color: var(--pharos-color-marble-gray-20);
   background-color: var(--pharos-color-marble-gray-97);
 
