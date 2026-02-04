@@ -181,7 +181,8 @@ import {
 
 import { v4 as uuidv4 } from 'uuid'
 import OpenSeadragon from 'openseadragon'
-import { useCoreStore } from '@/stores/core'
+import { useLogger } from '@/composables/logging/useLogger'
+import { ViewerControls } from '@/interfaces/Viewer'
 
 const VIEWPORT_MARGIN = 10
 
@@ -250,6 +251,8 @@ export default {
       isFirstLoad: true,
       enableSavedZoomImage: false,
       interval: null,
+      handleWithLog: null,
+      logs: {},
     }
   },
   computed: {
@@ -406,23 +409,29 @@ export default {
     if (this.isInFullscreen) {
       this.$refs.iiifViewerWrapper.focus()
     }
-    const coreStore = useCoreStore()
 
-    this.interval = setInterval(
-      () =>
-        coreStore.$api.log({
-          eventtype: 'pep_page_view',
-          event_description: 'user is viewing a page',
-          itemid: this.metadata?.id,
-          page_index: this.currentPageIndex,
-        }),
-      1000 * 60,
-    )
+    // This is a little ugly, but I'm hoping to be phasing out this component in the next couple of months, and if we don't,
+    // we should probably think about rewriting this anyway, as it's mostly copy-pasted from the now-outdated platform code.
+    const { handleWithLog, logs } = useLogger()
+    this.handleWithLog = handleWithLog
+    const {
+      viewerControlLog,
+      pageSelectionLog,
+      startPageViewingSessionLog,
+      endPageViewingSessionLog,
+      pageViewerErrorLog,
+    } = logs.getPageViewerLogs({ iid: this.contentId || 'unknown' })
+    this.logs = {
+      viewerControlLog,
+      pageSelectionLog,
+      startPageViewingSessionLog,
+      endPageViewingSessionLog,
+      pageViewerErrorLog,
+    }
+    handleWithLog(startPageViewingSessionLog)
   },
   beforeUnmount() {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
+    this.handleWithLog(this.logs.endPageViewingSessionLog)
   },
   methods: {
     async setupViewer() {
@@ -439,10 +448,15 @@ export default {
       }
     },
     goToPage(index) {
+      const page = this.currentPage
       this.viewer.goToPage(index)
       if (typeof this.pageNumberUpdateCallback === 'function') {
         this.pageNumberUpdateCallback(index)
       }
+      this.handleWithLog(this.pageSelectionLog)({
+        previous_page: page,
+        new_page: index,
+      })
     },
     goToPreviousPage() {
       const currentPage = this.viewer.currentPage()
@@ -511,34 +525,45 @@ export default {
       this.viewer.viewport.applyConstraints() //So we don't zoom too far in/out with our custom buttons
     },
     zoomIn() {
-      this.changeZoom(ZOOM_IN_FACTOR)
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_in }))(() =>
+        this.changeZoom(ZOOM_IN_FACTOR),
+      )
     },
     zoomOut() {
-      this.changeZoom(ZOOM_OUT_FACTOR)
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_out }))(() =>
+        this.changeZoom(ZOOM_OUT_FACTOR),
+      )
     },
     fitView() {
-      const viewport = this.viewer.viewport
-      if (this.fitHeight) {
-        viewport.fitHorizontally(true)
-      } else {
-        viewport.fitVertically(true)
-      }
-      viewport.panTo(new OpenSeadragon.Point(0.5, 0))
-      viewport.applyConstraints(true)
-      this.fitHeight = !this.fitHeight
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.fit_view }))(() => {
+        const viewport = this.viewer.viewport
+        if (this.fitHeight) {
+          viewport.fitHorizontally(true)
+        } else {
+          viewport.fitVertically(true)
+        }
+        viewport.panTo(new OpenSeadragon.Point(0.5, 0))
+        viewport.applyConstraints(true)
+        this.fitHeight = !this.fitHeight
+      })
     },
     toggleFullscreen() {
-      setTimeout(() => {
-        this.$refs.iiifViewerWrapper.focus()
-      })
-      if (
-        typeof this.fullscreenToggledCallback === 'function' &&
-        this.fullscreenToggledCallback()
-      ) {
-        return true
-      } else {
-        return false
-      }
+      this.handleWithLog(
+        this.logs.viewerControlLog({ action: ViewerControls.toggle_fullscreen }),
+        () => {
+          setTimeout(() => {
+            this.$refs.iiifViewerWrapper.focus()
+          })
+          if (
+            typeof this.fullscreenToggledCallback === 'function' &&
+            this.fullscreenToggledCallback()
+          ) {
+            return true
+          } else {
+            return false
+          }
+        },
+      )
     },
     handleZoomKeyPress(keyCode) {
       // we are handling the zoom here because neither zoomPerScroll nor zoomPerClick seem to affect

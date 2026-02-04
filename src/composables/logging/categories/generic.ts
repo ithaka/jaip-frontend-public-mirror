@@ -4,6 +4,7 @@
 
 import { LogEvent, type WorkingLog } from '@/interfaces/Log'
 import type { PaginationDirections } from '@/interfaces/Queries'
+import type { ViewerControlOptions } from '@/interfaces/Viewer'
 
 export const generics = {
   error: (options: { message: string; code?: string }): WorkingLog => {
@@ -127,6 +128,30 @@ export const generics = {
       action: `navigated_to_${options.to.replace(/\//g, '_')}`,
       destination: options.to,
       origin_page: options.from,
+    }
+  },
+  viewerControl: (options: { action: ViewerControlOptions; iid: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.viewer_control,
+      event_description: `Used viewer control: ${options.action}`,
+      action: `${options.action}`,
+      itemid: options.iid,
+    }
+  },
+  startViewingSession: (options: { iid: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.start_viewing_session,
+      event_description: `Started viewing session`,
+      action: `start_viewing_session`,
+      itemid: options.iid,
+    }
+  },
+  endViewingSession: (options: { iid: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.end_viewing_session,
+      event_description: `Ended viewing session`,
+      action: `end_viewing_session`,
+      itemid: options.iid,
     }
   },
 }

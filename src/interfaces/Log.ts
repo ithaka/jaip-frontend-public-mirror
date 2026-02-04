@@ -3,6 +3,7 @@ import type { Collections } from './Collections'
 import type { Ref } from 'vue'
 import type { Entity } from './Entities'
 import type { Subdomain } from './Subdomains'
+import type { ViewerError } from './Viewer'
 
 // These LogEvent enum values define the different types of log events. These are deliberately
 // fairly broad to allow for flexibility in logging various user interactions and ease of aggregation.
@@ -21,6 +22,9 @@ export enum LogEvent {
   page_landing = 'page_landing',
   page_exit = 'page_exit',
   route_change = 'route_change',
+  start_viewing_session = 'start_viewing_session',
+  end_viewing_session = 'end_viewing_session',
+  viewer_control = 'viewer_control',
 }
 
 export type EventType = `pep_fe_${LogEvent}`
@@ -33,7 +37,6 @@ interface BaseLog {
   // Action is a short string identifying the action taken by the user. This is intended for disaggregating
   // events of the same type.
   action?: string
-  landing_id?: string
   itemid?: string
   group_id?: number
   frontend_error?: string
@@ -71,6 +74,11 @@ interface BaseLog {
   source?: string
   event_uuid?: string
   origin_page?: string
+  is_reentry_content?: boolean
+  total_pages?: number
+  current_page?: number
+  previous_page?: number
+  viewer_error?: ViewerError
 }
 
 // WorkingLog is the log structure used within the application before being

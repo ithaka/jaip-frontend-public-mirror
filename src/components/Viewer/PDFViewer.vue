@@ -2,7 +2,6 @@
 import { ref, toRaw, onBeforeUnmount, useTemplateRef, type Ref, type PropType, computed } from 'vue'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
 import * as viewer from 'pdfjs-dist/legacy/web/pdf_viewer.mjs'
-import type { Log } from '@/interfaces/Log'
 import { useCoreStore } from '@/stores/core'
 import ControlBar from './Controls/ControlBar.vue'
 import {
@@ -21,6 +20,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
+import { useLogger } from '@/composables/logging/useLogger'
+import { ViewerControls } from '@/interfaces/Viewer'
 
 const props = defineProps({
   iid: {
@@ -51,12 +52,7 @@ const props = defineProps({
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
-
-const logEvent: Log = {
-  eventtype: 'pep_pdf_viewer_access_attempt',
-  event_description: 'A user attempted to access the PDF viewer, but an error occurred.',
-  itemid: props.iid || props.filename || 'unknown',
-}
+const itemid = ref(props.iid || props.filename || 'unknown')
 
 // PDFJS CONFIGURATION
 const ENABLE_XFA = true
@@ -69,15 +65,6 @@ const MAX_SCALE = 10.0
 const OPENJPEG_WASM_URL = `${import.meta.env.BASE_URL}scripts/pdfjs/wasm/`
 
 // PDF VIEWER SETUP
-const paginationKey = ref(0)
-const pdfDocument = ref()
-const pdfView = ref({}) as Ref<viewer.PDFViewer>
-const handlePageSelection = (page: number) => {
-  if (page && page > 0 && page <= (pdfDocument.value || {}).numPages) {
-    toRaw(pdfView.value).currentPageNumber = +page
-  }
-}
-
 // PDF LOADING
 const isLoading = ref(false)
 const loadingError = ref({
@@ -85,6 +72,7 @@ const loadingError = ref({
   status: false,
   code: 0,
 })
+
 const createLoadingTask = async (src: string) => {
   isLoading.value = true
   try {
@@ -115,8 +103,7 @@ const createLoadingTask = async (src: string) => {
       loadingError.value.message = 'Unknown Error'
       loadingError.value.code = 200
     }
-    logEvent.frontend_error = `CREATE LOADING TASK: ${JSON.stringify(loadingError.value)}`
-    coreStore.$api.log(logEvent)
+    handleWithLog(PDFViewerErrorLog({ error: { ...loadingError.value } }), () => {})
   } finally {
     isLoading.value = false
   }
@@ -158,21 +145,26 @@ const createViewer = () => {
     eventBus.on('pagesinit', function () {
       pdfViewer.currentScaleValue = 'page-fit'
       fitHeight.value = true
-    })
-    // Update pagination key on page change to force re-render of page number input
-    eventBus.on('pagechanging', function () {
-      paginationKey.value++
+      // This is logged here because this event indicates that the viewer is fully initialized,
+      // so we can reasonably assume that the user is now viewing the PDF.
+      handleWithLog(startPDFViewingSessionLog)
     })
 
+    // Update pagination key on page change to force re-render of page number input
+    eventBus.on('pagechanging', function ($event: { previous: number }) {
+      handleWithLog(
+        pageSelectionLog({ previous_page: $event.previous }),
+        () => paginationKey.value++,
+      )
+    })
     pdfView.value = pdfViewer
     return pdfViewer
   } catch (err) {
-    logEvent.frontend_error = `CREATE VIEWER: ${JSON.stringify(err)}`
     createViewerError.value = {
-      message: 'An error occurred while creating the PDF viewer.',
+      message: `An error occurred while creating the PDF viewer: ${JSON.stringify(err)}`,
       status: true,
     }
-    coreStore.$api.log(logEvent)
+    handleWithLog(PDFViewerErrorLog({ error: { ...createViewerError.value } }), () => {})
   } finally {
     isCreatingViewer.value = false
   }
@@ -193,8 +185,8 @@ const preparePage = async () => {
       status: true,
       code: 404,
     }
-    logEvent.frontend_error = preparePageError.value.message
-    coreStore.$api.log(logEvent)
+    handleWithLog(PDFViewerErrorLog({ error: { ...preparePageError.value } }), () => {})
+
     return
   }
   try {
@@ -217,10 +209,7 @@ const preparePage = async () => {
       status: true,
       code: 0,
     }
-    coreStore.$api.log({
-      ...logEvent,
-      frontend_error: preparePageError.value.message,
-    })
+    handleWithLog(PDFViewerErrorLog({ error: { ...preparePageError.value } }), () => {})
   } finally {
     isPreparingPage.value = false
   }
@@ -235,6 +224,23 @@ const viewerWrapper = useTemplateRef('viewerWrapper')
 const isMenuOpen = ref(false)
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
+}
+
+// PAGINATION CONTROLS
+const paginationKey = ref(0)
+const pdfDocument = ref()
+const pdfView = ref({}) as Ref<viewer.PDFViewer>
+const handlePageSelection = (page: number) => {
+  if (page && page > 0 && page <= (pdfDocument.value || {}).numPages) {
+    // This log happens here rather than in the click handler to ensure that we don't unnecessarily issue
+    // logs when the page isn't actually valid.
+    handleWithLog(
+      pageSelectionLog({ previous_page: toRaw(pdfView.value).currentPageNumber }),
+      () => {
+        toRaw(pdfView.value).currentPageNumber = +page
+      },
+    )
+  }
 }
 
 // ROTATION CONTROLS
@@ -331,28 +337,29 @@ const fitHeightToggle = () => {
   fitHeight.value = !fitHeight.value
 }
 
-coreStore.$api.log({
-  eventtype: 'pep_fe_pdf_view_start',
-  event_description: 'user is viewing the PDF',
-  itemid: props.iid || props.filename || 'unknown',
-  collection: props.collection || undefined,
-})
-
 onBeforeUnmount(() => {
-  removeFullscreenChangeListeners(handleFullscreenChange)
-  coreStore.$api.log({
-    eventtype: 'pep_fe_pdf_view_complete',
-    event_description: 'user has stopped viewing the PDF',
-    itemid: props.iid || props.filename || 'unknown',
-    collection: props.collection || undefined,
-  })
+  handleWithLog(endPDFViewingSessionLog, () =>
+    removeFullscreenChangeListeners(handleFullscreenChange),
+  )
 })
 
 const router = useRouter()
 const emit = defineEmits(['close'])
+const reentryPath = computed(() => {
+  return route.path.split('/').slice(0, 3).join('/')
+})
 const handleBrowseReentryLink = () => {
-  const newPath = route.path.split('/').slice(0, 3).join('/')
-  changeRoute(router, emit, newPath, searchTerms.value, pageNo.value, undefined, undefined)
+  handleWithLog(errorLinkClickLog({ destination: reentryPath.value }), () =>
+    changeRoute(
+      router,
+      emit,
+      reentryPath.value,
+      searchTerms.value,
+      pageNo.value,
+      undefined,
+      undefined,
+    ),
+  )
 }
 const route = useRoute()
 const routeName = ref(route.name)
@@ -362,6 +369,21 @@ const toastContent = `This item was added to Your Requests. <pep-pharos-link is-
 const fireToast = () => {
   coreStore.toast(toastContent, 'success', 10000)
 }
+
+const { handleWithLog, logs } = useLogger()
+const {
+  errorLinkClickLog,
+  viewerControlLog,
+  pageSelectionLog,
+  startPDFViewingSessionLog,
+  endPDFViewingSessionLog,
+  PDFViewerErrorLog,
+} = logs.getPDFViewerLogs({
+  iid: itemid,
+  isReentryContent: isReentryContent,
+  viewer: pdfView,
+  documentProxy: pdfDocument,
+})
 </script>
 
 <template>
@@ -533,14 +555,42 @@ const fireToast = () => {
               :can-fit-height="canFitHeight"
               :page-count="(pdfDocument || {}).numPages || 0"
               :current-page="(pdfView || {}).currentPageNumber || 1"
-              @toggle-menu="toggleMenu"
-              @rotate-right="rotateClockwise"
-              @rotate-left="rotateCounterClockwise"
-              @zoom-in="zoomIn(1)"
-              @zoom-out="zoomOut(1)"
-              @fit-view="fitHeightToggle"
+              @toggle-menu="
+                handleWithLog(viewerControlLog({ action: ViewerControls.toggle_menu }), toggleMenu)
+              "
+              @rotate-right="
+                handleWithLog(
+                  viewerControlLog({ action: ViewerControls.rotate_right }),
+                  rotateClockwise,
+                )
+              "
+              @rotate-left="
+                handleWithLog(
+                  viewerControlLog({ action: ViewerControls.rotate_left }),
+                  rotateCounterClockwise,
+                )
+              "
+              @zoom-in="
+                handleWithLog(viewerControlLog({ action: ViewerControls.zoom_in }), () => zoomIn(1))
+              "
+              @zoom-out="
+                handleWithLog(viewerControlLog({ action: ViewerControls.zoom_out }), () =>
+                  zoomOut(1),
+                )
+              "
+              @fit-view="
+                handleWithLog(
+                  viewerControlLog({ action: ViewerControls.fit_view }),
+                  fitHeightToggle,
+                )
+              "
               @update-page="handlePageSelection"
-              @toggle-fullscreen="handleFullscreenToggle"
+              @toggle-fullscreen="
+                handleWithLog(
+                  viewerControlLog({ action: ViewerControls.toggle_fullscreen }),
+                  handleFullscreenToggle,
+                )
+              "
             />
             <div id="viewer-container" tabindex="-1">
               <div v-if="!isLoading" id="viewer" class="pdfViewer" />
