@@ -8,6 +8,8 @@ import type { ViewerError } from './Viewer'
 // These LogEvent enum values define the different types of log events. These are deliberately
 // fairly broad to allow for flexibility in logging various user interactions and ease of aggregation.
 // For more specific actions, additional fields in the log can be used, such as 'action' and 'event_description'.
+// NOTE: Any log event added here must also be added to the LOG_EVENTS array in the backend to ensure it is
+// accepted by the logging API.
 export enum LogEvent {
   button_click = 'button_click',
   dropdown_open = 'dropdown_open',
