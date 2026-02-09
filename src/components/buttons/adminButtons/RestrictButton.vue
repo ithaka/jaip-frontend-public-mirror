@@ -92,13 +92,6 @@ const handleRestrict = async () => {
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
-
-    coreStore.$api.log({
-      eventtype: 'pep_restrict_submitted',
-      event_description: 'user submitted restricted item',
-      dois: [args.doi],
-      reason: args.reason,
-    })
   } catch {
     const msg = 'There was an error and your restricted item was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')

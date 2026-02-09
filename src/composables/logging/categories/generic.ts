@@ -16,6 +16,16 @@ export const generics = {
       code: options.code,
     }
   },
+  api_error: (options: { message: string; endpoint: string; code: string }): WorkingLog => {
+    return {
+      eventtype: LogEvent.api_error,
+      event_description: `API error on ${options.endpoint}: ${options.message}`,
+      action: 'api_error',
+      reason: options.message,
+      code: options.code,
+      endpoint: options.endpoint,
+    }
+  },
   searchLog: (target: string): WorkingLog => {
     return {
       eventtype: LogEvent.form_submit,

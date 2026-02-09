@@ -58,24 +58,11 @@ const handleGroupChange = (event: Event) => {
 const fetchAnalyticsData = async () => {
   try {
     const response = await coreStore.$api.analytics.get(selectedGroupId.value.toString())
-    coreStore.$api.log({
-      eventtype: 'pep_analytics_data_fetched',
-      event_description:
-        'Reentry metadata has been successfully fetched for group ' +
-        selectedGroupId.value.toString(),
-    })
     // TODO: remove before production
     console.log('🍏 Fetched analytics data:', response.data)
     analyticsStore.setAnalyticsData(response.data as unknown as AnalyticsData)
-  } catch (err) {
+  } catch {
     coreStore.toast('Error fetching analytics data. Please try again later.', 'error')
-    coreStore.$api.log({
-      eventtype: 'pep_reentry_analytics_data_error',
-      event_description:
-        'Error occurred while fetching analytics data for group ' +
-        selectedGroupId.value.toString() +
-        err,
-    })
   }
 }
 

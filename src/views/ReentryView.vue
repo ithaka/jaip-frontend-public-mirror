@@ -27,22 +27,13 @@ const splitNationalAndState = (data: CollectionMetadata[]) => {
 const getMetadata = async () => {
   try {
     const response = await coreStore.$api.collections.metadata(Collections.reentry)
-    coreStore.$api.log({
-      eventtype: 'pep_reentry_metadata_fetched',
-      event_description: 'Reentry metadata has been successfully fetched and processed',
-    })
     const { national, state } = splitNationalAndState(
       response.data as unknown as CollectionMetadata[],
     )
     nationalMetadata.value = national
     stateMetadata.value = state
-  } catch (err) {
+  } catch {
     coreStore.toast('Error fetching reentry content. Please try again later.', 'error')
-    console.error('Error fetching reentry metadata:', err)
-    coreStore.$api.log({
-      eventtype: 'pep_reentry_metadata_error',
-      event_description: 'Error occurred while fetching reentry metadata',
-    })
   }
 }
 

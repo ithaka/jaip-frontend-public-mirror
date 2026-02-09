@@ -77,12 +77,6 @@ const handleApproval = async () => {
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
-    coreStore.$api.log({
-      eventtype: 'pep_approval_submitted',
-      event_description: 'user submitted approval',
-      dois: [args.doi],
-      groups: args.groups,
-    })
   } catch {
     const msg = 'There was an error and your approval was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')

@@ -127,6 +127,48 @@ const getMediaHistoryLogs = (options: { itemid: string; is_global: Ref<boolean> 
   }
 }
 
+const getBulkApprovalLogs = (options: {
+  groups: Ref<number[]>
+  journals: Ref<string[]>
+  disciplines: Ref<string[]>
+  dois: Ref<string[]>
+}) => {
+  const openBulkApprovalModalLog = (): WorkingLog => ({
+    ...generics.openModal('bulk_approval'),
+    event_description: 'user opened bulk approval modal',
+    action: 'open_bulk_approval',
+    groups: options.groups.value,
+    journals: options.journals.value,
+    disciplines: options.disciplines.value,
+    dois: options.dois.value,
+  })
+
+  const closeBulkApprovalModalLog = (): WorkingLog => ({
+    ...generics.closeModal('bulk_approval'),
+    event_description: 'user closed bulk approval modal',
+    action: 'cancel_bulk_approval',
+    groups: options.groups.value,
+    journals: options.journals.value,
+    disciplines: options.disciplines.value,
+    dois: options.dois.value,
+  })
+
+  const submitBulkApprovalLog = (): WorkingLog => ({
+    eventtype: LogEvent.button_click,
+    event_description: 'user submitted bulk approval',
+    action: 'submit_bulk_approval',
+    groups: options.groups.value,
+    journals: options.journals.value,
+    disciplines: options.disciplines.value,
+    dois: options.dois.value,
+  })
+
+  return {
+    openBulkApprovalModalLog,
+    closeBulkApprovalModalLog,
+    submitBulkApprovalLog,
+  }
+}
 const getBulkUndoLogs = (options: { itemid: string; groups: Ref<number[]> }) => {
   const openBulkUndoModalLog = (): WorkingLog => ({
     ...generics.openModal('bulk_undo'),
@@ -245,6 +287,7 @@ export const mediaReviewLogs = {
   getMediaDenialLogs,
   getMediaHistoryLogs,
   getBulkUndoLogs,
+  getBulkApprovalLogs,
   getRestrictLogs,
   getUnrestrictLogs,
 }

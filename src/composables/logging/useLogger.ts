@@ -56,10 +56,12 @@ const useLogger = () => {
     return {
       ...log,
       eventtype: `pep_fe_${log.eventtype}`,
-      route_name: route.name,
-      path: route.path,
-      full_path: route.fullPath,
-      query_params: route.query ? JSON.stringify(route.query) : undefined,
+      // NOTE: Route info is left optional for those cases where the logger is used outside of a component setup function,
+      // where route and component info may not be available (e.g., api error handling).
+      route_name: route?.name,
+      path: route?.path,
+      full_path: route?.fullPath,
+      query_params: route?.query ? JSON.stringify(route.query) : undefined,
       component: componentInstance?.type.__name || 'AnonymousComponent',
       parents: getAncestorComponentNames(componentInstance),
       timestamp: new Date(),

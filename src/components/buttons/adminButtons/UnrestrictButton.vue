@@ -64,11 +64,6 @@ const handleUnrestrict = async () => {
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
       changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
     }
-    coreStore.$api.log({
-      eventtype: 'pep_unrestrict_submitted',
-      event_description: 'user submitted unrestrict',
-      dois: [args.doi],
-    })
   } catch {
     const msg = 'There was an error and your unrestrict was not submitted.'
     coreStore.toast(`Oops! ${msg}`, 'error')

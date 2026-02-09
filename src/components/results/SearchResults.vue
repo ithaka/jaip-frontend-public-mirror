@@ -16,6 +16,7 @@ import type { AxiosResponse } from 'axios'
 import type { Group, GroupSelection } from '@/interfaces/Group'
 import type { SearchResponse } from '@/interfaces/SearchResponse'
 import SkipToDestination from '../SkipToDestination.vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   requestsPage: {
@@ -121,14 +122,10 @@ const submitRequests = async () => {
       args.dois.length > 1 ? `Your requests have been submitted` : `Your request has been submitted`
     await searchStore.doSearch('', false)
     coreStore.toast(msg, 'success')
-    coreStore.$api.log({
-      eventtype: 'pep_request_submitted',
-      event_description: 'user submitted request',
-      dois: args.dois,
-      comments: args.comments,
-    })
   } catch {
-    const msg = `There was a server error and your ${args.dois.length ? 'requests were' : 'request was'} not submitted.`
+    const msg = `There was a server error and your ${
+      args.dois.length ? 'requests were' : 'request was'
+    } not submitted.`
     coreStore.toast(`Oops! ${msg}`, 'error')
   }
 }
@@ -327,6 +324,15 @@ const showDownloadButton = computed(() => {
     canViewRestrictedList.value
   )
 })
+
+const { handleWithLog, logs } = useLogger()
+const { openBulkApprovalModalLog, closeBulkApprovalModalLog, submitBulkApprovalLog } =
+  logs.getBulkApprovalLogs({
+    disciplines: selectedDisciplines,
+    journals: selectedJournalIDs,
+    groups: selectorBulkApproveGroupOptionIDs,
+    dois: bulkApproveReversals,
+  })
 </script>
 <template>
   <div
@@ -405,7 +411,7 @@ const showDownloadButton = computed(() => {
           <pep-pharos-button
             icon-left="checkmark-inverse"
             data-modal-id="approve-all-modal"
-            @click="openApproveAllModal"
+            @click="handleWithLog(openBulkApprovalModalLog, openApproveAllModal)"
           >
             Approve All
           </pep-pharos-button>
@@ -415,7 +421,9 @@ const showDownloadButton = computed(() => {
             :header="`Approve material`"
             :open="showApproveAllModal"
             size="large"
-            @pharos-modal-closed="showApproveAllModal = false"
+            @pharos-modal-closed="
+              handleWithLog(closeBulkApprovalModalLog, () => (showApproveAllModal = false))
+            "
           >
             <p slot="description" class="mb-3">
               <span
@@ -493,7 +501,7 @@ const showDownloadButton = computed(() => {
             <pep-pharos-button
               slot="footer"
               :disabled="secondarySearching || !selectedGroups['bulk_approve']?.length"
-              @click.prevent.stop="submitApproveAll"
+              @click.prevent.stop="handleWithLog(submitBulkApprovalLog, submitApproveAll)"
             >
               Submit
             </pep-pharos-button>

@@ -21,6 +21,7 @@ export enum LogEvent {
   radio_select = 'radio_select',
   form_submit = 'form_submit',
   error = 'error',
+  api_error = 'api_error',
   page_landing = 'page_landing',
   page_exit = 'page_exit',
   route_change = 'route_change',
@@ -81,6 +82,7 @@ interface BaseLog {
   current_page?: number
   previous_page?: number
   viewer_error?: ViewerError
+  endpoint?: string
 }
 
 // WorkingLog is the log structure used within the application before being
