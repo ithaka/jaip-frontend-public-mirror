@@ -73,6 +73,27 @@ const loadingError = ref({
   code: 0,
 })
 
+const route = useRoute()
+const routeName = ref(route.name)
+const isReentryContent = computed(() => routeName.value === 'collection item')
+const pdfView = ref({}) as Ref<viewer.PDFViewer>
+const pdfDocument = ref()
+
+const { handleWithLog, logs } = useLogger()
+const {
+  errorLinkClickLog,
+  viewerControlLog,
+  pageSelectionLog,
+  startPDFViewingSessionLog,
+  endPDFViewingSessionLog,
+  PDFViewerErrorLog,
+} = logs.getPDFViewerLogs({
+  iid: itemid,
+  isReentryContent: isReentryContent,
+  viewer: pdfView,
+  documentProxy: pdfDocument,
+})
+
 const createLoadingTask = async (src: string) => {
   isLoading.value = true
   try {
@@ -228,8 +249,6 @@ const toggleMenu = () => {
 
 // PAGINATION CONTROLS
 const paginationKey = ref(0)
-const pdfDocument = ref()
-const pdfView = ref({}) as Ref<viewer.PDFViewer>
 const handlePageSelection = (page: number) => {
   if (page && page > 0 && page <= (pdfDocument.value || {}).numPages) {
     // This log happens here rather than in the click handler to ensure that we don't unnecessarily issue
@@ -361,29 +380,11 @@ const handleBrowseReentryLink = () => {
     ),
   )
 }
-const route = useRoute()
-const routeName = ref(route.name)
-const isReentryContent = computed(() => routeName.value === 'collection item')
 
 const toastContent = `This item was added to Your Requests. <pep-pharos-link is-on-background href='/search' variant='inline'>Return to Search</pep-pharos-link> to review it.`
 const fireToast = () => {
   coreStore.toast(toastContent, 'success', 10000)
 }
-
-const { handleWithLog, logs } = useLogger()
-const {
-  errorLinkClickLog,
-  viewerControlLog,
-  pageSelectionLog,
-  startPDFViewingSessionLog,
-  endPDFViewingSessionLog,
-  PDFViewerErrorLog,
-} = logs.getPDFViewerLogs({
-  iid: itemid,
-  isReentryContent: isReentryContent,
-  viewer: pdfView,
-  documentProxy: pdfDocument,
-})
 </script>
 
 <template>
