@@ -6,5 +6,9 @@ http {
     include /etc/nginx/shared/server-setup.conf;
     include /etc/nginx/shared/spa-root.conf;
     include /etc/nginx/shared/error-pages.conf;
+
+    add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=86400";
+    add_header Pragma "no-cache";
+    add_header Expires 86400;
   }
 }
