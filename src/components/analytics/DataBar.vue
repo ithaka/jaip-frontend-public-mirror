@@ -34,7 +34,7 @@ const data = computed(() => {
  */
 const approvedValue = computed(() => {
   const series = data.value?.series as MediaReviewDataPoint[] | undefined
-  return series?.find((item) => item.status === 'approved')?.n ?? 0
+  return series?.find((item) => item.bucket === 'approved')?.n ?? 0
 })
 
 /**
@@ -44,7 +44,7 @@ const approvedValue = computed(() => {
 const deniedValue = computed(() => {
   // TODO: ditto as above
   const series = data.value?.series as MediaReviewDataPoint[] | undefined
-  return series?.find((item) => item.status === 'denied')?.n ?? 0
+  return series?.find((item) => item.bucket === 'denied')?.n ?? 0
 })
 </script>
 <template>

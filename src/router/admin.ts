@@ -69,6 +69,17 @@ const config = {
       component: () => import('@/views/AccountManagement.vue'),
     },
     {
+      path: '/analytics',
+      name: 'analytics',
+      meta: {
+        group: 'support',
+        requiresAny: ['view_analytics'],
+        showSearch: true,
+        label: 'Analytics',
+      },
+      component: () => import('@/views/AnalyticsView.vue'),
+    },
+    {
       path: '/account',
       name: 'account',
       meta: {
@@ -160,17 +171,6 @@ const config = {
         ],
       },
       component: () => import('@/views/CollectionsItemView.vue'),
-    },
-    {
-      path: '/analytics',
-      name: 'analytics',
-      meta: {
-        hidden: true,
-        requiresAny: ['view_analytics'],
-        showSearch: false,
-        label: 'Analytics',
-      },
-      component: () => import('@/views/AnalyticsView.vue'),
     },
     {
       path: '/:pathMatch(.*)*',

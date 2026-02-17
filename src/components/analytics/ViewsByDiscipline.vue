@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
+import NoDataViewsByDisciplineSvg from '@/assets/images/no-data-views-by-discipline.svg'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType
@@ -22,20 +23,44 @@ watch(selectedTimePeriod, () => {
 })
 
 /**
- * Fetches metric data and limits series to top 10 items when not expanded.
- * @returns {Object|null} Analytics data with limited or full series or null if unavailable
+ * Retrieves raw metric data from the analytics store.
+ * Cached to prevent duplicate store lookups.
+ */
+const metricData = computed(() => {
+  return analyticsStore.getMetricDataForSelectedTimePeriod(props.metricType, props.groupId)
+})
+
+/**
+ * Determines if no meaningful data exists to display.
+ * Returns true if metric data is missing, empty, or all values are zero.
+ */
+const showNoData = computed(() => {
+  const metric = metricData.value
+
+  if (!metric || !metric.series || metric.series.length === 0) {
+    return true
+  }
+
+  return metric.series.every((item) => {
+    const value = 'n' in item ? item.n : 0
+    return value === 0
+  })
+})
+
+/**
+ * Transforms metric data and limits series to top 10 items when not expanded.
+ * @returns {Object|null} Analytics data with limited or full series or null if no data to display
  */
 const data = computed(() => {
-  const metricData = analyticsStore.getMetricDataForSelectedTimePeriod(
-    props.metricType,
-    props.groupId,
-  )
-  if (!metricData) return null
+  if (showNoData.value) return null
 
-  const limitedSeries = isExpanded.value ? metricData.series : metricData.series.slice(0, 10)
+  const metric = metricData.value
+  if (!metric) return null
+
+  const limitedSeries = isExpanded.value ? metric.series : metric.series.slice(0, 10)
 
   return {
-    ...metricData,
+    ...metric,
     series: limitedSeries,
   }
 })
@@ -93,13 +118,19 @@ const options = computed(() => ({
     class="analytics__chart-container--expandable"
     :class="isExpanded ? 'analytics__chart-container--tall' : 'analytics__chart-container--short'"
   >
-    <CcvSimpleBarChart v-if="data" :data="data.series" :options />
-    <pep-pharos-button
-      class="analytics__expand-button"
-      variant="secondary"
-      @click="isExpanded = !isExpanded"
-      >{{ isExpanded ? 'Hide most disciplines' : 'Show all disciplines' }}
-    </pep-pharos-button>
+    <div v-if="data">
+      <CcvSimpleBarChart :data="data.series" :options />
+      <pep-pharos-button
+        class="analytics__expand-button"
+        variant="secondary"
+        @click="isExpanded = !isExpanded"
+        >{{ isExpanded ? 'Hide most disciplines' : 'Show all disciplines' }}
+      </pep-pharos-button>
+    </div>
+    <div v-else class="analytics__chart-container--no-data">
+      <p class="analytics__error-title">Views by discipline</p>
+      <img :src="NoDataViewsByDisciplineSvg" alt="No data available for views by discipline" />
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -120,5 +151,40 @@ const options = computed(() => ({
   :deep(.cc--chart-holder) {
     width: 100% !important;
   }
+}
+
+.analytics__chart-container--no-data {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // first child: top-left
+  > :first-child {
+    align-self: flex-start;
+  }
+
+  // second child: centered in remaining space
+  > :nth-child(2) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.analytics__error-title {
+  color: var(--cds-text-primary, #161616);
+  font-size: 16px;
+  font-family: var(--cds-charts-font-family);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 15px;
 }
 </style>

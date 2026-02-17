@@ -250,3 +250,14 @@ export const formatDisplayDateTime = (isoString: string): string => {
     minute: '2-digit',
   })
 }
+
+/**
+ * Creates an async promisified version of setTimeout
+ * @param ms - The number of milliseconds to wait
+ * @returns A promise that resolves after the specified delay
+ */
+export const setAsyncTimeout = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}

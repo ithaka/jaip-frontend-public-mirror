@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
+import NoDataStudentItemViewsSvg from '@/assets/images/no-data-student-item-views.svg'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType
@@ -13,41 +14,54 @@ const analyticsStore = useAnalyticsStore()
 const { selectedTimePeriod } = storeToRefs(analyticsStore)
 
 /**
- * Fetches metric data and transforms bucket strings to Date objects.
- * @returns {Object|null} Transformed analytics data with dates or null if unavailable
+ * Retrieves raw metric data from the analytics store.
+ * Cached to prevent duplicate store lookups.
+ */
+const metricData = computed(() => {
+  return analyticsStore.getMetricDataForSelectedTimePeriod(props.metricType, props.groupId)
+})
+
+/**
+ * Determines if no meaningful data exists to display.
+ * Returns true if metric data is missing, empty, or all values are zero.
+ */
+const showNoData = computed(() => {
+  const metric = metricData.value
+
+  if (!metric || !metric.series || metric.series.length === 0) {
+    return true
+  }
+
+  return metric.series.every((item) => {
+    const value = 'n' in item ? item.n : 0
+    return value === 0
+  })
+})
+
+/**
+ * Transforms metric data for area chart visualization, converting bucket strings to Date objects.
+ * @returns {Object|null} Transformed analytics data with dates or null if no data to display
  */
 const data = computed(() => {
-  const metricData = analyticsStore.getMetricDataForSelectedTimePeriod(
-    props.metricType,
-    props.groupId,
-  )
-  if (metricData) {
-    // Transform the data to convert bucket strings to Date for mapping
-    const transformedSeries = metricData.series.map((item) => {
-      if ('bucket' in item) {
-        return {
-          ...item,
-          date: new Date(item.bucket),
-        }
-      }
-      return item
-    })
+  if (showNoData.value) return null
 
-    return {
-      ...metricData,
-      series: transformedSeries,
+  const metric = metricData.value
+  if (!metric) return null
+
+  // Transform the data to convert bucket strings to Date for mapping
+  const transformedSeries = metric.series.map((item) => {
+    if ('bucket' in item) {
+      return {
+        ...item,
+        date: new Date(item.bucket),
+      }
     }
-  } else {
-    // TODO: Add empty state and error handling here.
-    console.warn(
-      'No metric data found for',
-      props.metricType,
-      'groupId:',
-      props.groupId,
-      'timePeriod:',
-      selectedTimePeriod.value,
-    )
-    return null
+    return item
+  })
+
+  return {
+    ...metric,
+    series: transformedSeries,
   }
 })
 
@@ -66,37 +80,6 @@ const MONTH_NAMES = [
   'Nov',
   'Dec',
 ]
-
-/**
- * Formats x-axis tick labels based on time period.
- * Returns empty string for filtered ticks to show tick marks without labels.
- * @returns {Function} Formatter: days_30 (1/15), weeks_365 (Jan 15), months_all_time (Jan YYYY)
- */
-const tickFormatter = computed(() => {
-  return (val: string | number | Date) => {
-    const date = new Date(val)
-    const timestamp = date.getTime()
-
-    // Check if this date should show a label
-    if (!labelsToShow.value.has(timestamp)) {
-      return ''
-    }
-
-    const month = MONTH_NAMES[date.getMonth()]
-    const year = date.getFullYear().toString()
-
-    switch (selectedTimePeriod.value) {
-      case 'days_30':
-        return `${month} ${date.getDate()}`
-      case 'weeks_365':
-        return `${month} ${date.getDate()}`
-      case 'months_all_time':
-        return `${month} ${year}`
-      default:
-        return `${date.getMonth() + 1}/${date.getDate()}`
-    }
-  }
-})
 
 /**
  * Extracts dates from series for x-axis ticks.
@@ -136,6 +119,37 @@ const labelsToShow = computed(() => {
   }
 
   return timestamps
+})
+
+/**
+ * Formats x-axis tick labels based on time period.
+ * Returns empty string for filtered ticks to show tick marks without labels.
+ * @returns {Function} Formatter: days_30 (1/15), weeks_365 (Jan 15), months_all_time (Jan YYYY)
+ */
+const tickFormatter = computed(() => {
+  return (val: string | number | Date) => {
+    const date = new Date(val)
+    const timestamp = date.getTime()
+
+    // Check if this date should show a label
+    if (!labelsToShow.value.has(timestamp)) {
+      return ''
+    }
+
+    const month = MONTH_NAMES[date.getMonth()]
+    const year = date.getFullYear().toString()
+
+    switch (selectedTimePeriod.value) {
+      case 'days_30':
+        return `${month} ${date.getDate()}`
+      case 'weeks_365':
+        return `${month} ${date.getDate()}`
+      case 'months_all_time':
+        return `${month} ${year}`
+      default:
+        return `${date.getMonth() + 1}/${date.getDate()}`
+    }
+  }
 })
 
 const areaOptions = computed(() => ({
@@ -195,9 +209,47 @@ const areaOptions = computed(() => ({
 </script>
 
 <template>
-  <div class="analytics__chart-container">
+  <div class="analytics__chart-container" :class="{ '': !data }">
     <CcvAreaChart v-if="data" :data="data.series" :options="areaOptions" />
+    <div v-else class="analytics__chart-container--no-data">
+      <p class="analytics__error-title">Views over time</p>
+      <img :src="NoDataStudentItemViewsSvg" alt="No data available for views over time" />
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.analytics__chart-container--no-data {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // first child: top-left
+  > :first-child {
+    align-self: flex-start;
+  }
+
+  // second child: centered in remaining space
+  > :nth-child(2) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.analytics__error-title {
+  color: var(--cds-text-primary, #161616);
+  font-size: 16px;
+  font-family: var(--cds-charts-font-family);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+}
+</style>

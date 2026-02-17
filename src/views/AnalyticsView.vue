@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, ref } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
@@ -11,7 +11,8 @@ import DataBox from '@/components/analytics/DataBox.vue'
 import ViewsByDiscipline from '@/components/analytics/ViewsByDiscipline.vue'
 import DayTimeHeatmap from '@/components/analytics/DayTimeHeatmap.vue'
 import DataBar from '@/components/analytics/DataBar.vue'
-import { formatDisplayDateTime } from '@/utils/helpers'
+import { formatDisplayDateTime, setAsyncTimeout } from '@/utils/helpers'
+import DashboardUnavailable from '@/components/analytics/DashboardUnavailable.vue'
 
 /**
  * Store references. selectedGroupId is stored in user store to avoid duplicating group data.
@@ -20,7 +21,7 @@ const userStore = useUserStore()
 const { groups, selectedGroupId } = storeToRefs(userStore)
 
 const analyticsStore = useAnalyticsStore()
-const { selectedTimePeriod, lastExported } = storeToRefs(analyticsStore)
+const { selectedTimePeriod, lastExported, isError } = storeToRefs(analyticsStore)
 
 const coreStore = useCoreStore()
 const isLoading = ref(false)
@@ -62,7 +63,7 @@ const fetchAnalyticsData = async () => {
     console.log('🍏 Fetched analytics data:', response.data)
     analyticsStore.setAnalyticsData(response.data as unknown as AnalyticsData)
   } catch {
-    coreStore.toast('Error fetching analytics data. Please try again later.', 'error')
+    analyticsStore.setError(true)
   }
 }
 
@@ -71,6 +72,15 @@ const lastUpdatedMsg = computed(() => {
   return `Last updated: ${formatDisplayDateTime(lastExported.value)}`
 })
 
+/**
+ * Handles reload button click from DashboardUnavailable component.
+ */
+const handleReload = async () => {
+  isLoading.value = true
+  await fetchAnalyticsData()
+  isLoading.value = false
+}
+
 /** Sets default group if none selected. */
 onBeforeMount(() => {
   if (selectedGroupId.value === 0 && groups.value[0]) {
@@ -78,10 +88,14 @@ onBeforeMount(() => {
   }
 })
 
+/** Reset error state when group changes */
+watch(selectedGroupId, () => {
+  analyticsStore.resetError()
+})
+
 onMounted(async () => {
-  // TODO: Uncomment once loading state is confirmed with design
-  // coreStore.isSpinning = true
   isLoading.value = true
+  setAsyncTimeout(3000) // Loading delay to show shimmer effect and prevent flicker on fast loads
   await fetchAnalyticsData()
   isLoading.value = false
 })
@@ -97,6 +111,7 @@ logPageView()
         <pep-pharos-heading :level="2" preset="5--bold" class="reentry__title">
           Welcome to your Analytics Dashboard
         </pep-pharos-heading>
+        <pep-pharos-heading :level="3" preset="3"> </pep-pharos-heading>
         <p>
           View a concise overview of content usage in your group(s). For more details, visit our
           <pep-pharos-link>support page</pep-pharos-link>.
@@ -125,41 +140,56 @@ logPageView()
           </option>
         </pep-pharos-select>
       </div>
-      <pep-pharos-heading :level="3" preset="3--bold"> Item usage </pep-pharos-heading>
-      <div class="analytics__section analytics__top-grid">
-        <DataBox
-          name="Total item views"
-          :value="
-            analyticsStore.getMetricTotalForSelectedTimePeriod(
-              'student_item_views',
-              selectedGroupId.toString(),
-            )
-          "
-        />
-        <DataBox
-          name="Total searches"
-          :value="
-            analyticsStore.getMetricTotalForSelectedTimePeriod(
-              'student_searches',
-              selectedGroupId.toString(),
-            )
-          "
-        />
-        <StudentItemViews metricType="student_item_views" :group-id="selectedGroupId.toString()" />
+      <div
+        v-if="isError"
+        class="analytics__section"
+        :class="{ 'analytics__section--loading': isLoading }"
+      >
+        <DashboardUnavailable @reload="handleReload" />
       </div>
-      <div class="analytics__section analytics__bottom-grid">
-        <ViewsByDiscipline
-          metricType="discipline_item_views"
-          :group-id="selectedGroupId.toString()"
-        />
-        <DayTimeHeatmap
-          metricType="time_of_day_item_views"
-          :group-id="selectedGroupId.toString()"
-        />
-      </div>
-      <pep-pharos-heading :level="3" preset="3--bold"> Media review </pep-pharos-heading>
-      <div class="analytics__section">
-        <DataBar metricType="media_reviews" :group-id="selectedGroupId.toString()" />
+      <div v-else>
+        <pep-pharos-heading :level="3" preset="3--bold"> Item usage </pep-pharos-heading>
+        <div
+          class="analytics__section analytics__top-grid"
+          :class="{ 'analytics__section--loading': isLoading }"
+        >
+          <DataBox
+            name="Total item views"
+            :value="
+              analyticsStore.getMetricTotalForSelectedTimePeriod(
+                'student_item_views',
+                selectedGroupId.toString(),
+              )
+            "
+          />
+          <DataBox
+            name="Total searches"
+            :value="
+              analyticsStore.getMetricTotalForSelectedTimePeriod(
+                'student_searches',
+                selectedGroupId.toString(),
+              )
+            "
+          />
+          <StudentItemViews
+            metricType="student_item_views"
+            :group-id="selectedGroupId.toString()"
+          />
+        </div>
+        <div
+          class="analytics__section analytics__bottom-grid"
+          :class="{ 'analytics__section--loading': isLoading }"
+        >
+          <ViewsByDiscipline metricType="discipline_views" :group-id="selectedGroupId.toString()" />
+          <DayTimeHeatmap
+            metricType="time_of_day_item_views"
+            :group-id="selectedGroupId.toString()"
+          />
+        </div>
+        <pep-pharos-heading :level="3" preset="3--bold"> Media review </pep-pharos-heading>
+        <div class="analytics__section" :class="{ 'analytics__section--loading': isLoading }">
+          <DataBar metricType="media_review_events" :group-id="selectedGroupId.toString()" />
+        </div>
       </div>
     </div>
   </main>
@@ -219,6 +249,50 @@ logPageView()
     margin-bottom: var(--pharos-spacing-1-x);
   }
 
+  &__section--loading {
+    > * {
+      position: relative;
+      border-radius: var(--pharos-radius-base-standard);
+      overflow: hidden;
+      border: none;
+    }
+
+    > *::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        110deg,
+        rgba(209, 207, 199, 1) 0%,
+        rgba(209, 207, 199, 0.39) 57%,
+        rgba(209, 207, 199, 0.84) 100%
+      );
+      background-size: 200% 100%;
+      animation: analytics-shimmer 1.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    > * > * {
+      visibility: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      > *::after {
+        animation: none;
+        background: #e5e5e3;
+      }
+    }
+  }
+
+  @keyframes analytics-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
   &__top-grid {
     display: grid;
     grid-template-columns: minmax(auto, 200px) 1fr;
@@ -257,14 +331,18 @@ logPageView()
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--pharos-spacing-1-x);
+    min-height: 400px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__chart-container {
+    padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-3-x);
     border: 2px solid var(--pharos-color-marble-gray-80);
     border-radius: var(--pharos-radius-base-standard);
-    padding: var(--pharos-spacing-2-x);
     min-height: 300px;
-    max-height: 1000px;
 
     :deep(.cc--chart-holder) {
       width: 100% !important;

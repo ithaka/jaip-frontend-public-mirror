@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType, TimeOfDayDataPoint } from '@/interfaces/Analytics'
+import NoDataDayTimeHeatmapSvg from '@/assets/images/no-data-day-time-heatmap.svg'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType
@@ -11,26 +12,44 @@ const props = defineProps<{
 const analyticsStore = useAnalyticsStore()
 
 /**
- * Fetches metric data and transforms values to replace 0 with null for heatmap visualization.
+ * Retrieves raw metric data from the analytics store.
+ * Cached to prevent duplicate store lookups.
+ */
+const metricData = computed(() => {
+  return analyticsStore.getMetricDataForSelectedTimePeriod(props.metricType, props.groupId)
+})
+
+/**
+ * Determines if no meaningful data exists to display.
+ * Returns true if metric data is missing, empty, or all values are zero.
+ */
+const showNoData = computed(() => {
+  const metric = metricData.value
+
+  if (!metric || !metric.series || metric.series.length === 0) {
+    return true
+  }
+
+  return (metric.series as TimeOfDayDataPoint[]).every((item) => item.value === 0)
+})
+
+/**
+ * Transforms metric data for heatmap visualization, replacing 0 with null.
  * Null values display as striped patterns to differentiate from low values.
- * @returns {Object|null} Transformed analytics data with null for zero values or null if unavailable
+ * @returns {Object|null} Transformed analytics data or null if no data to display
  */
 const data = computed(() => {
-  const metricData = analyticsStore.getMetricDataForSelectedTimePeriod(
-    props.metricType,
-    props.groupId,
-  )
-  if (metricData) {
-    return {
-      ...metricData,
-      series: (metricData.series as TimeOfDayDataPoint[]).map((item: TimeOfDayDataPoint) => ({
-        ...item,
-        value: item.value === 0 ? null : item.value,
-      })),
-    }
-  } else {
-    console.warn('No metric data found for', props.metricType, 'groupId:', props.groupId)
-    return null
+  if (showNoData.value) return null
+
+  const metric = metricData.value
+  if (!metric) return null
+
+  return {
+    ...metric,
+    series: (metric.series as TimeOfDayDataPoint[]).map((item: TimeOfDayDataPoint) => ({
+      ...item,
+      value: item.value === 0 ? null : item.value,
+    })),
   }
 })
 
@@ -92,7 +111,50 @@ const options = computed(() => ({
 }))
 </script>
 <template>
-  <div class="analytics__chart-container">
+  <div class="analytics__chart-container" :class="{ '': !data }">
     <CcvHeatmapChart v-if="data" :data="data.series" :options />
+    <div v-else class="analytics__chart-container--no-data">
+      <p class="analytics__error-title">Patterns of use by time of day</p>
+      <img
+        :src="NoDataDayTimeHeatmapSvg"
+        alt="No data available for patterns of use by time of day"
+      />
+    </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.analytics__chart-container--no-data {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // first child: top-left
+  > :first-child {
+    align-self: flex-start;
+  }
+
+  // second child: centered in remaining space
+  > :nth-child(2) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.analytics__error-title {
+  color: var(--cds-text-primary, #161616);
+  font-size: 16px;
+  font-family: var(--cds-charts-font-family);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+}
+</style>
