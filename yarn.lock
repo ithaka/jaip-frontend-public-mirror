@@ -2231,12 +2231,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.10.11":
-  version: 24.10.12
-  resolution: "@types/node@npm:24.10.12"
+"@types/node@npm:^24.10.13":
+  version: 24.10.13
+  resolution: "@types/node@npm:24.10.13"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/fa39b88c8d82a2cec41544bee3426c4b78a13cc3c5ccf6fcb6c9528a68466ffcc73772833c612c7bb7e5fe1bc8e38002d1d543152e43b20b0600096cf6f210d1
+  checksum: 10c0/4ff0b9b060b5477c0fec5b11a176f294be588104ab546295db65b17a92ba0a6077b52ad92dd3c0d2154198c7f9d0021e6c1d42b00c9ac7ebfd85632afbcc48a4
   languageName: node
   linkType: hard
 
@@ -3160,7 +3160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.2, axios@npm:^1.13.4":
+"axios@npm:^1.13.2, axios@npm:^1.13.5":
   version: 1.13.5
   resolution: "axios@npm:1.13.5"
   dependencies:
@@ -4560,14 +4560,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:^5.2.1":
-  version: 5.2.1
-  resolution: "eslint-plugin-cypress@npm:5.2.1"
+"eslint-plugin-cypress@npm:^5.3.0":
+  version: 5.4.0
+  resolution: "eslint-plugin-cypress@npm:5.4.0"
   dependencies:
-    globals: "npm:^16.2.0"
+    globals: "npm:^17.3.0"
   peerDependencies:
     eslint: ">=9"
-  checksum: 10c0/c57ecde95747b4834ec56f6ce003f725d6c0e047950496dae3d640e12b5a90c02fd7f0f7b5bfa1befd6cf5901bada53dbbb1a8c3b21fb2bc07f08d446cf287db
+  checksum: 10c0/ed5072d32f5695e93dd71df776436de0a19c32b789c37b173dcdd734189a4bb79086aa6e01e0c280df5d40bcd8b4b4d3758a053640dcecf43ec547e3142ba3a7
   languageName: node
   linkType: hard
 
@@ -5211,13 +5211,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.2.0":
-  version: 16.5.0
-  resolution: "globals@npm:16.5.0"
-  checksum: 10c0/615241dae7851c8012f5aa0223005b1ed6607713d6813de0741768bd4ddc39353117648f1a7086b4b0fa45eae733f1c0a0fe369aa4e543bb63f8de8990178ea9
-  languageName: node
-  linkType: hard
-
 "globals@npm:^17.3.0":
   version: 17.3.0
   resolution: "globals@npm:17.3.0"
@@ -5667,7 +5660,7 @@ __metadata:
     "@ithaka/pharos": "npm:^14.22.1"
     "@tsconfig/node22": "npm:^22.0.5"
     "@types/jsdom": "npm:^27.0.0"
-    "@types/node": "npm:^24.10.11"
+    "@types/node": "npm:^24.10.13"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.4"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.4"
@@ -5675,11 +5668,11 @@ __metadata:
     "@vue/tsconfig": "npm:^0.8.1"
     "@vuepic/vue-datepicker": "npm:^11.0.3"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.13.4"
+    axios: "npm:^1.13.5"
     cypress: "npm:^15.10.0"
     eslint: "npm:^9.39.2"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-cypress: "npm:^5.2.1"
+    eslint-plugin-cypress: "npm:^5.3.0"
     globals: "npm:^17.3.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.6.1"

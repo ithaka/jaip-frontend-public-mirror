@@ -1,6 +1,6 @@
 import globals from "globals";
 import ithakaVueEslintConfig from "@ithaka/eslint-config-vue";
-import pluginCypress from 'eslint-plugin-cypress/flat';
+import pluginCypress from 'eslint-plugin-cypress';
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default [
