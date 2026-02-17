@@ -106,7 +106,7 @@ const getPDFViewerLogs = (options: {
   }
 }
 
-const getPageViewerLogs = (options: { iid: Ref<string> }) => {
+const getPageViewerLogs = (options: { iid: string }) => {
   // This UUID is created when the Viewer component is created, and will be able to
   // link all viewer logs for a single document view session.
   const uuid = uuidv4()
@@ -115,7 +115,7 @@ const getPageViewerLogs = (options: { iid: Ref<string> }) => {
     (opts: { action: ViewerControlOptions }): (() => WorkingLog) =>
     () => {
       return {
-        ...generics.viewerControl({ action: opts.action, iid: options.iid.value }),
+        ...generics.viewerControl({ action: opts.action, iid: options.iid }),
         event_uuid: uuid,
       }
     }
@@ -124,7 +124,7 @@ const getPageViewerLogs = (options: { iid: Ref<string> }) => {
     (opts: { previous_page: number; new_page: number }): (() => WorkingLog) =>
     () => {
       return {
-        ...generics.viewerControl({ action: ViewerControls.update_page, iid: options.iid.value }),
+        ...generics.viewerControl({ action: ViewerControls.update_page, iid: options.iid }),
         event_uuid: uuid,
         previous_page: opts.previous_page,
         current_page: opts.new_page,
@@ -133,14 +133,14 @@ const getPageViewerLogs = (options: { iid: Ref<string> }) => {
 
   const startPageViewingSessionLog = (): WorkingLog => {
     return {
-      ...generics.startViewingSession({ iid: options.iid.value }),
+      ...generics.startViewingSession({ iid: options.iid }),
       event_uuid: uuid,
     }
   }
 
   const endPageViewingSessionLog = (): WorkingLog => {
     return {
-      ...generics.endViewingSession({ iid: options.iid.value }),
+      ...generics.endViewingSession({ iid: options.iid }),
       event_uuid: uuid,
     }
   }
@@ -149,7 +149,7 @@ const getPageViewerLogs = (options: { iid: Ref<string> }) => {
     (opts: { error: ViewerError }): (() => WorkingLog) =>
     () => {
       return {
-        ...generics.viewerControl({ action: ViewerControls.toggle_menu, iid: options.iid.value }),
+        ...generics.viewerControl({ action: ViewerControls.toggle_menu, iid: options.iid }),
         event_description: 'An error occurred in the page viewer',
         action: 'page_viewer_error',
         viewer_error: opts.error,
