@@ -20,6 +20,10 @@ import DashboardUnavailable from '@/components/analytics/DashboardUnavailable.vu
 const userStore = useUserStore()
 const { groups, selectedGroupId } = storeToRefs(userStore)
 
+const groupsWithAnalytics = computed(() => {
+  return userStore.groupsWithFeature(groups.value, 'view_analytics')
+})
+
 const analyticsStore = useAnalyticsStore()
 const { selectedTimePeriod, lastExported, isError } = storeToRefs(analyticsStore)
 
@@ -83,8 +87,8 @@ const handleReload = async () => {
 
 /** Sets default group if none selected. */
 onBeforeMount(() => {
-  if (selectedGroupId.value === 0 && groups.value[0]) {
-    userStore.setSelectedGroupId(groups.value[0].id)
+  if (selectedGroupId.value === 0 && groupsWithAnalytics.value.length) {
+    userStore.setSelectedGroupId(groupsWithAnalytics.value[0]!.id)
   }
 })
 
@@ -125,7 +129,7 @@ logPageView()
           @change="handleGroupChange"
         >
           <span slot="label">Your Group(s)</span>
-          <option v-for="group in groups" :key="group.id" :value="group.id">
+          <option v-for="group in groupsWithAnalytics" :key="group.id" :value="group.id">
             {{ group.name }}
           </option>
         </pep-pharos-select>
