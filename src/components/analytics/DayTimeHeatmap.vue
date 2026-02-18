@@ -11,6 +11,12 @@ const props = defineProps<{
 
 const analyticsStore = useAnalyticsStore()
 
+const capitalizeTimeLabel = (time: string) => {
+  return `${time.charAt(0).toUpperCase()}${time.slice(1)}`
+}
+
+const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
+
 /**
  * Retrieves raw metric data from the analytics store.
  * Cached to prevent duplicate store lookups.
@@ -48,6 +54,7 @@ const data = computed(() => {
     ...metric,
     series: (metric.series as TimeOfDayDataPoint[]).map((item: TimeOfDayDataPoint) => ({
       ...item,
+      time: capitalizeTimeLabel(item.time),
       value: item.value === 0 ? null : item.value,
     })),
   }
@@ -59,17 +66,17 @@ const data = computed(() => {
  * @returns {Object} Heatmap chart configuration options
  */
 const options = computed(() => ({
-  title: 'Patterns of use by time of day',
+  title: 'Views by time of day',
   axes: {
     top: {
-      mapsTo: 'time',
-      scaleType: 'labels',
-      domain: ['morning', 'afternoon', 'evening', 'night'],
-    },
-    left: {
       mapsTo: 'day',
       scaleType: 'labels',
-      domain: ['Sunday', 'Saturday', 'Friday', 'Thursday', 'Wednesday', 'Tuesday', 'Monday'],
+      domain: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    },
+    left: {
+      mapsTo: 'time',
+      scaleType: 'labels',
+      domain: ['Night', 'Evening', 'Afternoon', 'Morning'],
     },
   },
   color: {
@@ -89,6 +96,22 @@ const options = computed(() => ({
     colorLegend: {
       title: 'Low to High',
       type: 'quantize',
+    },
+  },
+  tooltip: {
+    groupLabel: '',
+    customHTML: (_data: unknown, _defaultHTML: string, datum: Record<string, unknown>) => {
+      const day = typeof datum?.day === 'string' ? datum.day : ''
+      const time = typeof datum?.time === 'string' ? datum.time : ''
+      const count = typeof datum?.value === 'number' ? datum.value : 0
+
+      return `
+        <div>
+          <p><strong>Day:</strong> ${day}</p>
+          <p><strong>Time of day:</strong> ${time}</p>
+          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+        </div>
+      `
     },
   },
   toolbar: {
@@ -114,16 +137,33 @@ const options = computed(() => ({
   <div class="analytics__chart-container" :class="{ '': !data }">
     <CcvHeatmapChart v-if="data" :data="data.series" :options />
     <div v-else class="analytics__chart-container--no-data">
-      <p class="analytics__error-title">Patterns of use by time of day</p>
-      <img
-        :src="NoDataDayTimeHeatmapSvg"
-        alt="No data available for patterns of use by time of day"
-      />
+      <p class="analytics__error-title">Views by time of day</p>
+      <img :src="NoDataDayTimeHeatmapSvg" alt="No data available for views by time of day" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.analytics__chart-container {
+  border-radius: 0.25rem;
+
+  :deep(.cds--cc--title text) {
+    font-family: var(--pharos-font-family-sans-serif);
+    font-weight: var(--pharos-font-weight-bold);
+  }
+
+  :deep(.cc--title text) {
+    font-family: var(--pharos-font-family-sans-serif);
+    font-weight: var(--pharos-font-weight-bold);
+  }
+
+  :deep(.cds--cc--chart-wrapper svg text:not(.title)),
+  :deep(.cc--chart-wrapper svg text:not(.title)) {
+    fill: var(--pharos-color-marble-gray-10) !important;
+    color: var(--pharos-color-marble-gray-10) !important;
+  }
+}
+
 .analytics__chart-container--no-data {
   display: flex;
   flex-direction: column;

@@ -125,10 +125,12 @@ logPageView()
         <pep-pharos-select
           a11y-label="Select your group(s)"
           :value="selectedGroupId || undefined"
-          :message="lastUpdatedMsg"
           @change="handleGroupChange"
         >
           <span slot="label">Your Group(s)</span>
+          <span v-if="lastUpdatedMsg" slot="message" class="analytics__last-updated-message">
+            {{ lastUpdatedMsg }}
+          </span>
           <option v-for="group in groupsWithAnalytics" :key="group.id" :value="group.id">
             {{ group.name }}
           </option>
@@ -256,7 +258,7 @@ logPageView()
   &__section--loading {
     > * {
       position: relative;
-      border-radius: var(--pharos-radius-base-standard);
+      border-radius: 0.25rem;
       overflow: hidden;
       border: none;
     }
@@ -336,6 +338,7 @@ logPageView()
     grid-template-columns: 1fr 1fr;
     gap: var(--pharos-spacing-1-x);
     min-height: 400px;
+    margin-bottom: var(--pharos-spacing-3-x);
 
     @media (max-width: 767px) {
       grid-template-columns: 1fr;
@@ -345,12 +348,16 @@ logPageView()
   &__chart-container {
     padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-3-x);
     border: 2px solid var(--pharos-color-marble-gray-80);
-    border-radius: var(--pharos-radius-base-standard);
+    border-radius: 0.25rem;
     min-height: 300px;
 
     :deep(.cc--chart-holder) {
       width: 100% !important;
     }
   }
+}
+
+.analytics__last-updated-message {
+  color: var(--pharos-color-marble-gray-40);
 }
 </style>

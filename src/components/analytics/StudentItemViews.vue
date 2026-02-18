@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
@@ -12,6 +12,23 @@ const props = defineProps<{
 
 const analyticsStore = useAnalyticsStore()
 const { selectedTimePeriod } = storeToRefs(analyticsStore)
+
+const MOBILE_TICK_BREAKPOINT = 570
+const viewportWidth = ref<number>(typeof window !== 'undefined' ? window.innerWidth : 1024)
+
+const isCompactTickMode = computed(() => viewportWidth.value < MOBILE_TICK_BREAKPOINT)
+
+const handleResize = () => {
+  viewportWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 
 /**
  * Retrieves raw metric data from the analytics store.
@@ -65,7 +82,6 @@ const data = computed(() => {
   }
 })
 
-// TODO: Substitute date-fns formatting if needed in more places. For now, keeping it simple.
 const MONTH_NAMES = [
   'Jan',
   'Feb',
@@ -80,6 +96,26 @@ const MONTH_NAMES = [
   'Nov',
   'Dec',
 ]
+
+const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
+
+const formatTooltipDate = (value: unknown) => {
+  const date = value instanceof Date ? value : new Date(String(value))
+
+  if (Number.isNaN(date.getTime())) {
+    return ''
+  }
+
+  const month = MONTH_NAMES[date.getMonth()]
+  const day = date.getDate()
+  const year = date.getFullYear()
+
+  if (selectedTimePeriod.value === 'months_all_time') {
+    return `${month} ${year}`
+  }
+
+  return `${month} ${day}, ${year}`
+}
 
 /**
  * Extracts dates from series for x-axis ticks.
@@ -109,16 +145,26 @@ const labelsToShow = computed(() => {
     })
   } else if (selectedTimePeriod.value === 'weeks_365') {
     dates.forEach((date, index) => {
-      if (index % 2 === 0) {
+      const showEvery = isCompactTickMode.value ? 3 : 2
+      if (index % showEvery === 0) {
         timestamps.add(date.getTime())
       }
     })
   } else {
-    // For days_30, show all labels
-    dates.forEach((date) => timestamps.add(date.getTime()))
+    // For days_30, show every day by default; every other day in compact mode
+    dates.forEach((date, index) => {
+      const showEvery = isCompactTickMode.value ? 2 : 1
+      if (index % showEvery === 0) {
+        timestamps.add(date.getTime())
+      }
+    })
   }
 
   return timestamps
+})
+
+const firstVisibleTimestamp = computed(() => {
+  return tickValues.value.find((date) => labelsToShow.value.has(date.getTime()))?.getTime() || null
 })
 
 /**
@@ -141,6 +187,14 @@ const tickFormatter = computed(() => {
 
     switch (selectedTimePeriod.value) {
       case 'days_30':
+        if (isCompactTickMode.value) {
+          if (timestamp === firstVisibleTimestamp.value) {
+            return `${month} ${date.getDate()}`
+          }
+
+          return `${date.getDate()}`
+        }
+
         return `${month} ${date.getDate()}`
       case 'weeks_365':
         return `${month} ${date.getDate()}`
@@ -166,7 +220,7 @@ const areaOptions = computed(() => ({
     },
     left: {
       mapsTo: 'n',
-      title: 'Number of items',
+      title: 'Items',
       scaleType: 'linear',
     },
   },
@@ -197,6 +251,17 @@ const areaOptions = computed(() => ({
   },
   tooltip: {
     groupLabel: '',
+    customHTML: (_data: unknown, _defaultHTML: string, datum: Record<string, unknown>) => {
+      const dateLabel = formatTooltipDate(datum?.date)
+      const count = typeof datum?.n === 'number' ? datum.n : 0
+
+      return `
+        <div>
+          <p><strong>Date:</strong> ${dateLabel}</p>
+          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+        </div>
+      `
+    },
   },
   points: {
     enabled: true,
@@ -219,6 +284,43 @@ const areaOptions = computed(() => ({
 </template>
 
 <style lang="scss" scoped>
+.analytics__chart-container {
+  border-radius: 0.25rem;
+
+  :deep(.cds--cc--title text),
+  :deep(.cc--title text) {
+    font-family: var(--pharos-font-family-sans-serif);
+    font-weight: var(--pharos-font-weight-bold);
+  }
+
+  :deep(.cds--cc--chart-wrapper svg text:not(.title)),
+  :deep(.cc--chart-wrapper svg text:not(.title)) {
+    fill: var(--pharos-color-marble-gray-10) !important;
+    color: var(--pharos-color-marble-gray-10) !important;
+  }
+
+  :deep(.ticks .tick-label),
+  :deep(.ticks .tick-label--primary),
+  :deep(.ticks .tick text) {
+    fill: var(--pharos-color-marble-gray-10) !important;
+    color: var(--pharos-color-marble-gray-10) !important;
+    font-family: var(--pharos-font-family-sans-serif) !important;
+    font-weight: var(--pharos-font-weight-regular) !important;
+    opacity: 1 !important;
+    stroke: none !important;
+  }
+
+  :deep(.cds--cc--axes g.axis.bottom .axis-title),
+  :deep(.cc--axes g.axis.bottom .axis-title) {
+    translate: 0 0.75rem;
+  }
+
+  :deep(.cds--cc--axes g.axis.left .axis-title),
+  :deep(.cc--axes g.axis.left .axis-title) {
+    translate: -0.5rem 0;
+  }
+}
+
 .analytics__chart-container--no-data {
   display: flex;
   flex-direction: column;

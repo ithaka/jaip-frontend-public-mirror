@@ -15,6 +15,13 @@ const { selectedTimePeriod } = storeToRefs(analyticsStore)
 
 const isExpanded = ref(false)
 
+const chartKey = computed(() => {
+  const seriesLength = data.value?.series?.length || 0
+  return `${isExpanded.value ? 'expanded' : 'collapsed'}-${selectedTimePeriod.value}-${seriesLength}`
+})
+
+const chartHeight = computed(() => (isExpanded.value ? '1000px' : '400px'))
+
 /**
  * Resets expanded state when time period changes to collapse the chart.
  */
@@ -29,6 +36,22 @@ watch(selectedTimePeriod, () => {
 const metricData = computed(() => {
   return analyticsStore.getMetricDataForSelectedTimePeriod(props.metricType, props.groupId)
 })
+
+const totalDisciplineCount = computed(() => {
+  const metric = metricData.value
+  if (!metric || !metric.series) {
+    return 0
+  }
+
+  return metric.series.length
+})
+
+const showAllDisciplinesLabel = computed(() => {
+  const count = totalDisciplineCount.value
+  return `Show all ${count} disciplines`
+})
+
+const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
 
 /**
  * Determines if no meaningful data exists to display.
@@ -57,11 +80,18 @@ const data = computed(() => {
   const metric = metricData.value
   if (!metric) return null
 
-  const limitedSeries = isExpanded.value ? metric.series : metric.series.slice(0, 10)
+  const sortedSeriesDesc = [...metric.series].sort((a, b) => {
+    const aValue = 'n' in a ? a.n : 0
+    const bValue = 'n' in b ? b.n : 0
+    return bValue - aValue
+  })
+
+  const highestSeries = isExpanded.value ? sortedSeriesDesc : sortedSeriesDesc.slice(0, 10)
+  const displaySeries = [...highestSeries].reverse()
 
   return {
     ...metric,
-    series: limitedSeries,
+    series: displaySeries,
   }
 })
 
@@ -75,6 +105,9 @@ const options = computed(() => ({
     left: {
       mapsTo: 'bucket',
       scaleType: 'labels',
+      domain: data.value?.series
+        .map((item) => ('bucket' in item ? item.bucket : ''))
+        .filter((bucket) => bucket.length > 0),
     },
     bottom: {
       mapsTo: 'n',
@@ -98,6 +131,20 @@ const options = computed(() => ({
   legend: {
     enabled: false,
   },
+  tooltip: {
+    groupLabel: '',
+    customHTML: (_data: unknown, _defaultHTML: string, datum: Record<string, unknown>) => {
+      const discipline = typeof datum?.bucket === 'string' ? datum.bucket : ''
+      const count = typeof datum?.n === 'number' ? datum.n : 0
+
+      return `
+        <div>
+          <p><strong>Discipline:</strong> ${discipline}</p>
+          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+        </div>
+      `
+    },
+  },
   toolbar: {
     enabled: true,
     numberOfIcons: 1,
@@ -110,7 +157,7 @@ const options = computed(() => ({
       },
     ],
   },
-  height: isExpanded.value ? 1000 : 300,
+  height: chartHeight.value,
 }))
 </script>
 <template>
@@ -119,13 +166,15 @@ const options = computed(() => ({
     :class="isExpanded ? 'analytics__chart-container--tall' : 'analytics__chart-container--short'"
   >
     <div v-if="data">
-      <CcvSimpleBarChart :data="data.series" :options />
-      <pep-pharos-button
-        class="analytics__expand-button"
-        variant="secondary"
-        @click="isExpanded = !isExpanded"
-        >{{ isExpanded ? 'Hide most disciplines' : 'Show all disciplines' }}
-      </pep-pharos-button>
+      <CcvSimpleBarChart :key="chartKey" :data="data.series" :options="options" />
+      <div class="analytics__expand-button-wrap">
+        <pep-pharos-button
+          class="analytics__expand-button"
+          variant="secondary"
+          @click="isExpanded = !isExpanded"
+          >{{ isExpanded ? 'Show less' : showAllDisciplinesLabel }}
+        </pep-pharos-button>
+      </div>
     </div>
     <div v-else class="analytics__chart-container--no-data">
       <p class="analytics__error-title">Views by discipline</p>
@@ -135,17 +184,36 @@ const options = computed(() => ({
 </template>
 <style lang="scss" scoped>
 .analytics__chart-container--expandable {
-  padding: var(--pharos-spacing-2-x) var(--pharos-spacing-2-x) var(--pharos-spacing-3-x);
+  :deep(.cds--cc--title text) {
+    font-family: var(--pharos-font-family-sans-serif);
+    font-weight: var(--pharos-font-weight-bold);
+  }
+
+  :deep(.cc--title text) {
+    font-family: var(--pharos-font-family-sans-serif);
+    font-weight: var(--pharos-font-weight-bold);
+  }
+
+  :deep(.cds--cc--chart-wrapper svg text:not(.title)),
+  :deep(.cc--chart-wrapper svg text:not(.title)) {
+    fill: var(--pharos-color-marble-gray-10) !important;
+    color: var(--pharos-color-marble-gray-10) !important;
+  }
+}
+
+.analytics__chart-container--expandable {
+  padding: var(--pharos-spacing-2-x);
   border: 2px solid var(--pharos-color-marble-gray-80);
-  border-radius: var(--pharos-radius-base-standard);
-  min-height: 300px;
+  border-radius: 0.25rem;
+  position: relative;
+  min-height: 400px;
 
   &.analytics__chart-container--short {
-    height: 400px;
+    min-height: 400px;
   }
 
   &.analytics__chart-container--tall {
-    height: 1000px;
+    min-height: 1000px;
   }
 
   :deep(.cc--chart-holder) {
@@ -175,6 +243,11 @@ const options = computed(() => ({
     max-width: 360px;
     margin: 0 auto;
   }
+}
+
+.analytics__expand-button-wrap {
+  text-align: center;
+  margin-top: var(--pharos-spacing-2-x);
 }
 
 .analytics__error-title {

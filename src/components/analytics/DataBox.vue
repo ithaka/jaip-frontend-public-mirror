@@ -17,7 +17,7 @@ defineProps<{
 .data-card {
   padding: var(--pharos-spacing-2-x);
   border: 2px solid var(--pharos-color-marble-gray-80);
-  border-radius: var(--pharos-radius-base-standard);
+  border-radius: 0.25rem;
   background-color: var(--pharos-color-marble-gray-97);
 
   @media (min-width: 768px) and (max-width: 1055px) {
