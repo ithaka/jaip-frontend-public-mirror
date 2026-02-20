@@ -2,6 +2,9 @@
 import { computed } from 'vue'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType, TimeOfDayDataPoint } from '@/interfaces/Analytics'
+import { formatAnalyticsCount, downloadIconSvg } from '@/utils/analytics'
+import { downloadCsvFile } from '@/utils/csv'
+import { capitalizeFirstLetter } from '@/utils/helpers'
 import NoDataDayTimeHeatmapSvg from '@/assets/images/no-data-day-time-heatmap.svg'
 
 const props = defineProps<{
@@ -11,11 +14,25 @@ const props = defineProps<{
 
 const analyticsStore = useAnalyticsStore()
 
-const capitalizeTimeLabel = (time: string) => {
-  return `${time.charAt(0).toUpperCase()}${time.slice(1)}`
-}
+/**
+ * Formats raw metric data for download as CSV, ensuring consistent formatting of day, time, and count values.
+ * @returns {void} Triggers download of a CSV file with formatted data.
+ */
+const downloadCsv = (): void => {
+  if (!data.value?.series?.length) {
+    return
+  }
 
-const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
+  const header = ['Day', 'Time of day', 'Number of items']
+  const rows = data.value.series.map((item) => {
+    const day = 'day' in item ? item.day : ''
+    const time = 'time' in item ? item.time : ''
+    const count = 'value' in item && typeof item.value === 'number' ? item.value : 0
+    return [day, time, formatAnalyticsCount(count)]
+  })
+
+  downloadCsvFile('views-by-time-of-day.csv', header, rows)
+}
 
 /**
  * Retrieves raw metric data from the analytics store.
@@ -54,7 +71,7 @@ const data = computed(() => {
     ...metric,
     series: (metric.series as TimeOfDayDataPoint[]).map((item: TimeOfDayDataPoint) => ({
       ...item,
-      time: capitalizeTimeLabel(item.time),
+      time: capitalizeFirstLetter(item.time),
       value: item.value === 0 ? null : item.value,
     })),
   }
@@ -109,20 +126,25 @@ const options = computed(() => ({
         <div>
           <p><strong>Day:</strong> ${day}</p>
           <p><strong>Time of day:</strong> ${time}</p>
-          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },
   },
   toolbar: {
     enabled: true,
-    numberOfIcons: 1,
+    numberOfIcons: 2,
     controls: [
       {
-        type: 'Export as PNG',
-      },
-      {
-        type: 'Export as CSV',
+        type: 'Custom',
+        title: 'Download (CSV)',
+        text: 'Download (CSV)',
+        iconSVG: {
+          content: downloadIconSvg,
+          width: '28px',
+          height: '28px',
+        },
+        clickFunction: downloadCsv,
       },
     ],
   },

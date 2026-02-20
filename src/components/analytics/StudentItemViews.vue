@@ -3,6 +3,8 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
+import { formatAnalyticsCount, formatViewsOverTimeDate, downloadIconSvg } from '@/utils/analytics'
+import { downloadCsvFile } from '@/utils/csv'
 import NoDataStudentItemViewsSvg from '@/assets/images/no-data-student-item-views.svg'
 
 const props = defineProps<{
@@ -97,24 +99,26 @@ const MONTH_NAMES = [
   'Dec',
 ]
 
-const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
+const formatTooltipDate = (value: unknown) =>
+  formatViewsOverTimeDate(value, selectedTimePeriod.value)
 
-const formatTooltipDate = (value: unknown) => {
-  const date = value instanceof Date ? value : new Date(String(value))
-
-  if (Number.isNaN(date.getTime())) {
-    return ''
+/** Utility function to download the current chart data as a CSV file.
+ * Formats the data with appropriate headers and values.
+ * @returns {void} Triggers download of a CSV file with formatted data.
+ */
+const downloadCsv = (): void => {
+  if (!data.value?.series?.length) {
+    return
   }
 
-  const month = MONTH_NAMES[date.getMonth()]
-  const day = date.getDate()
-  const year = date.getFullYear()
+  const header = ['Date', 'Number of items']
+  const rows = data.value.series.map((item) => {
+    const dateValue = 'date' in item ? item.date : null
+    const countValue = 'n' in item ? item.n : 0
+    return [formatTooltipDate(dateValue), formatAnalyticsCount(countValue)]
+  })
 
-  if (selectedTimePeriod.value === 'months_all_time') {
-    return `${month} ${year}`
-  }
-
-  return `${month} ${day}, ${year}`
+  downloadCsvFile('views-over-time.csv', header, rows)
 }
 
 /**
@@ -236,15 +240,23 @@ const areaOptions = computed(() => ({
   },
   toolbar: {
     enabled: true,
-    numberOfIcons: 1,
+    numberOfIcons: 2,
     controls: [
       {
-        type: 'Export as PNG',
-      },
-      {
-        type: 'Export as CSV',
+        type: 'Custom',
+        title: 'Download (CSV)',
+        text: 'Download (CSV)',
+        iconSVG: {
+          content: downloadIconSvg,
+          width: '28px',
+          height: '28px',
+        },
+        clickFunction: downloadCsv,
       },
     ],
+  },
+  ruler: {
+    enabled: false,
   },
   legend: {
     enabled: false,
@@ -253,12 +265,18 @@ const areaOptions = computed(() => ({
     groupLabel: '',
     customHTML: (_data: unknown, _defaultHTML: string, datum: Record<string, unknown>) => {
       const dateLabel = formatTooltipDate(datum?.date)
-      const count = typeof datum?.n === 'number' ? datum.n : 0
+      const hasValidCount = typeof datum?.n === 'number'
+
+      if (!dateLabel || !hasValidCount) {
+        return ''
+      }
+
+      const count = datum.n as number
 
       return `
         <div>
           <p><strong>Date:</strong> ${dateLabel}</p>
-          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },

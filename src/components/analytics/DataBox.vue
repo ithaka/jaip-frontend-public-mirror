@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDisplayNumbers } from '@/utils/helpers'
+import { formatDisplayNumbers } from '@/utils/analytics'
 
 defineProps<{
   name: string

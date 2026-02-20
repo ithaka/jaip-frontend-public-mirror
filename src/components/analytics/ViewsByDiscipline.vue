@@ -3,6 +3,8 @@ import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
+import { formatAnalyticsCount, downloadIconSvg } from '@/utils/analytics'
+import { downloadCsvFile } from '@/utils/csv'
 import NoDataViewsByDisciplineSvg from '@/assets/images/no-data-views-by-discipline.svg'
 
 const props = defineProps<{
@@ -32,6 +34,7 @@ watch(selectedTimePeriod, () => {
 /**
  * Retrieves raw metric data from the analytics store.
  * Cached to prevent duplicate store lookups.
+ * @returns {Object|null} Analytics metric data or null if unavailable
  */
 const metricData = computed(() => {
   return analyticsStore.getMetricDataForSelectedTimePeriod(props.metricType, props.groupId)
@@ -51,11 +54,30 @@ const showAllDisciplinesLabel = computed(() => {
   return `Show all ${count} disciplines`
 })
 
-const formatCount = (value: number) => new Intl.NumberFormat('en-US').format(value)
+/**
+ * Utility function to download the current chart data as a CSV file.
+ * Formats the data with appropriate headers and values for discipline and count.
+ * @returns {void} Triggers download of a CSV file with formatted data.
+ */
+const downloadCsv = (): void => {
+  if (!data.value?.series?.length) {
+    return
+  }
+
+  const header = ['Discipline', 'Number of items']
+  const rows = data.value.series.map((item) => {
+    const discipline = 'bucket' in item ? item.bucket : ''
+    const count = 'n' in item ? item.n : 0
+    return [discipline, formatAnalyticsCount(count)]
+  })
+
+  downloadCsvFile('views-by-discipline.csv', header, rows)
+}
 
 /**
  * Determines if no meaningful data exists to display.
  * Returns true if metric data is missing, empty, or all values are zero.
+ * @returns {boolean} True if no data to display, false otherwise
  */
 const showNoData = computed(() => {
   const metric = metricData.value
@@ -140,20 +162,25 @@ const options = computed(() => ({
       return `
         <div>
           <p><strong>Discipline:</strong> ${discipline}</p>
-          <p><strong>Number of items:</strong> ${formatCount(count)}</p>
+          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },
   },
   toolbar: {
     enabled: true,
-    numberOfIcons: 1,
+    numberOfIcons: 2,
     controls: [
       {
-        type: 'Export as PNG',
-      },
-      {
-        type: 'Export as CSV',
+        type: 'Custom',
+        title: 'Download (CSV)',
+        text: 'Download (CSV)',
+        iconSVG: {
+          content: downloadIconSvg,
+          width: '28px',
+          height: '28px',
+        },
+        clickFunction: downloadCsv,
       },
     ],
   },
@@ -198,6 +225,13 @@ const options = computed(() => ({
   :deep(.cc--chart-wrapper svg text:not(.title)) {
     fill: var(--pharos-color-marble-gray-10) !important;
     color: var(--pharos-color-marble-gray-10) !important;
+  }
+
+  :deep(.cds--cc--axes g.axis.bottom .axis-title),
+  :deep(.cc--axes g.axis.bottom .axis-title) {
+    translate: 0 0.75rem;
+    text-anchor: middle;
+    text-align: center;
   }
 }
 

@@ -178,6 +178,8 @@ export const formatRouteName = (route: RouteRecordNormalized): string => {
 
 /**
  * Organizes routes into grouped and ungrouped categories based on their metadata.
+ * @param router - The Vue Router instance containing the application's routes.
+ * @returns An object with grouped and ungrouped routes for navigation purposes.
  */
 export const getOrganizedRoutes = (router: Router): RoutesObject => {
   const routes = router.getRoutes()
@@ -220,38 +222,6 @@ export const getAncestorComponentNames = (
 }
 
 /**
- * Formats numbers over 999 with K for thousands and M for millions
- * @param val - The number to format
- * @returns Formatted string with K or M suffix
- */
-export const formatDisplayNumbers = (val: number): string => {
-  if (val >= 1000000) {
-    return `${parseFloat((val / 1000000).toFixed(1))}M`
-  } else if (val >= 1000) {
-    return `${parseFloat((val / 1000).toFixed(1))}K`
-  }
-  return val.toString()
-}
-
-/** Formats an ISO date string into a more readable format
- * @param isoString - The ISO date string to format
- * @returns Formatted date string
- */
-export const formatDisplayDateTime = (isoString: string): string => {
-  const date = new Date(isoString)
-  if (isNaN(date.getTime())) {
-    return 'Invalid Date'
-  }
-  return date.toLocaleString(undefined, {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-}
-
-/**
  * Creates an async promisified version of setTimeout
  * @param ms - The number of milliseconds to wait
  * @returns A promise that resolves after the specified delay
@@ -260,4 +230,12 @@ export const setAsyncTimeout = (ms: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
+}
+
+/** Capitalizes the first character of a string.
+ * @param str - The string to capitalize
+ * @returns The input string with the first character capitalized
+ */
+export const capitalizeFirstLetter = (str: string) => {
+  return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 }

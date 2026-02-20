@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType, MediaReviewDataPoint } from '@/interfaces/Analytics'
-import { formatDisplayNumbers } from '@/utils/helpers'
+import { formatDisplayNumbers } from '@/utils/analytics'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType

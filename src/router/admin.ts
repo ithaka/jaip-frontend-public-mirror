@@ -74,7 +74,7 @@ const config = {
       meta: {
         group: 'support',
         requiresAny: ['view_analytics'],
-        showSearch: true,
+        showSearch: false,
         label: 'Analytics',
       },
       component: () => import('@/views/AnalyticsView.vue'),

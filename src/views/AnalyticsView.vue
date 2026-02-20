@@ -11,8 +11,10 @@ import DataBox from '@/components/analytics/DataBox.vue'
 import ViewsByDiscipline from '@/components/analytics/ViewsByDiscipline.vue'
 import DayTimeHeatmap from '@/components/analytics/DayTimeHeatmap.vue'
 import DataBar from '@/components/analytics/DataBar.vue'
-import { formatDisplayDateTime, setAsyncTimeout } from '@/utils/helpers'
+import { setAsyncTimeout } from '@/utils/helpers'
+import { formatDisplayDateTime } from '@/utils/analytics'
 import DashboardUnavailable from '@/components/analytics/DashboardUnavailable.vue'
+import NoDataYet from '@/components/analytics/NoDataYet.vue'
 
 /**
  * Store references. selectedGroupId is stored in user store to avoid duplicating group data.
@@ -25,7 +27,7 @@ const groupsWithAnalytics = computed(() => {
 })
 
 const analyticsStore = useAnalyticsStore()
-const { selectedTimePeriod, lastExported, isError } = storeToRefs(analyticsStore)
+const { selectedTimePeriod, lastExported, isError, isNoDataYet } = storeToRefs(analyticsStore)
 
 const coreStore = useCoreStore()
 const isLoading = ref(false)
@@ -65,7 +67,10 @@ const fetchAnalyticsData = async () => {
     const response = await coreStore.$api.analytics.get(selectedGroupId.value.toString())
     // TODO: remove before production
     console.log('🍏 Fetched analytics data:', response.data)
-    analyticsStore.setAnalyticsData(response.data as unknown as AnalyticsData)
+    analyticsStore.setAnalyticsData(
+      response.data as unknown as AnalyticsData,
+      selectedGroupId.value.toString(),
+    )
   } catch {
     analyticsStore.setError(true)
   }
@@ -95,6 +100,7 @@ onBeforeMount(() => {
 /** Reset error state when group changes */
 watch(selectedGroupId, () => {
   analyticsStore.resetError()
+  analyticsStore.resetNoDataYet()
 })
 
 onMounted(async () => {
@@ -152,6 +158,13 @@ logPageView()
         :class="{ 'analytics__section--loading': isLoading }"
       >
         <DashboardUnavailable @reload="handleReload" />
+      </div>
+      <div
+        v-else-if="isNoDataYet"
+        class="analytics__section"
+        :class="{ 'analytics__section--loading': isLoading }"
+      >
+        <NoDataYet />
       </div>
       <div v-else>
         <pep-pharos-heading :level="3" preset="3--bold"> Item usage </pep-pharos-heading>
