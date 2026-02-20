@@ -6,6 +6,7 @@ import { formatAnalyticsCount, downloadIconSvg } from '@/utils/analytics'
 import { downloadCsvFile } from '@/utils/csv'
 import { capitalizeFirstLetter } from '@/utils/helpers'
 import NoDataDayTimeHeatmapSvg from '@/assets/images/no-data-day-time-heatmap.svg'
+import InfoInverseSvg from '@/assets/images/info-inverse.svg'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType
@@ -83,7 +84,7 @@ const data = computed(() => {
  * @returns {Object} Heatmap chart configuration options
  */
 const options = computed(() => ({
-  title: 'Views by time of day',
+  title: '',
   axes: {
     top: {
       mapsTo: 'day',
@@ -157,7 +158,35 @@ const options = computed(() => ({
 </script>
 <template>
   <div class="analytics__chart-container" :class="{ '': !data }">
-    <CcvHeatmapChart v-if="data" :data="data.series" :options />
+    <template v-if="data">
+      <div class="analytics__chart-header">
+        <p class="analytics__chart-title">Patterns of use</p>
+        <div class="analytics__chart-info">
+          <button
+            class="analytics__chart-info-trigger"
+            type="button"
+            aria-label="More information about patterns of use"
+            aria-describedby="patterns-of-use-info-tooltip"
+          >
+            <img :src="InfoInverseSvg" alt="" />
+          </button>
+          <div
+            id="patterns-of-use-info-tooltip"
+            class="analytics__chart-info-tooltip"
+            role="tooltip"
+          >
+            Item access by hour of the day:
+            <ul>
+              <li><strong>Morning:</strong>0-6</li>
+              <li><strong>Afternoon:</strong>6-12</li>
+              <li><strong>Evening:</strong>12-18</li>
+              <li><strong>Night:</strong>18-24</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <CcvHeatmapChart :data="data.series" :options />
+    </template>
     <div v-else class="analytics__chart-container--no-data">
       <p class="analytics__error-title">Views by time of day</p>
       <img :src="NoDataDayTimeHeatmapSvg" alt="No data available for views by time of day" />
@@ -168,6 +197,87 @@ const options = computed(() => ({
 <style lang="scss" scoped>
 .analytics__chart-container {
   border-radius: 0.25rem;
+
+  .analytics__chart-header {
+    display: flex;
+    align-items: center;
+    gap: var(--pharos-spacing-one-half-x);
+    margin-bottom: var(--pharos-spacing-one-half-x);
+  }
+
+  .analytics__chart-title {
+    margin: 0;
+    color: var(--cds-text-primary);
+    font-size: 16px;
+    font-family: var(--cds-charts-font-family);
+    font-weight: 600;
+  }
+
+  .analytics__chart-info {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover .analytics__chart-info-tooltip,
+    &:focus-within .analytics__chart-info-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .analytics__chart-info-trigger {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .analytics__chart-info-trigger img {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+  }
+
+  .analytics__chart-info-tooltip {
+    position: absolute;
+    bottom: calc(100% + var(--pharos-spacing-one-half-x));
+    left: 50%;
+    z-index: 10;
+    width: 18rem;
+    padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x);
+    border-radius: var(--pharos-radius-base-standard);
+    background-color: var(--pharos-tooltip-color-background-base);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    color: var(--pharos-tooltip-color-text-base);
+    font-family: var(--pharos-font-family-sans-serif);
+    font-size: var(--pharos-tooltip-size-text-base);
+    font-weight: var(--pharos-font-weight-regular);
+    letter-spacing: calc(var(--pharos-tooltip-size-text-base) * -0.02);
+    line-height: var(--pharos-line-height-small);
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(var(--pharos-spacing-one-quarter-x));
+    transition:
+      opacity 120ms ease,
+      visibility 120ms ease,
+      transform 120ms ease;
+    pointer-events: none;
+  }
+
+  .analytics__chart-info-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--pharos-spacing-one-quarter-x));
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--pharos-tooltip-color-background-base);
+    transform: translateX(-50%) rotate(45deg);
+  }
 
   :deep(.cds--cc--title text) {
     font-family: var(--pharos-font-family-sans-serif);

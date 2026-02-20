@@ -43,6 +43,56 @@ body {
     'Segoe UI Semibold', 'Roboto Condensed', 'Droid Sans', sans-serif;
 }
 
+.analytics {
+  .cds--cc--tooltip,
+  .cc--tooltip {
+    background-color: var(--pharos-color-marble-gray-20);
+    color: var(--pharos-color-text-white);
+    font-family: var(--pharos-font-family-sans-serif);
+    font-size: var(--pharos-font-size-small);
+    font-weight: var(--pharos-font-weight-regular);
+    letter-spacing: calc(var(--pharos-font-size-small) * -0.02);
+    line-height: var(--pharos-line-height-small);
+    border-radius: var(--pharos-radius-base-standard);
+    transform: translate(-50%, calc(-100% - var(--pharos-spacing-one-half-x)));
+    overflow: visible;
+  }
+
+  .cds--cc--tooltip .content-box,
+  .cc--tooltip .content-box {
+    color: var(--pharos-color-text-white);
+  }
+
+  .cds--cc--tooltip .content-box .title-tooltip,
+  .cds--cc--tooltip .content-box .datapoint-tooltip,
+  .cc--tooltip .content-box .title-tooltip,
+  .cc--tooltip .content-box .datapoint-tooltip {
+    padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x);
+  }
+
+  .cds--cc--tooltip .content-box .title-tooltip p,
+  .cds--cc--tooltip .content-box .datapoint-tooltip p,
+  .cc--tooltip .content-box .title-tooltip p,
+  .cc--tooltip .content-box .datapoint-tooltip p {
+    color: var(--pharos-color-text-white);
+    font-family: var(--pharos-font-family-sans-serif);
+    font-size: var(--pharos-font-size-small);
+    line-height: var(--pharos-line-height-small);
+  }
+
+  .cds--cc--tooltip::after,
+  .cc--tooltip::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: calc(-1 * var(--pharos-spacing-one-quarter-x));
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--pharos-color-marble-gray-20);
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
+
 .notice {
   border: 1px solid var(--pharos-color-marble-gray-80);
   padding: var(--pharos-spacing-1-x);

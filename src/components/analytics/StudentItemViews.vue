@@ -6,6 +6,7 @@ import type { AnalyticsMetricType } from '@/interfaces/Analytics'
 import { formatAnalyticsCount, formatViewsOverTimeDate, downloadIconSvg } from '@/utils/analytics'
 import { downloadCsvFile } from '@/utils/csv'
 import NoDataStudentItemViewsSvg from '@/assets/images/no-data-student-item-views.svg'
+import InfoInverseSvg from '@/assets/images/info-inverse.svg'
 
 const props = defineProps<{
   metricType: AnalyticsMetricType
@@ -211,7 +212,7 @@ const tickFormatter = computed(() => {
 })
 
 const areaOptions = computed(() => ({
-  title: 'Views over time',
+  title: '',
   axes: {
     bottom: {
       mapsTo: 'date',
@@ -262,16 +263,18 @@ const areaOptions = computed(() => ({
     enabled: false,
   },
   tooltip: {
+    alwaysShowRulerTooltip: false,
     groupLabel: '',
     customHTML: (_data: unknown, _defaultHTML: string, datum: Record<string, unknown>) => {
-      const dateLabel = formatTooltipDate(datum?.date)
-      const hasValidCount = typeof datum?.n === 'number'
+      const rawDate = datum?.date ?? datum?.bucket ?? datum?.label
+      const countValue = datum?.n ?? datum?.value
+      const dateLabel = formatTooltipDate(rawDate)
 
-      if (!dateLabel || !hasValidCount) {
-        return ''
+      if (!dateLabel || typeof countValue !== 'number') {
+        return _defaultHTML
       }
 
-      const count = datum.n as number
+      const count = countValue as number
 
       return `
         <div>
@@ -288,12 +291,35 @@ const areaOptions = computed(() => ({
   getFillColor: () => '#0ba2c0',
   getStrokeColor: () => '#0ba2c0',
   accessibility: { svgAriaLabel: 'Views over time. Download CSV to view tabular data.' },
+  height: '400px',
 }))
 </script>
 
 <template>
   <div class="analytics__chart-container" :class="{ '': !data }">
-    <CcvAreaChart v-if="data" :data="data.series" :options="areaOptions" />
+    <template v-if="data">
+      <div class="analytics__chart-header">
+        <p class="analytics__chart-title">Views over time</p>
+        <div class="analytics__chart-info">
+          <button
+            class="analytics__chart-info-trigger"
+            type="button"
+            aria-label="More information about views over time"
+            aria-describedby="views-over-time-info-tooltip"
+          >
+            <img :src="InfoInverseSvg" alt="lowercase i surrounded by a circle" />
+          </button>
+          <div
+            id="views-over-time-info-tooltip"
+            class="analytics__chart-info-tooltip"
+            role="tooltip"
+          >
+            Number of items accessed by your group.
+          </div>
+        </div>
+      </div>
+      <CcvAreaChart :data="data.series" :options="areaOptions" />
+    </template>
     <div v-else class="analytics__chart-container--no-data">
       <p class="analytics__error-title">Views over time</p>
       <img :src="NoDataStudentItemViewsSvg" alt="No data available for views over time" />
@@ -304,6 +330,87 @@ const areaOptions = computed(() => ({
 <style lang="scss" scoped>
 .analytics__chart-container {
   border-radius: 0.25rem;
+
+  .analytics__chart-header {
+    display: flex;
+    align-items: center;
+    gap: var(--pharos-spacing-one-half-x);
+    margin-bottom: var(--pharos-spacing-one-half-x);
+  }
+
+  .analytics__chart-title {
+    margin: 0;
+    color: var(--cds-text-primary);
+    font-size: 16px;
+    font-family: var(--cds-charts-font-family);
+    font-weight: 600;
+  }
+
+  .analytics__chart-info {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover .analytics__chart-info-tooltip,
+    &:focus-within .analytics__chart-info-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .analytics__chart-info-trigger {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .analytics__chart-info-trigger img {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+  }
+
+  .analytics__chart-info-tooltip {
+    position: absolute;
+    bottom: calc(100% + var(--pharos-spacing-one-half-x));
+    left: 50%;
+    z-index: 10;
+    width: 18rem;
+    padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x);
+    border-radius: var(--pharos-radius-base-standard);
+    background-color: var(--pharos-tooltip-color-background-base);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    color: var(--pharos-tooltip-color-text-base);
+    font-family: var(--pharos-font-family-sans-serif);
+    font-size: var(--pharos-tooltip-size-text-base);
+    font-weight: var(--pharos-font-weight-regular);
+    letter-spacing: calc(var(--pharos-tooltip-size-text-base) * -0.02);
+    line-height: var(--pharos-line-height-small);
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(var(--pharos-spacing-one-quarter-x));
+    transition:
+      opacity 120ms ease,
+      visibility 120ms ease,
+      transform 120ms ease;
+    pointer-events: none;
+  }
+
+  .analytics__chart-info-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: calc(-1 * var(--pharos-spacing-one-quarter-x));
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--pharos-tooltip-color-background-base);
+    transform: translateX(-50%) rotate(45deg);
+  }
 
   :deep(.cds--cc--title text),
   :deep(.cc--title text) {
