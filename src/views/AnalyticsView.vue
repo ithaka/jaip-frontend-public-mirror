@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
@@ -14,6 +14,7 @@ import DataBar from '@/components/analytics/DataBar.vue'
 import { setAsyncTimeout } from '@/utils/helpers'
 import { formatDisplayDateTime } from '@/utils/analytics'
 import DashboardUnavailable from '@/components/analytics/DashboardUnavailable.vue'
+import { useLogger } from '@/composables/logging/useLogger'
 import NoDataYet from '@/components/analytics/NoDataYet.vue'
 
 /**
@@ -32,6 +33,9 @@ const { selectedTimePeriod, lastExported, isError, isNoDataYet } = storeToRefs(a
 const coreStore = useCoreStore()
 const isLoading = ref(false)
 
+const time_of_day_item_views = useTemplateRef('time_of_day_item_views')
+const views_by_discipline = useTemplateRef('views_by_discipline')
+const student_item_views = useTemplateRef('student_item_views')
 /**
  * Updates selected time period when user changes dropdown selection.
  */
@@ -60,6 +64,15 @@ const handleGroupChange = (event: Event) => {
 }
 
 /**
+ *
+ * @param event
+ * Handles toolbar button clicks from charts, logging the event with control ID.
+ */
+const chartEventHandler = (event: any) => {
+  handleWithLog(chartButtonClickLog({ controlId: event.detail.control.id }))
+}
+
+/**
  * Fetches analytics data from API for selected group.
  */
 const fetchAnalyticsData = async () => {
@@ -73,6 +86,23 @@ const fetchAnalyticsData = async () => {
     )
   } catch {
     analyticsStore.setError(true)
+  } finally {
+    // When data is fetched and set in the store, we need to wait for the charts before we can attach event listeners to them.
+    nextTick(() => {
+      // These listen for interactions with the chart toolbars (e.g. export buttons)
+      time_of_day_item_views.value?.chart?.chart?.services?.events?.addEventListener(
+        'toolbar-button-click',
+        chartEventHandler,
+      )
+      views_by_discipline.value?.chart?.chart?.services?.events?.addEventListener(
+        'toolbar-button-click',
+        chartEventHandler,
+      )
+      student_item_views.value?.chart?.chart?.services?.events?.addEventListener(
+        'toolbar-button-click',
+        chartEventHandler,
+      )
+    })
   }
 }
 
@@ -112,6 +142,13 @@ onMounted(async () => {
 
 const { logPageView } = usePageViewLogger()
 logPageView()
+
+const { handleWithLog, logs } = useLogger()
+const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } =
+  logs.getAnalyticsLogs({
+    selectedGroupId: selectedGroupId,
+    selectedTimePeriod: selectedTimePeriod,
+  })
 </script>
 
 <template>
@@ -131,7 +168,7 @@ logPageView()
         <pep-pharos-select
           a11y-label="Select your group(s)"
           :value="selectedGroupId || undefined"
-          @change="handleGroupChange"
+          @change="handleWithLog(groupSelectorClickLog, () => handleGroupChange($event))"
         >
           <span slot="label">Your Group(s)</span>
           <span v-if="lastUpdatedMsg" slot="message" class="analytics__last-updated-message">
@@ -144,7 +181,7 @@ logPageView()
         <pep-pharos-select
           a11y-label="Select date range"
           :value="selectedTimePeriod"
-          @change="handleTimePeriodChange"
+          @change="handleWithLog(dateRangeSelectorClickLog, () => handleTimePeriodChange($event))"
         >
           <span slot="label">Date Range</span>
           <option v-for="(label, key) in TimePeriodLabels" :key="key" :value="key">
@@ -191,6 +228,7 @@ logPageView()
             "
           />
           <StudentItemViews
+            ref="student_item_views"
             metricType="student_item_views"
             :group-id="selectedGroupId.toString()"
           />
@@ -199,8 +237,13 @@ logPageView()
           class="analytics__section analytics__bottom-grid"
           :class="{ 'analytics__section--loading': isLoading }"
         >
-          <ViewsByDiscipline metricType="discipline_views" :group-id="selectedGroupId.toString()" />
+          <ViewsByDiscipline
+            ref="views_by_discipline"
+            metricType="discipline_views"
+            :group-id="selectedGroupId.toString()"
+          />
           <DayTimeHeatmap
+            ref="time_of_day_item_views"
             metricType="time_of_day_item_views"
             :group-id="selectedGroupId.toString()"
           />

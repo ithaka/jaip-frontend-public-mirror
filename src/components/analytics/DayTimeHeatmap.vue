@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType, TimeOfDayDataPoint } from '@/interfaces/Analytics'
 import { formatAnalyticsCount, downloadIconSvg } from '@/utils/analytics'
@@ -155,6 +155,11 @@ const options = computed(() => ({
   },
   height: '400px',
 }))
+
+const chart = useTemplateRef('chart')
+defineExpose({
+  chart,
+})
 </script>
 <template>
   <div class="analytics__chart-container" :class="{ '': !data }">
@@ -185,7 +190,7 @@ const options = computed(() => ({
           </div>
         </div>
       </div>
-      <CcvHeatmapChart :data="data.series" :options />
+      <CcvHeatmapChart ref="chart" :data="data.series" :options="options" />
     </template>
     <div v-else class="analytics__chart-container--no-data">
       <p class="analytics__error-title">Views by time of day</p>

@@ -83,6 +83,7 @@ interface BaseLog {
   previous_page?: number
   viewer_error?: ViewerError
   endpoint?: string
+  date_range?: string | Date[]
 }
 
 // WorkingLog is the log structure used within the application before being

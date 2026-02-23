@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
@@ -293,6 +293,11 @@ const areaOptions = computed(() => ({
   accessibility: { svgAriaLabel: 'Views over time. Download CSV to view tabular data.' },
   height: '400px',
 }))
+
+const chart = useTemplateRef('chart')
+defineExpose({
+  chart,
+})
 </script>
 
 <template>
@@ -318,7 +323,7 @@ const areaOptions = computed(() => ({
           </div>
         </div>
       </div>
-      <CcvAreaChart :data="data.series" :options="areaOptions" />
+      <CcvAreaChart ref="chart" :data="data.series" :options="areaOptions" />
     </template>
     <div v-else class="analytics__chart-container--no-data">
       <p class="analytics__error-title">Views over time</p>

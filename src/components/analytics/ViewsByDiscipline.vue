@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useTemplateRef, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
@@ -187,6 +187,11 @@ const options = computed(() => ({
   },
   height: chartHeight.value,
 }))
+
+const chart = useTemplateRef('chart')
+defineExpose({
+  chart,
+})
 </script>
 <template>
   <div
@@ -215,7 +220,7 @@ const options = computed(() => ({
           </div>
         </div>
       </div>
-      <CcvSimpleBarChart :key="chartKey" :data="data.series" :options="options" />
+      <CcvSimpleBarChart :key="chartKey" ref="chart" :data="data.series" :options="options" />
       <div class="analytics__expand-button-wrap">
         <pep-pharos-button
           class="analytics__expand-button"
