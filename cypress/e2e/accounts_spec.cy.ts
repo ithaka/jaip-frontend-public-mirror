@@ -648,11 +648,11 @@ describe('Account Management', () => {
             .click()
 
           cy.get('pep-pharos-modal:visible pep-pharos-button')
-            .contains('ithaka', { matchCase: false })
+            .contains('ilium', { matchCase: false })
             .click()
 
           cy.get('pep-pharos-modal:visible pep-pharos-dropdown-menu-item')
-            .contains('ilium', { matchCase: false })
+            .contains('ithaka', { matchCase: false })
             .click()
 
           cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')

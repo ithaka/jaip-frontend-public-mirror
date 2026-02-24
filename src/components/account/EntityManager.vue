@@ -64,13 +64,15 @@ if (!selectedGroups.value[featureName.value]) {
 }
 
 const selectorGroupOptions = ref(
-  featureDetails.value[featureName.value]?.groups.reduce((arr, id: number) => {
-    const group = groupMap.value.get(id)
-    if (group) {
-      arr.push(group)
-    }
-    return arr
-  }, [] as Group[]) || [],
+  featureDetails.value[featureName.value]?.groups
+    .reduce((arr, id: number) => {
+      const group = groupMap.value.get(id)
+      if (group) {
+        arr.push(group)
+      }
+      return arr
+    }, [] as Group[])
+    .sort((a, b) => a.name.localeCompare(b.name)) || [],
 )
 
 if (props.action === 'edit') {
