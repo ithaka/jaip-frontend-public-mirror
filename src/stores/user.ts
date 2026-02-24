@@ -4,7 +4,7 @@ import { useCoreStore } from './core'
 import { useFeaturesStore } from './features'
 import type { UngroupedFeatureDetails, FeatureBoolean, FeatureDetails } from '@/interfaces/Features'
 import type { Subdomain } from '@/interfaces/Subdomains'
-import { setCookie } from 'typescript-cookie'
+import { removeCookie, setCookie } from 'typescript-cookie'
 import type { Entity } from '@/interfaces/Entities'
 
 const hasAdminFeatures = (group: Group) => {
@@ -70,7 +70,7 @@ export const useUserStore = defineStore('user', {
       this.groups = []
       this.type = ''
       this.facilities = []
-      // removeCookie('uuid')
+      removeCookie('uuid')
     },
     async getCurrentUser() {
       this.gettingUser = true
