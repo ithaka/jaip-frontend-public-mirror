@@ -38,10 +38,10 @@ rollingUpdate:
 
 resources:
   requests:
-    cpu: 5m
+    cpu: 100m
     memory: 90Mi
   limits:
-    cpu: 50m
+    cpu: 100m
     memory: 500Mi
 
 healthcheckPath: /
