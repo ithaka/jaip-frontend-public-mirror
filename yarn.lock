@@ -5666,7 +5666,7 @@ __metadata:
     jsdom: "npm:^28.1.0"
     lint-staged: "npm:^16.2.7"
     npm-run-all2: "npm:^8.0.4"
-    openseadragon: "npm:^5.0.1"
+    openseadragon: "npm:^6.0.1"
     path: "npm:^0.12.7"
     pdfjs-dist: "npm:^5.4.624"
     pinia: "npm:^3.0.4"
@@ -6684,10 +6684,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openseadragon@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "openseadragon@npm:5.0.1"
-  checksum: 10c0/3fa0323ec4388b6dd26bfba756e743e9180747edae49ec44a7e888525f61654cec1a256e8fe6955c1e3c6e8bcd6fe7b54c7e1796a4da56e36f5d5b0fe6b6d375
+"openseadragon@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "openseadragon@npm:6.0.1"
+  checksum: 10c0/25aa6109e6ecc817e2b51563fbb94145c24e524ac76fe87704a8756878a5be2f4f419f1e376b71552fe3d32be54c31f22745cc411a518b829bb45cd53f6d5e9a
   languageName: node
   linkType: hard
 
