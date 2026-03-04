@@ -104,11 +104,9 @@ export default {
   },
   methods: {
     buttonClick() {
-      // @ts-expect-error This emit value does not have a type
-      this.$emit('clicked')(
-        // this is to close tool tips on click
-        document.activeElement as HTMLElement,
-      )?.blur()
+      this.$emit('clicked')
+      // this is to close tool tips on click
+      ;(document.activeElement as HTMLElement)?.blur()
     },
   },
 }

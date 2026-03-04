@@ -128,7 +128,7 @@
                 tooltip-text="Page left"
                 keyboard-shortcut="["
                 tooltip-position="top-start"
-                @page="handlePageLeft"
+                @click.prevent.stop="handlePageLeft"
               />
               <PaginationButton
                 v-if="!isPageRightDisabled"
@@ -138,7 +138,7 @@
                 tooltip-text="Page right"
                 keyboard-shortcut="]"
                 tooltip-position="top-end"
-                @page="handlePageRight"
+                @click.prevent.stop="handlePageRight"
               />
             </div>
           </div>
@@ -453,10 +453,12 @@ export default {
       if (typeof this.pageNumberUpdateCallback === 'function') {
         this.pageNumberUpdateCallback(index)
       }
-      this.handleWithLog(this.pageSelectionLog)({
-        previous_page: page,
-        new_page: index,
-      })
+      this.handleWithLog(
+        this.logs.pageSelectionLog({
+          previous_page: page,
+          new_page: index,
+        }),
+      )
     },
     goToPreviousPage() {
       const currentPage = this.viewer.currentPage()
@@ -525,17 +527,17 @@ export default {
       this.viewer.viewport.applyConstraints() //So we don't zoom too far in/out with our custom buttons
     },
     zoomIn() {
-      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_in }))(() =>
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_in }), () =>
         this.changeZoom(ZOOM_IN_FACTOR),
       )
     },
     zoomOut() {
-      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_out }))(() =>
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.zoom_out }), () =>
         this.changeZoom(ZOOM_OUT_FACTOR),
       )
     },
     fitView() {
-      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.fit_view }))(() => {
+      this.handleWithLog(this.logs.viewerControlLog({ action: ViewerControls.fit_view }), () => {
         const viewport = this.viewer.viewport
         if (this.fitHeight) {
           viewport.fitHorizontally(true)
