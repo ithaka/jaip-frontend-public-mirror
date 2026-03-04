@@ -7,6 +7,7 @@ import { computed } from 'vue'
 import { hasBrowserPDFViewer } from '@/utils/viewers'
 import type { Collections } from '@/interfaces/Collections'
 import { useValidDownloadURL } from '@/composables/urls'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
@@ -73,6 +74,13 @@ const downloadPDF = () => {
 const route = useRoute()
 const path = computed(() => route.path)
 const isPDFPage = ref(path.value.startsWith('/pdf/'))
+
+const { handleWithLog, logs } = useLogger()
+const { downloadButtonClickLog } = logs.getAccessButtonLogs({
+  iid: props.iid,
+  filename: props.filename,
+  collection: props.collection,
+})
 </script>
 
 <template>
@@ -90,7 +98,7 @@ const isPDFPage = ref(path.value.startsWith('/pdf/'))
         (featureDetails['view_pdf']?.enabled && includePdf) ||
         (featureDetails['view_document']?.enabled && isPDFPage),
     }"
-    @click="downloadPDF"
+    @click="handleWithLog(downloadButtonClickLog, downloadPDF)"
   >
     <pep-pharos-loading-spinner v-if="isDisabledDownload" />
     Download

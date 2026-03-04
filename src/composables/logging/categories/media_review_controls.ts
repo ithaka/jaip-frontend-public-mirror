@@ -282,6 +282,42 @@ const getUnrestrictLogs = (options: { doi: string }) => {
   }
 }
 
+const getRequestLogs = (options: { dois: string[] }) => {
+  const showExcessiveRequestWarningLog = (): WorkingLog => ({
+    eventtype: LogEvent.modal_open,
+    event_description: 'user opened excessive request warning modal',
+    action: 'open_excessive_request_warning',
+  })
+
+  const requestLog = (): WorkingLog => ({
+    ...generics.buttonClick('request_button'),
+    event_description: 'user added document to request list',
+    action: 'add_document_to_request_list',
+    dois: options.dois,
+  })
+
+  const cancelRequestLog = (): WorkingLog => ({
+    ...generics.buttonClick('cancel_request_button'),
+    event_description: 'user removed document from request list',
+    action: 'remove_document_from_request_list',
+    dois: options.dois,
+  })
+
+  const submitRequestLog = (opts: { dois: string[] }) => (): WorkingLog => ({
+    ...generics.buttonClick('submit_request_button'),
+    event_description: 'user submitted document request',
+    action: 'submit_request',
+    dois: opts.dois,
+  })
+
+  return {
+    requestLog,
+    cancelRequestLog,
+    submitRequestLog,
+    showExcessiveRequestWarningLog,
+  }
+}
+
 export const mediaReviewLogs = {
   getMediaApprovalLogs,
   getMediaDenialLogs,
@@ -290,4 +326,5 @@ export const mediaReviewLogs = {
   getBulkApprovalLogs,
   getRestrictLogs,
   getUnrestrictLogs,
+  getRequestLogs,
 }

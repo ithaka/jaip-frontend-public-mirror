@@ -7,6 +7,7 @@ import { getStatus } from '@/utils/helpers'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { PropType } from 'vue'
 import { ref, computed } from 'vue'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
   doc: {
@@ -39,14 +40,22 @@ const cartFull = computed(() => reqs.value.length >= 10)
 
 const emit = defineEmits(['submitRequest', 'cancelRequest'])
 
+const { handleWithLog, logs } = useLogger()
+const { requestLog, cancelRequestLog, showExcessiveRequestWarningLog } = logs.getRequestLogs({
+  dois: [props.doc.doi],
+})
+
 const addRequest = (doc: string) => {
   if (!cartFull.value) {
     coreStore.addRequest(doc)
     emit('submitRequest')
   } else {
-    showExcessiveRequestsWarningModal.value = true
+    handleWithLog(showExcessiveRequestWarningLog, () => {
+      showExcessiveRequestsWarningModal.value = true
+    })
   }
 }
+
 const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.value))
 const canRequest = computed(() => {
   return (
@@ -69,7 +78,7 @@ const canRequest = computed(() => {
         v-if="canRequest"
         full-width
         icon-left="checkmark-inverse"
-        @click.prevent.stop="addRequest(JSON.stringify(doc))"
+        @click.prevent.stop="handleWithLog(requestLog, () => addRequest(JSON.stringify(doc)))"
       >
         <span class="text-align-center">{{ buttonLabel }}</span>
       </pep-pharos-button>
@@ -79,10 +88,10 @@ const canRequest = computed(() => {
         icon-left="close-inverse"
         variant="secondary"
         @click.prevent.stop="
-          () => {
+          handleWithLog(cancelRequestLog, () => {
             coreStore.removeRequest(JSON.stringify(doc))
             emit('cancelRequest')
-          }
+          })
         "
       >
         <span>{{ cancelButtonLabel }}</span>

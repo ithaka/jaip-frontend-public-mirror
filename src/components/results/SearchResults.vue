@@ -106,13 +106,16 @@ const handleSortOrder = (val: string) => {
 const studentNotes = ref('')
 const maxNoteLength = 3000
 const invalidNotes = computed(() => studentNotes.value.length > maxNoteLength)
+const formattedRequests = computed(() => {
+  return reqs.value.map((req: string) => JSON.parse(req)['_id'])
+})
 const submitRequests = async () => {
   if (invalidNotes.value || !reqs.value.length) {
     return
   }
   const args = {
     comments: studentNotes.value,
-    dois: reqs.value.map((req: string) => JSON.parse(req)['_id']),
+    dois: formattedRequests.value,
   }
 
   try {
@@ -333,6 +336,7 @@ const { openBulkApprovalModalLog, closeBulkApprovalModalLog, submitBulkApprovalL
     groups: selectorBulkApproveGroupOptionIDs,
     dois: bulkApproveReversals,
   })
+const { submitRequestLog } = logs.getRequestLogs({ dois: formattedRequests.value })
 </script>
 <template>
   <div
@@ -401,7 +405,12 @@ const { openBulkApprovalModalLog, closeBulkApprovalModalLog, submitBulkApprovalL
                   <p>Notes</p>
                 </div>
               </pep-pharos-textarea>
-              <pep-pharos-button slot="footer" @click.prevent.stop="submitRequests">
+              <pep-pharos-button
+                slot="footer"
+                @click.prevent.stop="
+                  handleWithLog(submitRequestLog(formattedRequests.value), submitRequests)
+                "
+              >
                 Submit
               </pep-pharos-button>
             </pep-pharos-modal>

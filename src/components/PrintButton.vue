@@ -9,6 +9,7 @@ import { computed, type PropType } from 'vue'
 import { hasBrowserPDFViewer } from '@/utils/viewers'
 import { Collections } from '@/interfaces/Collections'
 import { useValidDownloadURL } from '@/composables/urls'
+import { useLogger } from '@/composables/logging/useLogger'
 
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
@@ -74,6 +75,13 @@ const adjustMargin = computed(() => {
 const route = useRoute()
 const path = computed(() => route.path)
 const isPDFPage = ref(path.value.startsWith('/pdf/'))
+
+const { handleWithLog, logs } = useLogger()
+const { printButtonClickLog } = logs.getAccessButtonLogs({
+  iid: props.iid,
+  filename: props.filename,
+  collection: props.collection,
+})
 </script>
 <template>
   <pep-pharos-button
@@ -87,7 +95,7 @@ const isPDFPage = ref(path.value.startsWith('/pdf/'))
     :variant="variant"
     full-width
     :disabled="isDisabledPrint"
-    @click.prevent.stop="printPDF"
+    @click.prevent.stop="handleWithLog(printButtonClickLog, printPDF)"
   >
     <pep-pharos-loading-spinner v-if="isDisabledPrint" />
     Print
