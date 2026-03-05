@@ -26,7 +26,7 @@
     "@vuepic/vue-datepicker": "^11.0.3",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
     "axios": "^1.13.5",
-    "openseadragon": "^5.0.1",
+    "openseadragon": "^6.0.1",
     "pdfjs-dist": "^5.4.624",
     "pinia": "^3.0.4",
     "print-js": "^1.6.0",
