@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
@@ -15,6 +15,78 @@ const props = defineProps<{
 
 const analyticsStore = useAnalyticsStore()
 const { selectedTimePeriod } = storeToRefs(analyticsStore)
+const chartContainer = useTemplateRef<HTMLElement>('chartContainer')
+const titleInfoPosition = ref({ left: 180, top: 24, visible: true })
+const viewsOverTimeInfoTooltipId = computed(() => `views-over-time-info-tooltip-${props.groupId}`)
+let titleObserver: MutationObserver | null = null
+const TITLE_INFO_X_OFFSET = 6
+const TITLE_INFO_Y_NUDGE = 0
+
+const chartInfoStyle = computed(() => ({
+  left: `${titleInfoPosition.value.left}px`,
+  top: `${titleInfoPosition.value.top + TITLE_INFO_Y_NUDGE}px`,
+  transform: 'translate(0, -50%)',
+}))
+
+const positionTitleInfo = () => {
+  const container = chartContainer.value
+  if (!container) {
+    return
+  }
+
+  const getTightTextRect = (element: Element): DOMRect => {
+    if (element instanceof SVGGraphicsElement) {
+      return element.getBoundingClientRect()
+    }
+
+    const textNode = Array.from(element.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && (node.textContent || '').trim().length > 0,
+    )
+
+    if (!textNode) {
+      return element.getBoundingClientRect()
+    }
+
+    const range = document.createRange()
+    range.selectNodeContents(textNode)
+    const rect = range.getBoundingClientRect()
+
+    return rect.width > 0 ? rect : element.getBoundingClientRect()
+  }
+
+  const normalizeTitle = (value: string | null | undefined) =>
+    (value || '').replace(/\s+/g, ' ').trim().toLowerCase()
+
+  const titleTextElements = Array.from(
+    container.querySelectorAll<Element>(
+      '.cds--cc--title p, .cc--title p, .cds--cc--title .title, .cc--title .title, .cds--cc--title text, .cc--title text, svg text, svg tspan',
+    ),
+  )
+
+  const titleElement =
+    titleTextElements.find((node) => normalizeTitle(node.textContent) === 'views over time') || null
+
+  if (!titleElement) {
+    return
+  }
+
+  const titleRect = getTightTextRect(titleElement)
+  const containerRect = container.getBoundingClientRect()
+
+  titleInfoPosition.value = {
+    left: titleRect.right - containerRect.left + TITLE_INFO_X_OFFSET,
+    top: titleRect.top - containerRect.top + titleRect.height / 2,
+    visible: true,
+  }
+}
+
+const scheduleTitleInfoPosition = () => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      positionTitleInfo()
+    })
+  })
+}
 
 const MOBILE_TICK_BREAKPOINT = 570
 const viewportWidth = ref<number>(typeof window !== 'undefined' ? window.innerWidth : 1024)
@@ -23,14 +95,30 @@ const isCompactTickMode = computed(() => viewportWidth.value < MOBILE_TICK_BREAK
 
 const handleResize = () => {
   viewportWidth.value = window.innerWidth
+  scheduleTitleInfoPosition()
 }
 
 onMounted(() => {
   window.addEventListener('resize', handleResize)
+  scheduleTitleInfoPosition()
+
+  if (chartContainer.value) {
+    titleObserver = new MutationObserver(() => {
+      scheduleTitleInfoPosition()
+    })
+
+    titleObserver.observe(chartContainer.value, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
+  }
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize)
+  titleObserver?.disconnect()
+  titleObserver = null
 })
 
 /**
@@ -85,6 +173,10 @@ const data = computed(() => {
   }
 })
 
+watch(data, () => {
+  scheduleTitleInfoPosition()
+})
+
 const MONTH_NAMES = [
   'Jan',
   'Feb',
@@ -112,7 +204,7 @@ const downloadCsv = (): void => {
     return
   }
 
-  const header = ['Date', 'Number of items']
+  const header = ['Date', 'Number of articles accessed']
   const rows = data.value.series.map((item) => {
     const dateValue = 'date' in item ? item.date : null
     const countValue = 'n' in item ? item.n : 0
@@ -212,7 +304,7 @@ const tickFormatter = computed(() => {
 })
 
 const areaOptions = computed(() => ({
-  title: '',
+  title: 'Views over time',
   axes: {
     bottom: {
       mapsTo: 'date',
@@ -225,7 +317,7 @@ const areaOptions = computed(() => ({
     },
     left: {
       mapsTo: 'n',
-      title: 'Items',
+      title: 'Articles',
       scaleType: 'linear',
     },
   },
@@ -279,7 +371,7 @@ const areaOptions = computed(() => ({
       return `
         <div>
           <p><strong>Date:</strong> ${dateLabel}</p>
-          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
+          <p><strong>Number of articles:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },
@@ -295,31 +387,31 @@ const areaOptions = computed(() => ({
 }))
 
 const chart = useTemplateRef('chart')
+
 defineExpose({
   chart,
 })
 </script>
 
 <template>
-  <div class="analytics__chart-container" :class="{ '': !data }">
+  <div ref="chartContainer" class="analytics__chart-container">
     <template v-if="data">
-      <div class="analytics__chart-header">
-        <p class="analytics__chart-title">Views over time</p>
+      <div class="analytics__chart-title-info" :style="chartInfoStyle">
         <div class="analytics__chart-info">
           <button
             class="analytics__chart-info-trigger"
             type="button"
             aria-label="More information about views over time"
-            aria-describedby="views-over-time-info-tooltip"
+            :aria-describedby="viewsOverTimeInfoTooltipId"
           >
             <img :src="InfoInverseSvg" alt="lowercase i surrounded by a circle" />
           </button>
           <div
-            id="views-over-time-info-tooltip"
+            :id="viewsOverTimeInfoTooltipId"
             class="analytics__chart-info-tooltip"
             role="tooltip"
           >
-            Number of items accessed by your group.
+            Number of articles accessed by your group.
           </div>
         </div>
       </div>
@@ -335,24 +427,17 @@ defineExpose({
 <style lang="scss" scoped>
 .analytics__chart-container {
   border-radius: 0.25rem;
+  padding: var(--pharos-spacing-2-x) !important;
+  position: relative;
 
-  .analytics__chart-header {
-    display: flex;
-    align-items: center;
-    gap: var(--pharos-spacing-one-half-x);
-    margin-bottom: var(--pharos-spacing-one-half-x);
-  }
-
-  .analytics__chart-title {
-    margin: 0;
-    color: var(--cds-text-primary);
-    font-size: 16px;
-    font-family: var(--cds-charts-font-family);
-    font-weight: 600;
+  .analytics__chart-title-info {
+    position: absolute;
+    z-index: 3;
   }
 
   .analytics__chart-info {
     position: relative;
+    z-index: 3;
     display: inline-flex;
     align-items: center;
 
@@ -440,14 +525,9 @@ defineExpose({
     stroke: none !important;
   }
 
-  :deep(.cds--cc--axes g.axis.bottom .axis-title),
-  :deep(.cc--axes g.axis.bottom .axis-title) {
-    translate: 0 0.75rem;
-  }
-
-  :deep(.cds--cc--axes g.axis.left .axis-title),
-  :deep(.cc--axes g.axis.left .axis-title) {
-    translate: -0.5rem 0;
+  :deep(.cds--cc--axes g.axis .axis-title),
+  :deep(.cc--axes g.axis .axis-title) {
+    font-size: 14px !important;
   }
 }
 
@@ -483,5 +563,6 @@ defineExpose({
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 15px;
+  padding-top: var(--pharos-spacing-2-x);
 }
 </style>

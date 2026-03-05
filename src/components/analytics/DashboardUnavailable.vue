@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import DashboardUnavailableSvg from '@/assets/images/dashboard-unavailable.svg'
-defineEmits(['reload'])
+
+const hardRefresh = () => {
+  window.location.reload()
+}
 </script>
 <template>
   <div class="analytics__chart-container analytics__chart-container--unavailable">
@@ -9,7 +12,7 @@ defineEmits(['reload'])
       variant="primary"
       size="medium"
       class="analytics__reload-button"
-      @click="$emit('reload')"
+      @click="hardRefresh"
     >
       Reload
     </pep-pharos-button>

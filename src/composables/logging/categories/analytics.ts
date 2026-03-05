@@ -26,10 +26,17 @@ const getAnalyticsLogs = (options: {
       date_range: options.selectedTimePeriod.value,
     })
 
+  const supportLinkClickLog = (): WorkingLog => ({
+    ...generics.linkClick('analytics_support_link'),
+    destination:
+      'https://support.jstor.org/hc/en-us/articles/38769417042839-JSTOR-Access-in-Prison-Using-the-analytics-dashboard',
+  })
+
   return {
     groupSelectorClickLog,
     dateRangeSelectorClickLog,
     chartButtonClickLog,
+    supportLinkClickLog,
   }
 }
 

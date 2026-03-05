@@ -123,7 +123,7 @@ describe('Analytics view states', () => {
 
     visitAnalyticsPage()
 
-    cy.contains('Item usage').should('be.visible')
+    cy.contains('Article usage').should('be.visible')
     cy.contains('Media review').should('be.visible')
     cy.get('img[alt="Dashboard Unavailable"]').should('not.exist')
     cy.get('img[alt="No data yet"]').should('not.exist')

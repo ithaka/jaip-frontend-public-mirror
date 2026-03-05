@@ -78,8 +78,6 @@ const chartEventHandler = (event: any) => {
 const fetchAnalyticsData = async () => {
   try {
     const response = await coreStore.$api.analytics.get(selectedGroupId.value.toString())
-    // TODO: remove before production
-    console.log('🍏 Fetched analytics data:', response.data)
     analyticsStore.setAnalyticsData(
       response.data as unknown as AnalyticsData,
       selectedGroupId.value.toString(),
@@ -109,6 +107,10 @@ const fetchAnalyticsData = async () => {
 const lastUpdatedMsg = computed(() => {
   if (!lastExported.value) return ''
   return `Last updated: ${formatDisplayDateTime(lastExported.value)}`
+})
+
+const selectedTimePeriodLabel = computed(() => {
+  return TimePeriodLabels[selectedTimePeriod.value]
 })
 
 /**
@@ -144,11 +146,19 @@ const { logPageView } = usePageViewLogger()
 logPageView()
 
 const { handleWithLog, logs } = useLogger()
-const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } =
-  logs.getAnalyticsLogs({
-    selectedGroupId: selectedGroupId,
-    selectedTimePeriod: selectedTimePeriod,
-  })
+const {
+  groupSelectorClickLog,
+  dateRangeSelectorClickLog,
+  chartButtonClickLog,
+  supportLinkClickLog,
+} = logs.getAnalyticsLogs({
+  selectedGroupId: selectedGroupId,
+  selectedTimePeriod: selectedTimePeriod,
+})
+
+const handleSupportLinkClick = () => {
+  handleWithLog(supportLinkClickLog)
+}
 </script>
 
 <template>
@@ -158,19 +168,32 @@ const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } 
         <pep-pharos-heading :level="2" preset="5--bold" class="reentry__title">
           Welcome to your Analytics Dashboard
         </pep-pharos-heading>
-        <pep-pharos-heading :level="3" preset="3"> </pep-pharos-heading>
         <p>
           View a concise overview of content usage in your group(s). For more details, visit our
-          <pep-pharos-link>support page</pep-pharos-link>.
+          <pep-pharos-link @click="handleSupportLinkClick()">support page</pep-pharos-link>.
         </p>
       </div>
       <div class="analytics__selectors">
+        <pep-pharos-text-input
+          v-if="groupsWithAnalytics.length === 1"
+          readonly
+          :value="groupsWithAnalytics[0]?.name ? groupsWithAnalytics[0].name : 'Group'"
+          a11y-label="{{ groupsWithAnalytics[0].name }} group selected"
+        >
+          <span slot="label">Group</span>
+          {{
+            selectedGroupId
+              ? groupsWithAnalytics.find((group) => group.id === selectedGroupId)?.name
+              : ''
+          }}
+        </pep-pharos-text-input>
         <pep-pharos-select
+          v-else
           a11y-label="Select your group(s)"
           :value="selectedGroupId || undefined"
           @change="handleWithLog(groupSelectorClickLog, () => handleGroupChange($event))"
         >
-          <span slot="label">Your Group(s)</span>
+          <span slot="label">Your Groups</span>
           <span v-if="lastUpdatedMsg" slot="message" class="analytics__last-updated-message">
             {{ lastUpdatedMsg }}
           </span>
@@ -204,13 +227,13 @@ const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } 
         <NoDataYet />
       </div>
       <div v-else>
-        <pep-pharos-heading :level="3" preset="3--bold"> Item usage </pep-pharos-heading>
+        <pep-pharos-heading :level="3" preset="4--bold">Article usage</pep-pharos-heading>
         <div
           class="analytics__section analytics__top-grid"
           :class="{ 'analytics__section--loading': isLoading }"
         >
           <DataBox
-            name="Total item views"
+            name="Total article views"
             :value="
               analyticsStore.getMetricTotalForSelectedTimePeriod(
                 'student_item_views',
@@ -248,7 +271,10 @@ const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } 
             :group-id="selectedGroupId.toString()"
           />
         </div>
-        <pep-pharos-heading :level="3" preset="3--bold"> Media review </pep-pharos-heading>
+        <pep-pharos-heading :level="3" preset="4--bold"> Media review </pep-pharos-heading>
+        <p class="analytics__subtitle">
+          Showing data for: <b>{{ selectedTimePeriodLabel }}</b>
+        </p>
         <div class="analytics__section" :class="{ 'analytics__section--loading': isLoading }">
           <DataBar metricType="media_review_events" :group-id="selectedGroupId.toString()" />
         </div>
@@ -261,7 +287,7 @@ const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } 
   display: grid;
   grid-template-areas: '. main .';
   grid-template-columns: 1fr 8fr 1fr;
-  padding: 0 var(--pharos-spacing-1-x);
+  padding: var(--pharos-spacing-1-x);
 
   /* Mobile: up to 767px */
   @media (max-width: 767px) {
@@ -410,6 +436,10 @@ const { groupSelectorClickLog, dateRangeSelectorClickLog, chartButtonClickLog } 
     :deep(.cc--chart-holder) {
       width: 100% !important;
     }
+  }
+
+  &__subtitle {
+    margin-bottom: var(--pharos-spacing-1-x);
   }
 }
 

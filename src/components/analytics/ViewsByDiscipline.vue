@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, ref, useTemplateRef, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType } from '@/interfaces/Analytics'
@@ -17,6 +17,80 @@ const analyticsStore = useAnalyticsStore()
 const { selectedTimePeriod } = storeToRefs(analyticsStore)
 
 const isExpanded = ref(false)
+const chartContainer = useTemplateRef<HTMLElement>('chartContainer')
+const titleInfoPosition = ref({ left: 180, top: 24, visible: true })
+let titleObserver: MutationObserver | null = null
+const TITLE_INFO_X_OFFSET = 6
+const TITLE_INFO_Y_NUDGE = 0
+
+const viewsBySubjectInfoTooltipId = computed(() => `views-by-subject-info-tooltip-${props.groupId}`)
+
+const chartInfoStyle = computed(() => ({
+  left: `${titleInfoPosition.value.left}px`,
+  top: `${titleInfoPosition.value.top + TITLE_INFO_Y_NUDGE}px`,
+  transform: 'translate(0, -50%)',
+}))
+
+const positionTitleInfo = () => {
+  const container = chartContainer.value
+  if (!container) {
+    return
+  }
+
+  const getTightTextRect = (element: Element): DOMRect => {
+    if (element instanceof SVGGraphicsElement) {
+      return element.getBoundingClientRect()
+    }
+
+    const textNode = Array.from(element.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && (node.textContent || '').trim().length > 0,
+    )
+
+    if (!textNode) {
+      return element.getBoundingClientRect()
+    }
+
+    const range = document.createRange()
+    range.selectNodeContents(textNode)
+    const rect = range.getBoundingClientRect()
+
+    return rect.width > 0 ? rect : element.getBoundingClientRect()
+  }
+
+  const normalizeTitle = (value: string | null | undefined) =>
+    (value || '').replace(/\s+/g, ' ').trim().toLowerCase()
+
+  const titleTextElements = Array.from(
+    container.querySelectorAll<Element>(
+      '.cds--cc--title p, .cc--title p, .cds--cc--title .title, .cc--title .title, .cds--cc--title text, .cc--title text, svg text, svg tspan',
+    ),
+  )
+
+  const titleElement =
+    titleTextElements.find((node) => normalizeTitle(node.textContent) === 'views by subject') ||
+    null
+
+  if (!titleElement) {
+    return
+  }
+
+  const titleRect = getTightTextRect(titleElement)
+  const containerRect = container.getBoundingClientRect()
+
+  titleInfoPosition.value = {
+    left: titleRect.right - containerRect.left + TITLE_INFO_X_OFFSET,
+    top: titleRect.top - containerRect.top + titleRect.height / 2,
+    visible: true,
+  }
+}
+
+const scheduleTitleInfoPosition = () => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      positionTitleInfo()
+    })
+  })
+}
 
 const chartKey = computed(() => {
   const seriesLength = data.value?.series?.length || 0
@@ -52,7 +126,7 @@ const totalDisciplineCount = computed(() => {
 
 const showAllDisciplinesLabel = computed(() => {
   const count = totalDisciplineCount.value
-  return `Show all ${count} disciplines`
+  return `Show all ${count} subjects`
 })
 
 /**
@@ -65,14 +139,14 @@ const downloadCsv = (): void => {
     return
   }
 
-  const header = ['Discipline', 'Number of items']
+  const header = ['Discipline', 'Number of articles']
   const rows = data.value.series.map((item) => {
     const discipline = 'bucket' in item ? item.bucket : ''
     const count = 'n' in item ? item.n : 0
     return [discipline, formatAnalyticsCount(count)]
   })
 
-  downloadCsvFile('views-by-discipline.csv', header, rows)
+  downloadCsvFile('views-by-subject.csv', header, rows)
 }
 
 /**
@@ -118,12 +192,39 @@ const data = computed(() => {
   }
 })
 
+watch([chartKey, data], () => {
+  scheduleTitleInfoPosition()
+})
+
+onMounted(() => {
+  scheduleTitleInfoPosition()
+  window.addEventListener('resize', scheduleTitleInfoPosition)
+
+  if (chartContainer.value) {
+    titleObserver = new MutationObserver(() => {
+      scheduleTitleInfoPosition()
+    })
+
+    titleObserver.observe(chartContainer.value, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', scheduleTitleInfoPosition)
+  titleObserver?.disconnect()
+  titleObserver = null
+})
+
 /**
  * Generates chart options with dynamic height and title based on expanded state.
  * @returns {Object} Chart configuration options
  */
 const options = computed(() => ({
-  title: '',
+  title: 'Views by subject',
   axes: {
     left: {
       mapsTo: 'bucket',
@@ -135,7 +236,7 @@ const options = computed(() => ({
     bottom: {
       mapsTo: 'n',
       scaleType: 'linear',
-      title: 'Number of items',
+      title: 'Number of articles',
     },
   },
   grid: {
@@ -150,7 +251,7 @@ const options = computed(() => ({
   },
   getFillColor: () => '#0ba2c0',
   getStrokeColor: () => '#0ba2c0',
-  accessibility: { svgAriaLabel: 'Views by discipline. Download CSV to view tabular data.' },
+  accessibility: { svgAriaLabel: 'Views by subject. Download CSV to view tabular data.' },
   legend: {
     enabled: false,
   },
@@ -162,8 +263,8 @@ const options = computed(() => ({
 
       return `
         <div>
-          <p><strong>Discipline:</strong> ${discipline}</p>
-          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
+          <p><strong>Subject:</strong> ${discipline}</p>
+          <p><strong>Number of articles:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },
@@ -195,28 +296,28 @@ defineExpose({
 </script>
 <template>
   <div
+    ref="chartContainer"
     class="analytics__chart-container--expandable"
     :class="isExpanded ? 'analytics__chart-container--tall' : 'analytics__chart-container--short'"
   >
     <div v-if="data">
-      <div class="analytics__chart-header">
-        <p class="analytics__chart-title">Views by discipline</p>
+      <div class="analytics__chart-title-info" :style="chartInfoStyle">
         <div class="analytics__chart-info">
           <button
             class="analytics__chart-info-trigger"
             type="button"
-            aria-label="More information about views by discipline"
-            aria-describedby="views-by-discipline-info-tooltip"
+            aria-label="More information about views by subject"
+            :aria-describedby="viewsBySubjectInfoTooltipId"
           >
             <img :src="InfoInverseSvg" alt="" />
           </button>
           <div
-            id="views-by-discipline-info-tooltip"
+            :id="viewsBySubjectInfoTooltipId"
             class="analytics__chart-info-tooltip"
             role="tooltip"
           >
-            Disciplines accessed by your group. Items that belong to multiple disciplines may be
-            counted in each relevant discipline.
+            Subjects accessed by your group. Articles that belong to multiple subjects may be
+            counted in each relevant subject.
           </div>
         </div>
       </div>
@@ -231,30 +332,27 @@ defineExpose({
       </div>
     </div>
     <div v-else class="analytics__chart-container--no-data">
-      <p class="analytics__error-title">Views by discipline</p>
-      <img :src="NoDataViewsByDisciplineSvg" alt="No data available for views by discipline" />
+      <p class="analytics__error-title">Views by subject</p>
+      <img :src="NoDataViewsByDisciplineSvg" alt="No data available for views by subject" />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .analytics__chart-container--expandable {
-  .analytics__chart-header {
-    display: flex;
-    align-items: center;
-    gap: var(--pharos-spacing-one-half-x);
-    margin-bottom: var(--pharos-spacing-one-half-x);
-  }
+  padding: var(--pharos-spacing-2-x) !important;
+  position: relative;
+  border: 2px solid var(--pharos-color-marble-gray-80);
+  border-radius: 0.25rem;
+  min-height: 400px;
 
-  .analytics__chart-title {
-    margin: 0;
-    color: var(--cds-text-primary);
-    font-size: 16px;
-    font-family: var(--cds-charts-font-family);
-    font-weight: 600;
+  .analytics__chart-title-info {
+    position: absolute;
+    z-index: 3;
   }
 
   .analytics__chart-info {
     position: relative;
+    z-index: 3;
     display: inline-flex;
     align-items: center;
 
@@ -319,16 +417,6 @@ defineExpose({
     transform: translateX(-50%) rotate(45deg);
   }
 
-  :deep(.cds--cc--title text) {
-    font-family: var(--pharos-font-family-sans-serif);
-    font-weight: var(--pharos-font-weight-bold);
-  }
-
-  :deep(.cc--title text) {
-    font-family: var(--pharos-font-family-sans-serif);
-    font-weight: var(--pharos-font-weight-bold);
-  }
-
   :deep(.cds--cc--chart-wrapper svg text:not(.title)),
   :deep(.cc--chart-wrapper svg text:not(.title)) {
     fill: var(--pharos-color-marble-gray-10) !important;
@@ -337,17 +425,10 @@ defineExpose({
 
   :deep(.cds--cc--axes g.axis.bottom .axis-title),
   :deep(.cc--axes g.axis.bottom .axis-title) {
-    translate: 0 0.75rem;
+    font-size: 14px !important;
     text-anchor: middle;
     text-align: center;
   }
-}
-
-.analytics__chart-container--expandable {
-  padding: var(--pharos-spacing-2-x);
-  border: 2px solid var(--pharos-color-marble-gray-80);
-  border-radius: 0.25rem;
-  min-height: 400px;
 
   &.analytics__chart-container--short {
     min-height: 400px;
@@ -400,5 +481,6 @@ defineExpose({
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 15px;
+  padding-top: var(--pharos-spacing-2-x);
 }
 </style>

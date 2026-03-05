@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { useAnalyticsStore } from '@/stores/analytics'
 import type { AnalyticsMetricType, TimeOfDayDataPoint } from '@/interfaces/Analytics'
 import { formatAnalyticsCount, downloadIconSvg } from '@/utils/analytics'
@@ -14,6 +14,79 @@ const props = defineProps<{
 }>()
 
 const analyticsStore = useAnalyticsStore()
+const chartContainer = useTemplateRef<HTMLElement>('chartContainer')
+const titleInfoPosition = ref({ left: 180, top: 24, visible: true })
+const patternsOfUseInfoTooltipId = computed(() => `patterns-of-use-info-tooltip-${props.groupId}`)
+let titleObserver: MutationObserver | null = null
+const TITLE_INFO_X_OFFSET = 6
+const TITLE_INFO_Y_NUDGE = 0
+
+const chartInfoStyle = computed(() => ({
+  left: `${titleInfoPosition.value.left}px`,
+  top: `${titleInfoPosition.value.top + TITLE_INFO_Y_NUDGE}px`,
+  transform: 'translate(0, -50%)',
+}))
+
+const positionTitleInfo = () => {
+  const container = chartContainer.value
+  if (!container) {
+    return
+  }
+
+  const getTightTextRect = (element: Element): DOMRect => {
+    if (element instanceof SVGGraphicsElement) {
+      return element.getBoundingClientRect()
+    }
+
+    const textNode = Array.from(element.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && (node.textContent || '').trim().length > 0,
+    )
+
+    if (!textNode) {
+      return element.getBoundingClientRect()
+    }
+
+    const range = document.createRange()
+    range.selectNodeContents(textNode)
+    const rect = range.getBoundingClientRect()
+
+    return rect.width > 0 ? rect : element.getBoundingClientRect()
+  }
+
+  const normalizeTitle = (value: string | null | undefined) =>
+    (value || '').replace(/\s+/g, ' ').trim().toLowerCase()
+
+  const titleTextElements = Array.from(
+    container.querySelectorAll<Element>(
+      '.cds--cc--title p, .cc--title p, .cds--cc--title .title, .cc--title .title, .cds--cc--title text, .cc--title text, svg text, svg tspan',
+    ),
+  )
+
+  const titleElement =
+    titleTextElements.find((node) => normalizeTitle(node.textContent) === 'views by time of day') ||
+    null
+
+  if (!titleElement) {
+    return
+  }
+
+  const titleRect = getTightTextRect(titleElement)
+  const containerRect = container.getBoundingClientRect()
+
+  titleInfoPosition.value = {
+    left: titleRect.right - containerRect.left + TITLE_INFO_X_OFFSET,
+    top: titleRect.top - containerRect.top + titleRect.height / 2,
+    visible: true,
+  }
+}
+
+const scheduleTitleInfoPosition = () => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      positionTitleInfo()
+    })
+  })
+}
 
 /**
  * Formats raw metric data for download as CSV, ensuring consistent formatting of day, time, and count values.
@@ -24,7 +97,7 @@ const downloadCsv = (): void => {
     return
   }
 
-  const header = ['Day', 'Time of day', 'Number of items']
+  const header = ['Day', 'Time of day', 'Number of articles']
   const rows = data.value.series.map((item) => {
     const day = 'day' in item ? item.day : ''
     const time = 'time' in item ? item.time : ''
@@ -78,13 +151,40 @@ const data = computed(() => {
   }
 })
 
+watch(data, () => {
+  scheduleTitleInfoPosition()
+})
+
+onMounted(() => {
+  scheduleTitleInfoPosition()
+  window.addEventListener('resize', scheduleTitleInfoPosition)
+
+  if (chartContainer.value) {
+    titleObserver = new MutationObserver(() => {
+      scheduleTitleInfoPosition()
+    })
+
+    titleObserver.observe(chartContainer.value, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', scheduleTitleInfoPosition)
+  titleObserver?.disconnect()
+  titleObserver = null
+})
+
 /**
  * Generates chart options with gradient color scale and heatmap configuration.
  * Uses glacier blue gradient from light to dark to represent low to high values.
  * @returns {Object} Heatmap chart configuration options
  */
 const options = computed(() => ({
-  title: '',
+  title: 'Views by time of day',
   axes: {
     top: {
       mapsTo: 'day',
@@ -127,7 +227,7 @@ const options = computed(() => ({
         <div>
           <p><strong>Day:</strong> ${day}</p>
           <p><strong>Time of day:</strong> ${time}</p>
-          <p><strong>Number of items:</strong> ${formatAnalyticsCount(count)}</p>
+          <p><strong>Number of articles:</strong> ${formatAnalyticsCount(count)}</p>
         </div>
       `
     },
@@ -162,30 +262,29 @@ defineExpose({
 })
 </script>
 <template>
-  <div class="analytics__chart-container" :class="{ '': !data }">
+  <div ref="chartContainer" class="analytics__chart-container">
     <template v-if="data">
-      <div class="analytics__chart-header">
-        <p class="analytics__chart-title">Patterns of use</p>
+      <div class="analytics__chart-title-info" :style="chartInfoStyle">
         <div class="analytics__chart-info">
           <button
             class="analytics__chart-info-trigger"
             type="button"
-            aria-label="More information about patterns of use"
-            aria-describedby="patterns-of-use-info-tooltip"
+            aria-label="More information about views by time of day chart"
+            :aria-describedby="patternsOfUseInfoTooltipId"
           >
             <img :src="InfoInverseSvg" alt="" />
           </button>
           <div
-            id="patterns-of-use-info-tooltip"
+            :id="patternsOfUseInfoTooltipId"
             class="analytics__chart-info-tooltip"
             role="tooltip"
           >
-            Item access by hour of the day:
+            Article access by 24-hour time view:
             <ul>
-              <li><strong>Morning:</strong>0-6</li>
-              <li><strong>Afternoon:</strong>6-12</li>
-              <li><strong>Evening:</strong>12-18</li>
-              <li><strong>Night:</strong>18-24</li>
+              <li><strong>Morning:</strong> Hours 0-6</li>
+              <li><strong>Afternoon:</strong> Hours 6-12</li>
+              <li><strong>Evening:</strong> Hours 12-18</li>
+              <li><strong>Night:</strong> Hours 18-24</li>
             </ul>
           </div>
         </div>
@@ -202,24 +301,17 @@ defineExpose({
 <style lang="scss" scoped>
 .analytics__chart-container {
   border-radius: 0.25rem;
+  padding: var(--pharos-spacing-2-x) !important;
+  position: relative;
 
-  .analytics__chart-header {
-    display: flex;
-    align-items: center;
-    gap: var(--pharos-spacing-one-half-x);
-    margin-bottom: var(--pharos-spacing-one-half-x);
-  }
-
-  .analytics__chart-title {
-    margin: 0;
-    color: var(--cds-text-primary);
-    font-size: 16px;
-    font-family: var(--cds-charts-font-family);
-    font-weight: 600;
+  .analytics__chart-title-info {
+    position: absolute;
+    z-index: 3;
   }
 
   .analytics__chart-info {
     position: relative;
+    z-index: 3;
     display: inline-flex;
     align-items: center;
 
@@ -299,6 +391,24 @@ defineExpose({
     fill: var(--pharos-color-marble-gray-10) !important;
     color: var(--pharos-color-marble-gray-10) !important;
   }
+
+  :deep(.cds--cc--axes g.axis g.tick-hover),
+  :deep(.cc--axes g.axis g.tick-hover) {
+    pointer-events: none;
+  }
+
+  :deep(.cds--cc--axes g.axis g.tick-hover rect.axis-holder),
+  :deep(.cc--axes g.axis g.tick-hover rect.axis-holder) {
+    fill: transparent !important;
+    stroke: transparent !important;
+  }
+
+  :deep(.cds--cc--axes g.axis g.tick-hover:hover text),
+  :deep(.cds--cc--axes g.axis g.tick-hover:focus text),
+  :deep(.cc--axes g.axis g.tick-hover:hover text),
+  :deep(.cc--axes g.axis g.tick-hover:focus text) {
+    fill: var(--pharos-color-marble-gray-10) !important;
+  }
 }
 
 .analytics__chart-container--no-data {
@@ -333,5 +443,6 @@ defineExpose({
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 15px;
+  padding-top: var(--pharos-spacing-2-x);
 }
 </style>
