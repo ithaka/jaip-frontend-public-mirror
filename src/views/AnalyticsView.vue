@@ -155,10 +155,6 @@ const {
   selectedGroupId: selectedGroupId,
   selectedTimePeriod: selectedTimePeriod,
 })
-
-const handleSupportLinkClick = () => {
-  handleWithLog(supportLinkClickLog)
-}
 </script>
 
 <template>
@@ -170,7 +166,13 @@ const handleSupportLinkClick = () => {
         </pep-pharos-heading>
         <p>
           View a concise overview of content usage in your group(s). For more details, visit our
-          <pep-pharos-link @click="handleSupportLinkClick()">support page</pep-pharos-link>.
+          <pep-pharos-link
+            href="https://support.jstor.org/hc/en-us/articles/38769417042839-JSTOR-Access-in-Prison-Using-the-analytics-dashboard"
+            a11y-label="Support Link"
+            target="_blank"
+            @click="handleWithLog(() => supportLinkClickLog())"
+            >support page</pep-pharos-link
+          >.
         </p>
       </div>
       <div class="analytics__selectors">
