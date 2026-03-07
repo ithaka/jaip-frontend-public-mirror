@@ -1242,9 +1242,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ithaka/eslint-config-vue@npm:^5.1.2":
-  version: 5.1.2
-  resolution: "@ithaka/eslint-config-vue@npm:5.1.2::__archiveUrl=https%3A%2F%2Fartifactory.acorn.cirrostratus.org%2Fartifactory%2Fapi%2Fnpm%2Fnpms%2F%40ithaka%2Feslint-config-vue%2F-%2F%40ithaka%2Feslint-config-vue-5.1.2.tgz"
+"@ithaka/eslint-config-vue@npm:^5.1.3":
+  version: 5.1.3
+  resolution: "@ithaka/eslint-config-vue@npm:5.1.3::__archiveUrl=https%3A%2F%2Fartifactory.acorn.cirrostratus.org%2Fartifactory%2Fapi%2Fnpm%2Fnpms%2F%40ithaka%2Feslint-config-vue%2F-%2F%40ithaka%2Feslint-config-vue-5.1.3.tgz"
   dependencies:
     "@ithaka/eslint-config-base": "npm:^2.0.0"
     eslint-plugin-vue: "npm:^10.0.0"
@@ -1257,7 +1257,7 @@ __metadata:
   peerDependenciesMeta:
     typescript-eslint:
       optional: true
-  checksum: 10c0/0d1852240e58b789d9119ef572f7047556b1d9f34004ca4363a9ba93942f72660dfa8d5bbb4d3803fdd9bd909a12443fb39aa065e85eee5c0bd9f241ff2fa02e
+  checksum: 10c0/0cf09f2af4262860e3d15de537765cea37bbc03647779047c03ea0fe27d0ed45a8a30ad7ad427a8e7bba90bd6532b9a210c8550cb64f09a127b6481ac08fba1e
   languageName: node
   linkType: hard
 
@@ -1383,98 +1383,98 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-android-arm64@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.90"
+"@napi-rs/canvas-android-arm64@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-android-arm64@npm:0.1.96"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-arm64@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.90"
+"@napi-rs/canvas-darwin-arm64@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-darwin-arm64@npm:0.1.96"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-darwin-x64@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.90"
+"@napi-rs/canvas-darwin-x64@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-darwin-x64@npm:0.1.96"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.90"
+"@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-arm-gnueabihf@npm:0.1.96"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.90"
+"@napi-rs/canvas-linux-arm64-gnu@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-arm64-gnu@npm:0.1.96"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-arm64-musl@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.90"
+"@napi-rs/canvas-linux-arm64-musl@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-arm64-musl@npm:0.1.96"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.90"
+"@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-riscv64-gnu@npm:0.1.96"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-gnu@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.90"
+"@napi-rs/canvas-linux-x64-gnu@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-x64-gnu@npm:0.1.96"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-linux-x64-musl@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.90"
+"@napi-rs/canvas-linux-x64-musl@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-linux-x64-musl@npm:0.1.96"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-arm64-msvc@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-win32-arm64-msvc@npm:0.1.90"
+"@napi-rs/canvas-win32-arm64-msvc@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-win32-arm64-msvc@npm:0.1.96"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas-win32-x64-msvc@npm:0.1.90":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.90"
+"@napi-rs/canvas-win32-x64-msvc@npm:0.1.96":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas-win32-x64-msvc@npm:0.1.96"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:^0.1.88":
-  version: 0.1.90
-  resolution: "@napi-rs/canvas@npm:0.1.90"
+"@napi-rs/canvas@npm:^0.1.95":
+  version: 0.1.96
+  resolution: "@napi-rs/canvas@npm:0.1.96"
   dependencies:
-    "@napi-rs/canvas-android-arm64": "npm:0.1.90"
-    "@napi-rs/canvas-darwin-arm64": "npm:0.1.90"
-    "@napi-rs/canvas-darwin-x64": "npm:0.1.90"
-    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.90"
-    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.90"
-    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.90"
-    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.90"
-    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.90"
-    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.90"
-    "@napi-rs/canvas-win32-arm64-msvc": "npm:0.1.90"
-    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.90"
+    "@napi-rs/canvas-android-arm64": "npm:0.1.96"
+    "@napi-rs/canvas-darwin-arm64": "npm:0.1.96"
+    "@napi-rs/canvas-darwin-x64": "npm:0.1.96"
+    "@napi-rs/canvas-linux-arm-gnueabihf": "npm:0.1.96"
+    "@napi-rs/canvas-linux-arm64-gnu": "npm:0.1.96"
+    "@napi-rs/canvas-linux-arm64-musl": "npm:0.1.96"
+    "@napi-rs/canvas-linux-riscv64-gnu": "npm:0.1.96"
+    "@napi-rs/canvas-linux-x64-gnu": "npm:0.1.96"
+    "@napi-rs/canvas-linux-x64-musl": "npm:0.1.96"
+    "@napi-rs/canvas-win32-arm64-msvc": "npm:0.1.96"
+    "@napi-rs/canvas-win32-x64-msvc": "npm:0.1.96"
   dependenciesMeta:
     "@napi-rs/canvas-android-arm64":
       optional: true
@@ -1498,7 +1498,7 @@ __metadata:
       optional: true
     "@napi-rs/canvas-win32-x64-msvc":
       optional: true
-  checksum: 10c0/2ac5e177ed1d6d88d3825a9d8393065df602d2e841db9c542b7e01137b1636e41730cbb52692fd7a30795cb267dffb9bfee7e714651097e5b7148827a6f5fb1f
+  checksum: 10c0/edb4bd46be484d4d59ad060f338b06ac14c271aaac00a31538f45e2efddf7ffb41700b1fbc58d0a07851378821022d2d4fcb79c177a0948b88289b219724e646
   languageName: node
   linkType: hard
 
@@ -2242,12 +2242,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.10.15":
-  version: 24.11.0
-  resolution: "@types/node@npm:24.11.0"
+"@types/node@npm:^24.11.0":
+  version: 24.12.0
+  resolution: "@types/node@npm:24.12.0"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/4fb7390259e3b158d25dbecf52de8ce70fa18a4ed0949c9444bb6384517c361fa19781e6821ca8c18dc5f6af43eab72e9e159e07000e6b1286d082e8585d8c41
+  checksum: 10c0/8b31c0af5b5474f13048a4e77c57f22cd4f8fe6e58c4b6fde9456b0c13f46a5bfaf5744ff88fd089581de9f0d6e99c584e022681de7acb26a58d258c654c4843
   languageName: node
   linkType: hard
 
@@ -2720,19 +2720,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/devtools-core@npm:^8.0.6":
-  version: 8.0.6
-  resolution: "@vue/devtools-core@npm:8.0.6"
+"@vue/devtools-core@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "@vue/devtools-core@npm:8.0.7"
   dependencies:
-    "@vue/devtools-kit": "npm:^8.0.6"
-    "@vue/devtools-shared": "npm:^8.0.6"
-    mitt: "npm:^3.0.1"
-    nanoid: "npm:^5.1.5"
-    pathe: "npm:^2.0.3"
-    vite-hot-client: "npm:^2.1.0"
+    "@vue/devtools-kit": "npm:^8.0.7"
+    "@vue/devtools-shared": "npm:^8.0.7"
   peerDependencies:
     vue: ^3.0.0
-  checksum: 10c0/f892f89905996198acb4bcdd809b14355f19d230c61fe250250cd2218821ea64e545076a8e0257de408b95464385d122720ca295e58c62812520ada5984c626a
+  checksum: 10c0/2cf2f56c706c6b026fa47e303c4d9b52c53549008aae260cb1d00cca80eaa28d97abcc939022ffcadbf1a6c63cb84cc86122a76c43973e41987f9580e572ed39
   languageName: node
   linkType: hard
 
@@ -2766,6 +2762,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-kit@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "@vue/devtools-kit@npm:8.0.7"
+  dependencies:
+    "@vue/devtools-shared": "npm:^8.0.7"
+    birpc: "npm:^2.6.1"
+    hookable: "npm:^5.5.3"
+    perfect-debounce: "npm:^2.0.0"
+  checksum: 10c0/5d0a13f698ada1756a64a1dabecab304f75fbdfd137839ce40a354f95527b6c7b423f25f3a86acdf231ed0083f2c4e4697f4b1b59b87a1d10790e89dd248f48e
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-shared@npm:^7.7.9":
   version: 7.7.9
   resolution: "@vue/devtools-shared@npm:7.7.9"
@@ -2781,6 +2789,13 @@ __metadata:
   dependencies:
     rfdc: "npm:^1.4.1"
   checksum: 10c0/e253bd15b00418dc1c6f7c90d990a517c461ecf4ad8484155dca53b6cc96f83e93158e2e8b2b2b68e869472cc64230ed388e2ceca6509430a2b78f0cbffe5fd8
+  languageName: node
+  linkType: hard
+
+"@vue/devtools-shared@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "@vue/devtools-shared@npm:8.0.7"
+  checksum: 10c0/96e714ef562ca72200ccfcd457c94112367fa245e3b238e8474d000b2b48de666b74d86d0e6b238dbdff84515249652e704a56f1a065b23b2276fa3cf71f2757
   languageName: node
   linkType: hard
 
@@ -3155,6 +3170,17 @@ __metadata:
     form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/abf468c34f2d145f3dc7dbc0f1be67e520630624307bda69a41bbe8d386bd672d87b4405c4ee77f9ff54b235ab02f96a9968fb00e75b13ce64706e352a3068fd
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.13.6":
+  version: 1.13.6
+  resolution: "axios@npm:1.13.6"
+  dependencies:
+    follow-redirects: "npm:^1.15.11"
+    form-data: "npm:^4.0.5"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/51fb5af055c3b85662fa97df17d986ae2c37d13bf86d50b6bb36b6b3a2dec6966a1d3a14ab3774b71707b155ae3597ed9b7babdf1a1a863d1a31840cb8e7ec71
   languageName: node
   linkType: hard
 
@@ -3563,10 +3589,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^14.0.2":
-  version: 14.0.2
-  resolution: "commander@npm:14.0.2"
-  checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
+"commander@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "commander@npm:14.0.3"
+  checksum: 10c0/755652564bbf56ff2ff083313912b326450d3f8d8c85f4b71416539c9a05c3c67dbd206821ca72635bf6b160e2afdefcb458e86b317827d5cb333b69ce7f1a24
   languageName: node
   linkType: hard
 
@@ -5206,6 +5232,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"globals@npm:^17.4.0":
+  version: 17.4.0
+  resolution: "globals@npm:17.4.0"
+  checksum: 10c0/2be9e8c2b9035836f13d420b22f0247a328db82967d3bebfc01126d888ed609305f06c05895914e969653af5c6ba35fd7a0920f3e6c869afa60666c810630feb
+  languageName: node
+  linkType: hard
+
 "gopd@npm:^1.2.0":
   version: 1.2.0
   resolution: "gopd@npm:1.2.0"
@@ -5644,11 +5677,11 @@ __metadata:
   dependencies:
     "@babel/types": "npm:^7.29.0"
     "@carbon/charts-vue": "npm:^1.27.2"
-    "@ithaka/eslint-config-vue": "npm:^5.1.2"
+    "@ithaka/eslint-config-vue": "npm:^5.1.3"
     "@ithaka/pharos": "npm:^14.22.2"
     "@tsconfig/node22": "npm:^22.0.5"
     "@types/jsdom": "npm:^27.0.0"
-    "@types/node": "npm:^24.10.15"
+    "@types/node": "npm:^24.11.0"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.4"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.4"
@@ -5656,20 +5689,20 @@ __metadata:
     "@vue/tsconfig": "npm:^0.8.1"
     "@vuepic/vue-datepicker": "npm:^11.0.3"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.13.5"
+    axios: "npm:^1.13.6"
     cypress: "npm:^15.11.0"
     eslint: "npm:^9.39.3"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-cypress: "npm:^5.3.0"
-    globals: "npm:^17.3.0"
+    globals: "npm:^17.4.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.6.1"
     jsdom: "npm:^28.1.0"
-    lint-staged: "npm:^16.2.7"
+    lint-staged: "npm:^16.3.2"
     npm-run-all2: "npm:^8.0.4"
     openseadragon: "npm:^5.0.1"
     path: "npm:^0.12.7"
-    pdfjs-dist: "npm:^5.4.624"
+    pdfjs-dist: "npm:^5.5.207"
     pinia: "npm:^3.0.4"
     prettier: "npm:^3.8.1"
     print-js: "npm:^1.6.0"
@@ -5683,7 +5716,7 @@ __metadata:
     vite: "npm:^7.3.1"
     vite-plugin-dynamic-import: "npm:^1.6.0"
     vite-plugin-static-copy: "npm:^3.2.0"
-    vite-plugin-vue-devtools: "npm:^8.0.6"
+    vite-plugin-vue-devtools: "npm:^8.0.7"
     vue: "npm:^3.5.13"
     vue-router: "npm:^5.0.3"
     vue-tsc: "npm:^3.2.5"
@@ -5943,20 +5976,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^16.2.7":
-  version: 16.2.7
-  resolution: "lint-staged@npm:16.2.7"
+"lint-staged@npm:^16.3.2":
+  version: 16.3.2
+  resolution: "lint-staged@npm:16.3.2"
   dependencies:
-    commander: "npm:^14.0.2"
+    commander: "npm:^14.0.3"
     listr2: "npm:^9.0.5"
     micromatch: "npm:^4.0.8"
-    nano-spawn: "npm:^2.0.0"
-    pidtree: "npm:^0.6.0"
     string-argv: "npm:^0.3.2"
-    yaml: "npm:^2.8.1"
+    tinyexec: "npm:^1.0.2"
+    yaml: "npm:^2.8.2"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10c0/9a677c21a8112d823ae5bc565ba2c9e7b803786f2a021c46827a55fe44ed59def96edb24fc99c06a2545cdbbf366022ad82addcb3bf60c712f3b98ef92069717
+  checksum: 10c0/4cbaa85904a912215660ac3c69400b71beabe3fe7e82969cd32c726dbfb04b0f651d0660906215f955c1446ac6b520319e1c7a03c707353a5f038c3d0441a8c3
   languageName: node
   linkType: hard
 
@@ -6468,28 +6500,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nano-spawn@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "nano-spawn@npm:2.0.0"
-  checksum: 10c0/d00f9b5739f86e28cb732ffd774793e110810cded246b8393c75c4f22674af47f98ee37b19f022ada2d8c9425f800e841caa0662fbff4c0930a10e39339fb366
-  languageName: node
-  linkType: hard
-
 "nanoid@npm:^3.3.11":
   version: 3.3.11
   resolution: "nanoid@npm:3.3.11"
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 10c0/40e7f70b3d15f725ca072dfc4f74e81fcf1fbb02e491cf58ac0c79093adc9b0a73b152bcde57df4b79cd097e13023d7504acb38404a4da7bc1cd8e887b82fe0b
-  languageName: node
-  linkType: hard
-
-"nanoid@npm:^5.1.5":
-  version: 5.1.6
-  resolution: "nanoid@npm:5.1.6"
-  bin:
-    nanoid: bin/nanoid.js
-  checksum: 10c0/27b5b055ad8332cf4f0f9f6e2a494aa7e5ded89df4cab8c8490d4eabefe72c4423971d2745d22002868b1d50576a5e42b7b05214733b19f576382323282dd26e
   languageName: node
   linkType: hard
 
@@ -6841,18 +6857,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pdfjs-dist@npm:^5.4.624":
-  version: 5.4.624
-  resolution: "pdfjs-dist@npm:5.4.624"
+"pdfjs-dist@npm:^5.5.207":
+  version: 5.5.207
+  resolution: "pdfjs-dist@npm:5.5.207"
   dependencies:
-    "@napi-rs/canvas": "npm:^0.1.88"
+    "@napi-rs/canvas": "npm:^0.1.95"
     node-readable-to-web-readable-stream: "npm:^0.4.2"
   dependenciesMeta:
     "@napi-rs/canvas":
       optional: true
     node-readable-to-web-readable-stream:
       optional: true
-  checksum: 10c0/cebfc264ff41f7bedb60bfd2c9900be82bc19f143a1f8dd426d1e08c2093116e41c3900451633733c9ee65b18e39972e4f8de3622d443dde7d01c7eeb018dcfe
+  checksum: 10c0/764edfe839644c82f11cc16872625af4fe8a878b8434df91e64aaf023344c592748a079c3f886b19ab5a75ab9ca2ae02c7e0af18e36184c0dbf2a010d11df2e6
   languageName: node
   linkType: hard
 
@@ -8027,6 +8043,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyexec@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "tinyexec@npm:1.0.2"
+  checksum: 10c0/1261a8e34c9b539a9aae3b7f0bb5372045ff28ee1eba035a2a059e532198fe1a182ec61ac60fa0b4a4129f0c4c4b1d2d57355b5cb9aa2d17ac9454ecace502ee
+  languageName: node
+  linkType: hard
+
 "tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.15":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
@@ -8504,19 +8527,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-vue-devtools@npm:^8.0.6":
-  version: 8.0.6
-  resolution: "vite-plugin-vue-devtools@npm:8.0.6"
+"vite-plugin-vue-devtools@npm:^8.0.7":
+  version: 8.0.7
+  resolution: "vite-plugin-vue-devtools@npm:8.0.7"
   dependencies:
-    "@vue/devtools-core": "npm:^8.0.6"
-    "@vue/devtools-kit": "npm:^8.0.6"
-    "@vue/devtools-shared": "npm:^8.0.6"
+    "@vue/devtools-core": "npm:^8.0.7"
+    "@vue/devtools-kit": "npm:^8.0.7"
+    "@vue/devtools-shared": "npm:^8.0.7"
     sirv: "npm:^3.0.2"
     vite-plugin-inspect: "npm:^11.3.3"
     vite-plugin-vue-inspector: "npm:^5.3.2"
   peerDependencies:
-    vite: ^6.0.0 || ^7.0.0-0
-  checksum: 10c0/cef8ea316f4b0e0c3f0d925ae72db375ca3b18192f803233d525c60dd3bf116f2d4079660e4415f990281f3aca1abb91db1121542485972658dcc5afcee76fb0
+    vite: ^6.0.0 || ^7.0.0-0 || ^8.0.0-0
+  checksum: 10c0/2e5202d79246cdf5e5d833ad54a066537d9f97d9a363f79b52ef98980a8b3101f4ac3e182b767f5865804674675f23ad96179e2ff01169617964af5c1f9f63e2
   languageName: node
   linkType: hard
 
@@ -8888,15 +8911,6 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: 10c0/a499c81ce6d4a1d260d4ea0f6d49ab4da09681e32c3f0472dee16667ed69d01dae63a3b81745a24bd78476ec4fcf856114cb4896ace738e01da34b2c42235416
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "yaml@npm:2.8.1"
-  bin:
-    yaml: bin.mjs
-  checksum: 10c0/7c587be00d9303d2ae1566e03bc5bc7fe978ba0d9bf39cc418c3139d37929dfcb93a230d9749f2cb578b6aa5d9ebebc322415e4b653cb83acd8bc0bc321707f3
   languageName: node
   linkType: hard
 
