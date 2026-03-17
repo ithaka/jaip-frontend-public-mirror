@@ -96,6 +96,12 @@
 .test:
   extends:
     - .test-env
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn/
   before_script:
     - yarn install --immutable
   tags:
