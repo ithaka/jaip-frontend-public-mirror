@@ -60,6 +60,26 @@ const config = {
       component: () => import('@/views/HelpView.vue'),
     },
     {
+      path: '/dictionary',
+      name: 'dictionary',
+      meta: {
+        hidden: true,
+        label: 'Dictionary',
+        requiresAny: ['use_dictionary'],
+      },
+      component: () => import('@/views/DictionaryView.vue'),
+    },
+    {
+      path: '/dictionary/:term',
+      name: 'term view',
+      meta: {
+        hidden: true,
+        label: 'Term View',
+        requiresAny: ['use_dictionary'],
+      },
+      component: () => import('@/views/TermView.vue'),
+    },
+    {
       path: '/accessibility',
       name: 'accessibility',
       meta: {

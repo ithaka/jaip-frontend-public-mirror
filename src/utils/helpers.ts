@@ -78,13 +78,20 @@ export const getStatus = (opts: { [key: string]: History }, groups: number[]): s
 
 export const changeRoute = (
   router: Router,
-  emit: (event: 'close', ...args: unknown[]) => void,
+  emit: ((event: 'close', ...args: unknown[]) => void) | undefined,
   path: string,
   term: string,
   page: number,
   groups: number[] | undefined,
   statusQuery: string | undefined,
+  options: {
+    includeSearchQuery?: boolean
+    closeOnNavigate?: boolean
+  } = {},
 ) => {
+  const includeSearchQuery = options.includeSearchQuery ?? true
+  const closeOnNavigate = options.closeOnNavigate ?? true
+
   const route = router.getRoutes().find((r) => r.path === path)
   if (route?.redirect) {
     window.open(route.redirect as string, '_blank')
@@ -93,17 +100,25 @@ export const changeRoute = (
   if (router.currentRoute.value.path !== path) {
     page = 1
   }
-  const statusq = statusQuery
-  router.push({
-    path,
-    query: {
-      term,
-      page,
-      groups: JSON.stringify(groups),
-      statusq: statusq,
-    },
-  })
-  emit('close')
+
+  if (includeSearchQuery) {
+    const statusq = statusQuery
+    router.push({
+      path,
+      query: {
+        term,
+        page,
+        groups: JSON.stringify(groups),
+        statusq: statusq,
+      },
+    })
+  } else {
+    router.push({ path })
+  }
+
+  if (closeOnNavigate) {
+    emit?.('close')
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

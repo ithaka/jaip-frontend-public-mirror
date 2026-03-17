@@ -112,6 +112,26 @@ const config = {
         'https://support.jstor.org/hc/en-us/sections/35991222174615-JSTOR-Access-in-Prison-Initiative',
     },
     {
+      path: '/dictionary',
+      name: 'dictionary',
+      meta: {
+        hidden: true,
+        label: 'Dictionary',
+        requiresAny: ['use_dictionary'],
+      },
+      component: () => import('@/views/DictionaryView.vue'),
+    },
+    {
+      path: '/dictionary/:term',
+      name: 'term view',
+      meta: {
+        hidden: true,
+        label: 'Term View',
+        requiresAny: ['use_dictionary'],
+      },
+      component: () => import('@/views/TermView.vue'),
+    },
+    {
       path: '/accessibility',
       name: 'accessibility',
       meta: {

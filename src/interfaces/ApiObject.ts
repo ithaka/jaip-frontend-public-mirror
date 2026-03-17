@@ -97,6 +97,11 @@ interface DocumentsRoutes {
   metadata: (arg: string) => Promise<AxiosResponse<SearchResponse>>
 }
 
+interface DictionaryRoutes {
+  headwordSearch: (word: string) => Promise<AxiosResponse<unknown>>
+  wordSearch: (word: string) => Promise<AxiosResponse<unknown>>
+}
+
 interface GlobalRestricts {
   restrict: (arg: RestrictArgs) => Promise<AxiosResponse<unknown>>
   unrestrict: (arg: UnrestrictArgs) => Promise<AxiosResponse<unknown>>
@@ -124,6 +129,7 @@ export default interface ApiObject {
   auth: AuthRoutes
   collections: CollectionsRoutes
   disciplines: () => Promise<AxiosResponse<Discipline[]>>
+  dictionary: DictionaryRoutes
   documents: DocumentsRoutes
   environment: {
     get: () => Promise<AxiosResponse<{ environment: string }>>

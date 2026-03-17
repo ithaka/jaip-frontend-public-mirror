@@ -69,6 +69,11 @@ export const routes = {
   disciplines: {
     get: `${global_route_prefix_versioned}/disciplines`,
   },
+  dictionary: {
+    headwordSearch: (word: string) =>
+      `${global_route_prefix_versioned}/dictionary/headword_search/${word}`,
+    wordSearch: (word: string) => `${global_route_prefix_versioned}/dictionary/word_search/${word}`,
+  },
   journals: {
     get: (code: string) => `${global_route_prefix_versioned}/disciplines/${code}`,
   },
@@ -179,6 +184,10 @@ export default ($axios: AxiosInstance): ApiObject => ({
     get: () => $axios.get(routes.environment.get),
   },
   disciplines: () => $axios.get(routes.disciplines.get),
+  dictionary: {
+    headwordSearch: (word: string) => $axios.get(routes.dictionary.headwordSearch(word)),
+    wordSearch: (word: string) => $axios.get(routes.dictionary.wordSearch(word)),
+  },
   journals: (code: string) => $axios(routes.journals.get(code)),
   search: {
     basic: (data) => $axios.post(routes.search.basic, data),
