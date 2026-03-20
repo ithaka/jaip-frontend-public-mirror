@@ -20,7 +20,6 @@ import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
-import unauthenticatedRouteConfig from '@/router/unauthenticated'
 import { useLogger } from './composables/logging/useLogger'
 
 function checkIfValidUUID(str: string) {
@@ -155,20 +154,10 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
 
 const logout = () => {
   // This will get a list of route paths that are valid for unauthenticated users
-  const routes = unauthenticatedRouteConfig.routes.map((r) => r.path)
-  const router = app.config.globalProperties.$router
   duplicateRoute = true
   // Reset route to home if current route is not valid for unauthenticated users
-  routePath.value = routes.includes(routePath.value) ? routePath.value : '/'
   userStore.$reset()
   gettingUser.value = false
-  router.push({
-    path: routePath.value,
-    query: {
-      term: '',
-      page: 1,
-    },
-  })
 }
 const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
 
@@ -197,7 +186,7 @@ const auth = async (app: App) => {
 
   // Set UUID Cookie and remove hash
   if (valid && isAdminSubdomain.value && (location || {}).hash) {
-    setCookie('uuid', uuid, { expires: inOneDay, sameSite: 'None', secure: true })
+    setCookie('uuid', uuid, { expires: inOneDay, sameSite: 'None', secure: true, path: '/' })
 
     duplicateRoute = true
     if (router) {
@@ -227,7 +216,12 @@ const auth = async (app: App) => {
           }
         }
         if (data?.uuid) {
-          setCookie('uuid', data.uuid, { expires: inOneDay, sameSite: 'None', secure: true })
+          setCookie('uuid', data.uuid, {
+            expires: inOneDay,
+            sameSite: 'None',
+            secure: true,
+            path: '/',
+          })
         }
         if (data.invalid_email) {
           invalidUserEmail.value = data.invalid_email
@@ -251,7 +245,6 @@ const auth = async (app: App) => {
     }
   }
 }
-
 // Finalize router and mount app
 const router = createRouter(isAuthenticatedStudent.value, isAuthenticatedAdmin.value)
 app.use(router)

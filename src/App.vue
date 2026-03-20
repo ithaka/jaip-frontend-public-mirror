@@ -72,15 +72,6 @@ watch(entityName, () => {
 })
 
 const logout = async () => {
-  await router.push({
-    path: '/',
-    query: {
-      term: '',
-      page: 1,
-    },
-  })
-  routePath.value = '/'
-  routeQuery.value = '?term=&page=1'
   userStore.$reset()
 }
 const showRequestWarning = computed(

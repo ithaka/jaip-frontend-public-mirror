@@ -17,13 +17,24 @@ describe('Main site content', () => {
           .as('subdomains')
         handleLocation('/', cy, 'index', 'pep')
       })
-      it('includes about text', () => {
+      it('includes about text for existing paths', () => {
+        // NOTE: This does not test all paths, just a representative sample.
         cy.visit('/')
         cy.get('main').contains('About JSTOR')
+
+        cy.visit('/search')
+        cy.get('main').contains('About JSTOR')
+
+        cy.visit('/management')
+        cy.get('main').contains('About JSTOR')
+
+        cy.visit('/analytics')
+        cy.get('main').contains('About JSTOR')
       })
-      it('redirects to index', () => {
-        cy.visit('/about')
-        cy.location('pathname').should('eq', '/')
+
+      it('includes page not found for non-existent paths', () => {
+        cy.visit('/random-path')
+        cy.get('#main-content').contains('Page Not Found')
       })
 
       it('includes logos in the footer', () => {

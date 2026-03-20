@@ -70,7 +70,7 @@ export const useUserStore = defineStore('user', {
       this.groups = []
       this.type = ''
       this.facilities = []
-      removeCookie('uuid')
+      removeCookie('uuid', { path: '/' })
     },
     async getCurrentUser() {
       this.gettingUser = true
@@ -79,7 +79,12 @@ export const useUserStore = defineStore('user', {
 
       if (data?.uuid) {
         const inOneDay = new Date(new Date().getTime() + 24 * 3600 * 1000)
-        setCookie('uuid', data.uuid, { expires: inOneDay, sameSite: 'None', secure: true })
+        setCookie('uuid', data.uuid, {
+          expires: inOneDay,
+          sameSite: 'None',
+          secure: true,
+          path: '/',
+        })
       }
 
       this.groups = data.groups
