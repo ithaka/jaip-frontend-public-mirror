@@ -1,8 +1,3 @@
 # ALPINE VULNERABILITIES
-# These are vulnerabilities in the libpng library in Alpine, which we are not using
-CVE-2025-64720 exp:2026-03-01
-CVE-2025-65018 exp:2026-03-01
-CVE-2025-66293 exp:2026-03-01
-CVE-2026-22695 exp:2026-03-01
-CVE-2026-22801 exp:2026-03-01
-CVE-2026-25646 exp:2026-03-01
+# This vulnerability is in the libxpat library in Alpine, which we are not using
+CVE-2026-32767 exp:2026-06-01
