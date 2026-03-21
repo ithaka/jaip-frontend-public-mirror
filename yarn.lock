@@ -4574,14 +4574,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:^5.3.0":
-  version: 5.4.0
-  resolution: "eslint-plugin-cypress@npm:5.4.0"
+"eslint-plugin-cypress@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "eslint-plugin-cypress@npm:6.2.0"
   dependencies:
     globals: "npm:^17.3.0"
   peerDependencies:
     eslint: ">=9"
-  checksum: 10c0/ed5072d32f5695e93dd71df776436de0a19c32b789c37b173dcdd734189a4bb79086aa6e01e0c280df5d40bcd8b4b4d3758a053640dcecf43ec547e3142ba3a7
+  checksum: 10c0/2b61c0891149359d73d339703cbdec7b08523e4f15efaeccb4b034d26f2e29246aab80e9bbafaced8a460e4066f4d79558fcaff69156dcd3e4c8b71c7d0a4e51
   languageName: node
   linkType: hard
 
@@ -5693,7 +5693,7 @@ __metadata:
     cypress: "npm:^15.11.0"
     eslint: "npm:^9.39.4"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-cypress: "npm:^5.3.0"
+    eslint-plugin-cypress: "npm:^6.2.0"
     globals: "npm:^17.4.0"
     husky: "npm:^9.1.7"
     jiti: "npm:^2.6.1"
