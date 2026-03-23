@@ -68,7 +68,7 @@ const handleGroupChange = (event: Event) => {
  * @param event
  * Handles toolbar button clicks from charts, logging the event with control ID.
  */
-const chartEventHandler = (event: any) => {
+const chartEventHandler = (event: { detail: { control: { id: string } } }) => {
   handleWithLog(chartButtonClickLog({ controlId: event.detail.control.id }))
 }
 

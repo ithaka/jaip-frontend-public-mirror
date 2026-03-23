@@ -6,7 +6,7 @@ import type { ComponentInternalInstance } from 'vue'
 
 export const ensureError = (value: unknown): Error => {
   if (value instanceof Error) return value
-  let stringified = '[Unable to stringify the thrown value]'
+  let stringified: string
   try {
     stringified = JSON.stringify(value)
   } catch {
@@ -23,7 +23,7 @@ export const makeGrammaticalList = (original: Array<string>) => {
     const last: string = `and ${arr.pop()}`
     arr.push(last)
   }
-  let list: string = ''
+  let list: string
   if (arr.length >= 3) {
     list = arr.join(', ')
   } else {

@@ -123,7 +123,7 @@ const selectAll = () => {
 }
 
 const selectAllInCategory = (category: string | number) => {
-  let newValue = {} as UngroupedFeatureDetails
+  let newValue: UngroupedFeatureDetails
   if (checkAllFeaturesInCategory(category) && newUserSortedUngroupedFeatures.value[category]) {
     newValue = disenable(newUserSortedUngroupedFeatures.value[category])
   } else {
