@@ -1,0 +1,46 @@
+{
+  "etymologies": {
+    "response": [
+      {
+        "etymologyXML": "<div>[Middle English <i>doun</i>, from Old Norse <i>dūnn</i>.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac777938a"
+      },
+      {
+        "etymologyXML": "<div>[Middle English <i>doun</i>, from Old English <i>-dūne</i> (as in <i>ofdūne</i>, downwards), from <i>dūne</i>, dative of <i>dūn</i>, hill; see  dheuə- in Indo-European roots.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac777939d"
+      },
+      {
+        "etymologyXML": "<div>[Middle English <i>doune</i>, from Old English <i>dūn</i>, hill; see  dheuə- in Indo-European roots.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac7779389"
+      }
+    ],
+    "is_error": false
+  },
+  "pronunciations": {
+    "response": [
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374600"
+      },
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374500"
+      },
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374700"
+      }
+    ],
+    "is_error": false
+  },
+  "definitions": {
+    "response": [],
+    "is_error": false
+  }
+}

@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 import type { Entity } from './Entities'
 import type { Subdomain } from './Subdomains'
 import type { ViewerError } from './Viewer'
+import type { FootnoteDirections } from './Dictionary'
 
 // These LogEvent enum values define the different types of log events. These are deliberately
 // fairly broad to allow for flexibility in logging various user interactions and ease of aggregation.
@@ -84,6 +85,9 @@ interface BaseLog {
   viewer_error?: ViewerError
   endpoint?: string
   date_range?: string | Date[]
+  label?: string
+  index?: number
+  direction?: FootnoteDirections
 }
 
 // WorkingLog is the log structure used within the application before being

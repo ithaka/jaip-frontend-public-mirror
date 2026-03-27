@@ -20,6 +20,7 @@ import type { RestrictArgs, UnrestrictArgs } from '@/interfaces/RestrictArgs'
 import type SearchArgs from '@/interfaces/SearchArgs'
 import type { SearchResponse } from '@/interfaces/SearchResponse'
 import type { SubdomainRequest, SubdomainsResponse } from '@/interfaces/Subdomains'
+import type { WordnikWordData } from './Dictionary'
 
 interface AlertsRoutes {
   get: () => Promise<AxiosResponse<AlertsResponse>>
@@ -98,8 +99,8 @@ interface DocumentsRoutes {
 }
 
 interface DictionaryRoutes {
-  headwordSearch: (word: string) => Promise<AxiosResponse<unknown>>
-  wordSearch: (word: string) => Promise<AxiosResponse<unknown>>
+  headwordSearch: (word: string) => Promise<AxiosResponse<string[]>>
+  wordSearch: (word: string) => Promise<AxiosResponse<WordnikWordData>>
 }
 
 interface GlobalRestricts {

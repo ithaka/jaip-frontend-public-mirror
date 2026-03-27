@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import { changeRoute } from '@/utils/helpers'
+import { useCoreStore } from '@/stores/core'
 
 const props = withDefaults(
   defineProps<{
@@ -15,6 +16,8 @@ const props = withDefaults(
   },
 )
 
+const coreStore = useCoreStore()
+
 const router = useRouter()
 const typedValue = ref(props.initialValue)
 const suggestedOptions = ref<string[]>([])
@@ -22,24 +25,12 @@ const latestRequestId = ref(0)
 const dictionaryCombobox = ref<HTMLElement | null>(null)
 let shadowOptionObserver: MutationObserver | null = null
 
-// TODO: Replace with actual dictionary API results when endpoint is available.
-const exampleAWords = [
-  'abacus',
-  'abalone',
-  'abandon',
-  'abbey',
-  'ability',
-  'abject',
-  'ablaze',
-  'abnormal',
-  'aboard',
-  'abode',
-  'abound',
-]
-
 const getDictionaryResults = async (query: string): Promise<string[]> => {
-  console.log('Fetching dictionary results for query:', query)
-  return Promise.resolve(exampleAWords)
+  if (query.trim().length < 3) {
+    return []
+  }
+  const results = await coreStore.$api.dictionary.headwordSearch(query)
+  return results.data
 }
 
 const updateSuggestions = async (query: string) => {
@@ -62,6 +53,8 @@ const handleTermSubmit = () => {
     return
   }
 
+  // Remove the search term from the combobox after submission
+  typedValue.value = ''
   changeRoute(
     router,
     undefined,
@@ -75,10 +68,19 @@ const handleTermSubmit = () => {
       closeOnNavigate: false,
     },
   )
+  dictionaryCombobox.value?.blur()
 }
 
 const handleComboboxChange = () => {
   const comboboxValue = (dictionaryCombobox.value as { value?: string } | null)?.value || ''
+  // The combobox component emits a change event on blur, but we don't actually want to submit
+  // a search if the user hasn't changed the value from the initial value.
+  if (
+    comboboxValue.trim() === typedValue.value.trim() &&
+    typedValue.value.trim() === props.initialValue.trim()
+  ) {
+    return
+  }
   typedValue.value = comboboxValue
   void updateSuggestions(typedValue.value)
   handleTermSubmit()
@@ -88,26 +90,29 @@ const styleFirstShadowOption = () => {
   const shadowRoot = dictionaryCombobox.value?.shadowRoot
   const options = shadowRoot?.querySelectorAll('.combobox__option')
   options?.forEach((option, index) => {
+    option.classList.add('dictionary-search-combobox__shadow-option')
     option.classList.toggle('dictionary-search-combobox__shadow-option--first', index === 0)
   })
-  const firstOption = shadowRoot?.querySelector('.combobox__option') as HTMLElement | null
-  if (firstOption) {
-    firstOption.style.backgroundColor = 'var(--pharos-color-marble-gray-94)'
-  }
 }
 
 const ensureShadowFirstOptionStyle = (shadowRoot: ShadowRoot) => {
-  if (shadowRoot.querySelector('[data-dictionary-first-option-style]')) {
+  if (shadowRoot.querySelector('[data-dictionary-option-styles]')) {
     return
   }
 
   const style = document.createElement('style')
-  style.setAttribute('data-dictionary-first-option-style', 'true')
+  style.setAttribute('data-dictionary-option-styles', 'true')
   style.textContent = `
     .dictionary-search-combobox__shadow-option--first::before {
       content: "Just search for: ";
     }
-
+    .dictionary-search-combobox__shadow-option--first{
+      background-color: var(--pharos-color-marble-gray-94) !important;
+    }
+    .dictionary-search-combobox__shadow-option {
+      padding: var(--pharos-spacing-three-quarters-x) !important;
+      font-weight: normal !important;
+    }
     .search__button {
       background-color: #fff;
     }
@@ -135,16 +140,14 @@ const connectShadowOptionStyling = async () => {
 
 const optionList = computed(() => {
   const query = typedValue.value.trim()
-  return [query, ...suggestedOptions.value]
-})
+  if (query.length === 0) {
+    return []
+  }
 
-watch(
-  () => props.initialValue,
-  (value) => {
-    typedValue.value = value
-    void updateSuggestions(value)
-  },
-)
+  // We remove the typed query from the suggestions to avoid duplication while still placing the matching
+  // word first in the list.
+  return [query, ...suggestedOptions.value.filter((option) => option !== query)]
+})
 
 onMounted(() => {
   void updateSuggestions(typedValue.value)

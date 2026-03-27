@@ -1,0 +1,425 @@
+{
+  "etymologies": {
+    "response": [
+      {
+        "etymologyXML": "<div>[Middle English <i>doun</i>, from Old Norse <i>dūnn</i>.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac777938a"
+      },
+      {
+        "etymologyXML": "<div>[Middle English <i>doun</i>, from Old English <i>-dūne</i> (as in <i>ofdūne</i>, downwards), from <i>dūne</i>, dative of <i>dūn</i>, hill; see  dheuə- in Indo-European roots.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac777939d"
+      },
+      {
+        "etymologyXML": "<div>[Middle English <i>doune</i>, from Old English <i>dūn</i>, hill; see  dheuə- in Indo-European roots.]</div>",
+        "sourceDictionary": "ahd-5",
+        "id": "5cb3b2c72d22641ac7779389"
+      }
+    ],
+    "is_error": false
+  },
+  "pronunciations": {
+    "response": [
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374600"
+      },
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374500"
+      },
+      {
+        "raw": "doun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "id": "D5374700"
+      }
+    ],
+    "is_error": false
+  },
+  "definitions": {
+    "response": [
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Fine, soft, fluffy feathers forming the first plumage of a young bird and underlying the contour feathers in certain adult birds.",
+        "word": "down",
+        "id": "D5374600-1"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "A covering of soft, short hairs, as on some leaves or fruit.",
+        "word": "down",
+        "id": "D5374600-2"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "A soft, silky, or feathery substance, such as the first growth of a human beard.",
+        "word": "down",
+        "id": "D5374600-3"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "From a higher to a lower place or position.",
+        "word": "down",
+        "id": "D5374500-2"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Toward, to, or on the ground, floor, or bottom.",
+        "word": "down",
+        "id": "D5374500-3"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Downstairs.",
+        "word": "down",
+        "id": "D5374500-4"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In or into a sitting, kneeling, or reclining position.",
+        "word": "down",
+        "id": "D5374500-5"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In or into one's stomach.",
+        "word": "down",
+        "id": "D5374500-6"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In writing or a record.",
+        "word": "down",
+        "id": "D5374500-7"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In partial payment at the time of purchase.",
+        "word": "down",
+        "id": "D5374500-8"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Into or toward a secure position.",
+        "word": "down",
+        "id": "D5374500-9"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Toward or in the south; southward.",
+        "word": "down",
+        "id": "D5374500-11"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Away from a place considered central or a center of activity, such as a city or town.",
+        "word": "down",
+        "id": "D5374500-12"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To a specific location or source.",
+        "word": "down",
+        "id": "D5374500-13"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Toward or at a low or lower point on a scale.",
+        "word": "down",
+        "id": "D5374500-15"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "From earlier times or people.",
+        "word": "down",
+        "id": "D5374500-16"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To or at a lower intensity or amount.",
+        "word": "down",
+        "id": "D5374500-18"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To or in a reduced or concentrated form.",
+        "word": "down",
+        "id": "D5374500-19"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To or in a quiescent or subdued state.",
+        "word": "down",
+        "id": "D5374500-20"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In or into an inactive or inoperative state.",
+        "word": "down",
+        "id": "D5374500-21"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To or into a lower or inferior condition, as of subjection, defeat, or disgrace.",
+        "word": "down",
+        "id": "D5374500-22"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To an extreme degree; heavily.",
+        "word": "down",
+        "id": "D5374500-24"
+      },
+      {
+        "partOfSpeech": "adverb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Seriously or vigorously.",
+        "word": "down",
+        "id": "D5374500-25"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Moving or directed downward.",
+        "word": "down",
+        "id": "D5374500-27"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Low or lower.",
+        "word": "down",
+        "id": "D5374500-28"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Reduced; diminished.",
+        "word": "down",
+        "id": "D5374500-29"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Trailing an opponent.",
+        "word": "down",
+        "id": "D5374500-30"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Afflicted; sick.",
+        "word": "down",
+        "id": "D5374500-32"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Malfunctioning or not operating, especially temporarily.",
+        "word": "down",
+        "id": "D5374500-33"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Low in spirits; depressed.",
+        "word": "down",
+        "id": "D5374500-34"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Not in play and at the place where offensive forward progress has stopped.",
+        "word": "down",
+        "id": "D5374500-36"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Not permitted to advance further in the play because forward progress has stopped, especially by being tackled. Used of a ball carrier.",
+        "word": "down",
+        "id": "D5374500-37"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Retired; out.",
+        "word": "down",
+        "id": "D5374500-38"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Completed; done.",
+        "word": "down",
+        "id": "D5374500-40"
+      },
+      {
+        "partOfSpeech": "adjective",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Learned or known perfectly.",
+        "word": "down",
+        "id": "D5374500-41"
+      },
+      {
+        "partOfSpeech": "preposition",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In a descending direction along, upon, into, or through.",
+        "word": "down",
+        "id": "D5374500-43"
+      },
+      {
+        "partOfSpeech": "preposition",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In a sequential or temporal sequence.",
+        "word": "down",
+        "id": "D5374500-44"
+      },
+      {
+        "partOfSpeech": "preposition",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Along the course of.",
+        "word": "down",
+        "id": "D5374500-45"
+      },
+      {
+        "partOfSpeech": "preposition",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "In or at.",
+        "word": "down",
+        "id": "D5374500-46"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "A downward movement; descent.",
+        "word": "down",
+        "id": "D5374500-48"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "A feeling of sadness or depression.",
+        "word": "down",
+        "id": "D5374500-49"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "A misfortune or difficulty.",
+        "word": "down",
+        "id": "D5374500-50"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Any of a series of four plays in American football or three plays in Canadian football during which a team must advance at least ten yards to retain possession of the ball.",
+        "word": "down",
+        "id": "D5374500-51"
+      },
+      {
+        "partOfSpeech": "intransitive verb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To bring, put, strike, or throw down.",
+        "word": "down",
+        "id": "D5374500-52"
+      },
+      {
+        "partOfSpeech": "intransitive verb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To swallow hastily; gulp.",
+        "word": "down",
+        "id": "D5374500-53"
+      },
+      {
+        "partOfSpeech": "intransitive verb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To put (the ball) out of play by touching it to the ground or stepping out of bounds.",
+        "word": "down",
+        "id": "D5374500-54"
+      },
+      {
+        "partOfSpeech": "intransitive verb",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "To go or come down; descend.",
+        "word": "down",
+        "id": "D5374500-55"
+      },
+      {
+        "partOfSpeech": "idiom",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "(<em>down on</em>)  Hostile or negative toward; ill-disposed to.",
+        "word": "down",
+        "id": "D5374500-56"
+      },
+      {
+        "partOfSpeech": "idiom",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "(<em>down on (one's) luck</em>)  Afflicted by misfortune.",
+        "word": "down",
+        "id": "D5374500-57"
+      },
+      {
+        "partOfSpeech": "idiom",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "(<em>down with</em>)  Used to express disapproval of someone or a wish to see someone removed from a position of authority.",
+        "word": "down",
+        "id": "D5374500-58"
+      },
+      {
+        "partOfSpeech": "idiom",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "(<em>down with</em>)  Being in support of or agreement with something.",
+        "word": "down",
+        "id": "D5374500-60"
+      },
+      {
+        "partOfSpeech": "idiom",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "(<em>down with</em>)  Knowledgeable or aware of the latest trends or developments.",
+        "word": "down",
+        "id": "D5374500-61"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "An expanse of rolling, grassy, treeless upland used for grazing.",
+        "word": "down",
+        "id": "D5374700-1"
+      },
+      {
+        "partOfSpeech": "noun",
+        "attributionText": "from The American Heritage® Dictionary of the English Language, 5th Edition.",
+        "text": "Any of several breeds of sheep having short wool, originally bred in the Downs of southern England.",
+        "word": "down",
+        "id": "D5374700-2"
+      }
+    ],
+    "is_error": false
+  }
+}

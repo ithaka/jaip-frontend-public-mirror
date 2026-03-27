@@ -1,10 +1,20 @@
 <script setup lang="ts">
 import DictionarySearchCombobox from '@/components/dictionary/DictionarySearchCombobox.vue'
+import { useLogger } from '@/composables/logging/useLogger'
+import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
-// TODO: Replace with actual search suggestions when available.
-const quickSearchExamples = ['habeaus corpus', 'chide', 'apricity', 'involuntary', 'sagacious']
+// These are just examples and can be changed out for any terms we want to highlight on the dictionary landing page.
+// We may weant to use the randomWord endpoint from Wordnik to surface different terms with each landing
+// or each day, but for now we'll hardcode some interesting terms that we know have definitions in the source dictionary.
+const quickSearchExamples = ['habeas corpus', 'chide', 'academic', 'involuntary', 'sagacious']
 
 const getTermPath = (term: string) => `/dictionary/${encodeURIComponent(term)}`
+
+const { logPageView } = usePageViewLogger()
+logPageView()
+
+const { handleWithLog, logs } = useLogger()
+const { quickSearchLinkClick } = logs.getDictionaryTermLogs()
 </script>
 
 <template>
@@ -18,7 +28,7 @@ const getTermPath = (term: string) => `/dictionary/${encodeURIComponent(term)}`
             class="dictionary-view__title"
             data-cy="dictionary-view-title"
           >
-            Search the Dictionary
+            Search the dictionary
           </pep-pharos-heading>
           <DictionarySearchCombobox />
         </div>
@@ -30,6 +40,7 @@ const getTermPath = (term: string) => `/dictionary/${encodeURIComponent(term)}`
             :key="`example_${index}`"
             custom
             :to="getTermPath(option)"
+            @click="handleWithLog(quickSearchLinkClick({ label: option }))"
           >
             <a :href="href" class="dictionary-view__suggested-link" @click="navigate">
               <pep-pharos-pill preset="8">{{ option }}</pep-pharos-pill>
@@ -41,8 +52,8 @@ const getTermPath = (term: string) => `/dictionary/${encodeURIComponent(term)}`
     <div class="dictionary-view__section">
       <div class="dictionary-view__content">
         <p class="dictionary-view__copy">
-          Search for any word or phrase in the the dictionary to help you build and master
-          vocabulary as you read. JSTOR uses definitions from the
+          Search for any word or phrase in the the dictionary to help you build vocabulary as you
+          read. JSTOR uses definitions from the
           <b>American Heritage Dictionary</b>, a secure source.
         </p>
         <img
@@ -57,7 +68,7 @@ const getTermPath = (term: string) => `/dictionary/${encodeURIComponent(term)}`
 
 <style lang="scss" scoped>
 .dictionary-view {
-  margin-top: var(--pharos-spacing-3-x);
+  margin-top: 0;
   margin-bottom: var(--pharos-spacing-2-x);
   &__section {
     padding: var(--pharos-spacing-3-x) var(--pharos-spacing-2-x);
