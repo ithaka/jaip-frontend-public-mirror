@@ -2,7 +2,7 @@ import '@ithaka/pharos/lib/styles/fonts.css'
 import '@ithaka/pharos/lib/styles/typography.scss'
 import '@/assets/main.scss'
 import 'pdfjs-dist/legacy/web/pdf_viewer.css'
-
+import { initViewportUnitsPatch } from '@/utils/patchViewportUnits'
 import { createApp } from 'vue'
 import type { App } from 'vue'
 import { createPinia, storeToRefs } from 'pinia'
@@ -21,6 +21,10 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
 import { useLogger } from './composables/logging/useLogger'
+
+// This has to run before any web component definitions so that shadow DOM stylesheets
+// get viewport units rewritten via the patched CSSStyleSheet.replaceSync.
+initViewportUnitsPatch()
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID

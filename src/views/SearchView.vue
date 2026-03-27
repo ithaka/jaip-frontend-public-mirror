@@ -512,12 +512,13 @@ $pharos-breakpoint-medium: 48rem; // 768px
 .search-facets {
   position: sticky;
   top: 0;
-  // This is a difficult fallback for devices that don't support vh. It will basically break the
-  // ability to scroll the facets independently of the search results, but at least it won't
-  // overflow the viewport.
+  // --vh is set via JS in main.ts to work around Android WebView reporting vh as 0.
+  // The fallback chain provides progressively better values for other browsers.
   max-height: 100%;
   max-height: 100vh;
   max-height: 100dvh;
+  max-height: calc(var(--vh, 1vh) * 100);
+
   overflow: hidden scroll;
   padding-bottom: 2rem;
   grid-row-end: span 5;

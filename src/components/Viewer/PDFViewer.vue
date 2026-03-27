@@ -11,7 +11,7 @@ import {
   setupFullscreenChangeListeners,
   removeFullscreenChangeListeners,
   canUseFullscreenAPI,
-} from '@/utils/viewers.ts'
+} from '@/utils/viewers.js'
 import { useValidDownloadURL } from '@/composables/urls'
 import type { Collections } from '@/interfaces/Collections'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
@@ -640,15 +640,15 @@ const fireToast = () => {
   }
 }
 .viewer-and-controls {
-  // This number results in a somewhat odd height, but it seems to roughly accommodate a pdf
-  // and will work when in full screen or not. It's just slightly smaller than what we're told
-  // is the viewport height for some tablets. It's a fallback for devices that don't support
-  // vh.
+  // Fallback for devices that don't support vh (e.g. Android WebView).
+  // --vh is set via JS in main.ts.
   min-height: 1100px;
   min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
   height: 100%;
   height: 100vh;
   height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   position: relative;
   background-color: var(--pharos-color-black);
@@ -664,8 +664,10 @@ const fireToast = () => {
   height: 93%;
   height: 95vh;
   height: 95dvh;
+  height: calc(var(--vh, 1vh) * 95);
   &.full-screen {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     min-height: 100%;
     min-width: 100%;
   }

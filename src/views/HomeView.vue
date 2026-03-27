@@ -104,12 +104,14 @@ logPageView()
       height: 28%;
       height: 35vh;
       height: 35dvh;
+      height: calc(var(--vh, 1vh) * 35);
     }
 
     @media (max-width: 425px) {
       height: 20%;
       height: 30vh;
       height: 30dvh;
+      height: calc(var(--vh, 1vh) * 30);
     }
   }
 

@@ -6,6 +6,7 @@ import { pageLandingLogs } from './categories/pageLandings'
 import { viewerLogs } from './categories/viewers'
 import { accessLogs } from './categories/access'
 import { analyticsLogs } from './categories/analytics'
+import { viewportPatchLogs } from './categories/viewport_patch'
 import { dictionaryLogs } from './categories/dictionary'
 
 export const logs = {
@@ -17,5 +18,6 @@ export const logs = {
   ...viewerLogs,
   ...accessLogs,
   ...analyticsLogs,
+  ...viewportPatchLogs,
   ...dictionaryLogs,
 }

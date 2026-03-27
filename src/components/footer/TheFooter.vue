@@ -256,7 +256,7 @@ const { footerLinkClickLog } = logs.getFooterLogs()
     justify-self: center;
 
     @media (width <= 570px) {
-      max-width: calc(100vw - 2rem);
+      max-width: calc(calc(var(--vh, 1vh) * 100) - 2rem);
     }
 
     .footer__row {

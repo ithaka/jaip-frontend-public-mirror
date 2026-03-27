@@ -687,7 +687,9 @@ $button-offset: var(--pharos-spacing-one-and-a-half-x);
   height: 100%;
   height: 100vh;
   height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   min-height: 700px;
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   margin-bottom: 100px;
   &.full-screen {
