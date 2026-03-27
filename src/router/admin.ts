@@ -12,14 +12,25 @@ const config = {
       component: () => import('@/views/HomeView.vue'),
     },
     {
-      path: '/search',
-      name: 'search',
+      path: '/dictionary',
+      name: 'dictionary',
       meta: {
-        group: 'research',
-        showSearch: true,
-        label: 'Search',
+        label: 'Dictionary',
+        requiresAny: ['use_dictionary'],
+        showInFooter: true,
+        showAsNew: true,
       },
-      component: () => import('@/views/SearchView.vue'),
+      component: () => import('@/views/DictionaryView.vue'),
+    },
+    {
+      path: '/collections/reentry',
+      name: 'reentry guides',
+      meta: {
+        label: 'Reentry Guides',
+        requiresAny: ['include_reentry_content'],
+        showInFooter: true,
+      },
+      component: () => import('@/views/ReentryView.vue'),
     },
     {
       path: '/requests',
@@ -31,15 +42,57 @@ const config = {
       component: () => import('@/views/RequestsView.vue'),
     },
     {
-      path: '/notifications',
-      name: 'notifications',
+      path: '/search',
+      name: 'search',
+      meta: {
+        group: 'research',
+        showSearch: true,
+        label: 'Search',
+      },
+      component: () => import('@/views/SearchView.vue'),
+    },
+    {
+      path: '/about',
+      name: 'about',
       meta: {
         group: 'support',
-        requiresAny: ['edit_facilities', 'manage_facilities'],
         showSearch: true,
-        label: 'Notifications',
+        label: 'About',
       },
-      component: () => import('@/views/NotificationsView.vue'),
+      component: () => import('@/views/AboutView.vue'),
+    },
+    {
+      path: '/account',
+      name: 'account',
+      meta: {
+        group: 'support',
+        requiresAny: ['get_users', 'get_facilities'],
+        showSearch: true,
+        label: 'Account',
+      },
+      component: () => import('@/views/AccountView.vue'),
+    },
+    {
+      path: '/analytics',
+      name: 'analytics',
+      meta: {
+        group: 'support',
+        requiresAny: ['view_analytics'],
+        showSearch: false,
+        label: 'Analytics',
+      },
+      component: () => import('@/views/AnalyticsView.vue'),
+    },
+    {
+      path: '/help',
+      name: 'help',
+      meta: {
+        group: 'support',
+        showSearch: true,
+        label: 'Help',
+      },
+      redirect:
+        'https://support.jstor.org/hc/en-us/sections/35991222174615-JSTOR-Access-in-Prison-Initiative',
     },
     {
       path: '/management',
@@ -69,67 +122,15 @@ const config = {
       component: () => import('@/views/AccountManagement.vue'),
     },
     {
-      path: '/analytics',
-      name: 'analytics',
+      path: '/notifications',
+      name: 'notifications',
       meta: {
         group: 'support',
-        requiresAny: ['view_analytics'],
-        showSearch: false,
-        label: 'Analytics',
-      },
-      component: () => import('@/views/AnalyticsView.vue'),
-    },
-    {
-      path: '/account',
-      name: 'account',
-      meta: {
-        group: 'support',
-        requiresAny: ['get_users', 'get_facilities'],
+        requiresAny: ['edit_facilities', 'manage_facilities'],
         showSearch: true,
-        label: 'Account',
+        label: 'Notifications',
       },
-      component: () => import('@/views/AccountView.vue'),
-    },
-    {
-      path: '/about',
-      name: 'about',
-      meta: {
-        group: 'support',
-        showSearch: true,
-        label: 'About',
-      },
-      component: () => import('@/views/AboutView.vue'),
-    },
-    {
-      path: '/help',
-      name: 'help',
-      meta: {
-        group: 'support',
-        showSearch: true,
-        label: 'Help',
-      },
-      redirect:
-        'https://support.jstor.org/hc/en-us/sections/35991222174615-JSTOR-Access-in-Prison-Initiative',
-    },
-    {
-      path: '/dictionary',
-      name: 'dictionary',
-      meta: {
-        hidden: true,
-        label: 'Dictionary',
-        requiresAny: ['use_dictionary'],
-      },
-      component: () => import('@/views/DictionaryView.vue'),
-    },
-    {
-      path: '/dictionary/:term',
-      name: 'term view',
-      meta: {
-        hidden: true,
-        label: 'Term View',
-        requiresAny: ['use_dictionary'],
-      },
-      component: () => import('@/views/TermView.vue'),
+      component: () => import('@/views/NotificationsView.vue'),
     },
     {
       path: '/accessibility',
@@ -140,37 +141,6 @@ const config = {
         label: 'Accessibility',
       },
       component: () => import('@/views/AccessibilityView.vue'),
-    },
-    {
-      path: '/pdf/:iid',
-      name: 'pdfViewer',
-      meta: {
-        hidden: true,
-        requiresAny: ['view_pdf'],
-        label: 'PDF Viewer',
-      },
-      component: () => import('@/views/PDFView.vue'),
-    },
-    {
-      path: '/page/:iid/:pid',
-      name: 'pageViewer',
-      meta: {
-        hidden: true,
-        requiresAny: ['view_document'],
-        label: 'Page Viewer',
-      },
-      component: () => import('@/views/PageView.vue'),
-    },
-    {
-      path: '/collections/reentry',
-      name: 'reentry guides',
-      meta: {
-        label: 'Reentry Guides',
-        requiresAny: ['include_reentry_content'],
-        showAsNew: true,
-        showInFooter: true,
-      },
-      component: () => import('@/views/ReentryView.vue'),
     },
     {
       path: '/collections/:collection/:filename',
@@ -200,6 +170,36 @@ const config = {
         label: 'Not Found',
       },
       component: () => import('@/views/NotFound.vue'),
+    },
+    {
+      path: '/page/:iid/:pid',
+      name: 'pageViewer',
+      meta: {
+        hidden: true,
+        requiresAny: ['view_document'],
+        label: 'Page Viewer',
+      },
+      component: () => import('@/views/PageView.vue'),
+    },
+    {
+      path: '/pdf/:iid',
+      name: 'pdfViewer',
+      meta: {
+        hidden: true,
+        requiresAny: ['view_pdf'],
+        label: 'PDF Viewer',
+      },
+      component: () => import('@/views/PDFView.vue'),
+    },
+    {
+      path: '/dictionary/:term',
+      name: 'term view',
+      meta: {
+        hidden: true,
+        label: 'Term View',
+        requiresAny: ['use_dictionary'],
+      },
+      component: () => import('@/views/TermView.vue'),
     },
   ],
 }

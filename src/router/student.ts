@@ -4,23 +4,42 @@ const config = {
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/collections/reentry',
-      name: 'reentry guides',
-      meta: {
-        label: 'Reentry Guides',
-        requiresAny: ['include_reentry_content'],
-        showAsNew: true,
-        showInFooter: true,
-      },
-      component: () => import('@/views/ReentryView.vue'),
-    },
-    {
       path: '/',
       name: 'home',
       meta: {
         label: 'Home',
       },
       component: () => import('@/views/HomeView.vue'),
+    },
+    {
+      path: '/dictionary',
+      name: 'dictionary',
+      meta: {
+        label: 'Dictionary',
+        requiresAny: ['use_dictionary'],
+        showInFooter: true,
+        showAsNew: true,
+      },
+      component: () => import('@/views/DictionaryView.vue'),
+    },
+    {
+      path: '/collections/reentry',
+      name: 'reentry guides',
+      meta: {
+        label: 'Reentry Guides',
+        requiresAny: ['include_reentry_content'],
+        showInFooter: true,
+      },
+      component: () => import('@/views/ReentryView.vue'),
+    },
+    {
+      path: '/requests',
+      name: 'requests',
+      meta: {
+        group: 'research',
+        label: 'Requests',
+      },
+      component: () => import('@/views/RequestsView.vue'),
     },
     {
       path: '/search',
@@ -31,15 +50,6 @@ const config = {
         label: 'Search',
       },
       component: () => import('@/views/SearchView.vue'),
-    },
-    {
-      path: '/requests',
-      name: 'requests',
-      meta: {
-        group: 'research',
-        label: 'Requests',
-      },
-      component: () => import('@/views/RequestsView.vue'),
     },
     {
       path: '/about',
@@ -58,26 +68,6 @@ const config = {
         label: 'Help',
       },
       component: () => import('@/views/HelpView.vue'),
-    },
-    {
-      path: '/dictionary',
-      name: 'dictionary',
-      meta: {
-        hidden: true,
-        label: 'Dictionary',
-        requiresAny: ['use_dictionary'],
-      },
-      component: () => import('@/views/DictionaryView.vue'),
-    },
-    {
-      path: '/dictionary/:term',
-      name: 'term view',
-      meta: {
-        hidden: true,
-        label: 'Term View',
-        requiresAny: ['use_dictionary'],
-      },
-      component: () => import('@/views/TermView.vue'),
     },
     {
       path: '/accessibility',
@@ -100,6 +90,15 @@ const config = {
       component: () => import('@/views/CollectionsItemView.vue'),
     },
     {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      meta: {
+        hidden: true,
+        label: 'Not Found',
+      },
+      component: () => import('@/views/NotFound.vue'),
+    },
+    {
       path: '/page/:iid/:pid',
       name: 'pageViewer',
       meta: {
@@ -110,13 +109,14 @@ const config = {
       component: () => import('@/views/PageView.vue'),
     },
     {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
+      path: '/dictionary/:term',
+      name: 'term view',
       meta: {
         hidden: true,
-        label: 'Not Found',
+        label: 'Term View',
+        requiresAny: ['use_dictionary'],
       },
-      component: () => import('@/views/NotFound.vue'),
+      component: () => import('@/views/TermView.vue'),
     },
   ],
 }

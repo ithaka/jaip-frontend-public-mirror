@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { useSearchStore } from '@/stores/search'
 import { useRouter } from 'vue-router'
-import { changeRoute } from '@/utils/helpers'
+import { changeRoute, compareRoutesByName, collectOrganizedRoutes } from '@/utils/helpers'
 import { computed } from 'vue'
 import { useLogger } from '@/composables/logging/useLogger'
 
@@ -18,22 +18,38 @@ const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
 })
 
 const router = useRouter()
+/**
+ * Collects and organizes routes for footer links.
+ * Filters to include only routes that are not hidden, or routes with showInFooter: true.
+ * Routes are organized as: home first, then ungrouped routes sorted alphabetically by name,
+ * followed by grouped routes sorted by group name and then by route name within each group.
+ */
 const linkGroup = computed(() => {
   const routes = router.getRoutes()
-  return routes.reduce(
-    (acc, route) => {
-      if (!route.meta?.hidden || route.meta?.showInFooter) {
-        // Insert 'home' route at the beginning, others at the end
-        if (route.name === 'home') {
-          acc.unshift(route)
-        } else {
-          acc.push(route)
-        }
-      }
-      return acc
-    },
-    [] as typeof routes,
+  const { homeRoute, ungrouped, grouped } = collectOrganizedRoutes(
+    routes,
+    (route) => !route.meta?.hidden || !!route.meta?.showInFooter,
   )
+
+  // Sort ungrouped routes alphabetically
+  ungrouped.sort(compareRoutesByName)
+
+  // Build final array: home first, then ungrouped, then grouped
+  const result = []
+  if (homeRoute) {
+    result.push(homeRoute)
+  }
+  result.push(...ungrouped)
+
+  // Add grouped routes sorted by group name, then by route name within group
+  const sortedGroups = Object.keys(grouped).sort()
+  sortedGroups.forEach((group) => {
+    const groupItems = grouped[group]
+    groupItems.sort(compareRoutesByName)
+    result.push(...groupItems)
+  })
+
+  return result
 })
 
 const emit = defineEmits(['close'])

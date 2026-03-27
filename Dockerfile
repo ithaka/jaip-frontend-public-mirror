@@ -1,7 +1,7 @@
 FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:24.14.0-alpine AS build-stage
 WORKDIR /app
 
-RUN apk update && apk upgrade
+#RUN apk update && apk upgrade
 
 COPY package.json ./
 COPY yarn.lock ./
@@ -13,7 +13,7 @@ RUN yarn build-only
 
 FROM docker-virtual.artifactory.acorn.cirrostratus.org/nginx:stable-alpine AS production-stage
 
-RUN apk update && apk upgrade
+#RUN apk update && apk upgrade
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 COPY --from=build-stage /app/nginx/nginx.conf /etc/nginx/nginx.conf

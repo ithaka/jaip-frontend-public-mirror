@@ -1,3 +1,6 @@
 # ALPINE VULNERABILITIES
 # This vulnerability is in the libxpat library in Alpine, which we are not using
 CVE-2026-32767 exp:2026-06-01
+
+# This vulnerability affects zlib's untgz utility, which we are not using
+CVE-2026-22184 exp:2026-06-01

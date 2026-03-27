@@ -192,36 +192,76 @@ export const formatRouteName = (route: RouteRecordNormalized): string => {
 }
 
 /**
- * Organizes routes into grouped and ungrouped categories based on their metadata.
+ * Compares two routes alphabetically by their name for sorting.
+ * @param a - First route to compare
+ * @param b - Second route to compare
+ * @returns Negative if a < b, positive if a > b, 0 if equal
+ */
+export const compareRoutesByName = (a: RouteRecordNormalized, b: RouteRecordNormalized): number => {
+  const aName = String(a.name || '').toLowerCase()
+  const bName = String(b.name || '').toLowerCase()
+  return aName.localeCompare(bName)
+}
+
+/**
+ * Collects and organizes routes into home, ungrouped, and grouped categories.
+ * @param routes - Array of routes to organize
+ * @param filterFn - Filter function to determine which routes to include
+ * @returns Object containing homeRoute, ungrouped array, and grouped object
+ */
+export const collectOrganizedRoutes = (
+  routes: RouteRecordNormalized[],
+  filterFn: (route: RouteRecordNormalized) => boolean,
+): {
+  homeRoute: RouteRecordNormalized | null
+  ungrouped: RouteRecordNormalized[]
+  grouped: { [key: string]: RouteRecordNormalized[] }
+} => {
+  let homeRoute: RouteRecordNormalized | null = null
+  const ungrouped: RouteRecordNormalized[] = []
+  const grouped: { [key: string]: RouteRecordNormalized[] } = {}
+
+  routes.forEach((route) => {
+    if (filterFn(route)) {
+      if (route.name === 'home') {
+        homeRoute = route
+      } else if (route.meta?.group) {
+        if (!grouped[route.meta.group]) {
+          grouped[route.meta.group] = []
+        }
+        grouped[route.meta.group].push(route)
+      } else {
+        ungrouped.push(route)
+      }
+    }
+  })
+
+  return { homeRoute, ungrouped, grouped }
+}
+
+/**
+ * Organizes routes into grouped and ungrouped categories, excluding hidden routes.
+ * Home is always first in the ungrouped list, followed by other ungrouped routes
+ * sorted alphabetically by route name. Routes with a meta.group are organized by group.
  * @param router - The Vue Router instance containing the application's routes.
- * @returns An object with grouped and ungrouped routes for navigation purposes.
+ * @returns An object with grouped and ungrouped routes sorted for menu navigation.
  */
 export const getOrganizedRoutes = (router: Router): RoutesObject => {
   const routes = router.getRoutes()
-  return routes.reduce(
-    (obj: RoutesObject, route) => {
-      if (route.meta.hidden) {
-        return obj
-      }
-      if (route.name === 'home') {
-        obj.ungrouped.unshift(route)
-        return obj
-      }
-      if (route.meta.group) {
-        if (!obj.grouped[route.meta.group]) {
-          obj.grouped[route.meta.group] = []
-        }
-        obj.grouped[route.meta.group]?.push(route)
-      } else {
-        obj.ungrouped.push(route)
-      }
-      return obj
-    },
-    {
-      grouped: {},
-      ungrouped: [],
-    } as RoutesObject,
+  const { homeRoute, ungrouped, grouped } = collectOrganizedRoutes(
+    routes,
+    (route) => !route.meta.hidden,
   )
+
+  ungrouped.sort(compareRoutesByName)
+
+  const result: RoutesObject = { grouped, ungrouped: [] }
+  if (homeRoute) {
+    result.ungrouped.push(homeRoute)
+  }
+  result.ungrouped.push(...ungrouped)
+
+  return result
 }
 
 export const getAncestorComponentNames = (
