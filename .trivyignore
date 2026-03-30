@@ -4,3 +4,7 @@ CVE-2026-32767 exp:2026-06-01
 
 # This vulnerability affects zlib's untgz utility, which we are not using
 CVE-2026-22184 exp:2026-06-01
+
+# These affect libpng in Alpine, which we're not using
+CVE-2026-33636 exp:2026-06-01
+CVE-2026-33416 exp:2026-06-01

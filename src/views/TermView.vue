@@ -187,7 +187,13 @@ const { footnoteLinkClick } = logs.getDictionaryTermLogs()
             aria-labelledby="etymologies-title"
           >
             <pep-pharos-heading id="etymologies-title" preset="2" :level="2"
-              >Etymologies<sup>{{ etymologiesNote }}</sup></pep-pharos-heading
+              >Etymologies<sup
+                ><pep-pharos-link
+                  :id="`footnote_link_${etymologiesNote}`"
+                  :href="`#footnote_${etymologiesNote}`"
+                  >{{ etymologiesNote }}</pep-pharos-link
+                ></sup
+              ></pep-pharos-heading
             >
             <p v-if="attributionStatement" class="term-view__source">{{ attributionStatement }}</p>
             <hr />
