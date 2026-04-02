@@ -1192,7 +1192,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/canvas@npm:^0.1.95":
+"@napi-rs/canvas@npm:^0.1.96":
   version: 0.1.97
   resolution: "@napi-rs/canvas@npm:0.1.97"
   dependencies:
@@ -1658,7 +1658,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node24@npm:^24.0.0":
+"@tsconfig/node24@npm:^24.0.4":
   version: 24.0.4
   resolution: "@tsconfig/node24@npm:24.0.4"
   checksum: 10c0/9c5d4173204c6935c45d3ff0584fd423bd7d8bc3f6b246e646320ae584e4226b34ea1c66ec67cd16769c73e7e80f4cc562287b0acaa4ec81aa482463972ff83f
@@ -2485,15 +2485,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/devtools-core@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "@vue/devtools-core@npm:8.1.0"
+"@vue/devtools-core@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "@vue/devtools-core@npm:8.1.1"
   dependencies:
-    "@vue/devtools-kit": "npm:^8.1.0"
-    "@vue/devtools-shared": "npm:^8.1.0"
+    "@vue/devtools-kit": "npm:^8.1.1"
+    "@vue/devtools-shared": "npm:^8.1.1"
   peerDependencies:
     vue: ^3.0.0
-  checksum: 10c0/d9c8f6e2ae64e6914a125bae749a4344aa345d671d1b30cfe3d807993c65f2e99da86e0e299b506ba22dc521e8968df2a0927a9a9f27afb53948a91a9f338c6b
+  checksum: 10c0/6fbf5c3faebb361ca6d7325b75eebe5ca31cbeb9c1a0fd6dfaa87f154ad04ab13a61f5353fd1b4275b8a2cb2afc56c97782fa87c898628949fd1e4373eb96630
   languageName: node
   linkType: hard
 
@@ -2524,6 +2524,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-kit@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "@vue/devtools-kit@npm:8.1.1"
+  dependencies:
+    "@vue/devtools-shared": "npm:^8.1.1"
+    birpc: "npm:^2.6.1"
+    hookable: "npm:^5.5.3"
+    perfect-debounce: "npm:^2.0.0"
+  checksum: 10c0/ee317d4bfec3bb0287648510ca511788482b41850a24ffe232150ac408d6c09baf2e00fd873cf974804ca659b77828c5e8364fed32473dbb57e9acfaa1755be1
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-shared@npm:^7.7.9":
   version: 7.7.9
   resolution: "@vue/devtools-shared@npm:7.7.9"
@@ -2537,6 +2549,13 @@ __metadata:
   version: 8.1.0
   resolution: "@vue/devtools-shared@npm:8.1.0"
   checksum: 10c0/4de409e02f1048afee508e52632d1015d17d5a7e45f9dcc4bebeeae8a908c01f74d0410b4bdbd3f0490f86e23e796878a1ecb51eb9d35fe252514bbd97c7798e
+  languageName: node
+  linkType: hard
+
+"@vue/devtools-shared@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "@vue/devtools-shared@npm:8.1.1"
+  checksum: 10c0/5c3bfa0aca19f9ca4a1dc3a0aa8e932d3ba34e74995e6abcbedd3fcf659ee9bd1502558a328c743cc8697be9308404b068f29451dc49eb29ddebbf5f80ec5540
   languageName: node
   linkType: hard
 
@@ -2903,7 +2922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.5, axios@npm:^1.13.6":
+"axios@npm:^1.13.5":
   version: 1.13.6
   resolution: "axios@npm:1.13.6"
   dependencies:
@@ -2911,6 +2930,17 @@ __metadata:
     form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/51fb5af055c3b85662fa97df17d986ae2c37d13bf86d50b6bb36b6b3a2dec6966a1d3a14ab3774b71707b155ae3597ed9b7babdf1a1a863d1a31840cb8e7ec71
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "axios@npm:1.14.0"
+  dependencies:
+    follow-redirects: "npm:^1.15.11"
+    form-data: "npm:^4.0.5"
+    proxy-from-env: "npm:^2.1.0"
+  checksum: 10c0/2541f4aa215a7d1842429dad006fc682d82bc0e74bd14500823f7d8cce3bbae0e0a8c328c8538946718f366ab8ce5a4c12e9ad40e5a0f3482ff8bff0cd115d45
   languageName: node
   linkType: hard
 
@@ -3434,9 +3464,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^15.12.0":
-  version: 15.12.0
-  resolution: "cypress@npm:15.12.0"
+"cypress@npm:^15.13.0":
+  version: 15.13.0
+  resolution: "cypress@npm:15.13.0"
   dependencies:
     "@cypress/request": "npm:^3.0.10"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -3483,7 +3513,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10c0/aa11220a2da53689de9334975b6c8cbe3d5aa586542ac755c8581c80186b1a12394932d77c44fbeaf4d5f442afb357b1ccb9e66f0e8e6f778ed386131787e6fb
+  checksum: 10c0/2b6b235d93eb003c5d68e2b63a50c24f1c295f25ca008fc5ff1f60d80839a1d5e88e709e9e6e4c468492982076aaa4ace40d6ff237fdca2cc461fc9529e33f8f
   languageName: node
   linkType: hard
 
@@ -4345,7 +4375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^10.0.3":
+"eslint@npm:^10.1.0":
   version: 10.1.0
   resolution: "eslint@npm:10.1.0"
   dependencies:
@@ -5379,7 +5409,7 @@ __metadata:
     "@carbon/charts-vue": "npm:^1.27.3"
     "@ithaka/eslint-config-vue": "npm:^6.0.0"
     "@ithaka/pharos": "npm:^14.22.2"
-    "@tsconfig/node24": "npm:^24.0.0"
+    "@tsconfig/node24": "npm:^24.0.4"
     "@types/jsdom": "npm:^27.0.0"
     "@types/node": "npm:^24.12.0"
     "@types/pnpapi": "npm:^0.0.5"
@@ -5389,9 +5419,9 @@ __metadata:
     "@vue/tsconfig": "npm:^0.9.1"
     "@vuepic/vue-datepicker": "npm:^11.0.3"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.13.6"
-    cypress: "npm:^15.12.0"
-    eslint: "npm:^10.0.3"
+    axios: "npm:^1.14.0"
+    cypress: "npm:^15.13.0"
+    eslint: "npm:^10.1.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-cypress: "npm:^5.3.0"
     globals: "npm:^17.4.0"
@@ -5402,7 +5432,7 @@ __metadata:
     npm-run-all2: "npm:^8.0.4"
     openseadragon: "npm:^5.0.1"
     path: "npm:^0.12.7"
-    pdfjs-dist: "npm:^5.5.207"
+    pdfjs-dist: "npm:^5.6.205"
     pinia: "npm:^3.0.4"
     prettier: "npm:^3.8.1"
     print-js: "npm:^1.6.0"
@@ -5415,8 +5445,8 @@ __metadata:
     uuid: "npm:^13.0.0"
     vite: "npm:^7.3.1"
     vite-plugin-dynamic-import: "npm:^1.6.0"
-    vite-plugin-static-copy: "npm:^3.3.0"
-    vite-plugin-vue-devtools: "npm:^8.1.0"
+    vite-plugin-static-copy: "npm:^3.4.0"
+    vite-plugin-vue-devtools: "npm:^8.1.1"
     vue: "npm:^3.5.13"
     vue-router: "npm:^5.0.4"
     vue-tsc: "npm:^3.2.6"
@@ -6488,18 +6518,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pdfjs-dist@npm:^5.5.207":
-  version: 5.5.207
-  resolution: "pdfjs-dist@npm:5.5.207"
+"pdfjs-dist@npm:^5.6.205":
+  version: 5.6.205
+  resolution: "pdfjs-dist@npm:5.6.205"
   dependencies:
-    "@napi-rs/canvas": "npm:^0.1.95"
+    "@napi-rs/canvas": "npm:^0.1.96"
     node-readable-to-web-readable-stream: "npm:^0.4.2"
   dependenciesMeta:
     "@napi-rs/canvas":
       optional: true
     node-readable-to-web-readable-stream:
       optional: true
-  checksum: 10c0/764edfe839644c82f11cc16872625af4fe8a878b8434df91e64aaf023344c592748a079c3f886b19ab5a75ab9ca2ae02c7e0af18e36184c0dbf2a010d11df2e6
+  checksum: 10c0/e912d5d993494898b432530ca8351f35e71ef56a6ff194fb09aba81084b8da835a23c7827b7b4383d1e17b6c9cdc2ac587a51319fe971c0b9f8ab957d9737d55
   languageName: node
   linkType: hard
 
@@ -6688,6 +6718,13 @@ __metadata:
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
+  languageName: node
+  linkType: hard
+
+"proxy-from-env@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "proxy-from-env@npm:2.1.0"
+  checksum: 10c0/ed01729fd4d094eab619cd7e17ce3698b3413b31eb102c4904f9875e677cd207392795d5b4adee9cec359dfd31c44d5ad7595a3a3ad51c40250e141512281c58
   languageName: node
   linkType: hard
 
@@ -8121,7 +8158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:^3.3.0":
+"vite-plugin-static-copy@npm:^3.4.0":
   version: 3.4.0
   resolution: "vite-plugin-static-copy@npm:3.4.0"
   dependencies:
@@ -8135,19 +8172,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-vue-devtools@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "vite-plugin-vue-devtools@npm:8.1.0"
+"vite-plugin-vue-devtools@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "vite-plugin-vue-devtools@npm:8.1.1"
   dependencies:
-    "@vue/devtools-core": "npm:^8.1.0"
-    "@vue/devtools-kit": "npm:^8.1.0"
-    "@vue/devtools-shared": "npm:^8.1.0"
+    "@vue/devtools-core": "npm:^8.1.1"
+    "@vue/devtools-kit": "npm:^8.1.1"
+    "@vue/devtools-shared": "npm:^8.1.1"
     sirv: "npm:^3.0.2"
     vite-plugin-inspect: "npm:^11.3.3"
     vite-plugin-vue-inspector: "npm:^5.3.2"
   peerDependencies:
     vite: ^6.0.0 || ^7.0.0 || ^8.0.0
-  checksum: 10c0/4c9fb6f64d2576d0d649bb537439b119ad2f6a8bcfb913a15bc9ebfac30e771dc3d6e0a359329af285f734f43e394ff46b878b6f0f5b77a7853aad905d0c7d86
+  checksum: 10c0/5953cebf0d8507680ed3d7af75f86f2ca18d5eff12c08818655793234ac2d920a24a8ab24f1fec84bfa2f56ae840f56ff1f4dacffd1388f0b64c663544a17499
   languageName: node
   linkType: hard
 
