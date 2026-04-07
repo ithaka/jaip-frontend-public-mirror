@@ -1,4 +1,4 @@
-FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:24.14.0-alpine AS build-stage
+FROM docker-virtual.artifactory.acorn.cirrostratus.org/node:24.14.1-alpine AS build-stage
 WORKDIR /app
 
 COPY package.json ./
