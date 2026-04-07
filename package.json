@@ -39,7 +39,7 @@
     "@babel/types": "^7.29.0",
     "@ithaka/eslint-config-vue": "^6.0.0",
     "@tsconfig/node24": "^24.0.0",
-    "@types/jsdom": "^27.0.0",
+    "@types/jsdom": "^28.0.1",
     "@types/node": "^24.12.0",
     "@types/pnpapi": "^0.0.5",
     "@vitejs/plugin-vue": "^6.0.5",

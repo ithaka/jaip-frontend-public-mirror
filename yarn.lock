@@ -1949,14 +1949,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsdom@npm:^27.0.0":
-  version: 27.0.0
-  resolution: "@types/jsdom@npm:27.0.0"
+"@types/jsdom@npm:^28.0.1":
+  version: 28.0.1
+  resolution: "@types/jsdom@npm:28.0.1"
   dependencies:
     "@types/node": "npm:*"
     "@types/tough-cookie": "npm:*"
     parse5: "npm:^7.0.0"
-  checksum: 10c0/1ec7ff7177e1f7266e51279f07f3cd013e1713766b01eebceac783061675b31c672a47b0a508dcbaf040f7f22d90405858378c6c5358991989fbe8b95adde354
+    undici-types: "npm:^7.21.0"
+  checksum: 10c0/4d0e412b4de5389279544ff227c6bacf6a8cb3e2fcabf8b543026568444c60e770848ba752cd134ef90f6ce3e7bafd3158b2a3dc1947c2961a5824b12d15bfac
   languageName: node
   linkType: hard
 
@@ -5323,7 +5324,7 @@ __metadata:
     "@ithaka/eslint-config-vue": "npm:^6.0.0"
     "@ithaka/pharos": "npm:^14.22.2"
     "@tsconfig/node24": "npm:^24.0.0"
-    "@types/jsdom": "npm:^27.0.0"
+    "@types/jsdom": "npm:^28.0.1"
     "@types/node": "npm:^24.12.0"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.5"
@@ -7812,6 +7813,13 @@ __metadata:
   version: 1.6.3
   resolution: "ufo@npm:1.6.3"
   checksum: 10c0/bf0e4ebff99e54da1b9c7182ac2f40475988b41faa881d579bc97bc2a0509672107b0a0e94c4b8d31a0ab8c4bf07f4aa0b469ac6da8536d56bda5b085ea2e953
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:^7.21.0":
+  version: 7.24.7
+  resolution: "undici-types@npm:7.24.7"
+  checksum: 10c0/5bbf61cdbe3ab79a3be90d7b2e48d78e2a472e5cff09963f9ee1a0232297307f0bed5ee1f2ed94ec41eda87705bc846547d524a9f90a64729d1c19eceb653bb0
   languageName: node
   linkType: hard
 
