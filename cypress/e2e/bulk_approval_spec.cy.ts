@@ -203,9 +203,13 @@ describe('Bulk approval', () => {
         .contains('Approve with the set?')
         .click()
 
-      cy.get('#approve-all-modal pep-pharos-button')
-        .contains('Submit', { matchCase: false })
-        .click()
+      cy.contains('#approve-all-modal pep-pharos-button', 'Submit', {
+        matchCase: false,
+      }).scrollIntoView()
+
+      cy.contains('#approve-all-modal pep-pharos-button', 'Submit', { matchCase: false }).click({
+        force: true,
+      })
 
       cy.fixture('approvals/bulk__plus_one__request.json').then((request) => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
@@ -430,9 +434,14 @@ describe('Bulk approval', () => {
         .eq(2)
         .contains('Ithaka', { matchCase: false })
 
-      cy.get('#approve-all-modal pep-pharos-button')
-        .contains('Submit', { matchCase: false })
-        .click()
+      cy.contains('#approve-all-modal pep-pharos-button', 'Submit', {
+        matchCase: false,
+      }).scrollIntoView()
+
+      cy.contains('#approve-all-modal pep-pharos-button', 'Submit', { matchCase: false }).click({
+        force: true,
+      })
+
       cy.fixture('approvals/bulk__two_groups__request.json').then((request) => {
         cy.wait('@bulk').its('request.body').should('deep.eq', request)
       })

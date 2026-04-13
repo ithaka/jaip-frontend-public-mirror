@@ -301,7 +301,6 @@ describe('Requests page', () => {
         .should('be.visible')
         .first()
         .shadow()
-        .find('focus-trap')
         // This component is in the shadow DOM, and so is a pharos-button, not pep-pharos-button
         .find('pharos-button[a11y-label="Close modal"]')
         .click()
