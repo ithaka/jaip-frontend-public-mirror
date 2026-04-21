@@ -95,6 +95,18 @@ const styleFirstShadowOption = () => {
   })
 }
 
+// Similar to styleFirstShadowOption, set autocapitalize="off" on #input-element inside the combobox shadow DOM.
+// A lot of our users are on tablets that will autocapitalize the first letter of the search term, and the
+// wordnik api is case sensitive.
+const setInputAutocapitalizeOff = () => {
+  const shadowRoot = dictionaryCombobox.value?.shadowRoot
+  if (!shadowRoot) return
+  const input = shadowRoot.querySelector('#input-element')
+  if (input) {
+    input.setAttribute('autocapitalize', 'off')
+  }
+}
+
 const ensureShadowFirstOptionStyle = (shadowRoot: ShadowRoot) => {
   if (shadowRoot.querySelector('[data-dictionary-option-styles]')) {
     return
@@ -132,8 +144,10 @@ const connectShadowOptionStyling = async () => {
 
   ensureShadowFirstOptionStyle(shadowRoot)
   styleFirstShadowOption()
+  setInputAutocapitalizeOff()
   shadowOptionObserver = new MutationObserver(() => {
     styleFirstShadowOption()
+    setInputAutocapitalizeOff()
   })
   shadowOptionObserver.observe(shadowRoot, { childList: true, subtree: true })
 }
@@ -165,6 +179,7 @@ onBeforeUnmount(() => {
       ref="dictionaryCombobox"
       :value="typedValue"
       :placeholder="placeholder"
+      autocapitalize="off"
       message=""
       search-mode=""
       @input="handleComboboxInput"
