@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import SearchResults from '@/components/results/SearchResults.vue'
-import { changeRoute } from '@/utils/helpers'
+import { changeRoute, parseGroupsQueryParam } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
@@ -56,7 +56,7 @@ const sortedFullGroups = groupIDs.value.reduce((arr, id: number) => {
 const params = new URLSearchParams(location.search || '')
 const initialGroups = params.get('groups')
 if (initialGroups) {
-  statusGroups.value = JSON.parse(initialGroups)
+  statusGroups.value = parseGroupsQueryParam(initialGroups)
 }
 selectedGroups.value['status_search'] = statusGroups.value
 

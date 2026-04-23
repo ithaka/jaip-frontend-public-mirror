@@ -18,7 +18,7 @@ import { useFeaturesStore } from '@/stores/features'
 import { useSearchStore } from './stores/search'
 import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
-import { capitalize } from '@/utils/helpers'
+import { capitalize, parseGroupsQueryParam } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
 import { useLogger } from './composables/logging/useLogger'
 
@@ -131,7 +131,7 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
       if (to.path === '/requests') {
         const groups = (to.query.groups || '').toString()
         selectedGroups.value['status_search'] = groups
-          ? JSON.parse(groups)
+          ? parseGroupsQueryParam(groups)
           : groupIDs.value.length > 4
             ? []
             : groupIDs.value

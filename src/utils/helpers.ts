@@ -76,6 +76,40 @@ export const getStatus = (opts: { [key: string]: History }, groups: number[]): s
   return returnStatus.toLowerCase()
 }
 
+// Parses a groups query parameter which can be either a JSON array string or a comma-separated list of group IDs,
+// and returns an array of valid integer group IDs. This function is necessary to handle arrays in query parameters,
+// which don't always handle brackets nicely. Having brackets in the url can cause issues with encoding that break the
+// login process.
+export const parseGroupsQueryParam = (groupsParam: string | null | undefined): number[] => {
+  const rawGroups = groupsParam?.trim()
+  if (!rawGroups) {
+    return []
+  }
+
+  try {
+    if (rawGroups.startsWith('[')) {
+      return JSON.parse(rawGroups)
+        .map((groupId: unknown) => Number(groupId))
+        .filter((groupId: number) => Number.isInteger(groupId))
+    }
+  } catch {
+    // It's fine if this fails, we'll just try parsing it as a comma-separated list below
+  }
+
+  return rawGroups
+    .split(',')
+    .map((groupId) => Number(groupId.trim()))
+    .filter((groupId) => Number.isInteger(groupId))
+}
+
+export const serializeGroupsQueryParam = (groups: number[] | undefined): string | undefined => {
+  if (!groups?.length) {
+    return undefined
+  }
+
+  return groups.join(',')
+}
+
 export const changeRoute = (
   router: Router,
   emit: ((event: 'close', ...args: unknown[]) => void) | undefined,
@@ -108,7 +142,7 @@ export const changeRoute = (
       query: {
         term,
         page,
-        groups: JSON.stringify(groups),
+        groups: serializeGroupsQueryParam(groups),
         statusq: statusq,
       },
     })
