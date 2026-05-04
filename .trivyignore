@@ -19,3 +19,6 @@ CVE-2026-28390 exp:2026-06-01
 # This affects musl, which we're not using
 CVE-2026-40200 exp:2026-06-01
 CVE-2026-6042 exp:2026-06-01
+
+# This affects nghttp2-libs, which we're not using.
+CVE-2026-27135 exp:2026-06-01
