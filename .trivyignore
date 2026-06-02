@@ -1,24 +1,3 @@
 # ALPINE VULNERABILITIES
-# This vulnerability is in the libxpat library in Alpine, which we are not using
-CVE-2026-32767 exp:2026-06-01
-
-# This vulnerability affects zlib's untgz utility, which we are not using
-CVE-2026-22184 exp:2026-06-01
-
-# These affect libpng in Alpine, which we're not using
-CVE-2026-33636 exp:2026-06-01
-CVE-2026-33416 exp:2026-06-01
-CVE-2026-34757 exp:2026-06-01
-
-# This affects libcrypto, which we're not using
-CVE-2026-28390 exp:2026-06-01
-
-# This affects libssl, which we're not using
-CVE-2026-28390 exp:2026-06-01
-
-# This affects musl, which we're not using
-CVE-2026-40200 exp:2026-06-01
-CVE-2026-6042 exp:2026-06-01
-
-# This affects nghttp2-libs, which we're not using.
-CVE-2026-27135 exp:2026-06-01
+# This vulnerability is in the libxml library, which we're not using
+CVE-2026-6732 exp:2026-07-01
