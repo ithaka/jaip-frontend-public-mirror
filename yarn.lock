@@ -2071,12 +2071,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.12.4":
-  version: 24.12.4
-  resolution: "@types/node@npm:24.12.4"
+"@types/node@npm:^24.13.0":
+  version: 24.13.1
+  resolution: "@types/node@npm:24.13.1"
   dependencies:
-    undici-types: "npm:~7.16.0"
-  checksum: 10c0/d2c36b78b6050d8677769fa05a32243061675e81ddc2bb43955d91a671af3465506ef2731a24c0c9ab42b6b679bd5c1513de45bbe9ea278c2c07ee63b564b61b
+    undici-types: "npm:~7.18.0"
+  checksum: 10c0/ef58425ed71c7fefa95f30d370eeb0390f24c9337d66fa6617b5a14b53e2e831aa6a13e95d978d9057237bf257062b8fa60f773380abed1607183fe7065bc26b
   languageName: node
   linkType: hard
 
@@ -2658,9 +2658,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/test-utils@npm:^2.4.10":
-  version: 2.4.10
-  resolution: "@vue/test-utils@npm:2.4.10"
+"@vue/test-utils@npm:^2.4.11":
+  version: 2.4.11
+  resolution: "@vue/test-utils@npm:2.4.11"
   dependencies:
     js-beautify: "npm:^1.14.9"
     vue-component-type-helpers: "npm:^3.0.0"
@@ -2671,7 +2671,7 @@ __metadata:
   peerDependenciesMeta:
     "@vue/server-renderer":
       optional: true
-  checksum: 10c0/5dee1a15a4908d1ad82d9940307223214d9fa93e2cdffdc294b72880f73db3e1938bd2f290b096a22b8b8d84db481d4aea7989fcb4c9e5e63ea16896c9a4f4fd
+  checksum: 10c0/7e964df1b011de5e0c782f61300ce22d43ccdca5c58dfe07303d700cd1a8e423480b3144076f2a83c241326d25ab383a9e3d3fe51509c7adc3fa276dd465c78b
   languageName: node
   linkType: hard
 
@@ -2933,7 +2933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.16.0, axios@npm:^1.16.1":
+"axios@npm:^1.16.0":
   version: 1.16.1
   resolution: "axios@npm:1.16.1"
   dependencies:
@@ -2942,6 +2942,18 @@ __metadata:
     https-proxy-agent: "npm:^5.0.1"
     proxy-from-env: "npm:^2.1.0"
   checksum: 10c0/2f77e37e6552bbff8a772d058fb09500198e9188c6b20dc799d82dbe12a8cb506f6eed4e4e62a9ba612a35cbab496faa26d68f9bff14a53af6d15c3e136391a7
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.17.0":
+  version: 1.17.0
+  resolution: "axios@npm:1.17.0"
+  dependencies:
+    follow-redirects: "npm:^1.16.0"
+    form-data: "npm:^4.0.5"
+    https-proxy-agent: "npm:^5.0.1"
+    proxy-from-env: "npm:^2.1.0"
+  checksum: 10c0/c4fa19ff3a3a63bde48beec03ad816b133b9a6385cccffffe172577ab18c6a70e299280d57f12c80c867fe25df41f92cb91d3a8258708a6d2be3e9e085f92650
   languageName: node
   linkType: hard
 
@@ -3014,7 +3026,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:3.7.2, bluebird@npm:^3.7.2":
+"bluebird@npm:^3.7.2":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 10c0/680de03adc54ff925eaa6c7bb9a47a0690e8b5de60f4792604aae8ed618c65e6b63a7893b57ca924beaf53eee69c5af4f8314148c08124c550fe1df1add897d2
@@ -5194,15 +5206,15 @@ __metadata:
     "@ithaka/pharos": "npm:^14.23.0"
     "@tsconfig/node24": "npm:^24.0.4"
     "@types/jsdom": "npm:^28.0.3"
-    "@types/node": "npm:^24.12.4"
+    "@types/node": "npm:^24.13.0"
     "@types/pnpapi": "npm:^0.0.5"
     "@vitejs/plugin-vue": "npm:^6.0.7"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.5"
-    "@vue/test-utils": "npm:^2.4.10"
+    "@vue/test-utils": "npm:^2.4.11"
     "@vue/tsconfig": "npm:^0.9.1"
     "@vuepic/vue-datepicker": "npm:^11.0.3"
     "@webcomponents/scoped-custom-element-registry": "npm:^0.0.10"
-    axios: "npm:^1.16.1"
+    axios: "npm:^1.17.0"
     cypress: "npm:^15.16.0"
     eslint: "npm:^10.4.1"
     eslint-config-prettier: "npm:^10.1.8"
@@ -5221,18 +5233,18 @@ __metadata:
     print-js: "npm:^1.6.0"
     sass: "npm:^1.100.0"
     sass-embedded: "npm:^1.100.0"
-    start-server-and-test: "npm:^3.0.5"
+    start-server-and-test: "npm:^3.0.7"
     typescript: "npm:~5.9.3"
     typescript-cookie: "npm:^1.0.6"
     unplugin-vue-markdown: "npm:^30.0.0"
     uuid: "npm:^14.0.0"
-    vite: "npm:^7.3.3"
+    vite: "npm:^7.3.5"
     vite-plugin-dynamic-import: "npm:^1.6.0"
     vite-plugin-static-copy: "npm:^3.4.0"
     vite-plugin-vue-devtools: "npm:^8.1.2"
     vue: "npm:^3.5.13"
     vue-router: "npm:^5.1.0"
-    vue-tsc: "npm:^3.3.2"
+    vue-tsc: "npm:^3.3.3"
   languageName: unknown
   linkType: soft
 
@@ -5452,10 +5464,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lazy-ass@npm:1.6.0":
-  version: 1.6.0
-  resolution: "lazy-ass@npm:1.6.0"
-  checksum: 10c0/4af6cb9a333fbc811268c745f9173fba0f99ecb817cc9c0fae5dbf986b797b730ff525504128f6623b91aba32b02124553a34b0d14de3762b637b74d7233f3bd
+"lazy-ass@npm:2.0.3":
+  version: 2.0.3
+  resolution: "lazy-ass@npm:2.0.3"
+  checksum: 10c0/2a3cf18fe892212dc410529e5e0186952df352aaf738cae648712223fc466c16a5962439c5c31652cf2b3a737e49dd62b86f7db57f2aa7344a7208bb8631b9de
   languageName: node
   linkType: hard
 
@@ -7027,23 +7039,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"start-server-and-test@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "start-server-and-test@npm:3.0.5"
+"start-server-and-test@npm:^3.0.7":
+  version: 3.0.8
+  resolution: "start-server-and-test@npm:3.0.8"
   dependencies:
     arg: "npm:5.0.2"
-    bluebird: "npm:3.7.2"
     check-more-types: "npm:2.24.0"
     debug: "npm:4.4.3"
     execa: "npm:5.1.1"
-    lazy-ass: "npm:1.6.0"
+    lazy-ass: "npm:2.0.3"
     tree-kill: "npm:1.2.2"
     wait-on: "npm:9.0.10"
   bin:
     server-test: src/bin/start.js
     start-server-and-test: src/bin/start.js
     start-test: src/bin/start.js
-  checksum: 10c0/579bf00fe5babbb90279e7f7706e76d6001d93472c907c7b757ae767708ba004c96e743b71613a8524d5a0c890597529ffca315ebd5d6a34182566776caa213d
+  checksum: 10c0/01f19c2d5c0bf82544e579dd99f0c6fed115d0297b90cc3736688475a29ddddf20a20478cb8795f51b11be1810a3f4ce688e50fd9ae266d57db4a2e1c65f5d16
   languageName: node
   linkType: hard
 
@@ -7476,10 +7487,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici-types@npm:~7.16.0":
-  version: 7.16.0
-  resolution: "undici-types@npm:7.16.0"
-  checksum: 10c0/3033e2f2b5c9f1504bdc5934646cb54e37ecaca0f9249c983f7b1fc2e87c6d18399ebb05dc7fd5419e02b2e915f734d872a65da2e3eeed1813951c427d33cc9a
+"undici-types@npm:~7.18.0":
+  version: 7.18.2
+  resolution: "undici-types@npm:7.18.2"
+  checksum: 10c0/85a79189113a238959d7a647368e4f7c5559c3a404ebdb8fc4488145ce9426fcd82252a844a302798dfc0e37e6fb178ff481ed03bc4caf634c5757d9ef43521d
   languageName: node
   linkType: hard
 
@@ -7739,7 +7750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^7.3.3":
+"vite@npm:^7.3.5":
   version: 7.3.5
   resolution: "vite@npm:7.3.5"
   dependencies:
@@ -7864,7 +7875,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-tsc@npm:^3.3.2":
+"vue-tsc@npm:^3.3.3":
   version: 3.3.3
   resolution: "vue-tsc@npm:3.3.3"
   dependencies:
