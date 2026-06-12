@@ -113,6 +113,19 @@ const getCardLogs = () => {
   }
 }
 
+const getTileLogs = () => {
+  const tileClickLog =
+    (destination: string): (() => WorkingLog) =>
+    () => ({
+      ...generics.linkClick(destination),
+      event_description: `Clicked on tile to navigate to ${destination}`,
+    })
+
+  return {
+    tileClickLog,
+  }
+}
+
 const getRouterLogs = () => {
   const routeChangeLog =
     (options: { to: string; from: string }): (() => WorkingLog) =>
@@ -136,4 +149,5 @@ export const navigationLogs = {
   getHeaderLogs,
   getCardLogs,
   getRouterLogs,
+  getTileLogs,
 }

@@ -18,7 +18,6 @@ const config = {
         label: 'Dictionary',
         requiresAny: ['use_dictionary'],
         showInFooter: true,
-        showAsNew: true,
       },
       component: () => import('@/views/DictionaryView.vue'),
     },

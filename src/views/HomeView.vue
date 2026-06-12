@@ -2,15 +2,21 @@
 import StudentHelp from '@/components/help/StudentHelp.vue'
 import AdminHelp from '@/components/help/AdminHelp.vue'
 import SearchInput from '@/components/SearchInput.vue'
+import ContentTile from '@/components/tiles/ContentTile.vue'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
-
+import { useRouter } from 'vue-router'
 const userStore = useUserStore()
 const { isAuthenticatedStudent, isAuthenticatedAdmin } = storeToRefs(userStore)
 
 const { logPageView } = usePageViewLogger()
 logPageView()
+
+const router = useRouter()
+const routes = router.getRoutes()
+const reentryRoute = routes.find((route) => route.name === 'reentry guides')
+const dictionaryRoute = routes.find((route) => route.name === 'dictionary')
 </script>
 
 <template>
@@ -33,17 +39,49 @@ logPageView()
         >
           <span>Explore the world's knowledge, cultures, and ideas</span>
         </pep-pharos-heading>
-        <div class="home-view__search-container">
-          <SearchInput id="home" label="Search" a11y-label="Search" variant="prominent" />
-        </div>
       </pep-pharos-layout>
+
+      <div class="home-view__hero" :class="{ 'home-view__hero--admin': isAuthenticatedAdmin }">
+        <pep-pharos-layout row-gap="0">
+          <div class="home-view__search-container">
+            <SearchInput id="home" label="Search" a11y-label="Search" variant="prominent" />
+          </div>
+          <div v-if="isAuthenticatedStudent" class="home-view__content-tiles-layout">
+            <div class="home-view__content-tile-item">
+              <ContentTile
+                arrow-a11y-title="View reentry resources"
+                :href="reentryRoute ? reentryRoute.path : '#'"
+              >
+                <template #title-icon>
+                  <pep-pharos-icon name="view-list" a11y-title="Reentry resources" />
+                </template>
+                <template #title-text>Reentry resources</template>
+                <template #body-text>
+                  National and state guides to help your transition to community
+                </template>
+              </ContentTile>
+            </div>
+
+            <div class="home-view__content-tile-item">
+              <ContentTile
+                arrow-a11y-title="View dictionary resources"
+                :href="dictionaryRoute ? dictionaryRoute.path : '#'"
+              >
+                <template #title-icon>
+                  <pep-pharos-icon name="book" a11y-title="Look up a word" />
+                </template>
+                <template #title-text>Look up a word</template>
+                <template #body-text>
+                  Explore definitions from the American Heritage Dictionary
+                </template>
+              </ContentTile>
+            </div>
+          </div>
+        </pep-pharos-layout>
+      </div>
     </div>
 
-    <div class="home-view__hero">
-      <img src="@/assets/images/PEP_hero.jpg" alt="" class="home-view__hero-image" />
-    </div>
-
-    <pep-pharos-layout row-gap="0" preset="1-col">
+    <pep-pharos-layout class="help" row-gap="0" preset="1-col">
       <StudentHelp v-if="isAuthenticatedStudent" class="home-view__help-container" />
       <AdminHelp v-else-if="isAuthenticatedAdmin" class="home-view__help-container" />
     </pep-pharos-layout>
@@ -52,12 +90,8 @@ logPageView()
 
 <style lang="scss" scoped>
 .home-view {
+  --home-search-height: clamp(3.5rem, 8vw, 4.5rem);
   margin-top: var(--pharos-spacing-3-x);
-
-  &__top-section {
-    position: relative;
-    z-index: 10;
-  }
 
   &__header {
     width: 100%;
@@ -86,40 +120,19 @@ logPageView()
 
   &__search-container {
     grid-column: span 10;
+    position: relative;
+    z-index: 6;
+    min-width: 0;
+    max-width: 100%;
+
+    :deep(form) {
+      min-width: 0;
+      max-width: 100%;
+    }
 
     @media (max-width: 48rem) {
       grid-column: span 8;
     }
-  }
-
-  &__hero {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    margin-top: -1rem; // negative margin to place it partially under the search bar
-    margin-bottom: var(--pharos-spacing-one-and-a-half-x);
-    overflow: hidden;
-
-    @media (min-width: 426px) {
-      height: 28%;
-      height: 35vh;
-      height: 35dvh;
-      height: calc(var(--vh, 1vh) * 35);
-    }
-
-    @media (max-width: 425px) {
-      height: 20%;
-      height: 30vh;
-      height: 30dvh;
-      height: calc(var(--vh, 1vh) * 30);
-    }
-  }
-
-  &__hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: right bottom;
   }
 
   &__help-container {
@@ -130,5 +143,79 @@ logPageView()
       grid-column: span 8;
     }
   }
+
+  &__content-tiles-layout {
+    grid-column: span 10;
+    position: relative;
+    z-index: 4;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: var(--pharos-spacing-1-x);
+    margin-top: var(--pharos-spacing-1-x);
+    margin-bottom: var(--pharos-spacing-1-x);
+    align-items: stretch;
+    min-width: 0;
+    max-width: 100%;
+
+    @media (max-width: 48rem) {
+      grid-column: span 8;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+
+    @media (max-width: 425px) {
+      display: flex;
+      flex-direction: column;
+      gap: var(--pharos-spacing-1-x);
+    }
+  }
+
+  &__hero {
+    position: relative;
+    z-index: 4;
+    isolation: isolate;
+    max-width: 100vw;
+    overflow-x: clip;
+
+    &--admin {
+      min-height: 300px;
+    }
+
+    :deep(pep-pharos-layout) {
+      max-width: 100%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(var(--home-search-height) * 0.7);
+      bottom: 0;
+      background-image: url('@/assets/images/PEP_hero.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right top;
+      z-index: -1;
+      pointer-events: none;
+    }
+  }
+
+  &__content-tile-item {
+    grid-column: span 5;
+    height: 100%;
+
+    @media (max-width: 48rem) {
+      grid-column: span 4;
+    }
+
+    @media (max-width: 425px) {
+      grid-column: span 8;
+      width: 100%;
+    }
+  }
+}
+.help {
+  margin-top: var(--pharos-spacing-3-x);
 }
 </style>
