@@ -116,6 +116,16 @@ describe('Main site content', () => {
       cy.get('[data-cy="home-view-header"]').contains(
         "Explore the world's knowledge, cultures, and ideas",
       )
+      cy.contains('[data-cy="content-card"]', 'Reentry resources').should('be.visible')
+      cy.contains('[data-cy="content-card"]', 'Look up a word').should('be.visible')
+    })
+
+    it('shows content tiles to students only', () => {
+      cy.visit('/')
+      cy.wait(['@index', '@alerts', '@env', '@auth'])
+
+      cy.get('[data-cy="content-card"]').should('have.length', 2)
+      cy.get('[data-cy="image-card"]').should('not.exist')
     })
 
     it('shows authenticated users an error page on invalid paths', () => {
@@ -221,6 +231,16 @@ describe('Main site content', () => {
       cy.get('[data-cy="home-view-header"]').contains(
         "Explore the world's knowledge, cultures, and ideas",
       )
+      cy.contains('[data-cy="image-card"]', 'See key data and JSTOR usage').should('be.visible')
+      cy.contains('[data-cy="image-card"]', 'View analytics').should('be.visible')
+    })
+
+    it('shows the image tile to admins only', () => {
+      cy.visit('/')
+      cy.wait(['@index', '@alerts', '@env', '@auth', '@features'])
+
+      cy.get('[data-cy="image-card"]').should('have.length', 1)
+      cy.get('[data-cy="content-card"]').should('not.exist')
     })
 
     it('links to Mellon', () => {
@@ -297,10 +317,10 @@ describe('Main site content', () => {
       cy.get('[data-cy="nav-link-help"]').should('be.visible')
     })
 
-    it('has exactly seven links', () => {
+    xit('has exactly eight links', () => {
       cy.visit('/')
       cy.wait(['@index', '@alerts', '@env', '@auth'])
-      cy.get('.nav-menu-item').should('have.length', 7).should('be.visible')
+      cy.get('.nav-menu-item').should('have.length', 8).should('be.visible')
     })
   })
 

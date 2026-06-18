@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import StudentHelp from '@/components/help/StudentHelp.vue'
-import AdminHelp from '@/components/help/AdminHelp.vue'
-import SearchInput from '@/components/SearchInput.vue'
-import ContentTile from '@/components/tiles/ContentTile.vue'
+import { computed } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import { useRouter } from 'vue-router'
+import StudentHelp from '@/components/help/StudentHelp.vue'
+import AdminHelp from '@/components/help/AdminHelp.vue'
+import SearchInput from '@/components/SearchInput.vue'
+import ContentTile from '@/components/tiles/ContentTile.vue'
+import ImageTile from '@/components/tiles/ImageTile.vue'
+import analyticsPreview from '@/assets/images/analytics-preview-no-blur.png'
+
 const userStore = useUserStore()
-const { isAuthenticatedStudent, isAuthenticatedAdmin } = storeToRefs(userStore)
+const { isAuthenticatedStudent, isAuthenticatedAdmin, groups } = storeToRefs(userStore)
+
+const canViewAnalytics = computed(() => {
+  return userStore.groupsWithFeature(groups.value, 'view_analytics').length > 0
+})
 
 const { logPageView } = usePageViewLogger()
 logPageView()
@@ -17,6 +25,7 @@ const router = useRouter()
 const routes = router.getRoutes()
 const reentryRoute = routes.find((route) => route.name === 'reentry guides')
 const dictionaryRoute = routes.find((route) => route.name === 'dictionary')
+const analyticsRoute = routes.find((route) => route.name === 'analytics')
 </script>
 
 <template>
@@ -75,6 +84,20 @@ const dictionaryRoute = routes.find((route) => route.name === 'dictionary')
                   Explore definitions from the American Heritage Dictionary
                 </template>
               </ContentTile>
+            </div>
+          </div>
+          <div
+            v-if="isAuthenticatedAdmin && canViewAnalytics"
+            class="home-view__content-tiles-layout"
+          >
+            <div class="home-view__content-tile-item home-view__content-tile-item--analytics">
+              <ImageTile
+                :key-img="analyticsPreview"
+                :href="analyticsRoute ? analyticsRoute.path : '#'"
+              >
+                <template #body-text> See key data and JSTOR usage </template>
+                <template #button-text> View analytics </template>
+              </ImageTile>
             </div>
           </div>
         </pep-pharos-layout>
@@ -212,6 +235,17 @@ const dictionaryRoute = routes.find((route) => route.name === 'dictionary')
     @media (max-width: 425px) {
       grid-column: span 8;
       width: 100%;
+    }
+
+    &--analytics {
+      @media (max-width: 48rem) {
+        grid-column: span 8;
+      }
+
+      @media (max-width: 425px) {
+        grid-column: span 8;
+        width: 100%;
+      }
     }
   }
 }

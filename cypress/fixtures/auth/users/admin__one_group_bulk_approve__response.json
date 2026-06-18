@@ -22,6 +22,7 @@
         "remove_users": false,
         "undo_bulk_approve": true,
         "use_protected_features": false,
+        "view_analytics": true,
         "view_abstract": false,
         "view_book_description": false,
         "view_hidden_users": false,
