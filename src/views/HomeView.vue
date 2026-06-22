@@ -64,7 +64,7 @@ const analyticsRoute = routes.find((route) => route.name === 'analytics')
                 <template #title-icon>
                   <pep-pharos-icon name="view-list" a11y-title="Reentry resources" />
                 </template>
-                <template #title-text>Reentry resources</template>
+                <template #title-text>Plan for reentry</template>
                 <template #body-text>
                   National and state guides to help your transition to community
                 </template>

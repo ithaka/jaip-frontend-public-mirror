@@ -4,3 +4,6 @@ CVE-2026-6732 exp:2026-07-01
 
 # vulnerabilities in libcrypto and libssl in the alpine image, which should not be relevant here
 CVE-2026-45447 exp:2026-07-15
+
+# This vulnerability is in libexpat via XML which we are not using
+CVE-2026-45186

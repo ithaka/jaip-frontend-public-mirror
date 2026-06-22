@@ -116,7 +116,7 @@ describe('Main site content', () => {
       cy.get('[data-cy="home-view-header"]').contains(
         "Explore the world's knowledge, cultures, and ideas",
       )
-      cy.contains('[data-cy="content-card"]', 'Reentry resources').should('be.visible')
+      cy.contains('[data-cy="content-card"]', 'Plan for reentry').should('be.visible')
       cy.contains('[data-cy="content-card"]', 'Look up a word').should('be.visible')
     })
 

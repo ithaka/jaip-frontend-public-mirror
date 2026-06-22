@@ -13,7 +13,6 @@ const props = withDefaults(
 
 const { handleWithLog, logs } = useLogger()
 const { tileClickLog } = logs.getTileLogs()
-console.log('props', props, props.href)
 </script>
 
 <template>
