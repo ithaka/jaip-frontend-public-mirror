@@ -1,9 +1,8 @@
-# ALPINE VULNERABILITIES
-# This vulnerability is in the libxml library, which we're not using
-CVE-2026-6732 exp:2026-07-01
-
 # vulnerabilities in libcrypto and libssl in the alpine image, which should not be relevant here
 CVE-2026-45447 exp:2026-07-15
 
-# This vulnerability is in libexpat via XML which we are not using
-CVE-2026-45186
+# vulnerabilities in libxpat. We're not processing XML, so it shouldn't affect us
+CVE-2026-56131 exp:2026-08-01
+CVE-2026-56407 exp:2026-08-01
+CVE-2026-56408 exp:2026-08-01
+CVE-2026-56409 exp:2026-08-01
