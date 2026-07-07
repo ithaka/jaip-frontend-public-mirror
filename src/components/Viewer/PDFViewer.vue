@@ -79,6 +79,13 @@ const isReentryContent = computed(() => routeName.value === 'collection item')
 const pdfView = ref({}) as Ref<viewer.PDFViewer>
 const pdfDocument = ref()
 
+// The viewerEventBus is used to listen for events from the PDF viewer.
+// It is set when the viewer is created and cleared when the component is unmounted.
+// The removeWindowResizeListener function is used to remove the window resize event
+// listener when the component is unmounted to prevent memory leaks.
+const viewerEventBus = ref<viewer.EventBus | null>(null)
+let removeWindowResizeListener: (() => void) | null = null
+
 const { handleWithLog, logs } = useLogger()
 const {
   errorLinkClickLog,
@@ -94,6 +101,18 @@ const {
   documentProxy: pdfDocument,
 })
 
+onBeforeUnmount(() => {
+  handleWithLog(endPDFViewingSessionLog, () =>
+    removeFullscreenChangeListeners(handleFullscreenChange),
+  )
+
+  if (removeWindowResizeListener) {
+    removeWindowResizeListener()
+    removeWindowResizeListener = null
+  }
+
+  viewerEventBus.value = null
+})
 const createLoadingTask = async (src: string) => {
   isLoading.value = true
   try {
@@ -142,6 +161,9 @@ const createViewer = () => {
 
     const container = document.getElementById('viewer-container') as HTMLDivElement
     const eventBus = new viewer.EventBus()
+
+    // This needs to be set on the viewerEventBus ref so that it can be accessed in the onBeforeUnmount hook to remove the resize listener.
+    viewerEventBus.value = eventBus
     const pdfViewer = new viewer.PDFViewer({
       container,
       eventBus,
@@ -155,11 +177,12 @@ const createViewer = () => {
       eventBus.dispatch('resize', {})
     }
     window.addEventListener('resize', dispatchResizeEvent)
+    // This is set on a variable so that it can be removed in the onBeforeUnmount hook to prevent memory leaks.
+    removeWindowResizeListener = () => {
+      window.removeEventListener('resize', dispatchResizeEvent)
+    }
     eventBus.on('resize', function () {
       pdfViewer.currentScaleValue = 'page-fit'
-    })
-    onBeforeUnmount(() => {
-      window.removeEventListener('resize', dispatchResizeEvent)
     })
 
     // Set initial scale to fit page
@@ -355,12 +378,6 @@ const fitHeightToggle = () => {
   }
   fitHeight.value = !fitHeight.value
 }
-
-onBeforeUnmount(() => {
-  handleWithLog(endPDFViewingSessionLog, () =>
-    removeFullscreenChangeListeners(handleFullscreenChange),
-  )
-})
 
 const router = useRouter()
 const emit = defineEmits(['close'])

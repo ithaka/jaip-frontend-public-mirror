@@ -27,8 +27,7 @@ export default defineConfig(({ mode }) => {
       },
       rollupOptions: {
         external: [
-          `/public/scripts/scoped-custom-element-registry.min.js`,
-          `/public/scripts/pdf.worker.min.mjs`
+          `/scripts/pdf.worker.min.mjs`
         ],
         output: {
           entryFileNames: `[name].[hash].mjs`,
@@ -52,21 +51,11 @@ export default defineConfig(({ mode }) => {
         targets: [
           {
             src: './node_modules/@ithaka/pharos/lib/styles/icons/**/*',
-            dest: 'public/styles/icons/pharos',
-          },
-          // This is kind of an awkward workaround to avoid external script. Instead of importing this in the index,
-          // we install it in node_modules and copy it to a static file where we can reach it from index.html
-          {
-            src: './node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js',
-            dest: 'public/scripts/',
+            dest: 'styles/icons/pharos',
           },
           {
-            src: './node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js.map',
-            dest: 'public/scripts/',
-          },
-          {
-            src: './node_modules/pdfjs-dist/wasm',
-            dest: 'public/scripts/pdfjs',
+            src: './node_modules/pdfjs-dist/wasm/**/*',
+            dest: 'scripts/pdfjs/wasm',
           },
         ],
       }),

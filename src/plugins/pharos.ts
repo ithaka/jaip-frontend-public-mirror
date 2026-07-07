@@ -1,3 +1,8 @@
+// This file is used to register the Pharos components with the scoped custom element registry.
+// In most cases, this file is imported from a cdn, but since we can't use a cdn, it's added here.
+// It is currently only used for Pharos components and so can be housed with them.
+import '@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js'
+
 // These imports and the registry are in alphabetical order, and for the sake of maintenance,
 // it would probably be best to keep them that way.
 import {
