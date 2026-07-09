@@ -156,6 +156,7 @@ const truncatedGramaticalGroupsList = computed(() => {
     'main'
     'footer';
   grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   &__spinner {
     position: fixed;
   }
@@ -172,6 +173,7 @@ const truncatedGramaticalGroupsList = computed(() => {
   &__main {
     grid-area: main;
     min-height: 0;
+    min-width: 0;
     margin-top: var(--pharos-spacing-2-x);
     margin-bottom: var(--pharos-spacing-5-x);
   }

@@ -44,5 +44,4 @@ export enum FootnoteDirectionOptions {
   toSource = 'to_source',
 }
 export type FootnoteDirections =
-  | FootnoteDirectionOptions.toFootnote
-  | FootnoteDirectionOptions.toSource
+  FootnoteDirectionOptions.toFootnote | FootnoteDirectionOptions.toSource

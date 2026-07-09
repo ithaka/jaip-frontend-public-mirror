@@ -242,7 +242,7 @@ const { footerLinkClickLog } = logs.getFooterLogs()
   padding: var(--pharos-spacing-2-x) var(--pharos-spacing-1-x);
   display: grid;
   grid-template-areas: '. main .';
-  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-columns: 1fr minmax(0, 8fr) 1fr;
 
   * > ul {
     list-style: none;
@@ -252,11 +252,12 @@ const { footerLinkClickLog } = logs.getFooterLogs()
 
   .footer__content {
     grid-area: main;
+    min-width: 0;
     max-width: 70rem;
     justify-self: center;
 
     @media (width <= 570px) {
-      max-width: calc(calc(var(--vh, 1vh) * 100) - 2rem);
+      max-width: calc(calc(var(--vw, 1vw) * 100) - 2rem);
     }
 
     .footer__row {
@@ -337,7 +338,7 @@ const { footerLinkClickLog } = logs.getFooterLogs()
       grid-template-rows: repeat(2, auto);
       gap: var(--pharos-spacing-1-x) var(--pharos-spacing-3-x);
 
-      @media (width <= 570px) {
+      @media (width <= 1024px) {
         gap: var(--pharos-spacing-one-half-x);
         grid-template-columns: repeat(2, 1fr);
       }

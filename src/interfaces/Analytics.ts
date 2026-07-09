@@ -28,13 +28,7 @@ export interface MediaReviewDataPoint {
 
 export type TimeOfDay = 'morning' | 'afternoon' | 'evening' | 'night'
 export type DayOfWeek =
-  | 'Monday'
-  | 'Tuesday'
-  | 'Wednesday'
-  | 'Thursday'
-  | 'Friday'
-  | 'Saturday'
-  | 'Sunday'
+  'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday'
 
 export interface TimeOfDayDataPoint {
   time: TimeOfDay

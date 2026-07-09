@@ -90,7 +90,7 @@ const { quickSearchLinkClick } = logs.getDictionaryTermLogs()
     width: 100%;
 
     @media (width <= 570px) {
-      max-width: calc((var(--vh, 1vh) * 100) - 2rem);
+      max-width: calc((var(--vw, 1vw) * 100) - 2rem);
     }
   }
   &__suggested {
