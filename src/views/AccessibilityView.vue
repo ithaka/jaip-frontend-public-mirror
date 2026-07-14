@@ -31,7 +31,9 @@ logPageView()
         <p>
           The
           <span v-if="isAuthenticatedAdmin">
-            <pep-pharos-link href="https://www.w3.org/WAI/standards-guidelines/wcag/"
+            <pep-pharos-link
+              href="https://www.w3.org/WAI/standards-guidelines/wcag/"
+              target="_blank"
               >Web Content Accessibility Guidelines (WCAG)</pep-pharos-link
             >
           </span>
@@ -40,6 +42,19 @@ logPageView()
           people with disabilities. It defines three levels of conformance: Level A, Level AA, and
           Level AAA. JSTOR Access in Prison aims to meet WCAG 2.2 Level AA conformance and is
           compliant to the extent described in this Accessibility Statement.
+        </p>
+        <p>
+          The latest JSTOR Access in Prison
+          <span v-if="isAuthenticatedAdmin">
+            <pep-pharos-link
+              href="https://about.jstor.org/wp-content/uploads/2026/02/JSTOR-VPAT-WCAG-2.2-2025-Final.pdf"
+              target="_blank"
+              >Accessibility Conformance Report (ACR) (PDF)</pep-pharos-link
+            >
+          </span>
+          <span v-else> Accessibility Conformance Report (ACR) </span>
+          demonstrates the extent of compliance with both Section 508 and WCAG standards and
+          guidelines based on the Voluntary Product Accessibility Template (VPAT).
         </p>
         <pep-pharos-heading class="accessibility__heading" :level="2" preset="4--bold"
           >Feedback</pep-pharos-heading
@@ -74,12 +89,7 @@ logPageView()
           the known issue.
         </p>
         <ul class="accessibility__known-issues">
-          <li>
-            Due to the nature of a single page application, there are some focus management issues
-            where content updates without a page refresh and focus or current status isn’t updated
-            accordingly. Users are able to recover and continue with their flow and nothing is
-            blocked. Remediation is currently underway with a fix coming in Q4.
-          </li>
+          <li>No known issues</li>
         </ul>
         <pep-pharos-heading class="accessibility__heading" :level="2" preset="4--bold"
           >Assessment approach</pep-pharos-heading
