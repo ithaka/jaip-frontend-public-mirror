@@ -32,6 +32,11 @@ build app image:
   variables:
     KUBERNETES_MEMORY_LIMIT: 8Gi
     CI_DEBUG_TRACE: true
+    # Kaniko's default cache TTL (2 weeks) was serving a stale layer for
+    # `apk update && apk upgrade` in the Dockerfile, missing newer package
+    # fixes (e.g. curl/libcurl CVE-2026-5773, CVE-2026-6276). Disable the
+    # build cache until infra exposes a shorter KANIKO_CACHE_TTL.
+    EXTRA_ARGS: --cache=false
   before_script:
     # Copy the environment specific nginx config so it can be used in the build, then remove irrelevant config files
     - mv nginx/$NGINX_CONFIG nginx/nginx.conf && rm -rf nginx/nginx.conf.*
