@@ -21,6 +21,7 @@ import type SearchArgs from '@/interfaces/SearchArgs'
 import type { SearchResponse } from '@/interfaces/SearchResponse'
 import type { SubdomainRequest, SubdomainsResponse } from '@/interfaces/Subdomains'
 import type { WordnikWordData } from './Dictionary'
+import type { CitationsResponse } from './CitationsResponse'
 
 interface AlertsRoutes {
   get: () => Promise<AxiosResponse<AlertsResponse>>
@@ -138,4 +139,7 @@ export default interface ApiObject {
   global_restricts: GlobalRestricts
   journals: (arg: string) => Promise<AxiosResponse<Journal[]>>
   search: SearchRoutes
+  citations: {
+    get: (arg: string) => Promise<AxiosResponse<CitationsResponse>>
+  }
 }

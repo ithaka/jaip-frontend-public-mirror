@@ -109,6 +109,9 @@ export const routes = {
     pdf: (collection: Collections, filename: string) =>
       `${global_route_prefix_versioned}/custom_content/pdf/${collection}/${filename}`,
   },
+  citations: {
+    get: (iid: string) => `${global_route_prefix_versioned}/citations/${iid}`,
+  },
 }
 export default ($axios: AxiosInstance): ApiObject => ({
   log: (log: Log) => {
@@ -272,5 +275,8 @@ export default ($axios: AxiosInstance): ApiObject => ({
   },
   analytics: {
     get: (group_id: string) => $axios.get(routes.analytics.get(group_id)),
+  },
+  citations: {
+    get: (iid: string) => $axios.get(routes.citations.get(iid)),
   },
 })
