@@ -5159,7 +5159,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "jaip-frontend@workspace:."
   dependencies:
-    "@babel/types": "npm:^7.29.7"
+    "@babel/types": "npm:^8.0.4"
     "@carbon/charts-vue": "npm:^1.27.16"
     "@ithaka/eslint-config-vue": "npm:^6.0.0"
     "@ithaka/pharos": "npm:^14.25.0"
