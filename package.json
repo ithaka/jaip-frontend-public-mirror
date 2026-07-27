@@ -21,7 +21,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@carbon/charts-vue": "^1.27.16",
+    "@carbon/charts-vue": "^1.27.17",
     "@ithaka/pharos": "^14.25.0",
     "@vuepic/vue-datepicker": "^11.0.3",
     "@webcomponents/scoped-custom-element-registry": "^0.0.10",
@@ -46,7 +46,7 @@
     "@vitejs/plugin-vue-jsx": "^5.1.6",
     "@vue/test-utils": "^2.4.11",
     "@vue/tsconfig": "^0.9.1",
-    "cypress": "^15.18.1",
+    "cypress": "^15.19.0",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^6.4.3",
@@ -54,11 +54,11 @@
     "husky": "^9.1.7",
     "jiti": "^2.7.0",
     "jsdom": "^29.1.1",
-    "lint-staged": "^17.1.0",
+    "lint-staged": "^17.2.0",
     "npm-run-all2": "^9.0.2",
     "path": "^0.12.7",
     "prettier": "^3.9.6",
-    "sass": "^1.101.3",
+    "sass": "^1.101.7",
     "sass-embedded": "^1.100.0",
     "start-server-and-test": "^3.0.11",
     "typescript": "~5.9.3",
@@ -67,7 +67,7 @@
     "vite-plugin-dynamic-import": "^1.6.0",
     "vite-plugin-static-copy": "^3.4.0",
     "vite-plugin-vue-devtools": "^8.1.5",
-    "vue-tsc": "^3.3.7"
+    "vue-tsc": "^3.3.8"
   },
   "lint-staged": {
     "src/**/*.ts": [
