@@ -67,7 +67,7 @@ watch(entityName, () => {
   params.forEach((value: string, key: string) => {
     paramObject[key] = value
   })
-  router.replace({ path, query: paramObject })
+  router.replace({ path, query: paramObject, hash: window.location.hash })
   updateKey++
 })
 

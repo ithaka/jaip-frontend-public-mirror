@@ -60,7 +60,7 @@ const config = {
       component: () => import('@/views/AboutView.vue'),
     },
     {
-      path: '/help',
+      path: '/help/:tab?',
       name: 'help',
       meta: {
         group: 'support',
