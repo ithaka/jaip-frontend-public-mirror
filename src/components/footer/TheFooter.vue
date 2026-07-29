@@ -110,8 +110,8 @@ const { footerLinkClickLog } = logs.getFooterLogs()
               </pep-pharos-heading>
               <img
                 v-if="!isAuthenticatedAdmin"
-                src="@/assets/images/JSTOR_Labs_Logo.png"
-                class="footer__logo"
+                src="@/assets/images/ITHAKA_Labs_Logo.png"
+                class="footer__logo footer__logo--labs"
                 alt="JSTOR Labs Logo"
                 data-cy="footer-jstor-labs-logo-linkless"
               />
@@ -132,8 +132,8 @@ const { footerLinkClickLog } = logs.getFooterLogs()
                 "
               >
                 <img
-                  src="@/assets/images/JSTOR_Labs_Logo.png"
-                  class="footer__logo"
+                  src="@/assets/images/ITHAKA_Labs_Logo.png"
+                  class="footer__logo footer__logo--labs"
                   alt="JSTOR Labs Logo"
                   data-cy="footer-jstor-labs-logo-linked"
                 />
@@ -324,6 +324,10 @@ const { footerLinkClickLog } = logs.getFooterLogs()
       width: 100%;
       max-width: 180px;
       margin-top: var(--pharos-spacing-1-x);
+
+      &--labs {
+        margin-top: calc(var(--pharos-spacing-1-x) + var(--pharos-spacing-1-x));
+      }
     }
 
     .footer__brand {
