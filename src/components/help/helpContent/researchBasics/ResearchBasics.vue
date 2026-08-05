@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AssessingSearchResults from './AssessingSearchResults.vue'
 import AssessingSources from './AssessingSources.vue'
-import ForumlatingAStrategy from './ForumlatingAStrategy.vue'
+import FormulatingAStrategy from './FormulatingAStrategy.vue'
 import CitingScholarlyWork from './CitingScholarlyWork.vue'
 import CreatingBibliography from './CreatingBibliography.vue'
 </script>
@@ -20,7 +20,7 @@ import CreatingBibliography from './CreatingBibliography.vue'
       concepts needed for success in school and beyond. The topics covered are subjects that will
       help you prepare for academic research.
     </p>
-    <ForumlatingAStrategy />
+    <FormulatingAStrategy />
     <AssessingSearchResults />
     <AssessingSources />
     <CitingScholarlyWork />
