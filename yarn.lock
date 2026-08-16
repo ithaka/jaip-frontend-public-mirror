@@ -2673,7 +2673,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.12.1, acorn@npm:^8.15.0, acorn@npm:^8.16.0":
+"acorn@npm:^8.12.1, acorn@npm:^8.16.0":
   version: 8.17.0
   resolution: "acorn@npm:8.17.0"
   bin:
@@ -5180,7 +5180,7 @@ __metadata:
     start-server-and-test: "npm:^3.0.11"
     typescript: "npm:~5.9.3"
     typescript-cookie: "npm:^1.0.6"
-    unplugin-vue-markdown: "npm:^30.0.0"
+    unplugin-vue-markdown: "npm:^32.0.0"
     uuid: "npm:^14.0.1"
     vite: "npm:^7.3.6"
     vite-plugin-dynamic-import: "npm:^1.6.0"
@@ -5601,7 +5601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-exit@npm:^1.0.0-beta.8":
+"markdown-exit@npm:^1.0.0-beta.9":
   version: 1.0.0-beta.9
   resolution: "markdown-exit@npm:1.0.0-beta.9"
   dependencies:
@@ -7486,35 +7486,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-markdown@npm:^30.0.0":
-  version: 30.0.0
-  resolution: "unplugin-vue-markdown@npm:30.0.0"
+"unplugin-vue-markdown@npm:^32.0.0":
+  version: 32.0.0
+  resolution: "unplugin-vue-markdown@npm:32.0.0"
   dependencies:
     "@mdit-vue/plugin-component": "npm:^3.0.2"
     "@mdit-vue/plugin-frontmatter": "npm:^3.0.2"
     "@mdit-vue/types": "npm:^3.0.2"
-    markdown-exit: "npm:^1.0.0-beta.8"
-    unplugin: "npm:^2.3.10"
-    unplugin-utils: "npm:^0.3.0"
+    markdown-exit: "npm:^1.0.0-beta.9"
+    unplugin: "npm:^3.0.0"
+    unplugin-utils: "npm:^0.3.1"
   peerDependencies:
-    vite: ^2.0.0 || ^3.0.0-0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0 || ^7.0.0
-  checksum: 10c0/adec7f39933a7a413b23b9235da91e5df455326f7c8f88220f74031475588008ac2c8bc55eb5cd3f33a7b262de7c81a8b0271ca11a6f5812321595d85230caa1
+    vite: ^2.0.0 || ^3.0.0-0 || ^4.0.0-0 || ^5.0.0-0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+  checksum: 10c0/cec28496177a579159886d01474c705b0232e44bff3078b24221eb908099fe5530912eab1eca35406327c4a4b87bbc36699419e867962d14d78ed9f9ed0a370b
   languageName: node
   linkType: hard
 
-"unplugin@npm:^2.3.10":
-  version: 2.3.11
-  resolution: "unplugin@npm:2.3.11"
-  dependencies:
-    "@jridgewell/remapping": "npm:^2.3.5"
-    acorn: "npm:^8.15.0"
-    picomatch: "npm:^4.0.3"
-    webpack-virtual-modules: "npm:^0.6.2"
-  checksum: 10c0/273c1eab0eca4470c7317428689295c31dbe8ab0b306504de9f03cd20c156debb4131bef24b27ac615862958c5dd950a3951d26c0723ea774652ab3624149cff
-  languageName: node
-  linkType: hard
-
-"unplugin@npm:^3.3.0":
+"unplugin@npm:^3.0.0, unplugin@npm:^3.3.0":
   version: 3.3.0
   resolution: "unplugin@npm:3.3.0"
   dependencies:
