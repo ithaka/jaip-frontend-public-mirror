@@ -22,7 +22,7 @@ import { capitalize, parseGroupsQueryParam } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
 import { useLogger } from './composables/logging/useLogger'
 
-// This has to run before any web component definitions so that shadow DOM stylesheets
+// This needs to run before any web component definitions so that shadow DOM stylesheets
 // get viewport units rewritten via the patched CSSStyleSheet.replaceSync.
 initViewportUnitsPatch()
 
