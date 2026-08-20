@@ -42,10 +42,18 @@ const getCopyButtonLogs = (options: { dois?: string[]; copyContext: string }) =>
       dois: options.dois,
     })
 
+  const copyLegacyFallbackLog = (): (() => WorkingLog) => () => ({
+    ...generics.buttonClick(`copy_${options.copyContext}_button`),
+    event_description: `user copied ${options.copyContext} using legacy fallback method`,
+    action: `copy_${options.copyContext}_legacy_fallback`,
+    dois: options.dois,
+  })
+
   return {
     copyButtonLog,
     copyErrorLog,
     copyAvailabilityLog,
+    copyLegacyFallbackLog,
   }
 }
 

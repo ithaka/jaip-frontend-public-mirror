@@ -37,16 +37,33 @@ const props = defineProps({
 const emit = defineEmits(['clipboard-unavailable', 'copy-error', 'success'])
 
 const { handleWithLog, logs } = useLogger()
-const { copyButtonLog, copyErrorLog, copyAvailabilityLog } = logs.getCopyButtonLogs({
-  dois: props.dois,
-  copyContext: props.copyContext,
-})
+const { copyButtonLog, copyErrorLog, copyAvailabilityLog, copyLegacyFallbackLog } =
+  logs.getCopyButtonLogs({
+    dois: props.dois,
+    copyContext: props.copyContext,
+  })
 
 const tooltipText = ref(props.defaultTooltipText)
 
 const isClipboardAvailable = computed(() => {
   return !!(navigator.clipboard && navigator.clipboard.writeText)
 })
+
+// Fallback for browsers/contexts that deny navigator.clipboard writes (e.g. NotAllowedError).
+const legacyCopy = (text: string): boolean => {
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.style.position = 'fixed'
+  textarea.style.opacity = '0'
+  document.body.appendChild(textarea)
+  textarea.focus()
+  textarea.select()
+  try {
+    return document.execCommand('copy')
+  } finally {
+    document.body.removeChild(textarea)
+  }
+}
 
 /**
  * Copies the currently displayed citation text to the user's clipboard.
@@ -62,13 +79,27 @@ const handleCopy = async () => {
     }
     await navigator.clipboard.writeText(props.copyText)
     tooltipText.value = props.tooltipSuccessText
-    emit('success')
+    handleWithLog(copyButtonLog(), () => emit('success'))
 
     // Keep success feedback visible briefly before restoring the default text.
     setTimeout(() => {
       tooltipText.value = props.defaultTooltipText
     }, 5000)
   } catch (error) {
+    if (
+      error instanceof DOMException &&
+      error.name === 'NotAllowedError' &&
+      legacyCopy(props.copyText)
+    ) {
+      handleWithLog(copyLegacyFallbackLog(), () => {
+        tooltipText.value = props.tooltipSuccessText
+        emit('success')
+        setTimeout(() => {
+          tooltipText.value = props.defaultTooltipText
+        }, 5000)
+      })
+      return
+    }
     handleWithLog(copyErrorLog({ error }), () => emit('copy-error'))
     return
   }
@@ -82,7 +113,7 @@ const handleCopy = async () => {
     :aria-describedby="tooltipId"
     :data-tooltip-id="tooltipId"
     :data-cy="`copy-${copyContext}-button`"
-    @click.prevent.stop="handleWithLog(copyButtonLog(), handleCopy)"
+    @click.prevent.stop="handleCopy"
   >
     <span class="text-align-center">{{ label }}</span>
   </pep-pharos-button>
