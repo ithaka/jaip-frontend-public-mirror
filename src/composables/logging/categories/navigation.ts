@@ -94,6 +94,33 @@ const getRequestWarningLogs = () => {
   }
 }
 
+const getCitationsNavigationLogs = (options: { dois: string[]; destination: string }) => {
+  const citationsLearnMoreLinkClickLog = (): WorkingLog => ({
+    ...generics.linkClick('citing_scholarly_work', 'internal_navigation'),
+    event_description: 'user clicked learn more link from citations modal',
+    action: 'open_citations_learn_more',
+    destination: options.destination,
+    dois: options.dois,
+  })
+
+  return {
+    citationsLearnMoreLinkClickLog,
+  }
+}
+
+const getSearchResultsNavigationLogs = (options: { destination: string }) => {
+  const searchHelpLinkClickLog = (): WorkingLog => ({
+    ...generics.linkClick('search_help', 'internal_navigation'),
+    event_description: 'user clicked search help link from no results suggestions',
+    action: 'open_search_help',
+    destination: options.destination,
+  })
+
+  return {
+    searchHelpLinkClickLog,
+  }
+}
+
 const getCardLogs = () => {
   const cardClickLog =
     (destination: string): (() => WorkingLog) =>
@@ -146,6 +173,8 @@ export const navigationLogs = {
   getSkipNavigationLogs,
   getJstorLogoLogs,
   getRequestWarningLogs,
+  getCitationsNavigationLogs,
+  getSearchResultsNavigationLogs,
   getHeaderLogs,
   getCardLogs,
   getRouterLogs,

@@ -226,15 +226,48 @@ export const formatRouteName = (route: RouteRecordNormalized): string => {
 }
 
 /**
+ * Returns a string in lower case for sorting purposes, ensuring that the comparison is case-insensitive.
+ * @param value - The string value to normalize for sorting
+ * @returns Lowercase version of the input string for sorting purposes.
+ */
+const getNavSortName = (value: string): string => value.toLowerCase()
+
+/**
  * Compares two routes alphabetically by their name for sorting.
  * @param a - First route to compare
  * @param b - Second route to compare
  * @returns Negative if a < b, positive if a > b, 0 if equal
  */
 export const compareRoutesByName = (a: RouteRecordNormalized, b: RouteRecordNormalized): number => {
-  const aName = String(a.name || '').toLowerCase()
-  const bName = String(b.name || '').toLowerCase()
+  const aName = getNavSortName(String(a.name || ''))
+  const bName = getNavSortName(String(b.name || ''))
   return aName.localeCompare(bName)
+}
+
+/**
+ * Explicit priority order for grouped navigation menu sections.
+ * Groups listed here appear first and in this exact sequence.
+ */
+const NAV_ROUTE_ORDER: string[] = ['dictionary', 'reentry', 'research', 'support']
+
+const NAV_ROUTE_RANK: Record<string, number> = Object.fromEntries(
+  NAV_ROUTE_ORDER.map((groupName, index) => [groupName, index]),
+)
+
+/**
+ * Compares two grouped navigation section names using explicit priority order,
+ * with alphabetical fallback for groups not in NAV_ROUTE_ORDER.
+ * @param a - First group name to compare
+ * @param b - Second group name to compare
+ * @returns Negative if a < b, positive if a > b, 0 if equal
+ */
+const compareNavRoutes = (a: string, b: string): number => {
+  const aName = getNavSortName(a)
+  const bName = getNavSortName(b)
+  const aRank = NAV_ROUTE_RANK[aName] ?? Number.MAX_SAFE_INTEGER
+  const bRank = NAV_ROUTE_RANK[bName] ?? Number.MAX_SAFE_INTEGER
+
+  return aRank - bRank || aName.localeCompare(bName)
 }
 
 /**
@@ -289,7 +322,14 @@ export const getOrganizedRoutes = (router: Router): RoutesObject => {
 
   ungrouped.sort(compareRoutesByName)
 
-  const result: RoutesObject = { grouped, ungrouped: [] }
+  const sortedGrouped: { [key: string]: RouteRecordNormalized[] } = {}
+  Object.keys(grouped)
+    .sort(compareNavRoutes)
+    .forEach((groupName) => {
+      sortedGrouped[groupName] = [...grouped[groupName]].sort(compareRoutesByName)
+    })
+
+  const result: RoutesObject = { grouped: sortedGrouped, ungrouped: [] }
   if (homeRoute) {
     result.ungrouped.push(homeRoute)
   }

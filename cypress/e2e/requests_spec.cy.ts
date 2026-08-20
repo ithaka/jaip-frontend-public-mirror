@@ -229,7 +229,14 @@ describe('Requests page', () => {
 
       cy.get('.search-result').first().contains('Status: Pending')
 
-      cy.get('.search-result pep-pharos-button').should('have.length', 0)
+      // Pending items only render the Cite button — no request-related buttons.
+      cy.get('.search-result').each(($result) => {
+        cy.wrap($result)
+          .find('pep-pharos-button')
+          .contains('Request this', { matchCase: false })
+          .should('not.exist')
+        cy.wrap($result).find('[data-cy="cite-button"]').should('exist')
+      })
     })
     it('Has no groups', () => {
       cy.intercept('POST', routes.search.status('completed'), {

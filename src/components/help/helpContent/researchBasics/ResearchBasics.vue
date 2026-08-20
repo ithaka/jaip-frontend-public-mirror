@@ -20,11 +20,11 @@ import CreatingBibliography from './CreatingBibliography.vue'
       concepts needed for success in school and beyond. The topics covered are subjects that will
       help you prepare for academic research.
     </p>
-    <FormulatingAStrategy />
-    <AssessingSearchResults />
-    <AssessingSources />
-    <CitingScholarlyWork />
-    <CreatingBibliography />
+    <FormulatingAStrategy id="formulating-a-strategy" />
+    <AssessingSearchResults id="assessing-search-results" />
+    <AssessingSources id="assessing-sources" />
+    <CitingScholarlyWork id="citing-scholarly-work" />
+    <CreatingBibliography id="creating-bibliography" />
   </div>
 </template>
 <style scoped lang="scss">

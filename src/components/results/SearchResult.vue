@@ -15,6 +15,7 @@ import BibliographicalData from '@/components/results/BibliographicalData.vue'
 import { ref, computed } from 'vue'
 import UnrestrictButton from '@/components/buttons/adminButtons/UnrestrictButton.vue'
 import RequestButton from '../buttons/RequestButton.vue'
+import CiteButton from '../buttons/CiteButton.vue'
 
 const props = defineProps({
   doc: {
@@ -196,6 +197,7 @@ const showReaderRestrictedLabel = computed(() => {
         >
           <span>Read</span>
         </pep-pharos-button>
+        <CiteButton v-if="isAuthenticatedStudent" :doc="doc" />
         <AccessButtons
           v-if="status === 'approved' && !hideAccess"
           :iid="doc.iid"

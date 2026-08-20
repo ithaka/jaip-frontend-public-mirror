@@ -8,6 +8,7 @@ import { accessLogs } from './categories/access'
 import { analyticsLogs } from './categories/analytics'
 import { viewportPatchLogs } from './categories/viewport_patch'
 import { dictionaryLogs } from './categories/dictionary'
+import { citationsLogs } from './categories/citations'
 
 export const logs = {
   ...navigationLogs,
@@ -20,4 +21,5 @@ export const logs = {
   ...analyticsLogs,
   ...viewportPatchLogs,
   ...dictionaryLogs,
+  ...citationsLogs,
 }

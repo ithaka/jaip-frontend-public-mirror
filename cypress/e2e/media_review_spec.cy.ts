@@ -200,7 +200,15 @@ describe('Media Review', () => {
           .contains('The Sacrifices and Achievements of African-American Women')
           .parents('.search-result')
           .find('pep-pharos-button')
+          .contains('Request this', { matchCase: false })
           .should('not.exist')
+
+        // It does include a Cite button
+        cy.get('.search-result')
+          .contains('The Sacrifices and Achievements of African-American Women')
+          .parents('.search-result')
+          .find('[data-cy="cite-button"]')
+          .should('exist')
       })
     })
 

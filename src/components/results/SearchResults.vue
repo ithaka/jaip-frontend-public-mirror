@@ -38,6 +38,7 @@ const {
   pageNo,
   pubYearStart,
   pubYearEnd,
+  searching,
   searchTerms,
   secondarySearchResults,
   secondarySearchTotal,
@@ -63,7 +64,7 @@ const { reqs } = storeToRefs(coreStore)
 
 const getResultsCountLabel = (count: number) => {
   if (count === 0) {
-    return 'No results'
+    return 'No results found'
   }
   if (count === 1) {
     return '1 result'
@@ -337,6 +338,23 @@ const { openBulkApprovalModalLog, closeBulkApprovalModalLog, submitBulkApprovalL
     dois: bulkApproveReversals,
   })
 const { submitRequestLog } = logs.getRequestLogs({ dois: formattedRequests.value })
+
+// Search help route. Shared between openSearchHelp and the navigation log so the
+// logged destination always matches the actual route.
+const searchHelpRouteName = 'help'
+const searchHelpTab = 'how-to-use-jstor'
+const searchHelpDestination = `/${searchHelpRouteName}/${searchHelpTab}`
+const { searchHelpLinkClickLog } = logs.getSearchResultsNavigationLogs({
+  destination: searchHelpDestination,
+})
+
+const openSearchHelp = async () => {
+  await router.push({
+    name: searchHelpRouteName,
+    params: { tab: searchHelpTab },
+    query: router.currentRoute.value.query,
+  })
+}
 </script>
 <template>
   <div
@@ -355,9 +373,26 @@ const { submitRequestLog } = logs.getRequestLogs({ dois: formattedRequests.value
         class="search-results-header results-list mx-0"
         :class="{ 'search-results-header-margins': !requestsPage }"
       >
-        <pep-pharos-heading no-margin preset="3--bold" :level="2">
-          {{ getResultsCountLabel(searchTotal) }}
-        </pep-pharos-heading>
+        <div v-if="!searching && !secondarySearching">
+          <pep-pharos-heading no-margin preset="3--bold" :level="2">
+            {{ getResultsCountLabel(searchTotal) }}
+          </pep-pharos-heading>
+          <div v-if="!searchTotal && !requestsPage" class="search-suggestions">
+            Try these suggestions:
+            <ul class="search-suggestions__list">
+              <li>Check your spelling</li>
+              <li>Clear your search filters</li>
+              <li>
+                See
+                <pep-pharos-link
+                  @click.prevent="handleWithLog(searchHelpLinkClickLog, openSearchHelp)"
+                >
+                  Search help
+                </pep-pharos-link>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div v-if="reqs.length" class="justify-self-end">
           <pep-pharos-button
             id="requests-button"
@@ -599,6 +634,14 @@ const { submitRequestLog } = logs.getRequestLogs({ dois: formattedRequests.value
     color: var(--pharos-color-marble-gray-40);
     grid-column: span 12;
     margin-bottom: var(--pharos-spacing-one-half-x);
+  }
+}
+.search-suggestions {
+  margin-top: var(--pharos-spacing-1-x);
+  &__list {
+    margin-top: var(--pharos-spacing-one-half-x);
+    list-style-type: disc;
+    padding-left: var(--pharos-spacing-one-and-a-half-x);
   }
 }
 </style>
