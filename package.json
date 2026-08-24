@@ -28,7 +28,7 @@
     "axios": "^1.18.1",
     "openseadragon": "^6.0.2",
     "pdfjs-dist": "^6.0.0",
-    "pinia": "^3.0.4",
+    "pinia": "^4.0.3",
     "print-js": "^1.6.0",
     "typescript-cookie": "^1.0.6",
     "uuid": "^14.0.1",
