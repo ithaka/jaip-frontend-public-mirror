@@ -39,7 +39,7 @@ describe('Requests page', () => {
 
     it('Can filter by date reviewed', () => {
       // Open date picker
-      cy.get('pep-pharos-button[id="datepicker-button"').click()
+      cy.get('#datepicker-button').click()
       cy.get('.dp--preset-dates').contains('Today', { matchCase: false }).should('be.visible')
       cy.get('.dp--preset-dates')
         .contains('Last 30 Days', { matchCase: false })
@@ -53,11 +53,11 @@ describe('Requests page', () => {
 
       // // This test needs to use a date range wholly in the past, because prior
       // // to the 10th, the specified dates won't be selectable.
-      cy.get('button[aria-label$="pen years overlay"').click()
-      cy.get('div[role="gridcell"]').contains('2022').click()
+      cy.get('[data-test-id="year-toggle-overlay-0"]').click()
+      cy.get('[role="option"][data-test-id="2022"]').click()
 
-      cy.get('button[aria-label$="pen months overlay"').click()
-      cy.get('div[role="gridcell"]').contains('Jan').click()
+      cy.get('[data-test-id="month-toggle-overlay-0"]').click()
+      cy.get('[role="option"][data-test-id="Jan"]').click()
 
       // Using regex to ensure that the number is the only value in the cell to avoid
       // selecting 31 when we want 1.

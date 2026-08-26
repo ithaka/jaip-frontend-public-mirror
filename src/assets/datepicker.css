@@ -29,7 +29,9 @@
   --dp-menu-min-width: 260px; /*Adjust the min width of the menu*/
   --dp-action-buttons-padding: var(--pharos-spacing-one-eighth-x)
     var(--pharos-spacing-one-quarter-x); /*Adjust padding for the action buttons in action row*/
-  --dp-row-maring: var(--pharos-spacing-one-quarter-x) 0; /*Adjust the spacing between rows in the calendar*/
+  --dp-action-button-height: var(--pharos-spacing-2-x); /*Height for the action row buttons*/
+  --dp-action-row-padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x); /*Padding for the action row*/
+  --dp-row-margin: var(--pharos-spacing-one-quarter-x) 0; /*Adjust the spacing between rows in the calendar*/
   --dp-calendar-header-cell-padding: var(
     --pharos-spacing-one-half-x
   ); /*Adjust padding in calendar header cells*/
@@ -60,11 +62,12 @@
   --dp-transition-timing: ease-out; /*Timing on slide animations*/
 
   /*Colors*/
-  --dp-primary-color: var(--pharos-color-primary); /*Primary color*/
+  --dp-primary-color: var(--pharos-color-interactive-primary); /*Primary color*/
   --dp-secondary-color: var(--pharos-color-secondary); /*Secondary color*/
   --dp-tertiary-color: var(--pharos-color-tertiary); /*Tertiary color*/
 }
 
+.dp--theme-light,
 .dp__theme_light {
   --dp-background-color: var(--pharos-modal-color-background-content);
   --dp-text-color: var(--pharos-color-text-base);
@@ -84,5 +87,5 @@
   --dp-success-color-disabled: var(--pharos-color-disabled);
   --dp-icon-color: var(--pharos-color-ui-50);
   --dp-danger-color: var(--pharos-color-feedback-error);
-  --dp-highlight-color: #990000a;
+  --dp-highlight-color: #9900000a;
 }

@@ -5,9 +5,11 @@ import { useCoreStore } from '@/stores/core'
 import { useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import DatePicker from '@/components/DatePicker.vue'
 import SearchResults from '@/components/results/SearchResults.vue'
 import { changeRoute, parseGroupsQueryParam } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
+import { DatePickerRangeDirection } from '@/interfaces/DatePicker'
 import type { Group } from '@/interfaces/Group'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
@@ -24,26 +26,6 @@ const {
 
 const searchStore = useSearchStore()
 const { reviewStatus, statusStartDate, statusEndDate, statusQuery } = storeToRefs(searchStore)
-
-const presetRanges = ref([
-  { label: 'Today', value: [new Date(), new Date()] },
-  {
-    label: 'Last 30 Days',
-    value: [new Date().setDate(new Date().getDate() - 30), new Date()],
-  },
-  {
-    label: 'Last 60 Days',
-    value: [new Date().setDate(new Date().getDate() - 60), new Date()],
-  },
-  {
-    label: 'Last 90 Days',
-    value: [new Date().setDate(new Date().getDate() - 90), new Date()],
-  },
-  {
-    label: 'All',
-    value: [Date.parse('01 Jan 2022 00:00:00 GMT'), new Date()],
-  },
-])
 
 const statusGroups = ref(groupIDs.value)
 const sortedFullGroups = groupIDs.value.reduce((arr, id: number) => {
@@ -66,12 +48,6 @@ const updateStatusQuery = (val: string) => {
   statusQuery.value = val
 }
 
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-}
 const handleDateSelection = (dates: Array<Date>) => {
   statusStartDate.value = new Date(dates[0]!.setHours(0, 0, 0, 0))
   statusEndDate.value = new Date((dates[1] || dates[0])!.setHours(23, 59, 59, 999))
@@ -79,16 +55,6 @@ const handleDateSelection = (dates: Array<Date>) => {
 }
 const dates = computed(() => {
   return [statusStartDate.value, statusEndDate.value]
-})
-const displayDates = computed(() => {
-  const displayDates = [
-    statusStartDate.value.toLocaleString('en', dateOptions),
-    statusEndDate.value.toLocaleString('en', dateOptions),
-  ]
-  if (displayDates[0] === displayDates[1]) {
-    return String(displayDates[0])
-  }
-  return `${displayDates[0]} - ${displayDates[1]}`
 })
 
 const statuses = [
@@ -165,44 +131,15 @@ logPageView()
       </div>
 
       <div class="cols-md-8 cols-6">
-        <VueDatePicker
-          :value="dates"
-          :enable-time-picker="false"
-          range
-          :text-input="true"
+        <DatePicker
+          :initial-dates="dates"
+          label="Status Date"
+          :range-direction="DatePickerRangeDirection.Past"
+          trigger-id="datepicker-button"
+          time-zone="UTC"
           :max-date="new Date()"
-          :preset-dates="presetRanges"
-          @update:model-value="handleDateSelection"
-        >
-          <template #trigger>
-            <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="2">
-              Status Date
-            </pep-pharos-heading>
-            <pep-pharos-button
-              id="datepicker-button"
-              variant="secondary"
-              full-width
-              icon-left="calendar"
-            >
-              {{ displayDates }}
-            </pep-pharos-button>
-          </template>
-          <template #action-row="{ internalModelValue, selectDate, disabled, closePicker }">
-            <div class="action-row justify-self-end">
-              <div class="">
-                <pep-pharos-button variant="secondary" class="mr-2" @click="closePicker">
-                  Cancel
-                </pep-pharos-button>
-                <pep-pharos-button
-                  :disabled="disabled || (internalModelValue || []).length < 1"
-                  @click="selectDate"
-                >
-                  Select
-                </pep-pharos-button>
-              </div>
-            </div>
-          </template>
-        </VueDatePicker>
+          @selected-dates="handleDateSelection"
+        />
       </div>
       <div class="cols-md-8 cols-6 md-ml-0 ml-13" style="width: 100%">
         <pep-pharos-heading class="mb-2 pb-0" preset="legend" :level="2">
@@ -259,9 +196,3 @@ logPageView()
     </pep-pharos-layout>
   </main>
 </template>
-
-<style>
-.dp__action_row {
-  justify-content: end;
-}
-</style>

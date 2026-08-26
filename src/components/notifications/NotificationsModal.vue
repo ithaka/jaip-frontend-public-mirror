@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import DatePicker from './DatePicker.vue'
+import DatePicker from '@/components/DatePicker.vue'
 import { AlertStatus, type Alert, type StatusOption } from '@/interfaces/Alert'
+import { DatePickerRangeDirection } from '@/interfaces/DatePicker'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import { useCoreStore } from '@/stores/core'
 import { useSubdomainStore } from '@/stores/subdomains'
@@ -369,7 +370,11 @@ const emit = defineEmits<{
           <DatePicker
             :key="`datepicker_${props.notification?.id || 'new'}`"
             :initial-dates="dates"
-            @selected:dates="(d: Array<Date>) => (dates = d)"
+            label="Schedule"
+            required
+            :range-direction="DatePickerRangeDirection.Future"
+            :min-date="new Date()"
+            @selected-dates="(d: Array<Date>) => (dates = d)"
           />
           <p v-if="invalidDates">
             <span class="notifications-modal__text--error">{{ invalidDatesMessage }}</span>
