@@ -16,5 +16,16 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+beforeEach(() => {
+  // Calls to the log endpoint use the Beacon API, so they can be intercepted and destroyed without
+  // affecting user-facing behavior.
+  cy.intercept('POST', '/api/v2/log', (req) => req.destroy())
+  // Intercepting the subdomains get request to return a fixture response.
+  cy.intercept('POST', '/api/v2/site-administration/subdomains/get', {
+    statusCode: 200,
+    fixture: 'auth/subdomains/get_subdomains__response.json',
+  })
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

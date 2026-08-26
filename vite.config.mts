@@ -9,19 +9,12 @@ import dynamicImport from "vite-plugin-dynamic-import";
 
 export default defineConfig(({ mode }) => {
   const config = {
-    esbuild: {
-      keepNames: true,
-      supported: {
-        'top-level-await': true //browsers can handle top-level-await features
-      },
-    },
     build: {
       assetsDir: "assets/generated",
       // This is the default value for target:
       // target: 'baseline-widely-available',
       // We can't use the default because we're still supporting devices using Firefox 91 ESR
       target: ['chrome107', 'edge107', 'firefox91', 'safari16'],
-      keepNames: true,
       compilerOptions: {
         useDefineForClassFields: true,
       },
@@ -32,6 +25,9 @@ export default defineConfig(({ mode }) => {
         output: {
           entryFileNames: `[name].[hash].mjs`,
           chunkFileNames: `[name].[hash].mjs`,
+          // Pharos derives custom element tag names from `class.name`, so minifying them
+          // produces duplicate tags (e.g. `pep-aq`) and breaks registration.
+          keepNames: true,
         },
       }
     },
@@ -70,11 +66,8 @@ export default defineConfig(({ mode }) => {
 
     ],
     optimizeDeps: {
-      include: [
-          '@ithaka/pharos'
-      ],
       esbuildOptions: {
-        target: "esnext",
+        keepNames: true,
       },
     },
     resolve: {
@@ -82,7 +75,7 @@ export default defineConfig(({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         'vue': 'vue/dist/vue.esm-bundler.js',
         "/styles/icons": path.resolve(
-          __dirname,
+          import.meta.dirname,
           "public/styles/icons/pharos"
         ),
       }

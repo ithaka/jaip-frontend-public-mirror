@@ -38,7 +38,7 @@
   ); /*Space between multiple calendars*/
   --dp-overlay-col-padding: var(--pharos-spacing-one-eighth-x); /*Padding in the overlay column*/
   --dp-time-inc-dec-button-size: var(
-    -pharos-spacing-2-x
+    --pharos-spacing-2-x
   ); /*Sizing for arrow buttons in the time picker*/
   --dp-menu-padding: var(--pharos-spacing-one-quarter-x) var(--pharos-spacing-one-half-x); /*Menu padding*/
 
