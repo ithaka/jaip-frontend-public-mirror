@@ -58,21 +58,6 @@ const analyticsRoute = routes.find((route) => route.name === 'analytics')
           <div v-if="isAuthenticatedStudent" class="home-view__content-tiles-layout">
             <div class="home-view__content-tile-item">
               <ContentTile
-                arrow-a11y-title="View reentry resources"
-                :href="reentryRoute ? reentryRoute.path : '#'"
-              >
-                <template #title-icon>
-                  <pep-pharos-icon name="view-list" a11y-title="Reentry resources" />
-                </template>
-                <template #title-text>Plan for reentry</template>
-                <template #body-text>
-                  National and state guides to help your transition to community
-                </template>
-              </ContentTile>
-            </div>
-
-            <div class="home-view__content-tile-item">
-              <ContentTile
                 arrow-a11y-title="View dictionary resources"
                 :href="dictionaryRoute ? dictionaryRoute.path : '#'"
               >
@@ -82,6 +67,20 @@ const analyticsRoute = routes.find((route) => route.name === 'analytics')
                 <template #title-text>Look up a word</template>
                 <template #body-text>
                   Explore definitions from the American Heritage Dictionary
+                </template>
+              </ContentTile>
+            </div>
+            <div class="home-view__content-tile-item">
+              <ContentTile
+                arrow-a11y-title="View reentry resources"
+                :href="reentryRoute ? reentryRoute.path : '#'"
+              >
+                <template #title-icon>
+                  <pep-pharos-icon name="view-list" a11y-title="Reentry resources" />
+                </template>
+                <template #title-text>Plan for reentry</template>
+                <template #body-text>
+                  National and state guides to help your transition to community
                 </template>
               </ContentTile>
             </div>
