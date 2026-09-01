@@ -26,6 +26,7 @@
         "view_book_description": false,
         "view_hidden_users": false,
         "view_snippet": false,
+        "view_document": false,
         "view_pdf": false,
         "test_feature": false
       }
@@ -53,6 +54,7 @@
         "view_book_description": false,
         "view_hidden_users": false,
         "view_snippet": false,
+        "view_document": false,
         "view_pdf": false,
         "test_feature": false
       }
@@ -91,6 +93,7 @@
             "edit_facilities": false,
             "get_facilities": false,
             "get_users": false,
+            "view_document": true,
             "view_pdf": true
           }
         }
@@ -118,6 +121,7 @@
             "approve_requests": false,
             "deny_requests": false,
             "view_pdf": true,
+            "view_document": true,
             "bulk_approve": false,
             "submit_requests": true,
             "get_facilities": false,

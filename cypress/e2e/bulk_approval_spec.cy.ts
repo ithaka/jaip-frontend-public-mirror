@@ -5,7 +5,7 @@ describe('Bulk approval', () => {
   context('As a student', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf__response.json',
+        fixture: 'auth/users/student__one_group_view_document__response.json',
       }).as('auth')
       cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' }).as(
         'disciplines',

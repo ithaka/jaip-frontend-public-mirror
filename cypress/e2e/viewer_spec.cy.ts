@@ -3,42 +3,14 @@ import { routes } from '../../src/config/api'
 
 // These tests seem to be taking an unusually long time, so we're increasing the timeout. That's resulting in
 // consistent test passing.
-// NOTE: The page viewer (/page/:iid/:pid) no longer renders its own view; it redirects to the pdf viewer
-// (/pdf/:iid), so these tests exercise the pdf viewer route directly.
-describe('PDF Viewer Access', () => {
+describe('Page Viewer', () => {
   const iid = '43e7b8c1-a49c-37c3-ad42-6016af1d0eb8'
-
-  it('redirects the page viewer route to the pdf viewer route', () => {
-    cy.intercept('GET', routes.auth.get, {
-      fixture: 'auth/users/student__one_group_view_pdf__response.json',
-    }).as('auth')
-    cy.intercept('GET', routes.environment.get, { environment: 'test' }).as('env')
-    cy.intercept('POST', routes.features.grouped.get, {
-      fixture: 'auth/features/basic_features.json',
-    }).as('features')
-    cy.intercept('POST', routes.search.basic, {
-      fixture: 'search/term_given__specified_id_limit_one__response.json',
-    }).as('search')
-    cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }).as(
-      'alerts',
-    )
-    cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
-      'metadata',
-    )
-    handleLocation(`/page/${iid}/0`, cy, 'viewer', 'pep')
-
-    cy.visit(`/page/${iid}/0`)
-    cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'], {
-      requestTimeout: 20000,
-    })
-    cy.location('pathname').should('eq', `/pdf/${iid}`)
-  })
 
   context('As student', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf__response.json',
+        fixture: 'auth/users/student__one_group_view_document__response.json',
       }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
@@ -56,7 +28,7 @@ describe('PDF Viewer Access', () => {
       handleLocation(route, cy, 'viewer', 'pep')
 
       cy.visit(route)
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })
@@ -75,7 +47,7 @@ describe('PDF Viewer Access', () => {
 
   context('As student with restricted item', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
         fixture: 'auth/users/student__one_group_media_access__response.json',
       }).as('auth')
@@ -96,7 +68,7 @@ describe('PDF Viewer Access', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })
@@ -118,9 +90,9 @@ describe('PDF Viewer Access', () => {
 
   context('As admin', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/admin__one_group_view_pdf__response.json',
+        fixture: 'auth/users/admin__one_group_bulk_approve__response.json',
       }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
@@ -139,7 +111,7 @@ describe('PDF Viewer Access', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })
@@ -155,7 +127,7 @@ describe('PDF Viewer Access', () => {
 
   context('As student with media access', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
         fixture: 'auth/users/student__one_group_media_access__response.json',
       }).as('auth')
@@ -176,12 +148,12 @@ describe('PDF Viewer Access', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })
-    it('does not show view pdf button', () => {
-      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('not.exist')
+    it('shows pdf button', () => {
+      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('be.visible')
     })
     it('shows download button', () => {
       cy.get('pep-pharos-button').contains('Download', { matchCase: false }).should('be.visible')
@@ -193,7 +165,7 @@ describe('PDF Viewer Access', () => {
 
   context('As admin with media access', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
         fixture: 'auth/users/admin__one_group_media_access__response.json',
       }).as('auth')
@@ -214,13 +186,13 @@ describe('PDF Viewer Access', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })
 
-    it('does not show view pdf button', () => {
-      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('not.exist')
+    it('shows pdf button', () => {
+      cy.get('pep-pharos-button').contains('View PDF', { matchCase: false }).should('be.visible')
     })
     it('shows download button', () => {
       cy.get('pep-pharos-button').contains('Download', { matchCase: false }).should('be.visible')
@@ -239,7 +211,7 @@ describe('PDF Viewer Access', () => {
 
   context('As admin with manage restricted list', () => {
     beforeEach(() => {
-      const route = `/pdf/${iid}?term=&page=1`
+      const route = `/page/${iid}/0?term=&page=1`
       cy.intercept('GET', routes.auth.get, {
         fixture:
           'auth/users/admin__ungrouped_manage_restricted_list_one_group_media_access__response.json',
@@ -261,7 +233,7 @@ describe('PDF Viewer Access', () => {
 
       cy.visit(route)
 
-      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search'], {
+      cy.wait(['@viewer', '@alerts', '@env', '@auth', '@features', '@search', '@metadata'], {
         requestTimeout: 20000,
       })
     })

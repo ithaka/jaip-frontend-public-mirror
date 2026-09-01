@@ -16,7 +16,6 @@ import { ref, computed } from 'vue'
 import UnrestrictButton from '@/components/buttons/adminButtons/UnrestrictButton.vue'
 import RequestButton from '../buttons/RequestButton.vue'
 import CiteButton from '../buttons/CiteButton.vue'
-import { useLogger } from '@/composables/logging/useLogger.ts'
 
 const props = defineProps({
   doc: {
@@ -69,8 +68,10 @@ const searchFor = (term: string) => {
 
 const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.value))
 const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'restrictSubmitted'])
-const readRoute = computed(() =>
-  (featureDetails.value['view_pdf'] || {}).enabled ? `/pdf/${props.doc.iid}` : '',
+const readRoute = ref(
+  (featureDetails.value['view_document'] || {}).enabled
+    ? `/page/${props.doc.iid}/0`
+    : `/pdf/${props.doc.iid}`,
 )
 
 const showRestrictedLabel: ComputedRef<boolean> = computed(() => {
@@ -92,7 +93,6 @@ const showReviewerAccess = computed(() => {
   return (
     isAuthenticatedAdmin.value &&
     props.doc.is_restricted &&
-    (featureDetails.value['view_pdf'] || {}).enabled &&
     !hasUnsubscribedFacilities.value &&
     !props.pdfView &&
     !ungroupedFeatures.value['manage_restricted_list']
@@ -105,13 +105,6 @@ const showReaderRestrictedLabel = computed(() => {
     !hasUnsubscribedFacilities.value &&
     props.pdfView
   )
-})
-
-const isGlobal = ref((props.doc.history || []).length ? false : true)
-const { handleWithLog, logs } = useLogger()
-const { readButtonLog } = logs.getMediaHistoryLogs({
-  itemid: props.doc.doi,
-  is_global: isGlobal,
 })
 </script>
 <template>
@@ -186,16 +179,20 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
         class="display-flex justify-content-end flex-direction-column"
       >
         <RequestButton :doc="doc" :hide-requests="hideRequests" :cancel-button-label="buttonName" />
+        <!-- TODO: This won't work as it is, we'll need the actual pdf route and to create a pdf viewer -->
         <pep-pharos-button
-          v-if="status === 'approved' && !pdfView && (featureDetails['view_pdf'] || {}).enabled"
+          v-if="
+            status === 'approved' &&
+            !pdfView &&
+            ((featureDetails['view_pdf'] || {}).enabled ||
+              (featureDetails['view_document'] || {}).enabled)
+          "
           full-width
           class="mb-3"
           variant="primary"
           icon-left="filetype-pdf"
-          @click="
-            handleWithLog(readButtonLog, () =>
-              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined),
-            )
+          @click.prevent.stop="
+            changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)
           "
         >
           <span>Read</span>
@@ -217,7 +214,9 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
             class="mb-2 lg-mr-3"
             variant="secondary"
             icon-left="filetype-pdf"
-            @click="changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)"
+            @click.prevent.stop="
+              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)
+            "
           >
             <span>Reviewer Access</span>
           </pep-pharos-button>

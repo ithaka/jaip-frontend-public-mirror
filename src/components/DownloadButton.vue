@@ -2,6 +2,8 @@
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { ref, type PropType } from 'vue'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 import { hasBrowserPDFViewer } from '@/utils/viewers'
 import type { Collections } from '@/interfaces/Collections'
 import { useValidDownloadURL } from '@/composables/urls'
@@ -69,6 +71,10 @@ const downloadPDF = () => {
   }
 }
 
+const route = useRoute()
+const path = computed(() => route.path)
+const isPDFPage = ref(path.value.startsWith('/pdf/'))
+
 const { handleWithLog, logs } = useLogger()
 const { downloadButtonClickLog } = logs.getAccessButtonLogs({
   iid: props.iid,
@@ -89,7 +95,8 @@ const { downloadButtonClickLog } = logs.getAccessButtonLogs({
     :class="{
       'lg-mr-3':
         (featureDetails['print_pdf']?.enabled && hasBrowserPDFViewer()) ||
-        (featureDetails['view_pdf']?.enabled && includePdf),
+        (featureDetails['view_pdf']?.enabled && includePdf) ||
+        (featureDetails['view_document']?.enabled && isPDFPage),
     }"
     @click="handleWithLog(downloadButtonClickLog, downloadPDF)"
   >

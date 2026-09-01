@@ -1,8 +1,8 @@
-import { createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createWebHistory } from 'vue-router'
 
 const config = {
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: <RouteRecordRaw[]>[
+  routes: [
     {
       path: '/',
       name: 'home',
@@ -96,6 +96,16 @@ const config = {
         label: 'Not Found',
       },
       component: () => import('@/views/NotFound.vue'),
+    },
+    {
+      path: '/page/:iid/:pid',
+      name: 'pageViewer',
+      meta: {
+        hidden: true,
+        requiresAny: ['view_document'],
+        label: 'Page Viewer',
+      },
+      component: () => import('@/views/PageView.vue'),
     },
     {
       path: '/dictionary/:term',

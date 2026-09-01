@@ -34,6 +34,7 @@
         "view_book_description": false,
         "view_hidden_users": false,
         "view_snippet": false,
+        "view_document": false,
         "view_pdf": false
       }
     }

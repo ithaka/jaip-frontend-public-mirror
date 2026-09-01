@@ -5,7 +5,7 @@ describe('Media Review', () => {
   context('As a student', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf_submit_requests__response.json',
+        fixture: 'auth/users/student__one_group_view_document_submit_requests__response.json',
       }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
@@ -242,7 +242,7 @@ describe('Media Review', () => {
   context('As a student who cannot submit requests', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf__response.json',
+        fixture: 'auth/users/student__one_group_view_document__response.json',
       }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')

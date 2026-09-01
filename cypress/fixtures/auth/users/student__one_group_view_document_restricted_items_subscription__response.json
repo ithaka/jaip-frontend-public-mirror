@@ -14,6 +14,7 @@
         "deny_requests": false,
         "download_pdf": false,
         "edit_facilities": false,
+        "restricted_items_subscription": true,
         "get_facilities": false,
         "get_users": false,
         "is_hidden_user": false,
@@ -27,7 +28,8 @@
         "view_book_description": false,
         "view_hidden_users": false,
         "view_snippet": false,
-        "view_pdf": true,
+        "view_document": true,
+        "view_pdf": false,
         "test_feature": false
       }
     }
