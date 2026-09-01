@@ -105,19 +105,10 @@ const config = {
     },
     {
       path: '/pdf/:iid',
-      name: 'pdfViewer',
+      name: 'PDF Viewer',
       meta: {
         hidden: true,
         label: 'PDF Viewer',
-      },
-      component: () => import('@/views/AboutView.vue'),
-    },
-    {
-      path: '/page/:iid/:pid',
-      name: 'pageViewer',
-      meta: {
-        hidden: true,
-        label: 'Page Viewer',
       },
       component: () => import('@/views/AboutView.vue'),
     },

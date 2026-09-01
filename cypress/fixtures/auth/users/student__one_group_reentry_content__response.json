@@ -27,7 +27,6 @@
         "view_hidden_users": false,
         "view_snippet": false,
         "view_pdf": false,
-        "view_document": false,
         "test_feature": false,
         "include_reentry_content": true
       }
