@@ -1,8 +1,8 @@
-import { createWebHistory } from 'vue-router'
+import { createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const config = {
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+  routes: <RouteRecordRaw[]>[
     {
       path: '/',
       name: 'home',
@@ -169,26 +169,6 @@ const config = {
         label: 'Not Found',
       },
       component: () => import('@/views/NotFound.vue'),
-    },
-    {
-      path: '/page/:iid/:pid',
-      name: 'pageViewer',
-      meta: {
-        hidden: true,
-        requiresAny: ['view_document'],
-        label: 'Page Viewer',
-      },
-      component: () => import('@/views/PageView.vue'),
-    },
-    {
-      path: '/pdf/:iid',
-      name: 'pdfViewer',
-      meta: {
-        hidden: true,
-        requiresAny: ['view_pdf'],
-        label: 'PDF Viewer',
-      },
-      component: () => import('@/views/PDFView.vue'),
     },
     {
       path: '/dictionary/:term',

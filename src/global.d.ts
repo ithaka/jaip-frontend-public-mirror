@@ -9,3 +9,6 @@ declare module '*.md' {
   const Component: ComponentOptions
   export default Component
 }
+
+// PDF.js publishes this executable worker entry without a corresponding TypeScript declaration.
+declare module 'pdfjs-dist/legacy/build/pdf.worker.min.mjs'

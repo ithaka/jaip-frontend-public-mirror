@@ -21,26 +21,27 @@ const collection = (route.params || {}).collection as Collections
 
 const gettingDocument = ref(false)
 const collectionMetadata = ref(undefined as CollectionMetadata | undefined)
+const documentMetadataResolved = ref(false)
 
 const updateKey = ref(0)
 const getDocument = async () => {
   try {
     gettingDocument.value = true
+    documentMetadataResolved.value = false
     if (!metadataByFilename.value[collection]) {
       await metadataStore.getMetadata(collection)
     }
-    collectionMetadata.value = metadataByFilename.value[collection][filename]
+    collectionMetadata.value = metadataByFilename.value[collection]?.[filename]
   } catch (err: unknown) {
     const errorResponse = err
     console.log('Error fetching document metadata:', errorResponse)
   } finally {
     updateKey.value++
     gettingDocument.value = false
+    documentMetadataResolved.value = true
   }
 }
 getDocument()
-
-const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 
 const hasPrint = computed(() => {
   return featureDetails.value['print_pdf']?.enabled
@@ -172,19 +173,63 @@ logPageView()
       </div>
     </div>
 
+    <div
+      v-else-if="documentMetadataResolved"
+      class="document-not-found"
+      data-cy="collection-item-not-found"
+    >
+      <pep-pharos-heading
+        :level="2"
+        preset="4--bold"
+        data-cy="item-not-found"
+        no-margin
+        class="document-not-found__heading"
+      >
+        Item not found
+      </pep-pharos-heading>
+      <p class="document-not-found__text">
+        This guide may not exist or is no longer available on JSTOR. Try searching for another
+        guide.
+      </p>
+      <pep-pharos-button
+        variant="primary"
+        :href="`/collections/${collection}`"
+        data-cy="browse-guides-button"
+      >
+        Browse guides
+      </pep-pharos-button>
+    </div>
+
+    <!-- This will wait to render until collectionMetadata is available. -->
     <PDFViewer
-      v-if="hasStructuredClone"
-      :key="collectionMetadata?.filename"
+      v-if="collectionMetadata"
+      :key="collectionMetadata.filename"
       class="pdf-viewer"
       tabindex="-1"
       :collection="collection"
-      :filename="collectionMetadata?.filename"
+      :filename="collectionMetadata.filename"
       :enable-viewer="true"
     />
   </pep-pharos-layout>
 </template>
 
 <style lang="scss">
+.document-not-found {
+  grid-column: span 12;
+  padding: 10rem;
+  border: 1px solid var(--pharos-color-black);
+  text-align: center;
+
+  @media (max-width: 767px) {
+    padding: 10rem var(--pharos-spacing-1-x);
+  }
+
+  &__heading,
+  &__text {
+    margin-bottom: var(--pharos-spacing-one-and-a-half-x);
+  }
+}
+
 .pdf-viewer,
 .pdf-viewer-error {
   grid-column: span 12;

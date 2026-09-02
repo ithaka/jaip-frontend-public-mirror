@@ -14,14 +14,11 @@ export default defineConfig(({ mode }) => {
       // This is the default value for target:
       // target: 'baseline-widely-available',
       // We can't use the default because we're still supporting devices using Firefox 91 ESR
-      target: ['chrome107', 'edge107', 'firefox91', 'safari16'],
+      target: ['chrome100', 'edge100', 'firefox91', 'safari16'],
       compilerOptions: {
         useDefineForClassFields: true,
       },
       rollupOptions: {
-        external: [
-          `/scripts/pdf.worker.min.mjs`
-        ],
         output: {
           entryFileNames: `[name].[hash].mjs`,
           chunkFileNames: `[name].[hash].mjs`,
@@ -30,6 +27,11 @@ export default defineConfig(({ mode }) => {
           keepNames: true,
         },
       }
+    },
+    // Firefox versions before module-worker support ignore PDF.js's `type: "module"` option. Bundling
+    // the worker and its polyfills into one import-free script works in either mode.
+    worker: {
+      format: 'iife' as const,
     },
     server: {},
     plugins: [
@@ -52,6 +54,9 @@ export default defineConfig(({ mode }) => {
           {
             src: './node_modules/pdfjs-dist/wasm/**/*',
             dest: 'scripts/pdfjs/wasm',
+            // PDF.js resolves decoder assets directly beneath wasmUrl. The copy plugin
+            // otherwise preserves the node_modules path inside the destination.
+            rename: { stripBase: 3 },
           },
         ],
       }),
@@ -108,5 +113,3 @@ export default defineConfig(({ mode }) => {
 
   return config
 })
-
-

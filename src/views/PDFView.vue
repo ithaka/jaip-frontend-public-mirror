@@ -68,7 +68,6 @@ const getDocument = async () => {
 }
 
 getDocument()
-const hasStructuredClone = ref(typeof window.structuredClone === 'function')
 
 const { logPageView } = usePageViewLogger()
 logPageView()
@@ -93,7 +92,6 @@ logPageView()
       />
     </div>
     <PDFViewer
-      v-if="!page_index && hasStructuredClone"
       tabindex="-1"
       class="cols-12"
       :iid="iid"

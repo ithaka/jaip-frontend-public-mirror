@@ -4,7 +4,6 @@ import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { computed, type PropType } from 'vue'
 import { hasBrowserPDFViewer } from '@/utils/viewers'
 import { Collections } from '@/interfaces/Collections'
@@ -66,15 +65,8 @@ const printPDF = () => {
 }
 
 const adjustMargin = computed(() => {
-  return (
-    (featureDetails.value['view_pdf']?.enabled && props.includePdf) ||
-    (featureDetails.value['view_document']?.enabled && isPDFPage.value)
-  )
+  return featureDetails.value['view_pdf']?.enabled && props.includePdf
 })
-
-const route = useRoute()
-const path = computed(() => route.path)
-const isPDFPage = ref(path.value.startsWith('/pdf/'))
 
 const { handleWithLog, logs } = useLogger()
 const { printButtonClickLog } = logs.getAccessButtonLogs({

@@ -13,6 +13,8 @@ export type ViewerControlOptions = `${ViewerControls}`
 
 export interface ViewerError {
   message: string
+  name?: string
+  stack?: string
   code?: number
   status: boolean
 }

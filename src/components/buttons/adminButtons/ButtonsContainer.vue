@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import { useRouter } from 'vue-router'
+import { useSearchStore } from '@/stores/search'
 import { changeRoute } from '@/utils/helpers'
 import { useUserStore } from '@/stores/user'
 import ApprovalControls from '@/components/buttons/adminButtons/ApprovalControls.vue'
@@ -23,11 +23,11 @@ const props = defineProps({
   includePdf: Boolean,
 })
 
-const searchStore = useSearchStore()
-const { searchTerms, pageNo } = storeToRefs(searchStore)
-
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
+
+const searchStore = useSearchStore()
+const { searchTerms, pageNo } = storeToRefs(searchStore)
 
 const { handleWithLog, logs } = useLogger()
 
@@ -46,11 +46,7 @@ const closeHistoryModal = () => {
   showHistoryModal.value = false
 }
 const isGlobal = ref((props.doc.history || []).length ? false : true)
-const readRoute = ref(
-  featureDetails.value['view_document']?.enabled
-    ? `/page/${props.doc.iid}/0`
-    : `/pdf/${props.doc.iid}`,
-)
+const readRoute = ref(`/pdf/${props.doc.iid}`)
 const { openHistoryModalLog, closeHistoryModalLog, readButtonLog, toggleGlobalHistoryLog } =
   logs.getMediaHistoryLogs({
     itemid: props.doc.doi,
@@ -86,14 +82,12 @@ const { openHistoryModalLog, closeHistoryModalLog, readButtonLog, toggleGlobalHi
         />
 
         <pep-pharos-button
-          v-if="
-            !pdfView &&
-            (featureDetails['view_pdf']?.enabled || featureDetails['view_document']?.enabled)
-          "
+          v-if="!pdfView && featureDetails['view_pdf']?.enabled"
           full-width
           class="mb-2 mr-3"
           variant="secondary"
           icon-left="filetype-pdf"
+          :href="readRoute"
           @click.prevent.stop="
             handleWithLog(readButtonLog, () =>
               changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined),

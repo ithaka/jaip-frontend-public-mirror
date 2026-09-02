@@ -21,10 +21,12 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize, parseGroupsQueryParam } from '@/utils/helpers'
 import { useNotificationsStore } from './stores/notifications'
 import { useLogger } from './composables/logging/useLogger'
+import { initPDFViewerPolyfills } from '@/utils/polyfills'
 
 // This needs to run before any web component definitions so that shadow DOM stylesheets
 // get viewport units rewritten via the patched CSSStyleSheet.replaceSync.
 initViewportUnitsPatch()
+initPDFViewerPolyfills()
 
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID

@@ -91,7 +91,7 @@ describe('Collections Item View', () => {
     cy.get('#viewer').should('exist')
   })
 
-  it('shows a not found message when the document metadata is missing', () => {
+  it('shows a not found message when the content metadata is missing', () => {
     const missingFilename = 'missing-guide.pdf'
     const missingRoute = `/collections/${collection}/${missingFilename}`
 
@@ -105,12 +105,18 @@ describe('Collections Item View', () => {
       requestTimeout: 20000,
     })
 
-    cy.get('[data-cy="item-not-found"]').should('be.visible').and('contain', 'Item not found')
-    cy.contains(
-      'p',
-      'This guide may not exist or is no longer available on JSTOR. Try searching for another guide.',
-    ).should('be.visible')
-    cy.get('[data-cy="browse-guides-button"]').should('be.visible')
+    cy.get('[data-cy="collection-item-not-found"]')
+      .should('be.visible')
+      .within(() => {
+        cy.get('[data-cy="item-not-found"]').should('contain', 'Item not found')
+        cy.contains(
+          'p',
+          'This guide may not exist or is no longer available on JSTOR. Try searching for another guide.',
+        ).should('be.visible')
+        cy.get('[data-cy="browse-guides-button"]')
+          .should('be.visible')
+          .and('have.attr', 'href', `/collections/${collection}`)
+      })
     cy.get('#viewer').should('not.exist')
   })
 

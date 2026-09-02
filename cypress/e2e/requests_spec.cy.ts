@@ -178,6 +178,9 @@ describe('Requests page', () => {
         .eq(1)
         .find('pep-pharos-button')
         .contains('Read', { matchCase: false })
+        .click()
+
+      cy.location('pathname').should('eq', '/pdf/a9715135-bbe8-3a4e-984c-2fa6aea71d23')
     })
 
     it('Lets students download approved articles', () => {
