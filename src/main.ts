@@ -28,6 +28,31 @@ import { initPDFViewerPolyfills } from '@/utils/polyfills'
 initViewportUnitsPatch()
 initPDFViewerPolyfills()
 
+// After a new deploy, a tab left open on an old build will reference stale hashed chunk
+// filenames that no longer exist; force a reload to pick up the current index.html.
+// Guard against a reload loop if the new build still fails to load (e.g. CDN outage).
+let hasReloadedForPreloadError = false
+window.addEventListener('vite:preloadError', (event) => {
+  // Log every hit (not just the first) so we can see how often this happens in prod and
+  // spot a broken build vs. a normal post-deploy blip or a CDN issue.
+  try {
+    const { handleWithLog, logs } = useLogger()
+    const { assetPreloadErrorLog } = logs.getBuildLogs()
+    const err = event.payload instanceof Error ? event.payload : new Error(String(event.payload))
+    handleWithLog(assetPreloadErrorLog({ err }))
+  } catch (error) {
+    console.error('Error handling vite:preloadError event:', error)
+    console.error('Original event payload:', event.payload)
+  }
+
+  if (hasReloadedForPreloadError) {
+    return
+  }
+  hasReloadedForPreloadError = true
+  event.preventDefault()
+  window.location.reload()
+})
+
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
   const regexExp =

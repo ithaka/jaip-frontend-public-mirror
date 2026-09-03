@@ -30,6 +30,7 @@ export enum LogEvent {
   end_viewing_session = 'end_viewing_session',
   viewer_control = 'viewer_control',
   viewport_patch_error = 'viewport_patch_error',
+  asset_preload_error = 'asset_preload_error',
 }
 
 export type EventType = `pep_fe_${LogEvent}`

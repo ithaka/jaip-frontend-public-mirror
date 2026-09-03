@@ -9,6 +9,7 @@ import { analyticsLogs } from './categories/analytics'
 import { viewportPatchLogs } from './categories/viewport_patch'
 import { dictionaryLogs } from './categories/dictionary'
 import { citationsLogs } from './categories/citations'
+import { buildLogs } from './categories/build'
 
 export const logs = {
   ...navigationLogs,
@@ -22,4 +23,5 @@ export const logs = {
   ...viewportPatchLogs,
   ...dictionaryLogs,
   ...citationsLogs,
+  ...buildLogs,
 }
