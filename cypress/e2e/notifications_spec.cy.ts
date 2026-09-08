@@ -90,7 +90,7 @@ describe('Notifications Admin Page', () => {
       cy.get('[data-cy="notifications-status-option-success"]').should('not.exist')
 
       cy.get('[data-cy="notifications-modal"]').find('pep-pharos-button').contains('Cancel').click()
-      cy.get('body').find('[data-cy="notifications-modal"]').should('not.be.visible')
+      cy.get('[data-cy="notifications-modal"]').should('not.have.attr', 'open')
     })
 
     it('requests notifications scoped to the user groups', () => {
@@ -147,7 +147,7 @@ describe('Notifications Admin Page', () => {
       cy.get('[data-cy="notifications-status-option-success"]').should('exist')
 
       cy.get('[data-cy="notifications-modal"]').find('pep-pharos-button').contains('Cancel').click()
-      cy.get('body').find('[data-cy="notifications-modal"]').should('not.be.visible')
+      cy.get('[data-cy="notifications-modal"]').should('not.have.attr', 'open')
     })
 
     it('shows expired notifications when active filtering is disabled', () => {

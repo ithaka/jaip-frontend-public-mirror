@@ -332,7 +332,7 @@ describe('Requests page', () => {
     })
 
     it('Has no groups', () => {
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
     })
 
     it('Approves with the approve button', () => {
@@ -732,12 +732,16 @@ describe('Requests page', () => {
 
       cy.get('.search-result').first().find('pep-pharos-button').contains('Deny').click()
 
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-      cy.get('pep-pharos-modal:visible .group-selector-combobox')
+      cy.get('[id^=deny-modal]').first().find('.group-selector-combobox').should('be.visible')
+      cy.get('[id^=deny-modal]').first().find('.group-selector-combobox').click()
+      cy.get('[id^=deny-modal]')
+        .first()
+        .find('.group-selector-combobox')
         .find('option')
         .should('have.length', 3)
-      cy.get('pep-pharos-modal:visible .group-selector-combobox')
+      cy.get('[id^=deny-modal]')
+        .first()
+        .find('.group-selector-combobox')
         .shadow()
         .find('li[role="option"]')
         .contains('all groups', { matchCase: false })

@@ -136,11 +136,11 @@ describe('Account Management', () => {
         // gets things out of order. If this happens, just run the test again.
         cy.get('pep-pharos-input-group[id="users_contact"]').shadow().find('input').type('t@t.com')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
         cy.fixture('account/add_user__one_group__request.json').then((request) => {
@@ -153,13 +153,13 @@ describe('Account Management', () => {
       it('Submits user edit', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -194,11 +194,9 @@ describe('Account Management', () => {
       it('Submits user removal', () => {
         cy.get('pep-pharos-button').contains('Remove', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible')
-          .contains('GROUP', { matchCase: false })
-          .should('not.exist')
+        cy.get('pep-pharos-modal[open]').contains('GROUP', { matchCase: false }).should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('Remove', { matchCase: false })
           .click()
 
@@ -239,13 +237,13 @@ describe('Account Management', () => {
       it('Submits facility edit', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -302,9 +300,9 @@ describe('Account Management', () => {
       it('Submits facility management', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
@@ -312,7 +310,7 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-input-group[id="4_contact"]').shadow().find('input').type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -326,9 +324,9 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
@@ -336,42 +334,37 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-input-group[id="4_contact"]').shadow().find('input').type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('use subdomain', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_primary_sitecode')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible').find('#4_subdomain').should('have.prop', 'invalidated')
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_primary_sitecode')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible').find('#4_subdomain').click()
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_subdomain')
           .shadow()
           .find('ul>li')
           .should('have.length', 3)
 
-        cy.get('pep-pharos-modal:visible')
-          .find('#4_subdomain')
-          .shadow()
-          .find('ul>li')
-          .first()
-          .click()
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').shadow().find('ul>li').first().click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -386,7 +379,7 @@ describe('Account Management', () => {
 
       it('Submits facility removal', () => {
         cy.get('pep-pharos-button').contains('Remove', { matchCase: false }).click()
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('remove', { matchCase: false })
           .click()
         cy.fixture('account/remove_facility__one_group__request.json').then((request) => {
@@ -405,11 +398,11 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-input-group[id="facilities_contact"]').shadow().find('input').type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
         cy.fixture('account/add_facility__one_group__request.json').then((request) => {
@@ -421,58 +414,58 @@ describe('Account Management', () => {
         cy.wait(['@getSubdomains'])
         cy.get('pep-pharos-button').contains('Add Facility', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_name"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_name"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_contact"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_contact"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('use subdomain', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_primary_sitecode')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_primary_sitecode')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible').find('#facilities_subdomain').click()
+        cy.get('pep-pharos-modal[open]').find('#facilities_subdomain').click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .shadow()
           .find('ul>li')
           .should('have.length', 3)
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .shadow()
           .find('ul>li')
           .first()
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
         cy.fixture('account/add_facility__one_group_subdomain__request.json').then((request) => {
@@ -637,29 +630,29 @@ describe('Account Management', () => {
             .click()
         })
         it('Does not show selection for edit users', () => {
-          cy.get('pep-pharos-modal:visible pep-pharos-heading')
+          cy.get('pep-pharos-modal[open] pep-pharos-heading')
             .contains('GROUP', { matchCase: false })
             .should('not.exist')
         })
 
         it('Submits user edit', () => {
-          cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
             .contains('select all', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-button')
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
             .contains('ilium', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-dropdown-menu-item')
+          cy.get('pep-pharos-modal[open] pep-pharos-dropdown-menu-item')
             .contains('ithaka', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
             .contains('select all', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-button')
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
             .contains('submit', { matchCase: false })
             .click()
 
@@ -681,32 +674,29 @@ describe('Account Management', () => {
             .click()
         })
         it('Shows group selection for add users', () => {
-          cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-          cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-          cy.get('pep-pharos-modal:visible .group-selector-combobox option').should(
-            'have.length',
-            3,
-          )
-          cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
+          cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 3)
+          cy.get('pep-pharos-modal[open] .group-selector-combobox option')
             .eq(0)
             .contains('All Groups', { matchCase: false })
-          cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox option')
             .eq(1)
             .contains('Ilium', { matchCase: false })
-          cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox option')
             .eq(2)
             .contains('Ithaka', { matchCase: false })
         })
         it('Submits add user', () => {
-          cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
 
-          cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
+          cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
 
-          cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox option')
             .eq(0)
             .contains('All Groups', { matchCase: false })
 
-          cy.get('pep-pharos-modal:visible .group-selector-combobox')
+          cy.get('pep-pharos-modal[open] .group-selector-combobox')
             .shadow()
             .find('li[role="option"]')
             .contains('all groups', { matchCase: false })
@@ -721,23 +711,23 @@ describe('Account Management', () => {
             .find('input')
             .type('t@t.com')
 
-          cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
             .contains('select all', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-button')
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
             .contains('ilium', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-dropdown-menu-item')
+          cy.get('pep-pharos-modal[open] pep-pharos-dropdown-menu-item')
             .contains('ithaka', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible .feature-selection pep-pharos-checkbox')
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
             .contains('select all', { matchCase: false })
             .click()
 
-          cy.get('pep-pharos-modal:visible pep-pharos-button')
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
             .contains('submit', { matchCase: false })
             .click()
 
@@ -768,16 +758,16 @@ describe('Account Management', () => {
 
       it('Shows group selection for remove users', () => {
         cy.get('pep-pharos-button').contains('Remove', { matchCase: false }).click()
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option').should('have.length', 3)
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 3)
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option')
           .eq(0)
           .contains('All Groups', { matchCase: false })
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option')
           .eq(1)
           .contains('Ilium', { matchCase: false })
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option')
           .eq(2)
           .contains('Ithaka', { matchCase: false })
       })
@@ -785,7 +775,7 @@ describe('Account Management', () => {
       it('Submits user removal', () => {
         cy.get('pep-pharos-button').contains('Remove', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('Remove', { matchCase: false })
           .click()
 
@@ -816,20 +806,20 @@ describe('Account Management', () => {
       // Facilities can only be in one group, so there should be no group selection
       it('Does not show group selection for edit facilities', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
       })
 
       // NOTE: Facilities can only be in one group, so there should be no group selection
       it('Submits facility edit', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -871,7 +861,7 @@ describe('Account Management', () => {
       // except adding facilities
       it('Does not show group selection for edit facilities', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
-        cy.get('pep-pharos-modal:visible pep-pharos-heading')
+        cy.get('pep-pharos-modal[open] pep-pharos-heading')
           .contains('GROUP', { matchCase: false })
           .should('not.exist')
       })
@@ -879,11 +869,11 @@ describe('Account Management', () => {
       it('Submits facility management', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-heading')
+        cy.get('pep-pharos-modal[open] pep-pharos-heading')
           .contains('GROUP', { matchCase: false })
           .should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
@@ -891,7 +881,7 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-input-group[id="4_contact"]').shadow().find('input').type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -905,9 +895,9 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('not.exist')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('not.exist')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
@@ -915,42 +905,37 @@ describe('Account Management', () => {
 
         cy.get('pep-pharos-input-group[id="4_contact"]').shadow().find('input').type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('use subdomain', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_primary_sitecode')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible').find('#4_subdomain').should('have.prop', 'invalidated')
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_primary_sitecode')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible').find('#4_subdomain').click()
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#4_subdomain')
           .shadow()
           .find('ul>li')
           .should('have.length', 3)
 
-        cy.get('pep-pharos-modal:visible')
-          .find('#4_subdomain')
-          .shadow()
-          .find('ul>li')
-          .first()
-          .click()
+        cy.get('pep-pharos-modal[open]').find('#4_subdomain').shadow().find('ul>li').first().click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
@@ -961,7 +946,7 @@ describe('Account Management', () => {
 
       it('Submits facility removal', () => {
         cy.get('pep-pharos-button').contains('Remove', { matchCase: false }).click()
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('remove', { matchCase: false })
           .click()
         cy.fixture('account/remove_facility__one_group__request.json').then((request) => {
@@ -972,15 +957,15 @@ describe('Account Management', () => {
       it('Shows group radio buttons when adding facility', () => {
         cy.get('pep-pharos-button').contains('Add Facility', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option').should('have.length', 2)
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 2)
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option')
           .eq(0)
           .contains('Ilium', { matchCase: false })
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox option')
           .eq(1)
           .contains('Ithaka', { matchCase: false })
       })
@@ -988,31 +973,31 @@ describe('Account Management', () => {
       it('Submits add facility', () => {
         cy.get('pep-pharos-button').contains('Add Facility', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_name"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_name"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_contact"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_contact"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox')
           .shadow()
           .find('li[role="option"]')
           .contains('ithaka', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
         cy.fixture('account/add_facility__one_group__request.json').then((request) => {
@@ -1024,68 +1009,68 @@ describe('Account Management', () => {
         cy.wait(['@getSubdomains'])
         cy.get('pep-pharos-button').contains('Add Facility', { matchCase: false }).click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_name"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_name"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-input-group[id="facilities_contact"]')
+        cy.get('pep-pharos-modal[open] pep-pharos-input-group[id="facilities_contact"]')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('use subdomain', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_primary_sitecode')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .should('have.prop', 'invalidated')
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_primary_sitecode')
           .shadow()
           .find('input')
           .type('t')
 
-        cy.get('pep-pharos-modal:visible').find('#facilities_subdomain').click()
+        cy.get('pep-pharos-modal[open]').find('#facilities_subdomain').click()
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .shadow()
           .find('ul>li')
           .should('have.length', 3)
 
-        cy.get('pep-pharos-modal:visible')
+        cy.get('pep-pharos-modal[open]')
           .find('#facilities_subdomain')
           .shadow()
           .find('ul>li')
           .first()
           .click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
+        cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
 
-        cy.get('pep-pharos-modal:visible .group-selector-combobox')
+        cy.get('pep-pharos-modal[open] .group-selector-combobox')
           .shadow()
           .find('li[role="option"]')
           .contains('ithaka', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-checkbox')
+        cy.get('pep-pharos-modal[open] pep-pharos-checkbox')
           .contains('select all', { matchCase: false })
           .click()
 
-        cy.get('pep-pharos-modal:visible pep-pharos-button')
+        cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
         cy.fixture('account/add_facility__one_group_subdomain__request.json').then((request) => {

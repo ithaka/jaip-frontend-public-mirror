@@ -165,7 +165,7 @@ describe('Reentry View', () => {
     cy.get('[data-cy="reentry-card-image"]').should('have.attr', 'alt')
     cy.get('[data-cy="reentry-card-image"]').should('have.attr', 'src')
 
-    // Verify fallback image logic by checking src contains either thumbnail path or fallback
+    // Vite may inline the small fallback PNG as a data URL in production builds.
     cy.get('[data-cy="reentry-card-image"]').each(($img) => {
       cy.wrap($img)
         .should('have.attr', 'src')
@@ -173,7 +173,8 @@ describe('Reentry View', () => {
           return (
             src.includes('thumbnails/') ||
             src.includes('fallbackimage.png') ||
-            src.includes('/_build/')
+            src.includes('/_build/') ||
+            src.startsWith('data:image/png;base64,')
           )
         })
     })

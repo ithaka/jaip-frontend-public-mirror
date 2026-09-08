@@ -362,7 +362,7 @@ const {
             :id="`${entity.id || entity.type}_use_subdomain`"
             :checked="includeSubdomain"
             class="mb-4"
-            @input="
+            @change="
               handleWithLog(
                 featureCheckboxToggleLog('use_subdomain', 'Use Subdomain'),
                 () => (includeSubdomain = !includeSubdomain),
@@ -543,7 +543,7 @@ const {
                     )
                   "
                   class="mb-2"
-                  @input="
+                  @change="
                     handleWithLog(
                       featureCheckboxToggleLog(`category_${label}`, String(label)),
                       () => selectCategoryFeatures(category),
@@ -558,7 +558,7 @@ const {
               <pep-pharos-checkbox-group
                 v-if="category.length"
                 class="entity-manager__jaip-checkbox-group"
-                @input="handleFeatureSelection($event)"
+                @change="handleFeatureSelection($event)"
               >
                 <ul class="jaip-checkbox-group">
                   <li v-for="feature in category" :key="`feature_${feature.name}`">

@@ -231,7 +231,7 @@ describe('Bulk approval', () => {
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-facets').contains('African American Studies', { matchCase: false }).click()
+      cy.get('pep-pharos-checkbox[value="africanamericanstudies-discipline"]').click()
 
       // The page rerenders after each search, and triggers a search after each
       // click of a discipline filter; we need to make sure all these rerenders
@@ -239,11 +239,11 @@ describe('Bulk approval', () => {
       cy.wait(['@search', '@afam'])
       cy.contains('Mary McLeod Bethune', { matchCase: false })
 
-      cy.get('.search-facets').contains('Criminology & Criminal Justice').click()
+      cy.get('pep-pharos-checkbox[value="criminologycriminaljustice-discipline"]').click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
 
-      cy.get('.search-facets').contains('Law').click()
+      cy.get('pep-pharos-checkbox[value="law-discipline"]').click()
       cy.wait(['@search', '@law'])
       cy.contains('We Specialize in the Wholly Impossible', { matchCase: false })
 
@@ -421,16 +421,16 @@ describe('Bulk approval', () => {
       cy.get('pep-pharos-button').contains('Approve All', { matchCase: false }).click()
       cy.wait('@denied')
 
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option').should('have.length', 3)
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 3)
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(0)
         .contains('All Groups', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(1)
         .contains('Ilium', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(2)
         .contains('Ithaka', { matchCase: false })
 
@@ -461,16 +461,16 @@ describe('Bulk approval', () => {
         .contains('Show 68 More', { matchCase: false })
         .click()
 
-      cy.get('.search-facets').contains('African American Studies', { matchCase: false }).click()
+      cy.get('#filters pep-pharos-checkbox[value="africanamericanstudies-discipline"]').click()
 
       cy.wait(['@search', '@afam'])
       cy.contains('Mary McLeod Bethune', { matchCase: false })
 
-      cy.get('.search-facets').contains('Criminology & Criminal Justice').click()
+      cy.get('#filters pep-pharos-checkbox[value="criminologycriminaljustice-discipline"]').click()
       cy.wait(['@search', '@crim'])
       cy.contains('Clarifying our Vision with the Facts', { matchCase: false })
 
-      cy.get('.search-facets').contains('Law').click()
+      cy.get('#filters pep-pharos-checkbox[value="law-discipline"]').click()
       cy.wait(['@search', '@law'])
       cy.contains('We Specialize in the Wholly Impossible', { matchCase: false })
 
@@ -480,16 +480,16 @@ describe('Bulk approval', () => {
         'This will add all material in African American Studies, Criminology & Criminal Justice, and Law from all journals.',
       )
 
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option').should('have.length', 3)
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 3)
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(0)
         .contains('All Groups', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(1)
         .contains('Ilium', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(2)
         .contains('Ithaka', { matchCase: false })
 
@@ -538,16 +538,16 @@ describe('Bulk approval', () => {
         'This will add all material in all subjects from Fire!!!',
       )
 
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').should('be.visible')
-      cy.get('pep-pharos-modal:visible .group-selector-combobox').click()
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option').should('have.length', 3)
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').should('be.visible')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox').click()
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option').should('have.length', 3)
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(0)
         .contains('All Groups', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(1)
         .contains('Ilium', { matchCase: false })
-      cy.get('pep-pharos-modal:visible .group-selector-combobox option')
+      cy.get('pep-pharos-modal[open] .group-selector-combobox option')
         .eq(2)
         .contains('Ithaka', { matchCase: false })
 
