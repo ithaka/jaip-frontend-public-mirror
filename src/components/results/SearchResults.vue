@@ -621,12 +621,14 @@ const openSearchHelp = async () => {
   </div>
 </template>
 <style scoped lang="scss">
+// Bottom spacing lives on the results container itself (not just the pagination control) so the
+// page keeps consistent spacing above the footer even when there aren't enough results to paginate.
+.results-list.display-grid {
+  margin-bottom: var(--pharos-spacing-5-x);
+}
 .pagination {
   justify-self: end;
   margin-top: var(--pharos-spacing-2-x) !important;
-  margin-bottom: var(
-    --pharos-spacing-5-x
-  ) !important; // Adjusted for spacing on 2 columns view to match other pages
 }
 .search-results-header {
   &__last_updated {

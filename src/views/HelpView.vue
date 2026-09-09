@@ -9,7 +9,7 @@ logPageView()
 <template>
   <div>
     <pep-pharos-layout row-gap="0">
-      <StudentHelp class="cols-12" />
+      <StudentHelp class="cols-10" />
     </pep-pharos-layout>
   </div>
 </template>

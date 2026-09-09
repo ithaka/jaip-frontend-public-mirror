@@ -979,6 +979,7 @@ const fireToast = () => {
               :level="2"
               preset="4--bold"
               data-cy="item-unavailable"
+              no-margin
               class="error__heading"
             >
               Item unavailable

@@ -69,6 +69,15 @@ const config = {
       component: () => import('@/views/HelpView.vue'),
     },
     {
+      path: '/help/media-review-policy',
+      name: 'media review policy',
+      meta: {
+        hidden: true,
+        label: 'Media Review Policy',
+      },
+      component: () => import('@/components/help/MediaReviewPolicy.vue'),
+    },
+    {
       path: '/accessibility',
       name: 'accessibility',
       meta: {

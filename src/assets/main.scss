@@ -245,6 +245,16 @@ $text-decoration-line-options: (none, underline, overline, line-through, blink);
 .underline {
   border-bottom: 1px solid var(--pharos-color-marble-gray-80);
 }
+
+.help-tab__inner .help-tab__image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: var(--pharos-spacing-2-x) auto auto auto;
+  max-width: 600px;
+  width: 100%;
+}
+
 .group-card {
   .buttons {
     flex-direction: column;

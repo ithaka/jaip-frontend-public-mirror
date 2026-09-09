@@ -10,6 +10,7 @@ import { viewportPatchLogs } from './categories/viewport_patch'
 import { dictionaryLogs } from './categories/dictionary'
 import { citationsLogs } from './categories/citations'
 import { buildLogs } from './categories/build'
+import { mediaReviewHelpLogs } from './categories/help'
 
 export const logs = {
   ...navigationLogs,
@@ -24,4 +25,5 @@ export const logs = {
   ...dictionaryLogs,
   ...citationsLogs,
   ...buildLogs,
+  ...mediaReviewHelpLogs,
 }

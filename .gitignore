@@ -23,6 +23,7 @@ dist
 dist-ssr
 coverage
 *.local
+*.tsbuildinfo
 
 /public/styles/icons/pharos/*
 

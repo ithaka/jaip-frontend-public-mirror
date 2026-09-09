@@ -162,6 +162,24 @@ const config = {
       component: () => import('@/views/CollectionsItemView.vue'),
     },
     {
+      path: '/help/media-review-policy',
+      name: 'media review policy',
+      meta: {
+        hidden: true,
+        label: 'Media Review Policy',
+      },
+      component: () => import('@/components/help/MediaReviewPolicy.vue'),
+    },
+    {
+      path: '/help/admin-media-review-help',
+      name: 'admin media review help',
+      meta: {
+        hidden: true,
+        label: 'Admin Media Review Help',
+      },
+      component: () => import('@/components/help/AdminMediaReviewHelp.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       meta: {

@@ -348,13 +348,5 @@ import LongtextexampleAPA from '@/assets/markdown/img/LongtextexampleAPA.png'
       background-color: var(--pharos-color-gray-200);
     }
   }
-  .help-tab__image {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: var(--pharos-spacing-2-x) auto auto auto;
-    max-width: 600px;
-    width: 100%;
-  }
 }
 </style>

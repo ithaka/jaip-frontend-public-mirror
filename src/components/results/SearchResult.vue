@@ -1,9 +1,9 @@
-a
 <script setup lang="ts">
 import TextBlock from '@/components/truncated/TextBlock.vue'
 import ButtonsContainer from '@/components/buttons/adminButtons/ButtonsContainer.vue'
 import AccessButtons from '@/components/AccessButtons.vue'
 import { useUserStore } from '@/stores/user'
+import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { getStatus } from '@/utils/helpers'
@@ -56,6 +56,8 @@ const {
 const searchStore = useSearchStore()
 const { searchTerms, pageNo, searchResultsKey } = storeToRefs(searchStore)
 
+const coreStore = useCoreStore()
+
 const router = useRouter()
 const searchFor = (term: string) => {
   router.push({
@@ -65,6 +67,9 @@ const searchFor = (term: string) => {
       page: 1,
     },
   })
+}
+const goToUnavailableItemsHelp = () => {
+  router.push({ name: 'help', params: { tab: 'unavailable-items' }, hash: '#help-tabs' })
 }
 
 const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.value))
@@ -226,9 +231,21 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
           <pep-pharos-heading preset="1--bold" :level="4" class="heading">
             Restricted
           </pep-pharos-heading>
-          <p>Item restricted in this facility based on content guidelines.</p>
+          <p>
+            Item restricted in this facility based on
+            <pep-pharos-link href="/help/admin-media-review-help"
+              >content guidelines</pep-pharos-link
+            >.
+          </p>
           <p><strong>Reason:&nbsp;</strong> {{ doc.restricted_reason }}</p>
           <UnrestrictButton :doc="doc" class="restricted-label__button" />
+          <p class="restricted-label__contact">
+            If you think this item was incorrectly restricted, please contact
+            <pep-pharos-link :href="`mailto:${coreStore.supportEmail}`">{{
+              coreStore.supportEmail.replace('@', '[at]')
+            }}</pep-pharos-link
+            >.
+          </p>
         </div>
         <!-- We want to re-render the admin buttons after a new search, because the statuses
         may have been updated. -->
@@ -282,6 +299,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
           </p>
         </span>
       </div>
+      <!-- Restricted buttons -->
       <div
         v-else-if="status === 'restricted' && isAuthenticatedStudent"
         class="display-flex justify-content-end flex-direction-column"
@@ -294,6 +312,13 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
         >
           <span>Item unavailable</span>
         </pep-pharos-heading>
+        <pep-pharos-link
+          class="restricted-label__why-link"
+          data-cy="unavailable-items-help-link"
+          @click.prevent="goToUnavailableItemsHelp"
+        >
+          Why is this item unavailable?
+        </pep-pharos-link>
       </div>
       <div v-if="isRestrictedList">
         <p>{{ doc.restricted_reason }}</p>
@@ -309,6 +334,19 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
   padding: var(--pharos-spacing-one-half-x);
   &__button {
     margin-top: var(--pharos-spacing-one-half-x);
+  }
+  &__why-link {
+    display: block;
+    margin-top: var(--pharos-spacing-one-half-x);
+    font-size: var(--pharos-font-size-base);
+
+    @media screen and (min-width: 48rem) {
+      font-size: var(--pharos-font-size-small);
+    }
+  }
+  &__contact {
+    font-size: var(--pharos-font-size-micro);
+    color: var(--pharos-color-marble-gray-30);
   }
   .heading {
     color: var(--pharos-color-living-coral-53);

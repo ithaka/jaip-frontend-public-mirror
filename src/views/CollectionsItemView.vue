@@ -64,23 +64,19 @@ logPageView()
     </Teleport>
     <div v-if="collectionMetadata" class="document-metadata">
       <div class="document-metadata__back">
-        <pep-pharos-icon
-          class="document-metadata__back-icon"
-          name="arrow-left"
-          a11y-title="Browse all guides"
-          a11y-hidden="false"
-          role="button"
-          tabindex="0"
-          :aria-describedby="`Browse all guides`"
-          :data-tooltip-id="`Browse all guides`"
-        >
-        </pep-pharos-icon>
         <pep-pharos-link
           subtle
+          flex
           :href="`/collections/${collection}`"
           class="document-metadata__back-link"
           data-cy="custom-content-back-link"
         >
+          <pep-pharos-icon
+            class="document-metadata__back-icon"
+            name="arrow-left"
+            a11y-hidden="true"
+          >
+          </pep-pharos-icon>
           Browse all guides
         </pep-pharos-link>
       </div>
@@ -248,7 +244,7 @@ logPageView()
   &__back {
     &-link {
       font-size: var(--pharos-font-size-small);
-      margin-left: var(--pharos-spacing-one-half-x);
+      gap: var(--pharos-spacing-one-half-x);
     }
     display: flex;
     grid-column: span 2;

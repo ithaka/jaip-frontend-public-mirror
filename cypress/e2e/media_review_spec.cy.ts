@@ -114,6 +114,16 @@ describe('Media Review', () => {
           .should('not.exist')
       })
 
+      it('Sends students to the Unavailable Items help tab when asking why an item is unavailable', () => {
+        // This is a client-side route change (no full page load), so no new document request to
+        // intercept/wait on here.
+        cy.get('[data-cy="unavailable-items-help-link"]').first().click()
+
+        cy.location('pathname').should('eq', '/help/unavailable-items')
+        cy.location('hash').should('eq', '#help-tabs')
+        cy.contains('How do I know if an item is unavailable?').should('be.visible')
+      })
+
       it('Does not let students restrict or unrestrict items', () => {
         cy.get('.search-result')
           .find('pep-pharos-button')
@@ -235,6 +245,22 @@ describe('Media Review', () => {
         })
 
         cy.get('pep-pharos-modal#excessive-requests-warning-modal').should('be.visible')
+      })
+    })
+
+    context('On the media review policy page', () => {
+      beforeEach(() => {
+        handleLocation('/help/media-review-policy', cy, 'policyPage', 'pep')
+        cy.visit('/help/media-review-policy')
+        cy.wait(['@policyPage', '@alerts', '@env', '@auth'])
+      })
+
+      it('Returns to the Unavailable Items help tab from the back link', () => {
+        cy.get('[data-cy="media-review-back-link"]').click()
+
+        cy.location('pathname').should('eq', '/help/unavailable-items')
+        cy.location('hash').should('eq', '#help-tabs')
+        cy.contains('How do I know if an item is unavailable?').should('be.visible')
       })
     })
   })

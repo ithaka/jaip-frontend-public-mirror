@@ -158,7 +158,7 @@ const analyticsRoute = routes.find((route) => route.name === 'analytics')
   }
 
   &__help-container {
-    grid-column: span 12;
+    grid-column: span 10;
     width: 100%;
 
     @media screen and (max-width: 48rem) {
