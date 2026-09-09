@@ -180,12 +180,36 @@ const getErrorDetails = (err: unknown): Pick<ViewerError, 'message' | 'name' | '
 // listener when the component is unmounted to prevent memory leaks.
 const viewerEventBus = ref<viewer.EventBus | null>(null)
 let removeWindowResizeListener: (() => void) | null = null
+let removeViewerEventBusListeners: (() => void) | null = null
+let removeRetryPagesInitListener: (() => void) | null = null
+
 // The source URL is retained so a failed render can reload the same document with safer options.
 let activePDFSourceUrl: string | null = null
+
 // Ensures an OffscreenCanvas failure triggers at most one full-document retry.
 let hasRetriedWithoutOffscreenCanvas = false
+
 // Prevents render-error events produced during replacement from starting overlapping retries.
 let isRetryingWithoutOffscreenCanvas = false
+
+// Component-owned refs avoid finding another viewer instance through a document-wide ID lookup.
+const viewerContainer = useTemplateRef<HTMLDivElement>('viewerContainer')
+const viewerElement = useTemplateRef<HTMLDivElement>('viewerElement')
+type PDFLoadingTask = ReturnType<typeof pdfjsLib.getDocument>
+type PDFDocumentProxy = Awaited<PDFLoadingTask['promise']>
+type PDFResource = PDFLoadingTask | PDFDocumentProxy | null | undefined
+
+// Retaining the task allows an in-flight request and its worker to be cancelled during navigation.
+let activeLoadingTask: PDFLoadingTask | null = null
+let activePDFViewer: viewer.PDFViewer | null = null
+let isUnmounted = false
+
+/** Releases either a PDF.js document or loading task through its owning loading task. */
+const disposePDFResource = (resource: PDFResource, onError?: (error: unknown) => void) => {
+  const loadingTask = resource && 'loadingTask' in resource ? resource.loadingTask : resource
+  if (!loadingTask || loadingTask.destroyed) return
+  void loadingTask.destroy().catch((error: unknown) => onError?.(error))
+}
 
 const { handleWithLog, logs } = useLogger()
 const {
@@ -195,6 +219,7 @@ const {
   startPDFViewingSessionLog,
   endPDFViewingSessionLog,
   PDFViewerErrorLog,
+  PDFViewerLoadingCancelledLog,
 } = logs.getPDFViewerLogs({
   iid: itemid,
   isReentryContent: isReentryContent,
@@ -203,6 +228,8 @@ const {
 })
 
 onBeforeUnmount(() => {
+  // Set this before cleanup so promise rejections caused by destroy() are treated as cancellation.
+  isUnmounted = true
   handleWithLog(endPDFViewingSessionLog, () =>
     removeFullscreenChangeListeners(handleFullscreenChange),
   )
@@ -212,7 +239,25 @@ onBeforeUnmount(() => {
     removeWindowResizeListener = null
   }
 
+  if (removeViewerEventBusListeners) {
+    removeViewerEventBusListeners()
+    removeViewerEventBusListeners = null
+  }
+
+  if (removeRetryPagesInitListener) {
+    removeRetryPagesInitListener()
+    removeRetryPagesInitListener = null
+  }
+
+  if (activePDFViewer) {
+    activePDFViewer.cleanup()
+    activePDFViewer = null
+  }
+
   viewerEventBus.value = null
+  disposePDFResource(activeLoadingTask)
+  activeLoadingTask = null
+  disposePDFResource(pdfDocument.value)
 })
 
 /**
@@ -230,8 +275,9 @@ const createLoadingTask = async (
   { disableOffscreenCanvas = false }: { disableOffscreenCanvas?: boolean } = {},
 ) => {
   isLoading.value = true
+  let loadingTask: PDFLoadingTask | null = null
   try {
-    const loadingTask = await pdfjsLib.getDocument({
+    loadingTask = pdfjsLib.getDocument({
       url: src,
       enableXfa: ENABLE_XFA,
       withCredentials: true,
@@ -244,9 +290,26 @@ const createLoadingTask = async (
       isImageDecoderSupported: !DISABLE_IMAGE_DECODER && !disableOffscreenCanvas,
       // This override is applied only after a render failure to preserve the faster default path.
       ...(disableOffscreenCanvas && { isOffscreenCanvasSupported: false }),
-    }).promise
-    return loadingTask
+    })
+    activeLoadingTask = loadingTask
+    const document = await loadingTask.promise
+    if (isUnmounted) {
+      disposePDFResource(loadingTask)
+      return undefined
+    }
+    return document
   } catch (err) {
+    // destroy() rejects the loading promise as part of normal component teardown.
+    if (isUnmounted || loadingTask?.destroyed) {
+      handleWithLog(
+        PDFViewerLoadingCancelledLog({
+          reason: isUnmounted ? 'component_unmounted' : 'loading_task_destroyed',
+        }),
+        () => {},
+      )
+      return undefined
+    }
+
     const errorDetails = getErrorDetails(err)
     if (err instanceof Error && 'status' in err) {
       if (err.status === 404) {
@@ -281,7 +344,8 @@ const createLoadingTask = async (
     }
     handleWithLog(PDFViewerErrorLog({ error: { ...loadingError.value } }), () => {})
   } finally {
-    isLoading.value = false
+    if (activeLoadingTask === loadingTask) activeLoadingTask = null
+    if (!isUnmounted) isLoading.value = false
   }
 }
 
@@ -295,7 +359,7 @@ const createLoadingTask = async (
  */
 const handlePageRenderError = async (err: unknown) => {
   // Several page renders may fail together; only the first event should control replacement.
-  if (isRetryingWithoutOffscreenCanvas) return
+  if (isUnmounted || isRetryingWithoutOffscreenCanvas) return
 
   const errorDetails = getErrorDetails(err)
   // A second failure is terminal because repeating the same fallback would create a retry loop.
@@ -332,22 +396,34 @@ const handlePageRenderError = async (err: unknown) => {
       disableOffscreenCanvas: true,
     })
     if (!replacementDocument) return
+    if (isUnmounted) {
+      disposePDFResource(replacementDocument)
+      return
+    }
 
     // Wait for the replacement viewer to initialize before restoring the user's page position.
-    viewerEventBus.value?.on(
-      'pagesinit',
-      () => {
+    const eventBus = viewerEventBus.value
+    if (eventBus) {
+      const handleReplacementPagesInit = () => {
+        removeRetryPagesInitListener = null
+        if (isUnmounted) return
         pdfViewer.currentPageNumber = Math.min(previousPageNumber, replacementDocument.numPages)
-      },
-      { once: true },
-    )
+      }
+
+      removeRetryPagesInitListener = () => {
+        eventBus.off('pagesinit', handleReplacementPagesInit)
+      }
+
+      eventBus.on('pagesinit', handleReplacementPagesInit, { once: true })
+    }
     pdfDocument.value = replacementDocument
     pdfViewer.setDocument(replacementDocument)
     isRetryingWithoutOffscreenCanvas = false
 
     // The replacement now owns the viewer, so the first document can release its worker resources.
     if (previousDocument) {
-      void previousDocument.destroy().catch((cleanupError: unknown) => {
+      disposePDFResource(previousDocument, (cleanupError: unknown) => {
+        if (isUnmounted) return
         const cleanupErrorDetails = getErrorDetails(cleanupError)
         handleWithLog(
           PDFViewerErrorLog({
@@ -363,6 +439,8 @@ const handlePageRenderError = async (err: unknown) => {
       })
     }
   } catch (retryError) {
+    if (isUnmounted) return
+
     const retryErrorDetails = getErrorDetails(retryError)
     preparePageError.value = {
       ...retryErrorDetails,
@@ -377,7 +455,6 @@ const handlePageRenderError = async (err: unknown) => {
 }
 
 // PDF VIEWER CREATION
-const isCreatingViewer = ref(false)
 // Holds viewer-construction failures in the shared shape used by the error UI and logger.
 const createViewerError = ref<ViewerError>({
   message: '',
@@ -386,36 +463,68 @@ const createViewerError = ref<ViewerError>({
 })
 const createViewer = () => {
   try {
-    isCreatingViewer.value = true
-
-    const container = document.getElementById('viewer-container') as HTMLDivElement
+    const container = viewerContainer.value
+    const viewerNode = viewerElement.value
+    if (!container || !viewerNode) {
+      // A missing element after navigation is expected; while mounted it indicates a real template
+      // or lifecycle problem and should still be reported.
+      if (isUnmounted) return undefined
+      throw new Error('The PDF viewer DOM elements are not mounted.')
+    }
     const eventBus = new viewer.EventBus()
 
     // This needs to be set on the viewerEventBus ref so that it can be accessed in the onBeforeUnmount hook to remove the resize listener.
     viewerEventBus.value = eventBus
     const pdfViewer = new viewer.PDFViewer({
       container,
+      viewer: viewerNode,
       eventBus,
       annotationMode: pdfjsLib.AnnotationMode.DISABLE,
     })
 
+    // Keep these listener callbacks named so the same references can be removed via eventBus.off.
+    const handlePagesLoaded = () => setLegacyViewerDimensions(pdfViewer)
+    const handlePageRender = ({ source }: { source: viewer.PDFPageView }) =>
+      setLegacyPageDimensions(source)
+    const handleTextLayerRendered = ({ source }: { source: viewer.PDFPageView }) =>
+      setLegacyPageDimensions(source)
+    const handleXFALayerRendered = ({ source }: { source: viewer.PDFPageView }) =>
+      setLegacyPageDimensions(source)
+    const handleScaleChanging = () => setLegacyViewerDimensions(pdfViewer)
+    const handleRotationChanging = () => setLegacyViewerDimensions(pdfViewer)
+    const handleResize = () => {
+      pdfViewer.currentScaleValue = 'page-fit'
+    }
+    const handlePagesInit = () => {
+      if (isUnmounted) return
+      setLegacyViewerDimensions(pdfViewer)
+      pdfViewer.currentScaleValue = 'page-fit'
+      fitHeight.value = true
+      // This is logged here because this event indicates that the viewer is fully initialized,
+      // so we can reasonably assume that the user is now viewing the PDF.
+      handleWithLog(startPDFViewingSessionLog)
+    }
+    const handlePageRendered = ({ error }: { error?: unknown }) => {
+      if (error) void handlePageRenderError(error)
+    }
+    const handlePageChanging = ($event: { previous: number }) => {
+      handleWithLog(
+        pageSelectionLog({ previous_page: $event.previous }),
+        () => paginationKey.value++,
+      )
+    }
+
     if (!SUPPORTS_CSS_ROUND) {
       // pagesloaded catches mixed-size documents after their individual viewports are known;
       // pagerender also covers lazily initialized pages before their canvas is drawn.
-      eventBus.on('pagesloaded', () => setLegacyViewerDimensions(pdfViewer))
-      eventBus.on('pagerender', ({ source }: { source: viewer.PDFPageView }) =>
-        setLegacyPageDimensions(source),
-      )
-      eventBus.on('textlayerrendered', ({ source }: { source: viewer.PDFPageView }) =>
-        setLegacyPageDimensions(source),
-      )
-      eventBus.on('xfalayerrendered', ({ source }: { source: viewer.PDFPageView }) =>
-        setLegacyPageDimensions(source),
-      )
+      eventBus.on('pagesloaded', handlePagesLoaded)
+      eventBus.on('pagerender', handlePageRender)
+      eventBus.on('textlayerrendered', handleTextLayerRendered)
+      eventBus.on('xfalayerrendered', handleXFALayerRendered)
       // PDF.js updates viewports before these events; refresh the fixed pixel values after zooming
       // and after rotation swaps the page width and height.
-      eventBus.on('scalechanging', () => setLegacyViewerDimensions(pdfViewer))
-      eventBus.on('rotationchanging', () => setLegacyViewerDimensions(pdfViewer))
+      eventBus.on('scalechanging', handleScaleChanging)
+      eventBus.on('rotationchanging', handleRotationChanging)
     }
 
     // In cases where the viewer size changes, the pdf needs to be re-fitted. We can use
@@ -429,36 +538,39 @@ const createViewer = () => {
     removeWindowResizeListener = () => {
       window.removeEventListener('resize', dispatchResizeEvent)
     }
-    eventBus.on('resize', function () {
-      pdfViewer.currentScaleValue = 'page-fit'
-    })
+    eventBus.on('resize', handleResize)
 
     // Set initial scale to fit page
-    eventBus.on('pagesinit', function () {
-      setLegacyViewerDimensions(pdfViewer)
-      pdfViewer.currentScaleValue = 'page-fit'
-      fitHeight.value = true
-      // This is logged here because this event indicates that the viewer is fully initialized,
-      // so we can reasonably assume that the user is now viewing the PDF.
-      handleWithLog(startPDFViewingSessionLog)
-    })
+    eventBus.on('pagesinit', handlePagesInit)
 
     // Rendering happens asynchronously after setDocument, so loading the document can succeed
     // even when a browser-specific canvas implementation later fails.
-    eventBus.on('pagerendered', ({ error }: { error?: unknown }) => {
-      if (error) void handlePageRenderError(error)
-    })
+    eventBus.on('pagerendered', handlePageRendered)
 
     // Update pagination key on page change to force re-render of page number input
-    eventBus.on('pagechanging', function ($event: { previous: number }) {
-      handleWithLog(
-        pageSelectionLog({ previous_page: $event.previous }),
-        () => paginationKey.value++,
-      )
-    })
+    eventBus.on('pagechanging', handlePageChanging)
+
+    removeViewerEventBusListeners = () => {
+      if (!SUPPORTS_CSS_ROUND) {
+        eventBus.off('pagesloaded', handlePagesLoaded)
+        eventBus.off('pagerender', handlePageRender)
+        eventBus.off('textlayerrendered', handleTextLayerRendered)
+        eventBus.off('xfalayerrendered', handleXFALayerRendered)
+        eventBus.off('scalechanging', handleScaleChanging)
+        eventBus.off('rotationchanging', handleRotationChanging)
+      }
+      eventBus.off('resize', handleResize)
+      eventBus.off('pagesinit', handlePagesInit)
+      eventBus.off('pagerendered', handlePageRendered)
+      eventBus.off('pagechanging', handlePageChanging)
+    }
+
+    activePDFViewer = pdfViewer
     pdfView.value = pdfViewer
     return pdfViewer
   } catch (err) {
+    if (isUnmounted) return undefined
+
     const errorDetails = getErrorDetails(err)
     createViewerError.value = {
       ...errorDetails,
@@ -469,13 +581,10 @@ const createViewer = () => {
     handleWithLog(PDFViewerErrorLog({ error: { ...createViewerError.value } }), () => {})
     // Returning no viewer lets preparePage stop instead of calling setDocument on a placeholder.
     return undefined
-  } finally {
-    isCreatingViewer.value = false
   }
 }
 
 // PDF PREPARATION
-const isPreparingPage = ref(false)
 /** Holds compatibility, URL, worker, and document-attachment failures encountered during setup. */
 const preparePageError = ref<ViewerError>({
   message: '',
@@ -498,7 +607,19 @@ const configurePDFJSWorker = async () => {
     if (import.meta.env.DEV) {
       await import('pdfjs-dist/legacy/build/pdf.worker.min.mjs')
     } else {
-      await import(/* @vite-ignore */ pdfWorkerUrl)
+      try {
+        await import(/* @vite-ignore */ pdfWorkerUrl)
+      } catch (err) {
+        // pdfWorkerUrl is added at build time with a hashed filename, so existing sessions
+        // can reference a chunk that's since been removed. @vite-ignore keeps Vite from
+        // wrapping this import, so it never reaches Vite's own vite:preloadError dispatch -
+        // forward it manually so main.ts's stale-build reload handler still catches it.
+        const event = Object.assign(new Event('vite:preloadError', { cancelable: true }), {
+          payload: err,
+        })
+        window.dispatchEvent(event)
+        throw err
+      }
     }
     return
   }
@@ -512,6 +633,9 @@ const configurePDFJSWorker = async () => {
  * than leaving the surrounding view blank.
  */
 const preparePage = async () => {
+  if (isUnmounted) return
+  let pendingDocument: PDFDocumentProxy | undefined
+
   // The legacy bundle still relies on a small set of APIs supplied by polyfills.
   if (props.enableViewer && !canUsePDFViewer()) {
     preparePageError.value = {
@@ -539,21 +663,41 @@ const preparePage = async () => {
   try {
     if (props.enableViewer) {
       await configurePDFJSWorker()
+      if (isUnmounted) return
+
       const doc = await createLoadingTask(url)
       if (!doc) return
+      pendingDocument = doc
 
       // #viewer is hidden via v-show while isLoading is true; PDF.js measures text-layer layout
       // (and caches the result forever) as soon as pages are created, so that DOM update must be
       // flushed first or those measurements are taken against a display:none ancestor.
       await nextTick()
+      if (isUnmounted) {
+        disposePDFResource(doc)
+        return
+      }
 
       const pdfViewer = createViewer()
-      if (!pdfViewer) return
+      if (!pdfViewer) {
+        disposePDFResource(doc)
+        return
+      }
 
       pdfDocument.value = doc
       await pdfViewer.setDocument(doc)
+      pendingDocument = undefined
     }
   } catch (err) {
+    if (isUnmounted) return
+
+    if (pendingDocument) {
+      disposePDFResource(pendingDocument)
+      if (pdfDocument.value === pendingDocument) {
+        pdfDocument.value = undefined
+      }
+    }
+
     const errorDetails = getErrorDetails(err)
     preparePageError.value = {
       ...errorDetails,
@@ -562,8 +706,6 @@ const preparePage = async () => {
       code: 0,
     }
     handleWithLog(PDFViewerErrorLog({ error: { ...preparePageError.value } }), () => {})
-  } finally {
-    isPreparingPage.value = false
   }
 }
 preparePage()
@@ -949,10 +1091,10 @@ const fireToast = () => {
                 )
               "
             />
-            <div id="viewer-container" tabindex="-1">
+            <div id="viewer-container" ref="viewerContainer" tabindex="-1">
               <!-- Keep PDF.js's viewer node mounted while a document reloads. Replacing it with v-if
                would invalidate the DOM references held by the existing PDFViewer instance. -->
-              <div v-show="!isLoading" id="viewer" class="pdfViewer" />
+              <div v-show="!isLoading" id="viewer" ref="viewerElement" class="pdfViewer" />
               <pep-pharos-loading-spinner v-if="isLoading" />
             </div>
           </div>

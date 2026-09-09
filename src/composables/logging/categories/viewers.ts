@@ -95,6 +95,15 @@ const getPDFViewerLogs = (options: {
       }
     }
 
+  const PDFViewerLoadingCancelledLog =
+    (opts: { reason: string }): (() => WorkingLog) =>
+    () => ({
+      ...generics.error({ message: `PDF loading cancelled: ${opts.reason}` }),
+      event_description: 'PDF loading was cancelled during teardown',
+      action: 'pdf_viewer_loading_cancelled',
+      event_uuid: uuid,
+    })
+
   return {
     errorLinkClickLog,
     viewerControlLog,
@@ -103,6 +112,7 @@ const getPDFViewerLogs = (options: {
     startPDFViewingSessionLog,
     endPDFViewingSessionLog,
     PDFViewerErrorLog,
+    PDFViewerLoadingCancelledLog,
   }
 }
 

@@ -8,6 +8,59 @@ import { routes } from '../../src/config/api'
 describe('PDF Viewer Access', () => {
   const iid = '43e7b8c1-a49c-37c3-ad42-6016af1d0eb8'
 
+  it('cancels PDF loading without reporting an error when navigating away', () => {
+    const route = `/pdf/${iid}?term=&page=1`
+    let pdfRequestStarted = false
+    const beaconBodies: Promise<string>[] = []
+
+    cy.intercept('GET', routes.auth.get, {
+      fixture: 'auth/users/student__one_group_view_pdf__response.json',
+    }).as('auth')
+    cy.intercept('GET', routes.environment.get, { environment: 'test' }).as('env')
+    cy.intercept('POST', routes.features.grouped.get, {
+      fixture: 'auth/features/basic_features.json',
+    }).as('features')
+    cy.intercept('POST', routes.search.basic, {
+      fixture: 'search/term_given__specified_id_limit_one__response.json',
+    }).as('search')
+    cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }).as(
+      'alerts',
+    )
+    cy.intercept('GET', routes.documents.pdfs(iid), (req) => {
+      pdfRequestStarted = true
+      req.reply({
+        delay: 3000,
+        fixture: 'pdf/open-access-sample.pdf',
+        headers: { 'content-type': 'application/pdf' },
+      })
+    }).as('pdfDocument')
+    handleLocation(route, cy, 'pdf-viewer-navigation', 'pep')
+
+    cy.visit(route, {
+      onBeforeLoad(win) {
+        cy.stub(win.navigator, 'sendBeacon').callsFake((_url, data) => {
+          if (data instanceof win.Blob) beaconBodies.push(data.text())
+          return true
+        })
+      },
+    })
+    cy.wait(['@pdf-viewer-navigation', '@alerts', '@env', '@auth', '@search'], {
+      requestTimeout: 20000,
+    })
+    cy.wrap(null).should(() => expect(pdfRequestStarted).to.equal(true))
+
+    cy.get('[data-cy="nav-link-research"]').click()
+    cy.get('[data-cy="nav-link-search"]').click()
+    cy.location('pathname').should('eq', '/search')
+    cy.get('#viewer-container').should('not.exist')
+    cy.then(() => Promise.all(beaconBodies)).then((bodies) => {
+      const viewerErrors = bodies
+        .map((body) => JSON.parse(body) as { action?: string })
+        .filter((log) => log.action === 'pdf_viewer_error')
+      expect(viewerErrors).to.have.length(0)
+    })
+  })
+
   it('redirects the page viewer route to the pdf viewer route', () => {
     cy.intercept('GET', routes.auth.get, {
       fixture: 'auth/users/student__one_group_view_pdf__response.json',
