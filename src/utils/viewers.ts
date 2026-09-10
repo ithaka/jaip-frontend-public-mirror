@@ -159,6 +159,36 @@ export const removeFullscreenChangeListeners = (callback: () => void): void => {
   })
 }
 
+let bodyScrollLockY: number | null = null
+
+/** Pins the document body in place so it can't scroll behind a fixed-position overlay. */
+export const lockBodyScroll = (): void => {
+  if (bodyScrollLockY !== null) return
+
+  bodyScrollLockY = window.scrollY
+  const { style } = document.body
+  style.position = 'fixed'
+  style.top = `-${bodyScrollLockY}px`
+  style.left = '0'
+  style.right = '0'
+  style.width = '100%'
+}
+
+/** Reverses {@link lockBodyScroll}, restoring normal scrolling and the prior scroll position. */
+export const unlockBodyScroll = (): void => {
+  if (bodyScrollLockY === null) return
+
+  const scrollY = bodyScrollLockY
+  bodyScrollLockY = null
+  const { style } = document.body
+  style.position = ''
+  style.top = ''
+  style.left = ''
+  style.right = ''
+  style.width = ''
+  window.scrollTo(0, scrollY)
+}
+
 export const hasBrowserPDFViewer = (): boolean => {
   // Modern browsers
   // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/pdfViewerEnabled

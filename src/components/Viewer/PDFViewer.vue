@@ -24,6 +24,8 @@ import {
   canUsePDFViewer,
   shouldDisablePDFJSImageDecoder,
   shouldUsePDFJSMainThreadWorker,
+  lockBodyScroll,
+  unlockBodyScroll,
 } from '@/utils/viewers.js'
 import { initPDFWorkerPolyfills } from '@/utils/polyfills'
 import { useValidDownloadURL } from '@/composables/urls'
@@ -233,6 +235,8 @@ onBeforeUnmount(() => {
   handleWithLog(endPDFViewingSessionLog, () =>
     removeFullscreenChangeListeners(handleFullscreenChange),
   )
+  // In case the viewer unmounts (the user navigates away) while CSS fullscreen is still active.
+  unlockBodyScroll()
 
   if (removeWindowResizeListener) {
     removeWindowResizeListener()
@@ -776,6 +780,7 @@ const isUsingCSSFullscreen = ref(false)
 const exitCSSFullscreen = () => {
   isUsingCSSFullscreen.value = false
   isInFullscreen.value = false
+  unlockBodyScroll()
   toRaw(pdfView.value).currentScaleValue = 'page-fit'
 }
 
@@ -785,6 +790,7 @@ const enterCSSFullscreen = () => {
 
   isUsingCSSFullscreen.value = true
   isInFullscreen.value = true
+  lockBodyScroll()
 }
 
 /**
@@ -1092,7 +1098,12 @@ const fireToast = () => {
                 )
               "
             />
-            <div id="viewer-container" ref="viewerContainer" tabindex="-1">
+            <div
+              id="viewer-container"
+              ref="viewerContainer"
+              :class="{ 'full-screen': isInFullscreen }"
+              tabindex="-1"
+            >
               <!-- Keep PDF.js's viewer node mounted while a document reloads. Replacing it with v-if
                would invalidate the DOM references held by the existing PDFViewer instance. -->
               <div v-show="!isLoading" id="viewer" ref="viewerElement" class="pdfViewer" />
@@ -1174,6 +1185,7 @@ const fireToast = () => {
     bottom: 0;
     height: 100%;
     width: 100%;
+    overflow: hidden;
     background-color: var(--pharos-color-black);
     display: flex;
     flex-direction: column;
