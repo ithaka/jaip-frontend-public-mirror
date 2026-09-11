@@ -152,15 +152,14 @@ const focusToTop = () => {
 
 const router = useRouter()
 const changePage = (page: number) => {
-  changeRoute(
-    router,
+  changeRoute(router, {
     emit,
-    router.currentRoute.value.path || '/search',
-    searchTerms.value,
+    path: router.currentRoute.value.path || '/search',
+    term: searchTerms.value,
     page,
-    props.requestsPage ? selectedGroups.value['status_search'] : undefined,
-    statusQuery.value,
-  )
+    groups: props.requestsPage ? selectedGroups.value['status_search'] : undefined,
+    statusQuery: statusQuery.value,
+  })
   focusToTop()
 }
 const changeSecondaryPage = (page: number) => {

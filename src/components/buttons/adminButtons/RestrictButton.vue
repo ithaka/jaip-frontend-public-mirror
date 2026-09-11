@@ -90,7 +90,7 @@ const handleRestrict = async () => {
     coreStore.toast(msg, 'success')
 
     if (route.path.startsWith('/pdf') || route.path.startsWith('/page')) {
-      changeRoute(router, emit, '/requests', searchTerms.value, pageNo.value, undefined, undefined)
+      changeRoute(router, { emit, path: '/requests', term: searchTerms.value, page: pageNo.value })
     }
   } catch {
     const msg = 'There was an error and your restricted item was not submitted.'

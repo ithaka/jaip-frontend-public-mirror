@@ -873,15 +873,12 @@ const reentryPath = computed(() => {
 })
 const handleBrowseReentryLink = () => {
   handleWithLog(errorLinkClickLog({ destination: reentryPath.value }), () =>
-    changeRoute(
-      router,
+    changeRoute(router, {
       emit,
-      reentryPath.value,
-      searchTerms.value,
-      pageNo.value,
-      undefined,
-      undefined,
-    ),
+      path: reentryPath.value,
+      term: searchTerms.value,
+      page: pageNo.value,
+    }),
   )
 }
 

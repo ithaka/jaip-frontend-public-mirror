@@ -22,7 +22,7 @@ const organizedRoutes = getOrganizedRoutes(router)
  * @returns {void}
  */
 const changeRouteHandler = (route: RouteRecordRaw) => {
-  changeRoute(router, emit, route.path, searchTerms.value, pageNo.value, undefined, undefined)
+  changeRoute(router, { emit, path: route.path, term: searchTerms.value, page: pageNo.value })
   emit('close-sidenav')
 }
 const { handleWithLog, logs } = useLogger()

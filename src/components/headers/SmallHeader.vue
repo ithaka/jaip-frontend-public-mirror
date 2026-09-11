@@ -66,7 +66,7 @@ const logout = () => {
 
 const handleLogoClick = () => {
   onCloseSidenav()
-  changeRoute(router, emit, '/', searchTerms.value, pageNo.value, undefined, undefined)
+  changeRoute(router, { emit, path: '/', term: searchTerms.value, page: pageNo.value })
 }
 
 const isSidenavVisible = ref(false)
@@ -102,7 +102,7 @@ const { logOutLog, logInLog, jstorLogoClickLog, openSidenavLog, closeSidenavLog 
         class="mr-4"
         @click.prevent.stop="
           handleWithLog(jstorLogoClickLog, () =>
-            changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined),
+            changeRoute(router, { emit, path: '/', term: searchTerms, page: pageNo }),
           )
         "
       >

@@ -11,7 +11,7 @@ const router = useRouter()
 const emit = defineEmits(['close'])
 
 const followLink = (path: string) => {
-  changeRoute(router, emit, path, searchTerms.value, pageNo.value, undefined, undefined)
+  changeRoute(router, { emit, path, term: searchTerms.value, page: pageNo.value })
   scrollTo(0, 0)
 }
 </script>

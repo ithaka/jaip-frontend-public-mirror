@@ -110,22 +110,30 @@ export const serializeGroupsQueryParam = (groups: number[] | undefined): string 
   return groups.join(',')
 }
 
+export interface ChangeRouteOptions {
+  path: string
+  term: string
+  page: number
+  emit?: (event: 'close', ...args: unknown[]) => void
+  groups?: number[]
+  statusQuery?: string
+  includeSearchQuery?: boolean
+  closeOnNavigate?: boolean
+}
+
 export const changeRoute = (
   router: Router,
-  emit: ((event: 'close', ...args: unknown[]) => void) | undefined,
-  path: string,
-  term: string,
-  page: number,
-  groups: number[] | undefined,
-  statusQuery: string | undefined,
-  options: {
-    includeSearchQuery?: boolean
-    closeOnNavigate?: boolean
-  } = {},
+  {
+    path,
+    term,
+    page,
+    emit,
+    groups,
+    statusQuery,
+    includeSearchQuery = true,
+    closeOnNavigate = true,
+  }: ChangeRouteOptions,
 ) => {
-  const includeSearchQuery = options.includeSearchQuery ?? true
-  const closeOnNavigate = options.closeOnNavigate ?? true
-
   const route = router.getRoutes().find((r) => r.path === path)
   if (route?.redirect) {
     window.open(route.redirect as string, '_blank')

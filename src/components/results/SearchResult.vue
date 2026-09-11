@@ -174,7 +174,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
           Item restricted at other facilities.
           <pep-pharos-link
             @click.prevent.stop="
-              changeRoute(router, emit, '/account', searchTerms, pageNo, undefined, undefined)
+              changeRoute(router, { emit, path: '/account', term: searchTerms, page: pageNo })
             "
             >Edit facility permissions</pep-pharos-link
           >
@@ -199,7 +199,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
           icon-left="filetype-pdf"
           @click="
             handleWithLog(readButtonLog, () =>
-              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined),
+              changeRoute(router, { emit, path: readRoute, term: searchTerms, page: pageNo }),
             )
           "
         >
@@ -222,7 +222,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
             class="mb-2 lg-mr-3"
             variant="secondary"
             icon-left="filetype-pdf"
-            @click="changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined)"
+            @click="changeRoute(router, { emit, path: readRoute, term: searchTerms, page: pageNo })"
           >
             <span>Reviewer Access</span>
           </pep-pharos-button>

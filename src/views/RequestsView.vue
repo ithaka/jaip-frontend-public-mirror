@@ -83,15 +83,14 @@ const router = useRouter()
 const emit = defineEmits(['close'])
 
 const newSearch = () => {
-  changeRoute(
-    router,
+  changeRoute(router, {
     emit,
-    '/requests',
-    '',
-    1,
-    selectedGroups.value['status_search'],
-    statusQuery.value,
-  )
+    path: '/requests',
+    term: '',
+    page: 1,
+    groups: selectedGroups.value['status_search'],
+    statusQuery: statusQuery.value,
+  })
   searchStore.doSearch(reviewStatus.value, false)
 }
 

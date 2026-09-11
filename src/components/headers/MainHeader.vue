@@ -79,7 +79,7 @@ const { logOutLog, logInLog, jstorLogoClickLog } = logs.getHeaderLogs()
       <pep-pharos-link
         @click.prevent.stop="
           handleWithLog(jstorLogoClickLog, () =>
-            changeRoute(router, emit, '/', searchTerms, pageNo, undefined, undefined),
+            changeRoute(router, { emit, path: '/', term: searchTerms, page: pageNo }),
           )
         "
       >

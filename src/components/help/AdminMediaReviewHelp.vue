@@ -81,16 +81,7 @@ const goBack = () => {
             <pep-pharos-link
               @click.prevent.stop="
                 handleWithLog(unavailableItemsPolicyLinkClickLog, () =>
-                  changeRoute(
-                    router,
-                    undefined,
-                    '/help/media-review-policy',
-                    '',
-                    0,
-                    undefined,
-                    undefined,
-                    undefined,
-                  ),
+                  changeRoute(router, { path: '/help/media-review-policy', term: '', page: 0 }),
                 )
               "
               >read the model media review policy here</pep-pharos-link

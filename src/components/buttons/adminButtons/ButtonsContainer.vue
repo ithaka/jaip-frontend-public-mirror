@@ -90,7 +90,7 @@ const { openHistoryModalLog, closeHistoryModalLog, readButtonLog, toggleGlobalHi
           :href="readRoute"
           @click.prevent.stop="
             handleWithLog(readButtonLog, () =>
-              changeRoute(router, emit, readRoute, searchTerms, pageNo, undefined, undefined),
+              changeRoute(router, { emit, path: readRoute, term: searchTerms, page: pageNo }),
             )
           "
         >

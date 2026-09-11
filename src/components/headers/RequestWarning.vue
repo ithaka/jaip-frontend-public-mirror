@@ -25,7 +25,7 @@ const { searchLinkLog, requestsLinkLog } = logs.getRequestWarningLogs()
           <pep-pharos-link
             @click.prevent.stop="
               handleWithLog(searchLinkLog, () =>
-                changeRoute(router, emit, '/search', searchTerms, pageNo, undefined, undefined),
+                changeRoute(router, { emit, path: '/search', term: searchTerms, page: pageNo }),
               )
             "
           >
@@ -37,7 +37,7 @@ const { searchLinkLog, requestsLinkLog } = logs.getRequestWarningLogs()
           <pep-pharos-link
             @click.prevent.stop="
               handleWithLog(requestsLinkLog, () =>
-                changeRoute(router, emit, '/requests', searchTerms, pageNo, undefined, undefined),
+                changeRoute(router, { emit, path: '/requests', term: searchTerms, page: pageNo }),
               )
             "
           >

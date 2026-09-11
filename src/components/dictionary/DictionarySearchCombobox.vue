@@ -55,19 +55,13 @@ const handleTermSubmit = () => {
 
   // Remove the search term from the combobox after submission
   typedValue.value = ''
-  changeRoute(
-    router,
-    undefined,
-    `/dictionary/${encodeURIComponent(term)}`,
-    '',
-    1,
-    undefined,
-    undefined,
-    {
-      includeSearchQuery: false,
-      closeOnNavigate: false,
-    },
-  )
+  changeRoute(router, {
+    path: `/dictionary/${encodeURIComponent(term)}`,
+    term: '',
+    page: 1,
+    includeSearchQuery: false,
+    closeOnNavigate: false,
+  })
   dictionaryCombobox.value?.blur()
 }
 

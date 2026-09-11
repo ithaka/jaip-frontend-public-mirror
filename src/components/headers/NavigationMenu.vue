@@ -56,7 +56,7 @@ const { changeRouteLog } = logs.getHeaderLogs()
       href
       @click.prevent.stop="
         handleWithLog(changeRouteLog(route.path), () =>
-          changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined),
+          changeRoute(router, { emit, path: route.path, term: searchTerms, page: pageNo }),
         )
       "
     >
@@ -95,7 +95,7 @@ const { changeRouteLog } = logs.getHeaderLogs()
           href
           @click.prevent.stop="
             handleWithLog(changeRouteLog(route.path), () =>
-              changeRoute(router, emit, route.path, searchTerms, pageNo, undefined, undefined),
+              changeRoute(router, { emit, path: route.path, term: searchTerms, page: pageNo }),
             )
           "
         >

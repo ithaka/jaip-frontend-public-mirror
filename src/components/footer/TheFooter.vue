@@ -59,7 +59,7 @@ const { searchTerms, pageNo } = storeToRefs(searchStore)
 const onLinkClick = (path: string) => {
   // Add a check as I saw an object being passed instead of a string
   const term = typeof searchTerms.value === 'string' ? searchTerms.value : ''
-  changeRoute(router, emit, path, term, pageNo.value, undefined, undefined)
+  changeRoute(router, { emit, path, term, page: pageNo.value })
 }
 
 const { handleWithLog, logs } = useLogger()
