@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import type { Entity } from '@/interfaces/Entities'
+import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { EntityActions } from '@/interfaces/AccountManagement'
+import type { Feature } from '@/interfaces/Features'
+import type { Entity, EntityManagerPayload } from '@/interfaces/Entities'
 import type { Group, GroupSelection } from '@/interfaces/Group'
-import { capitalize, isEmail } from '@/utils/helpers'
-import { useUserStore } from '@/stores/user'
+import type { PropType, Ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed, ref } from 'vue'
+import GroupSelector from '@/components/account/GroupSelector.vue'
+import { useLogger } from '@/composables/logging/useLogger'
 import { useCoreStore } from '@/stores/core'
 import { useFeaturesStore } from '@/stores/features'
-import { storeToRefs } from 'pinia'
-import { ref, computed } from 'vue'
-import type InputFileEvent from '@/interfaces/Events/InputEvent'
-import type { PropType, Ref } from 'vue'
-import type { Feature } from '@/interfaces/Features'
-import GroupSelector from '@/components/account/GroupSelector.vue'
 import { useSubdomainStore } from '@/stores/subdomains'
-import { useLogger } from '@/composables/logging/useLogger'
+import { useUserStore } from '@/stores/user'
+import { capitalize, isEmail } from '@/utils/helpers'
 
 const props = defineProps({
   entity: {
@@ -31,18 +31,25 @@ const props = defineProps({
   showModal: Boolean,
 })
 
-const coreStore = useCoreStore()
-const userStore = useUserStore()
-const { featureDetails, selectedGroups, groupMap, groupThreshold } = storeToRefs(userStore)
-
-const subdomainStore = useSubdomainStore()
-const { subdomains, gettingSubdomains } = storeToRefs(subdomainStore)
-
-const featuresStore = useFeaturesStore()
-const { features } = storeToRefs(featuresStore)
-
 const emit = defineEmits(['close', 'update'])
 
+const coreStore = useCoreStore()
+const featuresStore = useFeaturesStore()
+const subdomainStore = useSubdomainStore()
+const userStore = useUserStore()
+
+const { featureDetails, selectedGroups, groupMap, groupThreshold } = storeToRefs(userStore)
+const { subdomains, gettingSubdomains } = storeToRefs(subdomainStore)
+
+/**
+ * The new entity being managed.
+ */
+const newEntity = ref({ ...props.entity })
+
+/**
+ * Compute the feature name based on the entity type and action.
+ * @returns The computed feature name as a string.
+ */
 const featureName = computed(() => {
   let name = 'add_or_edit_users'
   if (props.action === 'add' && props.entity.type === 'facilities') {
@@ -63,6 +70,9 @@ if (!selectedGroups.value[featureName.value]) {
   selectedGroups.value[featureName.value] = []
 }
 
+/**
+ * Options for the group selector component, derived from the available groups for the current feature.
+ */
 const selectorGroupOptions = ref(
   featureDetails.value[featureName.value]?.groups
     .reduce((arr, id: number) => {
@@ -75,6 +85,7 @@ const selectorGroupOptions = ref(
     .sort((a, b) => a.name.localeCompare(b.name)) || [],
 )
 
+// Set the initial values for groups and options based on the entity type and action
 if (props.action === 'edit') {
   if (props.entity.type === 'users') {
     selectedGroups.value[featureName.value] =
@@ -86,15 +97,21 @@ if (props.action === 'edit') {
   }
 }
 
+/**
+ * Ref for the currently selected group in the modal
+ */
 const focusedGroup = ref(
   selectorGroupOptions.value?.length ? selectorGroupOptions.value![0]?.id : 0,
 ) as Ref<number>
 
+// Automatically select the first group if there is only one available for the feature.
 if (featureDetails.value[featureName.value]?.groups.length === 1) {
   selectedGroups.value[featureName.value] = selectorGroupOptions.value![0]?.id
     ? [selectorGroupOptions.value![0].id]
     : []
 }
+
+// Automatically select the first group for facilities when editing if the entity has exactly one group.
 if (
   props.entity.type === 'facilities' &&
   props.action === 'edit' &&
@@ -105,15 +122,96 @@ if (
     : []
   focusedGroup.value = props.entity.groups![0]?.id || 0
 }
+
+/**
+ * The selected features of each group, keyed by group ID and feature name.
+ */
+const selectedFeatures = ref({} as { [group: number]: { [feature: string]: boolean } })
+
+/**
+ * Initialize selected features for each available group from the entity's current values.
+ */
+selectorGroupOptions.value?.forEach((group) => {
+  const currentGroup = newEntity.value.groups?.find((g: Group) => g.id === group.id)
+  selectedFeatures.value[group.id] = Object.entries(currentGroup?.features || {}).reduce(
+    (featureMap, [name, isSelected]) => {
+      featureMap[name] = !!isSelected
+      return featureMap
+    },
+    {} as { [feature: string]: boolean },
+  )
+})
+
+/**
+ * The categorized features of the focused group.
+ */
+const categorizedFeatures = computed(() => {
+  return featuresStore.categorizedFeatures(
+    groupMap.value.get(focusedGroup.value),
+    props.entity.type,
+    true,
+  )
+})
+
+/**
+ * Flat list of feature names currently visible for the focused group.
+ */
+const focusedGroupFeatureNames = computed(() => {
+  return Object.values(categorizedFeatures.value).flatMap((category) =>
+    category.map((feature: Feature) => feature.name),
+  )
+})
+
+/**
+ * Number of enabled features in the focused group.
+ */
+const selectedFocusedGroupFeatureCount = computed(() => {
+  return focusedGroupFeatureNames.value.filter((name) => {
+    return !!selectedFeatures.value[focusedGroup.value]?.[name]
+  }).length
+})
+
+/**
+ * True when every visible feature in the focused group is enabled.
+ */
+const allFocusedGroupFeaturesSelected = computed(() => {
+  return (
+    focusedGroupFeatureNames.value.length > 0 &&
+    selectedFocusedGroupFeatureCount.value === focusedGroupFeatureNames.value.length
+  )
+})
+
+/**
+ * True when the focused group has a partial feature selection (i.e., indeterminate state)
+ */
+const someFocusedGroupFeaturesSelected = computed(() => {
+  return selectedFocusedGroupFeatureCount.value > 0 && !allFocusedGroupFeaturesSelected.value
+})
+
+/**
+ * Validation state and error messages for the entity's name and contact fields.
+ */
 const invalidName = ref(false)
 const invalidContact = ref(false)
 const nameError = ref('')
 const contactError = ref('')
+
+/**
+ * Validates the entity's name field.
+ *
+ * @param str
+ */
 const validateName = (str: string) => {
   str = str.trim()
   invalidName.value = !str
   nameError.value = invalidName.value ? 'Name is required' : ''
 }
+
+/**
+ * Validates the entity's contact field.
+ *
+ * @param str
+ */
 const validateContact = (str: string) => {
   str = str.trim()
   invalidContact.value = !str
@@ -126,122 +224,165 @@ const validateContact = (str: string) => {
   }
 }
 
+/**
+ * Handlers for input events on the entity's name and contact fields.
+ *
+ * @param e The input for the entity's name field.
+ */
 const handleNameInput = (e: InputFileEvent) => {
   newEntity.value.name = e.target.value
   validateName(newEntity.value.name || '')
 }
 
+/**
+ * Handles input events for the entity's contact field.
+ *
+ * @param e The input for the entity's contact field.
+ */
 const handleContactInput = (e: InputFileEvent) => {
   newEntity.value.contact = e.target.value
   validateContact(newEntity.value.contact)
 }
 
-const handleSubmit = async () => {
-  // Validation
-  validateName(newEntity.value.name || '')
-  validateContact(newEntity.value.contact || '')
-  const hasGroups = selectedGroups.value[featureName.value]?.length
-  const anyInvalid =
-    invalidName.value ||
-    invalidContact.value ||
-    !hasGroups ||
-    hasInvalidPrimarySiteCode.value ||
-    hasInvalidSubdomain.value
-  if (anyInvalid) {
-    if (includeSubdomain.value) {
-      primarySitecodeTouched.value = true
-      subdomainTouched.value = true
-    }
-    return
+/**
+ * Returns feature names available to a specific group for the current entity type.
+ *
+ * @param groupId The ID of the group for which to retrieve available feature names.
+ * @returns An array of feature names available to the specified group.
+ */
+const getAvailableFeatureNamesForGroup = (groupId: number): string[] => {
+  const group = groupMap.value.get(groupId)
+  if (!group) {
+    return []
   }
 
-  if (props.entity.type == 'facilities' && canManageFacilities.value && includeSubdomain.value) {
-    newEntity.value.subdomain = subdomain.value
-    newEntity.value.primary_sitecode = primarySitecode.value
-  } else if (props.entity.type == 'facilities' && canManageFacilities.value) {
-    newEntity.value.subdomain = ''
-    newEntity.value.primary_sitecode = ''
-  }
-
-  newEntity.value.groups = selectedGroups.value[featureName.value]
-    ?.map((group: number) => {
-      const g = groupMap.value.get(group)
-      return {
-        id: g!.id,
-        name: g!.name,
-        features: selectedFeatures.value[group] || {},
-      }
-    })
-    .filter((group) => {
-      return Object.keys(group.features).length
-    })
-  try {
-    await coreStore.$api.auth.entities[props.action](newEntity.value, props.entity.type)
-    const msg = `${newEntity.value.name} successfully ${props.action === 'add' ? 'added' : 'edited'}.`
-    coreStore.toast(msg, 'success')
-  } catch {
-    const msg = `Oops! There was an error and ${newEntity.value.name} could not be ${props.action === 'add' ? 'added' : 'edited'}.`
-    coreStore.toast(msg, 'error')
-  }
-  emit('update')
-
-  emit('close')
+  return Object.values(featuresStore.categorizedFeatures(group, props.entity.type, true)).flatMap(
+    (category) => category.map((feature: Feature) => feature.name),
+  )
 }
 
-const newEntity = ref({ ...props.entity })
-const categorizedFeatures = computed(() => {
-  return featuresStore.categorizedFeatures(
-    groupMap.value.get(focusedGroup.value),
-    props.entity.type,
-    true,
+/**
+ * We want every value to have an explicitly set value so that features being turned off are specifically
+ * included in the changes sent to the server.
+ *
+ * @param groupId The ID of the group for which to build the feature map.
+ * @param source An optional source object containing the current feature states.
+ * @returns A feature map with all available features for the group explicitly set to true or false.
+ */
+const buildFeatureMapForGroup = (
+  groupId: number,
+  source: { [feature: string]: boolean } = {},
+): { [feature: string]: boolean } => {
+  return getAvailableFeatureNamesForGroup(groupId).reduce(
+    (featureMap, featureName) => {
+      featureMap[featureName] = !!source[featureName]
+      return featureMap
+    },
+    {} as { [feature: string]: boolean },
   )
-})
-const selectedFeatures = ref({} as { [group: number]: { [feature: string]: boolean } })
-selectorGroupOptions.value?.forEach((group) => {
-  selectedFeatures.value[group.id] = {}
-  for (const key in categorizedFeatures.value) {
-    categorizedFeatures.value[key]?.forEach((feature) => {
-      if (newEntity.value.groups) {
-        const currentGroup = newEntity.value.groups.find((g: Group) => g.id === group.id)
-        if (currentGroup && currentGroup.features[feature.name]) {
-          selectedFeatures.value[group.id]![feature.name] =
-            currentGroup.features[feature.name] || false
-        }
-      }
-    })
+}
+
+/**
+ * Checks if any features are enabled in the given feature map.
+ *
+ * @param featureMap A map of feature names to their enabled/disabled state.
+ * @returns True if at least one feature is enabled, false otherwise.
+ */
+const hasAnyEnabledFeature = (featureMap: { [feature: string]: boolean }): boolean => {
+  return Object.values(featureMap).some((isEnabled) => isEnabled)
+}
+
+/**
+ * Compares two feature maps, treating missing keys as false. This allows us to identify where
+ * changes have been made.
+ *
+ * @param a The first feature map to compare.
+ * @param b The second feature map to compare.
+ * @returns True if the feature maps are equal, false otherwise.
+ */
+const areFeatureMapsEqual = (
+  a: { [feature: string]: boolean },
+  b: { [feature: string]: boolean },
+): boolean => {
+  const keys = new Set([...Object.keys(a), ...Object.keys(b)])
+  for (const key of keys) {
+    if (!!a[key] !== !!b[key]) {
+      return false
+    }
   }
-})
+  return true
+}
+
+/**
+ * Get the selection status of a specific feature within the focused group.
+ *
+ * @param featureName The name of the feature to check.
+ * @returns A boolean indicating whether the feature is selected in the focused group.
+ */
+const getFeatureStatusInFocusedGroup = (featureName: string): boolean => {
+  return !!selectedFeatures.value[focusedGroup.value]?.[featureName]
+}
+
+/**
+ * Select or deselect all features within the focused group.
+ *
+ * @param emptying A boolean indicating whether to deselect all features (true) or select all features (false).
+ */
 const selectAllFeatures = (emptying: boolean) => {
+  if (!selectedFeatures.value[focusedGroup.value]) {
+    selectedFeatures.value[focusedGroup.value] = {}
+  }
+
   if (emptying) {
     selectedFeatures.value[focusedGroup.value] = {}
   } else {
-    selectedFeatures.value[focusedGroup.value] = features.value.reduce(
-      (obj, feature) => {
-        obj[feature.name] = true
-        return obj
+    selectedFeatures.value[focusedGroup.value] = focusedGroupFeatureNames.value.reduce(
+      (featureMap, featureName) => {
+        featureMap[featureName] = true
+        return featureMap
       },
       {} as { [feature: string]: boolean },
     )
   }
 }
 
+/**
+ * Select or deselect all features within a specific category.
+ *
+ * @param category The array of features within the category to be toggled.
+ */
 const selectCategoryFeatures = (category: Array<Feature>) => {
-  const hasCategoryFeature = category.some((feature: Feature) => {
-    return selectedFeatures.value[focusedGroup.value]?.[feature.name]
-  })
-  category.forEach((feature: Feature) => {
-    if (selectedFeatures.value[focusedGroup.value]) {
-      selectedFeatures.value[focusedGroup.value]![feature.name] =
-        !selectedFeatures.value[focusedGroup.value] || !hasCategoryFeature
-    }
-  })
-}
-const handleFeatureSelection = (e: InputFileEvent) => {
-  if (selectedFeatures.value[focusedGroup.value]) {
-    selectedFeatures.value[focusedGroup.value]![e.target.value] = !e.target.checked
+  if (!selectedFeatures.value[focusedGroup.value]) {
+    selectedFeatures.value[focusedGroup.value] = {}
   }
+
+  const shouldEnable = !category.every((feature: Feature) => {
+    return !!selectedFeatures.value[focusedGroup.value]?.[feature.name]
+  })
+
+  category.forEach((feature: Feature) => {
+    selectedFeatures.value[focusedGroup.value]![feature.name] = shouldEnable
+  })
 }
 
+/**
+ * Toggle the selection status of a specific feature within the focused group.
+ *
+ * @param featureName The name of the feature to be toggled.
+ */
+const toggleFeatureSelection = (featureName: string) => {
+  if (!selectedFeatures.value[focusedGroup.value]) {
+    selectedFeatures.value[focusedGroup.value] = {}
+  }
+  selectedFeatures.value[focusedGroup.value]![featureName] =
+    !selectedFeatures.value[focusedGroup.value]![featureName]
+}
+
+/**
+ * Handle the selection of a group.
+ *
+ * @param event The group selection event containing the target and available groups.
+ */
 const handleGroupSelection = (event: GroupSelection) => {
   const hasGroup = selectedGroups.value[featureName.value]?.includes(event.target)
   const hasAny = event.groups.length
@@ -254,24 +395,30 @@ const handleGroupSelection = (event: GroupSelection) => {
   }
 }
 
-const getFeatureStatusInFocusedGroup = (featureName: string): boolean | undefined => {
-  return selectedFeatures.value[focusedGroup.value]?.[featureName]
-}
-
+/**
+ * Handle the selection of a feature group.
+ *
+ * @param e The input file event containing the selected group value.
+ */
 const handleFeatureGroupSelection = (e: InputFileEvent) => {
   focusedGroup.value = parseInt(e.target.value, 10)
 }
 
+/**
+ * Include subdomain flag and related reactive properties involving subdomain and sitecode.
+ */
 const includeSubdomain = ref(!!newEntity.value.subdomain && !!newEntity.value.primary_sitecode)
-const primarySitecode = ref(newEntity.value.primary_sitecode || '')
-const noPrimarySitecode = computed(() => !primarySitecode.value.trim())
-const primarySitecodeTouched = ref(false)
-const hasInvalidPrimarySiteCode = computed(() => includeSubdomain.value && noPrimarySitecode.value)
-const showInvalidPrimarySitecode = computed(
-  () => includeSubdomain.value && primarySitecodeTouched.value && noPrimarySitecode.value,
+const primarySiteCode = ref(newEntity.value.primary_sitecode || '')
+const isPrimarySiteCodeBlank = computed(() => !primarySiteCode.value.trim())
+const primarySiteCodeTouched = ref(false)
+const hasInvalidPrimarySiteCode = computed(
+  () => includeSubdomain.value && isPrimarySiteCodeBlank.value,
 )
-const sitecodeMessage = computed(() =>
-  primarySitecodeTouched.value && noPrimarySitecode.value
+const showInvalidPrimarySiteCode = computed(
+  () => includeSubdomain.value && primarySiteCodeTouched.value && isPrimarySiteCodeBlank.value,
+)
+const primarySiteCodeMessage = computed(() =>
+  primarySiteCodeTouched.value && isPrimarySiteCodeBlank.value
     ? 'A primary sitecode is required if you wish to use a subdomain.'
     : '',
 )
@@ -285,15 +432,30 @@ const subdomainMessage = computed(() =>
   showInvalidSubdomain.value ? 'A subdomain is required if you wish to use a subdomain.' : '',
 )
 
-const handlePrimarySitecode = (e: InputFileEvent) => {
-  primarySitecode.value = e.target.value
-  primarySitecodeTouched.value = true
+/**
+ * Handle the input events for primary sitecode and subdomain.
+ *
+ * @param e The input file event containing the primary sitecode value.
+ */
+const handlePrimarySiteCode = (e: InputFileEvent) => {
+  primarySiteCode.value = e.target.value
+  primarySiteCodeTouched.value = true
 }
+
+/**
+ * Handle the input event for the subdomain field.
+ *
+ * @param e The input file event containing the subdomain value.
+ */
 const handleSubdomain = (e: InputFileEvent) => {
   subdomain.value = e.target.value
   subdomainTouched.value = true
 }
 
+/**
+ * Get the list of subdomains from the API.
+ *
+ */
 const getSubdomains = async () => {
   gettingSubdomains.value = true
   const args = {
@@ -304,8 +466,103 @@ const getSubdomains = async () => {
   subdomains.value = data.subdomains
   gettingSubdomains.value = false
 }
+
+// Fetch subdomains if the entity is a facility and subdomains have not been fetched yet.
 if (props.entity.type === 'facilities' && !subdomains.value.length && !gettingSubdomains.value) {
   getSubdomains()
+}
+
+/**
+ * Handles the submission of the entity form, including validation and preparation of the payload.
+ */
+const handleSubmit = async () => {
+  // Validation
+  validateName(newEntity.value.name || '')
+  validateContact(newEntity.value.contact || '')
+  const hasGroups = selectedGroups.value[featureName.value]?.length
+  const anyInvalid =
+    invalidName.value ||
+    invalidContact.value ||
+    !hasGroups ||
+    hasInvalidPrimarySiteCode.value ||
+    hasInvalidSubdomain.value
+  if (anyInvalid) {
+    if (includeSubdomain.value) {
+      primarySiteCodeTouched.value = true
+      subdomainTouched.value = true
+    }
+    return
+  }
+
+  // Filter and prepare the list of groups to be included in the payload.
+  const groups = (selectedGroups.value[featureName.value]
+    ?.map((group: number) => {
+      const g = groupMap.value.get(group)
+
+      // We want to filter out groups that don't exist in the group map
+      if (!g) {
+        return null
+      }
+
+      // We also want to filter out groups that don't have any enabled features
+      const selectedGroupFeatures = buildFeatureMapForGroup(
+        group,
+        selectedFeatures.value[group] || {},
+      )
+      if (!hasAnyEnabledFeature(selectedGroupFeatures)) {
+        return null
+      }
+
+      // We also want to filter out groups that haven't changed from the original entity
+      const originalGroup = (newEntity.value.groups || []).find((entityGroup: Group) => {
+        return entityGroup.id === group
+      })
+
+      // Build a feature map for the original group to compare against the selected features.
+      const originalGroupFeatures = buildFeatureMapForGroup(group, originalGroup?.features || {})
+
+      // Determine if the selected features for this group have changed compared to the original features.
+      const hasChanged =
+        props.action === 'add' || !areFeatureMapsEqual(selectedGroupFeatures, originalGroupFeatures)
+
+      // If the features haven't changed, we don't need to include this group in the update.
+      if (!hasChanged) {
+        return null
+      }
+
+      return {
+        id: g.id,
+        name: g.name,
+        features: selectedGroupFeatures,
+      }
+    })
+    .filter(Boolean) || []) as Group[]
+
+  // Prepare the payload for the API request, including the updated groups
+  // and any relevant subdomain or primary sitecode information.
+  const payload: EntityManagerPayload = {
+    ...newEntity.value,
+    groups,
+    ...(props.entity.type === 'facilities' && canManageFacilities.value
+      ? {
+          subdomain: includeSubdomain.value ? subdomain.value : '',
+          primary_sitecode: includeSubdomain.value ? primarySiteCode.value : '',
+        }
+      : {}),
+  }
+
+  // Send the prepared payload to the API and handle the response.
+  try {
+    await coreStore.$api.auth.entities[props.action](payload, props.entity.type)
+    const msg = `${payload.name} successfully ${props.action === 'add' ? 'added' : 'edited'}.`
+    coreStore.toast(msg, 'success')
+  } catch {
+    const msg = `Oops! There was an error and ${payload.name} could not be ${props.action === 'add' ? 'added' : 'edited'}.`
+    coreStore.toast(msg, 'error')
+  }
+
+  emit('update')
+  emit('close')
 }
 
 const { handleWithLog, logs } = useLogger()
@@ -396,12 +653,12 @@ const {
           <pep-pharos-input-group
             v-if="includeSubdomain"
             :id="`${entity.id || entity.type}_primary_sitecode`"
-            :value="primarySitecode"
+            :value="primarySiteCode"
             :placeholder="'example.edu'"
             :name="`${entity.id || entity.type}_primary_sitecode`"
-            :message="sitecodeMessage"
-            :invalidated="showInvalidPrimarySitecode"
-            @input="handlePrimarySitecode"
+            :message="primarySiteCodeMessage"
+            :invalidated="showInvalidPrimarySiteCode"
+            @input="handlePrimarySiteCode"
           >
             <span slot="label">{{ 'Primary Sitecode' }}</span>
           </pep-pharos-input-group>
@@ -501,23 +758,12 @@ const {
       >
         <div>
           <pep-pharos-checkbox
-            :checked="
-              Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                .length === features.length
-            "
-            :indeterminate="
-              Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                .length &&
-              Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                .length !== features.length
-            "
+            :checked="allFocusedGroupFeaturesSelected"
+            :indeterminate="someFocusedGroupFeaturesSelected"
             class="mb-4"
-            @input="
+            @change="
               handleWithLog(featureCheckboxToggleLog('select_all_features', 'Select All'), () =>
-                selectAllFeatures(
-                  Object.values(selectedFeatures[focusedGroup] || {}).filter((val: boolean) => val)
-                    .length === features.length,
-                ),
+                selectAllFeatures(allFocusedGroupFeaturesSelected),
               )
             "
           >
@@ -558,19 +804,19 @@ const {
               <pep-pharos-checkbox-group
                 v-if="category.length"
                 class="entity-manager__jaip-checkbox-group"
-                @change="handleFeatureSelection($event)"
               >
                 <ul class="jaip-checkbox-group">
                   <li v-for="feature in category" :key="`feature_${feature.name}`">
                     <pep-pharos-checkbox
                       :checked="getFeatureStatusInFocusedGroup(feature.name)"
                       :value="feature.name"
-                      @click="
+                      @change="
                         handleWithLog(
                           featureCheckboxToggleLog(
                             !getFeatureStatusInFocusedGroup(feature.name),
                             feature.display_name,
                           ),
+                          () => toggleFeatureSelection(feature.name),
                         )
                       "
                     >

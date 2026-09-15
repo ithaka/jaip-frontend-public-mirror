@@ -29,3 +29,7 @@ export interface EntityResponse {
   total: number
   entities: { [key: string]: Entity }
 }
+
+export interface EntityManagerPayload extends Omit<Entity, 'groups'> {
+  groups: Array<Group>
+}

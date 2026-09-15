@@ -1,6 +1,43 @@
 import { handleLocation } from './helpers'
 import { routes } from '../../src/config/api'
 
+const assertFacilityPayloadWithFixture = (alias: string, fixturePath: string) => {
+  cy.fixture(fixturePath).then((request) => {
+    cy.wait(alias)
+      .its('request.body')
+      .then((body) => {
+        const expectedFields: Record<string, unknown> = {}
+        ;['id', 'name', 'contact', 'type', 'subdomain', 'primary_sitecode'].forEach((field) => {
+          const value = (request as Record<string, unknown>)[field]
+          if (value !== undefined) {
+            expectedFields[field] = value
+          }
+        })
+
+        expect(body).to.deep.include(expectedFields)
+
+        const expectedGroups =
+          (request as { groups?: Array<{ id: number; name: string }> }).groups || []
+        expect(body.groups).to.have.length(expectedGroups.length)
+
+        expectedGroups.forEach((group) => {
+          expect(
+            body.groups.some(
+              (actualGroup: { id: number; name: string }) =>
+                actualGroup.id === group.id && actualGroup.name === group.name,
+            ),
+          ).to.eq(true)
+        })
+
+        expect(
+          body.groups.some((group: { features: Record<string, boolean> }) =>
+            Object.values(group.features).every((isEnabled) => !isEnabled),
+          ),
+        ).to.eq(false)
+      })
+  })
+}
+
 describe('Account Management', () => {
   context('For admins', () => {
     beforeEach(() => {
@@ -247,9 +284,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/edit_facility__one_group__request.json').then((request) => {
-          cy.wait('@editFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@editFacility',
+          'account/edit_facility__one_group__request.json',
+        )
       })
     })
 
@@ -314,9 +352,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/manage_facility__one_group__request.json').then((request) => {
-          cy.wait('@manageFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@manageFacility',
+          'account/manage_facility__one_group__request.json',
+        )
       })
 
       it('Submits facility management with subdomain', () => {
@@ -368,9 +407,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/manage_facility__one_group_subdomain__request.json').then((request) => {
-          cy.wait('@manageFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@manageFacility',
+          'account/manage_facility__one_group_subdomain__request.json',
+        )
       })
 
       it('Shows remove button', () => {
@@ -405,9 +445,10 @@ describe('Account Management', () => {
         cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
-        cy.fixture('account/add_facility__one_group__request.json').then((request) => {
-          cy.wait('@addFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@addFacility',
+          'account/add_facility__one_group__request.json',
+        )
       })
 
       it('Submits add facility with subdomain', () => {
@@ -468,9 +509,10 @@ describe('Account Management', () => {
         cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
-        cy.fixture('account/add_facility__one_group_subdomain__request.json').then((request) => {
-          cy.wait('@addFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@addFacility',
+          'account/add_facility__one_group_subdomain__request.json',
+        )
       })
     })
   })
@@ -660,6 +702,100 @@ describe('Account Management', () => {
             cy.wait('@editUser').its('request.body').should('deep.eq', request)
           })
         })
+
+        it('Submits only changed groups and omits all-false groups', () => {
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
+            .contains('select all', { matchCase: false })
+            .click()
+
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
+            .contains('select all', { matchCase: false })
+            .click()
+
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
+            .contains('ilium', { matchCase: false })
+            .click()
+
+          cy.get('pep-pharos-modal[open] pep-pharos-dropdown-menu-item')
+            .contains('ithaka', { matchCase: false })
+            .click()
+
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
+            .contains('view snippet', { matchCase: false })
+            .click()
+
+          cy.get('pep-pharos-modal[open] pep-pharos-button')
+            .contains('submit', { matchCase: false })
+            .click()
+
+          cy.wait('@editUser')
+            .its('request.body.groups')
+            .then((groups) => {
+              expect(groups).to.have.length(1)
+              expect(groups.map((group: { id: number }) => group.id)).to.deep.eq([1])
+              expect(
+                groups.some((group: { features: Record<string, boolean> }) =>
+                  Object.values(group.features).every((isEnabled) => !isEnabled),
+                ),
+              ).to.eq(false)
+            })
+        })
+
+        it('Respects indeterminate state for parent checkboxes', () => {
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-checkbox',
+            'select all',
+            { matchCase: false },
+          ).should('have.prop', 'indeterminate', false)
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-heading pep-pharos-checkbox',
+            'search results',
+            { matchCase: false },
+          ).should('have.prop', 'indeterminate', false)
+
+          cy.get('pep-pharos-modal[open] .feature-selection pep-pharos-checkbox')
+            .contains('view snippet', { matchCase: false })
+            .click()
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-checkbox',
+            'select all',
+            { matchCase: false },
+          )
+            .should('have.prop', 'indeterminate', true)
+            .should('have.prop', 'checked', false)
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-heading pep-pharos-checkbox',
+            'search results',
+            { matchCase: false },
+          )
+            .should('have.prop', 'indeterminate', true)
+            .should('have.prop', 'checked', false)
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-heading pep-pharos-checkbox',
+            'search results',
+            { matchCase: false },
+          ).click()
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-heading pep-pharos-checkbox',
+            'search results',
+            { matchCase: false },
+          )
+            .should('have.prop', 'indeterminate', false)
+            .should('have.prop', 'checked', true)
+
+          cy.contains(
+            'pep-pharos-modal[open] .feature-selection pep-pharos-checkbox',
+            'select all',
+            { matchCase: false },
+          )
+            .should('have.prop', 'indeterminate', true)
+            .should('have.prop', 'checked', false)
+        })
       })
 
       context('When adding users', () => {
@@ -823,9 +959,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/edit_facility__one_group__request.json').then((request) => {
-          cy.wait('@editFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@editFacility',
+          'account/edit_facility__one_group__request.json',
+        )
       })
     })
 
@@ -885,9 +1022,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/manage_facility__one_group__request.json').then((request) => {
-          cy.wait('@manageFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@manageFacility',
+          'account/manage_facility__one_group__request.json',
+        )
       })
 
       it('Submits facility management with subdomain', () => {
@@ -939,9 +1077,10 @@ describe('Account Management', () => {
           .contains('submit', { matchCase: false })
           .click()
 
-        cy.fixture('account/manage_facility__one_group_subdomain__request.json').then((request) => {
-          cy.wait('@manageFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@manageFacility',
+          'account/manage_facility__one_group_subdomain__request.json',
+        )
       })
 
       it('Submits facility removal', () => {
@@ -1000,9 +1139,10 @@ describe('Account Management', () => {
         cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
-        cy.fixture('account/add_facility__one_group__request.json').then((request) => {
-          cy.wait('@addFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@addFacility',
+          'account/add_facility__one_group__request.json',
+        )
       })
 
       it('Submits add facility with subdomain', () => {
@@ -1073,9 +1213,10 @@ describe('Account Management', () => {
         cy.get('pep-pharos-modal[open] pep-pharos-button')
           .contains('submit', { matchCase: false })
           .click()
-        cy.fixture('account/add_facility__one_group_subdomain__request.json').then((request) => {
-          cy.wait('@addFacility').its('request.body').should('deep.eq', request)
-        })
+        assertFacilityPayloadWithFixture(
+          '@addFacility',
+          'account/add_facility__one_group_subdomain__request.json',
+        )
       })
     })
   })
