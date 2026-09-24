@@ -71,7 +71,9 @@ const { searchTerms, pageNo } = storeToRefs(searchStore)
 const itemid = ref(props.iid || props.filename || 'unknown')
 
 // PDFJS CONFIGURATION
-const ENABLE_XFA = true
+// XFA is not needed for this read-only viewer and requires PDF.js to build an additional document
+// representation. Keep it disabled to reduce peak memory use on constrained devices.
+const ENABLE_XFA = false
 const DEFAULT_SCALE_DELTA = 1.1
 const MIN_SCALE = 0.25
 const MAX_SCALE = 10.0
@@ -286,6 +288,10 @@ const createLoadingTask = async (
       enableXfa: ENABLE_XFA,
       withCredentials: true,
       wasmUrl: OPENJPEG_WASM_URL,
+      // The PDF endpoint will support optional byte ranges. These flags will disable streaming
+      // and prefetching the rest of the document so PDF.js retains only the chunks needed for the pages the user opens.
+      disableStream: true,
+      disableAutoFetch: true,
       // This disables only Chromium's native ImageDecoder on affected versions. PDF images remain
       // enabled and are decoded through PDF.js's WASM/JavaScript fallback implementation.
       // The single render-failure retry also forces this off: WebView builds can misreport their
