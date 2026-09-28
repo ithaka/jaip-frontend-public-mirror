@@ -245,7 +245,10 @@ const { footnoteLinkClick } = logs.getDictionaryTermLogs()
             >No results found for "<strong>{{ term }}</strong
             >"</pep-pharos-heading
           >
-          <p>Try searching the dictionary for another word or phrase.</p>
+          <p>
+            Check your spelling or try searching for another word. We’re aware that some common
+            words are returning no results and are working to resolve this.
+          </p>
         </div>
       </div>
     </section>
