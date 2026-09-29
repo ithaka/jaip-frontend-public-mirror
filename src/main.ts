@@ -116,6 +116,9 @@ const checkForNewVersion = async () => {
 
     // If the build ID in the version.json file is different from the current build ID, log the new version and reload the page.
     const versionInfo = await response.json()
+    if (typeof versionInfo.buildId === 'string') {
+      coreStore.version = versionInfo.buildId
+    }
 
     let attempted = ''
     try {
@@ -230,6 +233,7 @@ app.use(pinia)
 
 // Set up stores
 const coreStore = useCoreStore()
+coreStore.version = __APP_BUILD_ID__
 const featuresStore = useFeaturesStore()
 const userStore = useUserStore()
 const searchStore = useSearchStore()

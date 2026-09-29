@@ -35,6 +35,7 @@ export const useCoreStore = defineStore('core', {
       environment: '',
       isSpinning: false,
       $api: {} as ApiObject,
+      version: '',
     }
   },
   getters: {

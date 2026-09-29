@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import { changeRoute, compareRoutesByName, collectOrganizedRoutes } from '@/utils/helpers'
 import { computed } from 'vue'
 import { useLogger } from '@/composables/logging/useLogger'
+import { useCoreStore } from '@/stores/core'
 
 const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
   isAuthenticatedAdmin: {
@@ -16,6 +17,8 @@ const { isAuthenticatedAdmin, isAdminSubdomain } = defineProps({
     required: true,
   },
 })
+
+const coreStore = useCoreStore()
 
 const router = useRouter()
 /**
@@ -228,6 +231,9 @@ const { footerLinkClickLog } = logs.getFooterLogs()
             ©2000-{{ new Date().getFullYear().toString() }} ITHAKA. All Rights Reserved. JSTOR®, the
             JSTOR logo, JPASS®, Artstor®, Reveal Digital™ and ITHAKA® are registered trademarks of
             ITHAKA.
+          </p>
+          <p v-if="coreStore.version" class="footer__statement">
+            Version: {{ coreStore.version || 'dev' }}
           </p>
         </div>
       </div>
