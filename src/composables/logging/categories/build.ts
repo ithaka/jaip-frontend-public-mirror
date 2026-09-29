@@ -9,8 +9,25 @@ const getBuildLogs = () => {
       eventtype: LogEvent.asset_preload_error,
     })
 
+  const versionCheckLog =
+    (opts: {
+      currentBuildId: string
+      latestBuildId?: string
+      status: 'new_version' | 'invalid_response' | 'reload_failed' | 'unavailable'
+      reason?: string
+    }): (() => WorkingLog) =>
+    () => ({
+      eventtype: LogEvent.version_check,
+      event_description: `Version check ${opts.status.replace('_', ' ')}`,
+      action: opts.status,
+      value: opts.currentBuildId,
+      new_value: opts.latestBuildId,
+      reason: opts.reason,
+    })
+
   return {
     assetPreloadErrorLog,
+    versionCheckLog,
   }
 }
 

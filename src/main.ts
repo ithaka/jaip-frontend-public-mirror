@@ -53,6 +53,160 @@ window.addEventListener('vite:preloadError', (event) => {
   window.location.reload()
 })
 
+// Check for a new build every 15 minutes, on focus, and when the tab becomes visible again.
+const versionCheckInterval = 15 * 60 * 1000
+let isCheckingForNewVersion = false
+let hasReloadedForNewVersion = false
+let hasInitializedVersionChecks = false
+let updatePending = false
+let lastCheckAt = 0
+
+/**
+ * Check for a new build of the app by fetching the version.json file and comparing the build ID with the current build ID.
+ * If a new build is detected, reload the page to load the latest version.
+ *
+ * @returns A promise that resolves when the version check is complete.
+ */
+const checkForNewVersion = async () => {
+  // If we're already checking for a new version or have already reloaded for a new version, don't check again.
+  const now = Date.now()
+  // Focus and visibilitychange can fire together; throttle checks to one per minute.
+  if (isCheckingForNewVersion || hasReloadedForNewVersion || now - lastCheckAt < 60000) {
+    return
+  }
+
+  lastCheckAt = now
+  // Set the flag to indicate that we're checking for a new version.
+  isCheckingForNewVersion = true
+  try {
+    // We use a plain fetch rather than axios because axios is configured to use the base URL,
+    // which may not be the same as the root of the app (particularly in ephemeral environments).
+    // Because this file is served by nginx, rather than via the api, we need to fetch it from the root of the app.
+    // The timestamp query parameter is added to prevent caching of the version.json file, ensuring that we always
+    // get the latest version information. We also set cache: 'no-store' to ensure we get the latest version.json
+    // file and not a cached version.
+    const response = await fetch(`/version.json?t=${Date.now()}`, { cache: 'no-store' })
+    const { handleWithLog, logs } = useLogger()
+    const { versionCheckLog } = logs.getBuildLogs()
+
+    // If the response status is not 200, log the manifest as unavailable and return early.
+    if (response.status !== 200) {
+      handleWithLog(
+        versionCheckLog({
+          currentBuildId: __APP_BUILD_ID__,
+          status: 'unavailable',
+          reason: `Version manifest returned ${response.status}`,
+        }),
+      )
+      return
+    }
+
+    // Check the content type of the response to ensure it's JSON. If not, log the manifest as invalid and return early.
+    const contentType = String(response.headers.get('content-type') || '')
+    if (!contentType.includes('application/json')) {
+      handleWithLog(
+        versionCheckLog({
+          currentBuildId: __APP_BUILD_ID__,
+          status: 'invalid_response',
+          reason: `Version manifest returned ${contentType || 'unknown content type'}`,
+        }),
+      )
+      return
+    }
+
+    // If the build ID in the version.json file is different from the current build ID, log the new version and reload the page.
+    const versionInfo = await response.json()
+
+    let attempted = ''
+    try {
+      attempted = sessionStorage.getItem('reloadedForBuildId') || ''
+    } catch {
+      // Ignore errors accessing sessionStorage, as it may not be available in some environments.
+    }
+
+    if (versionInfo.buildId === __APP_BUILD_ID__ && attempted === __APP_BUILD_ID__) {
+      try {
+        sessionStorage.removeItem('reloadedForBuildId')
+      } catch {
+        // Ignore errors accessing sessionStorage, as it may not be available in some environments.
+      }
+    }
+
+    if (typeof versionInfo.buildId === 'string' && versionInfo.buildId !== __APP_BUILD_ID__) {
+      if (attempted === versionInfo.buildId) {
+        handleWithLog(
+          versionCheckLog({
+            currentBuildId: __APP_BUILD_ID__,
+            latestBuildId: versionInfo.buildId,
+            status: 'reload_failed',
+            reason: 'Already reloaded for this build ID, but the new build is still not loading.',
+          }),
+        )
+        hasReloadedForNewVersion = true
+        return
+      }
+      try {
+        sessionStorage.setItem('reloadedForBuildId', versionInfo.buildId)
+        // Verify that the value was written correctly to sessionStorage. If not, throw an error to be caught below.
+        if (sessionStorage.getItem('reloadedForBuildId') !== versionInfo.buildId) {
+          throw new Error('Reload guard could not be verified after writing it.')
+        }
+      } catch (error) {
+        handleWithLog(
+          versionCheckLog({
+            currentBuildId: __APP_BUILD_ID__,
+            latestBuildId: versionInfo.buildId,
+            status: 'unavailable',
+            reason: `Could not persist reload guard: ${String(error)}`,
+          }),
+        )
+        hasReloadedForNewVersion = true
+        return
+      }
+      handleWithLog(
+        versionCheckLog({
+          currentBuildId: __APP_BUILD_ID__,
+          latestBuildId: versionInfo.buildId,
+          status: 'new_version',
+        }),
+      )
+      hasReloadedForNewVersion = true
+      updatePending = true
+      if (document.hidden) {
+        window.location.reload()
+      }
+    }
+  } catch (error) {
+    console.error('Error checking app version:', error)
+  } finally {
+    isCheckingForNewVersion = false
+  }
+}
+
+const initializeVersionChecks = () => {
+  // Guards against repeat initializations of the version check to avoid adding listeners repeatedly.
+  if (hasInitializedVersionChecks) {
+    return
+  }
+
+  hasInitializedVersionChecks = true
+  checkForNewVersion()
+  // Set up periodic checks for a new build every 15 minutes, on focus, and when the tab becomes visible again.
+  window.setInterval(checkForNewVersion, versionCheckInterval)
+
+  // Check for a new build when the window gains focus or when the tab becomes visible again.
+  window.addEventListener('focus', checkForNewVersion)
+
+  // Defer reloads while the page is visible so an update check cannot interrupt an active task.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && updatePending) {
+      window.location.reload()
+    } else if (!document.hidden) {
+      checkForNewVersion()
+    }
+  })
+}
+
 function checkIfValidUUID(str: string) {
   // Regular expression to check if string is a valid UUID
   const regexExp =
@@ -280,5 +434,13 @@ const auth = async (app: App) => {
 const router = createRouter(isAuthenticatedStudent.value, isAuthenticatedAdmin.value)
 app.use(router)
 app.use(axios)
-router.beforeEach((to, from) => handleRouteChange(to, from))
+initializeVersionChecks()
+
+router.beforeEach((to, from) => {
+  if (updatePending) {
+    window.location.assign(to.fullPath)
+    return false
+  }
+  return handleRouteChange(to, from)
+})
 app.mount('#app')

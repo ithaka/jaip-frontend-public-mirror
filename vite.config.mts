@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig, loadEnv } from 'vite'
+import { execSync } from 'node:child_process'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
@@ -7,8 +8,74 @@ import path from "path";
 import Markdown from 'unplugin-vue-markdown/vite'
 import dynamicImport from "vite-plugin-dynamic-import";
 
+/**
+ * Prepare build information for the app, including a build ID and commit hash.
+ * 
+ * @returns An object containing the build ID, commit hash, and build timestamp.
+ */
+function getBuildInfo() {
+  const builtAt = new Date().toISOString()
+  // For CICD, we should use the commit hash provided by the environment variable. If not available, we can try to get it from git.
+  let commit = process.env.GIT_COMMIT || process.env.SOURCE_VERSION || ''
+
+  if (!commit) {
+    try {
+      commit = execSync('git rev-parse --short=12 HEAD', { encoding: 'utf8' }).trim()
+    } catch {
+      commit = ''
+    }
+  }
+
+  return {
+    // If the commit hash isn't available, then we can just use the timestamp as the build ID.
+    buildId: commit ? builtAt + '-' + commit : builtAt,
+    commit,
+    builtAt,
+  }
+}
+
+/**
+ * A Vite plugin that generates a version.json file containing build information, including the build ID, commit hash, and build timestamp.
+ * 
+ * @param buildInfo The build information object containing the build ID, commit hash, and build timestamp.
+ * @returns A Vite plugin that generates a version.json file with the build information.
+ */
+function buildVersionManifest(buildInfo: ReturnType<typeof getBuildInfo>): Plugin {
+  const source = JSON.stringify(buildInfo, null, 2)
+
+  return {
+    name: 'app-version-manifest',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const pathname = new URL(req.url || '', 'http://localhost').pathname
+        if (pathname !== '/version.json') {
+          next()
+          return
+        }
+
+        res.statusCode = 200
+        res.setHeader('Content-Type', 'application/json')
+        res.setHeader('Cache-Control', 'no-store')
+        res.end(source)
+      })
+    },
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'version.json',
+        source,
+      })
+    },
+  }
+}
+
 export default defineConfig(({ mode }) => {
+  const buildInfo = getBuildInfo()
   const config = {
+    define: {
+      // This is the build ID that is used to determine if a new version of the app is available. It is generated at build time and is unique for each build.
+      __APP_BUILD_ID__: JSON.stringify(buildInfo.buildId),
+    },
     build: {
       assetsDir: "assets/generated",
       // This is the default value for target:
@@ -68,6 +135,7 @@ export default defineConfig(({ mode }) => {
           }
         },
       }),
+      buildVersionManifest(buildInfo),
 
     ],
     optimizeDeps: {

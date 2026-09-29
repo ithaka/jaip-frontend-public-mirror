@@ -31,6 +31,7 @@ export enum LogEvent {
   viewer_control = 'viewer_control',
   viewport_patch_error = 'viewport_patch_error',
   asset_preload_error = 'asset_preload_error',
+  version_check = 'version_check',
 }
 
 export type EventType = `pep_fe_${LogEvent}`
