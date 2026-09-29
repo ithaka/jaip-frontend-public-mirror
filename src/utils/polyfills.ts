@@ -1,3 +1,5 @@
+import { shouldDisablePDFJSImageDecoder } from '@/utils/viewers'
+
 //Shape returned by `Promise.withResolvers`.
 type PromiseResolvers<T> = {
   promise: Promise<T>
@@ -138,6 +140,118 @@ const polyfillArrayBufferTransferToFixedLength = () => {
   })
 }
 
+/**
+ * Decodes the uncompressed BMP layout produced by pdfjs-dist's `ImageResizer._encodeBMP()`
+ * (BITMAPFILEHEADER + BITMAPINFOHEADER, 1bpp grayscale/24bpp BGR/32bpp RGBA pixel data, rows
+ * padded to 4 bytes for 1bpp/24bpp). Re-verify this layout whenever pdfjs-dist is upgraded by
+ * re-grepping `_encodeBMP` in the built worker bundle.
+ */
+const decodePDFJSEncodedBMP = (bytes: Uint8Array): ImageData => {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+  if (view.getUint16(0, true) !== 0x4d42) {
+    throw new Error('Not a BMP file')
+  }
+
+  const pixelDataOffset = view.getUint32(10, true)
+  const width = view.getInt32(18, true)
+  const height = Math.abs(view.getInt32(22, true))
+  const bitsPerPixel = view.getUint16(28, true)
+  const colorTableOffset = 14 + view.getUint32(14, true)
+  const rgba = new Uint8ClampedArray(width * height * 4)
+
+  if (bitsPerPixel === 1) {
+    const rowSize = (((width + 7) >> 3) + 3) & ~3
+    for (let y = 0; y < height; y++) {
+      const rowStart = pixelDataOffset + y * rowSize
+      for (let x = 0; x < width; x++) {
+        const bit = (bytes[rowStart + (x >> 3)] >> (7 - (x & 7))) & 1
+        const gray = bytes[colorTableOffset + bit * 4]
+        const outIdx = (y * width + x) * 4
+        rgba[outIdx] = gray
+        rgba[outIdx + 1] = gray
+        rgba[outIdx + 2] = gray
+        rgba[outIdx + 3] = 255
+      }
+    }
+  } else if (bitsPerPixel === 24) {
+    const rowSize = (3 * width + 3) & ~3
+    for (let y = 0; y < height; y++) {
+      const rowStart = pixelDataOffset + y * rowSize
+      for (let x = 0; x < width; x++) {
+        const idx = rowStart + x * 3
+        const outIdx = (y * width + x) * 4
+        rgba[outIdx] = bytes[idx + 2]
+        rgba[outIdx + 1] = bytes[idx + 1]
+        rgba[outIdx + 2] = bytes[idx]
+        rgba[outIdx + 3] = 255
+      }
+    }
+  } else if (bitsPerPixel === 32) {
+    const rowSize = width * 4
+    for (let y = 0; y < height; y++) {
+      const rowStart = pixelDataOffset + y * rowSize
+      for (let x = 0; x < width; x++) {
+        const idx = rowStart + x * 4
+        const outIdx = (y * width + x) * 4
+        rgba[outIdx] = bytes[idx]
+        rgba[outIdx + 1] = bytes[idx + 1]
+        rgba[outIdx + 2] = bytes[idx + 2]
+        rgba[outIdx + 3] = bytes[idx + 3]
+      }
+    }
+  } else {
+    throw new Error(`Unsupported BMP bit depth: ${bitsPerPixel}`)
+  }
+
+  return new ImageData(rgba, width, height)
+}
+
+type CreateImageBitmapFn = typeof createImageBitmap
+
+/**
+ * Chromium WebViews below version 133 can throw `InvalidStateError` from `createImageBitmap` when
+ * decoding the full-size BMP blobs PDF.js's `ImageResizer` builds before downscaling oversized page
+ * images (e.g. large JBIG2 scans - not gated by `isImageDecoderSupported`, which only covers
+ * `ImageDecoder`). This replaces `createImageBitmap` for `image/bmp` blobs only with a manual
+ * decode of that deterministic, self-encoded BMP, turned into a bitmap directly from its
+ * `ImageData` - sidestepping the broken native BMP codec entirely. Every other call
+ * (non-BMP sources, or BMP calls with crop/option arguments this fast path doesn't handle) falls
+ * through to the native implementation unchanged.
+ */
+const polyfillCreateImageBitmapForLegacyBMPDecoder = () => {
+  if (!shouldDisablePDFJSImageDecoder()) return
+  if (typeof createImageBitmap !== 'function') return
+
+  const nativeCreateImageBitmap: CreateImageBitmapFn = createImageBitmap.bind(globalThis)
+
+  const patchedCreateImageBitmap = (async (
+    image: unknown,
+    ...rest: unknown[]
+  ): Promise<ImageBitmap> => {
+    if (!(image instanceof Blob) || image.type !== 'image/bmp' || rest.length > 0) {
+      return (nativeCreateImageBitmap as (...args: unknown[]) => Promise<ImageBitmap>)(
+        image,
+        ...rest,
+      )
+    }
+
+    try {
+      const imageData = decodePDFJSEncodedBMP(new Uint8Array(await image.arrayBuffer()))
+      // No canvas: these images exceed canvas size limits.
+      return await nativeCreateImageBitmap(imageData)
+    } catch {
+      // Fall back to the native decoder if the BMP doesn't match the expected layout.
+      return nativeCreateImageBitmap(image)
+    }
+  }) as CreateImageBitmapFn
+
+  Object.defineProperty(globalThis, 'createImageBitmap', {
+    configurable: true,
+    writable: true,
+    value: patchedCreateImageBitmap,
+  })
+}
+
 /** Adds the runtime APIs required by the legacy PDF.js bundle on supported older browsers. */
 export const initPDFViewerPolyfills = () => {
   polyfillPromiseWithResolvers()
@@ -152,4 +266,5 @@ export const initPDFViewerPolyfills = () => {
 export const initPDFWorkerPolyfills = () => {
   polyfillPromiseWithResolvers()
   polyfillArrayBufferTransferToFixedLength()
+  polyfillCreateImageBitmapForLegacyBMPDecoder()
 }
