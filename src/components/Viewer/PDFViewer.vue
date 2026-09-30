@@ -89,10 +89,14 @@ const DISABLE_IMAGE_DECODER = shouldDisablePDFJSImageDecoder()
 // support see its injected static imports as syntax errors. Production uses the bundled IIFE.
 const USE_MAIN_THREAD_PDF_WORKER = import.meta.env.DEV || shouldUsePDFJSMainThreadWorker()
 
-// The wasm files are needed to process some images included in PDFs (jpx files specifically,
+// The files in this directory are needed to process some images included in PDFs (jpx files specifically,
 // though there may be others). Including the wasmUrl in the loading task options allows PDF.js to
-// render those images. PDF.js appends decoder filenames to this URL, so the trailing slash matters.
-const OPENJPEG_WASM_URL = `${import.meta.env.BASE_URL}scripts/pdfjs/wasm/`
+// render those images. However, some devices/browsers may not support WebAssembly, or may not handle those
+// files correctly. But this directory also includes fallbacks for those cases, so we can safely disable
+// WebAssembly and still render the PDF.
+//
+// PDF.js appends decoder filenames to this URL, so the trailing slash matters.
+const WASM_URL = `${import.meta.env.BASE_URL}scripts/pdfjs/wasm/`
 
 // We need to determine whether the browser supports CSS round(), because pdfjs uses it to set the
 // page sizes.
@@ -287,7 +291,11 @@ const createLoadingTask = async (
       url: src,
       enableXfa: ENABLE_XFA,
       withCredentials: true,
-      wasmUrl: OPENJPEG_WASM_URL,
+      wasmUrl: WASM_URL,
+      useWasm: false,
+      // Keep worker fetch enabled: PDF.js otherwise disables WASM and doesn't retain wasmUrl when
+      // CMap/standard-font URLs aren't configured, leaving its JS decoder fallback with no URL.
+      useWorkerFetch: true,
       // The PDF endpoint will support optional byte ranges. These flags will disable streaming
       // and prefetching the rest of the document so PDF.js retains only the chunks needed for the pages the user opens.
       disableStream: true,
