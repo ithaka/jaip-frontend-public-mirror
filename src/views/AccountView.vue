@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { ref, computed } from 'vue'
+import type { Ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import type { EntityOption, EntityObject, EntityTypes } from '@/interfaces/AccountManagement'
+import { useRoute } from 'vue-router'
+import { type EntityOption, type EntityObject, EntityTypes } from '@/interfaces/AccountManagement'
 import EntitySearch from '@/components/account/EntitySearch.vue'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
+
+const route = useRoute()
+const tab = ref(route.params?.tab || 'users')
 
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
 
+/**
+ * The list of all possible entity options, including their associated features, titles, types, and icons.
+ */
 const entityOptions = ref([
   {
     feature: 'get_users',
@@ -25,12 +33,23 @@ const entityOptions = ref([
     icon: 'workspace',
   },
 ] as EntityOption[])
+
+/**
+ * Computes the list of available entity options based on the user's feature details.
+ *
+ * @returns {EntityOption[]} The list of available entity options based on the user's feature details.
+ */
 const availableEntities = computed(() => {
   return entityOptions.value.filter((entity: EntityOption) => {
     return (featureDetails.value[entity.feature] || {}).enabled
   }) as EntityOption[]
 })
 
+/**
+ * Computes an object mapping entity types to their corresponding entity options.
+ *
+ * @returns {EntityObject} An object mapping entity types to their corresponding entity options.
+ */
 const entityObject = computed(() => {
   return entityOptions.value.reduce((obj, entity: EntityOption) => {
     obj[entity.type] = entity
@@ -38,11 +57,24 @@ const entityObject = computed(() => {
   }, {} as EntityObject) as EntityObject
 })
 
-const visibleEntity = ref(
-  featureDetails.value['get_users']?.enabled
-    ? ('users' as EntityTypes)
-    : ('facilities' as EntityTypes),
-)
+/**
+ * Determines the starting entity tab based on the current route and available features.
+ *
+ * @returns {EntityTypes} The starting entity tab based on the current route and available features.
+ */
+const startingEntity = computed(() => {
+  const hasUsersFeature = featureDetails.value['get_users']?.enabled
+  const hasFacilitiesFeature = featureDetails.value['get_facilities']?.enabled
+  if (tab.value === 'users' && hasUsersFeature) {
+    return EntityTypes.Users
+  }
+  if (tab.value === 'facilities' && hasFacilitiesFeature) {
+    return EntityTypes.Facilities
+  }
+  return availableEntities.value[0]?.type || EntityTypes.Users
+})
+
+const visibleEntity: Ref<EntityTypes> = ref(startingEntity.value)
 
 const { logPageView } = usePageViewLogger()
 logPageView()

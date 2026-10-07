@@ -1,4 +1,5 @@
 import { createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { EntityTypes } from '@/interfaces/AccountManagement'
 
 const config = {
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,7 +62,7 @@ const config = {
       component: () => import('@/views/AboutView.vue'),
     },
     {
-      path: '/account',
+      path: `/account/:tab(${Object.values(EntityTypes).join('|')})?`,
       name: 'account',
       meta: {
         group: 'support',
