@@ -174,6 +174,7 @@ onBeforeUnmount(() => {
   &__buttons-left {
     grid-column: 1;
     justify-content: flex-start;
+    padding-left: var(--fullscreen-exit-button-inset, 0px);
   }
   &__actions-right {
     grid-column: 3;

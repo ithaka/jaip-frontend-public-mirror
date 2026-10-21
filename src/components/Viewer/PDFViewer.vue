@@ -1061,7 +1061,13 @@ const fireToast = () => {
         <div
           v-if="enableViewer"
           ref="viewerWrapper"
-          :class="['viewer-wrapper', { 'viewer-wrapper--full-screen': isInFullscreen }]"
+          :class="[
+            'viewer-wrapper',
+            {
+              'viewer-wrapper--full-screen': isInFullscreen,
+              'viewer-wrapper--native-full-screen': isInFullscreen && !isUsingCSSFullscreen,
+            },
+          ]"
         >
           <div class="viewer-and-controls">
             <ControlBar
@@ -1109,16 +1115,13 @@ const fireToast = () => {
                 )
               "
             />
-            <div
-              id="viewer-container"
-              ref="viewerContainer"
-              :class="{ 'full-screen': isInFullscreen }"
-              tabindex="-1"
-            >
-              <!-- Keep PDF.js's viewer node mounted while a document reloads. Replacing it with v-if
-               would invalidate the DOM references held by the existing PDFViewer instance. -->
-              <div v-show="!isLoading" id="viewer" ref="viewerElement" class="pdfViewer" />
-              <pep-pharos-loading-spinner v-if="isLoading" />
+            <div class="viewer-body">
+              <div id="viewer-container" ref="viewerContainer" tabindex="-1">
+                <!-- Keep PDF.js's viewer node mounted while a document reloads. Replacing it with v-if
+                 would invalidate the DOM references held by the existing PDFViewer instance. -->
+                <div v-show="!isLoading" id="viewer" ref="viewerElement" class="pdfViewer" />
+                <pep-pharos-loading-spinner v-if="isLoading" />
+              </div>
             </div>
           </div>
         </div>
@@ -1200,6 +1203,22 @@ const fireToast = () => {
     background-color: var(--pharos-color-black);
     display: flex;
     flex-direction: column;
+    // iPadOS draws its status bar (time, date, battery) over native fullscreen content because the
+    // viewport uses viewport-fit=cover. Inset the viewer below it; the inset is 0 where nothing overlays the page.
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    box-sizing: border-box;
+    padding-top: var(--safe-area-top);
+    // Its min-height is a viewport unit; zero it so the box can shrink to fit below the inset.
+    .viewer-and-controls {
+      min-height: 0;
+    }
+  }
+  // iOS also overlays its own exit button at the top left of native fullscreen content, which would
+  // cover the first toolbar controls. ControlBar uses this inset to move them clear of it.
+  &--native-full-screen {
+    @supports (-webkit-touch-callout: none) {
+      --fullscreen-exit-button-inset: 88px;
+    }
   }
 }
 .viewer-and-controls {
@@ -1216,23 +1235,25 @@ const fireToast = () => {
   position: relative;
   background-color: var(--pharos-color-black);
   padding-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+// Takes the height the toolbar leaves, so the scroll container is sized by layout instead of its own
+// viewport-unit guess. Only .viewer-and-controls reads --vh (see its fallback chain above).
+.viewer-body {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 #viewer-container {
   overflow: auto;
+  // PDF.js requires its scroll container to be absolutely positioned.
   position: absolute;
-  left: 0;
+  top: 0;
   right: 0;
-  margin: auto;
-  height: 93%;
-  height: 95vh;
-  height: 95dvh;
-  height: calc(var(--vh, 1vh) * 95);
-  &.full-screen {
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 100%;
-    min-width: 100%;
-  }
+  bottom: 0;
+  left: 0;
 }
 </style>
