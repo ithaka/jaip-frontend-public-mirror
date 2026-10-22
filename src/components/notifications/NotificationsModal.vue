@@ -471,7 +471,7 @@ const emit = defineEmits<{
   }
   &__radio-buttons {
     display: grid;
-    grid-template-columns: repeat(2, 100%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     @media (width <= 570px) {
       grid-template-columns: repeat(1, 100%);
     }
