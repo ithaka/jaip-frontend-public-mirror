@@ -10,6 +10,8 @@ import SearchResults from '@/components/results/SearchResults.vue'
 import { changeRoute, parseGroupsQueryParam } from '@/utils/helpers'
 import GroupSelector from '@/components/account/GroupSelector.vue'
 import { DatePickerRangeDirection } from '@/interfaces/DatePicker'
+import { REQUEST_STATUSES } from '@/consts/RequestStatuses'
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import type { Group } from '@/interfaces/Group'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 
@@ -57,21 +59,13 @@ const dates = computed(() => {
   return [statusStartDate.value, statusEndDate.value]
 })
 
-const statuses = [
-  { label: 'Pending', value: 'pending' },
-  { label: 'Completed', value: 'completed' },
-  { label: 'Incomplete', value: 'incomplete' },
-  { label: 'Denied', value: 'denied' },
-  { label: 'Approved', value: 'approved' },
-]
+const statuses = REQUEST_STATUSES.filter(
+  (status) => status.value !== RequestStatus.Restricted || canViewRestrictedList.value,
+)
 
-if (canViewRestrictedList.value) {
-  statuses.push({ label: 'Restricted', value: 'restricted' })
-}
-
-const handleStatusSelection = (status: string) => {
+const handleStatusSelection = (status: RequestStatus) => {
   reviewStatus.value = status
-  if (status === 'restricted') {
+  if (status === RequestStatus.Restricted) {
     coreStore.$api.global_restricts.last_updated.get().then((response) => {
       searchStore.restrictedListLastUpdated = response.data.last_updated
     })
@@ -90,6 +84,7 @@ const newSearch = () => {
     page: 1,
     groups: selectedGroups.value['status_search'],
     statusQuery: statusQuery.value,
+    status: reviewStatus.value || undefined,
   })
   searchStore.doSearch(reviewStatus.value, false)
 }
@@ -102,11 +97,14 @@ logPageView()
   <main>
     <pep-pharos-layout row-gap="0">
       <pep-pharos-heading class="text-capitalize cols-12" :level="1" preset="5--bold">
-        <span v-if="reviewStatus === 'restricted'">{{ reviewStatus }} Items</span>
+        <span v-if="reviewStatus === RequestStatus.Restricted">{{ reviewStatus }} Items</span>
         <span v-else>{{ reviewStatus }} Requests</span>
       </pep-pharos-heading>
       <div
-        v-if="ungroupedFeatures['manage_restricted_list']?.enabled && reviewStatus === 'restricted'"
+        v-if="
+          ungroupedFeatures['manage_restricted_list']?.enabled &&
+          reviewStatus === RequestStatus.Restricted
+        "
         class="cols-7"
       >
         <pep-pharos-alert status="info">

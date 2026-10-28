@@ -43,6 +43,42 @@ describe('Search', () => {
       .as('env')
     handleLocation('/search?term=&page=1', cy, 'searchPage', 'pep')
   })
+  context('Returning from an item', () => {
+    beforeEach(() => {
+      cy.intercept('GET', routes.auth.get, {
+        fixture: 'auth/users/student__one_group_media_access__response.json',
+      }).as('auth')
+      cy.intercept('POST', routes.search.basic, {
+        fixture: 'search/no_term_given__response.json',
+      }).as('search')
+    })
+
+    it('Offers a back link on the item that returns to the same page of results', () => {
+      cy.visit('/search?term=&page=2')
+      cy.wait(['@auth', '@alerts', '@env', '@disciplines'])
+      cy.wait('@search').its('request.body.pageNo').should('eq', 2)
+
+      cy.get('.search-result')
+        .find('pep-pharos-button')
+        .contains('Read', { matchCase: false })
+        .first()
+        .click()
+      cy.location('pathname').should('match', /^\/pdf\//)
+      // The item page looks up its own record with the same endpoint.
+      cy.wait('@search')
+
+      cy.get('[data-cy="back-to-results-link"]')
+        .should('contain.text', 'Back to results')
+        .and('have.css', 'margin-bottom', '24px')
+        .find('pep-pharos-link')
+        .click()
+
+      cy.wait('@search').its('request.body.pageNo').should('eq', 2)
+      cy.location('pathname').should('eq', '/search')
+      cy.location('search').should('include', 'page=2')
+    })
+  })
+
   context('General', () => {
     context('Sorting', () => {
       context('When no search term is given', () => {

@@ -29,9 +29,16 @@ const getDictionaryTermLogs = () => {
       direction: opts.direction,
     })
 
+  const backToDictionaryHomeLinkClick = (): WorkingLog => ({
+    ...generics.linkClick('dictionary_home', 'internal_navigation'),
+    event_description: 'user clicked back to dictionary home link from term page',
+    action: 'back_to_dictionary_home',
+  })
+
   return {
     quickSearchLinkClick,
     footnoteLinkClick,
+    backToDictionaryHomeLinkClick,
   }
 }
 

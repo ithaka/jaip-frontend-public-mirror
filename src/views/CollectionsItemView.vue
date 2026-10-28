@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'
 import { computed, ref } from 'vue'
 import type { Collections, CollectionMetadata } from '@/interfaces/Collections'
+import BackLink from '@/components/BackLink.vue'
 import PDFViewer from '@/components/Viewer/PDFViewer.vue'
 import PrintButton from '@/components/PrintButton.vue'
 import DownloadButton from '@/components/DownloadButton.vue'
@@ -63,23 +64,12 @@ logPageView()
       <pep-pharos-loading-spinner v-if="gettingDocument" class="position-fixed" />
     </Teleport>
     <div v-if="collectionMetadata" class="document-metadata">
-      <div class="document-metadata__back">
-        <pep-pharos-link
-          subtle
-          flex
-          :href="`/collections/${collection}`"
-          class="document-metadata__back-link"
-          data-cy="custom-content-back-link"
-        >
-          <pep-pharos-icon
-            class="document-metadata__back-icon"
-            name="arrow-left"
-            a11y-hidden="true"
-          >
-          </pep-pharos-icon>
-          Browse all guides
-        </pep-pharos-link>
-      </div>
+      <BackLink
+        class="document-metadata__back"
+        label="Browse all guides"
+        :href="`/collections/${collection}`"
+        data-cy="custom-content-back-link"
+      />
       <div class="document-metadata document-metadata__content">
         <pep-pharos-heading
           :level="2"
@@ -242,14 +232,10 @@ logPageView()
 
 .document-metadata {
   &__back {
-    &-link {
-      font-size: var(--pharos-font-size-small);
-      gap: var(--pharos-spacing-one-half-x);
+    grid-column: span 12;
+    @media screen and (max-width: 1056px) {
+      grid-column: span 4;
     }
-    display: flex;
-    grid-column: span 2;
-    align-items: center;
-    margin-bottom: var(--pharos-spacing-one-and-a-half-x);
   }
   display: grid;
   grid-column: span 12;

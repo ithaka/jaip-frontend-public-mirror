@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import BackLink from '@/components/BackLink.vue'
 import DictionarySearchCombobox from '@/components/dictionary/DictionarySearchCombobox.vue'
 import { addDefinitionGroupFootnotes } from '@/utils/dictionary'
 import { useCoreStore } from '@/stores/core'
@@ -10,6 +11,7 @@ import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import { useLogger } from '@/composables/logging/useLogger'
 
 const route = useRoute()
+const router = useRouter()
 const coreStore = useCoreStore()
 const { isSpinning } = storeToRefs(coreStore)
 
@@ -114,7 +116,10 @@ const { logPageView } = usePageViewLogger()
 logPageView()
 
 const { handleWithLog, logs } = useLogger()
-const { footnoteLinkClick } = logs.getDictionaryTermLogs()
+const { footnoteLinkClick, backToDictionaryHomeLinkClick } = logs.getDictionaryTermLogs()
+
+const dictionaryHome = router.resolve('/dictionary')
+const goToDictionaryHome = () => router.push(dictionaryHome)
 </script>
 
 <template>
@@ -127,9 +132,12 @@ const { footnoteLinkClick } = logs.getDictionaryTermLogs()
 
     <section class="term-view__section">
       <div v-if="!isSpinning" class="term-view__content">
-        <RouterLink class="term-view__back-link" to="/dictionary"
-          >&larr; Back to dictionary home</RouterLink
-        >
+        <BackLink
+          label="Back to dictionary home"
+          :href="dictionaryHome.href"
+          data-cy="term-view-back-link"
+          @click.prevent="handleWithLog(backToDictionaryHomeLinkClick, goToDictionaryHome)"
+        />
         <div v-if="definitions.length" class="term-view__content--success">
           <div class="term-view__entry">
             <pep-pharos-heading preset="5" :level="1">{{ term }}</pep-pharos-heading>
@@ -294,16 +302,6 @@ const { footnoteLinkClick } = logs.getDictionaryTermLogs()
     &--no-results {
       margin-bottom: var(--pharos-spacing-10-x);
     }
-  }
-
-  &__back-link {
-    color: var(--pharos-color-text-base);
-    display: inline-flex;
-    font-size: var(--pharos-font-size-1-x);
-    font-weight: var(--pharos-font-weight-medium);
-    margin-bottom: var(--pharos-spacing-2-x);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.15em;
   }
 
   &__entry {

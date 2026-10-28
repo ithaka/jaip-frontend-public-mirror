@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
@@ -159,12 +160,13 @@ const changePage = (page: number) => {
     page,
     groups: props.requestsPage ? selectedGroups.value['status_search'] : undefined,
     statusQuery: statusQuery.value,
+    status: props.requestsPage ? reviewStatus.value || undefined : undefined,
   })
   focusToTop()
 }
 const changeSecondaryPage = (page: number) => {
   secondaryPageNo.value = page
-  searchStore.doSearch('denied', true)
+  searchStore.doSearch(RequestStatus.Denied, true)
 }
 
 const selectorApproveGroupOptions = ref(
@@ -238,7 +240,7 @@ const openApproveAllModal = () => {
     secondarySearchResp.value = {} as SearchResponse
   } else {
     // If no filters are applied, we can show all the previously denied articles.
-    searchStore.doSearch('denied', true)
+    searchStore.doSearch(RequestStatus.Denied, true)
   }
 
   approveAllUpdateKey.value++
@@ -321,7 +323,7 @@ const pageLimit = ref(props.requestsPage ? secondaryLimit.value : limit.value)
 const showDownloadButton = computed(() => {
   return (
     props.requestsPage &&
-    reviewStatus.value === 'restricted' &&
+    reviewStatus.value === RequestStatus.Restricted &&
     searchTotal.value > 0 &&
     !secondarySearching.value &&
     canViewRestrictedList.value

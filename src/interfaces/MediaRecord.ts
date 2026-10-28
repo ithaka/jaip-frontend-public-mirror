@@ -1,3 +1,5 @@
+import type { RequestStatusLabel } from '@/interfaces/RequestStatus'
+
 export interface MediaRecord {
   _id: string
   _score: number
@@ -31,7 +33,7 @@ export interface MediaRecord {
 }
 
 export interface History {
-  status: Status
+  status: RequestStatusLabel
   statusLabel: string
   statusCreatedAt: Date
   createdAt?: Date
@@ -43,21 +45,13 @@ export interface History {
 }
 
 export interface BulkHistory {
-  status: Status
+  status: RequestStatusLabel
   createdAt: Date
   entityName?: string
   groupName: string
   groupID: number
   statusDetails?: StatusDetails
   entityID?: number
-}
-
-export enum Status {
-  Approved = 'Approved',
-  ApprovedByDiscipline = 'Approved by Discipline',
-  ApprovedByJournal = 'Approved by Journal',
-  Denied = 'Denied',
-  Pending = 'Pending',
 }
 
 export interface StatusDetails {

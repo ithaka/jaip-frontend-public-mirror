@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
@@ -39,7 +40,7 @@ const statuses = ref(props.doc.mediaReviewStatuses)
 const showApprove = !hideButton(
   featureDetails.value,
   statuses.value,
-  'approved',
+  RequestStatus.Approved,
   'approve_requests',
 )
 const useApproveModal = ref(
@@ -169,7 +170,7 @@ const { approvalLog, openApproveModalLog, closeApproveModalLog } = logs.getMedia
         slot="footer"
         :disabled="
           !approveGroups.length ||
-          arraysAreEqual(approveGroups, getGroupsWithStatus(statuses, 'approved'))
+          arraysAreEqual(approveGroups, getGroupsWithStatus(statuses, RequestStatus.Approved))
         "
         @click.prevent.stop="handleWithLog(approvalLog, handleApproval)"
       >

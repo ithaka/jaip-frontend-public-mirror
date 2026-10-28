@@ -143,11 +143,13 @@ describe('Dictionary', () => {
         })
 
         it('shows a back link to the dictionary home', () => {
-          cy.get('[data-cy="term-view"]')
-            .contains('Back to dictionary home')
+          cy.get('[data-cy="term-view-back-link"]')
             .should('be.visible')
-            .and('have.attr', 'href')
-            .and('include', '/dictionary')
+            .and('contain.text', 'Back to dictionary home')
+            .and('have.css', 'margin-bottom', '24px')
+            .find('pep-pharos-link')
+            .click()
+          cy.location('pathname').should('eq', '/dictionary')
         })
 
         context('Footnotes', () => {

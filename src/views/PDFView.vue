@@ -6,9 +6,12 @@ import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
+import BackLink from '@/components/BackLink.vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { Cedar } from '@/interfaces/Metadata'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
+import { useLogger } from '@/composables/logging/useLogger'
+import { useBackToResults } from '@/composables/useBackToResults'
 
 const route = useRoute()
 const coreStore = useCoreStore()
@@ -69,6 +72,10 @@ const getDocument = async () => {
 
 getDocument()
 
+const { resultsHref, goBackToResults } = useBackToResults()
+const { handleWithLog, logs } = useLogger()
+const { backToResultsLog } = logs.getBackLinkLogs()
+
 const { logPageView } = usePageViewLogger()
 logPageView()
 </script>
@@ -78,7 +85,19 @@ logPageView()
     <Teleport to="body">
       <pep-pharos-loading-spinner v-if="gettingDocument" class="position-fixed" />
     </Teleport>
-    <div v-if="doc && Object.keys(doc).length" class="cols-12 mt-5 mb-7">
+    <BackLink
+      v-if="resultsHref"
+      class="cols-12 mt-5"
+      label="Back to results"
+      :href="resultsHref"
+      data-cy="back-to-results-link"
+      @click.prevent="handleWithLog(backToResultsLog, goBackToResults)"
+    />
+    <div
+      v-if="doc && Object.keys(doc).length"
+      class="cols-12 mb-7"
+      :class="{ 'mt-5': !resultsHref }"
+    >
       <SearchResult
         :key="updateKey"
         :doc="doc"

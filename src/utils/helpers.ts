@@ -1,3 +1,4 @@
+import { RequestStatus, RequestStatusLabel } from '@/interfaces/RequestStatus'
 import type { FeatureDetails } from '@/interfaces/Features'
 import type { BulkHistory, History } from '@/interfaces/MediaRecord'
 import type { Router, RouteRecordNormalized } from 'vue-router'
@@ -58,22 +59,35 @@ export const getBulkApprovalStatus = (opts: History[] | BulkHistory[], groups: n
   if (!numStatuses) return false
   let hasApproved = false
   for (let i = 0; i < opts.length; i++) {
-    if (opts[i]?.groupID && groups.includes(opts[i]!.groupID) && opts[i]!.status === 'Approved') {
+    if (
+      opts[i]?.groupID &&
+      groups.includes(opts[i]!.groupID) &&
+      opts[i]!.status === RequestStatusLabel.Approved
+    ) {
       hasApproved = true
     }
   }
   return hasApproved
 }
 
-export const getStatus = (opts: { [key: string]: History }, groups: number[]): string => {
+const REQUEST_STATUS_BY_LABEL: Record<RequestStatusLabel, RequestStatus> = {
+  [RequestStatusLabel.Pending]: RequestStatus.Pending,
+  [RequestStatusLabel.Completed]: RequestStatus.Completed,
+  [RequestStatusLabel.Incomplete]: RequestStatus.Incomplete,
+  [RequestStatusLabel.Denied]: RequestStatus.Denied,
+  [RequestStatusLabel.Approved]: RequestStatus.Approved,
+  [RequestStatusLabel.ApprovedByDiscipline]: RequestStatus.Approved,
+  [RequestStatusLabel.ApprovedByJournal]: RequestStatus.Approved,
+  [RequestStatusLabel.Restricted]: RequestStatus.Restricted,
+}
+
+export const getStatus = (
+  opts: { [key: string]: History },
+  groups: number[],
+): RequestStatus | '' => {
   if (!Object.keys(opts || {}).length) return ''
-  let status = ''
-  if (groups[0] && opts[groups[0]]) {
-    status = opts[groups[0]]!.status || ''
-  }
-  const returnStatus =
-    status == 'Approved by Discipline' || status == 'Approved by Journal' ? 'Approved' : status
-  return returnStatus.toLowerCase()
+  const status = groups[0] ? opts[groups[0]]?.status : undefined
+  return status ? REQUEST_STATUS_BY_LABEL[status] : ''
 }
 
 // Parses a groups query parameter which can be either a JSON array string or a comma-separated list of group IDs,
@@ -117,6 +131,7 @@ export interface ChangeRouteOptions {
   emit?: (event: 'close', ...args: unknown[]) => void
   groups?: number[]
   statusQuery?: string
+  status?: RequestStatus
   includeSearchQuery?: boolean
   closeOnNavigate?: boolean
 }
@@ -130,6 +145,7 @@ export const changeRoute = (
     emit,
     groups,
     statusQuery,
+    status,
     includeSearchQuery = true,
     closeOnNavigate = true,
   }: ChangeRouteOptions,
@@ -152,6 +168,7 @@ export const changeRoute = (
         page,
         groups: serializeGroupsQueryParam(groups),
         statusq: statusq,
+        status,
       },
     })
   } else {

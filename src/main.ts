@@ -19,6 +19,8 @@ import { useSearchStore } from './stores/search'
 import createRouter from '@/router/createRouter'
 import type { RouteLocationNormalized } from 'vue-router'
 import { capitalize, parseGroupsQueryParam } from '@/utils/helpers'
+import { REQUEST_STATUSES } from '@/consts/RequestStatuses'
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useNotificationsStore } from './stores/notifications'
 import { useLogger } from './composables/logging/useLogger'
 import { initPDFViewerPolyfills } from '@/utils/polyfills'
@@ -264,6 +266,7 @@ const {
   ungroupedFeatures,
   id,
   facilities,
+  canViewRestrictedList,
 } = storeToRefs(userStore)
 const { pageNo, reviewStatus, statusQuery } = storeToRefs(searchStore)
 
@@ -281,6 +284,17 @@ routeQuery.value = location.search
 const host = window.__location ? window.__location.host() : location.host
 subdomain.value = get_subdomain(host)
 let duplicateRoute = false
+
+// Returns the request status named in the url, or an empty string if it's missing or not one the
+// user can view.
+const getRequestedStatus = (to: RouteLocationNormalized): RequestStatus | '' => {
+  const requested = [to.query.status].flat()[0]
+  const match = REQUEST_STATUSES.find((status) => status.value === requested)
+  if (!match || (match.value === RequestStatus.Restricted && !canViewRestrictedList.value)) {
+    return ''
+  }
+  return match.value
+}
 
 // We don't need to refetch auth data with every route change.
 // This only runs those api calls when necessary.
@@ -301,6 +315,20 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
   if (isUnauthenticated.value) {
     await auth(app)
   } else {
+    // The request status lives in the url so that coming back to the page, whether with the browser
+    // or from an item, shows the status the user left. If it's missing, fill it in and run this
+    // guard again.
+    const requestedStatus = getRequestedStatus(to)
+    if (to.path === '/requests') {
+      const status =
+        requestedStatus ||
+        reviewStatus.value ||
+        (isAuthenticatedAdmin.value ? RequestStatus.Pending : RequestStatus.Completed)
+      if (to.query.status !== status) {
+        return { path: to.path, query: { ...to.query, status }, hash: to.hash, replace: true }
+      }
+    }
+
     const term = (to.query.term || '').toString()
     const page = (to.query.page || '').toString()
     searchStore.setSearchTerms(term, to.path)
@@ -308,9 +336,12 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
     if (
       from.query.term !== to.query.term ||
       from.query.page !== to.query.page ||
-      from.path !== to.path
+      from.path !== to.path ||
+      (to.path === '/requests' && requestedStatus !== reviewStatus.value)
     ) {
-      if (from.query.page === to.query.page) {
+      // Only start over on the first page when the term changed within the same results page. When
+      // arriving from somewhere else, like an item, the page in the url is the one to show.
+      if (from.path === to.path && from.query.page === to.query.page) {
         pageNo.value = 1
       }
       if (to.path === '/requests') {
@@ -320,9 +351,7 @@ const handleRouteChange = async (to: RouteLocationNormalized, from: RouteLocatio
           : groupIDs.value.length > 4
             ? []
             : groupIDs.value
-        if (!reviewStatus.value) {
-          reviewStatus.value = isAuthenticatedAdmin.value ? 'pending' : 'completed'
-        }
+        reviewStatus.value = requestedStatus
         const sq = (to.query.statusq || '').toString()
         statusQuery.value = sq
       } else {

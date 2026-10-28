@@ -7,6 +7,7 @@ import type { MediaRecord } from '@/interfaces/MediaRecord'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import type SearchArgs from '@/interfaces/SearchArgs'
+import type { RequestStatus } from '@/interfaces/RequestStatus'
 
 const formatSearchString = (arr: string[]) => {
   arr = arr.map((item) => `"${item}"`).filter((item) => !!item)
@@ -59,7 +60,7 @@ export const useSearchStore = defineStore('search', {
       pubYearStart: 1665,
       pubYearEnd: new Date().getFullYear(),
 
-      reviewStatus: '' as string,
+      reviewStatus: '' as RequestStatus | '',
       statusStartDate: new Date(Date.parse('01 Jan 2022 00:00:00 GMT')),
       statusEndDate: new Date(new Date().setUTCHours(23, 59, 59, 999)),
       statusQuery: '' as string,
@@ -121,7 +122,7 @@ export const useSearchStore = defineStore('search', {
         }
       }
     },
-    async doSearch(status: string, secondary: boolean) {
+    async doSearch(status: RequestStatus | '', secondary: boolean) {
       this.searching = true
       const args: SearchArgs = {
         pageNo: this.pageNo,

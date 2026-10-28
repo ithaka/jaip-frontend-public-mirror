@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
@@ -51,7 +52,7 @@ const { handleWithLog, logs } = useLogger()
 const getInitialBulkApprovalState = (approval: BulkHistory[]) => {
   return approval
     .filter((hist: BulkHistory) => {
-      return hist.status.toLowerCase() === 'approved'
+      return hist.status.toLowerCase() === RequestStatus.Approved
     })
     .map((hist: BulkHistory) => {
       return hist.groupID

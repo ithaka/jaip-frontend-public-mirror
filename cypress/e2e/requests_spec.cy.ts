@@ -183,6 +183,79 @@ describe('Requests page', () => {
       cy.location('pathname').should('eq', '/pdf/a9715135-bbe8-3a4e-984c-2fa6aea71d23')
     })
 
+    it('Returns to the same status and page after viewing an approved article', () => {
+      cy.intercept('POST', routes.search.status('approved'), {
+        fixture: 'search/completed__response.json',
+      }).as('approved')
+
+      cy.visit('/requests?term=&page=2&status=approved')
+      cy.wait(['@auth', '@alerts', '@env', '@approved']).then((interceptions) => {
+        expect(interceptions[3]!.request.body.pageNo).to.eq(2)
+      })
+
+      cy.get('.search-result')
+        .eq(1)
+        .find('pep-pharos-button')
+        .contains('Read', { matchCase: false })
+        .click()
+      cy.location('pathname').should('eq', '/pdf/a9715135-bbe8-3a4e-984c-2fa6aea71d23')
+
+      cy.go('back')
+      cy.wait('@approved').its('request.body.pageNo').should('eq', 2)
+      cy.location('pathname').should('eq', '/requests')
+      cy.location('search').should('include', 'status=approved').and('include', 'page=2')
+      cy.get('pep-pharos-heading').contains('approved requests', { matchCase: false })
+    })
+
+    it('Offers a back link on the item that returns to the same status and page', () => {
+      cy.intercept('POST', routes.search.status('approved'), {
+        fixture: 'search/completed__response.json',
+      }).as('approved')
+
+      cy.visit('/requests?term=&page=2&status=approved')
+      cy.wait(['@auth', '@alerts', '@env', '@approved'])
+
+      cy.get('.search-result')
+        .eq(1)
+        .find('pep-pharos-button')
+        .contains('Read', { matchCase: false })
+        .click()
+      cy.location('pathname').should('eq', '/pdf/a9715135-bbe8-3a4e-984c-2fa6aea71d23')
+
+      cy.get('[data-cy="back-to-results-link"]')
+        .should('contain.text', 'Back to results')
+        .and('have.css', 'margin-bottom', '24px')
+        .find('pep-pharos-link')
+        .click()
+
+      cy.wait('@approved').its('request.body.pageNo').should('eq', 2)
+      cy.location('pathname').should('eq', '/requests')
+      cy.location('search').should('include', 'status=approved').and('include', 'page=2')
+      cy.get('pep-pharos-heading').contains('approved requests', { matchCase: false })
+    })
+
+    it('Adds the default status to the url', () => {
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
+
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
+
+      cy.location('search').should('include', 'status=completed')
+    })
+
+    it('Falls back to the default status when the url has an unknown status', () => {
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/completed__response.json',
+      }).as('completed')
+
+      cy.visit('/requests?term=&page=1&status=bogus')
+      cy.wait(['@auth', '@alerts', '@env', '@completed'])
+
+      cy.location('search').should('include', 'status=completed').and('not.include', 'bogus')
+    })
+
     it('Lets students download approved articles', () => {
       cy.intercept('POST', routes.search.status('completed'), {
         fixture: 'search/completed__response.json',

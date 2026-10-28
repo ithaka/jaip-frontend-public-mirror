@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useCitationsStore } from '@/stores/citations'
 import ModalSheet from '@/components/popups/ModalSheet.vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
@@ -110,12 +111,12 @@ const selectedCitationCopyText = computed(() => {
 
 const isPending = computed(() => {
   const status = getStatus(props.doc.mediaReviewStatuses, groupIDs.value)
-  return status === 'pending'
+  return status === RequestStatus.Pending
 })
 
 const isRestricted = computed(() => {
   const status = getStatus(props.doc.mediaReviewStatuses, groupIDs.value)
-  return status === 'restricted'
+  return status === RequestStatus.Restricted
 })
 
 // Functions

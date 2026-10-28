@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import TextBlock from '@/components/truncated/TextBlock.vue'
 import ButtonsContainer from '@/components/buttons/adminButtons/ButtonsContainer.vue'
 import AccessButtons from '@/components/AccessButtons.vue'
@@ -192,7 +193,11 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
       >
         <RequestButton :doc="doc" :hide-requests="hideRequests" :cancel-button-label="buttonName" />
         <pep-pharos-button
-          v-if="status === 'approved' && !pdfView && (featureDetails['view_pdf'] || {}).enabled"
+          v-if="
+            status === RequestStatus.Approved &&
+            !pdfView &&
+            (featureDetails['view_pdf'] || {}).enabled
+          "
           full-width
           class="mb-3"
           variant="primary"
@@ -207,7 +212,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
         </pep-pharos-button>
         <CiteButton v-if="isAuthenticatedStudent" :doc="doc" />
         <AccessButtons
-          v-if="status === 'approved' && !hideAccess"
+          v-if="status === RequestStatus.Approved && !hideAccess"
           :iid="doc.iid"
           variant="secondary"
           column
@@ -263,7 +268,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
 
       <!-- Statuses -->
       <div
-        v-if="!hideStatuses && status !== 'restricted'"
+        v-if="!hideStatuses && status !== RequestStatus.Restricted"
         class="display-flex justify-content-end flex-direction-column"
       >
         <span v-for="(statusData, key) in doc.mediaReviewStatuses" :key="`status_${key}`">
@@ -278,15 +283,15 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
               <span v-if="statusData.statusDetails?.reason || statusData.statusDetails?.comments">
                 <span
                   v-if="
-                    statusData.status.toLowerCase() === 'denied' ||
-                    statusData.status.toLowerCase() === 'incomplete' ||
+                    statusData.status.toLowerCase() === RequestStatus.Denied ||
+                    statusData.status.toLowerCase() === RequestStatus.Incomplete ||
                     isAuthenticatedAdmin
                   "
                 >
                   <span
                     v-if="
                       statusData.statusDetails!.reason ||
-                      statusData.status.toLowerCase() !== 'incomplete'
+                      statusData.status.toLowerCase() !== RequestStatus.Incomplete
                     "
                   >
                     {{ statusData.statusDetails!.reason }}
@@ -301,7 +306,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
       </div>
       <!-- Restricted buttons -->
       <div
-        v-else-if="status === 'restricted' && isAuthenticatedStudent"
+        v-else-if="status === RequestStatus.Restricted && isAuthenticatedStudent"
         class="display-flex justify-content-end flex-direction-column"
       >
         <pep-pharos-heading

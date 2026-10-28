@@ -1,5 +1,5 @@
-a
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
@@ -60,9 +60,9 @@ const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.
 const canRequest = computed(() => {
   return (
     !reqs.value.includes(JSON.stringify(props.doc)) &&
-    status.value !== 'approved' &&
-    status.value !== 'pending' &&
-    status.value !== 'restricted' &&
+    status.value !== RequestStatus.Approved &&
+    status.value !== RequestStatus.Pending &&
+    status.value !== RequestStatus.Restricted &&
     userStore.features['submit_requests'] &&
     !props.hideRequests
   )

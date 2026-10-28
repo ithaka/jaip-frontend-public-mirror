@@ -153,6 +153,18 @@ const getTileLogs = () => {
   }
 }
 
+const getBackLinkLogs = () => {
+  const backToResultsLog = (): WorkingLog => ({
+    ...generics.linkClick('results', 'internal_navigation'),
+    event_description: 'user clicked back to results link from item page',
+    action: 'back_to_results',
+  })
+
+  return {
+    backToResultsLog,
+  }
+}
+
 const getRouterLogs = () => {
   const routeChangeLog =
     (options: { to: string; from: string }): (() => WorkingLog) =>
@@ -177,6 +189,7 @@ export const navigationLogs = {
   getSearchResultsNavigationLogs,
   getHeaderLogs,
   getCardLogs,
+  getBackLinkLogs,
   getRouterLogs,
   getTileLogs,
 }

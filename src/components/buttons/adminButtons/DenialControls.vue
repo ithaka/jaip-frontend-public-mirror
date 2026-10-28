@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RequestStatus } from '@/interfaces/RequestStatus'
 import { useUserStore } from '@/stores/user'
 import { useCoreStore } from '@/stores/core'
 import { useSearchStore } from '@/stores/search'
@@ -39,13 +40,18 @@ const props = defineProps({
 
 const isSingleGroup = userStore.isSingleGroupFeature('deny_requests')
 const statuses = ref(props.doc.mediaReviewStatuses)
-const showDeny = !hideButton(featureDetails.value, statuses.value, 'denied', 'deny_requests')
+const showDeny = !hideButton(
+  featureDetails.value,
+  statuses.value,
+  RequestStatus.Denied,
+  'deny_requests',
+)
 const showDenyModal = ref(false)
 const denyModalKey = ref(0)
 const denyGroups = ref(
   isSingleGroup
     ? featureDetails.value['deny_requests']?.groups
-    : getGroupsWithStatus(statuses.value, 'denied'),
+    : getGroupsWithStatus(statuses.value, RequestStatus.Denied),
 )
 const reasons = [
   DenialReasons.Sex,
@@ -313,7 +319,7 @@ const handleDenial = async () => {
           !selectedGroups['deny_requests'] ||
           !selectedGroups['deny_requests'].length ||
           !denyGroups?.length ||
-          arraysAreEqual(denyGroups, getGroupsWithStatus(statuses, 'denied'))
+          arraysAreEqual(denyGroups, getGroupsWithStatus(statuses, RequestStatus.Denied))
         "
         @click.prevent.stop="handleWithLog(submitDenialLog, handleDenial)"
       >

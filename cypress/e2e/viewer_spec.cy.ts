@@ -117,6 +117,10 @@ describe('PDF Viewer Access', () => {
     // NOTE: There are no pep-pharos-buttons on the student PDF viewer. This means we can't
     // check for a specific button, but we can check that there are no buttons. We just repeat
     // the same test for print.
+    it('does not show a back link when the item is opened directly', () => {
+      cy.get('[data-cy="back-to-results-link"]').should('not.exist')
+    })
+
     it('does not show download button', () => {
       cy.get('[data-cy="download-pdf-button"]').should('not.exist')
     })
