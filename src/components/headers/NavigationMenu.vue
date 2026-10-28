@@ -107,6 +107,11 @@ const { changeRouteLog } = logs.getHeaderLogs()
 </template>
 
 <style scoped lang="scss">
+// The category host defaults to display: inline, so its bounding box leaves out the inner button's
+// padding and Pharos positions the dropdown over the bottom of the button.
+pep-pharos-dropdown-menu-nav-category {
+  display: block;
+}
 .nav-link-pill {
   margin-left: 0.5rem;
 }
