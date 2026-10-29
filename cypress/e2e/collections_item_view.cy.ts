@@ -26,7 +26,7 @@ describe('Collections Item View', () => {
   const interceptPdf = (pdfFilename: string) => {
     cy.intercept('GET', routes.collections.pdf(collection, pdfFilename), (req) => {
       req.reply({
-        fixture: 'pdf/open-access-sample.pdf',
+        fixture: 'pdf/open-access-sample.pdf,null',
         headers: {
           'content-type': 'application/pdf',
           'transfer-encoding': 'chunked',

@@ -7,6 +7,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import path from "path";
 import Markdown from 'unplugin-vue-markdown/vite'
 import dynamicImport from "vite-plugin-dynamic-import";
+import pdfjsPackage from 'pdfjs-dist/package.json' with { type: 'json' }
 
 /**
  * Prepare build information for the app, including a build ID and commit hash.
@@ -120,9 +121,21 @@ export default defineConfig(({ mode }) => {
           },
           {
             src: './node_modules/pdfjs-dist/wasm/**/*',
-            dest: 'scripts/pdfjs/wasm',
+            dest: `scripts/pdfjs/${pdfjsPackage.version}/wasm`,
             // PDF.js resolves decoder assets directly beneath wasmUrl. The copy plugin
             // otherwise preserves the node_modules path inside the destination.
+            rename: { stripBase: 3 },
+          },
+          {
+            src: './node_modules/pdfjs-dist/cmaps/**/*',
+            // Keep packed character maps beside the worker assets for lazy document-driven fetches.
+            dest: `scripts/pdfjs/${pdfjsPackage.version}/cmaps`,
+            rename: { stripBase: 3 },
+          },
+          {
+            src: './node_modules/pdfjs-dist/standard_fonts/**/*',
+            // Include the packaged font licenses as well as TTF/PFB files; do not preload the fonts.
+            dest: `scripts/pdfjs/${pdfjsPackage.version}/standard_fonts`,
             rename: { stripBase: 3 },
           },
         ],

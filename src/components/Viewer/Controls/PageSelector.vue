@@ -20,6 +20,8 @@ const page = ref(props.currentPage)
   <div v-if="pageCount > 1" class="page-selector">
     <input
       v-model="page"
+      inputmode="numeric"
+      aria-label="Page number"
       name="select-page"
       class="page-selector__input"
       @keydown.enter="emit('update-page', page)"

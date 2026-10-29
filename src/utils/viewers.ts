@@ -30,6 +30,40 @@ type AbortSignalConstructorWithAny = typeof AbortSignal & {
   any?: (signals: AbortSignal[]) => AbortSignal
 }
 
+let pendingPDFResourceDisposal: Promise<void> = Promise.resolve()
+
+// Slow tablets can take a while to terminate a worker; past this, a replacement load goes ahead.
+const PDF_RESOURCE_DISPOSAL_WAIT_MS = 3000
+
+/**
+ * Tracks task teardown across viewer instances. Failures are reported by the caller that owns the
+ * disposal, so they must not reject the shared chain and block every later load.
+ */
+export const trackPDFResourceDisposal = (disposal: Promise<void>): void => {
+  const settled = disposal.catch(() => {})
+  pendingPDFResourceDisposal = Promise.all([pendingPDFResourceDisposal, settled]).then(() => {})
+}
+
+/**
+ * Waits for recorded resource teardown before another viewer creates a worker. A teardown that
+ * never settles is dropped after a bounded wait so it cannot stall every later load.
+ *
+ * @returns Whether teardown finished; false means the wait timed out and loading may overlap it.
+ */
+export const waitForPDFResourceDisposal = async (): Promise<boolean> => {
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const timeout = new Promise<false>((resolve) => {
+    timer = setTimeout(() => resolve(false), PDF_RESOURCE_DISPOSAL_WAIT_MS)
+  })
+  try {
+    const finished = await Promise.race([pendingPDFResourceDisposal.then(() => true), timeout])
+    if (!finished) pendingPDFResourceDisposal = Promise.resolve()
+    return finished
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
 // Chromium's ImageDecoder implementation had PDF.js-breaking bugs until 133.
 const MINIMUM_RELIABLE_CHROMIUM_IMAGE_DECODER_VERSION = 133
 // Firefox added static and dynamic module imports in dedicated workers in version 114.

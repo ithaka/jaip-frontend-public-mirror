@@ -4,11 +4,10 @@ import { useRoute } from 'vue-router'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import BackLink from '@/components/BackLink.vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
-import type { Cedar } from '@/interfaces/Metadata'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import { useLogger } from '@/composables/logging/useLogger'
 import { useBackToResults } from '@/composables/useBackToResults'
@@ -16,61 +15,62 @@ import { useBackToResults } from '@/composables/useBackToResults'
 const route = useRoute()
 const coreStore = useCoreStore()
 const doc = ref({} as MediaRecord)
-const iid = (route.params || {}).iid as string
-const page_index = (route.params || {}).pid as string
-let initial_page_index = parseInt(page_index, 10)
-if (isNaN(initial_page_index) || initial_page_index < 0) {
-  initial_page_index = 0
-}
+/** Active document ID stays reactive when Vue Router reuses this view for another PDF. */
+const iid = computed(() => route.params.iid as string)
 const gettingDocument = ref(false)
-const metadata = ref({ id: iid } as Cedar)
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
 
 const updateKey = ref(0)
+/** Invalidates older metadata requests after a newer request starts or the view unmounts. */
+let requestGeneration = 0
+onBeforeUnmount(() => requestGeneration++)
+
+/** Loads metadata only while this request still belongs to the active route and view. */
 const getDocument = async () => {
+  /** Request identity is captured together so stale responses cannot update the next document. */
+  const generation = ++requestGeneration
+  const documentId = iid.value
   try {
+    /** Search arguments fetch metadata for this request's captured document, not a later route. */
     const args = {
       pageNo: 1,
       limit: 1,
       sort: 'rel',
       facets: ['contentType', 'disciplines'],
       filters: [],
-      query: `id:${iid}`,
+      query: `id:${documentId}`,
     }
     gettingDocument.value = true
 
-    const apiCalls = [coreStore.$api.search.basic(args)]
-    if (page_index) {
-      apiCalls.push(coreStore.$api.documents.metadata(iid))
-    }
-
-    const results = await Promise.all(apiCalls)
-    const search = results[0]
+    /** Only the current request may publish this response or clear the loading state. */
+    const search = await coreStore.$api.search.basic(args)
+    if (generation !== requestGeneration) return
 
     if (((search?.data || {}).docs || []).length) {
       doc.value = search!.data.docs[0]!
     }
-
-    if (page_index) {
-      metadata.value = {
-        ...metadata.value,
-        ...results[1]?.data,
-      }
-      if (metadata.value.pageCount && initial_page_index >= metadata.value.pageCount) {
-        initial_page_index = metadata.value.pageCount - 1
-      }
-    }
   } catch (err: unknown) {
+    if (generation !== requestGeneration) return
     const errorResponse = err as { response: { status: number } }
     console.log('Error fetching document:', errorResponse)
   } finally {
-    updateKey.value++
-    gettingDocument.value = false
+    if (generation === requestGeneration) {
+      updateKey.value++
+      gettingDocument.value = false
+    }
   }
 }
 
-getDocument()
+/** Reloads metadata immediately and whenever same-component navigation changes the document. */
+watch(
+  iid,
+  () => {
+    doc.value = {} as MediaRecord
+    void getDocument()
+  },
+  { immediate: true },
+)
 
 const { resultsHref, goBackToResults } = useBackToResults()
 const { handleWithLog, logs } = useLogger()
@@ -104,13 +104,14 @@ logPageView()
         hide-details
         hide-requests
         pdf-view
-        :include-pdf="!!page_index"
         @approval-submitted="getDocument"
         @denial-submitted="getDocument"
         @restrict-submitted="getDocument"
       />
     </div>
     <PDFViewer
+      v-if="featureDetails['view_pdf']?.enabled"
+      :key="iid"
       tabindex="-1"
       class="cols-12"
       :iid="iid"

@@ -4864,7 +4864,7 @@ __metadata:
     npm-run-all2: "npm:^9.0.2"
     openseadragon: "npm:^6.0.2"
     path: "npm:^0.12.7"
-    pdfjs-dist: "npm:^6.3.289"
+    pdfjs-dist: "npm:6.3.289"
     pinia: "npm:^4.0.3"
     prettier: "npm:^3.9.6"
     print-js: "npm:^1.6.0"
@@ -5923,7 +5923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pdfjs-dist@npm:^6.3.289":
+"pdfjs-dist@npm:6.3.289":
   version: 6.3.289
   resolution: "pdfjs-dist@npm:6.3.289"
   dependencies:

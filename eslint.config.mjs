@@ -22,6 +22,7 @@ export default [
         ...globals.node,
         ...globals.jest,
         ...globals.cypress,
+        __APP_BUILD_ID__: "readonly",
       },
     },
   },

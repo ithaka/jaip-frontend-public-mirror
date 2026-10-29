@@ -1,4 +1,4 @@
-import { shouldDisablePDFJSImageDecoder } from '@/utils/viewers'
+import { shouldDisablePDFJSImageDecoder } from './viewers'
 
 //Shape returned by `Promise.withResolvers`.
 type PromiseResolvers<T> = {
@@ -140,23 +140,53 @@ const polyfillArrayBufferTransferToFixedLength = () => {
   })
 }
 
+class InvalidPDFJSBMPError extends Error {}
+
 /**
  * Decodes the uncompressed BMP layout produced by pdfjs-dist's `ImageResizer._encodeBMP()`
  * (BITMAPFILEHEADER + BITMAPINFOHEADER, 1bpp grayscale/24bpp BGR/32bpp RGBA pixel data, rows
  * padded to 4 bytes for 1bpp/24bpp). Re-verify this layout whenever pdfjs-dist is upgraded by
  * re-grepping `_encodeBMP` in the built worker bundle.
+ *
+ * @param bytes - A complete top-down BMP, possibly within a non-zero-offset typed-array view.
+ * @returns Decoded pixels; 32-bit ArrayBuffer input is shared rather than copied and must stay valid.
+ * @throws If the header, dimensions, bit depth, or pixel extent does not match the supported layout.
  */
-const decodePDFJSEncodedBMP = (bytes: Uint8Array): ImageData => {
+export const decodePDFJSEncodedBMP = (bytes: Uint8Array): ImageData => {
+  if (bytes.byteLength < 54) throw new InvalidPDFJSBMPError('Incomplete BMP header')
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
   if (view.getUint16(0, true) !== 0x4d42) {
-    throw new Error('Not a BMP file')
+    throw new InvalidPDFJSBMPError('Not a BMP file')
   }
 
+  // Validate all source bounds before a pixel view or expanded RGBA allocation can be constructed.
   const pixelDataOffset = view.getUint32(10, true)
   const width = view.getInt32(18, true)
   const height = Math.abs(view.getInt32(22, true))
   const bitsPerPixel = view.getUint16(28, true)
   const colorTableOffset = 14 + view.getUint32(14, true)
+  const rowSize = Math.ceil((width * bitsPerPixel) / 32) * 4
+  if (
+    width <= 0 ||
+    height <= 0 ||
+    view.getInt32(22, true) >= 0 ||
+    ![1, 24, 32].includes(bitsPerPixel) ||
+    colorTableOffset < 54 ||
+    pixelDataOffset < colorTableOffset ||
+    (bitsPerPixel === 1 && pixelDataOffset < colorTableOffset + 8) ||
+    pixelDataOffset + rowSize * height > bytes.byteLength
+  ) {
+    throw new InvalidPDFJSBMPError('Invalid PDF.js BMP layout')
+  }
+  // This layout is already RGBA: retain its buffer and offset instead of copying a full scan again.
+  // SharedArrayBuffer input stays on the copying path because ImageData requires ArrayBuffer pixels.
+  if (bitsPerPixel === 32 && bytes.buffer instanceof ArrayBuffer) {
+    return new ImageData(
+      new Uint8ClampedArray(bytes.buffer, bytes.byteOffset + pixelDataOffset, width * height * 4),
+      width,
+      height,
+    )
+  }
   const rgba = new Uint8ClampedArray(width * height * 4)
 
   if (bitsPerPixel === 1) {
@@ -200,7 +230,7 @@ const decodePDFJSEncodedBMP = (bytes: Uint8Array): ImageData => {
       }
     }
   } else {
-    throw new Error(`Unsupported BMP bit depth: ${bitsPerPixel}`)
+    throw new InvalidPDFJSBMPError(`Unsupported BMP bit depth: ${bitsPerPixel}`)
   }
 
   return new ImageData(rgba, width, height)
@@ -216,7 +246,8 @@ type CreateImageBitmapFn = typeof createImageBitmap
  * decode of that deterministic, self-encoded BMP, turned into a bitmap directly from its
  * `ImageData` - sidestepping the broken native BMP codec entirely. Every other call
  * (non-BMP sources, or BMP calls with crop/option arguments this fast path doesn't handle) falls
- * through to the native implementation unchanged.
+ * through to the native implementation unchanged. Allocation and bitmap-creation failures are not
+ * retried through the native BMP decoder.
  */
 const polyfillCreateImageBitmapForLegacyBMPDecoder = () => {
   if (!shouldDisablePDFJSImageDecoder()) return
@@ -235,14 +266,14 @@ const polyfillCreateImageBitmapForLegacyBMPDecoder = () => {
       )
     }
 
+    let imageData: ImageData
     try {
-      const imageData = decodePDFJSEncodedBMP(new Uint8Array(await image.arrayBuffer()))
-      // No canvas: these images exceed canvas size limits.
-      return await nativeCreateImageBitmap(imageData)
-    } catch {
-      // Fall back to the native decoder if the BMP doesn't match the expected layout.
-      return nativeCreateImageBitmap(image)
+      imageData = decodePDFJSEncodedBMP(new Uint8Array(await image.arrayBuffer()))
+    } catch (error) {
+      if (error instanceof InvalidPDFJSBMPError) return nativeCreateImageBitmap(image)
+      throw error
     }
+    return nativeCreateImageBitmap(imageData)
   }) as CreateImageBitmapFn
 
   Object.defineProperty(globalThis, 'createImageBitmap', {

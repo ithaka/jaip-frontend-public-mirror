@@ -10,7 +10,8 @@ const getPDFViewerLogs = (options: {
   iid: Ref<string>
   isReentryContent: Ref<boolean>
   viewer: Ref<PDFViewer>
-  documentProxy: Ref<PDFDocumentProxy>
+  // Loading failures and teardown can be logged before/after any document is attached.
+  documentProxy: Ref<PDFDocumentProxy | undefined>
 }) => {
   // This UUID is created when the Viewer component is created, and will be able to
   // link all viewer logs for a single document view session.
@@ -22,7 +23,7 @@ const getPDFViewerLogs = (options: {
       ...generics.linkClick(opts.destination),
       event_uuid: uuid,
       is_reentry_content: options.isReentryContent.value,
-      total_pages: toRaw(options.documentProxy.value).numPages,
+      total_pages: toRaw(options.documentProxy.value)?.numPages,
       current_page: toRaw(options.viewer.value).currentPageNumber,
     })
 
@@ -33,7 +34,7 @@ const getPDFViewerLogs = (options: {
         ...generics.viewerControl({ action: opts.action, iid: options.iid.value }),
         event_uuid: uuid,
         is_reentry_content: options.isReentryContent.value,
-        total_pages: toRaw(options.documentProxy.value).numPages,
+        total_pages: toRaw(options.documentProxy.value)?.numPages,
         current_page: toRaw(options.viewer.value).currentPageNumber,
       }
     }
@@ -45,7 +46,7 @@ const getPDFViewerLogs = (options: {
         ...generics.viewerControl({ action: ViewerControls.update_page, iid: options.iid.value }),
         event_uuid: uuid,
         is_reentry_content: options.isReentryContent.value,
-        total_pages: toRaw(options.documentProxy.value).numPages,
+        total_pages: toRaw(options.documentProxy.value)?.numPages,
         current_page: toRaw(options.viewer.value).currentPageNumber,
         previous_page: opts.previous_page,
       }
@@ -61,7 +62,7 @@ const getPDFViewerLogs = (options: {
         }),
         event_uuid: uuid,
         is_reentry_content: options.isReentryContent.value,
-        total_pages: toRaw(options.documentProxy.value).numPages,
+        total_pages: toRaw(options.documentProxy.value)?.numPages,
         current_page: toRaw(options.viewer.value).currentPageNumber,
         previous_page: opts.previous_page,
       }
@@ -83,26 +84,40 @@ const getPDFViewerLogs = (options: {
     }
   }
 
-  const PDFViewerErrorLog =
-    (opts: { error: ViewerError }): (() => WorkingLog) =>
-    () => {
-      return {
-        ...generics.error({ message: opts.error.message, code: String(opts.error.code) }),
-        event_description: 'An error occurred in the PDF viewer',
-        action: 'pdf_viewer_error',
-        viewer_error: opts.error,
-        event_uuid: uuid,
-      }
-    }
-
-  const PDFViewerLoadingCancelledLog =
-    (opts: { reason: string }): (() => WorkingLog) =>
-    () => ({
-      ...generics.error({ message: `PDF loading cancelled: ${opts.reason}` }),
-      event_description: 'PDF loading was cancelled during teardown',
-      action: 'pdf_viewer_loading_cancelled',
+  /** Captures failure-time context before asynchronous logging or teardown changes the viewer. */
+  const PDFViewerErrorLog = (opts: { error: ViewerError; source: string }): (() => WorkingLog) => {
+    const log: WorkingLog = {
+      ...generics.error({ message: opts.error.message, code: String(opts.error.code) }),
+      event_description: `PDF viewer error in ${opts.source}: ${opts.error.message}`,
+      action: 'pdf_viewer_error',
+      viewer_error: {
+        ...opts.error,
+        source: opts.source,
+        reported_stack: new Error(`PDF viewer error reported in ${opts.source}`).stack,
+      },
       event_uuid: uuid,
+      itemid: options.iid.value,
+      is_reentry_content: options.isReentryContent.value,
+      total_pages: toRaw(options.documentProxy.value)?.numPages,
+      current_page: toRaw(options.viewer.value).currentPageNumber,
+    }
+    return () => log
+  }
+
+  const PDFViewerLoadingCancelledLog = (opts: {
+    reason: string
+    error: ViewerError
+  }): (() => WorkingLog) => {
+    const log = PDFViewerErrorLog({
+      error: opts.error,
+      source: 'PDFViewer.vue:createLoadingTask',
+    })()
+    return () => ({
+      ...log,
+      event_description: `PDF loading was cancelled during teardown (${opts.reason}): ${opts.error.message}`,
+      reason: `PDF loading cancelled: ${opts.reason}`,
     })
+  }
 
   return {
     errorLinkClickLog,

@@ -130,7 +130,27 @@ We try to make this software available on as many devices as possible. That ofte
 
 #### structuredClone
 
-PDF.js does not work without `structuredClone`. This generally means that browsers more than ~4 years old will not be supported. For now, we offer a page image viewer as an alternative, but as older browsers fade out, we will migrate away from that option.
+PDF.js does not work without `structuredClone`. Unsupported browsers receive the viewer error UI. The former page-image viewer routes now redirect to the PDF viewer; they are not a fallback.
+
+### PDF Viewer Reliability
+
+The PDF viewer is designed for older browsers and devices with limited memory, including Securus JP5 tablets. It uses PDF.js's legacy build and compatibility workarounds rather than relying only on modern browser features.
+
+- **Memory use:** Page rendering is capped at two megapixels, distant offscreen pages are released, and document resources are cleaned up when leaving the viewer. A replacement document waits for the previous worker to shut down.
+- **Worker fallback:** An ESM bootstrap exposes the polyfilled worker's named handler when real-worker startup fails. Its URL includes the build ID; stale worker imports retain the application's existing reload handling.
+- **Document navigation:** Changing the PDF route replaces the viewer and metadata. Responses from an older route or an unmounted view cannot overwrite the current document.
+- **Error recovery:** Recoverable rendering failures receive one retry with more conservative decoding settings. Network failures, HTTP errors, and memory allocation failures are shown and logged rather than retried with different decoder settings. Authorization and missing-content errors still need investigation on the server.
+- **Image decoding:** Missing-image results from PDF.js are observed per document, including its main-thread worker fallback. They are logged and receive the same single retry; a repeated failure shows the error UI instead of leaving incomplete content visible. This observer relies on PDF.js's transport message format, which must be rechecked when upgrading PDF.js.
+- **Text rendering:** System fonts remain enabled. Packaged fallback fonts and character maps are downloaded only when a document needs them.
+- **Asset caching:** Decoder, character-map, and fallback-font URLs include the installed PDF.js version so cached resources cannot be mixed across PDF.js upgrades. Static-copy destinations and viewer URLs must be updated together.
+- **Telemetry:** Synchronous logging failures do not interrupt viewer actions. Beacon delivery remains best-effort, without a queue or delivery retry; action failures still propagate to their caller.
+- **Resizing:** Repeated resize events leave the reader's zoom unchanged unless the viewer's dimensions actually change.
+
+These safeguards reduce memory pressure but cannot prevent every failure. Large scans, image decoding, fonts, and documents that must be downloaded in full can still exhaust available memory. The image observer detects missing-image results, not every possible visual defect in a PDF. Catchable failures are logged as `pdf_viewer_error`, but a browser or operating system that terminates the viewer may not allow a final log to be sent.
+
+Automated coverage in the [viewer tests](cypress/e2e/viewer_spec.cy.ts) and [collection viewer tests](cypress/e2e/collections_item_view.cy.ts) checks cleanup, recovery, error reporting, rendering limits, and font assets. Use the production build and end-to-end test commands above when validating viewer changes.
+
+Automated tests do not establish reliability on JP5 hardware or older browser engines. Before rollout, test complete scanned and selectable-text documents on supported devices, including long documents, page navigation, zoom, rotation, reopening documents, and switching to another app and back.
 
 ### CSS
 

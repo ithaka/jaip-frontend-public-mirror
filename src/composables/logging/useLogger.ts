@@ -71,11 +71,15 @@ const useLogger = () => {
     }
   }
 
-  // prepare and send the log to the logging API
+  /** Prepares and sends telemetry without allowing synchronous logging failures to break actions. */
   const sendLog = (log: WorkingLog) => {
-    const finalLog = enhanceLog(log)
-    coreStore.$api.log(finalLog)
-    // console.log('Logging event:', finalLog)
+    try {
+      /** Context-enriched payload submitted through the best-effort logging API. */
+      const finalLog = enhanceLog(log)
+      coreStore.$api.log(finalLog)
+    } catch (error) {
+      console.error('Failed to send log', error)
+    }
   }
 
   // The log is passed in as a function so we can get Ref values at the time of logging.
