@@ -3,6 +3,10 @@ import { useSearchStore } from '@/stores/search'
 import { changeRoute } from '@/utils/helpers'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useCoreStore } from '@/stores/core'
+
+const coreStore = useCoreStore()
+const { supportEmail, supportEmailDisplay } = storeToRefs(coreStore)
 
 const searchStore = useSearchStore()
 const { searchTerms, pageNo } = storeToRefs(searchStore)
@@ -57,7 +61,7 @@ const followLink = (path: string) => {
 
     <p>
       Have a question? Please contact us at
-      <pep-pharos-link href="mailto:aip@jstor.org">aip[at]jstor.org</pep-pharos-link>
+      <pep-pharos-link :href="`mailto:${supportEmail}`">{{ supportEmailDisplay }}</pep-pharos-link>
     </p>
   </section>
 </template>

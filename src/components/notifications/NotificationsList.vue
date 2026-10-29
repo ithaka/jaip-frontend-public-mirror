@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Alert } from '@/interfaces/Alert'
+import { defaultDateOptions } from '@/utils/dates'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref, useTemplateRef } from 'vue'
@@ -97,12 +98,6 @@ const nextPage = () => {
 onMounted(() => {
   getPaginatedNotifications(currentPage.value)
 })
-
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}
 </script>
 <template>
   <div class="notifications">
@@ -236,7 +231,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
                       a11y-hidden="false"
                     />
                     Scheduled ({{
-                      new Date(notification.start_date).toLocaleString('en', dateOptions)
+                      new Date(notification.start_date).toLocaleString('en', defaultDateOptions)
                     }})
                   </span>
                   <span
@@ -259,7 +254,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
               <div class="notifications-table__expiration">
                 {{
                   notification.created_at
-                    ? new Date(notification.end_date).toLocaleString('en', dateOptions)
+                    ? new Date(notification.end_date).toLocaleString('en', defaultDateOptions)
                     : 'N/A'
                 }}
               </div>
@@ -311,7 +306,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
               <div class="notifications-table__created-on">
                 {{
                   notification.created_at
-                    ? new Date(notification.created_at).toLocaleString('en', dateOptions)
+                    ? new Date(notification.created_at).toLocaleString('en', defaultDateOptions)
                     : 'N/A'
                 }}
               </div>

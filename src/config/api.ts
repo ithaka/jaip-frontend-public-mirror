@@ -112,6 +112,11 @@ export const routes = {
   citations: {
     get: (iid: string) => `${global_route_prefix_versioned}/citations/${iid}`,
   },
+  request_management: {
+    remove: () => `${global_route_prefix_versioned}/request_management`,
+    add: () => `${global_route_prefix_versioned}/request_management`,
+    edit: () => `${global_route_prefix_versioned}/request_management`,
+  },
 }
 export default ($axios: AxiosInstance): ApiObject => ({
   log: (log: Log) => {
@@ -278,5 +283,11 @@ export default ($axios: AxiosInstance): ApiObject => ({
   },
   citations: {
     get: (iid: string) => $axios.get(routes.citations.get(iid)),
+  },
+  request_management: {
+    add: (data) => $axios.post(routes.request_management.add(), data),
+    edit: (data) => $axios.patch(routes.request_management.edit(), data),
+    remove: (id) =>
+      $axios.delete(routes.request_management.remove(), { data: { facility_id: id } }),
   },
 })

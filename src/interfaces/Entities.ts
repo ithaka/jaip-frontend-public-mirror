@@ -17,6 +17,7 @@ export interface Entity {
   name?: string
   // This is the only necessary value when adding or editing
   type: string
+  request_permissions?: RequestPermissions
   ungrouped_features?: UngroupedFeatureDetails
   // This value is only used when adding or editing
   contact?: string
@@ -25,6 +26,17 @@ export interface Entity {
   primary_sitecode?: string
 }
 
+export interface RequestPermissions {
+  start_date: Date
+  end_date?: Date
+}
+
+export enum RequestPermissionStatus {
+  On = 'on',
+  Off = 'off',
+  Paused = 'paused',
+  Scheduled = 'scheduled',
+}
 export interface EntityResponse {
   total: number
   entities: { [key: string]: Entity }

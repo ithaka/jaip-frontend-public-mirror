@@ -65,6 +65,9 @@ export const useCoreStore = defineStore('core', {
     isAdminSubdomain(): boolean {
       return this.adminSubdomains.includes(this.subdomain) || this.isEphemeralAdmin
     },
+    supportEmailDisplay(): string {
+      return this.supportEmail.replace('@', '[at]')
+    },
   },
   actions: {
     saveReqs(reqs: MediaRecord[]) {

@@ -20,6 +20,7 @@ import GroupSelector from '@/components/account/GroupSelector.vue'
 import type { Group } from '@/interfaces/Group'
 import { changeRoute } from '@/utils/helpers'
 import { useLogger } from '@/composables/logging/useLogger'
+import { defaultLocaleDateString } from '@/utils/dates'
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
@@ -131,7 +132,7 @@ const { approvalLog, openApproveModalLog, closeApproveModalLog } = logs.getMedia
       <p slot="description">
         <span
           >The record will show that {{ entityName }} approved <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}</span
+          {{ defaultLocaleDateString(new Date()) }}</span
         >
         <span v-if="approveGroups.length"
           >&nbsp;for use in

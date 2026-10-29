@@ -33,7 +33,7 @@ const coreStore = useCoreStore()
 const { reqs } = storeToRefs(coreStore)
 
 const userStore = useUserStore()
-const { groupIDs } = storeToRefs(userStore)
+const { groupIDs, hasRequestsPaused, hasRequestsOff } = storeToRefs(userStore)
 
 const showExcessiveRequestsWarningModal = ref(false)
 const cartFull = computed(() => reqs.value.length >= 10)
@@ -64,6 +64,8 @@ const canRequest = computed(() => {
     status.value !== RequestStatus.Pending &&
     status.value !== RequestStatus.Restricted &&
     userStore.features['submit_requests'] &&
+    !hasRequestsPaused.value &&
+    !hasRequestsOff.value &&
     !props.hideRequests
   )
 })

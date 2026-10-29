@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTemplateRef, type ComputedRef, type PropType } from 'vue'
+import { computed, useTemplateRef, type PropType } from 'vue'
 import { useBreakpoints } from '@/composables/breakpoints'
 
 const props = defineProps({
@@ -28,8 +28,8 @@ const props = defineProps({
     default: false,
   },
   expanded: {
-    type: [Boolean, Object] as PropType<boolean | ComputedRef<boolean>>,
-    default: () => useBreakpoints().atMostMedium,
+    type: Boolean,
+    default: undefined,
   },
   enableExpansion: {
     type: Boolean,
@@ -51,10 +51,14 @@ const props = defineProps({
   // If a breakpoint is provided, it will override this prop and determine which component to use based on the current viewport width.
   // The default value is to be a sheet through the medium breakpoint, and a modal for larger viewports.
   breakpoint: {
-    type: [Boolean, Object] as PropType<boolean | ComputedRef<boolean>>,
-    default: () => useBreakpoints().atMostMedium,
+    type: Boolean,
+    default: undefined,
   },
 })
+
+const { atMostMedium } = useBreakpoints()
+const resolvedBreakpoint = computed(() => props.breakpoint ?? atMostMedium.value)
+const resolvedExpanded = computed(() => props.expanded ?? atMostMedium.value)
 
 // NOTE: This strategy for handling touch events might end up better as a composable
 // if we start seeing similar issues in other components. In this case, it's being used
@@ -100,14 +104,14 @@ defineEmits(['close'])
        positioning in the case that a user is zoomed in such that the sheet is taller than the screen size and 
        they close the sheet by clicking outside of it or using the escape key rather than the close button. -->
       <pep-pharos-sheet
-        v-if="breakpoint"
+        v-if="resolvedBreakpoint"
         :id="`${id}-sheet`"
         :key="`${id}-sheet-${open ? 'open' : 'closed'}`"
         :size="size"
         :open="open || null"
         :min-height="minHeight"
         :header="header"
-        :expanded="expanded || null"
+        :expanded="resolvedExpanded || null"
         :enable-expansion="enableExpansion || null"
         :omit-overlay="omitOverlay || null"
         :docked="docked || null"

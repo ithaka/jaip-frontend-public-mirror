@@ -18,6 +18,7 @@ import UnrestrictButton from '@/components/buttons/adminButtons/UnrestrictButton
 import RequestButton from '../buttons/RequestButton.vue'
 import CiteButton from '../buttons/CiteButton.vue'
 import { useLogger } from '@/composables/logging/useLogger.ts'
+import { defaultLocaleDateString, defaultLocaleDateRangeString } from '@/utils/dates'
 
 const props = defineProps({
   doc: {
@@ -52,6 +53,10 @@ const {
   canViewRestrictedList,
   hasUnsubscribedFacilities,
   ungroupedFeatures,
+  hasRequestsPaused,
+  hasRequestsOff,
+  requestPermissionsStartDate,
+  requestPermissionsEndDate,
 } = storeToRefs(userStore)
 
 const searchStore = useSearchStore()
@@ -74,6 +79,13 @@ const goToUnavailableItemsHelp = () => {
 }
 
 const status = computed(() => getStatus(props.doc.mediaReviewStatuses, groupIDs.value))
+const showUnavailableNotice = computed(
+  () =>
+    isAuthenticatedStudent.value &&
+    (status.value === 'restricted' ||
+      ((hasRequestsPaused.value || hasRequestsOff.value) &&
+        !['approved', 'denied', 'pending'].includes(status.value))),
+)
 const emit = defineEmits(['close', 'approvalSubmitted', 'denialSubmitted', 'restrictSubmitted'])
 const readRoute = computed(() =>
   (featureDetails.value['view_pdf'] || {}).enabled ? `/pdf/${props.doc.iid}` : '',
@@ -278,7 +290,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
               <span>{{ statusData.statusLabel || statusData.status }}</span
               ><span v-if="isAuthenticatedAdmin">&nbsp;({{ statusData.groupName }})</span> <br />
               <span v-if="statusData.createdAt">{{
-                new Date(statusData.createdAt).toLocaleDateString()
+                defaultLocaleDateString(new Date(statusData.createdAt))
               }}</span>
               <span v-if="statusData.statusDetails?.reason || statusData.statusDetails?.comments">
                 <span
@@ -306,7 +318,7 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
       </div>
       <!-- Restricted buttons -->
       <div
-        v-else-if="status === RequestStatus.Restricted && isAuthenticatedStudent"
+        v-if="showUnavailableNotice"
         class="display-flex justify-content-end flex-direction-column"
       >
         <pep-pharos-heading
@@ -317,7 +329,26 @@ const { readButtonLog } = logs.getMediaHistoryLogs({
         >
           <span>Item unavailable</span>
         </pep-pharos-heading>
+        <pep-pharos-alert
+          v-if="hasRequestsPaused && status !== 'restricted'"
+          class="mt-3"
+          status="warning"
+        >
+          Requests are paused at this site
+          {{
+            defaultLocaleDateRangeString(requestPermissionsStartDate, requestPermissionsEndDate)
+          }}. In the meantime, browse and read available material.
+        </pep-pharos-alert>
+        <pep-pharos-alert
+          v-else-if="hasRequestsOff && status !== 'restricted'"
+          class="mt-3"
+          status="warning"
+        >
+          This item has not been approved for use in your correctional facility, and requests for it
+          will not be reviewed. Please browse and read other available material.
+        </pep-pharos-alert>
         <pep-pharos-link
+          v-else
           class="restricted-label__why-link"
           data-cy="unavailable-items-help-link"
           @click.prevent="goToUnavailableItemsHelp"

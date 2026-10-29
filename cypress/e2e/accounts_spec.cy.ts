@@ -1,5 +1,20 @@
 import { handleLocation } from './helpers'
 import { routes } from '../../src/config/api'
+import type { User } from '../../src/interfaces/Entities'
+
+const interceptAuthWithFacilityAccess = (fixturePath: string) => {
+  cy.fixture<User>(fixturePath).then((user) => {
+    user.facilities = user.groups
+      .filter((group) => group.features.edit_facilities || group.features.manage_facilities)
+      .map((group, index) => ({
+        id: index + 4,
+        name: `Facility ${index + 4}`,
+        type: 'facilities',
+        groups: [group],
+      }))
+    cy.intercept('GET', routes.auth.get, { body: user }).as('auth')
+  })
+}
 
 const assertFacilityPayloadWithFixture = (alias: string, fixturePath: string) => {
   cy.fixture(fixturePath).then((request) => {
@@ -105,6 +120,7 @@ describe('Account Management', () => {
         cy.contains('Add Facility', { matchCase: false }).should('not.exist')
         cy.get('pep-pharos-toggle-button').should('not.exist')
         cy.get('span').contains('Facility Management', { matchCase: false }).should('be.visible')
+        cy.get('.request-permissions').should('not.exist')
       })
     })
 
@@ -245,9 +261,9 @@ describe('Account Management', () => {
 
     context('When user can edit facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, {
-          fixture: 'auth/users/admin__one_group_edit_facilities__response.json',
-        }).as('auth')
+        interceptAuthWithFacilityAccess(
+          'auth/users/admin__one_group_edit_facilities__response.json',
+        )
         cy.intercept('POST', routes.features.grouped.get, {
           fixture: 'auth/features/basic_features.json',
         }).as('features')
@@ -263,6 +279,10 @@ describe('Account Management', () => {
 
       it('Shows edit facility button', () => {
         cy.get('pep-pharos-button').contains('Edit', { matchCase: false })
+      })
+
+      it('Shows request settings for users who can edit facilities', () => {
+        cy.get('.request-permissions').should('be.visible')
       })
 
       it('Only allows feature editing', () => {
@@ -293,9 +313,9 @@ describe('Account Management', () => {
 
     context('When user can manage facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, {
-          fixture: 'auth/users/admin__one_group_manage_facilities__response.json',
-        }).as('auth')
+        interceptAuthWithFacilityAccess(
+          'auth/users/admin__one_group_manage_facilities__response.json',
+        )
         cy.intercept('POST', routes.features.grouped.get, {
           fixture: 'auth/features/basic_features.json',
         }).as('features')
@@ -317,6 +337,73 @@ describe('Account Management', () => {
 
         cy.visit('/account?term=&page=1')
         cy.wait(['@accountPage', '@alerts', '@env', '@auth', '@features', '@facilities'])
+      })
+
+      ;[
+        { width: 1280, height: 800, container: 'pep-pharos-modal' },
+        { width: 390, height: 844, container: 'pep-pharos-sheet' },
+      ].forEach(({ width, height, container }) => {
+        it(`Shows a separate pause requests dialog at ${width}px`, () => {
+          cy.viewport(width, height)
+          cy.contains('pep-pharos-button', 'Pause requests').click()
+          cy.get(
+            `${container}[id="pause-requests-4-${container === 'pep-pharos-modal' ? 'modal' : 'sheet'}"]`,
+          )
+            .should('be.visible')
+            .within(() => {
+              cy.get('#pause-requests-datepicker-4').should('be.visible')
+              cy.contains('What to expect:').should('be.visible')
+              cy.contains('Users will be unable to submit new requests immediately').should(
+                'be.visible',
+              )
+              cy.contains('You can continue to review pending requests').should('be.visible')
+              cy.contains('Resume any time before the pause duration').should('be.visible')
+              cy.contains('pep-pharos-button', 'Pause requests').should('have.attr', 'disabled')
+              cy.contains('Turn off and delete requests').should('not.exist')
+            })
+          cy.get('#pause-requests-datepicker-4').click()
+          cy.get('.datepicker__menu--teleported')
+            .should('be.visible')
+            .should(($menu) => {
+              const bounds = $menu[0]!.getBoundingClientRect()
+              expect(bounds.left).to.be.at.least(0)
+              expect(bounds.top).to.be.at.least(0)
+              expect(bounds.right).to.be.at.most(width)
+              expect(bounds.bottom).to.be.at.most(height)
+            })
+          cy.contains('pep-pharos-button', 'Today').click()
+          cy.get('.datepicker__action-row').contains('pep-pharos-button', 'Select').click()
+          cy.get('.datepicker__menu--teleported').should('not.exist')
+          cy.get(`${container}[open]`).contains('pep-pharos-button', 'Cancel').click()
+          cy.get(`${container}[open]`).should('not.exist')
+        })
+      })
+
+      it('Submits a bounded pause without deleting requests', () => {
+        cy.viewport(1280, 800)
+        cy.intercept('POST', routes.request_management.add(), { statusCode: 200, body: {} }).as(
+          'pauseRequests',
+        )
+        cy.intercept('DELETE', routes.request_management.remove(), {
+          statusCode: 200,
+          body: {},
+        }).as('deleteRequestPermissions')
+        cy.contains('pep-pharos-button', 'Pause requests').click()
+        cy.get('#pause-requests-datepicker-4').click()
+        cy.contains('pep-pharos-button', 'Today').click()
+        cy.get('.datepicker__action-row').contains('pep-pharos-button', 'Select').click()
+        cy.get('#pause-requests-4-modal').contains('pep-pharos-button', 'Pause requests').click()
+        cy.wait('@pauseRequests')
+          .its('request.body')
+          .then((body) => {
+            expect(body.facility_id).to.eq(4)
+            expect(body.end_date).to.be.a('string')
+            expect(new Date(body.end_date).getTime()).to.be.greaterThan(
+              new Date(body.start_date).getTime(),
+            )
+          })
+        cy.get('#pause-requests-4-modal').should('not.exist')
+        cy.get('@deleteRequestPermissions.all').should('have.length', 0)
       })
 
       it('Shows edit facility button', () => {
@@ -923,9 +1010,9 @@ describe('Account Management', () => {
 
     context('When user can edit facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, {
-          fixture: 'auth/users/admin__two_groups_edit_facilities__response.json',
-        }).as('auth')
+        interceptAuthWithFacilityAccess(
+          'auth/users/admin__two_groups_edit_facilities__response.json',
+        )
         cy.intercept('POST', routes.features.grouped.get, {
           fixture: 'auth/features/basic_features.json',
         }).as('features')
@@ -968,9 +1055,9 @@ describe('Account Management', () => {
 
     context('When user can manage facilities', () => {
       beforeEach(() => {
-        cy.intercept('GET', routes.auth.get, {
-          fixture: 'auth/users/admin__two_groups_manage_facilities__response.json',
-        }).as('auth')
+        interceptAuthWithFacilityAccess(
+          'auth/users/admin__two_groups_manage_facilities__response.json',
+        )
         cy.intercept('POST', routes.features.grouped.get, {
           fixture: 'auth/features/basic_features.json',
         }).as('features')

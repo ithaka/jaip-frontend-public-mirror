@@ -9,6 +9,7 @@ import type { EntityActions } from '@/interfaces/AccountManagement'
 import { useFeaturesStore } from '@/stores/features'
 import EntityManager from '@/components/account/EntityManager.vue'
 import EntityRemover from '@/components/account/EntityRemover.vue'
+import EntityRequestPermissions from '@/components/account/EntityRequestPermissions.vue'
 import { useLogger } from '@/composables/logging/useLogger'
 
 const props = defineProps({
@@ -23,7 +24,8 @@ const props = defineProps({
 })
 
 const userStore = useUserStore()
-const { featureDetails, groupThreshold } = storeToRefs(userStore)
+const { featureDetails, groupThreshold, canManageFacilities, canEditFacilities } =
+  storeToRefs(userStore)
 
 const featuresStore = useFeaturesStore()
 
@@ -130,7 +132,7 @@ const { openEntityModalLog, groupSelectionLog, openGroupSelectionLog, openModalL
 
     <div class="mt-4">
       <div v-if="(entity.groups || []).length === 1">
-        <pep-pharos-heading class="mb-2 pb-0" preset="3" :level="3">
+        <pep-pharos-heading no-margin preset="3" :level="3">
           {{ entity.groups![0]!.name || 'Unknown Group' }}
         </pep-pharos-heading>
       </div>
@@ -182,10 +184,16 @@ const { openEntityModalLog, groupSelectionLog, openGroupSelectionLog, openModalL
         </pep-pharos-select>
       </div>
     </div>
+
+    <EntityRequestPermissions
+      v-if="entity.type === 'facilities' && (canManageFacilities || canEditFacilities)"
+      :entity="entity"
+      @update="emit('update')"
+    />
     <ul>
       <div class="entity-features">
         <li v-for="(category, label, index) in categorizedFeatures" :key="`category_${index}`">
-          <pep-pharos-heading class="" preset="legend" :level="3">
+          <pep-pharos-heading preset="legend" :level="3">
             {{ label }}
           </pep-pharos-heading>
           <ul v-if="category.length">

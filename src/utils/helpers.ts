@@ -1,6 +1,7 @@
 import { RequestStatus, RequestStatusLabel } from '@/interfaces/RequestStatus'
 import type { FeatureDetails } from '@/interfaces/Features'
 import type { BulkHistory, History } from '@/interfaces/MediaRecord'
+import { RequestPermissionStatus, type RequestPermissions } from '@/interfaces/Entities'
 import type { Router, RouteRecordNormalized } from 'vue-router'
 import type { RoutesObject } from '@/interfaces/Routes'
 import type { ComponentInternalInstance } from 'vue'
@@ -90,6 +91,36 @@ export const getStatus = (
   return status ? REQUEST_STATUS_BY_LABEL[status] : ''
 }
 
+export const getRequestPermissionStatus = (
+  requestPermissions: RequestPermissions | undefined,
+): RequestPermissionStatus => {
+  if (!requestPermissions) {
+    return RequestPermissionStatus.On
+  }
+
+  const now = new Date()
+  const startDate = new Date(requestPermissions.start_date)
+  const endDate = requestPermissions.end_date ? new Date(requestPermissions.end_date) : null
+
+  if (startDate >= now) {
+    return RequestPermissionStatus.Scheduled
+  }
+
+  if (endDate && endDate <= now) {
+    return RequestPermissionStatus.On
+  }
+
+  if (startDate <= now && endDate && endDate >= now) {
+    return RequestPermissionStatus.Paused
+  }
+
+  if (startDate <= now && endDate === null) {
+    return RequestPermissionStatus.Off
+  }
+
+  return RequestPermissionStatus.On
+}
+
 // Parses a groups query parameter which can be either a JSON array string or a comma-separated list of group IDs,
 // and returns an array of valid integer group IDs. This function is necessary to handle arrays in query parameters,
 // which don't always handle brackets nicely. Having brackets in the url can cause issues with encoding that break the
@@ -150,7 +181,14 @@ export const changeRoute = (
     closeOnNavigate = true,
   }: ChangeRouteOptions,
 ) => {
-  const route = router.getRoutes().find((r) => r.path === path)
+  // We have some paths that include an optional tab or other path parameter. This strips out
+  // the literal from paths.
+  path =
+    path
+      .split('/')
+      .filter((segment) => !(segment.startsWith(':') && segment.endsWith('?')))
+      .join('/') || '/'
+  const route = router.resolve(path).matched.at(-1)
   if (route?.redirect) {
     window.open(route.redirect as string, '_blank')
     return

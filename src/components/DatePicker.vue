@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { DatePickerRangeDirection, type DatePickerPresetRange } from '@/interfaces/DatePicker'
 import { computed, ref, watch, type PropType } from 'vue'
+import { defaultDateOptions, normalizeDates } from '@/utils/dates'
 
 const props = defineProps({
   initialDates: {
@@ -14,6 +15,10 @@ const props = defineProps({
   rangeDirection: {
     type: String as PropType<DatePickerRangeDirection>,
     default: DatePickerRangeDirection.Future,
+  },
+  includeAll: {
+    type: Boolean,
+    default: true,
   },
   triggerId: {
     type: String,
@@ -35,10 +40,15 @@ const props = defineProps({
     type: Date as PropType<Date>,
     default: undefined,
   },
+  teleport: {
+    type: [Boolean, String] as PropType<boolean | string>,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['selected-dates'])
 
+const datePicker = ref<{ openMenu: () => void } | null>(null)
 const presetDateSlot = 'preset-date'
 
 const addDays = (date: Date, days: number) => {
@@ -59,19 +69,22 @@ const presetRanges = computed<DatePickerPresetRange[]>(() => {
       ? [new Date(), new Date(Date.parse('01 Jan 2100 00:00:00 GMT'))]
       : [new Date(Date.parse('01 Jan 2022 00:00:00 GMT')), new Date()]
 
-  return [
+  const ranges: DatePickerPresetRange[] = [
     { label: 'Today', value: [new Date(), new Date()], slot: presetDateSlot },
     { label: `${rangeLabel} 30 Days`, value: getRangeValue(30), slot: presetDateSlot },
     { label: `${rangeLabel} 60 Days`, value: getRangeValue(60), slot: presetDateSlot },
     { label: `${rangeLabel} 90 Days`, value: getRangeValue(90), slot: presetDateSlot },
-    { label: 'All', value: allRange, slot: presetDateSlot },
   ]
+
+  if (props.includeAll) {
+    ranges.push({ label: 'All', value: allRange, slot: presetDateSlot })
+  }
+
+  return ranges
 })
 
 const dateOptions = computed<Intl.DateTimeFormatOptions>(() => ({
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+  ...defaultDateOptions,
   ...(props.timeZone ? { timeZone: props.timeZone } : {}),
 }))
 
@@ -83,16 +96,6 @@ watch(
     selectedDates.value = initialDates.length ? initialDates : []
   },
 )
-
-const normalizeDates = (dates: Array<Date>) => {
-  const firstDate = new Date(dates[0]!)
-  const secondDate = new Date(dates[1] || dates[0]!)
-  const [startDate, endDate] =
-    firstDate <= secondDate ? [firstDate, secondDate] : [secondDate, firstDate]
-  startDate.setHours(0, 0, 0, 0)
-  endDate.setHours(23, 59, 59, 999)
-  return [startDate, endDate]
-}
 
 const handleDateSelection = (dates: Array<Date>) => {
   selectedDates.value = normalizeDates(dates)
@@ -116,16 +119,20 @@ const displayDates = computed(() => {
 
 <template>
   <VueDatePicker
+    ref="datePicker"
     class="datepicker"
     :model-value="selectedDates"
     :enable-time-picker="false"
     :time-config="{ enableTimePicker: false }"
+    arrow-navigation
     range
     :required="required"
     :min-date="minDate"
     :max-date="maxDate"
     :text-input="true"
     :preset-dates="presetRanges"
+    :teleport="teleport"
+    :ui="{ menu: teleport ? 'datepicker__menu--teleported' : '' }"
     @update:model-value="handleDateSelection"
   >
     <template #trigger>
@@ -135,7 +142,13 @@ const displayDates = computed(() => {
           >*<span class="datepicker__required-indicator-text">required</span></span
         >
       </pep-pharos-heading>
-      <pep-pharos-button :id="triggerId" variant="secondary" full-width icon-left="calendar">
+      <pep-pharos-button
+        :id="triggerId"
+        variant="secondary"
+        full-width
+        icon-left="calendar"
+        @keydown.enter.stop.prevent="datePicker?.openMenu()"
+      >
         {{ displayDates }}
       </pep-pharos-button>
     </template>
@@ -152,14 +165,40 @@ const displayDates = computed(() => {
     </template>
     <template #action-row="{ selectDate, disabled, closePicker }">
       <div class="datepicker__action-row">
-        <pep-pharos-button variant="secondary" class="mr-2" @click="closePicker">
+        <pep-pharos-button
+          variant="secondary"
+          class="mr-2"
+          @click="closePicker"
+          @keydown.enter.stop.prevent="closePicker"
+        >
           Cancel
         </pep-pharos-button>
-        <pep-pharos-button :disabled="disabled" @click="selectDate"> Select </pep-pharos-button>
+        <pep-pharos-button
+          :disabled="disabled"
+          @click="selectDate"
+          @keydown.enter.stop.prevent="!disabled && selectDate()"
+        >
+          Select
+        </pep-pharos-button>
       </div>
     </template>
   </VueDatePicker>
 </template>
+
+<!-- Styles for the teleported datepicker menu cannot be scoped. -->
+<style lang="scss">
+.datepicker__menu--teleported {
+  z-index: 9001;
+  max-width: calc(100vw - 1rem);
+
+  .dp--preset-dates[data-dp-mobile],
+  .dp--preset-dates-collapsed {
+    max-width: calc(100vw - 2rem);
+    flex-wrap: wrap;
+    gap: var(--pharos-spacing-one-quarter-x);
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 .datepicker {

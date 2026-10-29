@@ -1,5 +1,6 @@
 import { handleLocation } from './helpers'
 import { routes } from '../../src/config/api'
+import { RequestPermissionStatus } from '../../src/interfaces/Entities'
 
 describe('Requests page', () => {
   context('General', () => {
@@ -147,6 +148,79 @@ describe('Requests page', () => {
         .first()
         .find('pep-pharos-button')
         .contains('Request this', { matchCase: false })
+    })
+
+    for (const requestState of [RequestPermissionStatus.Paused, RequestPermissionStatus.Off]) {
+      it(`Hides request buttons when requests are ${requestState}`, () => {
+        cy.fixture('auth/users/student__one_group_media_access__response.json').then((student) => {
+          student.request_permissions = {
+            start_date: '2000-01-01T00:00:00.000Z',
+            ...(requestState === RequestPermissionStatus.Paused
+              ? { end_date: '2999-12-31T23:59:59.999Z' }
+              : {}),
+          }
+          cy.intercept('GET', routes.auth.get, { body: student }).as('auth')
+        })
+        cy.intercept('POST', routes.search.status('completed'), {
+          fixture: 'search/completed__response.json',
+        }).as('completed')
+
+        cy.visit('/requests?term=&page=1')
+        cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
+
+        cy.get('.search-result').first().contains('Status: Denied')
+        cy.get('.search-result')
+          .contains('pep-pharos-button', 'Request this', { matchCase: false })
+          .should('not.exist')
+        cy.get('.search-result').eq(1).contains('pep-pharos-button', 'Read').should('be.visible')
+      })
+    }
+
+    it('Shows the unavailable alert when requests are off for an incomplete article', () => {
+      cy.fixture('auth/users/student__one_group_media_access__response.json').then((student) => {
+        student.request_permissions = { start_date: '2000-01-01T00:00:00.000Z' }
+        cy.intercept('GET', routes.auth.get, { body: student }).as('auth')
+      })
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/incomplete__response.json',
+      }).as('completed')
+
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
+
+      cy.get('.search-result')
+        .first()
+        .within(() => {
+          cy.contains('Status: Incomplete').should('be.visible')
+          cy.contains(
+            'This item has not been approved for use in your correctional facility, and requests for it will not be reviewed.',
+          ).should('be.visible')
+          cy.contains('Why is this item unavailable?').should('not.exist')
+        })
+    })
+
+    it('Shows the paused alert instead of the help link for an incomplete article', () => {
+      cy.fixture('auth/users/student__one_group_media_access__response.json').then((student) => {
+        student.request_permissions = {
+          start_date: '2000-01-01T00:00:00.000Z',
+          end_date: '2999-12-31T23:59:59.999Z',
+        }
+        cy.intercept('GET', routes.auth.get, { body: student }).as('auth')
+      })
+      cy.intercept('POST', routes.search.status('completed'), {
+        fixture: 'search/incomplete__response.json',
+      }).as('completed')
+
+      cy.visit('/requests?term=&page=1')
+      cy.wait(['@requestsPage', '@alerts', '@env', '@auth', '@completed'])
+
+      cy.get('.search-result')
+        .first()
+        .within(() => {
+          cy.contains('Status: Incomplete').should('be.visible')
+          cy.contains('Requests are paused at this site').should('be.visible')
+          cy.contains('Why is this item unavailable?').should('not.exist')
+        })
     })
 
     it('Lets students re-request incomplete articles', () => {

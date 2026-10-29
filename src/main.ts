@@ -266,6 +266,7 @@ const {
   ungroupedFeatures,
   id,
   facilities,
+  requestPermissions,
   canViewRestrictedList,
 } = storeToRefs(userStore)
 const { pageNo, reviewStatus, statusQuery } = storeToRefs(searchStore)
@@ -451,6 +452,7 @@ const auth = async (app: App) => {
           entityName.value = data.name
           gettingUser.value = false
           facilities.value = data.facilities || []
+          requestPermissions.value = data.request_permissions || {}
         }
       }
     } catch {

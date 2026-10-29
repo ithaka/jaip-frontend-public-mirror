@@ -679,7 +679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.7.6":
+"@floating-ui/dom@npm:^1.7.6, @floating-ui/dom@npm:^1.8.0":
   version: 1.8.0
   resolution: "@floating-ui/dom@npm:1.8.0"
   dependencies:
@@ -865,19 +865,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ithaka/pharos@npm:^14.25.0":
-  version: 14.25.0
-  resolution: "@ithaka/pharos@npm:14.25.0"
+"@ithaka/pharos@npm:^14.26.0":
+  version: 14.26.0
+  resolution: "@ithaka/pharos@npm:14.26.0"
   dependencies:
-    "@floating-ui/dom": "npm:^1.7.6"
+    "@floating-ui/dom": "npm:^1.8.0"
     "@lit-labs/scoped-registry-mixin": "npm:^1.0.4"
     "@open-wc/dedupe-mixin": "npm:^2.0.1"
     focus-trap: "npm:^8.2.2"
     lit: "npm:^3.3.3"
-    uuid: "npm:^14.0.1"
+    uuid: "npm:^14.0.2"
   peerDependencies:
     sass: ^1.89.1
-  checksum: 10c0/a9820271b4380698bd856a72097495a4a9978eae395929b5b85292e801b7a7fb361f49c0f541864f0e14030917a9daea7b157bd84558c1e8ad25deda348537de
+  checksum: 10c0/ac08e6dc7a6b0fe47c8bdf7dbe1b99e10a863eacca041d15097d5c7b6df190af9443196bd0aab6bd742db0f22aa8155e51f81a1c3d681fead42da6a594f8b2c5
   languageName: node
   linkType: hard
 
@@ -4840,7 +4840,7 @@ __metadata:
     "@babel/types": "npm:^8.0.4"
     "@carbon/charts-vue": "npm:^1.27.17"
     "@ithaka/eslint-config-vue": "npm:^6.0.0"
-    "@ithaka/pharos": "npm:^14.25.0"
+    "@ithaka/pharos": "npm:^14.26.0"
     "@tsconfig/node24": "npm:^24.0.4"
     "@types/jsdom": "npm:^30.0.0"
     "@types/node": "npm:^24.13.3"
@@ -7375,6 +7375,15 @@ __metadata:
   bin:
     uuid: dist-node/bin/uuid
   checksum: 10c0/2d961289097cb68c37d93d1da0b5c3aafc1eb9948a455cca8d0ae53a099b2fe583b8933254a84097f700e6bac2e23033364904df0467c22551d5d9611febcaf6
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^14.0.2":
+  version: 14.0.2
+  resolution: "uuid@npm:14.0.2"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: 10c0/88906237004db370b013129c8372a2149f6fa1aad7a5f78fa65ddf2ba0a8663097022300d81fa01f551efee9d6bbe8c7ab140dc6d49f1b03d289f855096990c9
   languageName: node
   linkType: hard
 

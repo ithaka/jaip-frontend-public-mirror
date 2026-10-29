@@ -8,6 +8,7 @@ import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 
+import { defaultLocaleDateString } from '@/utils/dates'
 import type { PropType } from 'vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
@@ -291,7 +292,7 @@ const handleDenial = async () => {
       <p>
         <span
           >The record will show that {{ entityName }} denied <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}</span
+          {{ defaultLocaleDateString(new Date()) }}</span
         >
         <span v-if="denyGroups?.length"
           >&nbsp;for use in

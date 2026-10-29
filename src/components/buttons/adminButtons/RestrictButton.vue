@@ -10,6 +10,7 @@ import { changeRoute } from '@/utils/helpers'
 import { storeToRefs } from 'pinia'
 import { ref, type PropType } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { defaultLocaleDateString } from '@/utils/dates'
 
 const props = defineProps({
   doc: {
@@ -156,7 +157,7 @@ const handleRestrict = async () => {
       <p>
         <span
           >The record will show that {{ entityName }} globally denied <em>{{ doc.title }}</em> on
-          {{ new Date().toLocaleDateString() }}.</span
+          {{ defaultLocaleDateString(new Date()) }}.</span
         >
       </p>
 

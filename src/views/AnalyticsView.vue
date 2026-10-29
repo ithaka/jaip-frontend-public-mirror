@@ -273,7 +273,11 @@ const {
             :group-id="selectedGroupId.toString()"
           />
         </div>
-        <pep-pharos-heading :level="3" preset="4--bold"> Media review </pep-pharos-heading>
+        <div class="analytics__media-review-header">
+          <pep-pharos-heading no-margin :level="3" preset="4--bold">
+            Media review
+          </pep-pharos-heading>
+        </div>
         <p class="analytics__subtitle">
           Showing data for: <b>{{ selectedTimePeriodLabel }}</b>
         </p>
@@ -326,6 +330,18 @@ const {
 
   &__header {
     margin-bottom: var(--pharos-spacing-2-x);
+  }
+
+  &__media-review-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--pharos-spacing-1-x);
+    margin-bottom: var(--pharos-spacing-1-x);
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__selectors {

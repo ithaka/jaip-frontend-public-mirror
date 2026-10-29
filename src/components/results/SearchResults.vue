@@ -6,9 +6,10 @@ import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { ref, computed, useTemplateRef } from 'vue'
 import { useRouter } from 'vue-router'
+import GroupSelector from '@/components/account/GroupSelector.vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import { makeGrammaticalList, changeRoute } from '@/utils/helpers'
-import GroupSelector from '@/components/account/GroupSelector.vue'
+import { defaultLocaleDateString } from '@/utils/dates'
 
 import type InputFileEvent from '@/interfaces/Events/InputEvent'
 import type { Discipline } from '@/interfaces/Discipline'
@@ -558,13 +559,7 @@ const openSearchHelp = async () => {
         class="search-results-header__last_updated"
       >
         Last Updated:
-        {{
-          new Date(restrictedListLastUpdated).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })
-        }}
+        {{ defaultLocaleDateString(new Date(restrictedListLastUpdated)) }}
       </div>
     </div>
     <div v-if="searchTotal" :class="{ 'search-results': !requestsPage }">

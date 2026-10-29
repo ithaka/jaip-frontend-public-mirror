@@ -5,7 +5,12 @@ import { useFeaturesStore } from './features'
 import type { UngroupedFeatureDetails, FeatureBoolean, FeatureDetails } from '@/interfaces/Features'
 import type { Subdomain } from '@/interfaces/Subdomains'
 import { removeCookie, setCookie } from 'typescript-cookie'
-import type { Entity } from '@/interfaces/Entities'
+import {
+  RequestPermissionStatus,
+  type Entity,
+  type RequestPermissions,
+} from '@/interfaces/Entities'
+import { getRequestPermissionStatus } from '@/utils/helpers'
 
 const hasAdminFeatures = (group: Group) => {
   const features = useFeaturesStore()
@@ -62,6 +67,7 @@ export const useUserStore = defineStore('user', {
       // In some cases, a user may have a valid JSTOR account, but not have admin access to the site. If they attempt to log in, we'll
       // indicate which email they used and that they don't have access to the site.
       invalidUserEmail: '',
+      requestPermissions: {} as RequestPermissions,
     }
   },
   actions: {
@@ -105,6 +111,24 @@ export const useUserStore = defineStore('user', {
     },
     groupIDsWithFeature(groups: Array<Group>, feature: string): Array<number> {
       return this.groupsWithFeature(groups, feature).map((grp: Group) => grp.id)
+    },
+    facilitiesWithRequestPermissionStatus(status: RequestPermissionStatus): Array<Entity> {
+      return this.facilities.filter(
+        (facility) => getRequestPermissionStatus(facility.request_permissions) === status,
+      )
+    },
+    facilitiesWithRequestsPaused(): Array<Entity> {
+      return this.facilities.filter(
+        (facility) =>
+          getRequestPermissionStatus(facility.request_permissions) ===
+          RequestPermissionStatus.Paused,
+      )
+    },
+    facilitiesWithRequestsOff(): Array<Entity> {
+      return this.facilities.filter(
+        (facility) =>
+          getRequestPermissionStatus(facility.request_permissions) === RequestPermissionStatus.Off,
+      )
     },
     // Determines if a user has a given feature in only a single group.
     // This is useful for determining if the user can be treated as a single group user
@@ -354,6 +378,23 @@ export const useUserStore = defineStore('user', {
           return facility.groups?.[0]?.id && this.editableGroups.includes(facility.groups[0].id)
         })
         .map((facility) => facility.id!)
+    },
+    requestPermissionStatus(): RequestPermissionStatus {
+      return getRequestPermissionStatus(this.requestPermissions)
+    },
+    requestPermissionsStartDate(): Date | null {
+      return this.requestPermissions?.start_date
+        ? new Date(this.requestPermissions.start_date)
+        : null
+    },
+    requestPermissionsEndDate(): Date | null {
+      return this.requestPermissions?.end_date ? new Date(this.requestPermissions.end_date) : null
+    },
+    hasRequestsPaused(): boolean {
+      return this.requestPermissionStatus === RequestPermissionStatus.Paused
+    },
+    hasRequestsOff(): boolean {
+      return this.requestPermissionStatus === RequestPermissionStatus.Off
     },
   },
 })

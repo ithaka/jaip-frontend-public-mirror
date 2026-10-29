@@ -9,14 +9,11 @@ const useLogger = () => {
   // The core store provides access to the logging API
   const coreStore = useCoreStore()
 
-  // The route and component instance provide context for the log, and can be
-  // instantiated when the composable is used.
-  const route = useRoute()
-
   // This provides access to the current component instance, but may not be available in all contexts.
   // It's only used here to get the component name for logging purposes, so it's not a catastrophic failure
   // if it's undefined.
   const componentInstance = getCurrentInstance()
+  const route = componentInstance ? useRoute() : undefined
 
   // Uses clientWidth/Height to get the dimensions.
   const getDocumentDimensions = (): { width: number; height: number } | undefined => {
@@ -59,8 +56,8 @@ const useLogger = () => {
       // NOTE: Route info is left optional for those cases where the logger is used outside of a component setup function,
       // where route and component info may not be available (e.g., api error handling).
       route_name: route?.name,
-      path: route?.path,
-      full_path: route?.fullPath,
+      path: route?.path ?? '',
+      full_path: route?.fullPath ?? '',
       query_params: route?.query ? JSON.stringify(route.query) : undefined,
       component: componentInstance?.type.__name || 'AnonymousComponent',
       parents: getAncestorComponentNames(componentInstance),

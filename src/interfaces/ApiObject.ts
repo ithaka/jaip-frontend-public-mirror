@@ -15,7 +15,7 @@ import type { EditingGroup, GroupResponse } from '@/interfaces/Group'
 import type { Journal } from '@/interfaces/Journal'
 import type { Log } from '@/interfaces/Log'
 import type { PaginatedQuery, PaginatedGroupedQuery } from '@/interfaces/Queries'
-import type RequestArgs from '@/interfaces/RequestArgs'
+import type { RequestArgs, RequestPermissionsArgs } from '@/interfaces/RequestArgs'
 import type { RestrictArgs, UnrestrictArgs } from '@/interfaces/RestrictArgs'
 import type SearchArgs from '@/interfaces/SearchArgs'
 import type { SearchResponse } from '@/interfaces/SearchResponse'
@@ -141,5 +141,10 @@ export default interface ApiObject {
   search: SearchRoutes
   citations: {
     get: (arg: string) => Promise<AxiosResponse<CitationsResponse>>
+  }
+  request_management: {
+    add: (arg: RequestPermissionsArgs) => Promise<AxiosResponse<unknown>>
+    edit: (arg: RequestPermissionsArgs) => Promise<AxiosResponse<unknown>>
+    remove: (id: number) => Promise<AxiosResponse<unknown>>
   }
 }
