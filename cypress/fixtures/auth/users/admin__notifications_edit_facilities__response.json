@@ -56,7 +56,6 @@
             "manage_facilities": false,
             "print_pdf": false,
             "remove_users": false,
-            "submit_requests": false,
             "undo_bulk_approve": false,
             "use_protected_features": false,
             "view_abstract": false,

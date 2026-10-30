@@ -5,7 +5,7 @@ describe('Media Review', () => {
   context('As a student', () => {
     beforeEach(() => {
       cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf_submit_requests__response.json',
+        fixture: 'auth/users/student__one_group_view_pdf__response.json',
       }).as('auth')
       cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
         .as('env')
@@ -261,40 +261,6 @@ describe('Media Review', () => {
         cy.location('pathname').should('eq', '/help/unavailable-items')
         cy.location('hash').should('eq', '#help-tabs')
         cy.contains('How do I know if an item is unavailable?').should('be.visible')
-      })
-    })
-  })
-
-  context('As a student who cannot submit requests', () => {
-    beforeEach(() => {
-      cy.intercept('GET', routes.auth.get, {
-        fixture: 'auth/users/student__one_group_view_pdf__response.json',
-      }).as('auth')
-      cy.intercept('GET', routes.environment.get, { environment: 'test' }) // no alerts
-        .as('env')
-      cy.intercept('GET', routes.disciplines.get, { fixture: 'disciplines/response.json' }).as(
-        'disciplines',
-      )
-      cy.intercept('POST', routes.search.basic, { fixture: 'search/term_given__response.json' }).as(
-        'search',
-      )
-      cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }) // no alerts
-        .as('alerts')
-    })
-
-    context('With default search response', () => {
-      beforeEach(() => {
-        handleLocation('/search?term=mary+mcleod+bethune', cy, 'searchPage', 'pep')
-        cy.visit('/search?term=mary+mcleod+bethune')
-        cy.wait(['@searchPage', '@alerts', '@env', '@search', '@auth', '@disciplines'])
-      })
-      it('Shows a warning alert', () => {
-        cy.get('.alert')
-        // .contains('Requests are temporarily disabled at this site.')
-        // .should('be.visible')
-      })
-      it('Does not display the Request this button', () => {
-        cy.get('.search-result').contains('Request this', { matchCase: false }).should('not.exist')
       })
     })
   })

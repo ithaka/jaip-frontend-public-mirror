@@ -26,7 +26,6 @@ const {
   gettingUser,
   entityName,
   groups,
-  features,
 } = storeToRefs(userStore)
 
 const searchStore = useSearchStore()
@@ -74,10 +73,6 @@ watch(entityName, () => {
 const logout = async () => {
   userStore.$reset()
 }
-const showRequestWarning = computed(
-  () =>
-    !features.value['submit_requests'] && isAuthenticatedStudent.value && !isAdminSubdomain.value,
-)
 
 const truncatedGramaticalGroupsList = computed(() => {
   const isOverlong = groups.value.length > 3
@@ -108,7 +103,6 @@ const truncatedGramaticalGroupsList = computed(() => {
       :is-authenticated-admin="isAuthenticatedAdmin"
       :is-authenticated-student="isAuthenticatedStudent"
       :is-admin-subdomain="isAdminSubdomain"
-      :show-request-warning="!!showRequestWarning"
       :name="entityName"
       @logout="logout"
     />
@@ -121,7 +115,6 @@ const truncatedGramaticalGroupsList = computed(() => {
       :is-authenticated-student="isAuthenticatedStudent"
       :is-unauthenticated="isUnauthenticated"
       :is-admin-subdomain="isAdminSubdomain"
-      :show-request-warning="!!showRequestWarning"
       :name="entityName"
       :groups="truncatedGramaticalGroupsList"
       @logout="logout"

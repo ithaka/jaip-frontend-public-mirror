@@ -73,7 +73,6 @@
           "features": {
             "print_pdf": true,
             "remove_users": false,
-            "submit_requests": true,
             "undo_bulk_approve": false,
             "use_protected_features": false,
             "view_abstract": true,
@@ -119,7 +118,6 @@
             "deny_requests": false,
             "view_pdf": true,
             "bulk_approve": false,
-            "submit_requests": true,
             "get_facilities": false,
             "edit_facilities": false,
             "add_or_edit_users": false,

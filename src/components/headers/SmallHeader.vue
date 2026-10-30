@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import ProviderBar from '@/components/headers/ProviderBar.vue'
 import SidenavMenu from '@/components/headers/SidenavMenu.vue'
 import SearchInput from '@/components/SearchInput.vue'
-import RequestWarning from '@/components/headers/RequestWarning.vue'
 
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
@@ -38,10 +37,6 @@ defineProps({
     default: false,
   },
   isAdminSubdomain: {
-    type: Boolean,
-    default: false,
-  },
-  showRequestWarning: {
     type: Boolean,
     default: false,
   },
@@ -94,7 +89,6 @@ const { logOutLog, logInLog, jstorLogoClickLog, openSidenavLog, closeSidenavLog 
         :is-authenticated-student="isAuthenticatedStudent"
         :login-url="loginUrl"
       />
-      <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
     <!-- Header -->
     <div class="header__content pa-5 justify-content-space-between">

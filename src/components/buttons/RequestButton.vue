@@ -63,7 +63,6 @@ const canRequest = computed(() => {
     status.value !== RequestStatus.Approved &&
     status.value !== RequestStatus.Pending &&
     status.value !== RequestStatus.Restricted &&
-    userStore.features['submit_requests'] &&
     !hasRequestsPaused.value &&
     !hasRequestsOff.value &&
     !props.hideRequests

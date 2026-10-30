@@ -2,7 +2,6 @@
 import NavigationMenu from '@/components/headers/NavigationMenu.vue'
 import ProviderBar from '@/components/headers/ProviderBar.vue'
 import SearchInput from '@/components/SearchInput.vue'
-import RequestWarning from '@/components/headers/RequestWarning.vue'
 import { useRouter } from 'vue-router'
 import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
@@ -42,10 +41,6 @@ defineProps({
     type: Boolean,
     default: false,
   },
-  showRequestWarning: {
-    type: Boolean,
-    default: false,
-  },
   name: {
     type: String,
     default: '',
@@ -71,7 +66,6 @@ const { logOutLog, logInLog, jstorLogoClickLog } = logs.getHeaderLogs()
         :is-authenticated-student="isAuthenticatedStudent"
         :login-url="loginUrl"
       />
-      <RequestWarning v-if="showRequestWarning" class="my-3 px-3" />
     </div>
 
     <!-- Logo -->

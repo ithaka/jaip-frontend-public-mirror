@@ -20,7 +20,6 @@
         "manage_facilities": false,
         "print_pdf": true,
         "remove_users": false,
-        "submit_requests": true,
         "undo_bulk_approve": false,
         "use_protected_features": false,
         "view_abstract": false,
