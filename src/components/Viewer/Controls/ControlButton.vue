@@ -54,6 +54,10 @@ defineProps({
     required: false,
     default: false,
   },
+  buttonClass: {
+    type: String,
+    default: '',
+  },
 })
 
 const emit = defineEmits(['clicked'])
@@ -76,7 +80,7 @@ function handleKeyDown(event: KeyboardEvent) {
     :aria-label="tooltipText"
     :data-tooltip-id="tooltipId"
     :data-sc="analyticsTag"
-    :class="['viewer-control-button', !text ? 'icon-only-button' : 'button-with-text']"
+    :class="['viewer-control-button', !text ? 'icon-only-button' : 'button-with-text', buttonClass]"
     :disabled="disabled"
     @click="buttonClick"
     @keydown.enter="handleKeyDown"

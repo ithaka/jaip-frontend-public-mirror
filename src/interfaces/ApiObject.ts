@@ -14,6 +14,7 @@ import type { Feature, FeatureRequest, FeatureResponse } from '@/interfaces/Feat
 import type { EditingGroup, GroupResponse } from '@/interfaces/Group'
 import type { Journal } from '@/interfaces/Journal'
 import type { Log } from '@/interfaces/Log'
+import type { Cedar } from '@/interfaces/Metadata'
 import type { PaginatedQuery, PaginatedGroupedQuery } from '@/interfaces/Queries'
 import type { RequestArgs, RequestPermissionsArgs } from '@/interfaces/RequestArgs'
 import type { RestrictArgs, UnrestrictArgs } from '@/interfaces/RestrictArgs'
@@ -96,7 +97,7 @@ interface CollectionsRoutes {
 interface DocumentsRoutes {
   pdfs: (arg: string) => Promise<AxiosResponse<unknown>>
   pages: (arg1: string, arg2: string) => Promise<AxiosResponse<unknown>>
-  metadata: (arg: string) => Promise<AxiosResponse<SearchResponse>>
+  metadata: (arg: string) => Promise<AxiosResponse<Cedar>>
 }
 
 interface DictionaryRoutes {

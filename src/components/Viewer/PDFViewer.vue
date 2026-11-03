@@ -77,7 +77,16 @@ const props = defineProps({
     type: Object as PropType<MediaRecord>,
     default: () => ({}),
   },
+  initialPage: {
+    type: Number,
+    default: 1,
+  },
+  viewingSessionId: {
+    type: String,
+    default: undefined,
+  },
 })
+const emit = defineEmits(['close', 'page-change', 'viewing-started'])
 
 const coreStore = useCoreStore()
 const searchStore = useSearchStore()
@@ -282,6 +291,7 @@ const {
   isReentryContent: isReentryContent,
   viewer: pdfView,
   documentProxy: pdfDocument,
+  eventUUID: props.viewingSessionId,
 })
 
 /**
@@ -345,7 +355,7 @@ onBeforeUnmount(() => {
   // Set this before cleanup so promise rejections caused by destroy() are treated as cancellation.
   isUnmounted = true
   removeFullscreenChangeListeners(handleFullscreenChange)
-  if (hasStartedViewingSession) handleWithLog(endPDFViewingSessionLog)
+  if (hasStartedViewingSession && !props.viewingSessionId) handleWithLog(endPDFViewingSessionLog)
   // In case the viewer unmounts (the user navigates away) while CSS fullscreen is still active.
   unlockBodyScroll()
 
@@ -787,8 +797,13 @@ const createViewer = () => {
       // This is logged here because this event indicates that the viewer is fully initialized,
       // so we can reasonably assume that the user is now viewing the PDF.
       if (!hasStartedViewingSession) {
+        const page =
+          Number.isInteger(props.initialPage) && props.initialPage > 0 ? props.initialPage : 1
+        pdfViewer.currentPageNumber = Math.min(page, initializedDocument?.numPages || 1)
+        emit('page-change', pdfViewer.currentPageNumber)
         hasStartedViewingSession = true
-        handleWithLog(startPDFViewingSessionLog)
+        if (props.viewingSessionId) emit('viewing-started')
+        else handleWithLog(startPDFViewingSessionLog)
       }
     }
     /** Routes current-page render failures to recovery, ignoring events from replaced documents. */
@@ -807,7 +822,8 @@ const createViewer = () => {
         if (pageBounds.bottom <= bounds.top || pageBounds.top >= bounds.bottom) page.destroy()
       }
     }
-    const handlePageChanging = ($event: { previous: number }) => {
+    const handlePageChanging = ($event: { previous: number; pageNumber: number }) => {
+      emit('page-change', $event.pageNumber)
       handleWithLog(
         pageSelectionLog({ previous_page: $event.previous }),
         () => paginationKey.value++,
@@ -1221,7 +1237,6 @@ const fitHeightToggle = () => {
 }
 
 const router = useRouter()
-const emit = defineEmits(['close'])
 const reentryPath = computed(() => {
   return route.path.split('/').slice(0, 3).join('/')
 })
@@ -1422,6 +1437,7 @@ const fireToast = () => {
               :can-fit-height="canFitHeight"
               :page-count="(pdfDocument || {}).numPages || 0"
               :current-page="(pdfView || {}).currentPageNumber || 1"
+              :show-page-navigation="(pdfDocument?.numPages || 0) > 1"
               @toggle-menu="
                 handleWithLog(viewerControlLog({ action: ViewerControls.toggle_menu }), toggleMenu)
               "

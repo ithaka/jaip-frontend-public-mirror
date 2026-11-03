@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PDFViewer from '@/components/Viewer/PDFViewer.vue'
-import { useRoute } from 'vue-router'
+import PageViewer from '@/components/Viewer/PageViewer.vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useCoreStore } from '@/stores/core'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
@@ -11,12 +12,34 @@ import type { MediaRecord } from '@/interfaces/MediaRecord'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import { useLogger } from '@/composables/logging/useLogger'
 import { useBackToResults } from '@/composables/useBackToResults'
+import { v4 as uuidv4 } from 'uuid'
 
 const route = useRoute()
+const router = useRouter()
+const isPageViewer = computed(() => route.name === 'Page Viewer')
+const initialPage = computed(() => {
+  const page = isPageViewer.value
+    ? Number(route.params.pid) + 1
+    : Number(route.query.viewerPage || 1)
+  return Number.isInteger(page) && page > 0 ? page : 1
+})
+const currentPage = ref(1)
+const alternateViewer = computed(() => {
+  const query = { ...route.query }
+  delete query.viewerPage
+  return {
+    name: isPageViewer.value ? 'PDF Viewer' : 'Page Viewer',
+    params: isPageViewer.value
+      ? { iid: iid.value }
+      : { iid: iid.value, pid: currentPage.value - 1 },
+    query: isPageViewer.value ? { ...query, viewerPage: currentPage.value } : query,
+  }
+})
 const coreStore = useCoreStore()
 const doc = ref({} as MediaRecord)
 /** Active document ID stays reactive when Vue Router reuses this view for another PDF. */
 const iid = computed(() => route.params.iid as string)
+watch([iid, isPageViewer], () => (currentPage.value = initialPage.value), { immediate: true })
 const gettingDocument = ref(false)
 const userStore = useUserStore()
 const { featureDetails } = storeToRefs(userStore)
@@ -75,6 +98,44 @@ watch(
 const { resultsHref, goBackToResults } = useBackToResults()
 const { handleWithLog, logs } = useLogger()
 const { backToResultsLog } = logs.getBackLinkLogs()
+const viewingSessionId = ref(uuidv4())
+let viewingSessionStarted = false
+let viewingSessionLogs = logs.getPageViewerLogs({
+  iid: iid.value,
+  eventUUID: viewingSessionId.value,
+})
+const { viewerModeSwitchLog } = logs.getViewerNavigationLogs({
+  iid,
+  eventUUID: viewingSessionId,
+})
+
+const startViewingSession = () => {
+  if (viewingSessionStarted) return
+  viewingSessionStarted = true
+  void handleWithLog(viewingSessionLogs.startPageViewingSessionLog)
+}
+
+const endViewingSession = () => {
+  if (!viewingSessionStarted) return
+  viewingSessionStarted = false
+  void handleWithLog(viewingSessionLogs.endPageViewingSessionLog)
+}
+
+watch(iid, () => {
+  endViewingSession()
+  viewingSessionId.value = uuidv4()
+  viewingSessionLogs = logs.getPageViewerLogs({
+    iid: iid.value,
+    eventUUID: viewingSessionId.value,
+  })
+})
+onBeforeUnmount(endViewingSession)
+
+const navigateToAlternateViewer = () => {
+  const target = alternateViewer.value
+  const destination = router.resolve(target).path
+  return handleWithLog(viewerModeSwitchLog(destination), () => router.push(target))
+}
 
 const { logPageView } = usePageViewLogger()
 logPageView()
@@ -88,9 +149,9 @@ logPageView()
     <BackLink
       v-if="resultsHref"
       class="cols-12 mt-5"
-      label="Back to results"
+      label="Back"
       :href="resultsHref"
-      data-cy="back-to-results-link"
+      data-cy="back-link"
       @click.prevent="handleWithLog(backToResultsLog, goBackToResults)"
     />
     <div
@@ -109,16 +170,48 @@ logPageView()
         @restrict-submitted="getDocument"
       />
     </div>
-    <PDFViewer
+    <nav
       v-if="featureDetails['view_pdf']?.enabled"
-      :key="iid"
+      class="cols-12 mb-3 viewer-options"
+      aria-label="Viewer options"
+    >
+      <pep-pharos-link
+        :href="router.resolve(alternateViewer).href"
+        data-cy="alternate-viewer-link"
+        @click.prevent="navigateToAlternateViewer"
+      >
+        {{ isPageViewer ? 'Return to PDF viewer' : 'Not working? Try alternate viewer' }}
+      </pep-pharos-link>
+    </nav>
+    <PageViewer
+      v-if="isPageViewer && featureDetails['view_pdf']?.enabled"
+      :key="`page-${iid}`"
+      class="cols-12"
+      :iid="iid"
+      :doc="doc"
+      :viewing-session-id="viewingSessionId"
+      @viewing-started="startViewingSession"
+      @page-change="currentPage = $event"
+    />
+    <PDFViewer
+      v-else-if="featureDetails['view_pdf']?.enabled"
+      :key="`pdf-${iid}`"
       tabindex="-1"
       class="cols-12"
       :iid="iid"
       :enable-viewer="featureDetails['view_pdf']?.enabled || false"
       :doc="doc"
+      :initial-page="initialPage"
+      :viewing-session-id="viewingSessionId"
+      @viewing-started="startViewingSession"
+      @page-change="currentPage = $event"
     />
   </pep-pharos-layout>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.viewer-options {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

@@ -12,10 +12,11 @@ const getPDFViewerLogs = (options: {
   viewer: Ref<PDFViewer>
   // Loading failures and teardown can be logged before/after any document is attached.
   documentProxy: Ref<PDFDocumentProxy | undefined>
+  eventUUID?: string
 }) => {
   // This UUID is created when the Viewer component is created, and will be able to
   // link all viewer logs for a single document view session.
-  const uuid = uuidv4()
+  const uuid = options.eventUUID ?? uuidv4()
 
   const errorLinkClickLog =
     (opts: { destination: string }): (() => WorkingLog) =>
@@ -131,10 +132,10 @@ const getPDFViewerLogs = (options: {
   }
 }
 
-const getPageViewerLogs = (options: { iid: string }) => {
+const getPageViewerLogs = (options: { iid: string; eventUUID?: string }) => {
   // This UUID is created when the Viewer component is created, and will be able to
   // link all viewer logs for a single document view session.
-  const uuid = uuidv4()
+  const uuid = options.eventUUID ?? uuidv4()
 
   const viewerControlLog =
     (opts: { action: ViewerControlOptions }): (() => WorkingLog) =>
@@ -142,6 +143,7 @@ const getPageViewerLogs = (options: { iid: string }) => {
       return {
         ...generics.viewerControl({ action: opts.action, iid: options.iid }),
         event_uuid: uuid,
+        is_reentry_content: false,
       }
     }
 
@@ -151,6 +153,7 @@ const getPageViewerLogs = (options: { iid: string }) => {
       return {
         ...generics.viewerControl({ action: ViewerControls.update_page, iid: options.iid }),
         event_uuid: uuid,
+        is_reentry_content: false,
         previous_page: opts.previous_page,
         current_page: opts.new_page,
       }
@@ -160,6 +163,7 @@ const getPageViewerLogs = (options: { iid: string }) => {
     return {
       ...generics.startViewingSession({ iid: options.iid }),
       event_uuid: uuid,
+      is_reentry_content: false,
     }
   }
 
@@ -167,6 +171,7 @@ const getPageViewerLogs = (options: { iid: string }) => {
     return {
       ...generics.endViewingSession({ iid: options.iid }),
       event_uuid: uuid,
+      is_reentry_content: false,
     }
   }
 
@@ -179,6 +184,7 @@ const getPageViewerLogs = (options: { iid: string }) => {
         action: 'page_viewer_error',
         viewer_error: opts.error,
         event_uuid: uuid,
+        is_reentry_content: false,
       }
     }
 
@@ -190,7 +196,23 @@ const getPageViewerLogs = (options: { iid: string }) => {
     pageViewerErrorLog,
   }
 }
+
+const getViewerNavigationLogs = (options: { iid: Ref<string>; eventUUID?: Ref<string> }) => {
+  const uuid = uuidv4()
+
+  const viewerModeSwitchLog =
+    (destination: string): (() => WorkingLog) =>
+    () => ({
+      ...generics.linkClick(destination, 'viewer_mode_switch'),
+      event_uuid: options.eventUUID?.value ?? uuid,
+      itemid: options.iid.value,
+    })
+
+  return { viewerModeSwitchLog }
+}
+
 export const viewerLogs = {
   getPDFViewerLogs,
   getPageViewerLogs,
+  getViewerNavigationLogs,
 }

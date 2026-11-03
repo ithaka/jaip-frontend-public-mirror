@@ -67,8 +67,8 @@ describe('Search', () => {
       // The item page looks up its own record with the same endpoint.
       cy.wait('@search')
 
-      cy.get('[data-cy="back-to-results-link"]')
-        .should('contain.text', 'Back to results')
+      cy.get('[data-cy="back-link"]')
+        .should('contain.text', 'Back')
         .and('have.css', 'margin-bottom', '24px')
         .find('pep-pharos-link')
         .click()

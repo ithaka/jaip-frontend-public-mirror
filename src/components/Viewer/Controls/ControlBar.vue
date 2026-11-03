@@ -34,6 +34,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  showPageNavigation: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 // Emits
@@ -87,12 +91,23 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-  <div :class="['control-bar', { 'is-menu-open': props.isMenuOpen }]">
+  <div
+    role="group"
+    aria-label="Viewer controls"
+    :class="[
+      'control-bar',
+      {
+        'is-menu-open': props.isMenuOpen,
+        'control-bar--page-navigation': props.showPageNavigation,
+      },
+    ]"
+  >
     <!-- Control Menu (Does not include page selector or fullscreen toggle button) -->
     <div ref="menuRef" class="control-bar__menu">
       <ControlButton
         icon-name="menu"
         :tooltip-text="isMenuOpen ? 'Close menu' : 'Open menu'"
+        :tooltip-position="TooltipPositions.RIGHT"
         @clicked="emit('toggle-menu')"
       />
       <div :class="['control-bar__dropdown', { 'is-open': props.isMenuOpen }]">
@@ -128,22 +143,40 @@ onBeforeUnmount(() => {
     />
     <!-- Page Selector -->
     <div class="control-bar__page-selector">
+      <ControlButton
+        v-if="props.showPageNavigation && props.pageCount > 1"
+        button-class="page-navigation-button"
+        icon-name="chevron-up"
+        tooltip-text="Previous page"
+        :disabled="props.currentPage <= 1"
+        @clicked="emit('update-page', props.currentPage - 1)"
+      />
       <PageSelector
         :key="props.paginationKey"
         :page-count="props.pageCount"
         :current-page="props.currentPage"
         @update-page="emit('update-page', $event)"
       />
+      <ControlButton
+        v-if="props.showPageNavigation && props.pageCount > 1"
+        button-class="page-navigation-button"
+        icon-name="chevron-down"
+        tooltip-text="Next page"
+        :disabled="props.currentPage >= props.pageCount"
+        @clicked="emit('update-page', props.currentPage + 1)"
+      />
     </div>
     <div class="control-bar__actions-right">
       <!-- Rotate Button -->
-      <ControlButton
-        icon-name="rotate"
-        tooltip-text="Rotate clockwise"
-        keyboard-shortcut="r"
-        :tooltip-position="TooltipPositions.RIGHT"
-        @clicked="emit('rotate-right')"
-      />
+      <span class="control-bar__rotate">
+        <ControlButton
+          icon-name="rotate"
+          tooltip-text="Rotate clockwise"
+          keyboard-shortcut="r"
+          :tooltip-position="TooltipPositions.RIGHT"
+          @clicked="emit('rotate-right')"
+        />
+      </span>
       <!-- Fullscreen Toggle Button -->
       <ControlButton
         :icon-name="fullscreenToggleIcon"
@@ -186,11 +219,21 @@ onBeforeUnmount(() => {
   &__buttons-right {
     justify-content: flex-end;
   }
+  &__rotate {
+    display: flex;
+  }
   &__page-selector {
     grid-column: 2;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    > :deep(.page-navigation-button:disabled) {
+      color: var(--pharos-color-marble-gray-50);
+    }
+    > :deep(.page-navigation-button:disabled .icon) {
+      fill: var(--pharos-color-marble-gray-50);
+    }
 
     .page-selector {
       width: auto;
@@ -200,6 +243,29 @@ onBeforeUnmount(() => {
   &__menu {
     position: relative;
     display: none;
+  }
+  &--page-navigation {
+    .control-bar__page-selector > :deep(button) {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 480px) {
+      .control-bar__buttons-left,
+      .control-bar__rotate {
+        display: none;
+      }
+      .control-bar__menu,
+      .control-bar__dropdown.is-open {
+        display: flex;
+      }
+      .control-bar__dropdown.is-open {
+        background-color: var(--pharos-color-marble-gray-10);
+      }
+      .control-bar__dropdown-group {
+        flex-direction: column;
+      }
+    }
   }
   .control-page {
     color: white;

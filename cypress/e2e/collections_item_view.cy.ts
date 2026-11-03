@@ -89,6 +89,8 @@ describe('Collections Item View', () => {
     cy.get('[data-cy="print-pdf-button"]').should('be.visible')
     cy.get('[data-cy="download-pdf-button"]').should('be.visible')
     cy.get('#viewer').should('exist')
+    cy.get('[data-cy="alternate-viewer-link"]').should('not.exist')
+    cy.get('[data-cy="page-viewer-surface"]').should('not.exist')
   })
 
   it('shows a not found message when the content metadata is missing', () => {
@@ -118,6 +120,7 @@ describe('Collections Item View', () => {
           .and('have.attr', 'href', `/collections/${collection}`)
       })
     cy.get('#viewer').should('not.exist')
+    cy.get('[data-cy="alternate-viewer-link"]').should('not.exist')
   })
 
   it('shows a guide not found error when the PDF is missing', () => {

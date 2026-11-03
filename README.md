@@ -130,7 +130,7 @@ We try to make this software available on as many devices as possible. That ofte
 
 #### structuredClone
 
-PDF.js does not work without `structuredClone`. Unsupported browsers receive the viewer error UI. The former page-image viewer routes now redirect to the PDF viewer; they are not a fallback.
+PDF.js does not work without `structuredClone`. Unsupported browsers receive the viewer error UI. Article views offer a Page viewer link as a fallback; PDF remains the default Read destination. The page viewer uses OpenSeadragon and the same control bar as the PDF viewer, loading individual images from `/api/v2/page/:iid/:index` with page counts from `/api/v2/metadata/:iid`. Legacy `/page/:iid/:pid` links render the page viewer, with zero-based URL page indexes and one-based page controls. Reentry content remains PDF-only and does not offer a secondary viewer.
 
 ### PDF Viewer Reliability
 

@@ -296,8 +296,8 @@ describe('Requests page', () => {
         .click()
       cy.location('pathname').should('eq', '/pdf/a9715135-bbe8-3a4e-984c-2fa6aea71d23')
 
-      cy.get('[data-cy="back-to-results-link"]')
-        .should('contain.text', 'Back to results')
+      cy.get('[data-cy="back-link"]')
+        .should('contain.text', 'Back')
         .and('have.css', 'margin-bottom', '24px')
         .find('pep-pharos-link')
         .click()

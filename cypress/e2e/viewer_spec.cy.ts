@@ -4,8 +4,6 @@ import { decodePDFJSEncodedBMP, initPDFWorkerPolyfills } from '../../src/utils/p
 
 // These tests seem to be taking an unusually long time, so we're increasing the timeout. That's resulting in
 // consistent test passing.
-// NOTE: The page viewer (/page/:iid/:pid) no longer renders its own view; it redirects to the pdf viewer
-// (/pdf/:iid), so these tests exercise the pdf viewer route directly.
 describe('PDF Viewer Access', () => {
   const iid = '43e7b8c1-a49c-37c3-ad42-6016af1d0eb8'
 
@@ -80,7 +78,7 @@ describe('PDF Viewer Access', () => {
     })
   })
 
-  it('redirects the page viewer route to the pdf viewer route', () => {
+  const interceptPageViewer = (requestable = false) => {
     cy.intercept('GET', routes.auth.get, {
       fixture: 'auth/users/student__one_group_view_pdf__response.json',
     }).as('auth')
@@ -88,22 +86,632 @@ describe('PDF Viewer Access', () => {
     cy.intercept('POST', routes.features.grouped.get, {
       fixture: 'auth/features/basic_features.json',
     }).as('features')
-    cy.intercept('POST', routes.search.basic, {
-      fixture: 'search/term_given__specified_id_limit_one__response.json',
-    }).as('search')
+    cy.fixture('search/term_given__specified_id_limit_one__response.json').then((response) => {
+      if (requestable) response.docs[0].mediaReviewStatuses = {}
+      cy.intercept('POST', routes.search.basic, { body: response }).as('search')
+    })
     cy.intercept('GET', routes.alerts.get, { statusCode: 200, body: { alerts: [], count: 0 } }).as(
       'alerts',
     )
-    cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 200, body: '' }).as(
-      'metadata',
-    )
-    handleLocation(`/page/${iid}/0`, cy, 'viewer', 'pep')
+    cy.intercept('GET', routes.documents.metadata(iid), {
+      body: { id: iid, pageCount: 3 },
+    }).as('metadata')
+    cy.intercept('GET', `/api/v2/page/${iid}/*`, {
+      fixture: 'pdf/0.jpeg,null',
+      headers: { 'content-type': 'image/jpeg' },
+    }).as('pageImage')
+    cy.intercept('GET', routes.documents.pdfs(iid), {
+      fixture: 'pdf/open-access-sample.pdf,null',
+      headers: { 'content-type': 'application/pdf' },
+    }).as('pdfDocument')
+  }
 
-    cy.visit(`/page/${iid}/0`)
+  const openPageViewer = (index = '0') => {
+    const path = `/page/${iid}/${index}?term=history&page=2`
+    handleLocation(path, cy, 'viewer', 'pep')
+    cy.visit(path)
     cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'], {
       requestTimeout: 20000,
     })
+  }
+
+  it('renders the legacy page URL with shared controls and lazy zero-based images', () => {
+    interceptPageViewer()
+    openPageViewer('1')
+    cy.wait('@metadata')
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/1`)
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+    cy.get('@pageImage.all').should('have.length', 1)
+    cy.get('@pdfDocument.all').should('have.length', 0)
+    cy.location('pathname').should('eq', `/page/${iid}/1`)
+    cy.get('input[name="select-page"]').should('have.value', '2')
+    cy.get('.control-bar [aria-label="Zoom in"]').should('be.visible')
+    cy.get('.control-bar [aria-label="Rotate clockwise"]').should('be.visible')
+    cy.get('[data-cy="alternate-viewer-link"]').should('contain', 'PDF viewer')
+    cy.get('[data-cy="page-viewer-surface"] canvas').should(($canvas) => {
+      const canvas = $canvas[0] as HTMLCanvasElement
+      expect(canvas.width).to.be.greaterThan(0)
+      const pixels = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height).data
+      expect(pixels.some((value, index) => index % 4 !== 3 && value > 0)).to.equal(true)
+    })
+  })
+
+  it('loads page images from the ephemeral backend with credentials', () => {
+    interceptPageViewer()
+    const backendURL = 'https://admin.test-pep.jstor.org'
+    const imageURL = `${backendURL}${routes.documents.pages(iid, '0')}`
+    const imagePolicies: (string | null)[] = []
+    const path = `/pdf/${iid}`
+    handleLocation(path, cy, 'viewer', 'pep')
+    cy.visit(path, {
+      onBeforeLoad(win) {
+        const descriptor = Object.getOwnPropertyDescriptor(win.HTMLImageElement.prototype, 'src')!
+        Object.defineProperty(win.HTMLImageElement.prototype, 'src', {
+          ...descriptor,
+          set(this: HTMLImageElement, value: string) {
+            if (value === imageURL) imagePolicies.push(this.crossOrigin)
+            descriptor.set!.call(this, value)
+          },
+        })
+      },
+    })
+    cy.wait(['@viewer', '@alerts', '@env', '@auth', '@search'])
+    cy.window().then((win) => {
+      cy.intercept('GET', imageURL, {
+        fixture: 'pdf/0.jpeg,null',
+        headers: {
+          'content-type': 'image/jpeg',
+          'access-control-allow-origin': win.location.origin,
+          'access-control-allow-credentials': 'true',
+        },
+      }).as('backendImage')
+      cy.get('#app').then(($app) => {
+        const app = $app[0] as HTMLElement & {
+          __vue_app__: {
+            config: {
+              globalProperties: {
+                $pinia: { _s: Map<string, { $patch: (state: object) => void }> }
+                $router: { push: (path: string) => Promise<unknown> }
+              }
+            }
+          }
+        }
+        const globals = app.__vue_app__.config.globalProperties
+        globals.$pinia._s.get('core')!.$patch({
+          ephemeralAdminEnding: win.location.hostname,
+          baseAdminURL: backendURL,
+        })
+        return globals.$router.push(`/page/${iid}/0`)
+      })
+    })
+    cy.wait('@backendImage').its('request.url').should('eq', imageURL)
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+    cy.then(() => {
+      expect(imagePolicies).not.to.have.length(0)
+      expect(imagePolicies.every((policy) => policy === 'use-credentials')).to.equal(true)
+    })
+  })
+
+  for (const width of [1280, 360]) {
+    it(`covers the page viewer and centers the spinner while loading at ${width}px`, () => {
+      interceptPageViewer()
+      cy.viewport(width, 740)
+      cy.intercept('GET', routes.documents.metadata(iid), {
+        delay: 1500,
+        body: { id: iid, pageCount: 3 },
+      }).as('metadata')
+      cy.intercept('GET', `/api/v2/page/${iid}/*`, {
+        delay: 1500,
+        fixture: 'pdf/0.jpeg,null',
+        headers: { 'content-type': 'image/jpeg' },
+      }).as('pageImage')
+      openPageViewer()
+      const assertLoadingBounds = () => {
+        cy.get('.page-viewer__loading').should(($spinner) => {
+          const spinner = $spinner[0]!
+          const overlay = spinner.getBoundingClientRect()
+          const viewer = spinner.closest('.page-viewer')!.getBoundingClientRect()
+          for (const edge of ['top', 'left', 'width', 'height'] as const) {
+            expect(overlay[edge], `overlay ${edge}`).to.be.closeTo(viewer[edge], 1)
+          }
+          const icon = spinner
+            .shadowRoot!.querySelector('.loading-spinner__icon')!
+            .getBoundingClientRect()
+          expect(icon.left + icon.width / 2, 'spinner horizontal center').to.be.closeTo(
+            viewer.left + viewer.width / 2,
+            1,
+          )
+          expect(icon.top + icon.height / 2, 'spinner vertical center').to.be.closeTo(
+            viewer.top + viewer.height / 2,
+            1,
+          )
+        })
+      }
+      assertLoadingBounds()
+      cy.wait('@metadata')
+      cy.get('.page-viewer .control-bar').should('be.visible')
+      assertLoadingBounds()
+      cy.wait('@pageImage')
+      cy.get('.page-viewer__loading').should('not.exist')
+    })
+
+    it(`disables page arrows at document boundaries at ${width}px`, () => {
+      interceptPageViewer()
+      cy.viewport(width, 740)
+      openPageViewer()
+      cy.wait('@pageImage')
+      cy.get('.control-bar__page-selector').should(($selector) => {
+        const previous = $selector.find('[aria-label="Previous page"]')[0]!.getBoundingClientRect()
+        const input = $selector.find('input')[0]!.getBoundingClientRect()
+        const next = $selector.find('[aria-label="Next page"]')[0]!.getBoundingClientRect()
+        expect(previous.right).to.be.at.most(input.left)
+        expect(next.left).to.be.at.least(input.right)
+      })
+      cy.get('.control-bar').should(($bar) => {
+        const buttons = $bar.find('button:visible').toArray()
+        const bar = $bar[0]!.getBoundingClientRect()
+        for (const [index, button] of buttons.entries()) {
+          const bounds = button.getBoundingClientRect()
+          expect(bounds.left).to.be.at.least(bar.left)
+          expect(bounds.right).to.be.at.most(bar.right)
+          for (const other of buttons.slice(index + 1)) {
+            const otherBounds = other.getBoundingClientRect()
+            expect(bounds.right <= otherBounds.left || otherBounds.right <= bounds.left).to.equal(
+              true,
+            )
+          }
+        }
+      })
+      cy.get('[aria-label="Previous page"]').should('be.visible').and('be.disabled')
+      cy.get('[aria-label="Previous page"]').then(($button) => {
+        cy.document().then((doc) => {
+          const swatch = doc.createElement('span')
+          swatch.style.color = 'var(--pharos-color-marble-gray-50)'
+          doc.body.append(swatch)
+          const expectedColor = doc.defaultView!.getComputedStyle(swatch).color
+          swatch.remove()
+          expect(doc.defaultView!.getComputedStyle($button[0]!).color).to.eq(expectedColor)
+          expect(
+            doc.defaultView!.getComputedStyle($button[0]!.querySelector('pep-pharos-icon')!).fill,
+          ).to.eq(expectedColor)
+        })
+      })
+      cy.get('[aria-label="Next page"]').should('be.visible').and('not.be.disabled').click()
+      cy.location('pathname').should('eq', `/page/${iid}/1`)
+      cy.get('input[name="select-page"]').should('have.value', '2')
+      cy.get('[aria-label="Previous page"]').should('not.be.disabled')
+      cy.get('[aria-label="Next page"]').click()
+      cy.location('pathname').should('eq', `/page/${iid}/2`)
+      cy.get('input[name="select-page"]').should('have.value', '3')
+      cy.get('[aria-label="Next page"]').should('be.disabled')
+      cy.get('[aria-label="Previous page"]').click()
+      cy.location('pathname').should('eq', `/page/${iid}/1`)
+      cy.get('[aria-label="Next page"]').should('not.be.disabled')
+    })
+  }
+
+  it('retains zoom and rotation across page turns and selector navigation', () => {
+    interceptPageViewer()
+    openPageViewer()
+    cy.wait('@pageImage')
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+    cy.get('.control-bar [aria-label="Zoom in"]:visible').click()
+    cy.get('.control-bar [aria-label="Rotate clockwise"]:visible').click()
+    cy.get(
+      '.control-bar [aria-label="Page cannot be fit while rotated horizontally"]:visible',
+    ).should('be.disabled')
+    cy.get<HTMLCanvasElement>('[data-cy="page-viewer-surface"] canvas')
+      .then(($canvas) => {
+        return new Cypress.Promise<string>((resolve) => {
+          let previous = ''
+          let stableFrames = 0
+          const capture = () => {
+            const current = $canvas[0]!.toDataURL()
+            stableFrames = current === previous ? stableFrames + 1 : 0
+            previous = current
+            if (stableFrames >= 3) resolve(current)
+            else requestAnimationFrame(capture)
+          }
+          requestAnimationFrame(capture)
+        })
+      })
+      .then((view) => {
+        cy.get('[aria-label="Next page"]').click()
+        cy.location('pathname').should('eq', `/page/${iid}/1`)
+        cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+        cy.get<HTMLCanvasElement>('[data-cy="page-viewer-surface"] canvas').should(($canvas) => {
+          expect($canvas[0]!.toDataURL()).to.equal(view)
+        })
+        cy.get('[aria-label="Previous page"]').click()
+        cy.location('pathname').should('eq', `/page/${iid}/0`)
+        cy.get<HTMLCanvasElement>('[data-cy="page-viewer-surface"] canvas').should(($canvas) => {
+          expect($canvas[0]!.toDataURL()).to.equal(view)
+        })
+        cy.get('input[name="select-page"]').clear()
+        cy.get('input[name="select-page"]').type('3{enter}')
+        cy.location('pathname').should('eq', `/page/${iid}/2`)
+        cy.get<HTMLCanvasElement>('[data-cy="page-viewer-surface"] canvas').should(($canvas) => {
+          expect($canvas[0]!.toDataURL()).to.equal(view)
+        })
+        cy.get(
+          '.control-bar [aria-label="Page cannot be fit while rotated horizontally"]:visible',
+        ).should('be.disabled')
+      })
+  })
+
+  it('hides page-turning buttons for single-page documents', () => {
+    interceptPageViewer()
+    cy.intercept('GET', routes.documents.metadata(iid), {
+      body: { id: iid, pageCount: 1 },
+    }).as('metadata')
+    openPageViewer()
+    cy.wait('@pageImage')
+    cy.get('[aria-label="Previous page"], [aria-label="Next page"]').should('not.exist')
+  })
+
+  it('keeps PDF primary and offers the page viewer when PDF loading fails', () => {
+    interceptPageViewer()
+    const recordedLogs: Record<string, unknown>[] = []
+    cy.intercept('GET', routes.documents.pdfs(iid), { statusCode: 500 }).as('failedPDF')
+    const path = `/pdf/${iid}?term=history&page=2`
+    handleLocation(path, cy, 'viewer', 'pep')
+    cy.visit(path, {
+      onBeforeLoad(win) {
+        cy.stub(win.navigator, 'sendBeacon').callsFake((_url, data) => {
+          if (data instanceof win.Blob) {
+            void data.text().then((body) => recordedLogs.push(JSON.parse(body)))
+          }
+          return true
+        })
+      },
+    })
+    cy.wait(['@viewer', '@auth', '@search', '@failedPDF'])
+    cy.get('.error-container').should('be.visible')
+    cy.then(() => {
+      expect(recordedLogs.filter((log) => log.action === 'start_viewing_session')).to.have.length(0)
+    })
+    cy.get('[data-cy="alternate-viewer-link"]')
+      .should('contain', 'Not working?')
+      .and('have.attr', 'href', `/page/${iid}/0?term=history&page=2`)
+      .click()
+    cy.wait('@pageImage')
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+    cy.get('#viewer-container').should('not.exist')
+    cy.get('[data-cy="alternate-viewer-link"]').click()
     cy.location('pathname').should('eq', `/pdf/${iid}`)
+    cy.get('.page-viewer').should('not.exist')
+    cy.get('.error-container').should('be.visible')
+    cy.wrap(null).should(() => {
+      expect(recordedLogs.filter((log) => log.action === 'start_viewing_session')).to.have.length(1)
+      expect(recordedLogs.filter((log) => log.action === 'end_viewing_session')).to.have.length(0)
+    })
+  })
+
+  for (const initialViewer of ['pdf', 'page']) {
+    it(`counts one document view across mode switches starting in the ${initialViewer} viewer`, () => {
+      interceptPageViewer()
+      const recordedLogs: Record<string, unknown>[] = []
+      const path =
+        initialViewer === 'pdf' ? `/pdf/${iid}?term=&page=1` : `/page/${iid}/0?term=&page=1`
+      handleLocation(path, cy, 'viewer', 'pep')
+      cy.visit(path, {
+        onBeforeLoad(win) {
+          cy.stub(win.navigator, 'sendBeacon').callsFake((_url, data) => {
+            if (data instanceof win.Blob) {
+              void data.text().then((body) => recordedLogs.push(JSON.parse(body)))
+            }
+            return true
+          })
+        },
+      })
+      cy.wait(['@viewer', '@auth', '@search'])
+      const expectReadyViewer = (mode: string) => {
+        if (mode === 'page') cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+        else cy.get('.page-selector__input').should('have.value', '1')
+      }
+      expectReadyViewer(initialViewer)
+      cy.wrap(null).should(() => {
+        expect(recordedLogs.filter((log) => log.action === 'start_viewing_session')).to.have.length(
+          1,
+        )
+      })
+      const alternateMode = initialViewer === 'pdf' ? 'page' : 'pdf'
+      cy.get('[data-cy="alternate-viewer-link"]').click()
+      expectReadyViewer(alternateMode)
+      cy.get('[data-cy="alternate-viewer-link"]').click()
+      expectReadyViewer(initialViewer)
+      cy.wrap(null).should(() => {
+        expect(recordedLogs.filter((log) => log.action === 'viewer_mode_switch')).to.have.length(2)
+        expect(recordedLogs.filter((log) => log.action === 'start_viewing_session')).to.have.length(
+          1,
+        )
+        expect(recordedLogs.filter((log) => log.action === 'end_viewing_session')).to.have.length(0)
+        const start = recordedLogs.find((log) => log.action === 'start_viewing_session')!
+        expect(start).to.include({ itemid: iid, is_reentry_content: false })
+        for (const log of recordedLogs.filter((log) => log.action === 'viewer_mode_switch')) {
+          expect(log.event_uuid).to.equal(start.event_uuid)
+        }
+      })
+      cy.get('[data-cy="nav-link-research"]').click()
+      cy.get('[data-cy="nav-link-search"]').click()
+      cy.location('pathname').should('eq', '/search')
+      cy.wrap(null).should(() => {
+        const starts = recordedLogs.filter((log) => log.action === 'start_viewing_session')
+        const ends = recordedLogs.filter((log) => log.action === 'end_viewing_session')
+        expect(ends).to.have.length(1)
+        expect(ends[0]!.event_uuid).to.equal(starts[0]!.event_uuid)
+      })
+      cy.go('back')
+      expectReadyViewer(initialViewer)
+      cy.wrap(null).should(() => {
+        const starts = recordedLogs.filter((log) => log.action === 'start_viewing_session')
+        expect(starts).to.have.length(2)
+        expect(starts[1]!.event_uuid).not.to.equal(starts[0]!.event_uuid)
+      })
+    })
+  }
+
+  it('retains the selected page when switching viewers in both directions', () => {
+    interceptPageViewer()
+    openPageViewer('1')
+    cy.wait('@pageImage')
+    cy.intercept('POST', routes.log, (request) => {
+      if (
+        request.body.action === 'viewer_mode_switch' &&
+        request.body.destination === `/pdf/${iid}`
+      ) {
+        request.alias = 'viewerModeLog'
+      }
+    })
+    cy.get('[data-cy="alternate-viewer-link"]')
+      .should('have.attr', 'href', `/pdf/${iid}?term=history&page=2&viewerPage=2`)
+      .click()
+    cy.wait('@viewerModeLog')
+      .its('request.body')
+      .should('include', {
+        eventtype: 'pep_fe_link_click',
+        action: 'viewer_mode_switch',
+        destination: `/pdf/${iid}`,
+      })
+    cy.wait('@pdfDocument')
+    cy.get('.page-selector__input').should('have.value', '2')
+    cy.get('[aria-label="Next page"]').click()
+    cy.get('.page-selector__input').should('have.value', '3')
+    cy.get('[data-cy="alternate-viewer-link"]')
+      .should('have.attr', 'href', `/page/${iid}/2?term=history&page=2`)
+      .click()
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/2`)
+    cy.get('.page-selector__input').should('have.value', '3')
+    cy.get('[aria-label="Previous page"]').click()
+    cy.get('.page-selector__input').should('have.value', '2')
+    cy.get('[data-cy="alternate-viewer-link"]').click()
+    cy.wait('@pdfDocument')
+    cy.get('.page-selector__input').should('have.value', '2')
+    cy.location('search').should('eq', '?term=history&page=2&viewerPage=2')
+  })
+
+  it('uses the current scrolled PDF page when switching to the page viewer', () => {
+    interceptPageViewer()
+    const path = `/pdf/${iid}?term=history&page=2&viewerPage=2`
+    handleLocation(path, cy, 'viewer', 'pep')
+    cy.visit(path)
+    cy.wait(['@viewer', '@auth', '@search', '@pdfDocument'])
+    cy.get('.page-selector__input').should('have.value', '2')
+    cy.get('#viewer-container').scrollTo('bottom')
+    cy.get('.page-selector__input').should('have.value', '3')
+    cy.get('[data-cy="alternate-viewer-link"]').click()
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/2`)
+    cy.get('.page-selector__input').should('have.value', '3')
+  })
+
+  it('clamps a carried PDF page to the available pages', () => {
+    interceptPageViewer()
+    const path = `/pdf/${iid}?term=history&page=2&viewerPage=999`
+    handleLocation(path, cy, 'viewer', 'pep')
+    cy.visit(path)
+    cy.wait(['@viewer', '@auth', '@search', '@pdfDocument'])
+    cy.get('.page-selector__input').should('have.value', '3')
+    cy.get('[data-cy="alternate-viewer-link"]').should(
+      'have.attr',
+      'href',
+      `/page/${iid}/2?term=history&page=2`,
+    )
+  })
+
+  it('paginates using controls and keys without accepting invalid pages', () => {
+    interceptPageViewer()
+    openPageViewer()
+    cy.wait('@pageImage')
+    cy.get('input[name="select-page"]').clear()
+    cy.get('input[name="select-page"]').type('3{enter}')
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/2`)
+    cy.location('pathname').should('eq', `/page/${iid}/2`)
+    cy.get('input[name="select-page"]').should('have.value', '3')
+    cy.get('.page-viewer').focus()
+    cy.get('.page-viewer').type('[')
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/1`)
+    cy.get('input[name="select-page"]').should('have.value', '2')
+    cy.get('input[name="select-page"]').clear()
+    cy.get('input[name="select-page"]').type('1.5{enter}')
+    cy.location('pathname').should('eq', `/page/${iid}/1`)
+    cy.get('input[name="select-page"]').should('have.value', '2')
+    cy.get('input[name="select-page"]').clear()
+    cy.get('input[name="select-page"]').type('9{enter}')
+    cy.location('pathname').should('eq', `/page/${iid}/1`)
+    cy.get('input[name="select-page"]').should('have.value', '2')
+    cy.get('[data-cy="alternate-viewer-link"]').click()
+    cy.wait('@pdfDocument')
+    cy.go('back')
+    cy.location('pathname').should('eq', `/page/${iid}/1`)
+    cy.get('input[name="select-page"]').should('have.value', '2')
+  })
+
+  it('shares zoom, rotation, fit and CSS fullscreen controls on a mobile viewport', () => {
+    interceptPageViewer()
+    openPageViewer()
+    cy.viewport(360, 740)
+    cy.wait('@pageImage')
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+    cy.get('.control-bar [aria-label="Open menu"]').click()
+    cy.get('[data-cy="page-viewer-surface"] canvas').then(($canvas) => {
+      const initial = ($canvas[0] as HTMLCanvasElement).toDataURL()
+      cy.get('.control-bar [aria-label="Zoom in"]:visible').click()
+      cy.get('[data-cy="page-viewer-surface"] canvas').should(($zoomed) => {
+        expect(($zoomed[0] as HTMLCanvasElement).toDataURL()).not.to.equal(initial)
+      })
+    })
+    cy.get('.control-bar [aria-label="Zoom out"]:visible').click()
+    cy.get('.control-bar [aria-label="Fit to height"]:visible').click()
+    cy.get('.control-bar__dropdown [aria-label="Rotate clockwise"]:visible').click()
+    cy.get(
+      '.control-bar [aria-label="Page cannot be fit while rotated horizontally"]:visible',
+    ).should('be.disabled')
+    cy.window().then((win) => {
+      cy.stub(win.HTMLElement.prototype, 'requestFullscreen').rejects(new Error('Unavailable'))
+    })
+    cy.get('.control-bar [aria-label="Enter full screen"]').click()
+    cy.get('.page-viewer--fullscreen').should('be.visible')
+    cy.get('body').should('have.css', 'position', 'fixed')
+    cy.get('.page-viewer').type('{esc}')
+    cy.get('.page-viewer--fullscreen').should('not.exist')
+    cy.get('body').should('not.have.css', 'position', 'fixed')
+    cy.get('.control-bar [aria-label="Enter full screen"]').click()
+    cy.get('[data-cy="alternate-viewer-link"]').click({ force: true })
+    cy.get('.page-viewer').should('not.exist')
+    cy.get('body').should('not.have.css', 'position', 'fixed')
+  })
+
+  for (const code of [403, 404, 500]) {
+    it(`handles page metadata ${code} without requesting image content`, () => {
+      interceptPageViewer(code === 403)
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: code }).as('metadata')
+      openPageViewer()
+      cy.wait('@metadata')
+      cy.get('[data-cy="page-viewer-error"]')
+        .should('be.visible')
+        .and(
+          'contain',
+          code === 404
+            ? 'Item not found'
+            : code === 403
+              ? 'The item requires approval'
+              : 'Item not available',
+        )
+      cy.get('[data-cy="page-viewer-error-message"]').should(
+        'contain',
+        code === 404
+          ? 'This item may not exist or is no longer available on JSTOR.'
+          : code === 403
+            ? 'Request this item for review and to keep searching.'
+            : 'Something went wrong while loading this item.',
+      )
+      if (code === 403) cy.get('[data-cy="request-button"] pep-pharos-button').should('be.visible')
+      else cy.get('[data-cy="search-button"]').should('be.visible')
+      cy.get('@pageImage.all').should('have.length', 0)
+      cy.get('.page-viewer .control-bar').should('not.exist')
+      cy.get('[data-cy="alternate-viewer-link"]').should('contain', 'PDF viewer')
+    })
+  }
+
+  for (const width of [1280, 360]) {
+    it(`matches PDF error styling without overflowing at ${width}px`, () => {
+      interceptPageViewer()
+      cy.viewport(width, 740)
+      cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 404 }).as('metadata')
+      openPageViewer()
+      cy.wait('@metadata')
+      cy.get('.page-viewer__error')
+        .should('have.css', 'background-color', 'rgb(255, 255, 255)')
+        .and('have.css', 'border-top-color', 'rgb(0, 0, 0)')
+        .and('have.css', 'border-top-width', '1px')
+      cy.get('.page-viewer__error .error').should('have.css', 'color', 'rgb(0, 0, 0)')
+      cy.get('[data-cy="page-viewer-error-message"]')
+        .should('have.css', 'color', 'rgb(0, 0, 0)')
+        .and(($message) => {
+          const message = $message[0]!.getBoundingClientRect()
+          const panel = $message[0]!.closest('.page-viewer__error')!.getBoundingClientRect()
+          expect(message.left).to.be.at.least(panel.left)
+          expect(message.right).to.be.at.most(panel.right)
+          expect(message.width).to.be.at.most(360)
+        })
+    })
+  }
+
+  it('matches the PDF restricted-item error and offers search instead of requesting', () => {
+    interceptPageViewer()
+    cy.fixture('search/term_given__specified_id_limit_one__response.json').then((response) => {
+      response.docs[0].is_restricted = true
+      cy.intercept('POST', routes.search.basic, { body: response }).as('search')
+    })
+    cy.intercept('GET', routes.documents.metadata(iid), { statusCode: 403 }).as('metadata')
+    openPageViewer()
+    cy.wait('@metadata')
+    cy.get('[data-cy="page-viewer-error"]').should('contain', 'Item unavailable')
+    cy.get('[data-cy="page-viewer-error-message"]').should(
+      'have.text',
+      'Try searching for another item.',
+    )
+    cy.get('.page-viewer [data-cy="search-button"]').should('be.visible')
+    cy.get('.page-viewer [data-cy="request-button"]').should('not.exist')
+  })
+
+  it('reports image failures and permits navigation to another page', () => {
+    interceptPageViewer()
+    cy.intercept('GET', routes.documents.pages(iid, '0'), { statusCode: 404 }).as('missingImage')
+    openPageViewer()
+    cy.wait('@missingImage')
+    cy.get('[data-cy="page-viewer-error"]').should('be.visible').and('contain', 'Item not found')
+    cy.get('[data-cy="page-viewer-error-message"]').should(
+      'contain',
+      'This item may not exist or is no longer available on JSTOR.',
+    )
+    cy.get('[data-cy="search-button"]').should('be.visible')
+    cy.get('input[name="select-page"]').clear()
+    cy.get('input[name="select-page"]').type('2{enter}')
+    cy.wait('@pageImage')
+    cy.get('[data-cy="page-viewer-error"]').should('not.exist')
+    cy.get('.page-viewer').should('have.attr', 'aria-busy', 'false')
+  })
+
+  it('shows the request recovery action when a page image is forbidden', () => {
+    interceptPageViewer(true)
+    cy.intercept('GET', routes.documents.pages(iid, '0'), { statusCode: 403 }).as('forbiddenImage')
+    openPageViewer()
+    cy.wait('@forbiddenImage')
+    cy.get('[data-cy="page-viewer-error"]')
+      .should('be.visible')
+      .and('contain', 'The item requires approval')
+    cy.get('[data-cy="page-viewer-error-message"]').should(
+      'contain',
+      'Request this item for review and to keep searching.',
+    )
+    cy.get('[data-cy="request-button"] pep-pharos-button').should('be.visible')
+  })
+
+  it('clamps an out-of-range legacy page index', () => {
+    interceptPageViewer()
+    openPageViewer('999')
+    cy.wait('@pageImage').its('request.url').should('include', `/page/${iid}/2`)
+    cy.get('input[name="select-page"]').should('have.value', '3')
+    cy.get('[data-cy="alternate-viewer-link"]').should(
+      'have.attr',
+      'href',
+      `/pdf/${iid}?term=history&page=2&viewerPage=3`,
+    )
+  })
+
+  it('does not create an image viewer if metadata returns after switching to PDF', () => {
+    interceptPageViewer()
+    cy.intercept('GET', routes.documents.metadata(iid), {
+      delay: 1200,
+      body: { id: iid, pageCount: 3 },
+    }).as('metadata')
+    openPageViewer()
+    cy.get('[data-cy="alternate-viewer-link"]').click()
+    cy.wait('@metadata')
+    cy.wait('@pdfDocument')
+    cy.get('.page-viewer').should('not.exist')
+    cy.get('@pageImage.all').should('have.length', 0)
   })
 
   context('As student', () => {
@@ -137,7 +745,7 @@ describe('PDF Viewer Access', () => {
     // check for a specific button, but we can check that there are no buttons. We just repeat
     // the same test for print.
     it('does not show a back link when the item is opened directly', () => {
-      cy.get('[data-cy="back-to-results-link"]').should('not.exist')
+      cy.get('[data-cy="back-link"]').should('not.exist')
     })
 
     it('does not show download button', () => {
@@ -851,6 +1459,21 @@ describe('PDF Viewer Access', () => {
         expect(activeWorkers).to.equal(1)
         expect(peakWorkers).to.equal(1)
       })
+      cy.then(() => Promise.all(beaconBodies)).then((bodies) => {
+        const sessions = bodies
+          .map((body) => JSON.parse(body))
+          .filter((log) => ['start_viewing_session', 'end_viewing_session'].includes(log.action))
+        expect(sessions.map((log) => log.action)).to.deep.equal([
+          'start_viewing_session',
+          'end_viewing_session',
+          'start_viewing_session',
+        ])
+        expect(sessions[0].itemid).to.equal(iid)
+        expect(sessions[1].itemid).to.equal(iid)
+        expect(sessions[2].itemid).to.equal(secondId)
+        expect(sessions[1].event_uuid).to.equal(sessions[0].event_uuid)
+        expect(sessions[2].event_uuid).not.to.equal(sessions[0].event_uuid)
+      })
       expectNoCleanupErrors()
     })
 
@@ -1514,6 +2137,69 @@ describe('PDF Viewer Access', () => {
       cy.get('button[aria-label="Exit full screen"]').click()
       cy.get('.viewer-wrapper').should('not.have.class', 'viewer-wrapper--full-screen')
     })
+
+    it('tabs through the controls before entering the document', () => {
+      cy.get('.control-bar')
+        .should('have.attr', 'role', 'group')
+        .and('have.attr', 'aria-label', 'Viewer controls')
+      cy.get('.control-bar__buttons-left [aria-label="Zoom in"]').focus()
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused().should('have.attr', 'aria-label', 'Zoom out')
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused()
+        .invoke('attr', 'aria-label')
+        .should('match', /^Fit to (width|height)$/)
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused().should('have.attr', 'aria-label', 'Page number')
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused().should('have.attr', 'aria-label', 'Next page')
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused().should('have.attr', 'aria-label', 'Rotate clockwise')
+      cy.press(Cypress.Keyboard.Keys.TAB)
+      cy.focused().should('have.attr', 'aria-label', 'Enter full screen')
+    })
+
+    for (const width of [1280, 320]) {
+      it(`turns PDF pages with toolbar arrows and respects boundaries at ${width}px`, () => {
+        cy.viewport(width, 740)
+        cy.get('.page-selector__input').should('have.value', '1')
+        cy.get('.control-bar__page-selector [aria-label="Previous page"]')
+          .should('be.visible')
+          .and('be.disabled')
+        cy.get('.control-bar__page-selector [aria-label="Next page"]').click()
+        cy.get('.page-selector__input').should('have.value', '2')
+        cy.get('#viewer-container').should(($container) => {
+          expect($container[0]!.scrollTop).to.be.greaterThan(50)
+        })
+        cy.get('.control-bar__page-selector [aria-label="Previous page"]').click()
+        cy.get('.page-selector__input').should('have.value', '1')
+        cy.get('[aria-label="Previous page"]').should('be.disabled')
+        cy.get('#viewer .page').then(($pages) => {
+          const lastPage = $pages.length
+          cy.get('.page-selector__input').clear()
+          cy.get('.page-selector__input').type(`${lastPage}{enter}`)
+          cy.get('[aria-label="Next page"]').should('be.disabled')
+          cy.get('[aria-label="Previous page"]').click()
+          cy.get('.page-selector__input').should('have.value', String(lastPage - 1))
+          cy.get('[aria-label="Next page"]').should('not.be.disabled')
+        })
+        cy.get('.control-bar').should(($bar) => {
+          const bar = $bar[0]!.getBoundingClientRect()
+          const buttons = $bar.find('button:visible').toArray()
+          for (const [index, button] of buttons.entries()) {
+            const bounds = button.getBoundingClientRect()
+            expect(bounds.left).to.be.at.least(bar.left)
+            expect(bounds.right).to.be.at.most(bar.right)
+            for (const other of buttons.slice(index + 1)) {
+              const otherBounds = other.getBoundingClientRect()
+              expect(bounds.right <= otherBounds.left || otherBounds.right <= bounds.left).to.equal(
+                true,
+              )
+            }
+          }
+        })
+      })
+    }
 
     it('navigates to the requested page via the selector', () => {
       let initialScrollTop = 0

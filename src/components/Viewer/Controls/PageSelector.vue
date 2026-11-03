@@ -15,6 +15,19 @@ const props = defineProps({
 const emit = defineEmits(['update-page'])
 
 const page = ref(props.currentPage)
+
+/**
+ * Submits the current page number if it is valid.
+ * Resets the input to the current page if the input is invalid.
+ */
+const submitPage = () => {
+  const pageNumber = Number(page.value)
+  if (!Number.isInteger(pageNumber) || pageNumber < 1 || pageNumber > props.pageCount) {
+    page.value = props.currentPage
+    return
+  }
+  emit('update-page', page.value)
+}
 </script>
 <template>
   <div v-if="pageCount > 1" class="page-selector">
@@ -24,8 +37,8 @@ const page = ref(props.currentPage)
       aria-label="Page number"
       name="select-page"
       class="page-selector__input"
-      @keydown.enter="emit('update-page', page)"
-      @focusout="emit('update-page', page)"
+      @keydown.enter="submitPage"
+      @focusout="submitPage"
     />/ {{ pageCount }}
   </div>
 </template>
