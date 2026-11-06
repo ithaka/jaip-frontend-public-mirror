@@ -17,7 +17,12 @@ import { useCoreStore } from '@/stores/core'
 import { routes } from '@/config/api'
 import { useBaseURL } from '@/composables/urls'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
-import { ViewerControls, type ViewerControlOptions, type ViewerError } from '@/interfaces/Viewer'
+import {
+  ViewerControls,
+  type ViewerControlOptions,
+  type ViewerError,
+  type ViewerPhase,
+} from '@/interfaces/Viewer'
 import { useLogger } from '@/composables/logging/useLogger'
 import {
   browserInFullscreen,
@@ -61,6 +66,8 @@ const isInFullscreen = ref(false)
 const isCSSFullscreen = ref(false)
 const error = ref<ViewerError>({ message: '', status: false, code: 0 })
 let imageViewer: OpenSeadragon.Viewer | undefined
+// Reported with errors so a failure shows whether it came from the metadata call or a page image.
+let phase: ViewerPhase = 'loading_metadata'
 let unmounted = false
 let startedSession = false
 let openGeneration = 0
@@ -71,7 +78,11 @@ const {
   startPageViewingSessionLog,
   endPageViewingSessionLog,
   pageViewerErrorLog,
-} = logs.getPageViewerLogs({ iid: props.iid, eventUUID: props.viewingSessionId })
+} = logs.getPageViewerLogs({
+  iid: props.iid,
+  eventUUID: props.viewingSessionId,
+  getState: () => ({ phase, currentPage: currentPage.value, totalPages: pageCount.value }),
+})
 const errorHeading = computed(() => {
   if (error.value.code === 404) return 'Item not found'
   if (error.value.code === 403) {
@@ -99,16 +110,18 @@ const fireToast = () => {
   )
 }
 
-const showError = (failure: unknown) => {
+const showError = (failure: unknown, source: string) => {
   if (unmounted) return
-  const details = failure as { message?: string; response?: { status?: number } }
+  const details = failure as { message?: string; name?: string; response?: { status?: number } }
   error.value = {
     message: details?.message || 'Unable to load this page.',
+    ...(details?.name && { name: details.name }),
     code: details?.response?.status || 0,
     status: true,
   }
   isLoading.value = false
-  void handleWithLog(pageViewerErrorLog({ error: { ...error.value } }))
+  void handleWithLog(pageViewerErrorLog({ error: { ...error.value }, source }))
+  phase = 'failed'
 }
 
 const routePage = () => {
@@ -124,6 +137,7 @@ const selectPage = (page: number | string) => {
   openGeneration++
   error.value.status = false
   isLoading.value = true
+  phase = 'loading_page'
   imageViewer.goToPage(number - 1)
   void handleWithLog(pageSelectionLog({ previous_page: previous, new_page: number }))
   void router.replace({ params: { ...route.params, pid: number - 1 }, query: route.query })
@@ -194,9 +208,13 @@ const handleImageOpenFailed = async () => {
   const fallback = new Error('Unable to load this page.')
   try {
     await coreStore.$api.documents.pages(props.iid, String(failedPage - 1))
-    if (generation === openGeneration && failedPage === currentPage.value) showError(fallback)
+    if (generation === openGeneration && failedPage === currentPage.value) {
+      showError(fallback, 'PageViewer.vue:openPage')
+    }
   } catch (failure) {
-    if (generation === openGeneration && failedPage === currentPage.value) showError(failure)
+    if (generation === openGeneration && failedPage === currentPage.value) {
+      showError(failure, 'PageViewer.vue:openPage')
+    }
   }
 }
 
@@ -233,9 +251,12 @@ onMounted(async () => {
     if (unmounted) return
     const count = response.data?.pageCount
     if (typeof count !== 'number' || !Number.isInteger(count) || count < 1) {
-      throw new Error('No page images are available.')
+      const unavailable = new Error('No page images are available.')
+      unavailable.name = 'PageImagesUnavailable'
+      throw unavailable
     }
     pageCount.value = count
+    phase = 'loading_page'
     currentPage.value = routePage()
     emit('page-change', currentPage.value)
     imageViewer = OpenSeadragon({
@@ -259,6 +280,7 @@ onMounted(async () => {
       if (unmounted) return
       openGeneration++
       isLoading.value = false
+      phase = 'ready'
       error.value.status = false
       imageViewer?.viewport.setRotation(rotation.value)
       if (!startedSession) {
@@ -273,7 +295,7 @@ onMounted(async () => {
     })
     imageViewer.addHandler('open-failed', handleImageOpenFailed)
   } catch (failure) {
-    showError(failure)
+    showError(failure, 'PageViewer.vue:loadMetadata')
   }
 })
 

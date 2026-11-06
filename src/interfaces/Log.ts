@@ -3,7 +3,7 @@ import type { Collections } from './Collections'
 import type { Ref } from 'vue'
 import type { Entity } from './Entities'
 import type { Subdomain } from './Subdomains'
-import type { ViewerError } from './Viewer'
+import type { ViewerDiagnostics, ViewerError, ViewerIndexedFields } from './Viewer'
 import type { FootnoteDirections } from './Dictionary'
 
 // These LogEvent enum values define the different types of log events. These are deliberately
@@ -29,6 +29,7 @@ export enum LogEvent {
   start_viewing_session = 'start_viewing_session',
   end_viewing_session = 'end_viewing_session',
   viewer_control = 'viewer_control',
+  viewer_diagnostic = 'viewer_diagnostic',
   viewport_patch_error = 'viewport_patch_error',
   asset_preload_error = 'asset_preload_error',
   version_check = 'version_check',
@@ -38,7 +39,7 @@ export type EventType = `pep_fe_${LogEvent}`
 
 // BaseLog contains all the optional and common fields for logs.
 // It should not be exported or used directly. Use WorkingLog or FinalLog instead.
-interface BaseLog {
+interface BaseLog extends ViewerIndexedFields {
   // Event description provides a human-readable description of the event.
   event_description: string
   // Action is a short string identifying the action taken by the user. This is intended for disaggregating
@@ -86,6 +87,8 @@ interface BaseLog {
   current_page?: number
   previous_page?: number
   viewer_error?: ViewerError
+  // PDF viewer device, timing, and progress context. Sent on viewer errors and viewer_diagnostic logs.
+  viewer_diagnostics?: ViewerDiagnostics
   endpoint?: string
   date_range?: string | Date[]
   label?: string

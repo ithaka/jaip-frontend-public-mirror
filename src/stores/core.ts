@@ -2,17 +2,8 @@ import { defineStore } from 'pinia'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
 import type { ToastStatus } from '@ithaka/pharos/lib/components/toast/pharos-toast'
 import type ApiObject from '@/interfaces/ApiObject'
+import { isLocalStorageAvailable } from '../utils/storage'
 
-const isLocalStorageAvailable = () => {
-  const test = 'test'
-  try {
-    localStorage.setItem(test, test)
-    localStorage.removeItem(test)
-    return true
-  } catch {
-    return false
-  }
-}
 export const useCoreStore = defineStore('core', {
   state: () => {
     const stored = isLocalStorageAvailable() ? localStorage.getItem('requests') || '' : ''

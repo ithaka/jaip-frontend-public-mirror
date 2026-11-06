@@ -9,6 +9,7 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import SearchResult from '@/components/results/SearchResult.vue'
 import BackLink from '@/components/BackLink.vue'
 import type { MediaRecord } from '@/interfaces/MediaRecord'
+import type { ViewerType } from '@/interfaces/Viewer'
 import { usePageViewLogger } from '@/composables/logging/usePageViewLogger'
 import { useLogger } from '@/composables/logging/useLogger'
 import { useBackToResults } from '@/composables/useBackToResults'
@@ -17,6 +18,7 @@ import { v4 as uuidv4 } from 'uuid'
 const route = useRoute()
 const router = useRouter()
 const isPageViewer = computed(() => route.name === 'Page Viewer')
+const activeViewer = computed<ViewerType>(() => (isPageViewer.value ? 'page' : 'pdf'))
 const initialPage = computed(() => {
   const page = isPageViewer.value
     ? Number(route.params.pid) + 1
@@ -103,7 +105,9 @@ let viewingSessionStarted = false
 let viewingSessionLogs = logs.getPageViewerLogs({
   iid: iid.value,
   eventUUID: viewingSessionId.value,
+  viewerType: () => activeViewer.value,
 })
+const pdfViewer = ref<InstanceType<typeof PDFViewer> | null>(null)
 const { viewerModeSwitchLog } = logs.getViewerNavigationLogs({
   iid,
   eventUUID: viewingSessionId,
@@ -127,6 +131,7 @@ watch(iid, () => {
   viewingSessionLogs = logs.getPageViewerLogs({
     iid: iid.value,
     eventUUID: viewingSessionId.value,
+    viewerType: () => activeViewer.value,
   })
 })
 onBeforeUnmount(endViewingSession)
@@ -134,7 +139,13 @@ onBeforeUnmount(endViewingSession)
 const navigateToAlternateViewer = () => {
   const target = alternateViewer.value
   const destination = router.resolve(target).path
-  return handleWithLog(viewerModeSwitchLog(destination), () => router.push(target))
+  const from = activeViewer.value
+  const to = from === 'page' ? 'pdf' : 'page'
+  // Captured before navigating, since the PDF viewer unmounts once the route changes.
+  const snapshot = pdfViewer.value?.getSessionSnapshot()
+  return handleWithLog(viewerModeSwitchLog({ destination, from, to, snapshot }), () =>
+    router.push(target),
+  )
 }
 
 const { logPageView } = usePageViewLogger()
@@ -196,6 +207,7 @@ logPageView()
     <PDFViewer
       v-else-if="featureDetails['view_pdf']?.enabled"
       :key="`pdf-${iid}`"
+      ref="pdfViewer"
       tabindex="-1"
       class="cols-12"
       :iid="iid"

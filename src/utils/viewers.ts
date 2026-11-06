@@ -1,3 +1,10 @@
+import type {
+  PDFSessionMarker,
+  ViewerDiagnostics,
+  ViewerError,
+  ViewerIndexedFields,
+} from '@/interfaces/Viewer'
+
 declare global {
   interface HTMLElement {
     webkitRequestFullscreen?: () => Promise<void> | void
@@ -94,22 +101,113 @@ export const shouldUsePDFJSMainThreadWorker = (
   return Number.parseInt(firefoxVersion, 10) < MINIMUM_FIREFOX_MODULE_WORKER_VERSION
 }
 
-/** Returns whether the browser exposes all runtime APIs used by the PDF.js viewer. */
-export const canUsePDFViewer = (): boolean => {
+/** Runtime APIs the viewer needs that this browser lacks. */
+export const getMissingPDFViewerAPIs = (): string[] => {
   const promiseConstructor = Promise as PromiseConstructorWithResolvers
-  if (
-    typeof window.structuredClone !== 'function' ||
-    typeof window.AbortController === 'undefined' ||
-    typeof window.AbortSignal === 'undefined'
-  ) {
-    return false
-  }
+  const abortSignalConstructor = window.AbortSignal as AbortSignalConstructorWithAny | undefined
+  const missing: string[] = []
+  if (typeof window.structuredClone !== 'function') missing.push('structuredClone')
+  if (typeof window.AbortController === 'undefined') missing.push('AbortController')
+  if (typeof abortSignalConstructor === 'undefined') missing.push('AbortSignal')
+  else if (typeof abortSignalConstructor.any !== 'function') missing.push('AbortSignal.any')
+  if (typeof promiseConstructor.withResolvers !== 'function') missing.push('Promise.withResolvers')
+  return missing
+}
 
-  const abortSignalConstructor = window.AbortSignal as AbortSignalConstructorWithAny
-  return (
-    typeof abortSignalConstructor.any === 'function' &&
-    typeof promiseConstructor.withResolvers === 'function'
-  )
+/** Returns whether the browser exposes all runtime APIs used by the PDF.js viewer. */
+export const canUsePDFViewer = (): boolean => getMissingPDFViewerAPIs().length === 0
+
+/** Chromium's non-standard heap counters; undefined elsewhere or if the WebView misbehaves. */
+export const getMemoryDiagnostics = (): {
+  js_heap_used_mb?: number
+  js_heap_limit_mb?: number
+} => {
+  try {
+    const memory = (
+      performance as Performance & {
+        memory?: { usedJSHeapSize: number; jsHeapSizeLimit: number }
+      }
+    ).memory
+    const toMb = (bytes?: number) =>
+      Number.isFinite(bytes) ? Math.round(bytes! / 1_048_576) : undefined
+    return {
+      js_heap_used_mb: toMb(memory?.usedJSHeapSize),
+      js_heap_limit_mb: toMb(memory?.jsHeapSizeLimit),
+    }
+  } catch {
+    return {}
+  }
+}
+
+type NavigatorWithDeviceInfo = Navigator & {
+  deviceMemory?: number
+  connection?: { effectiveType?: string; downlink?: number; rtt?: number; saveData?: boolean }
+}
+
+/** Device facts sent at the top level of every viewer log, since logs cannot be joined by session. */
+export const getViewerDeviceFacts = (): Pick<
+  ViewerIndexedFields,
+  'device_memory_gb' | 'chromium_major' | 'connection_type'
+> => {
+  const nav = navigator as NavigatorWithDeviceInfo
+  const chromiumMajor = /(?:Chrome|Chromium)\/(\d+)/.exec(navigator.userAgent)?.[1]
+  return {
+    device_memory_gb: nav.deviceMemory,
+    chromium_major: chromiumMajor ? Number.parseInt(chromiumMajor, 10) : undefined,
+    connection_type: nav.connection?.effectiveType,
+  }
+}
+
+/** Remaining device and network facts that explain slow or failed loads. Any value may be undefined. */
+export const getPDFEnvironmentDiagnostics = (): ViewerDiagnostics => {
+  const nav = navigator as NavigatorWithDeviceInfo
+  return {
+    user_agent: navigator.userAgent,
+    cpu_cores: navigator.hardwareConcurrency,
+    connection_downlink_mbps: nav.connection?.downlink,
+    connection_rtt_ms: nav.connection?.rtt,
+    save_data: nav.connection?.saveData,
+    is_online: navigator.onLine,
+    has_webassembly: typeof WebAssembly === 'object',
+    has_offscreen_canvas: typeof OffscreenCanvas !== 'undefined',
+    has_native_image_decoder: 'ImageDecoder' in globalThis,
+    device_pixel_ratio: window.devicePixelRatio,
+    screen_width: window.screen?.width,
+    screen_height: window.screen?.height,
+  }
+}
+
+// One key for all tabs: the latest session wins. Tablets run one tab, so this is accepted.
+const PDF_SESSION_MARKER_KEY = 'pdfViewerSession'
+
+/** Saves viewer state for crash detection; a killed page fires no unload event. Best-effort. */
+export const writePDFSessionMarker = (marker: PDFSessionMarker): void => {
+  try {
+    localStorage.setItem(PDF_SESSION_MARKER_KEY, JSON.stringify(marker))
+  } catch {
+    // Storage may be full or blocked.
+  }
+}
+
+/** The marker from an earlier session, or null. */
+export const readPDFSessionMarker = (): PDFSessionMarker | null => {
+  try {
+    const stored = localStorage.getItem(PDF_SESSION_MARKER_KEY)
+    return stored ? (JSON.parse(stored) as PDFSessionMarker) : null
+  } catch {
+    return null
+  }
+}
+
+/** Removes the marker only if this session owns it. */
+export const clearPDFSessionMarker = (eventUuid: string): void => {
+  try {
+    if (readPDFSessionMarker()?.event_uuid === eventUuid) {
+      localStorage.removeItem(PDF_SESSION_MARKER_KEY)
+    }
+  } catch {
+    // Storage may be blocked.
+  }
 }
 
 export const canUseFullscreenAPI = (): boolean => {
@@ -244,4 +342,25 @@ export const hasBrowserPDFViewer = (): boolean => {
   }
 
   return hasPDFViewer
+}
+
+/**
+ * Converts any thrown value into the serializable error fields accepted by viewer logs and UI
+ * state. This is necessary to allow for possible arbitrary error values from PDF.js and browser APIs
+ * which may not be instances of Error.
+ *
+ * @param err - The value caught from PDF.js or browser APIs.
+ * @returns A displayable message plus the original error name and stack when available.
+ */
+export const getErrorDetails = (err: unknown): Pick<ViewerError, 'message' | 'name' | 'stack'> => {
+  if (typeof err === 'object' && err !== null) {
+    const error = err as { message?: unknown; name?: unknown; stack?: unknown }
+    return {
+      message: typeof error.message === 'string' ? error.message : String(err),
+      ...(typeof error.name === 'string' && { name: error.name }),
+      ...(typeof error.stack === 'string' && { stack: error.stack }),
+    }
+  }
+
+  return { message: typeof err === 'string' ? err : String(err) }
 }

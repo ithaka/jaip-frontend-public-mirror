@@ -4,7 +4,12 @@
 
 import { LogEvent, type WorkingLog } from '@/interfaces/Log'
 import type { PaginationDirections } from '@/interfaces/Queries'
-import type { ViewerControlOptions } from '@/interfaces/Viewer'
+import type {
+  ViewerControlOptions,
+  ViewerDiagnosticActions,
+  ViewerDiagnostics,
+  ViewerIndexedFields,
+} from '@/interfaces/Viewer'
 
 export const generics = {
   error: (options: { message: string; code?: string }): WorkingLog => {
@@ -146,6 +151,21 @@ export const generics = {
       event_description: `Used viewer control: ${options.action}`,
       action: `${options.action}`,
       itemid: options.iid,
+    }
+  },
+  viewerDiagnostic: (options: {
+    action: `${ViewerDiagnosticActions}`
+    iid: string
+    details?: ViewerDiagnostics
+    indexed?: ViewerIndexedFields
+  }): WorkingLog => {
+    return {
+      ...options.indexed,
+      eventtype: LogEvent.viewer_diagnostic,
+      event_description: `Viewer diagnostic: ${options.action}`,
+      action: options.action,
+      itemid: options.iid,
+      viewer_diagnostics: options.details,
     }
   },
   startViewingSession: (options: { iid: string }): WorkingLog => {

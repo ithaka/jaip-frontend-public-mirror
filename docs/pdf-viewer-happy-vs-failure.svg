@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 588" role="img">
+<title>PDF viewer healthy path versus failure signals</title>
+<desc>Six stages of a viewing session. The left column lists the logs of a healthy session. The right column lists the failure logs that can occur at that stage.</desc>
+<style>
+.t{font:14px sans-serif;fill:#3d3d3a}.th{font:500 14px sans-serif}.ts{font:12px sans-serif}
+.ok{fill:#E1F5EE;stroke:#0F6E56;stroke-width:.5}.ok text{fill:#085041}
+.bad{fill:#FAECE7;stroke:#993C1D;stroke-width:.5}.bad text{fill:#712B13}
+.arr{stroke:#73726c;stroke-width:1.5;fill:none}.head{fill:none;stroke:#73726c;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-color-scheme:dark){
+.t{fill:#c2c0b6}
+.ok{fill:#085041;stroke:#5DCAA5}.ok text{fill:#9FE1CB}
+.bad{fill:#712B13;stroke:#F0997B}.bad text{fill:#F5C4B3}
+.arr,.head{stroke:#9c9a92}}
+</style>
+<text class="t th" x="40" y="30" dominant-baseline="central">Healthy session</text>
+<text class="t th" x="330" y="30" dominant-baseline="central">Failure signals</text>
+<g class="ok"><rect x="40" y="50" width="240" height="68" rx="8"/><text class="th" x="52" y="66" dominant-baseline="central">Start</text><text class="ts" x="52" y="98" dominant-baseline="central">pdf_environment</text></g>
+<g class="bad"><rect x="330" y="50" width="310" height="68" rx="8"/><text class="ts" x="342" y="75" dominant-baseline="central">pdf_viewer_error (browser support, URL)</text><text class="ts" x="342" y="93" dominant-baseline="central">Error screen, no further logs</text></g>
+<line class="arr" x1="160" y1="119" x2="160" y2="133"/><path class="head" d="M156 128 L160 135 L164 128"/>
+<g class="ok"><rect x="40" y="136" width="240" height="68" rx="8"/><text class="th" x="52" y="152" dominant-baseline="central">Download</text><text class="ts" x="52" y="172" dominant-baseline="central">pdf_load_started,</text><text class="ts" x="52" y="188" dominant-baseline="central">pdf_document_loaded</text></g>
+<g class="bad"><rect x="330" y="136" width="310" height="68" rx="8"/><text class="ts" x="342" y="161" dominant-baseline="central">pdf_load_slow (over 15 s)</text><text class="ts" x="342" y="179" dominant-baseline="central">pdf_viewer_error (load failed, cancelled)</text></g>
+<line class="arr" x1="160" y1="205" x2="160" y2="219"/><path class="head" d="M156 214 L160 221 L164 214"/>
+<g class="ok"><rect x="40" y="222" width="240" height="68" rx="8"/><text class="th" x="52" y="238" dominant-baseline="central">Page setup</text><text class="ts" x="52" y="258" dominant-baseline="central">pdf_pages_initialized,</text><text class="ts" x="52" y="274" dominant-baseline="central">start_viewing_session</text></g>
+<g class="bad"><rect x="330" y="222" width="310" height="68" rx="8"/><text class="ts" x="342" y="247" dominant-baseline="central">pdf_viewer_error (viewer creation failed)</text><text class="ts" x="342" y="265" dominant-baseline="central">Error screen, no further logs</text></g>
+<line class="arr" x1="160" y1="291" x2="160" y2="305"/><path class="head" d="M156 300 L160 307 L164 300"/>
+<g class="ok"><rect x="40" y="308" width="240" height="68" rx="8"/><text class="th" x="52" y="324" dominant-baseline="central">Render</text><text class="ts" x="52" y="356" dominant-baseline="central">pdf_first_page_rendered</text></g>
+<g class="bad"><rect x="330" y="308" width="310" height="68" rx="8"/><text class="ts" x="342" y="324" dominant-baseline="central">pdf_page_render_stalled (blank pages)</text><text class="ts" x="342" y="342" dominant-baseline="central">pdf_viewer_error (render failed, retrying)</text><text class="ts" x="342" y="360" dominant-baseline="central">pdf_retry_recovered, or a second error</text></g>
+<line class="arr" x1="160" y1="377" x2="160" y2="391"/><path class="head" d="M156 386 L160 393 L164 386"/>
+<g class="ok"><rect x="40" y="394" width="240" height="68" rx="8"/><text class="th" x="52" y="410" dominant-baseline="central">Reading</text><text class="ts" x="52" y="442" dominant-baseline="central">viewer_control, pdf_page_visible</text></g>
+<g class="bad"><rect x="330" y="394" width="310" height="68" rx="8"/><text class="ts" x="342" y="419" dominant-baseline="central">pdf_page_hidden, pdf_page_frozen (app switch)</text><text class="ts" x="342" y="437" dominant-baseline="central">pdf_window_error (uncaught error)</text></g>
+<line class="arr" x1="160" y1="463" x2="160" y2="477"/><path class="head" d="M156 472 L160 479 L164 472"/>
+<g class="ok"><rect x="40" y="480" width="240" height="68" rx="8"/><text class="th" x="52" y="496" dominant-baseline="central">Exit</text><text class="ts" x="52" y="516" dominant-baseline="central">end_viewing_session,</text><text class="ts" x="52" y="532" dominant-baseline="central">pdf_page_hide</text></g>
+<g class="bad"><rect x="330" y="480" width="310" height="68" rx="8"/><text class="ts" x="342" y="505" dominant-baseline="central">No logs when the app is killed</text><text class="ts" x="342" y="523" dominant-baseline="central">Next start: pdf_previous_session_unclean</text></g>
+</svg>

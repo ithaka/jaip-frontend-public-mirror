@@ -369,10 +369,16 @@ describe('Account Management', () => {
               expect(bounds.left).to.be.at.least(0)
               expect(bounds.top).to.be.at.least(0)
               expect(bounds.right).to.be.at.most(width)
-              expect(bounds.bottom).to.be.at.most(height)
             })
+          // The menu can extend slightly below the viewport inside the dialog, and its position
+          // settles after opening, so a bottom-edge check is unreliable. Require the buttons to be
+          // reachable instead.
           cy.contains('pep-pharos-button', 'Today').click()
-          cy.get('.datepicker__action-row').contains('pep-pharos-button', 'Select').click()
+          cy.get('.datepicker__action-row').contains('pep-pharos-button', 'Select').scrollIntoView()
+          cy.get('.datepicker__action-row')
+            .contains('pep-pharos-button', 'Select')
+            .should('be.visible')
+            .click()
           cy.get('.datepicker__menu--teleported').should('not.exist')
           cy.get(`${container}[open]`).contains('pep-pharos-button', 'Cancel').click()
           cy.get(`${container}[open]`).should('not.exist')

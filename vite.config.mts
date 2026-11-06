@@ -152,8 +152,10 @@ export default defineConfig(({ mode }) => {
 
     ],
     optimizeDeps: {
-      esbuildOptions: {
-        keepNames: true,
+      rolldownOptions: {
+        output: {
+          keepNames: true,
+        },
       },
     },
     resolve: {

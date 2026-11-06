@@ -23,6 +23,8 @@ import {
   removeFullscreenChangeListeners,
   canUseFullscreenAPI,
   canUsePDFViewer,
+  getErrorDetails,
+  getMissingPDFViewerAPIs,
   shouldDisablePDFJSImageDecoder,
   shouldUsePDFJSMainThreadWorker,
   trackPDFResourceDisposal,
@@ -40,8 +42,11 @@ import { changeRoute } from '@/utils/helpers'
 import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia'
 import { useLogger } from '@/composables/logging/useLogger'
+import { usePDFViewerDiagnostics } from '@/composables/logging/usePDFViewerDiagnostics'
+import { v4 as uuidv4 } from 'uuid'
 import {
   ViewerControls,
+  ViewerDiagnosticActions,
   type ViewerError,
   type PDFLoadingTask,
   type PDFDocumentProxy,
@@ -51,6 +56,8 @@ import {
   type PDFPageRenderEvent,
   type PDFLoadingTaskWorkerOwner,
   type PDFWorkerImageMessage,
+  type ViewerDiagnostics,
+  type ViewerIndexedFields,
 } from '@/interfaces/Viewer'
 
 const props = defineProps({
@@ -188,27 +195,6 @@ const pdfView = shallowRef({}) as Ref<viewer.PDFViewer>
 const pdfDocument = shallowRef<PDFDocumentProxy>()
 
 /**
- * Converts any thrown value into the serializable error fields accepted by viewer logs and UI
- * state. This is necessary to allow for possible arbitrary error values from PDF.js and browser APIs
- * which may not be instances of Error.
- *
- * @param err - The value caught from PDF.js or browser APIs.
- * @returns A displayable message plus the original error name and stack when available.
- */
-const getErrorDetails = (err: unknown): Pick<ViewerError, 'message' | 'name' | 'stack'> => {
-  if (typeof err === 'object' && err !== null) {
-    const error = err as { message?: unknown; name?: unknown; stack?: unknown }
-    return {
-      message: typeof error.message === 'string' ? error.message : String(err),
-      ...(typeof error.name === 'string' && { name: error.name }),
-      ...(typeof error.stack === 'string' && { stack: error.stack }),
-    }
-  }
-
-  return { message: typeof err === 'string' ? err : String(err) }
-}
-
-/**
  * Reads a real response status without assuming PDF.js errors share the browser's Error prototype.
  *
  * @param error - A loading, initialization, or rendering failure.
@@ -277,8 +263,21 @@ const disposePDFResource = (resource: PDFResource): Promise<void> => {
   return disposal
 }
 
+const eventUuid = props.viewingSessionId ?? uuidv4()
 const { handleWithLog, logs } = useLogger()
+const diagnostics = usePDFViewerDiagnostics({
+  iid: itemid,
+  eventUuid,
+  log: (action, details, indexed) => logDiagnostic(action, details, indexed),
+  isRetry: () => hasRetriedWithoutOffscreenCanvas,
+  hadError: () =>
+    loadingError.value.status || preparePageError.value.status || createViewerError.value.status,
+})
+// Read by the parent view when the reader switches viewers.
+defineExpose({ getSessionSnapshot: diagnostics.getSnapshot })
+
 const {
+  viewerDiagnosticLog,
   errorLinkClickLog,
   viewerControlLog,
   pageSelectionLog,
@@ -291,8 +290,18 @@ const {
   isReentryContent: isReentryContent,
   viewer: pdfView,
   documentProxy: pdfDocument,
-  eventUUID: props.viewingSessionId,
+  getContext: diagnostics.getContext,
+  eventUUID: eventUuid,
 })
+
+/** Sends without a callback so the beacon queues synchronously, which page-hide events need. */
+const logDiagnostic = (
+  action: ViewerDiagnosticActions,
+  details?: ViewerDiagnostics,
+  indexed?: ViewerIndexedFields,
+) => {
+  void handleWithLog(viewerDiagnosticLog({ action, details, indexed }))
+}
 
 /**
  * Records cleanup failures even when navigation has already removed the viewer UI.
@@ -322,6 +331,7 @@ const logCleanupError = (error: unknown) => {
  */
 const releasePDFDocument = async () => {
   isDocumentReady.value = false
+  diagnostics.clearRenderWatchdogs()
   removeRetryPagesInitListener?.()
   removeRetryPagesInitListener = null
   removeImageDecodeListener?.()
@@ -340,6 +350,7 @@ const releasePDFDocument = async () => {
 /** Permanently stops this viewer, unlocks fullscreen, and logs asynchronous resource cleanup errors. */
 const disposeViewer = () => {
   isViewerDisposed = true
+  diagnostics.stop()
   isUsingCSSFullscreen.value = false
   isInFullscreen.value = false
   unlockBodyScroll()
@@ -380,9 +391,11 @@ const createLoadingTask = async (
 ) => {
   isLoading.value = true
   let loadingTask: PDFLoadingTask | null = null
+  let stopSlowLoadWatch: (() => void) | undefined
   try {
     const didPreviousDisposalFinish = await waitForPDFResourceDisposal()
     if (isUnmounted || isViewerDisposed) return undefined
+    diagnostics.loadStarted()
     // A worker that will not terminate must not block reading; the new load overlaps it instead.
     if (!didPreviousDisposalFinish) {
       void handleWithLog(
@@ -423,11 +436,20 @@ const createLoadingTask = async (
       ...(disableOffscreenCanvas && { isOffscreenCanvasSupported: false }),
     })
     activeLoadingTask = loadingTask
+    loadingTask.onProgress = ({ loaded, total }: { loaded: number; total: number }) =>
+      diagnostics.setProgress(loaded, total)
+    stopSlowLoadWatch = diagnostics.watchSlowLoad()
     const document = await loadingTask.promise
     if (isUnmounted || isViewerDisposed) {
       await disposePDFResource(loadingTask)
       return undefined
     }
+    const workerPort = (loadingTask as unknown as PDFLoadingTaskWorkerOwner)._worker?.port
+    diagnostics.documentLoaded({
+      numPages: document.numPages,
+      // A fake worker runs on the main thread and competes with rendering.
+      workerIsReal: typeof Worker !== 'undefined' && workerPort instanceof Worker,
+    })
     return document
   } catch (err) {
     // destroy() rejects the loading promise as part of normal component teardown.
@@ -484,6 +506,7 @@ const createLoadingTask = async (
     )
     disposeViewer()
   } finally {
+    stopSlowLoadWatch?.()
     if (!isUnmounted) isLoading.value = false
   }
 }
@@ -534,6 +557,7 @@ const handlePageRenderError = async (err: unknown, errorSource: string) => {
 
   hasRetriedWithoutOffscreenCanvas = true
   isRetryingWithoutOffscreenCanvas = true
+  diagnostics.setPhase('retrying')
   handleWithLog(
     PDFViewerErrorLog({
       error: {
@@ -568,6 +592,7 @@ const handlePageRenderError = async (err: unknown, errorSource: string) => {
       const handleReplacementPagesInit = () => {
         removeRetryPagesInitListener = null
         if (isUnmounted) return
+        logDiagnostic(ViewerDiagnosticActions.retry_recovered)
         pdfViewer.currentPageNumber = Math.min(previousPageNumber, replacementDocument.numPages)
       }
 
@@ -786,6 +811,7 @@ const createViewer = () => {
       if (isUnmounted || isViewerDisposed) return
       const initializedDocument = pdfDocument.value
       isDocumentReady.value = true
+      diagnostics.pagesInitialized()
       await nextTick()
       if (isUnmounted || isViewerDisposed || pdfDocument.value !== initializedDocument) return
       const { width, height } = container.getBoundingClientRect()
@@ -822,6 +848,15 @@ const createViewer = () => {
         if (pageBounds.bottom <= bounds.top || pageBounds.top >= bounds.bottom) page.destroy()
       }
     }
+    const handlePageRenderStarted = ({ pageNumber }: { pageNumber: number }) =>
+      diagnostics.renderStarted(pageNumber)
+    const handlePageRenderFinished = ({
+      pageNumber,
+      error,
+    }: {
+      pageNumber: number
+      error?: unknown
+    }) => diagnostics.renderFinished(pageNumber, error)
     const handlePageChanging = ($event: { previous: number; pageNumber: number }) => {
       emit('page-change', $event.pageNumber)
       handleWithLog(
@@ -870,6 +905,8 @@ const createViewer = () => {
     // even when a browser-specific canvas implementation later fails.
     eventBus.on('pagerendered', handlePageRendered)
     eventBus.on('textlayerrendered', handleTextLayerRendered)
+    eventBus.on('pagerender', handlePageRenderStarted)
+    eventBus.on('pagerendered', handlePageRenderFinished)
 
     // Update pagination key on page change to force re-render of page number input
     eventBus.on('pagechanging', handlePageChanging)
@@ -888,6 +925,9 @@ const createViewer = () => {
       eventBus.off('pagesinit', handlePagesInit)
       eventBus.off('pagerendered', handlePageRendered)
       eventBus.off('textlayerrendered', handleTextLayerRendered)
+      eventBus.off('pagerender', handlePageRenderStarted)
+      eventBus.off('pagerendered', handlePageRenderFinished)
+      diagnostics.clearRenderWatchdogs()
       eventBus.off('pagechanging', handlePageChanging)
       eventBus.off('updateviewarea', handleViewAreaUpdate)
     }
@@ -965,10 +1005,25 @@ const preparePage = async () => {
   if (isUnmounted) return
   let pendingDocument: PDFDocumentProxy | undefined
 
+  // Logged before any support check so unsupported devices still report what they are.
+  diagnostics.logEnvironment({
+    pdfjs_version: pdfjsLib.version,
+    worker_mode: USE_MAIN_THREAD_PDF_WORKER ? 'main_thread' : 'web_worker',
+    image_decoder_disabled: DISABLE_IMAGE_DECODER,
+    supports_css_round: SUPPORTS_CSS_ROUND,
+    max_canvas_pixels: MAX_CANVAS_PIXELS,
+    viewer_enabled: props.enableViewer,
+    missing_apis: getMissingPDFViewerAPIs().join(',') || undefined,
+  })
+
   // The legacy bundle still relies on a small set of APIs supplied by polyfills.
   if (props.enableViewer && !canUsePDFViewer()) {
     preparePageError.value = {
-      ...getErrorDetails(new Error('The PDF viewer is not supported by this browser.')),
+      ...getErrorDetails(
+        new Error(
+          `The PDF viewer is not supported by this browser. Missing: ${getMissingPDFViewerAPIs().join(', ')}`,
+        ),
+      ),
       status: true,
       code: 0,
     }
@@ -1001,6 +1056,7 @@ const preparePage = async () => {
   }
   // The render fallback needs the resolved URL because props alone may not describe the final host.
   activePDFSourceUrl = url
+  diagnostics.start()
   try {
     if (props.enableViewer) {
       await configurePDFJSWorker()

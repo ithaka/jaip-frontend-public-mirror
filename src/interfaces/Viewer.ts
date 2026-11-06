@@ -22,6 +22,69 @@ export interface PDFPageRenderEvent {
   error?: unknown
 }
 
+/** Flat context attached to viewer logs. */
+export type ViewerDiagnostics = Record<string, string | number | boolean | null | undefined>
+
+/**
+ * Viewer fields sent at the top level of a log. Elasticsearch indexes top-level fields but not the
+ * keys inside viewer_diagnostics, so anything that must be filtered or aggregated belongs here.
+ * Each name fixes its indexed type on first write; do not change a type once logs ship.
+ */
+export interface ViewerIndexedFields {
+  viewer_type?: ViewerType
+  to_viewer?: ViewerType
+  viewer_had_problem?: boolean
+  viewer_phase?: ViewerPhase
+  viewer_visibility?: string
+  js_heap_used_mb?: number
+  device_memory_gb?: number
+  chromium_major?: number
+  connection_type?: string
+  previous_visibility?: string
+}
+
+/** Context attached to every viewer error and diagnostic log. */
+export interface ViewerLogContext {
+  indexed: ViewerIndexedFields
+  details: ViewerDiagnostics
+}
+
+/** The PDF viewer's state when the reader leaves it, reported on the mode-switch log. */
+export interface ViewerSessionSnapshot {
+  phase: ViewerPhase
+  hadError: boolean
+  stallCount: number
+  retried: boolean
+  msInViewer: number
+  pagesRendered: number
+}
+
+/** Which viewer produced a log, so the PDF and page viewers can be compared. */
+export type ViewerType = 'pdf' | 'page'
+
+/** Where a viewer attempt is, reported in logs and the crash marker. */
+export type ViewerPhase =
+  | 'configuring_worker'
+  | 'loading_document'
+  | 'initializing_pages'
+  | 'loading_metadata'
+  | 'loading_page'
+  | 'ready'
+  | 'retrying'
+  | 'failed'
+
+/** Last known session state, saved so the next load can report a killed page. */
+export interface PDFSessionMarker {
+  event_uuid: string
+  iid: string
+  started_at: number
+  last_beat_at: number
+  phase: ViewerPhase
+  visibility: string
+  pages_rendered: number
+  js_heap_used_mb?: number
+}
+
 /** Runtime worker ownership is private in upstream types; use only for document-scoped observation. */
 export interface PDFLoadingTaskWorkerOwner {
   readonly _worker: Pick<PDFWorker, 'port'> | null
@@ -46,6 +109,25 @@ export enum ViewerControls {
   toggle_fullscreen = 'toggle-fullscreen',
 }
 export type ViewerControlOptions = `${ViewerControls}`
+
+/** Non-error viewer signals logged as viewer_diagnostic events. */
+export enum ViewerDiagnosticActions {
+  environment = 'pdf_environment',
+  load_started = 'pdf_load_started',
+  load_slow = 'pdf_load_slow',
+  document_loaded = 'pdf_document_loaded',
+  pages_initialized = 'pdf_pages_initialized',
+  first_page_rendered = 'pdf_first_page_rendered',
+  page_render_stalled = 'pdf_page_render_stalled',
+  retry_recovered = 'pdf_retry_recovered',
+  page_hidden = 'pdf_page_hidden',
+  page_visible = 'pdf_page_visible',
+  page_frozen = 'pdf_page_frozen',
+  page_resumed = 'pdf_page_resumed',
+  page_hide = 'pdf_page_hide',
+  window_error = 'pdf_window_error',
+  previous_session_unclean = 'pdf_previous_session_unclean',
+}
 
 export interface ViewerError {
   message: string
